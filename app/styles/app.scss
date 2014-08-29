@@ -1,5 +1,22 @@
 @import "bower_components/paint/paint.scss";
 
+$row-width: 100%;
+
 html, body {
-  margin: 20px;
+}
+
+.container {
+  @include grid-row();
+}
+
+main {
+  @extend %column-8;
+}
+
+nav {
+  @extend %column-4;
+}
+
+.actions {
+  @extend %column-8;
 }
