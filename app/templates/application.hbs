@@ -1,14 +1,39 @@
-<div class="container">
-  <nav>
-    <h2>Sidebar</h2>
-  </nav>
-  <div class="actions">
-    <h4>actions</h4>
-  <div>
-  <main>
-    <h2 id='title'>Welcome to Ember.js</h2>
-    <h3>Test</h3>
+<section class="application">
+  <header>
+    <div class="current">
+      <h1>Pistachio Next</h1>
+      <button class="toggle-apps" title="Change App"></button>
+    </div>
 
-    {{outlet}}
-   </main>
-</div>
+    <div class="actions">
+      <input type="text" class="search" />
+      <button class="toggle-add" title="Add"></button>
+    </div>
+  </header>
+
+  <div>
+    <nav>
+      <h1>Menu</h1>
+
+      <ul>
+        <li><a href="/team">Team</a></li>
+      </ul>
+
+      <section class="session">
+        <img
+          class="picture"
+          src="https://dzaqm99ko40cm.cloudfront.net/avatars/6565327/thumb.jpg?1406540825"
+          title="EDe"
+          alt="Profile Picture"
+        />
+
+        <div class="name">Eugenio Depalo</div>
+        <button class="toggle-actions" title="Actions"></button>
+      </section>
+    </nav>
+
+    <main>
+      {{outlet}}
+    </main>
+  </div>
+</section>
