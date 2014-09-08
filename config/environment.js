@@ -15,7 +15,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      apiBaseURL: 'http://localhost:3000/swordfish',
+      apiBaseURL: '/swordfish',
       authURL: 'http://localhost:3000/system'
     }
   };
