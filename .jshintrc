@@ -3,7 +3,8 @@
     "document": true,
     "window": true,
     "-Promise": true,
-    "PhoenixENV": true
+    "PhoenixENV": true,
+    "_": true
   },
   "browser" : true,
   "boss" : true,

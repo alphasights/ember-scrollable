@@ -13,5 +13,8 @@
   },
   "resolutions": {
     "jquery": ">= 1.7.0 < 2.2.0"
+  },
+  "devDependencies": {
+    "underscore": "~1.7.0"
   }
 }
