@@ -11,8 +11,13 @@
     </div>
 
     <div class="actions">
-      <input type="text" class="search" />
-      <button class="toggle-add" title="Add"></button>
+      <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
+      <button class="toggle-add" title="Add" data-dropdown="add"></button>
+
+      <ul id="add" data-dropdown-content>
+        <li><a href="#">New advisor</a></li>
+        <li><a href="#">New project</a></li>
+      </ul>
     </div>
   </header>
 

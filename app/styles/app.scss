@@ -5,7 +5,7 @@ body {
   @extend %grid-root-row;
 }
 
-#apps {
+#apps, #add {
   @extend %dropdown;
 }
 
@@ -14,29 +14,47 @@ body {
     @extend %grid-row;
 
     background-color: #e1e5ea;
-    height: rem-calc(60px);
+    height: rem-calc(80px);
+    line-height: rem-calc(80px);
     overflow: hidden;
-    padding: rem-calc(20px);
+    padding: 0 rem-calc(20px);
 
     h1 {
       display: inline-block;
       font-weight: 100;
       font-size: rem-calc(20px);
       margin: 0;
+      margin-right: rem-calc(10px);
+      
       text-transform: uppercase;
     }
 
-    .toggle-apps {
+    .toggle-apps, .toggle-add {
       @extend %button;
+    }
+
+    .toggle-apps {
       @include icon(th-large);
     }
 
+    .toggle-add {
+      @include icon(plus);
+    }
+
     .current {
-      @extend %grid-column-4;
+      @extend %grid-column-2;
     }
 
     .actions {
-      @extend %grid-column-8;
+      @extend %grid-column-10;
+
+      text-align: right;
+
+      .search {
+        margin-right: rem-calc(20px);
+        width: rem-calc(280px);
+        display: inline-block;
+      }
     }
   }
 
@@ -44,11 +62,11 @@ body {
     @extend %grid-row;
 
     > nav {
-      @extend %grid-column-4;
+      @extend %grid-column-2;
     }
 
     main {
-      @extend %grid-column-8;
+      @extend %grid-column-10;
     }
   }
 }
