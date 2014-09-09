@@ -2,31 +2,43 @@
 @import "bower_components/paint/paint.scss";
 
 body {
-  @extend %grid-row;
+  @extend %grid-row-root;
 }
 
 .application {
   > header {
-    @extend %grid-row-nested;
+    @extend %grid-row;
+
+    background-color: #e1e5ea;
+    height: rem-calc(60px);
+    overflow: hidden;
+    padding: rem-calc(20px);
 
     .current {
       @extend %grid-column-4;
+
+      h1 {
+        font-weight: 100;
+        font-size: rem-calc(20px);
+        margin: 0;
+        text-transform: uppercase;
+      }
     }
 
     .actions {
-      @extend %grid-column-last-8;
+      @extend %grid-column-8;
     }
   }
 
   > div {
-    @extend %grid-row-nested;
+    @extend %grid-row;
 
     > nav {
       @extend %grid-column-4;
     }
 
     main {
-      @extend %grid-column-last-8;
+      @extend %grid-column-8;
     }
   }
 }
