@@ -67,11 +67,32 @@ h1 {
     bottom: 0;
     color: white;
     left: 0;
-    padding: rem-calc(20px);
     position: absolute;
     top: rem-calc(80px);
     width: rem-calc(300px);
     min-height: rem-calc(500px);
+
+    h1 {
+      font-size: rem-calc(13px);
+      font-weight: 100;
+      padding: rem-calc(20px);
+      text-transform: uppercase;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0 rem-calc(30px);
+
+      a {
+        font-weight: 300;
+        line-height: rem-calc(40px);
+
+        &, &:visited {
+          color: white;
+        }
+      }
+    }
   }
 
   main {
