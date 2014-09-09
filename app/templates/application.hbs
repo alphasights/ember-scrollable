@@ -1,50 +1,54 @@
 <section class="application">
   <header>
-    <div class="current">
-      <h1>Phoenix</h1>
-      <button class="toggle-apps" title="Change App" data-dropdown="apps"></button>
+    <div>
+      <div class="current">
+        <h1>Phoenix</h1>
+        <button class="toggle-apps" title="Change App" data-dropdown="apps"></button>
 
-      <ul id="apps" data-dropdown-content>
-        <li><a href="#">Metrics</a></li>
-        <li><a href="#">Finance</a></li>
-        <li><a href="#">Clients</a></li>
-      </ul>
-    </div>
+        <ul id="apps" data-dropdown-content>
+          <li><a href="#">Metrics</a></li>
+          <li><a href="#">Finance</a></li>
+          <li><a href="#">Clients</a></li>
+        </ul>
+      </div>
 
-    <div class="actions">
-      <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
-      <button class="toggle-add" title="Add" data-dropdown="add"></button>
+      <div class="actions">
+        <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
+        <button class="toggle-add" title="Add" data-dropdown="add"></button>
 
-      <ul id="add" data-dropdown-content>
-        <li><a href="#">New advisor</a></li>
-        <li><a href="#">New project</a></li>
-      </ul>
+        <ul id="add" data-dropdown-content>
+          <li><a href="#">New advisor</a></li>
+          <li><a href="#">New project</a></li>
+        </ul>
+      </div>
     </div>
   </header>
 
-  <div>
-    <nav>
-      <h1>Menu</h1>
+  <nav>
+    <h1>Menu</h1>
 
-      <ul>
-        <li><a href="/team"><i></i>Team</a></li>
-      </ul>
+    <ul>
+      <li><a href="/team"><i></i>Team</a></li>
+    </ul>
 
-      <section class="session">
-        <img
-          class="picture"
-          src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
-          title="EDe"
-          alt="Profile Picture"
-        />
+    <section class="session">
+      <img
+        class="picture"
+        src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
+        title="EDe"
+        alt="Profile Picture"
+      />
 
-        <div class="name">Eugenio Depalo</div>
-        <button class="toggle-actions" title="Actions"></button>
-      </section>
-    </nav>
+      <div class="name">Eugenio Depalo</div>
+      <button class="toggle-actions" title="Actions"></button>
+    </section>
+  </nav>
 
-    <main>
+  <main>
+    <section class="dashboard">
+      <h1>Dashboard</h1>
+
       {{outlet}}
-    </main>
-  </div>
+    </section>
+  </main>
 </section>

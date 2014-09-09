@@ -5,6 +5,10 @@ body {
   @extend %grid-root-row;
 }
 
+h1 {
+  margin: 0;
+}
+
 #apps, #add {
   @extend %dropdown;
 }
@@ -13,19 +17,23 @@ body {
   > header {
     @extend %grid-row;
 
-    background-color: #e1e5ea;
-    height: rem-calc(80px);
-    line-height: rem-calc(80px);
-    overflow: hidden;
-    padding: 0 rem-calc(20px);
+    > div {
+      background-color: #e1e5ea;
+      height: rem-calc(80px);
+      left: 0;
+      line-height: rem-calc(80px);
+      overflow: hidden;
+      padding: 0 rem-calc(20px);
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
 
     h1 {
       display: inline-block;
-      font-weight: 100;
       font-size: rem-calc(20px);
-      margin: 0;
+      font-weight: 100;
       margin-right: rem-calc(10px);
-
       text-transform: uppercase;
     }
 
@@ -47,22 +55,31 @@ body {
       text-align: right;
 
       .search {
+        display: inline-block;
         margin-right: rem-calc(20px);
         width: rem-calc(280px);
-        display: inline-block;
       }
     }
   }
 
-  > div {
-    @extend %grid-row;
+  > nav {
+    background-color: #1a2226;
+    bottom: 0;
+    color: white;
+    left: 0;
+    padding: rem-calc(20px);
+    position: absolute;
+    top: rem-calc(80px);
+    width: rem-calc(300px);
+    min-height: rem-calc(500px);
+  }
 
-    > nav {
-      @extend %grid-column-2;
-    }
-
-    main {
-      @extend %grid-column-10;
-    }
+  main {
+    bottom: 0;
+    left: rem-calc(300px);
+    padding: rem-calc(20px);
+    position: absolute;
+    right: 0;
+    top: rem-calc(80px);
   }
 }
