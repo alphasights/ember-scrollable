@@ -2,7 +2,11 @@
 @import "bower_components/paint/paint";
 
 body {
-  @extend %grid-row-root;
+  @extend %grid-root-row;
+}
+
+#apps {
+  @extend %dropdown;
 }
 
 .application {
@@ -23,7 +27,7 @@ body {
     }
 
     .toggle-apps {
-      @extend %button-base;
+      @extend %button;
       @include icon(th-large);
     }
 
