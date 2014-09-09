@@ -25,12 +25,8 @@ body {
       font-size: rem-calc(20px);
       margin: 0;
       margin-right: rem-calc(10px);
-      
-      text-transform: uppercase;
-    }
 
-    .toggle-apps, .toggle-add {
-      @extend %button;
+      text-transform: uppercase;
     }
 
     .toggle-apps {
