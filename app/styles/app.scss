@@ -1,5 +1,5 @@
-@import "settings.scss";
-@import "bower_components/paint/paint.scss";
+@import "settings";
+@import "bower_components/paint/paint";
 
 body {
   @extend %grid-row-root;
@@ -14,15 +14,21 @@ body {
     overflow: hidden;
     padding: rem-calc(20px);
 
+    h1 {
+      display: inline-block;
+      font-weight: 100;
+      font-size: rem-calc(20px);
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .toggle-apps {
+      @extend %button-base;
+      @include icon(th-large);
+    }
+
     .current {
       @extend %grid-column-4;
-
-      h1 {
-        font-weight: 100;
-        font-size: rem-calc(20px);
-        margin: 0;
-        text-transform: uppercase;
-      }
     }
 
     .actions {
