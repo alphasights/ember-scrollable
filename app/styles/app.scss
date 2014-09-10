@@ -1,13 +1,24 @@
 @import "settings";
 @import "bower_components/paint/paint";
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+$nav-text-color: #f7f7f7;
+$nav-background-color: #191c1f;
+$nav-link-height: rem-calc(80px);
+$nav-link-text-color: darken($nav-text-color, 30%);
+$nav-min-height: rem-calc(600px);
+$nav-title-height: rem-calc(80px);
+$nav-title-text-color: darken($nav-text-color, 50%);
+$nav-title-background-color: lighten($nav-background-color, 5%);
+$nav-width: rem-calc(260px);
+
+$header-background-color: #e1e5ea;
+$header-height: rem-calc(80px);
+$header-search-bar-width: rem-calc(280px);
+
+$session-height: rem-calc(30px);
 
 body {
   @extend %grid-root-row;
-}
-
-h1 {
-  margin: 0;
 }
 
 #apps, #add, #session {
@@ -15,180 +26,176 @@ h1 {
 }
 
 .application {
-  > header {
-    @extend %grid-row;
+  h1 {
+    font-size: rem-calc(15px);
+    font-weight: 100;
+    margin: 0;
+    text-transform: uppercase;
+  }
+}
 
-    > div {
-      background-color: #e1e5ea;
-      height: rem-calc(80px);
-      left: 0;
-      line-height: rem-calc(80px);
-      overflow: hidden;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
+.application > header {
+  height: $header-height;
+  left: 0;
+  line-height: $header-height;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
 
-    h1 {
-      display: inline-block;
-      font-size: rem-calc(15px);
-      font-weight: 100;
-      margin-right: rem-calc(10px);
-      text-transform: uppercase;
-      color: #f7f7f6;
-    }
-
-    .toggle-apps {
-      @include icon(th);
-    }
-
-    .toggle-add {
-      @include icon(plus);
-    }
-
-    .current {
-      @extend %grid-column-2;
-
-      background-color: #191c1f;
-      padding: 0 rem-calc(20px);
-    }
-
-    .actions {
-      @extend %grid-column-10;
-
-      > div {
-        padding: 0 rem-calc(20px);
-        text-align: right;
-
-        .search {
-          display: inline-block;
-          margin-right: rem-calc(20px);
-          width: rem-calc(280px);
-        }
-      }
-    }
+  h1 {
+    color: $nav-text-color;
+    display: inline-block;
+    margin-right: $column-gutter / 2;
   }
 
-  > nav {
-    background-color: #191c1f;
-    bottom: 0;
-    color: white;
-    left: 0;
-    position: absolute;
-    top: rem-calc(80px);
-    width: 16.66667%;
-    min-height: rem-calc(500px);
+  .toggle-apps {
+    @include icon(th);
+  }
 
-    > div {
-      position: relative;
-      height: 100%;
+  .toggle-add {
+    @include icon(plus);
+  }
+
+  .main {
+    background-color: $nav-background-color;
+    padding: 0 $column-gutter / 2;
+    width: $nav-width;
+  }
+
+  .actions {
+    background-color: $header-background-color;
+    bottom: 0;
+    left: $nav-width;
+    padding: 0 $column-gutter / 2;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+
+    .search {
+      display: inline-block;
+      margin-right: $column-gutter / 2;
+      width: $header-search-bar-width;
     }
+  }
+}
+
+.application > nav {
+  background-color: $nav-background-color;
+  bottom: 0;
+  left: 0;
+  min-height: $nav-min-height;
+  position: absolute;
+  top: $header-height;
+  width: $nav-width;
+
+  > div {
+    height: 100%;
+    position: relative;
 
     h1 {
-      background-color: #1d2124;
-      font-size: rem-calc(15px);
-      font-weight: 100;
-      line-height: rem-calc(100px);
-      padding: 0 rem-calc(20px);
-      text-transform: uppercase;
-      color: #5b6067;
+      background-color: $nav-title-background-color;
+      line-height: $nav-title-height;
+      padding: $column-gutter / 2 $column-gutter;
+      color: $nav-title-text-color;
     }
 
-    ul {
+    > ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
 
       a {
-        border-bottom: 2px solid #1d2023;
+        border-bottom: 2px solid $nav-title-background-color;
         display: block;
         font-weight: 300;
         font-size: rem-calc(14px);
-        line-height: rem-calc(80px);
-        padding: 0 rem-calc(30px);
+        line-height: $nav-link-height;
+        padding: 0 $column-gutter;
         text-decoration: none;
 
         &, &:visited {
-          color: #7a8089;
+          color: $nav-link-text-color;
         }
 
         &:hover {
-          background-color: #1d2124;
+          background-color: $nav-title-background-color;
         }
       }
-    }
 
-    i {
-      background-color: #1d2124;
-      border-radius: rem-calc(10px);
-      color: #a2a3a4;
-      margin-right: rem-calc(10px);
-      padding: rem-calc(10px);
-    }
-
-    .dashboard i {
-      @include icon(tachometer);
-    }
-
-    .team i {
-      @include icon(tasks);
-    }
-
-    .projects i {
-      @include icon(folder);
-    }
-
-    .performances i {
-      @include icon(bar-chart);
-    }
-
-    .session {
-      @include clearfix;
-
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      line-height: rem-calc(30px);
-
-      .picture {
-        width: rem-calc(30px);
-        height: rem-calc(30px);
-        border-radius: rem-calc(30px);
-        display: inline-block;
-        margin-right: rem-calc(10px);
-        margin-left: rem-calc(15px);
+      i {
+        background-color: $nav-title-background-color;
+        border-radius: rem-calc(10px);
+        color: $nav-link-text-color;
+        margin-right: $column-gutter / 2;
+        padding: rem-calc(10px);
       }
 
-      .name {
-        display: inline-block;
-        font-size: rem-calc(14px);
-        color: #7a8089;
-        margin-right: rem-calc(10px);
+      .dashboard i {
+        @include icon(tachometer);
       }
 
-      .toggle-actions {
-        display: inline-block;
-        font-size: rem-calc(18px);
-        float: right;
-        margin-right: rem-calc(15px);
-        line-height: rem-calc(30px);
+      .team i {
+        @include icon(tasks);
+      }
 
-        button {
-          color: #a2a3a4;
-          background-color: transparent;
-          @include icon(cog);
-        }
+      .projects i {
+        @include icon(folder);
+      }
+
+      .performances i {
+        @include icon(bar-chart);
+      }
+    }
+  }
+
+  .session {
+    @include clearfix;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    line-height: $session-height;
+
+    .picture {
+      border-radius: $session-height;
+      display: inline-block;
+      height: $session-height;
+      margin: 0 $column-gutter / 2;
+      width: $session-height;
+    }
+
+    .name {
+      display: inline-block;
+      font-size: rem-calc(14px);
+      color: $nav-link-text-color;
+      margin-right: $column-gutter / 2;
+    }
+
+    .toggle-actions {
+      display: inline-block;
+      font-size: rem-calc(18px);
+      float: right;
+      margin-right: $column-gutter / 2;
+      line-height: $session-height;
+
+      button {
+        @include icon(cog);
+
+        color: $nav-link-text-color;
+        background-color: transparent;
       }
     }
   }
 
   main {
     bottom: 0;
-    left: 16.66667%;
-    padding: rem-calc(20px);
+    left: $nav-width;
+    padding: $column-gutter / 2;
     position: absolute;
     right: 0;
-    top: rem-calc(80px);
+    top: $header-height;
   }
 }
