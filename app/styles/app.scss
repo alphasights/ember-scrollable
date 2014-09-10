@@ -1,5 +1,6 @@
 @import "settings";
 @import "bower_components/paint/paint";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 body {
   @extend %grid-root-row;
@@ -23,7 +24,6 @@ h1 {
       left: 0;
       line-height: rem-calc(80px);
       overflow: hidden;
-      padding: 0 rem-calc(20px);
       position: absolute;
       right: 0;
       top: 0;
@@ -31,14 +31,15 @@ h1 {
 
     h1 {
       display: inline-block;
-      font-size: rem-calc(20px);
+      font-size: rem-calc(15px);
       font-weight: 100;
       margin-right: rem-calc(10px);
       text-transform: uppercase;
+      color: #f7f7f6;
     }
 
     .toggle-apps {
-      @include icon(th-large);
+      @include icon(th);
     }
 
     .toggle-add {
@@ -47,57 +48,99 @@ h1 {
 
     .current {
       @extend %grid-column-2;
+
+      background-color: #191c1f;
+      padding: 0 rem-calc(20px);
     }
 
     .actions {
       @extend %grid-column-10;
 
-      text-align: right;
+      > div {
+        padding: 0 rem-calc(20px);
+        text-align: right;
 
-      .search {
-        display: inline-block;
-        margin-right: rem-calc(20px);
-        width: rem-calc(280px);
-      }
-    }
-  }
-
-  > nav {
-    background-color: #1a2226;
-    bottom: 0;
-    color: white;
-    left: 0;
-    position: absolute;
-    top: rem-calc(80px);
-    width: rem-calc(300px);
-    min-height: rem-calc(500px);
-
-    h1 {
-      font-size: rem-calc(13px);
-      font-weight: 100;
-      padding: rem-calc(20px);
-      text-transform: uppercase;
-    }
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0 rem-calc(30px);
-
-      a {
-        font-weight: 300;
-        line-height: rem-calc(40px);
-
-        &, &:visited {
-          color: white;
+        .search {
+          display: inline-block;
+          margin-right: rem-calc(20px);
+          width: rem-calc(280px);
         }
       }
     }
   }
 
+  > nav {
+    background-color: #191c1f;
+    bottom: 0;
+    color: white;
+    left: 0;
+    position: absolute;
+    top: rem-calc(80px);
+    width: 16.66667%;
+    min-height: rem-calc(800px);
+
+    h1 {
+      background-color: #1d2124;
+      font-size: rem-calc(15px);
+      font-weight: 100;
+      line-height: rem-calc(100px);
+      padding: 0 rem-calc(20px);
+      text-transform: uppercase;
+      color: #5b6067;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      a {
+        border-bottom: 2px solid #1d2023;
+        display: block;
+        font-weight: 300;
+        font-size: rem-calc(14px);
+        line-height: rem-calc(80px);
+        padding: 0 rem-calc(30px);
+        text-decoration: none;
+
+        &, &:visited {
+          color: #7a8089;
+        }
+
+        &:hover {
+          background-color: #1d2124;
+        }
+      }
+    }
+
+    i {
+      background-color: #1d2124;
+      border-radius: rem-calc(10px);
+      color: #a2a3a4;
+      margin-right: rem-calc(10px);
+      padding: rem-calc(10px);
+    }
+
+    .dashboard i {
+      @include icon(tachometer);
+    }
+
+    .team i {
+      @include icon(tasks);
+    }
+
+    .projects i {
+      @include icon(folder);
+    }
+
+    .performances i {
+      @include icon(bar-chart)
+    }
+  }
+
   main {
     bottom: 0;
-    left: rem-calc(300px);
+    left: 16.66667%;
     padding: rem-calc(20px);
     position: absolute;
     right: 0;

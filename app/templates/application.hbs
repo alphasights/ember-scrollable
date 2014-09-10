@@ -1,25 +1,27 @@
 <section class="application">
+  <ul id="add" data-dropdown-content>
+    <li><a href="#">New advisor</a></li>
+    <li><a href="#">New project</a></li>
+  </ul>
+
+  <ul id="apps" data-dropdown-content>
+    <li><a href="#">Metrics</a></li>
+    <li><a href="#">Finance</a></li>
+    <li><a href="#">Clients</a></li>
+  </ul>
+
   <header>
     <div>
       <div class="current">
         <h1>Phoenix</h1>
         <button class="toggle-apps" title="Change App" data-dropdown="apps"></button>
-
-        <ul id="apps" data-dropdown-content>
-          <li><a href="#">Metrics</a></li>
-          <li><a href="#">Finance</a></li>
-          <li><a href="#">Clients</a></li>
-        </ul>
       </div>
 
       <div class="actions">
-        <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
-        <button class="toggle-add" title="Add" data-dropdown="add"></button>
-
-        <ul id="add" data-dropdown-content>
-          <li><a href="#">New advisor</a></li>
-          <li><a href="#">New project</a></li>
-        </ul>
+        <div>
+          <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
+          <button class="toggle-add" title="Add" data-dropdown="add"></button>
+        </div>
       </div>
     </div>
   </header>
@@ -28,10 +30,10 @@
     <h1>Menu</h1>
 
     <ul>
-      <li><a href="/dashboard"><i></i>Dashboard</a></li>
-      <li><a href="/projects"><i></i>Projects</a></li>
-      <li><a href="/team"><i></i>Team</a></li>
-      <li><a href="/performances"><i></i>Performances</a></li>
+      <li class="dashboard"><a href="/dashboard"><i></i>Dashboard</a></li>
+      <li class="projects"><a href="/projects"><i></i>Projects</a></li>
+      <li class="team"><a href="/team"><i></i>Team</a></li>
+      <li class="performances"><a href="/performances"><i></i>Performances</a></li>
     </ul>
 
     <section class="session">
