@@ -49,14 +49,6 @@ body {
     margin-right: $column-gutter / 2;
   }
 
-  .toggle-apps {
-    @include icon(th);
-  }
-
-  .toggle-add {
-    @include icon(plus);
-  }
-
   .main {
     background-color: $nav-background-color;
     padding: 0 $column-gutter / 2;
@@ -77,6 +69,14 @@ body {
       display: inline-block;
       margin-right: $column-gutter / 2;
       width: $header-search-bar-width;
+    }
+
+    .toggle-apps {
+      @include icon(th);
+    }
+
+    .toggle-add {
+      @include icon(plus);
     }
   }
 }
