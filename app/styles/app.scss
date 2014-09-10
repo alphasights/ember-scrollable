@@ -10,7 +10,7 @@ h1 {
   margin: 0;
 }
 
-#apps, #add {
+#apps, #add, #session {
   @extend %dropdown;
 }
 
@@ -77,7 +77,12 @@ h1 {
     position: absolute;
     top: rem-calc(80px);
     width: 16.66667%;
-    min-height: rem-calc(800px);
+    min-height: rem-calc(500px);
+
+    > div {
+      position: relative;
+      height: 100%;
+    }
 
     h1 {
       background-color: #1d2124;
@@ -134,7 +139,47 @@ h1 {
     }
 
     .performances i {
-      @include icon(bar-chart)
+      @include icon(bar-chart);
+    }
+
+    .session {
+      @include clearfix;
+
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      line-height: rem-calc(30px);
+
+      .picture {
+        width: rem-calc(30px);
+        height: rem-calc(30px);
+        border-radius: rem-calc(30px);
+        display: inline-block;
+        margin-right: rem-calc(10px);
+        margin-left: rem-calc(15px);
+      }
+
+      .name {
+        display: inline-block;
+        font-size: rem-calc(14px);
+        color: #7a8089;
+        margin-right: rem-calc(10px);
+      }
+
+      .toggle-actions {
+        display: inline-block;
+        font-size: rem-calc(18px);
+        float: right;
+        margin-right: rem-calc(15px);
+        line-height: rem-calc(30px);
+
+        button {
+          color: #a2a3a4;
+          background-color: transparent;
+          @include icon(cog);
+        }
+      }
     }
   }
 
