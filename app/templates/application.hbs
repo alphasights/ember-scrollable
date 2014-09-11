@@ -23,9 +23,15 @@
 
     <div class="actions">
       <div>
-        <div class="search">
+        <div {{bind-attr class=":search isSearching:active"}}>
           <i></i>
-          <input type="text" placeholder="Search for advisors, clients and projects..." />
+
+          {{input
+            type="text"
+            placeholder="Search for advisors, clients and projects..."
+            focus-in="toggleSearch"
+            focus-out="toggleSearch"
+          }}
         </div>
 
         <div class="toggles">

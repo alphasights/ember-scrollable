@@ -73,7 +73,7 @@ body {
     }
 
     .search {
-      $search-icon-width: rem-calc(20px);
+      $search-icon-size: rem-calc(30px);
 
       @extend %grid-column-10;
 
@@ -81,13 +81,18 @@ body {
 
       i {
         @include icon(search);
+        @include single-transition(all, 150ms, linear);
 
-        color: #f36b09;
+        border-radius: $search-icon-size / 2;
+        color: $primary-color;
+        height: $search-icon-size;
         left: 0;
-        line-height: $header-height;
+        line-height: $search-icon-size;
+        margin-top: - $search-icon-size / 2;
         position: absolute;
-        top: 0;
-        width: $search-icon-width;
+        text-align: center;
+        top: 50%;
+        width: $search-icon-size;
       }
 
       input {
@@ -96,8 +101,13 @@ body {
         box-shadow: none;
         display: inline-block;
         margin: 0;
-        text-indent: $search-icon-width;
+        text-indent: $search-icon-size;
         width: 100%;
+      }
+
+      &.active i {
+        background-color: $primary-color;
+        color: #ffffff;
       }
     }
 
@@ -150,7 +160,7 @@ body {
       padding: 0;
 
       a {
-        @include single-transition(background-color, 200ms, linear);
+        @include single-transition(all, 150ms, linear);
 
         border-bottom: 2px solid $nav-title-background-color;
         display: block;
