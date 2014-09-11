@@ -10,7 +10,7 @@
     <li><a href="#">Clients</a></li>
   </ul>
 
-  <ul id="session" data-dropdown-content>
+  <ul id="session-actions" data-dropdown-content>
     <li><a href="#">Settings</a></li>
     <li><a href="#">Logout</a></li>
   </ul>
@@ -22,10 +22,17 @@
     </div>
 
     <div class="actions">
-      <input type="text" class="search" placeholder="Search for advisors, clients, projects..." />
+      <div>
+        <div class="search">
+          <i></i>
+          <input type="text" placeholder="Search for advisors, clients and projects..." />
+        </div>
 
-      <button class="toggle-apps" title="Change App" data-dropdown="apps"></button>
-      <button class="toggle-add" title="Add" data-dropdown="add"></button>
+        <div class="toggles">
+          <button class="change-app" title="Change App" data-dropdown="apps"></button>
+          <button class="add" title="Add" data-dropdown="add"></button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -51,7 +58,7 @@
         <div class="name">Eugenio Depalo</div>
 
         <div class="toggle-actions">
-          <button title="Actions" data-dropdown="session"></button>
+          <button title="Actions" data-dropdown="session-actions"></button>
         </div>
       </section>
     </div>

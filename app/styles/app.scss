@@ -1,11 +1,11 @@
 @import "settings";
 @import "bower_components/paint/paint";
 
-$nav-text-color: #f7f7f7;
+$nav-text-color: #f2f2f2;
 $nav-background-color: #191c1f;
 $nav-link-height: rem-calc(80px);
 $nav-link-text-color: darken($nav-text-color, 30%);
-$nav-min-height: rem-calc(600px);
+$nav-min-height: rem-calc(500px);
 $nav-title-height: rem-calc(80px);
 $nav-title-text-color: darken($nav-text-color, 50%);
 $nav-title-background-color: lighten($nav-background-color, 5%);
@@ -13,15 +13,13 @@ $nav-width: rem-calc(260px);
 
 $header-background-color: #e1e5ea;
 $header-height: rem-calc(80px);
-$header-search-bar-width: rem-calc(280px);
-
 $session-height: rem-calc(30px);
 
 body {
   @extend %grid-root-row;
 }
 
-#apps, #add, #session {
+#apps, #add, #session-actions {
   @extend %dropdown;
 }
 
@@ -68,21 +66,60 @@ body {
     padding: 0 $column-gutter / 2;
     position: absolute;
     right: 0;
-    text-align: right;
     top: 0;
 
+    > div {
+      @extend %grid-row;
+    }
+
     .search {
-      display: inline-block;
-      margin-right: $column-gutter / 2;
-      width: $header-search-bar-width;
+      $search-icon-width: rem-calc(20px);
+
+      @extend %grid-column-10;
+
+      position: relative;
+
+      i {
+        @include icon(search);
+
+        color: #f36b09;
+        left: 0;
+        line-height: $header-height;
+        position: absolute;
+        top: 0;
+        width: $search-icon-width;
+      }
+
+      input {
+        background-color: transparent;
+        border-width: 0;
+        box-shadow: none;
+        display: inline-block;
+        margin: 0;
+        text-indent: $search-icon-width;
+        width: 100%;
+      }
     }
 
-    .toggle-apps {
-      @include icon(th);
-    }
+    .toggles {
+      $button-size: rem-calc(30px);
 
-    .toggle-add {
-      @include icon(plus);
+      @extend %grid-column-2;
+
+      text-align: right;
+
+      button {
+        width: $button-size;
+        height: $button-size;
+      }
+
+      .change-app {
+        @include icon(th);
+      }
+
+      .add {
+        @include icon(plus);
+      }
     }
   }
 }
@@ -113,6 +150,8 @@ body {
       padding: 0;
 
       a {
+        @include single-transition(background-color, 200ms, linear);
+
         border-bottom: 2px solid $nav-title-background-color;
         display: block;
         font-weight: 300;
@@ -192,6 +231,7 @@ body {
 
         color: $nav-link-text-color;
         background-color: transparent;
+        border-width: 0;
       }
     }
   }
