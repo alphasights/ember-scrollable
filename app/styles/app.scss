@@ -53,6 +53,12 @@ body {
     background-color: $nav-background-color;
     padding: 0 $column-gutter / 2;
     width: $nav-width;
+
+    img {
+      height: rem-calc(30px);
+      margin-right: $column-gutter / 2;
+      width: rem-calc(30px);
+    }
   }
 
   .actions {

@@ -37,4 +37,12 @@ app.import('bower_components/fontawesome/fonts/fontawesome-webfont.eot', {
   destDir: 'assets/fonts'
 });
 
+app.import('bower_components/paint/images/favicon.ico', {
+  destDir: 'assets/images'
+});
+
+app.import('bower_components/paint/images/logo.png', {
+  destDir: 'assets/images'
+});
+
 module.exports = app.toTree();
