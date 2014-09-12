@@ -13,7 +13,11 @@ $nav-width: rem-calc(260px);
 
 $header-background-color: #e1e5ea;
 $header-height: rem-calc(80px);
+
 $session-height: rem-calc(30px);
+
+$search-results-background-color: #f2f2f2;
+$search-results-item-height: rem-calc(50px);
 
 body {
   @extend %grid-root-row;
@@ -24,35 +28,66 @@ body {
 }
 
 .application .search-results {
-  position: absolute;
-  top: $header-height;
-  left: $nav-width;
   bottom: 0;
+  left: $nav-width;
+  position: absolute;
   right: 0;
+  top: $header-height;
 
   .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+    background-color: #000000;
     bottom: 0;
-    right: 0;
-    background-color: black;
+    left: 0;
     opacity: 0.6;
+    position: fixed;
+    right: 0;
+    top: 0;
     z-index: -1;
   }
 
-  > div, ul {
+  > div, .content {
     min-height: rem-calc(200px);
   }
 
-  ul {
-    list-style-type: none;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: rem-calc(10px);
+  .content {
+    background-color: $search-results-background-color;
+    padding: $column-gutter / 2;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
 
     li {
-      padding: rem-calc(10px);
+      height: $search-results-item-height;
+      line-height: $search-results-item-height;
+    }
+
+    article, h1 {
+      padding: 0 $column-gutter / 2;
+    }
+
+    article {
+      border-bottom: rem-calc(1px) solid #e8e8e8;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
+
+    section {
+      $font-size: rem-calc(14px);
+
+      margin: $column-gutter / 2 $column-gutter;
+      padding: $column-gutter / 2;
+      font-size: $font-size;
+
+      h1 {
+        font-size: $font-size;
+        margin-bottom: $column-gutter / 2;
+      }
     }
   }
 }
@@ -96,7 +131,7 @@ body {
   .actions {
     $search-icon-size: rem-calc(30px);
 
-    @include single-transition(all, 150ms, linear);
+    @include single-transition(background-color, 150ms, linear);
 
     background-color: $header-background-color;
     bottom: 0;
@@ -112,15 +147,12 @@ body {
 
     &.searching {
       background-color: #ffffff;
+      border-bottom: rem-calc(1px) solid #d0d0d0;
 
       .search {
         i {
           background-color: $primary-color;
           color: #ffffff;
-        }
-
-        input {
-          text-indent: $search-icon-size + rem-calc(8px);
         }
       }
     }
@@ -154,7 +186,7 @@ body {
         box-shadow: none;
         display: inline-block;
         margin: 0;
-        text-indent: $search-icon-size;
+        text-indent: $search-icon-size + rem-calc(5px);
         width: 100%;
       }
     }
@@ -167,8 +199,8 @@ body {
       text-align: right;
 
       button {
-        width: $button-size;
         height: $button-size;
+        width: $button-size;
       }
 
       .change-app {
@@ -197,9 +229,9 @@ body {
 
     h1 {
       background-color: $nav-title-background-color;
+      color: $nav-title-text-color;
       line-height: $nav-title-height;
       padding: $column-gutter / 2 $column-gutter;
-      color: $nav-title-text-color;
     }
 
     > ul {
@@ -212,8 +244,8 @@ body {
 
         border-bottom: 2px solid $nav-title-background-color;
         display: block;
-        font-weight: 300;
         font-size: rem-calc(14px);
+        font-weight: 300;
         line-height: $nav-link-height;
         padding: 0 $column-gutter;
         text-decoration: none;
@@ -256,11 +288,11 @@ body {
   .session {
     @include clearfix;
 
-    position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
     line-height: $session-height;
+    position: absolute;
+    right: 0;
 
     .picture {
       border-radius: $session-height;
@@ -271,25 +303,25 @@ body {
     }
 
     .name {
+      color: $nav-link-text-color;
       display: inline-block;
       font-size: rem-calc(14px);
-      color: $nav-link-text-color;
       margin-right: $column-gutter / 2;
     }
 
     .toggle-actions {
       display: inline-block;
-      font-size: rem-calc(18px);
       float: right;
-      margin-right: $column-gutter / 2;
+      font-size: rem-calc(18px);
       line-height: $session-height;
+      margin-right: $column-gutter / 2;
 
       button {
         @include icon(cog);
 
-        color: $nav-link-text-color;
         background-color: transparent;
         border-width: 0;
+        color: $nav-link-text-color;
       }
     }
   }
