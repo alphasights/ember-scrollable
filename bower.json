@@ -9,12 +9,10 @@
     "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
     "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
-    "paint": "../paint"
+    "paint": "../paint",
+    "underscore": "~1.7.0"
   },
   "resolutions": {
     "jquery": ">= 1.7.0 < 2.2.0"
-  },
-  "devDependencies": {
-    "underscore": "~1.7.0"
   }
 }

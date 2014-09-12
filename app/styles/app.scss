@@ -60,6 +60,8 @@ body {
   }
 
   .actions {
+    @include single-transition(all, 150ms, linear);
+
     background-color: $header-background-color;
     bottom: 0;
     left: $nav-width;
@@ -70,6 +72,17 @@ body {
 
     > div {
       @extend %grid-row;
+    }
+
+    &.searching {
+      background-color: #ffffff;
+
+      .search {
+        i {
+          background-color: $primary-color;
+          color: #ffffff;
+        }
+      }
     }
 
     .search {
@@ -103,11 +116,6 @@ body {
         margin: 0;
         text-indent: $search-icon-size;
         width: 100%;
-      }
-
-      &.active i {
-        background-color: $primary-color;
-        color: #ffffff;
       }
     }
 

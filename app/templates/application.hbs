@@ -21,9 +21,9 @@
       <h1>Phoenix</h1>
     </div>
 
-    <div class="actions">
+    <div {{bind-attr class=":actions isSearching:searching"}}>
       <div>
-        <div {{bind-attr class=":search isSearching:active"}}>
+        <div class="search">
           <i></i>
 
           {{input
@@ -35,8 +35,10 @@
         </div>
 
         <div class="toggles">
-          <button class="change-app" title="Change App" data-dropdown="apps"></button>
-          <button class="add" title="Add" data-dropdown="add"></button>
+          {{#liquid-unless isSearching}}
+            <button class="change-app" title="Change App" data-dropdown="apps"></button>
+            <button class="add" title="Add" data-dropdown="add"></button>
+          {{/liquid-unless}}
         </div>
       </div>
     </div>
