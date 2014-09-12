@@ -23,6 +23,40 @@ body {
   @extend %dropdown;
 }
 
+.application .search-results {
+  position: absolute;
+  top: $header-height;
+  left: $nav-width;
+  bottom: 0;
+  right: 0;
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    opacity: 0.6;
+    z-index: -1;
+  }
+
+  > div, ul {
+    min-height: rem-calc(200px);
+  }
+
+  ul {
+    list-style-type: none;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: rem-calc(10px);
+
+    li {
+      padding: rem-calc(10px);
+    }
+  }
+}
+
 .application {
   h1 {
     font-size: rem-calc(15px);
@@ -60,6 +94,8 @@ body {
   }
 
   .actions {
+    $search-icon-size: rem-calc(30px);
+
     @include single-transition(all, 150ms, linear);
 
     background-color: $header-background-color;
@@ -82,12 +118,14 @@ body {
           background-color: $primary-color;
           color: #ffffff;
         }
+
+        input {
+          text-indent: $search-icon-size + rem-calc(8px);
+        }
       }
     }
 
     .search {
-      $search-icon-size: rem-calc(30px);
-
       @extend %grid-column-10;
 
       position: relative;
@@ -109,6 +147,8 @@ body {
       }
 
       input {
+        @include single-transition(all, 150ms, linear);
+
         background-color: transparent;
         border-width: 0;
         box-shadow: none;

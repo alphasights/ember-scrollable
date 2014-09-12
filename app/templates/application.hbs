@@ -1,4 +1,12 @@
 <section class="application">
+  {{#liquid-if isSearching use="crossFade" class="search-results"}}
+    <div class="overlay"></div>
+
+    <ul>
+      <li>Imba advisor</li>
+    </uL>
+  {{/liquid-if}}
+
   <ul id="add" data-dropdown-content>
     <li><a href="#">New advisor</a></li>
     <li><a href="#">New project</a></li>
