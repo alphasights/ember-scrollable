@@ -33,14 +33,15 @@
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
+    <script>
+      window.PhoenixENV = {{ENV}};
+      window.EmberENV = window.PhoenixENV.EmberENV;
+    </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/test-support.js"></script>
     <script src="assets/phoenix.js"></script>
     <script src="testem.js"></script>
     <script>
-      window.PhoenixENV = require('phoenix/config/environment')['default'];
-      window.EmberENV = window.PhoenixENV.EmberENV;
-
       require('phoenix/tests/test-helper');
     </script>
     <script src="assets/test-loader.js"></script>

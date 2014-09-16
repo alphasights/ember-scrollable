@@ -1,8 +1,6 @@
-/* global require */
-
-var Application = require('phoenix/app')['default'];
-var Router = require('phoenix/router')['default'];
 import Ember from 'ember';
+import Application from 'phoenix/app';
+import Router from 'phoenix/router';
 
 export default function startApp(attrs) {
   var App;
