@@ -1,5 +1,7 @@
-@import "application/header";
-@import "application/nav";
+@import "components/quick-jump";
+
+@import "application/sidebar";
+@import "application/quick-jump";
 
 h1 {
   font-size: rem-calc(15px);
@@ -15,7 +17,7 @@ h1 {
     padding: $column-gutter / 2;
     position: absolute;
     right: 0;
-    top: $header-height;
+    top: 0;
 
     > div {
       @extend %grid-root-row;

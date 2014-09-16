@@ -4,17 +4,33 @@ body > div {
   }
 }
 
-.application > nav {
+.application > .sidebar {
   background-color: $nav-background-color;
   bottom: 0;
   left: 0;
-  min-height: $nav-min-height;
   position: absolute;
-  top: $header-height;
+  top: 0;
   width: $nav-width;
 
-  > div {
-    height: 100%;
+  > header {
+    padding: 0 $column-gutter / 2;
+    width: $nav-width;
+    height: $header-height;
+    line-height: $header-height;
+    
+    img {
+      height: rem-calc(30px);
+      margin-right: $column-gutter / 2;
+      width: rem-calc(30px);
+    }
+
+    h1 {
+      display: inline-block;
+      color: $white;
+    }
+  }
+
+  > nav {
     position: relative;
 
     h1 {
