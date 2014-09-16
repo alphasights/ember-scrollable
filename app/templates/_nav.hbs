@@ -1,10 +1,3 @@
-{{#top-level}}
-  <ul id="session-actions" class="session-actions" data-dropdown-content>
-    <li><a href="#">Settings</a></li>
-    <li><a href="#">Logout</a></li>
-  </ul>
-{{/top-level}}
-
 <nav>
   <div>
     <h1>Menu</h1>
@@ -28,6 +21,13 @@
 
       <div class="toggle-actions">
         <button title="Actions" data-dropdown="session-actions"></button>
+
+        {{#top-level}}
+          <ul id="session-actions" class="session-actions" data-dropdown-content>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        {{/top-level}}
       </div>
     </section>
   </div>

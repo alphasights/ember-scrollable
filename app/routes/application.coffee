@@ -1,4 +1,4 @@
-`import Ember from 'ember'`
+`import Ember from 'ember';`
 
 ApplicationRoute = Ember.Route.extend
   model: ->
@@ -11,4 +11,4 @@ ApplicationRoute = Ember.Route.extend
       else
         true
 
-`export default ApplicationRoute`
+`export default ApplicationRoute;`

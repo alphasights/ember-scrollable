@@ -1,9 +1,14 @@
-`import Ember from "ember";`
+`import Ember from 'ember';`
 
 TopLevelComponent = Ember.Component.extend
   layout: Ember.Handlebars.compile('{{yield}}')
 
-  didInsertElement: ->
+  onDidInsertElement: (->
     @$().appendTo(document.body)
+  ).on('didInsertElement')
 
-`export default TopLevelComponent`
+  onWillDestroyElement: (->
+    Ember.$(document.body).find("##{@get('elementId')}").remove()
+  ).on('willDestroyElement')
+
+`export default TopLevelComponent;`

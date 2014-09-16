@@ -3,7 +3,7 @@ body > div {
     @extend %dropdown;
   }
 
-  > .search-results {
+  > .quick-jump-results {
     bottom: 0;
     left: $nav-width;
     position: absolute;
@@ -96,7 +96,7 @@ body > div {
     }
   }
 
-  .actions {
+  .quick-jump {
     $search-icon-size: rem-calc(30px);
 
     @include single-transition(background-color, 150ms, linear);
@@ -113,11 +113,11 @@ body > div {
       @extend %grid-row;
     }
 
-    &.searching {
+    &.active {
       background-color: #ffffff;
       border-bottom: rem-calc(1px) solid #d0d0d0;
 
-      .search {
+      .bar {
         i {
           background-color: $primary-color;
           color: #ffffff;
@@ -125,7 +125,7 @@ body > div {
       }
     }
 
-    .search {
+    .bar {
       @extend %grid-column-10;
 
       position: relative;
@@ -159,7 +159,7 @@ body > div {
       }
     }
 
-    .toggles {
+    .actions {
       $button-size: rem-calc(30px);
 
       @extend %grid-column-2;

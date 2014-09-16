@@ -1,0 +1,39 @@
+<div>
+  <div class="bar">
+    <i></i>
+
+    {{input type="text" placeholder="Jump to advisors, client, projects and more..."}}
+
+    {{#top-level}}
+      {{#liquid-if isActive use="crossFade" class="quick-jump-results"}}
+        <div class="overlay"></div>
+
+        <div class="content">
+          <section>
+            <h1>Colleagues</h1>
+
+            <ul>
+              <li><article>Imba colleague 1</article></li>
+              <li><article>Imba colleague 2</article></li>
+            </ul>
+          </section>
+
+          <section>
+            <h1>Advisors</h1>
+
+            <ul>
+              <li><article>Pro advisor 1</article></li>
+              <li><article>Pro advisor 2</article></li>
+            </ul>
+          </section>
+        </div>
+      {{/liquid-if}}
+    {{/top-level}}
+  </div>
+
+  <div class="actions">
+    {{#liquid-unless isActive}}
+      {{yield}}
+    {{/liquid-unless}}
+  </div>
+</div>

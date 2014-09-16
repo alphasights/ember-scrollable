@@ -1,7 +1,7 @@
 transitions = ->
   @transition(
     @fromNonEmptyModel(),
-    @childOf('.application > header .actions .toggles'),
+    @childOf('.application > header .quick-jump .actions'),
     @toModel(true),
     @use('toRight'),
     @reverse('toLeft')
