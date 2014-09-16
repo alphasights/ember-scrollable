@@ -8,7 +8,7 @@ ApplicationView = Ember.View.extend
       @get('controller').set('isSearching', true)
       true
 
-    @$().on 'click', (event) =>
+    Ember.$(document).on 'click', (event) =>
       $target = $(event.target)
 
       unless $target.closest('.search, .search-results .content').length > 0

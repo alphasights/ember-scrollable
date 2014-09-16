@@ -1,0 +1,118 @@
+body > div {
+  > .session-actions {
+    @extend %dropdown;
+  }
+}
+
+.application > nav {
+  background-color: $nav-background-color;
+  bottom: 0;
+  left: 0;
+  min-height: $nav-min-height;
+  position: absolute;
+  top: $header-height;
+  width: $nav-width;
+
+  > div {
+    height: 100%;
+    position: relative;
+
+    h1 {
+      background-color: $nav-title-background-color;
+      color: $nav-title-text-color;
+      line-height: $nav-title-height;
+      padding: $column-gutter / 2 $column-gutter;
+    }
+
+    > ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      a {
+        @include single-transition(all, 150ms, linear);
+
+        border-bottom: 2px solid $nav-title-background-color;
+        display: block;
+        font-size: rem-calc(14px);
+        font-weight: 300;
+        line-height: $nav-link-height;
+        padding: 0 $column-gutter;
+        text-decoration: none;
+
+        &, &:visited {
+          color: $nav-link-text-color;
+        }
+
+        &:hover {
+          background-color: $nav-title-background-color;
+        }
+      }
+
+      i {
+        background-color: $nav-title-background-color;
+        border-radius: rem-calc(10px);
+        color: $nav-link-text-color;
+        margin-right: $column-gutter / 2;
+        padding: rem-calc(10px);
+      }
+
+      .dashboard i {
+        @include icon(tachometer);
+      }
+
+      .team i {
+        @include icon(tasks);
+      }
+
+      .projects i {
+        @include icon(folder);
+      }
+
+      .performances i {
+        @include icon(bar-chart);
+      }
+    }
+  }
+
+  .session {
+    @include clearfix;
+
+    bottom: 0;
+    left: 0;
+    line-height: $session-height;
+    position: absolute;
+    right: 0;
+
+    .picture {
+      border-radius: $session-height;
+      display: inline-block;
+      height: $session-height;
+      margin: 0 $column-gutter / 2;
+      width: $session-height;
+    }
+
+    .name {
+      color: $nav-link-text-color;
+      display: inline-block;
+      font-size: rem-calc(14px);
+      margin-right: $column-gutter / 2;
+    }
+
+    .toggle-actions {
+      display: inline-block;
+      float: right;
+      font-size: rem-calc(18px);
+      line-height: $session-height;
+      margin-right: $column-gutter / 2;
+
+      button {
+        @include icon(cog);
+
+        background-color: transparent;
+        border-width: 0;
+        color: $nav-link-text-color;
+      }
+    }
+  }
+}

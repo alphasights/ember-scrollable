@@ -1,0 +1,183 @@
+body > div {
+  > .apps, > .add {
+    @extend %dropdown;
+  }
+
+  > .search-results {
+    bottom: 0;
+    left: $nav-width;
+    position: absolute;
+    right: 0;
+    top: $header-height;
+
+    .overlay {
+      background-color: #000000;
+      bottom: 0;
+      left: 0;
+      opacity: 0.6;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    > div, .content {
+      min-height: rem-calc(200px);
+    }
+
+    .content {
+      background-color: $search-results-background-color;
+      padding: $column-gutter / 2;
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        height: $search-results-item-height;
+        line-height: $search-results-item-height;
+      }
+
+      article, h1 {
+        padding: 0 $column-gutter / 2;
+      }
+
+      article {
+        border-bottom: rem-calc(1px) solid #e8e8e8;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #eeeeee;
+        }
+      }
+
+      section {
+        $font-size: rem-calc(14px);
+
+        margin: $column-gutter / 2 $column-gutter;
+        padding: $column-gutter / 2;
+        font-size: $font-size;
+
+        h1 {
+          font-size: $font-size;
+          margin-bottom: $column-gutter / 2;
+        }
+      }
+    }
+  }
+}
+
+.application > header {
+  height: $header-height;
+  left: 0;
+  line-height: $header-height;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  h1 {
+    color: $nav-text-color;
+    display: inline-block;
+    margin-right: $column-gutter / 2;
+  }
+
+  .main {
+    background-color: $nav-background-color;
+    padding: 0 $column-gutter / 2;
+    width: $nav-width;
+
+    img {
+      height: rem-calc(30px);
+      margin-right: $column-gutter / 2;
+      width: rem-calc(30px);
+    }
+  }
+
+  .actions {
+    $search-icon-size: rem-calc(30px);
+
+    @include single-transition(background-color, 150ms, linear);
+
+    background-color: $header-background-color;
+    bottom: 0;
+    left: $nav-width;
+    padding: 0 $column-gutter / 2;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    > div {
+      @extend %grid-row;
+    }
+
+    &.searching {
+      background-color: #ffffff;
+      border-bottom: rem-calc(1px) solid #d0d0d0;
+
+      .search {
+        i {
+          background-color: $primary-color;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .search {
+      @extend %grid-column-10;
+
+      position: relative;
+
+      i {
+        @include icon(search);
+        @include single-transition(all, 150ms, linear);
+
+        border-radius: $search-icon-size / 2;
+        color: $primary-color;
+        height: $search-icon-size;
+        left: 0;
+        line-height: $search-icon-size;
+        margin-top: - $search-icon-size / 2;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: $search-icon-size;
+      }
+
+      input {
+        @include single-transition(all, 150ms, linear);
+
+        background-color: transparent;
+        border-width: 0;
+        box-shadow: none;
+        display: inline-block;
+        margin: 0;
+        text-indent: $search-icon-size + rem-calc(5px);
+        width: 100%;
+      }
+    }
+
+    .toggles {
+      $button-size: rem-calc(30px);
+
+      @extend %grid-column-2;
+
+      text-align: right;
+
+      button {
+        height: $button-size;
+        width: $button-size;
+      }
+
+      .change-app {
+        @include icon(th);
+      }
+
+      .add {
+        @include icon(plus);
+      }
+    }
+  }
+}

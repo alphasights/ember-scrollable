@@ -1,1 +1,17 @@
-$icon-font-folder-path: '/assets/fonts';
+$nav-text-color: #f2f2f2;
+$nav-background-color: #191c1f;
+$nav-link-height: rem-calc(80px);
+$nav-link-text-color: darken($nav-text-color, 30%);
+$nav-min-height: rem-calc(500px);
+$nav-title-height: rem-calc(80px);
+$nav-title-text-color: darken($nav-text-color, 50%);
+$nav-title-background-color: lighten($nav-background-color, 5%);
+$nav-width: rem-calc(260px);
+
+$session-height: rem-calc(30px);
+
+$header-background-color: #e1e5ea;
+$header-height: rem-calc(80px);
+
+$search-results-background-color: #f2f2f2;
+$search-results-item-height: rem-calc(50px);

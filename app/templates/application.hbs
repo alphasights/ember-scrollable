@@ -1,101 +1,10 @@
-<section class="application">
-  {{#liquid-if isSearching use="crossFade" class="search-results"}}
-    <div class="overlay"></div>
-
-    <div class="content">
-      <section>
-        <h1>Colleagues</h1>
-
-        <ul>
-          <li><article>Imba colleague 1</article></li>
-          <li><article>Imba colleague 2</article></li>
-        </ul>
-      </section>
-
-      <section>
-        <h1>Advisors</h1>
-
-        <ul>
-          <li><article>Pro advisor 1</article></li>
-          <li><article>Pro advisor 2</article></li>
-        </ul>
-      </section>
-    </div>
-  {{/liquid-if}}
-
-  <ul id="add" data-dropdown-content>
-    <li><a href="#">New advisor</a></li>
-    <li><a href="#">New project</a></li>
-  </ul>
-
-  <ul id="apps" data-dropdown-content>
-    <li><a href="#">Metrics</a></li>
-    <li><a href="#">Finance</a></li>
-    <li><a href="#">Clients</a></li>
-  </ul>
-
-  <ul id="session-actions" data-dropdown-content>
-    <li><a href="#">Settings</a></li>
-    <li><a href="#">Logout</a></li>
-  </ul>
-
-  <header>
-    <div class="main">
-      <img src="assets/images/logo.png" alt="Phoenix"></img>
-      <h1>Phoenix</h1>
-    </div>
-
-    <div {{bind-attr class=":actions isSearching:searching"}}>
-      <div>
-        <div class="search">
-          <i></i>
-
-          {{input type="text" placeholder="Search for advisors, clients and projects..."}}
-        </div>
-
-        <div class="toggles">
-          {{#liquid-unless isSearching}}
-            <button class="change-app" title="Change App" data-dropdown="apps"></button>
-            <button class="add" title="Add" data-dropdown="add"></button>
-          {{/liquid-unless}}
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <nav>
-    <div>
-      <h1>Menu</h1>
-
-      <ul>
-        <li class="dashboard"><a href="/dashboard"><i></i>Dashboard</a></li>
-        <li class="projects"><a href="/projects"><i></i>Projects</a></li>
-        <li class="team"><a href="/team"><i></i>Team</a></li>
-        <li class="performances"><a href="/performances"><i></i>Performances</a></li>
-      </ul>
-
-      <section class="session">
-        <img
-          class="picture"
-          src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
-          title="EDe"
-          alt="Profile Picture"
-        />
-
-        <div class="name">Eugenio Depalo</div>
-
-        <div class="toggle-actions">
-          <button title="Actions" data-dropdown="session-actions"></button>
-        </div>
-      </section>
-    </div>
-  </nav>
+<div class="application">
+  {{partial "header"}}
+  {{partial "nav"}}
 
   <main>
-    <section class="dashboard">
-      <h1>Dashboard</h1>
-
+    <div>
       {{outlet}}
-    </section>
+    </div>
   </main>
-</section>
+</div>

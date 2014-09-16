@@ -1,0 +1,24 @@
+@import "application/header";
+@import "application/nav";
+
+h1 {
+  font-size: rem-calc(15px);
+  font-weight: 100;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.application {
+  main {
+    bottom: 0;
+    left: $nav-width;
+    padding: $column-gutter / 2;
+    position: absolute;
+    right: 0;
+    top: $header-height;
+
+    > div {
+      @extend %grid-root-row;
+    }
+  }
+}
