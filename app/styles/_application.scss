@@ -1,26 +1,4 @@
-@import "components/quick-jump";
+@import "views/quick-jump";
 
+@import "application/main";
 @import "application/sidebar";
-@import "application/quick-jump";
-
-h1 {
-  font-size: rem-calc(15px);
-  font-weight: 100;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-.application {
-  main {
-    bottom: 0;
-    left: $nav-width;
-    padding: $column-gutter / 2;
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    > div {
-      @extend %grid-root-row;
-    }
-  }
-}

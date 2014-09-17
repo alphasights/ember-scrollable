@@ -5,7 +5,7 @@
     {{input type="text" placeholder="Jump to advisors, client, projects and more..."}}
 
     {{#top-level}}
-      {{#liquid-if isActive use="crossFade" class="quick-jump-results"}}
+      {{#liquid-if view.isActive use="crossFade" class="quick-jump-results"}}
         <div class="overlay"></div>
 
         <div class="content">
@@ -32,7 +32,7 @@
   </div>
 
   <div class="actions">
-    {{#liquid-unless isActive}}
+    {{#liquid-unless view.isActive}}
       {{yield}}
     {{/liquid-unless}}
   </div>

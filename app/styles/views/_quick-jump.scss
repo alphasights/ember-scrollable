@@ -71,7 +71,8 @@ body > div {
   @include single-transition(background-color, 150ms, linear);
 
   background-color: $header-background-color;
-
+  padding: 0 $column-gutter / 2;
+  
   > div {
     @extend %grid-row;
   }

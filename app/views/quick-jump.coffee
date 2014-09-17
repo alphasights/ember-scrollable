@@ -1,9 +1,10 @@
 `import Ember from 'ember';`
 
-QuickJumpComponent = Ember.Component.extend
-  isActive: false
-  placeholder: null
+QuickJumpView = Ember.View.extend
   classNameBindings: [':quick-jump', 'isActive:active']
+  isActive: false
+  layoutName: 'views/quick-jump'
+  placeholder: null
 
   didInsertElement: ->
     @$('input').on 'focusin', =>
@@ -18,4 +19,4 @@ QuickJumpComponent = Ember.Component.extend
 
       true
 
-`export default QuickJumpComponent;`
+`export default QuickJumpView;`
