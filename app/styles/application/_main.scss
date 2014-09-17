@@ -5,13 +5,15 @@ body > div {
 }
 
 .application main {
-  > div {
-    @extend %grid-root-row;
-  }
-
   .quick-jump {
     height: $header-height;
     line-height: $header-height;
     overflow: hidden;
+  }
+
+  .content {
+    @extend %grid-root-row;
+
+    padding: $column-gutter / 2;
   }
 }
