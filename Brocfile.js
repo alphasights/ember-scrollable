@@ -4,6 +4,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 
+app.registry.add('css', 'broccoli-ruby-sass', ['scss', 'sass'], {
+  bundleExec: true
+});
+
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
@@ -16,6 +20,7 @@ var app = new EmberApp();
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
+
 app.import('bower_components/paint/paint.scss');
 app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/modernizr/modernizr.js');

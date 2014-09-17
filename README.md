@@ -15,13 +15,12 @@ You will need the following things properly installed on your computer.
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `npm install`
-* `bower install`
+* `bin/setup`
 
 ## Running / Development
 
 * Start Pistachio with `rails s`
-* Start Phoenix with `ember server --proxy http://localhost:3000`
+* Start Phoenix with `ember server`
 * Visit your app at http://localhost:4200.
 
 ### Code Generators

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+bundle install
+npm install -g ember-cli
+npm install -g bower
+npm install
+bower install
