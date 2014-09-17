@@ -1,5 +1,10 @@
-body > div {
-  > .quick-jump-results {
+.quick-jump-results {
+  -webkit-transform: none;
+  -moz-transform: none;
+  transform: none;
+  position: static;
+
+  > div > div {
     bottom: 0;
     left: $nav-width;
     position: absolute;
@@ -12,14 +17,10 @@ body > div {
       bottom: 0;
       left: 0;
       opacity: 0.6;
-      position: fixed;
+      position: absolute;
       right: 0;
       top: 0;
       z-index: -1;
-    }
-
-    > div, .content {
-
     }
 
     .content {
