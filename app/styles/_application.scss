@@ -2,3 +2,19 @@
 
 @import "application/main";
 @import "application/sidebar";
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.application {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100%;
+
+  main {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}

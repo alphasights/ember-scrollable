@@ -6,18 +6,17 @@ body > div {
 
 .application > .sidebar {
   background-color: $nav-background-color;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  top: 0;
   width: $nav-width;
+  height: 100%;
+  overflow-y: scroll;
+  float: left;
 
   > header {
     padding: 0 $column-gutter / 2;
     width: $nav-width;
     height: $header-height;
     line-height: $header-height;
-    
+
     img {
       height: rem-calc(30px);
       margin-right: $column-gutter / 2;
