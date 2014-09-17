@@ -13,10 +13,15 @@ QuickJumpView = Ember.View.extend
 
     Ember.$(document).on 'click', (event) =>
       $target = $(event.target)
+      $nonBlurringElements = $('.quick-jump, .quick-jump-results .content')
 
-      unless $target.closest('.quick-jump, .quick-jump-results .content').length > 0
+      unless $target.closest($nonBlurringElements).length > 0
         @set('isActive', false)
 
       true
+
+  queryDidChange: (->
+    @get('controller').send('')
+  ).observes('query')
 
 `export default QuickJumpView;`

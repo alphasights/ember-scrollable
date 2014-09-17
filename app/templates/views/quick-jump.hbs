@@ -2,7 +2,11 @@
   <div class="bar">
     <i></i>
 
-    {{input type="text" placeholder="Jump to advisors, client, projects and more..."}}
+    {{input
+      type="text"
+      placeholder="Jump to advisors, client, projects and more..."
+      value=query
+    }}
 
     {{#top-level}}
       {{#liquid-if view.isActive use="crossFade" class="quick-jump-results"}}
