@@ -8,7 +8,6 @@ body > div {
   background-color: $nav-background-color;
   width: $nav-width;
   height: 100%;
-  overflow-y: scroll;
   float: left;
 
   > header {
@@ -30,7 +29,12 @@ body > div {
   }
 
   > nav {
-    position: relative;
+    position: absolute;
+    top: $header-height;
+    bottom: $session-height;;
+    width: $nav-width;
+    left: 0;
+    overflow-y: scroll;
 
     h1 {
       background-color: $nav-title-background-color;
@@ -91,20 +95,20 @@ body > div {
   }
 
   .session {
-    @include clearfix;
-
     bottom: 0;
     left: 0;
+    width: $nav-width;
+    height: $session-height;
     line-height: $session-height;
-    position: absolute;
-    right: 0;
+    position: fixed;
+    background: $nav-title-background-color;
 
     .picture {
-      border-radius: $session-height;
+      border-radius: $session-height / 2;
       display: inline-block;
-      height: $session-height;
+      height: $session-height / 2;
       margin: 0 $column-gutter / 2;
-      width: $session-height;
+      width: $session-height / 2;
     }
 
     .name {
