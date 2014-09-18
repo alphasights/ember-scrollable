@@ -9,10 +9,11 @@ body > div {
   width: $nav-width;
   height: 100%;
   float: left;
+  position: relative;
 
   > header {
     padding: 0 $column-gutter / 2;
-    width: $nav-width;
+    width: 100%;
     height: $header-height;
     line-height: $header-height;
 
@@ -32,7 +33,7 @@ body > div {
     position: absolute;
     top: $header-height;
     bottom: $session-height;;
-    width: $nav-width;
+    right: 0;
     left: 0;
     overflow-y: scroll;
 
@@ -130,6 +131,41 @@ body > div {
         background-color: transparent;
         border-width: 0;
         color: $nav-link-text-color;
+      }
+    }
+  }
+
+  &.toggled {
+    width: $nav-width-toggled;
+
+    > nav > ul a {
+      padding: 0 $column-gutter / 2;
+
+      > i {
+        border-radius: 50%;
+      }
+
+      > span {
+        display: none;
+      }
+    }
+
+    h1 {
+      display: none;
+    }
+
+    .session {
+      width: $nav-width-toggled;
+
+      .picture, .name {
+        display: none;
+      }
+
+      .toggle-actions {
+        float: none;
+        display: block;
+        margin-left: $column-gutter / 2;
+        text-align: center;
       }
     }
   }
