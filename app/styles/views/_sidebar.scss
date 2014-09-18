@@ -1,9 +1,3 @@
-body > div {
-  > .session-actions {
-    @extend %dropdown;
-  }
-}
-
 .sidebar {
   float: left;
   width: $nav-width;
@@ -199,6 +193,10 @@ body > div {
         display: block;
         margin-left: $column-gutter / 2;
         text-align: center;
+      }
+
+      .actions {
+        @extend %dropdown;
       }
     }
   }

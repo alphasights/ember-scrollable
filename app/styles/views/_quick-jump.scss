@@ -1,78 +1,3 @@
-body > div {
-  > .apps, > .add {
-    @extend %dropdown;
-  }
-}
-
-.quick-jump-results {
-  -webkit-transform: none;
-  -moz-transform: none;
-  transform: none;
-  position: static;
-
-  > div > div {
-    bottom: 0;
-    left: $nav-width;
-    overflow-y: scroll;
-    position: fixed;
-    right: 0;
-    top: $header-height;
-
-    .overlay {
-      background-color: #000000;
-      bottom: 0;
-      left: 0;
-      opacity: 0.6;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: -1;
-    }
-
-    .content {
-      background-color: $search-results-background-color;
-      padding: $column-gutter / 2;
-
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      li {
-        height: $search-results-item-height;
-        line-height: $search-results-item-height;
-      }
-
-      article, h1 {
-        padding: 0 $column-gutter / 2;
-      }
-
-      article {
-        border-bottom: rem-calc(1px) solid #e8e8e8;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #eeeeee;
-        }
-      }
-
-      section {
-        $font-size: rem-calc(14px);
-
-        margin: $column-gutter / 2 $column-gutter;
-        padding: $column-gutter / 2;
-        font-size: $font-size;
-
-        h1 {
-          font-size: $font-size;
-          margin-bottom: $column-gutter / 2;
-        }
-      }
-    }
-  }
-}
-
 .quick-jump {
   $search-icon-size: rem-calc(30px);
 
@@ -151,6 +76,72 @@ body > div {
 
     .add {
       @include icon(plus);
+    }
+
+    .apps, .addable {
+      @extend %dropdown;
+    }
+  }
+
+  .results {
+    bottom: 0;
+    left: $nav-width;
+    overflow-y: scroll;
+    position: fixed;
+    right: 0;
+    top: $header-height;
+
+    .overlay {
+      background-color: #000000;
+      bottom: 0;
+      left: 0;
+      opacity: 0.6;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .content {
+      background-color: $search-results-background-color;
+      padding: $column-gutter / 2;
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        height: $search-results-item-height;
+        line-height: $search-results-item-height;
+      }
+
+      article, h1 {
+        padding: 0 $column-gutter / 2;
+      }
+
+      article {
+        border-bottom: rem-calc(1px) solid #e8e8e8;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #eeeeee;
+        }
+      }
+
+      section {
+        $font-size: rem-calc(14px);
+
+        margin: $column-gutter / 2 $column-gutter;
+        padding: $column-gutter / 2;
+        font-size: $font-size;
+
+        h1 {
+          font-size: $font-size;
+          margin-bottom: $column-gutter / 2;
+        }
+      }
     }
   }
 }
