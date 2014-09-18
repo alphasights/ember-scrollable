@@ -4,7 +4,7 @@ QuickJumpController = Ember.Controller.extend
   query: null
 
   queryDidChange: (->
-    alert @get('query')
+    console.log @get('query')
   ).observes('query')
 
 `export default QuickJumpController;`
