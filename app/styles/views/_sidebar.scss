@@ -4,7 +4,7 @@ body > div {
   }
 }
 
-.application > .sidebar {
+.sidebar {
   background-color: $nav-background-color;
   width: $nav-width;
   height: 100%;
@@ -32,15 +32,27 @@ body > div {
   > nav {
     position: absolute;
     top: $header-height;
-    bottom: $session-height;;
+    bottom: $session-height;
     right: 0;
     left: 0;
     overflow-y: scroll;
 
-    h1 {
+    header {
       background-color: $nav-title-background-color;
       color: $nav-title-text-color;
-      padding: $column-gutter / 2 $column-gutter;
+      padding: $column-gutter / 2;
+
+      .toggle-collapse {
+        @include icon(caret-square-o-left);
+
+        display: inline-block;
+        float: right;
+        font-size: rem-calc(18px);
+
+        background-color: transparent;
+        border-width: 0;
+        color: $nav-link-text-color;
+      }
     }
 
     > ul {
@@ -135,14 +147,24 @@ body > div {
     }
   }
 
-  &.toggled {
-    width: $nav-width-toggled;
+  &.collapsed {
+    width: $nav-collapsed-width;
+
+    > header {
+      text-align: center;
+
+      img {
+        margin-right: 0;
+      }
+    }
 
     > nav > ul a {
       padding: 0 $column-gutter / 2;
+      text-align: center;
 
       > i {
         border-radius: 50%;
+        margin-right: 0;
       }
 
       > span {
@@ -150,12 +172,23 @@ body > div {
       }
     }
 
-    h1 {
-      display: none;
+    header {
+      text-align: center;
+
+      h1 {
+        display: none;
+      }
+
+      .toggle-collapse {
+        @include icon(caret-square-o-right);
+
+        float: none;
+        margin-bottom: 0;
+      }
     }
 
     .session {
-      width: $nav-width-toggled;
+      width: $nav-collapsed-width;
 
       .picture, .name {
         display: none;
