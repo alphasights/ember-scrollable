@@ -5,15 +5,14 @@ body > div {
 }
 
 .sidebar {
-  background-color: $nav-background-color;
-  width: $nav-width;
-  height: 100%;
   float: left;
+  width: $nav-width;
+  background-color: $nav-background-color;
+  height: 100%;
   position: relative;
 
   > header {
     padding: 0 $column-gutter / 2;
-    width: 100%;
     height: $header-height;
     line-height: $header-height;
 
@@ -40,7 +39,9 @@ body > div {
     header {
       background-color: $nav-title-background-color;
       color: $nav-title-text-color;
-      padding: $column-gutter / 2;
+      height: $nav-title-height;
+      line-height: $nav-title-height;
+      padding: 0 $column-gutter / 2;
 
       .toggle-collapse {
         @include icon(caret-square-o-left);
@@ -48,7 +49,7 @@ body > div {
         display: inline-block;
         float: right;
         font-size: rem-calc(18px);
-
+        line-height: $nav-title-height;
         background-color: transparent;
         border-width: 0;
         color: $nav-link-text-color;
@@ -61,9 +62,10 @@ body > div {
       padding: 0;
 
       a {
-        @include single-transition(all, 150ms, linear);
+        @include single-transition(color, 150ms, linear);
+        @include single-transition(background-color, 150ms, linear);
 
-        border-bottom: 2px solid $nav-title-background-color;
+        border-bottom: 1px solid $nav-title-background-color;
         display: block;
         font-size: rem-calc(14px);
         font-weight: 300;
@@ -107,13 +109,13 @@ body > div {
   }
 
   .session {
-    bottom: 0;
-    left: 0;
-    width: $nav-width;
     height: $session-height;
     line-height: $session-height;
-    position: fixed;
     background: $nav-title-background-color;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     .picture {
       border-radius: $session-height / 2;
@@ -188,8 +190,6 @@ body > div {
     }
 
     .session {
-      width: $nav-collapsed-width;
-
       .picture, .name {
         display: none;
       }

@@ -1,7 +1,5 @@
-@import "views/quick-jump";
-@import "views/sidebar";
-
-@import "application/main";
+@import 'views/quick-jump';
+@import 'views/sidebar';
 
 html, body {
   height: 100%;
@@ -10,4 +8,13 @@ html, body {
 
 .application {
   height: 100%;
+
+  main {
+    height: 100%;
+    overflow-y: scroll;
+
+    .content {
+      height: 100%;
+    }
+  }
 }

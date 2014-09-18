@@ -1,3 +1,9 @@
+body > div {
+  > .apps, > .add {
+    @extend %dropdown;
+  }
+}
+
 .quick-jump-results {
   -webkit-transform: none;
   -moz-transform: none;
@@ -74,6 +80,8 @@
 
   background-color: $header-background-color;
   padding: 0 $column-gutter / 2;
+  height: $header-height;
+  line-height: $header-height;
 
   > div {
     @extend %grid-row;

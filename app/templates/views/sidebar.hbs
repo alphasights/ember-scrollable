@@ -5,7 +5,7 @@
 
 <nav>
   <header>
-    <button class="toggle-collapse" {{action toggleCollapse target=view}}></button>
+    <button class="toggle-collapse" {{action "toggleCollapse" target=view}}></button>
     <h1>Menu</h1>
   </header>
 
@@ -15,26 +15,26 @@
     <li class="team"><a href="/team"><i></i><span>Team</span></a></li>
     <li class="performances"><a href="/performances"><i></i><span>Performances</span></a></li>
   </ul>
-
-  <section class="session">
-    <div class="toggle-actions">
-      <button title="Actions" data-dropdown="session-actions" data-options="align:top"></button>
-
-      {{#top-level}}
-        <ul id="session-actions" class="session-actions" data-dropdown-content>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-      {{/top-level}}
-    </div>
-
-    <img
-      class="picture"
-      src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
-      title="EDe"
-      alt="Profile Picture"
-    />
-
-    <div class="name">Eugenio Depalo</div>
-  </section>
 </nav>
+
+<section class="session">
+  <div class="toggle-actions">
+    <button title="Actions" data-dropdown="session-actions"></button>
+
+    {{#top-level}}
+      <ul id="session-actions" class="session-actions" data-dropdown-content>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    {{/top-level}}
+  </div>
+
+  <img
+    class="picture"
+    src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
+    title="EDe"
+    alt="Profile Picture"
+  />
+
+  <div class="name">Eugenio Depalo</div>
+</section>

@@ -3,7 +3,7 @@
 QuickJumpView = Ember.View.extend
   classNameBindings: [':quick-jump', 'isActive:active']
   isActive: false
-  layoutName: 'views/quick-jump'
+  templateName: 'views/quick-jump'
   placeholder: null
 
   didInsertElement: ->

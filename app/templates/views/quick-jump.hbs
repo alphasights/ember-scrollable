@@ -39,7 +39,24 @@
 
   <div class="actions">
     {{#liquid-unless view.isActive}}
-      {{yield}}
+      <button class="change-app" title="Change App" data-dropdown="apps"></button>
+
+      {{#top-level}}
+        <ul id="add" class="add" data-dropdown-content>
+          <li><a href="#">New advisor</a></li>
+          <li><a href="#">New project</a></li>
+        </ul>
+      {{/top-level}}
+
+      <button class="add" title="Add" data-dropdown="add"></button>
+
+      {{#top-level}}
+        <ul id="apps" class="apps" data-dropdown-content>
+          <li><a href="#">Metrics</a></li>
+          <li><a href="#">Finance</a></li>
+          <li><a href="#">Clients</a></li>
+        </ul>
+      {{/top-level}}
     {{/liquid-unless}}
   </div>
 </div>

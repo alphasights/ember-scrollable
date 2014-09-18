@@ -1,2 +1,9 @@
 {{render "sidebar"}}
-{{partial "main"}}
+
+<main>
+  {{render "quick-jump" tagName="section"}}
+
+  <div class="content">
+    {{outlet}}
+  </div>
+</main>
