@@ -11,10 +11,16 @@ html, body {
 
   main {
     height: 100%;
-    overflow-y: scroll;
+    overflow: hidden;
+    position: relative;
 
-    .content {
-      height: 100%;
+    > .content {
+      position: absolute;
+      top: $header-height;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: scroll;
     }
   }
 }

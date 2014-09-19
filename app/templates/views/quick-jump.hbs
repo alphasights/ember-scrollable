@@ -27,24 +27,17 @@
   {{/liquid-unless}}
 </div>
 
-{{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
+{{#liquid-if view.isActive use="quickJump" class="liquid-results"}}
   <div class="results">
-    <section>
-      <h1>Colleagues</h1>
+    <div>
+      <section>
+        <h1>Colleagues</h1>
 
-      <ul>
-        <li><article>Imba colleague 1</article></li>
-        <li><article>Imba colleague 2</article></li>
-      </ul>
-    </section>
-
-    <section>
-      <h1>Advisors</h1>
-
-      <ul>
-        <li><article>Pro advisor 1</article></li>
-        <li><article>Pro advisor 2</article></li>
-      </ul>
-    </section>
+        <ul>
+          <li><article>Imba colleague 1</article></li>
+          <li><article>Imba colleague 2</article></li>
+        </ul>
+      </section>
+    </div>
   </div>
 {{/liquid-if}}
