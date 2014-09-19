@@ -2,15 +2,11 @@
   $search-icon-size: rem-calc(30px);
 
   @include single-transition(background-color, 150ms, linear);
+  @include clearfix;
 
   background-color: $header-background-color;
-  padding: 0 $column-gutter / 2;
   height: $header-height;
   line-height: $header-height;
-
-  > div {
-    @extend %grid-row;
-  }
 
   &.active {
     background-color: #ffffff;
@@ -24,10 +20,15 @@
     }
   }
 
-  .bar {
-    @extend %grid-column-10;
+  .bar, .actions {
+    padding: 0 $column-gutter / 2;
+  }
 
+  .bar {
     position: relative;
+    margin-right: - $search-actions-width;
+    display: inline-block;
+    width: 100%;
 
     i {
       @include icon(search);
@@ -36,7 +37,6 @@
       border-radius: $search-icon-size / 2;
       color: $primary-color;
       height: $search-icon-size;
-      left: 0;
       line-height: $search-icon-size;
       margin-top: - $search-icon-size / 2;
       position: absolute;
@@ -58,11 +58,15 @@
     }
   }
 
+  .liquid-actions {
+    overflow: visible;
+  }
+
   .actions {
     $button-size: rem-calc(30px);
 
-    @extend %grid-column-2;
-
+    width: $search-actions-width;
+    float: right;
     text-align: right;
 
     button {
@@ -78,25 +82,26 @@
       @include icon(plus);
     }
 
-    .apps, .addable {
+    .apps, .add-actions {
       @extend %dropdown;
+
+      text-align: left;
     }
   }
 
+  .liquid-results {
+    overflow: visible;
+  }
+
   .results {
-    bottom: 0;
-    left: $nav-width;
     overflow-y: scroll;
-    position: fixed;
-    right: 0;
-    top: $header-height;
 
     .overlay {
       background-color: #000000;
       bottom: 0;
       left: 0;
       opacity: 0.6;
-      position: absolute;
+      position: fixed;
       right: 0;
       top: 0;
       z-index: -1;

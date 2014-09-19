@@ -38,14 +38,17 @@
       padding: 0 $column-gutter / 2;
 
       .toggle-collapse {
-        @include icon(caret-square-o-left);
+        button {
+          @include icon(caret-square-o-left);
+
+          background-color: transparent;
+          border-width: 0;
+        }
 
         display: inline-block;
         float: right;
         font-size: rem-calc(18px);
         line-height: $nav-title-height;
-        background-color: transparent;
-        border-width: 0;
         color: $nav-link-text-color;
       }
     }
@@ -140,6 +143,10 @@
         border-width: 0;
         color: $nav-link-text-color;
       }
+
+      .actions {
+        @extend %dropdown;
+      }
     }
   }
 
@@ -176,8 +183,10 @@
       }
 
       .toggle-collapse {
-        @include icon(caret-square-o-right);
-
+        button {
+          @include icon(caret-square-o-right);
+        }
+        
         float: none;
         margin-bottom: 0;
       }
@@ -193,10 +202,6 @@
         display: block;
         margin-left: $column-gutter / 2;
         text-align: center;
-      }
-
-      .actions {
-        @extend %dropdown;
       }
     }
   }
