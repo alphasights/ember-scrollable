@@ -3,6 +3,10 @@
 <main>
   {{render "quick-jump" tagName="section"}}
 
+  {{#liquid-if view.showOverlay use="crossFade" class="liquid-overlay"}}
+    <div class="overlay"></div>
+  {{/liquid-if}}
+
   <div class="content">
     {{outlet}}
   </div>

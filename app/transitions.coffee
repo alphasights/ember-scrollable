@@ -1,7 +1,7 @@
 transitions = ->
   @transition(
     @fromNonEmptyModel(),
-    @childOf('.quick-jump'),
+    @childOf('.quick-jump .actions'),
     @hasClass('liquid-actions'),
     @toModel(true),
     @use('toRight'),

@@ -60,6 +60,7 @@
 
   .liquid-actions {
     overflow: visible;
+    transform: none;
   }
 
   .actions {
@@ -91,61 +92,49 @@
 
   .liquid-results {
     overflow: visible;
+    transform: none;
   }
 
   .results {
     overflow-y: scroll;
 
-    .overlay {
-      background-color: #000000;
-      bottom: 0;
-      left: 0;
-      opacity: 0.6;
-      position: fixed;
-      right: 0;
-      top: 0;
-      z-index: -1;
+    background-color: $search-results-background-color;
+    padding: $column-gutter / 2;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
     }
 
-    .content {
-      background-color: $search-results-background-color;
+    li {
+      height: $search-results-item-height;
+      line-height: $search-results-item-height;
+    }
+
+    article, h1 {
+      padding: 0 $column-gutter / 2;
+    }
+
+    article {
+      border-bottom: rem-calc(1px) solid #e8e8e8;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
+
+    section {
+      $font-size: rem-calc(14px);
+
+      margin: $column-gutter / 2 $column-gutter;
       padding: $column-gutter / 2;
+      font-size: $font-size;
 
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      li {
-        height: $search-results-item-height;
-        line-height: $search-results-item-height;
-      }
-
-      article, h1 {
-        padding: 0 $column-gutter / 2;
-      }
-
-      article {
-        border-bottom: rem-calc(1px) solid #e8e8e8;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #eeeeee;
-        }
-      }
-
-      section {
-        $font-size: rem-calc(14px);
-
-        margin: $column-gutter / 2 $column-gutter;
-        padding: $column-gutter / 2;
+      h1 {
         font-size: $font-size;
-
-        h1 {
-          font-size: $font-size;
-          margin-bottom: $column-gutter / 2;
-        }
+        margin-bottom: $column-gutter / 2;
       }
     }
   }
