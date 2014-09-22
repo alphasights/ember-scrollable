@@ -11,6 +11,8 @@
     line-height: $header-height;
 
     img {
+      @include single-transition(padding, 150ms, linear);
+
       height: rem-calc(30px);
       margin-right: $column-gutter / 2;
       width: rem-calc(30px);
@@ -40,6 +42,7 @@
       height: $nav-title-height;
       line-height: $nav-title-height;
       padding: 0 $column-gutter / 2;
+      white-space: nowrap;
 
       .toggle-collapse {
         button {
@@ -65,6 +68,8 @@
       a {
         @include single-transition(color, 150ms, linear);
         @include single-transition(background-color, 150ms, linear);
+        @include single-transition(margin, 150ms, linear);
+        @include single-transition(padding, 150ms, linear);
 
         border-bottom: 1px solid $nav-title-background-color;
         display: block;
@@ -73,6 +78,7 @@
         line-height: $nav-link-height;
         padding: 0 $column-gutter;
         text-decoration: none;
+        white-space: nowrap;
 
         &, &:visited {
           color: $nav-link-text-color;
@@ -84,6 +90,8 @@
       }
 
       i {
+        @include single-transition(margin, 150ms, linear);
+
         background-color: $nav-title-background-color;
         border-radius: rem-calc(10px);
         color: $nav-link-text-color;
@@ -155,8 +163,6 @@
   }
 
   &.collapsed {
-    width: $nav-collapsed-width;
-
     > header {
       text-align: center;
 
@@ -170,7 +176,6 @@
       text-align: center;
 
       > i {
-        border-radius: 50%;
         margin-right: 0;
       }
 

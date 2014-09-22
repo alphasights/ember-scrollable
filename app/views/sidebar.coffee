@@ -9,4 +9,19 @@ SidebarView = Ember.View.extend
     toggleCollapse: ->
       @set('isCollapsed', !@get('isCollapsed'))
 
+  isCollapsedDidChange: (->
+    if @get('isCollapsed')
+      growth = '-= 190px'
+    else
+      growth = '+= 190px'
+
+    Ember.RSVP.all([
+      @$().velocity({
+        width: growth
+      }, {
+        duration: 150
+      }),
+    ])
+  ).observes('isCollapsed')
+
 `export default SidebarView;`

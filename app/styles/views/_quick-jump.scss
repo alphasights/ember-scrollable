@@ -160,6 +160,7 @@
         h1 {
           font-size: $font-size;
           margin-bottom: $column-gutter / 2;
+          line-height: rem-calc(30px);
         }
       }
     }
