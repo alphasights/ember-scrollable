@@ -105,10 +105,12 @@
     z-index: 1;
     background: rgba(0,0,0, 0.45);
     overflow-y: scroll;
+    pointer-events: none;
 
     > div {
       background-color: $search-results-background-color;
       padding: $column-gutter / 2;
+      pointer-events: all;
 
       ul {
         list-style-type: none;
