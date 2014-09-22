@@ -33,11 +33,12 @@
   <div class="results">
     <div>
       <section>
-        <h1>Colleagues</h1>
+        <h1>Results</h1>
 
         <ul>
-          <li><article>Imba colleague 1</article></li>
-          <li><article>Imba colleague 2</article></li>
+          {{#each results}}
+            <li><article>{{_type}}</article></li>
+          {{/each}}
         </ul>
       </section>
     </div>
