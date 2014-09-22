@@ -30,6 +30,10 @@
     left: 0;
     overflow-y: scroll;
 
+    &::-webkit-scrollbar {
+     display: none;
+    }
+
     header {
       background-color: $nav-title-background-color;
       color: $nav-title-text-color;
@@ -186,7 +190,7 @@
         button {
           @include icon(caret-square-o-right);
         }
-        
+
         float: none;
         margin-bottom: 0;
       }

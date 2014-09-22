@@ -107,6 +107,10 @@
     overflow-y: scroll;
     pointer-events: none;
 
+    &::-webkit-scrollbar {
+     display: none;
+    }
+
     > div {
       background-color: $search-results-background-color;
       padding: $column-gutter / 2;

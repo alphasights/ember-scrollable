@@ -21,8 +21,4 @@ QuickJumpView = Ember.View.extend
 
       true
 
-  queryDidChange: (->
-
-  ).observes('query')
-
 `export default QuickJumpView;`
