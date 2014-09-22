@@ -26,7 +26,7 @@
 
   .bar {
     position: relative;
-    margin-right: - $search-actions-width;
+    margin-right: - rem-calc(100px);
     display: inline-block;
     width: 100%;
 
@@ -66,13 +66,19 @@
   .actions {
     $button-size: rem-calc(30px);
 
-    width: $search-actions-width;
     float: right;
     text-align: right;
 
     button {
       height: $button-size;
       width: $button-size;
+    }
+
+    .close {
+      @include icon(times-circle);
+
+      border-width: 0;
+      background-color: transparent;
     }
 
     .change-app {

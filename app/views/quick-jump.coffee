@@ -14,7 +14,7 @@ QuickJumpView = Ember.View.extend
 
     Ember.$(document).on 'click', (event) =>
       $target = $(event.target)
-      $nonBlurringElements = $('.quick-jump')
+      $nonBlurringElements = $('.quick-jump .bar, .quick-jump .results')
 
       unless $target.closest($nonBlurringElements).length > 0
         @set('isActive', false)

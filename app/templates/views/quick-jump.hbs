@@ -9,7 +9,9 @@
 </div>
 
 <div class="actions">
-  {{#liquid-unless view.isActive class="liquid-actions"}}
+  {{#liquid-if view.isActive class="liquid-actions"}}
+    <button class="close" title="Close"></button>
+  {{else}}
     <button class="change-app" title="Change App" data-dropdown="apps"></button>
 
     <ul id="add-actions" class="add-actions" data-dropdown-content>
@@ -24,7 +26,7 @@
       <li><a href="#">Finance</a></li>
       <li><a href="#">Clients</a></li>
     </ul>
-  {{/liquid-unless}}
+  {{/liquid-if}}
 </div>
 
 {{#liquid-if view.isActive use="quickJump" class="liquid-results"}}

@@ -4,8 +4,8 @@ transitions = ->
     @childOf('.quick-jump .actions'),
     @hasClass('liquid-actions'),
     @toModel(true),
-    @use('toRight'),
-    @reverse('toLeft')
+    @use('fade'),
+    @reverse('fade')
   )
 
 `export default transitions;`

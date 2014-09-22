@@ -1,5 +1,4 @@
 `import Ember from 'ember';`
-`import { Promise } from 'vendor/liquid-fire';`
 
 Velocity = Ember.$.Velocity
 
