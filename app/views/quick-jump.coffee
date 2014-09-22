@@ -6,7 +6,6 @@ QuickJumpView = Ember.View.extend
   isActive: false
   templateName: 'views/quick-jump'
   placeholder: null
-  applicationView: null
 
   didInsertElement: ->
     @$('input').on 'focusin', =>
@@ -22,14 +21,8 @@ QuickJumpView = Ember.View.extend
 
       true
 
-    @set('applicationView', @nearestOfType(ApplicationView))
-
   queryDidChange: (->
-    @get('controller').send('')
-  ).observes('query')
 
-  isActiveDidChange: (->
-    @set('applicationView.showOverlay', @get('isActive'))
-  ).observes('isActive')
+  ).observes('query')
 
 `export default QuickJumpView;`

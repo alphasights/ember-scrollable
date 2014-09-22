@@ -9,10 +9,11 @@ hide = (oldView, insertNewView) ->
 
 reveal = (insertNewView) ->
   insertNewView().then (newView) ->
-    newView.$().css
+    newView.$().css({
       display: ''
       visibility: ''
-      opacity: 0
+      position: 'static'
+    })
 
     Velocity.animate(newView.$(), { opacity: [1, 0] }, { duration: 150 })
 

@@ -2,8 +2,7 @@
 
 ApplicationView = Ember.View.extend
   classNames: ['application']
-  showOverlay: false
-  
+
   onDidInsertElement: (->
     Ember.$(document).foundation()
   ).on('didInsertElement')
