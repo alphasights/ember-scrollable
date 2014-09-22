@@ -9,7 +9,7 @@
 </div>
 
 <div class="actions">
-  {{#liquid-if view.isActive class="liquid-actions"}}
+  {{#liquid-if view.isActive use="fade" class="liquid-actions"}}
     <button class="close" title="Close"></button>
   {{else}}
     <button class="change-app" title="Change App" data-dropdown="apps"></button>
@@ -29,7 +29,7 @@
   {{/liquid-if}}
 </div>
 
-{{#liquid-if view.isActive use="quickJump" class="liquid-results"}}
+{{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
   <div class="results">
     <div>
       <section>
