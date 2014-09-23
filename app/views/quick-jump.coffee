@@ -1,10 +1,11 @@
 `import Ember from 'ember';`
 
 QuickJumpView = Ember.View.extend
-  classNameBindings: [':quick-jump', 'isActive:active']
+  classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading']
   isActive: false
   templateName: 'views/quick-jump'
   placeholder: null
+  isLoading: Ember.computed.alias('controller.requestPromise.isLoading')
 
   didInsertElement: ->
     @$('input').on 'focusin', =>

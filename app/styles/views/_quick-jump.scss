@@ -8,12 +8,18 @@
   height: $header-height;
   line-height: $header-height;
 
+  &.loading {
+    .results .content {
+      opacity: 0.7;
+    }
+  }
+
   &.active {
     background-color: #ffffff;
     border-bottom: rem-calc(1px) solid #d0d0d0;
 
     .bar {
-      i {
+      .progress-indicator {
         background-color: $primary-color;
         color: #ffffff;
       }
@@ -30,19 +36,26 @@
     display: inline-block;
     width: 100%;
 
-    i {
-      @include icon(search);
+    .progress-indicator {
       @include single-transition(all, 150ms, linear);
 
       border-radius: $search-icon-size / 2;
       color: $primary-color;
-      height: $search-icon-size;
-      line-height: $search-icon-size;
       margin-top: - $search-icon-size / 2;
       position: absolute;
       text-align: center;
       top: 50%;
       width: $search-icon-size;
+    }
+
+    i {
+      @include icon(search);
+    }
+
+    .progress-indicator, i {
+      display: block;
+      height: $search-icon-size;
+      line-height: $search-icon-size;
     }
 
     input {
@@ -121,7 +134,9 @@
      display: none;
     }
 
-    > div {
+    .content {
+      @include single-transition(opacity, 150ms, linear);
+
       background-color: $search-results-background-color;
       padding: $column-gutter / 2;
       pointer-events: all;
