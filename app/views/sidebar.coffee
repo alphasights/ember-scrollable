@@ -15,13 +15,11 @@ SidebarView = Ember.View.extend
     else
       growth = '+= 190px'
 
-    Ember.RSVP.all([
-      @$().velocity({
-        width: growth
-      }, {
-        duration: 150
-      }),
-    ])
+    @$().velocity({
+      width: growth
+    }, {
+      duration: 150
+    })
   ).observes('isCollapsed')
 
 `export default SidebarView;`

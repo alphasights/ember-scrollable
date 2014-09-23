@@ -3,6 +3,7 @@
 QuickJumpController = Ember.Controller.extend
   query: null
   results: null
+  requestPromise: null
 
   queryDidChange: (->
     Ember.run.debounce(this, 'search', 250)
@@ -12,8 +13,9 @@ QuickJumpController = Ember.Controller.extend
     query = @get('query')
 
     if query.length > 2
-      $.getJSON('/swordfish/quick_jumps.json', q: query).then (response) =>
+      @set('requestPromise', $.getJSON('/swordfish/quick_jumps.json', q: query).then (response) =>
         @set('results', response.hits.hits)
+      )
     else
       @set('results', null)
 

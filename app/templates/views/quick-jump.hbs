@@ -32,6 +32,8 @@
 {{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
   <div class="results">
     <div>
+      {{as-progress-indicator promise=requestPromise}}
+
       <section>
         <h1>Results</h1>
 

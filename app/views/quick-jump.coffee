@@ -1,5 +1,4 @@
 `import Ember from 'ember';`
-`import ApplicationView from './application';`
 
 QuickJumpView = Ember.View.extend
   classNameBindings: [':quick-jump', 'isActive:active']

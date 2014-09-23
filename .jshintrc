@@ -4,7 +4,8 @@
     "window": true,
     "-Promise": true,
     "PhoenixENV": true,
-    "_": true
+    "_": true,
+    "Spinner": true
   },
   "browser" : true,
   "boss" : true,
