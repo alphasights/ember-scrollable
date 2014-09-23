@@ -106,6 +106,7 @@
       @extend %dropdown;
 
       text-align: left;
+      min-width: rem-calc(150px);
     }
   }
 
