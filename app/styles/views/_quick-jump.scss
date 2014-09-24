@@ -72,8 +72,7 @@
   }
 
   .liquid-actions {
-    overflow: visible;
-    transform: none;
+    @extend %static-liquid-container;
   }
 
   .actions {
@@ -111,13 +110,7 @@
   }
 
   .liquid-results {
-    transform: none;
-    overflow: visible;
-    position: static;
-
-    > div {
-      position: static !important;
-    }
+    @extend %static-liquid-container;
   }
 
   .results {

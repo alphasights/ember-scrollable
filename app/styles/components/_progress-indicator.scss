@@ -1,11 +1,5 @@
 .progress-indicator {
   .liquid-spinner {
-    position: static;
-    overflow: visible;
-    transform: none;
-
-    > div {
-      position: static !important;
-    }
+    @extend %static-liquid-container;
   }
 }

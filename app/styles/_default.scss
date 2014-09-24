@@ -4,3 +4,13 @@
   margin: 0;
   text-transform: uppercase;
 }
+
+%static-liquid-container {
+  position: static;
+  overflow: visible;
+  transform: none;
+
+  > div {
+    position: static !important;
+  }
+}
