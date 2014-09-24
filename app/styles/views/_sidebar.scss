@@ -19,6 +19,8 @@
     }
 
     h1 {
+      @extend %compact-heading;
+
       display: inline-block;
       color: $white;
     }
@@ -39,24 +41,30 @@
     header {
       background-color: $nav-title-background-color;
       color: $nav-title-text-color;
-      height: $nav-title-height;
       line-height: $nav-title-height;
       padding: 0 $column-gutter / 2;
       white-space: nowrap;
 
+      h1 {
+        @extend %compact-heading;
+
+        color: $nav-link-text-color;
+        display: inline-block;
+      }
+
       .toggle-collapse {
+        display: inline-block;
+        float: right;
+        font-size: rem-calc(18px);
+        line-height: $nav-title-height;
+        color: $nav-link-text-color;
+
         button {
           @include icon(caret-square-o-left);
 
           background-color: transparent;
           border-width: 0;
         }
-
-        display: inline-block;
-        float: right;
-        font-size: rem-calc(18px);
-        line-height: $nav-title-height;
-        color: $nav-link-text-color;
       }
     }
 
