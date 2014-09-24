@@ -71,10 +71,6 @@
     }
   }
 
-  .liquid-actions {
-    @extend %static-liquid-container;
-  }
-
   .actions {
     $button-size: rem-calc(30px);
 
