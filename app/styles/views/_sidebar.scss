@@ -1,14 +1,14 @@
 .sidebar {
   float: left;
-  width: $nav-width;
-  background-color: $nav-background-color;
+  width: $sidebar-nav-width;
+  background-color: $sidebar-nav-background-color;
   height: 100%;
   position: relative;
 
   > header {
     padding: 0 $column-gutter / 2;
-    height: $header-height;
-    line-height: $header-height;
+    height: $sidebar-header-height;
+    line-height: $sidebar-header-height;
 
     img {
       @include single-transition(padding, 150ms, linear);
@@ -28,8 +28,8 @@
 
   > nav {
     position: absolute;
-    top: $header-height;
-    bottom: $session-height;
+    top: $sidebar-header-height;
+    bottom: $sidebar-session-height;
     right: 0;
     left: 0;
     overflow-y: scroll;
@@ -39,16 +39,16 @@
     }
 
     header {
-      background-color: $nav-title-background-color;
-      color: $nav-title-text-color;
-      line-height: $nav-title-height;
+      background-color: $sidebar-nav-title-background-color;
+      color: $sidebar-nav-title-text-color;
+      line-height: $sidebar-nav-title-height;
       padding: 0 $column-gutter / 2;
       white-space: nowrap;
 
       h1 {
         @extend %compact-heading;
 
-        color: $nav-link-text-color;
+        color: $sidebar-nav-link-text-color;
         display: inline-block;
       }
 
@@ -56,8 +56,8 @@
         display: inline-block;
         float: right;
         font-size: rem-calc(18px);
-        line-height: $nav-title-height;
-        color: $nav-link-text-color;
+        line-height: $sidebar-nav-title-height;
+        color: $sidebar-nav-link-text-color;
 
         button {
           @include icon(caret-square-o-left);
@@ -79,30 +79,30 @@
         @include single-transition(margin, 150ms, linear);
         @include single-transition(padding, 150ms, linear);
 
-        border-bottom: 1px solid $nav-title-background-color;
+        border-bottom: 1px solid $sidebar-nav-title-background-color;
         display: block;
         font-size: rem-calc(14px);
         font-weight: 300;
-        line-height: $nav-link-height;
+        line-height: $sidebar-nav-link-height;
         padding: 0 $column-gutter;
         text-decoration: none;
         white-space: nowrap;
 
         &, &:visited {
-          color: $nav-link-text-color;
+          color: $sidebar-nav-link-text-color;
         }
 
         &:hover {
-          background-color: $nav-title-background-color;
+          background-color: $sidebar-nav-title-background-color;
         }
       }
 
       i {
         @include single-transition(margin, 150ms, linear);
 
-        background-color: $nav-title-background-color;
+        background-color: $sidebar-nav-title-background-color;
         border-radius: rem-calc(10px);
-        color: $nav-link-text-color;
+        color: $sidebar-nav-link-text-color;
         margin-right: $column-gutter / 2;
         padding: rem-calc(10px);
       }
@@ -126,24 +126,24 @@
   }
 
   .session {
-    height: $session-height;
-    line-height: $session-height;
-    background: $nav-title-background-color;
+    height: $sidebar-session-height;
+    line-height: $sidebar-session-height;
+    background: $sidebar-nav-title-background-color;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 
     .picture {
-      border-radius: $session-height / 2;
+      border-radius: $sidebar-session-height / 2;
       display: inline-block;
-      height: $session-height / 2;
+      height: $sidebar-session-height / 2;
       margin: 0 $column-gutter / 2;
-      width: $session-height / 2;
+      width: $sidebar-session-height / 2;
     }
 
     .name {
-      color: $nav-link-text-color;
+      color: $sidebar-nav-link-text-color;
       display: inline-block;
       font-size: rem-calc(14px);
       margin-right: $column-gutter / 2;
@@ -153,7 +153,7 @@
       display: inline-block;
       float: right;
       font-size: rem-calc(18px);
-      line-height: $session-height;
+      line-height: $sidebar-session-height;
       margin-right: $column-gutter / 2;
 
       button {
@@ -161,7 +161,7 @@
 
         background-color: transparent;
         border-width: 0;
-        color: $nav-link-text-color;
+        color: $sidebar-nav-link-text-color;
       }
 
       .actions {
