@@ -2,15 +2,19 @@
 
 ResultView = Ember.View.extend
   classNameBindings: ['type']
-  type: Ember.computed.alias('controller.type')
+  availableTypes: ['project']
+
+  type: (->
+    type = @get('controller.type')
+
+    if type? && @get('availableTypes').contains(type)
+      type
+    else
+      'default'
+  ).property('controller.type')
 
   templateName: (->
-    type = @get('type')
-
-    if type?
-      "views/quick-jump/#{type}"
-    else
-      null
+    "views/quick-jump/#{@get('type')}"
   ).property('type')
 
 `export default ResultView;`
