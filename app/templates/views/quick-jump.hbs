@@ -35,15 +35,19 @@
   <div class="results">
     {{#liquid-if results use="crossFade" class="liquid-content"}}
       <div class="content">
-        <section>
-          <h1>Results</h1>
+        {{#each resultsSections}}
+          <section>
+            <h1>{{title}}</h1>
 
-          <ul>
-            {{#each results}}
-              <li><article>{{_type}}</article></li>
-            {{/each}}
-          </ul>
-        </section>
+            <ul>
+              {{#each result in results}}
+                <li>
+                  {{render "quick-jump/result" result tagName="article"}}
+                </li>
+              {{/each}}
+            </ul>
+          </section>
+        {{/each}}
       </div>
     {{/liquid-if}}
   </div>
