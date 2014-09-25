@@ -6,14 +6,25 @@ QuickJumpController = Ember.Controller.extend
   results: null
   requestPromise: null
 
-  resultsSections: (->
-    _(@get('results')).chain().groupBy('_type').map((results, type) ->
-      title: type.capitalize().pluralize()
+  normalizedResults: (->
+    results = @get('results')
 
-      results: results.map (result) ->
-        _(result._source).extend(type: type)
-    ).value()
+    if results?
+      results.map (result) ->
+        _(result._source).extend(type: result._type)
+    else
+      []
   ).property('results')
+
+  topHitSection: (->
+    title: 'Top Hit', results: [@get('normalizedResults.firstObject')]
+  ).property('normalizedResults')
+
+  resultsSections: (->
+    [@get('topHitSection')].concat _(@get('normalizedResults')).chain().groupBy('type').map((results, type) ->
+      title: type.capitalize().pluralize(), results: results
+    ).value()
+  ).property('normalizedResults', 'topHitSection')
 
   queryDidChange: (->
     Ember.run.debounce(this, 'search', 250)
