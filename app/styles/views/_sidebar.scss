@@ -19,10 +19,11 @@
     }
 
     h1 {
-      @extend %compact-heading;
+      @extend %sidebar-heading;
 
       display: inline-block;
       color: $white;
+      margin: 0;
     }
   }
 
@@ -46,10 +47,11 @@
       white-space: nowrap;
 
       h1 {
-        @extend %compact-heading;
+        @extend %sidebar-heading;
 
         color: $sidebar-nav-link-text-color;
         display: inline-block;
+        margin: 0;
       }
 
       .toggle-collapse {

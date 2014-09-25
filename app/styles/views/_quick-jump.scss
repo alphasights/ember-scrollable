@@ -163,7 +163,7 @@
         font-size: $font-size;
 
         h1 {
-          @extend %compact-heading;
+          @extend %uppercase-medium-heading;
 
           margin-bottom: $column-gutter / 2;
           line-height: rem-calc(30px);

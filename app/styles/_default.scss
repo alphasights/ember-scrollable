@@ -1,8 +1,7 @@
-%compact-heading {
-  font-size: rem-calc(15px);
-  font-weight: 100;
-  margin: 0;
-  text-transform: uppercase;
+%sidebar-heading {
+  @extend %uppercase-small-heading;
+
+  font-weight: $font-weight-normal;
 }
 
 %static-liquid-container {
