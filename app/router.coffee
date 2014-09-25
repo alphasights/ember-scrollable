@@ -3,6 +3,6 @@
 Router = Ember.Router.extend
   location: PhoenixENV.locationType
 
-Router.map ->
+Router.map (->)
 
 `export default Router;`

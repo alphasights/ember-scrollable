@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/phoenix.css">
     <link rel="stylesheet" href="assets/test-support.css">
+
     <style>
       #ember-testing-container {
         position: absolute;
@@ -24,11 +25,13 @@
         z-index: 9999;
         border: 1px solid #ccc;
       }
+
       #ember-testing {
         zoom: 50%;
       }
     </style>
   </head>
+
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
@@ -37,13 +40,16 @@
       window.PhoenixENV = {{ENV}};
       window.EmberENV = window.PhoenixENV.EmberENV;
     </script>
+
     <script src="assets/vendor.js"></script>
     <script src="assets/test-support.js"></script>
     <script src="assets/phoenix.js"></script>
     <script src="testem.js"></script>
+
     <script>
       require('phoenix/tests/test-helper');
     </script>
+
     <script src="assets/test-loader.js"></script>
   </body>
 </html>
