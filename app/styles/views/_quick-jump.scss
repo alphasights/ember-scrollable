@@ -71,6 +71,10 @@
     }
   }
 
+  .liquid-actions {
+    overflow: visible;
+  }
+
   .actions {
     $button-size: rem-calc(30px);
 
