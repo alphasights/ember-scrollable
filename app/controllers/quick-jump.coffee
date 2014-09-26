@@ -1,5 +1,5 @@
 `import Ember from 'ember';`
-`import PromiseController from './promise'`
+`import PromiseController from 'phoenix/controllers/promise'`
 
 QuickJumpController = Ember.Controller.extend
   query: null

@@ -10,5 +10,5 @@ module "Quick Jump",
     Ember.run @app, @app.destroy
 
 test "Page contents", ->
-  visit '/'.then ->
+  visit('/').then ->
     equal find('.quick-jump').length, 1, "Page contains quick jump component"

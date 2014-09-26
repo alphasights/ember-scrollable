@@ -3,7 +3,6 @@
     "document": true,
     "window": true,
     "-Promise": true,
-    "PhoenixENV": true,
     "_": true,
     "Spinner": true
   },

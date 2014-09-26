@@ -18,7 +18,7 @@ SidebarView = Ember.View.extend
     @$().velocity({
       width: growth
     }, {
-      duration: 180
+      duration: 150
     })
   ).observes('isCollapsed')
 

@@ -1,7 +1,8 @@
 `import Ember from 'ember';`
+`import config from 'phoenix/config/environment';`
 
 Router = Ember.Router.extend
-  location: PhoenixENV.locationType
+  location: config.locationType
 
 Router.map (->)
 

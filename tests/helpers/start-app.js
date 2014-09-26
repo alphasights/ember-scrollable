@@ -1,15 +1,13 @@
 import Ember from 'ember';
 import Application from 'phoenix/app';
 import Router from 'phoenix/router';
+import config from 'phoenix/config/environment';
 
 export default function startApp(attrs) {
   var App;
 
-  var attributes = Ember.merge({
-    rootElement: '#ember-testing',
-    LOG_ACTIVE_GENERATION: false,
-    LOG_VIEW_LOOKUPS: false
-  }, attrs);
+  var attributes = Ember.merge({}, config.APP);
+  attributes = Ember.merge(attributes, attrs);
 
   Router.reopen({
     location: 'none'
