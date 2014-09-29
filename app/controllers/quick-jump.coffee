@@ -1,10 +1,11 @@
 `import Ember from 'ember';`
-`import PromiseController from 'phoenix/controllers/promise'`
+`import PromiseController from 'phoenix/controllers/promise';`
 
 QuickJumpController = Ember.Controller.extend
   query: null
   results: null
   requestPromise: null
+  resultSectionsOrder: ['contact', 'project', 'advisor', 'user', 'entity', 'account']
 
   normalizedResults: (->
     results = @get('results')
@@ -20,11 +21,22 @@ QuickJumpController = Ember.Controller.extend
     title: 'Top Hit', results: [@get('normalizedResults.firstObject')]
   ).property('normalizedResults')
 
-  resultsSections: (->
-    [@get('topHitSection')].concat _(@get('normalizedResults')).chain().groupBy('type').map((results, type) ->
-      title: type.capitalize().pluralize(), results: results
+  allSections: (->
+    [@get('topHitSection')].concat(@get('sortedResultSections'))
+  ).property('sortedResultSections', 'topHitSection')
+
+  sortedResultSections: (->
+    resultSectionsOrder = @get('resultSectionsOrder')
+
+    @get('resultSections').sort (a, b) ->
+      resultSectionsOrder.indexOf(a.type) - resultSectionsOrder.indexOf(b.type)
+  ).property('resultSections')
+
+  resultSections: (->
+    _(@get('normalizedResults')).chain().groupBy('type').map((results, type) ->
+      title: type.capitalize().pluralize(), results: results, type: type
     ).value()
-  ).property('normalizedResults', 'topHitSection')
+  ).property('normalizedResults')
 
   queryDidChange: (->
     Ember.run.debounce(this, 'search', 250)
