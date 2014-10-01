@@ -9,6 +9,10 @@ module "Quick Jump",
   teardown: ->
     Ember.run @app, @app.destroy
 
-test "Page contents", ->
-  visit('/').then ->
-    equal find('.quick-jump').length, 1, "Page contains quick jump component"
+test "Search results", ->
+  visit '/'
+  click '.quick-jump .bar input'
+  fillIn '.quick-jump .bar input', 'red'
+
+  andThen ->
+    equal find('.quick-jump .results section:first-of-type li').length, 1, "Results contain only one top hit"

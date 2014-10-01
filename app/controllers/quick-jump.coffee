@@ -1,5 +1,7 @@
 `import Ember from 'ember';`
 `import PromiseController from 'phoenix/controllers/promise';`
+`import config from 'phoenix/config/environment';`
+`import { request } from 'ic-ajax';`
 
 QuickJumpController = Ember.Controller.extend
   query: null
@@ -12,7 +14,7 @@ QuickJumpController = Ember.Controller.extend
 
     if results?
       results.map (result) ->
-        _(result._source).extend(type: result._type)
+        _({}).extend(result._source, type: result._type)
     else
       []
   ).property('results')
@@ -48,8 +50,9 @@ QuickJumpController = Ember.Controller.extend
     if query && query.length > 2
       @set('requestPromise', PromiseController.create(
         promise:
-          $.getJSON('/swordfish/quick_jumps.json', q: query).then (response) =>
-            @set('results', response.hits.hits)
+          request("#{config.APP.apiBaseURL}/quick_jumps", data: { q: query })
+            .then (response) =>
+              @set('results', response.hits.hits)
       ))
     else
       @set('results', null)

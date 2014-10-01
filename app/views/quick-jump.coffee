@@ -7,12 +7,12 @@ QuickJumpView = Ember.View.extend
   placeholder: null
   isLoading: Ember.computed.alias('controller.requestPromise.isLoading')
 
-  didInsertElement: ->
-    @$('input').on 'focusin', =>
-      @set('isActive', true)
-      true
+  clickEventName: (->
+    "click.#{@get('elementId')}"
+  ).property('elementId')
 
-    Ember.$(document).on 'click', (event) =>
+  didInsertElement: ->
+    Ember.$(document).on @get('clickEventName'), (event) =>
       $target = $(event.target)
       $nonBlurringElements = $('.quick-jump .bar, .quick-jump .results')
 
@@ -20,5 +20,12 @@ QuickJumpView = Ember.View.extend
         @set('isActive', false)
 
       true
+
+  willDestroyElement: ->
+    Ember.$(document).off(@get('clickEventName'))
+
+  actions:
+    onBarFocusIn: ->
+      @set('isActive', true)
 
 `export default QuickJumpView;`
