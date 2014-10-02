@@ -46,7 +46,8 @@
     "currentURL",
     "currentPath",
     "currentRouteName",
-    "Pretender"
+    "Pretender",
+    "defineFixture"
   ],
   "node": false,
   "browser": false,

@@ -1,77 +1,66 @@
 `import Ember from 'ember';`
 `import { test } from 'ember-qunit';`
+`import '../helpers/define-fixture';`
 `import startApp from '../helpers/start-app';`
 
 module "Quick Jump",
   setup: ->
     @app = startApp()
+    @app.server = new Pretender()
 
   teardown: ->
+    @app.server.shutdown()
     Ember.run @app, @app.destroy
 
 test "Search results", ->
-  new Pretender ->
-    @get '/swordfish/users/me', (request) ->
-      [
-        200,
-        { "Content-Type": "application/json" },
+  defineFixture('/users/me', {}, {
+    "user": {
+      "initials": "EU",
+      "id": 1
+    }
+  })
 
-        JSON.stringify({
-          "user": {
-            "initials": "EU",
-            "id": 1
-          }
-        })
-      ]
-
-    @get '/swordfish/quick_jumps', (request) ->
-      if request.queryParams.q == 'example'
-        [
-          200,
-          { "Content-Type": "application/json" },
-
-          JSON.stringify({
-            "hits": {
-              "hits": [{
-                "_index": "client-contacts",
-                "_type": "contact",
-                "_source": {
-                  "name": "Example Client Contact"
-                }
-              }, {
-                "_index": "client-entities",
-                "_type": "entity",
-                "_source": {
-                  "name": "Example Client Entity"
-                }
-              }, {
-                "_index": "client-accounts",
-                "_type": "account",
-                "_source": {
-                  "name": "Example Client Account"
-                }
-              }, {
-                "_index": "advisors",
-                "_type": "advisor",
-                "_source": {
-                  "name": "Example Advisor"
-                }
-              }, {
-                "_index": "projects",
-                "_type": "project",
-                "_source": {
-                  "codename": "Example Project"
-                }
-              }, {
-                "_index": "users",
-                "_type": "user",
-                "_source": {
-                  "name": "Example User"
-                }
-              }]
-            }
-          })
-        ]
+  defineFixture('/quick_jumps', q: 'example', {
+    "hits": {
+      "hits": [{
+        "_index": "client-contacts",
+        "_type": "contact",
+        "_source": {
+          "name": "Example Client Contact"
+        }
+      }, {
+        "_index": "client-entities",
+        "_type": "entity",
+        "_source": {
+          "name": "Example Client Entity"
+        }
+      }, {
+        "_index": "client-accounts",
+        "_type": "account",
+        "_source": {
+          "name": "Example Client Account"
+        }
+      }, {
+        "_index": "advisors",
+        "_type": "advisor",
+        "_source": {
+          "name": "Example Advisor"
+        }
+      }, {
+        "_index": "projects",
+        "_type": "project",
+        "_source": {
+          "codename": "Example Project"
+        }
+      }, {
+        "_index": "users",
+        "_type": "user",
+        "_source": {
+          "name": "Example User"
+        }
+      }]
+    }
+  })
 
   visit '/'
   click '.quick-jump .bar input'
