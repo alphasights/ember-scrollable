@@ -10,6 +10,44 @@ module "Quick Jump",
     Ember.run @app, @app.destroy
 
 test "Search results", ->
+  new Pretender ->
+    @get '/swordfish/users/me', (request) ->
+      [
+        200,
+        { "Content-Type": "application/json" },
+
+        JSON.stringify({
+          "user": {
+            "initials": "JB",
+            "id": 1
+          }
+        })
+      ]
+
+    @get '/swordfish/quick_jumps', (request) ->
+      [
+        200,
+        { "Content-Type": "application/json" },
+
+        JSON.stringify({
+          "hits": {
+            "hits": [{
+              "_index": "client-contacts",
+              "_type": "contact",
+              "_source": {
+                "name": "Reda Rebib"
+              }
+            }, {
+              "_index": "advisors",
+              "_type": "advisor",
+              "_source": {
+                "name": "H. Reddy"
+              }
+            }]
+          }
+        })
+      ]
+
   visit '/'
   click '.quick-jump .bar input'
   fillIn '.quick-jump .bar input', 'red'

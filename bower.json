@@ -15,7 +15,8 @@
     "qunit": "~1.15.0",
     "paint": "../paint",
     "underscore": "~1.7.0",
-    "spinjs": "~2.0.1"
+    "spinjs": "~2.0.1",
+    "pretender": "~0.2.0"
   },
   "resolutions": {
     "jquery": ">= 1.7.0 < 2.2.0"
