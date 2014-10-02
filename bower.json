@@ -16,7 +16,8 @@
     "paint": "../paint",
     "underscore": "~1.7.0",
     "spinjs": "~2.0.1",
-    "pretender": "~0.2.0"
+    "pretender": "~0.2.0",
+    "underscore.string": "~2.3.3"
   },
   "resolutions": {
     "jquery": ">= 1.7.0 < 2.2.0"

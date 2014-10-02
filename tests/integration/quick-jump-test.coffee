@@ -18,39 +18,91 @@ test "Search results", ->
 
         JSON.stringify({
           "user": {
-            "initials": "JB",
+            "initials": "EU",
             "id": 1
           }
         })
       ]
 
     @get '/swordfish/quick_jumps', (request) ->
-      [
-        200,
-        { "Content-Type": "application/json" },
+      if request.queryParams.q == 'example'
+        [
+          200,
+          { "Content-Type": "application/json" },
 
-        JSON.stringify({
-          "hits": {
-            "hits": [{
-              "_index": "client-contacts",
-              "_type": "contact",
-              "_source": {
-                "name": "Reda Rebib"
-              }
-            }, {
-              "_index": "advisors",
-              "_type": "advisor",
-              "_source": {
-                "name": "H. Reddy"
-              }
-            }]
-          }
-        })
-      ]
+          JSON.stringify({
+            "hits": {
+              "hits": [{
+                "_index": "client-contacts",
+                "_type": "contact",
+                "_source": {
+                  "name": "Example Client Contact"
+                }
+              }, {
+                "_index": "client-entities",
+                "_type": "entity",
+                "_source": {
+                  "name": "Example Client Entity"
+                }
+              }, {
+                "_index": "client-accounts",
+                "_type": "account",
+                "_source": {
+                  "name": "Example Client Account"
+                }
+              }, {
+                "_index": "advisors",
+                "_type": "advisor",
+                "_source": {
+                  "name": "Example Advisor"
+                }
+              }, {
+                "_index": "projects",
+                "_type": "project",
+                "_source": {
+                  "codename": "Example Project"
+                }
+              }, {
+                "_index": "users",
+                "_type": "user",
+                "_source": {
+                  "name": "Example User"
+                }
+              }]
+            }
+          })
+        ]
 
   visit '/'
   click '.quick-jump .bar input'
-  fillIn '.quick-jump .bar input', 'red'
+  fillIn '.quick-jump .bar input', 'example'
 
   andThen ->
-    equal find('.quick-jump .results section:first-of-type li').length, 1, "Results contain only one top hit"
+    sections = find('.quick-jump .results section').toArray().map (section) ->
+      $section = $(section)
+
+      title: $section.find('h1').text()
+      results: $section.find('li').toArray().map (item) -> _.str.trim($(item).text())
+
+    deepEqual sections, [{
+      title: 'Top Hit'
+      results: ['Example Client Contact']
+    }, {
+      title: 'Projects'
+      results: ['Example Project']
+    }, {
+      title: 'Advisors'
+      results: ['Example Advisor']
+    }, {
+      title: 'Users'
+      results: ['Example User']
+    }, {
+      title: 'Contacts'
+      results: ['Example Client Contact']
+    }, {
+      title: 'Entities'
+      results: ['Example Client Entity']
+    }, {
+      title: 'Accounts'
+      results: ['Example Client Account']
+    }]
