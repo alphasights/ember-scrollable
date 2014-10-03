@@ -1,4 +1,4 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 QuickJumpView = Ember.View.extend
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading']
@@ -28,4 +28,4 @@ QuickJumpView = Ember.View.extend
     onBarFocusIn: ->
       @set('isActive', true)
 
-`export default QuickJumpView;`
+`export default QuickJumpView`

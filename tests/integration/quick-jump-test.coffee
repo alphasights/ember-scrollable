@@ -1,7 +1,7 @@
-`import Ember from 'ember';`
-`import { test } from 'ember-qunit';`
-`import '../helpers/define-fixture';`
-`import startApp from '../helpers/start-app';`
+`import Ember from 'ember'`
+`import { test } from 'ember-qunit'`
+`import '../helpers/define-fixture'`
+`import startApp from '../helpers/start-app'`
 
 module "Quick Jump",
   setup: ->

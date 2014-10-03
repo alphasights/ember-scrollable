@@ -1,4 +1,4 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 SidebarView = Ember.View.extend
   templateName: 'views/sidebar'
@@ -22,4 +22,4 @@ SidebarView = Ember.View.extend
     })
   ).observes('isCollapsed')
 
-`export default SidebarView;`
+`export default SidebarView`

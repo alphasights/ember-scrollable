@@ -1,5 +1,5 @@
-`import Ember from 'ember';`
-`import config from 'phoenix/config/environment';`
+`import Ember from 'ember'`
+`import config from 'phoenix/config/environment'`
 
 ApplicationRoute = Ember.Route.extend
   model: ->
@@ -12,4 +12,4 @@ ApplicationRoute = Ember.Route.extend
       else
         true
 
-`export default ApplicationRoute;`
+`export default ApplicationRoute`
