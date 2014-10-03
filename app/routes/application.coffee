@@ -3,7 +3,8 @@
 
 ApplicationRoute = Ember.Route.extend
   model: ->
-    @store.find('user', 'me')
+    Ember.RSVP.hash
+      currentUser: @store.find('user', 'me')
 
   actions:
     error: (error) ->

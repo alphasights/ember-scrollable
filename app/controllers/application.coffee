@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
 
-ApplicationController = Ember.Controller.extend()
+ApplicationController = Ember.ObjectController.extend()
 
 `export default ApplicationController`

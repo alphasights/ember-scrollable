@@ -41,7 +41,7 @@ QuickJumpController = Ember.Controller.extend
   ).property('normalizedResults')
 
   queryDidChange: (->
-    Ember.run.debounce(this, 'search', 250)
+    Ember.run.debounce(this, 'search', 500)
   ).observes('query')
 
   search: ->

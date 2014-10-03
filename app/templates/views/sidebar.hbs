@@ -32,10 +32,9 @@
 
   <img
     class="picture"
-    src="https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_medium_square-3d72ccbb7acff822d65372d383b37c86.png"
-    title="EDe"
     alt="Profile Picture"
+    {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}}
   />
 
-  <div class="name">Eugenio Depalo</div>
+  <div class="name">{{currentUser.name}}</div>
 </section>
