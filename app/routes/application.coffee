@@ -1,5 +1,4 @@
 `import Ember from 'ember'`
-`import config from 'phoenix/config/environment'`
 
 ApplicationRoute = Ember.Route.extend
   model: ->
