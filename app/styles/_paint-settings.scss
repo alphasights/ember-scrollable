@@ -1,13 +1,13 @@
-$include-html-application-layout: true;
+$include-html-layout: true;
 
-$application-sidebar-nav-classes:
+$layout-sidebar-nav-classes:
                       dashboard,
                       team,
                       projects,
                       performances,
                       settings;
 
-$application-sidebar-nav-icons:
+$layout-sidebar-nav-icons:
                       tachometer,
                       tasks,
                       folder,
