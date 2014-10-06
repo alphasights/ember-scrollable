@@ -1,7 +1,7 @@
-`import Ember from 'ember';`
-`import PromiseController from 'phoenix/controllers/promise';`
-`import config from 'phoenix/config/environment';`
-`import { request } from 'ic-ajax';`
+`import Ember from 'ember'`
+`import PromiseController from 'phoenix/controllers/promise'`
+`import config from 'phoenix/config/environment'`
+`import { request } from 'ic-ajax'`
 
 QuickJumpController = Ember.Controller.extend
   query: null
@@ -41,7 +41,7 @@ QuickJumpController = Ember.Controller.extend
   ).property('normalizedResults')
 
   queryDidChange: (->
-    Ember.run.debounce(this, 'search', 250)
+    Ember.run.debounce(this, 'search', 500)
   ).observes('query')
 
   search: ->
@@ -61,4 +61,4 @@ QuickJumpController = Ember.Controller.extend
     clear: ->
       @set('query', null)
 
-`export default QuickJumpController;`
+`export default QuickJumpController`

@@ -1,0 +1,10 @@
+dependencies:
+  override:
+    - npm install
+    - bower install
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - "git push --force git@heroku.com:as-phoenix-staging.git HEAD:master"

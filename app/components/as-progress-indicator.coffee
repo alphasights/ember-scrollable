@@ -1,7 +1,7 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 AsProgressIndicatorComponent = Ember.Component.extend
   classNames: ['progress-indicator']
   layoutName: 'components/progress-indicator'
 
-`export default AsProgressIndicatorComponent;`
+`export default AsProgressIndicatorComponent`

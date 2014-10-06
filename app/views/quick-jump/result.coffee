@@ -1,4 +1,4 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 ResultView = Ember.View.extend
   classNameBindings: ['type']
@@ -17,4 +17,4 @@ ResultView = Ember.View.extend
     "views/quick-jump/#{@get('type')}"
   ).property('type')
 
-`export default ResultView;`
+`export default ResultView`

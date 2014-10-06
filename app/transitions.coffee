@@ -1,3 +1,3 @@
 transitions = (->)
 
-`export default transitions;`
+`export default transitions`

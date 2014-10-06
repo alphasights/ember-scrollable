@@ -1,9 +1,9 @@
-`import Ember from 'ember';`
-`import config from 'phoenix/config/environment';`
+`import Ember from 'ember'`
 
 ApplicationRoute = Ember.Route.extend
   model: ->
-    @store.find('user', 'me')
+    Ember.RSVP.hash
+      currentUser: @store.find('user', 'me')
 
   actions:
     error: (error) ->
@@ -12,4 +12,4 @@ ApplicationRoute = Ember.Route.extend
       else
         true
 
-`export default ApplicationRoute;`
+`export default ApplicationRoute`

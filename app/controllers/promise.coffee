@@ -1,8 +1,8 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 PromiseController = Ember.Controller.extend Ember.PromiseProxyMixin,
   isLoading: (->
     @get('promise') && @get('isPending')
   ).property('promise', 'isPending')
 
-`export default PromiseController;`
+`export default PromiseController`

@@ -17,6 +17,8 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
+app.import('bower_components/raven-js/dist/raven.js');
+
 app.import('bower_components/paint/paint.scss');
 app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/underscore.string/lib/underscore.string.js');

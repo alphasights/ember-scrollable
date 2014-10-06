@@ -1,4 +1,4 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 
 AsSpinnerComponent = Ember.Component.extend
   classNames: ['spinner']
@@ -11,4 +11,4 @@ AsSpinnerComponent = Ember.Component.extend
       color: '#ffffff'
     ).spin(@$()[0])
 
-`export default AsSpinnerComponent;`
+`export default AsSpinnerComponent`

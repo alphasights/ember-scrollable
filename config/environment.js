@@ -43,7 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.APP.authURL = 'https://secure.alphasights.com/system';
   }
 
   return ENV;

@@ -4,7 +4,8 @@
     "window": true,
     "-Promise": true,
     "_": true,
-    "Spinner": true
+    "Spinner": true,
+    "Raven": true
   },
   "browser" : true,
   "boss" : true,
