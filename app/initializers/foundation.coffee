@@ -1,4 +1,4 @@
-foundationInitializer =
+FoundationInitializer =
   name: 'foundation'
 
   initialize: ->
@@ -10,4 +10,4 @@ foundationInitializer =
       initializeFoundation: ->
         Ember.$(document).foundation()
 
-`export default foundationInitializer`
+`export default FoundationInitializer`

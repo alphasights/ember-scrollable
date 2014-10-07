@@ -17,7 +17,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      apiBaseURL: '/swordfish',
+      apiBaseURL: 'http://localhost:3000/swordfish',
       authURL: 'http://localhost:3000/system'
     }
   };
@@ -43,6 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.APP.apiBaseURL = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authURL = 'https://secure.alphasights.com/system';
   }
 
