@@ -8,9 +8,8 @@ CorsInitializer =
       options.crossDomain = true
       options.xhrFields = { withCredentials: true }
 
-      options.headers = {
+      options.headers =
         'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest'
-      }
 
 `export default CorsInitializer`
