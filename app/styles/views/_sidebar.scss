@@ -1,0 +1,60 @@
+.user-session {
+  .picture {
+    border-radius: $sidebar-session-height / 2;
+    display: inline-block;
+    height: $sidebar-session-height / 2;
+    margin: 0 $column-gutter / 2;
+    width: $sidebar-session-height / 2;
+  }
+
+  .name {
+    color: $sidebar-nav-link-text-color;
+    display: inline-block;
+    font-size: rem-calc(14px);
+    margin-right: $column-gutter / 2;
+  }
+
+  .toggle-actions {
+    display: inline-block;
+    float: right;
+    font-size: rem-calc(18px);
+    line-height: $sidebar-session-height;
+    margin-right: $column-gutter / 2;
+
+    button {
+      @include icon(cog);
+
+      background-color: transparent;
+      border-width: 0;
+      color: $sidebar-nav-link-text-color;
+    }
+
+    .actions {
+      @extend %dropdown;
+    }
+  }
+
+  &.collapsed {
+    .toggle-collapse {
+      float: none;
+      margin-bottom: 0;
+
+      button {
+        @include icon(caret-square-o-right);
+      }
+    }
+
+    .user-session {
+      .picture, .name {
+        display: none;
+      }
+
+      .toggle-actions {
+        float: none;
+        display: block;
+        margin-left: $column-gutter / 2;
+        text-align: center;
+      }
+    }
+  }
+}
