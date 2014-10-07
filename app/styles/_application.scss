@@ -3,30 +3,13 @@
 @import 'views/quick-jump';
 @import 'views/sidebar';
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
 .application {
-  height: 100%;
-
-  main {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-
-    > .content {
-      position: absolute;
-      top: $sidebar-header-height;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-       display: none;
-      }
-    }
+  > main > .content {
+    position: absolute;
+    top: $sidebar-header-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
   }
 }
