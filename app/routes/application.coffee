@@ -1,4 +1,5 @@
 `import Ember from 'ember'`
+`import config from '../config/environment'`
 
 ApplicationRoute = Ember.Route.extend
   model: ->

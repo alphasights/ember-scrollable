@@ -43,6 +43,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.APP.apiBaseURL = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authURL = 'https://secure.alphasights.com/system';
   }
 

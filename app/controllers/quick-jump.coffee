@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 `import PromiseController from 'phoenix/controllers/promise'`
-`import config from 'phoenix/config/environment'`
+`import config from '../config/environment'`
 `import { request } from 'ic-ajax'`
 
 QuickJumpController = Ember.Controller.extend
