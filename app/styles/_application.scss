@@ -6,7 +6,7 @@
 .application {
   > main > .content {
     position: absolute;
-    top: $sidebar-header-height;
+    top: $layout-sidebar-header-height;
     left: 0;
     right: 0;
     bottom: 0;
