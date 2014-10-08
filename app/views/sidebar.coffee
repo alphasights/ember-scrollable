@@ -11,9 +11,9 @@ SidebarView = Ember.View.extend
 
   isCollapsedDidChange: (->
     if @get('isCollapsed')
-      growth = '-= 190px'
+      growth = '-= 170px'
     else
-      growth = '+= 190px'
+      growth = '+= 170px'
 
     @$().velocity({
       width: growth
