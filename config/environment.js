@@ -42,6 +42,11 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
+  if (environment === 'staging') {
+    ENV.APP.apiBaseURL = 'https://pistachio-staging.herokuapp.com/swordfish';
+    ENV.APP.authURL = 'https://pistachio-staging.herokuapp.com/system';
+  }
+
   if (environment === 'production') {
     ENV.APP.apiBaseURL = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authURL = 'https://secure.alphasights.com/system';
