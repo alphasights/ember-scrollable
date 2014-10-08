@@ -5,8 +5,8 @@
   @include clearfix;
 
   background-color: $quick-jump-header-background-color;
-  height: $layout-sidebar-header-height;
-  line-height: $layout-sidebar-header-height;
+  height: $quick-jump-height;
+  line-height: $quick-jump-height;
 
   &.loading {
     .results .content {
@@ -115,7 +115,7 @@
 
   .results {
     position: absolute;
-    top: $layout-sidebar-header-height;
+    top: $quick-jump-height;
     left: 0;
     bottom: 0;
     right: 0;
