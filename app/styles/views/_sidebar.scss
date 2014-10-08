@@ -1,33 +1,33 @@
 .sidebar {
   .user-session {
+    padding: 0 $layout-sidebar-nav-padding;
+
     .picture {
-      border-radius: $sidebar-session-height / 2;
+      border-radius: 50%;
       display: inline-block;
-      height: $sidebar-session-height / 2;
-      margin: 0 $column-gutter / 2;
-      width: $sidebar-session-height / 2;
+      margin-right: $layout-sidebar-nav-padding / 2;
+      width: $layout-sidebar-nav-link-icon-width;
+      height: $layout-sidebar-nav-link-icon-width;
     }
 
     .name {
-      color: $sidebar-nav-link-text-color;
+      color: $layout-sidebar-nav-link-text-color;
       display: inline-block;
-      font-size: rem-calc(14px);
-      margin-right: $column-gutter / 2;
+      margin-right: $layout-sidebar-nav-padding / 2;
     }
 
     .toggle-actions {
       display: inline-block;
       float: right;
-      font-size: rem-calc(18px);
-      line-height: $sidebar-session-height;
-      margin-right: $column-gutter / 2;
+      line-height: $layout-sidebar-footer-height;
 
       button {
         @include icon(cog);
 
         background-color: transparent;
         border-width: 0;
-        color: $sidebar-nav-link-text-color;
+        color: $layout-sidebar-nav-link-text-color;
+        margin-bottom: 0;
       }
 
       .actions {
@@ -54,7 +54,6 @@
       .toggle-actions {
         float: none;
         display: block;
-        margin-left: $column-gutter / 2;
         text-align: center;
       }
     }

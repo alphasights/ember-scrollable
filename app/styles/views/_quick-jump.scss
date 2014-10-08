@@ -4,9 +4,9 @@
   @include single-transition(background-color, 150ms, linear);
   @include clearfix;
 
-  background-color: $sidebar-header-background-color;
-  height: $sidebar-header-height;
-  line-height: $sidebar-header-height;
+  background-color: $quick-jump-header-background-color;
+  height: $quick-jump-height;
+  line-height: $quick-jump-height;
 
   &.loading {
     .results .content {
@@ -115,7 +115,7 @@
 
   .results {
     position: absolute;
-    top: $sidebar-header-height;
+    top: $quick-jump-height;
     left: 0;
     bottom: 0;
     right: 0;
@@ -160,11 +160,9 @@
       }
 
       section {
-        $font-size: rem-calc(14px);
-
         margin: $column-gutter / 2 $column-gutter;
         padding: $column-gutter / 2;
-        font-size: $font-size;
+        font-size: $base-font-size;
 
         h1 {
           @extend %heading-medium-uppercase;

@@ -1,9 +1,3 @@
-%sidebar-heading {
-  @extend %heading-small-uppercase;
-
-  font-weight: $font-weight-normal;
-}
-
 %static-liquid-container {
   position: static;
   overflow: visible;
