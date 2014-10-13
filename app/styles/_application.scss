@@ -4,10 +4,5 @@
 @import "views/sidebar";
 
 .application main > .content {
-  position: absolute;
-  top: $layout-sidebar-header-height;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: scroll;
+  padding-bottom: $quick-jump-height;
 }
