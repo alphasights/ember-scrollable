@@ -52,7 +52,10 @@ QuickJumpController = Ember.Controller.extend
         promise:
           request("#{config.APP.apiBaseURL}/quick_jumps", data: { q: query })
             .then (response) =>
-              @set('results', response.hits.hits)
+              @set('results', _.chain(response.responses)
+                .map((response) -> response.hits.hits)
+                .flatten().value()
+              )
       ))
     else
       @set('results', null)
