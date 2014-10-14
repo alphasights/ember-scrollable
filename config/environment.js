@@ -18,7 +18,11 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       apiBaseURL: '/swordfish',
-      authURL: 'http://localhost:3000/system'
+      authURL: 'http://localhost:3000/system',
+      raven: {
+        url: 'https://665338a0e51643adb0c51f05dda5c368@app.getsentry.com/31225',
+        whitelistURLs: ['as-phoenix-production.herokuapp.com', 'as-phoenix-staging.herokuapp.com']
+      }
     }
   };
 

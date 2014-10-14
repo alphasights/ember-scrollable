@@ -7,7 +7,10 @@ QuickJumpController = Ember.Controller.extend
   query: null
   results: null
   requestPromise: null
-  resultSectionsOrder: ['project', 'advisor', 'user', 'contact', 'entity', 'account']
+
+  resultSectionsOrder: [
+    'project', 'advisor', 'user', 'contact', 'entity', 'account'
+  ]
 
   normalizedResults: (->
     results = @get('results')

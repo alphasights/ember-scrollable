@@ -1,8 +1,8 @@
-$icon-font-folder-path: "/assets/fonts";
+$icon-font-folder-path: '/assets/fonts';
 
-@import "paint-settings";
-@import "bower_components/paint/paint";
+@import 'paint-settings';
+@import 'bower_components/paint/paint';
 
-@import "settings";
-@import "default";
-@import "application";
+@import 'settings';
+@import 'default';
+@import 'application';
