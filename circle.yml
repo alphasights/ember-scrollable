@@ -6,6 +6,7 @@ dependencies:
   override:
     - npm install
     - bower install
+    - bundle install
 
 deployment:
   staging:
