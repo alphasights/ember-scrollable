@@ -21,45 +21,80 @@ test "Search results", ->
   })
 
   defineFixture('/quick_jumps', q: 'example', {
-    "hits": {
-      "hits": [{
-        "_index": "client-contacts",
-        "_type": "contact",
-        "_source": {
-          "name": "Example Client Contact"
+    "responses": [
+      {
+        "hits": {
+          "hits": [{
+            "_index": "client-contacts",
+            "_type": "contact",
+            "_score": 5,
+            "_source": {
+              "name": "Example Client Contact"
+            }
+          }]
         }
-      }, {
-        "_index": "client-entities",
-        "_type": "entity",
-        "_source": {
-          "name": "Example Client Entity"
+      },
+      {
+        "hits": {
+          "hits": [{
+            "_index": "client-entities",
+            "_type": "entity",
+            "_score": 1,
+            "_source": {
+              "name": "Example Client Entity"
+            }
+          }]
         }
-      }, {
-        "_index": "client-accounts",
-        "_type": "account",
-        "_source": {
-          "name": "Example Client Account"
+      },
+      {
+        "hits": {
+          "hits": [{
+            "_index": "client-accounts",
+            "_type": "account",
+            "_score": 10,
+            "_source": {
+              "name": "Example Client Account"
+            }
+          }]
         }
-      }, {
-        "_index": "advisors",
-        "_type": "advisor",
-        "_source": {
-          "name": "Example Advisor"
+      },
+      {
+        "hits": {
+          "hits": [{
+            "_index": "advisors",
+            "_type": "advisor",
+            "_score": 4,
+            "_source": {
+              "name": "Example Advisor"
+            }
+          }]
         }
-      }, {
-        "_index": "projects",
-        "_type": "project",
-        "_source": {
-          "codename": "Example Project"
+      },
+      {
+        "hits": {
+          "hits": [{
+            "_index": "projects",
+            "_type": "project",
+            "_score": 2,
+            "_source": {
+              "codename": "Example Project"
+            }
+          }]
         }
-      }, {
-        "_index": "users",
-        "_type": "user",
-        "_source": {
-          "name": "Example User"
+      },
+      {
+        "hits": {
+          "hits": [{
+            "_index": "users",
+            "_type": "user",
+            "_score": 11,
+            "_source": {
+              "name": "Example User"
+            }
+          }]
         }
-      }]
-    }
+      }
+    ]
   })
 
   visit '/'
@@ -75,7 +110,7 @@ test "Search results", ->
 
     deepEqual sections, [{
       title: 'Top Hit'
-      results: ['Example Client Contact']
+      results: ['Example User']
     }, {
       title: 'Projects'
       results: ['Example Project']

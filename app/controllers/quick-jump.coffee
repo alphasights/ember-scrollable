@@ -14,14 +14,18 @@ QuickJumpController = Ember.Controller.extend
 
     if results?
       results.map (result) ->
-        _({}).extend(result._source, type: result._type)
+        _({}).extend(result._source, type: result._type, score: result._score)
     else
       []
   ).property('results')
 
-  topHitSection: (->
-    title: 'Top Hit', results: [@get('normalizedResults.firstObject')]
+  topHit: (->
+    _(@get('normalizedResults')).max((result) -> result.score)
   ).property('normalizedResults')
+
+  topHitSection: (->
+    title: 'Top Hit', results: [@get('topHit')]
+  ).property('topHit')
 
   allSections: (->
     [@get('topHitSection')].concat(@get('sortedResultSections'))
@@ -52,7 +56,11 @@ QuickJumpController = Ember.Controller.extend
         promise:
           request("#{config.APP.apiBaseURL}/quick_jumps", data: { q: query })
             .then (response) =>
-              @set('results', response.hits.hits)
+              @set('results', _.chain(response.responses)
+                .map((response) -> response.hits.hits)
+                .flatten()
+                .value()
+              )
       ))
     else
       @set('results', null)
