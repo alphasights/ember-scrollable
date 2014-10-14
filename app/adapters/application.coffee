@@ -2,6 +2,6 @@
 `import config from '../config/environment'`
 
 ApplicationAdapter = DS.ActiveModelAdapter.extend
-  host: config.APP.apiBaseURL
+  host: config.APP.apiBaseUrl
 
 `export default ApplicationAdapter`

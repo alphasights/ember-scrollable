@@ -17,8 +17,13 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      apiBaseURL: '/swordfish',
-      authURL: 'http://localhost:3000/system'
+      apiBaseUrl: '/swordfish',
+      authUrl: 'http://localhost:3000/system',
+
+      raven: {
+        url: 'https://665338a0e51643adb0c51f05dda5c368@app.getsentry.com/31225',
+        whitelistUrls: ['as-phoenix-production.herokuapp.com', 'as-phoenix-staging.herokuapp.com']
+      }
     }
   };
 
@@ -43,13 +48,13 @@ module.exports = function(environment) {
   }
 
   if (environment === 'staging') {
-    ENV.APP.apiBaseURL = 'https://pistachio-staging.herokuapp.com/swordfish';
-    ENV.APP.authURL = 'https://pistachio-staging.herokuapp.com/system';
+    ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
+    ENV.APP.authUrl = 'https://pistachio-staging.herokuapp.com/system';
   }
 
   if (environment === 'production') {
-    ENV.APP.apiBaseURL = 'https://secure.alphasights.com/swordfish';
-    ENV.APP.authURL = 'https://secure.alphasights.com/system';
+    ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
+    ENV.APP.authUrl = 'https://secure.alphasights.com/system';
   }
 
   return ENV;
