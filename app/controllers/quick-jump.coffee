@@ -58,7 +58,8 @@ QuickJumpController = Ember.Controller.extend
             .then (response) =>
               @set('results', _.chain(response.responses)
                 .map((response) -> response.hits.hits)
-                .flatten().value()
+                .flatten()
+                .value()
               )
       ))
     else
