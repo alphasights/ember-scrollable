@@ -5,7 +5,7 @@ RavenInitializer =
 
   initialize: ->
     Raven.config(config.APP.raven.url, {
-      whitelistUrls: config.APP.raven.whitelistURLs
+      whitelistUrls: config.APP.raven.whitelistUrls
     }).install()
 
 `export default RavenInitializer`

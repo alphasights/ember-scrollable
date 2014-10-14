@@ -9,7 +9,7 @@ ApplicationRoute = Ember.Route.extend
   actions:
     error: (error) ->
       if error.status == 401 || error.status == 404
-        window.location.replace(config.APP.authURL)
+        window.location.replace(config.APP.authUrl)
       else
         true
 
