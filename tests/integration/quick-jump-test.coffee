@@ -27,6 +27,7 @@ test "Search results", ->
           "hits": [{
             "_index": "client-contacts",
             "_type": "contact",
+            "_score": 5,
             "_source": {
               "name": "Example Client Contact"
             }
@@ -38,6 +39,7 @@ test "Search results", ->
           "hits": [{
             "_index": "client-entities",
             "_type": "entity",
+            "_score": 1,
             "_source": {
               "name": "Example Client Entity"
             }
@@ -49,6 +51,7 @@ test "Search results", ->
           "hits": [{
             "_index": "client-accounts",
             "_type": "account",
+            "_score": 10,
             "_source": {
               "name": "Example Client Account"
             }
@@ -60,6 +63,7 @@ test "Search results", ->
           "hits": [{
             "_index": "advisors",
             "_type": "advisor",
+            "_score": 4,
             "_source": {
               "name": "Example Advisor"
             }
@@ -71,6 +75,7 @@ test "Search results", ->
           "hits": [{
             "_index": "projects",
             "_type": "project",
+            "_score": 2,
             "_source": {
               "codename": "Example Project"
             }
@@ -82,6 +87,7 @@ test "Search results", ->
           "hits": [{
             "_index": "users",
             "_type": "user",
+            "_score": 11,
             "_source": {
               "name": "Example User"
             }
@@ -104,7 +110,7 @@ test "Search results", ->
 
     deepEqual sections, [{
       title: 'Top Hit'
-      results: ['Example Client Contact']
+      results: ['Example User']
     }, {
       title: 'Projects'
       results: ['Example Project']
