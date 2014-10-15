@@ -78,8 +78,11 @@
   .actions {
     $button-size: rem-calc(30px);
 
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     text-align: right;
+    width: 10%;
 
     button {
       height: $button-size;
@@ -116,9 +119,7 @@
 
   .results {
     position: absolute;
-    top: $quick-jump-height;
     left: 0;
-    bottom: 0;
     right: 0;
     z-index: 1;
     background: rgba(0,0,0, 0.45);

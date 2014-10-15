@@ -10,27 +10,27 @@
     focus-in="onBarFocusIn"
     targetObject=view
   }}
-</div>
 
-<div class="actions">
-  {{#liquid-if view.isActive use="crossFade" class="liquid-actions"}}
-    <button class="close" title="Close" {{action "clear"}}></button>
-  {{else}}
-    <button class="change-app" title="Change App" data-dropdown="apps" data-options="align: left"></button>
+  <div class="actions">
+    {{#liquid-if view.isActive use="crossFade" class="liquid-actions"}}
+      <button class="close" title="Close" {{action "clear"}}></button>
+    {{else}}
+      <button class="change-app" title="Change App" data-dropdown="apps" data-options="align: left"></button>
 
-    <ul id="add-actions" class="add-actions" data-dropdown-content>
-      <li><a href="#">New advisor</a></li>
-      <li><a href="#">New project</a></li>
-    </ul>
+      <ul id="add-actions" class="add-actions" data-dropdown-content>
+        <li><a href="#">New advisor</a></li>
+        <li><a href="#">New project</a></li>
+      </ul>
 
-    <button class="add" title="Add" data-dropdown="add-actions" data-options="align: left"></button>
+      <button class="add" title="Add" data-dropdown="add-actions" data-options="align: left"></button>
 
-    <ul id="apps" class="apps" data-dropdown-content>
-      <li><a href="#">Metrics</a></li>
-      <li><a href="#">Finance</a></li>
-      <li><a href="#">Clients</a></li>
-    </ul>
-  {{/liquid-if}}
+      <ul id="apps" class="apps" data-dropdown-content>
+        <li><a href="#">Metrics</a></li>
+        <li><a href="#">Finance</a></li>
+        <li><a href="#">Clients</a></li>
+      </ul>
+    {{/liquid-if}}
+  </div>
 </div>
 
 {{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
