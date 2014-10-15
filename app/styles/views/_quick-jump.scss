@@ -15,13 +15,13 @@
   }
 
   &.active {
-    background-color: #ffffff;
-    border-bottom: rem-calc(1px) solid #d0d0d0;
+    background-color: $white;
+    border-bottom: 1px solid $quick-jump-header-background-color;
 
     .bar {
       .progress-indicator {
         background-color: $primary-color;
-        color: #ffffff;
+        color: $white;
       }
     }
   }
