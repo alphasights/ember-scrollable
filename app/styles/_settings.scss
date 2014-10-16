@@ -1,4 +1,8 @@
 $quick-jump-height: $layout-sidebar-header-height;
-$quick-jump-header-background-color: #e1e5ea;
+$quick-jump-background-color: #e1e5ea;
+$quick-jump-icon-size: rem-calc(30);
 $quick-jump-results-background-color: #f2f2f2;
-$quick-jump-results-item-height: rem-calc(50px);
+$quick-jump-results-heading-height: rem-calc(30);
+$quick-jump-results-item-height: rem-calc(50);
+
+$overlay-background-color: rgba(0, 0, 0, .45);

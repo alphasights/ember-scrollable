@@ -1,29 +1,16 @@
 .quick-jump {
-  $search-icon-size: rem-calc(30px);
-
   @include single-transition(background-color, 150ms, linear);
-  @include clearfix;
 
-  background-color: $quick-jump-header-background-color;
-  height: $quick-jump-height;
-  line-height: $quick-jump-height;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
 
-  &.loading {
-    .results .content {
-      opacity: 0.7;
-    }
-  }
-
-  &.active {
-    background-color: #ffffff;
-    border-bottom: rem-calc(1px) solid #d0d0d0;
-
-    .bar {
-      .progress-indicator {
-        background-color: $primary-color;
-        color: #ffffff;
-      }
-    }
+  > * {
+    pointer-events: all;
   }
 
   .bar, .actions {
@@ -31,31 +18,31 @@
   }
 
   .bar {
+    background-color: $quick-jump-background-color;
+    display: block;
+    height: $quick-jump-height;
+    line-height: $quick-jump-height;
     position: relative;
-    margin-right: - rem-calc(100px);
-    display: inline-block;
     width: 100%;
 
     .progress-indicator {
       @include single-transition(all, 150ms, linear);
 
-      border-radius: $search-icon-size / 2;
+      border-radius: 50%;
       color: $primary-color;
-      margin-top: - $search-icon-size / 2;
+      height: $quick-jump-icon-size;
+      overflow: hidden;
       position: absolute;
       text-align: center;
-      top: 50%;
-      width: $search-icon-size;
-    }
+      top: ($quick-jump-height - $quick-jump-icon-size) / 2;
+      width: $quick-jump-icon-size;
 
-    i {
-      @include icon(search);
-    }
+      i {
+        @include icon(search);
 
-    .progress-indicator, i {
-      display: block;
-      height: $search-icon-size;
-      line-height: $search-icon-size;
+        line-height: $quick-jump-icon-size;
+        display: block;
+      }
     }
 
     input {
@@ -66,8 +53,29 @@
       box-shadow: none;
       display: inline-block;
       margin: 0;
-      text-indent: $search-icon-size + rem-calc(5px);
+      text-indent: $quick-jump-icon-size + rem-calc(5);
       width: 100%;
+    }
+  }
+
+  &.loading {
+    .results .content {
+      opacity: 0.7;
+    }
+  }
+
+  &.active {
+    background-color: $overlay-background-color;
+    pointer-events: all;
+
+    .bar {
+      background-color: $white;
+      border-bottom: 1px solid $quick-jump-background-color;
+
+      .progress-indicator {
+        background-color: $primary-color;
+        color: $white;
+      }
     }
   }
 
@@ -76,14 +84,17 @@
   }
 
   .actions {
-    $button-size: rem-calc(30px);
+    $actions-button-size: $quick-jump-icon-size;
 
-    float: right;
+    position: absolute;
+    right: 0;
     text-align: right;
+    top: ($quick-jump-height - $actions-button-size) / 2;
+    white-space: nowrap;
 
     button {
-      height: $button-size;
-      width: $button-size;
+      height: $actions-button-size;
+      width: $actions-button-size;
       margin-bottom: 0px;
     }
 
@@ -106,7 +117,7 @@
       @extend %dropdown;
 
       text-align: left;
-      min-width: rem-calc(150px);
+      min-width: rem-calc(150);
     }
   }
 
@@ -115,26 +126,14 @@
   }
 
   .results {
-    position: absolute;
-    top: $quick-jump-height;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    background: rgba(0,0,0, 0.45);
-    overflow-y: scroll;
-    pointer-events: none;
-
-    &::-webkit-scrollbar {
-     display: none;
-    }
+    position: relative;
+    width: 100%;
+    background-color: $quick-jump-results-background-color;
 
     .content {
       @include single-transition(opacity, 150ms, linear);
 
-      background-color: $quick-jump-results-background-color;
       padding: $column-gutter / 2;
-      pointer-events: all;
 
       ul {
         list-style-type: none;
@@ -152,24 +151,23 @@
       }
 
       article {
-        border-bottom: rem-calc(1px) solid #e8e8e8;
+        border-bottom: 1px solid darken($quick-jump-results-background-color, 5%);
         cursor: pointer;
 
         &:hover {
-          background-color: #eeeeee;
+          background-color: darken($quick-jump-results-background-color, 10%);
         }
       }
 
       section {
         margin: $column-gutter / 2 $column-gutter;
         padding: $column-gutter / 2;
-        font-size: $base-font-size;
 
         h1 {
           @extend %heading-medium-uppercase;
 
+          line-height: $quick-jump-results-heading-height;
           margin-bottom: $column-gutter / 2;
-          line-height: rem-calc(30px);
         }
       }
     }
