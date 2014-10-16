@@ -86,11 +86,11 @@
   .actions {
     $actions-button-size: $quick-jump-icon-size;
 
-    overflow: hidden;
     position: absolute;
     right: 0;
     text-align: right;
     top: ($quick-jump-height - $actions-button-size) / 2;
+    width: 10%;
 
     button {
       height: $actions-button-size;
