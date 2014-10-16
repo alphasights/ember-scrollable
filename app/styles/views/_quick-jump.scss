@@ -65,7 +65,7 @@
   }
 
   &.active {
-    background-color: $overlay-transparent-background;
+    background-color: $overlay-background-color;
     pointer-events: all;
 
     .bar {
