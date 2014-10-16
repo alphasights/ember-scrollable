@@ -32,6 +32,7 @@
     "express": "^4.8.5",
     "glob": "^4.0.5",
     "liquid-fire": "0.10.0",
-    "coffeelint": "^1.6.0"
+    "coffeelint": "^1.6.0",
+    "ember-cli-esnext": "~0.1.0"
   }
 }
