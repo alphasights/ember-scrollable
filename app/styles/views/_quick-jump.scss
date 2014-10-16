@@ -18,7 +18,7 @@
   }
 
   .bar {
-    background-color: $quick-jump-background;
+    background-color: $quick-jump-background-color;
     display: block;
     height: $quick-jump-height;
     line-height: $quick-jump-height;
@@ -70,7 +70,7 @@
 
     .bar {
       background-color: $white;
-      border-bottom: 1px solid $quick-jump-background;
+      border-bottom: 1px solid $quick-jump-background-color;
 
       .progress-indicator {
         background-color: $primary-color;
@@ -128,7 +128,7 @@
   .results {
     position: relative;
     width: 100%;
-    background-color: $quick-jump-results-background;
+    background-color: $quick-jump-results-background-color;
 
     .content {
       @include single-transition(opacity, 150ms, linear);
@@ -151,11 +151,11 @@
       }
 
       article {
-        border-bottom: 1px solid darken($quick-jump-results-background, 5%);
+        border-bottom: 1px solid darken($quick-jump-results-background-color, 5%);
         cursor: pointer;
 
         &:hover {
-          background-color: darken($quick-jump-results-background, 10%);
+          background-color: darken($quick-jump-results-background-color, 10%);
         }
       }
 
