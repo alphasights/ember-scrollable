@@ -1,19 +1,61 @@
 .quick-jump {
-  $search-icon-size: rem-calc(30);
-
   @include single-transition(background-color, 150ms, linear);
-  @include clearfix;
 
-  position: absolute;
-  left: 0;
-  right: 0;
   bottom: 0;
-  top: 0;
-  pointer-events: none;
+  left: 0;
   overflow-y: auto;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
 
   > * {
     pointer-events: all;
+  }
+
+  .bar, .actions {
+    padding: 0 $column-gutter / 2;
+  }
+
+  .bar {
+    background-color: $quick-jump-background;
+    display: block;
+    height: $quick-jump-height;
+    line-height: $quick-jump-height;
+    position: relative;
+    width: 100%;
+
+    .progress-indicator {
+      @include single-transition(all, 150ms, linear);
+
+      border-radius: 50%;
+      color: $primary-color;
+      height: $quick-jump-icon-size;
+      overflow: hidden;
+      position: absolute;
+      text-align: center;
+      top: ($quick-jump-height - $quick-jump-icon-size) / 2;
+      width: $quick-jump-icon-size;
+
+      i {
+        @include icon(search);
+
+        line-height: $quick-jump-icon-size;
+        display: block;
+      }
+    }
+
+    input {
+      @include single-transition(all, 150ms, linear);
+
+      background-color: transparent;
+      border-width: 0;
+      box-shadow: none;
+      display: inline-block;
+      margin: 0;
+      text-indent: $quick-jump-icon-size + rem-calc(5);
+      width: 100%;
+    }
   }
 
   &.loading {
@@ -27,7 +69,7 @@
 
     .bar {
       background-color: $white;
-      border-bottom: 1px solid $quick-jump-header-background-color;
+      border-bottom: 1px solid $quick-jump-background;
 
       .progress-indicator {
         background-color: $primary-color;
@@ -36,72 +78,22 @@
     }
   }
 
-  .bar, .actions {
-    padding: 0 $column-gutter / 2;
-  }
-
-  .bar {
-    position: relative;
-    display: block;
-    width: 100%;
-
-    background-color: $quick-jump-header-background-color;
-    height: $quick-jump-height;
-    line-height: $quick-jump-height;
-
-
-    .progress-indicator {
-      @include single-transition(all, 150ms, linear);
-
-      border-radius: 50%;
-      color: $primary-color;
-      margin-top: - $search-icon-size / 2;
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      width: $search-icon-size;
-      overflow: hidden;
-    }
-
-    i {
-      @include icon(search);
-    }
-
-    .progress-indicator, i {
-      display: block;
-      height: $search-icon-size;
-      line-height: $search-icon-size;
-    }
-
-    input {
-      @include single-transition(all, 150ms, linear);
-
-      background-color: transparent;
-      border-width: 0;
-      box-shadow: none;
-      display: inline-block;
-      margin: 0;
-      text-indent: $search-icon-size + rem-calc(5);
-      width: 100%;
-    }
-  }
-
   .liquid-actions {
     overflow: visible;
   }
 
   .actions {
-    $button-size: $search-icon-size;
+    $actions-button-size: $quick-jump-icon-size;
 
     position: absolute;
     right: 0;
-    top: ($quick-jump-height - $button-size) / 2;
     text-align: right;
+    top: ($quick-jump-height - $actions-button-size) / 2;
     width: 10%;
 
     button {
-      height: $button-size;
-      width: $button-size;
+      height: $actions-button-size;
+      width: $actions-button-size;
       margin-bottom: 0px;
     }
 
@@ -135,7 +127,7 @@
   .results {
     position: relative;
     width: 100%;
-    background-color: $quick-jump-results-background-color;
+    background-color: $quick-jump-results-background;
 
     .content {
       @include single-transition(opacity, 150ms, linear);
@@ -158,24 +150,23 @@
       }
 
       article {
-        border-bottom: 1px solid darken($quick-jump-results-background-color, 5%);
+        border-bottom: 1px solid darken($quick-jump-results-background, 5%);
         cursor: pointer;
 
         &:hover {
-          background-color: darken($quick-jump-results-background-color, 10%);
+          background-color: darken($quick-jump-results-background, 10%);
         }
       }
 
       section {
         margin: $column-gutter / 2 $column-gutter;
         padding: $column-gutter / 2;
-        font-size: $base-font-size;
 
         h1 {
           @extend %heading-medium-uppercase;
 
-          margin-bottom: $column-gutter / 2;
           line-height: $quick-jump-results-heading-height;
+          margin-bottom: $column-gutter / 2;
         }
       }
     }
