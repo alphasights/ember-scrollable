@@ -90,7 +90,7 @@
     right: 0;
     text-align: right;
     top: ($quick-jump-height - $actions-button-size) / 2;
-    width: 10%;
+    white-space: nowrap;
 
     button {
       height: $actions-button-size;
