@@ -2,5 +2,4 @@
 
 set -e
 
-node_modules/.bin/coffeelint app/**/*.coffee
 bundle exec scss-lint app/**/*.scss
