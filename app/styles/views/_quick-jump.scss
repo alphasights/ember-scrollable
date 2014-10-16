@@ -1,5 +1,5 @@
 .quick-jump {
-  $search-icon-size: rem-calc(30px);
+  $search-icon-size: rem-calc(30);
 
   @include single-transition(background-color, 150ms, linear);
   @include clearfix;
@@ -81,7 +81,7 @@
       box-shadow: none;
       display: inline-block;
       margin: 0;
-      text-indent: $search-icon-size + rem-calc(5px);
+      text-indent: $search-icon-size + rem-calc(5);
       width: 100%;
     }
   }
@@ -91,7 +91,7 @@
   }
 
   .actions {
-    $button-size: rem-calc(30px);
+    $button-size: $search-icon-size;
 
     position: absolute;
     right: 0;
@@ -124,7 +124,7 @@
       @extend %dropdown;
 
       text-align: left;
-      min-width: rem-calc(150px);
+      min-width: rem-calc(150);
     }
   }
 
@@ -158,11 +158,11 @@
       }
 
       article {
-        border-bottom: rem-calc(1px) solid #e8e8e8;
+        border-bottom: 1px solid darken($quick-jump-results-background-color, 5%);
         cursor: pointer;
 
         &:hover {
-          background-color: #eeeeee;
+          background-color: darken($quick-jump-results-background-color, 10%);
         }
       }
 
@@ -175,7 +175,7 @@
           @extend %heading-medium-uppercase;
 
           margin-bottom: $column-gutter / 2;
-          line-height: rem-calc(30px);
+          line-height: $quick-jump-results-heading-height;
         }
       }
     }
