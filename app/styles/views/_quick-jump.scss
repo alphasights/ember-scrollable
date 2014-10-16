@@ -95,7 +95,7 @@
 
     position: absolute;
     right: 0;
-    top: 0;
+    top: ($quick-jump-height - $button-size) / 2;
     text-align: right;
     width: 10%;
 
