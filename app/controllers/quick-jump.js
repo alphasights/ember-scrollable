@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
 
     if (!Ember.isBlank(results)) {
       return results.map(function(result) {
-        _({}).extend(result._source, { type: result._type, score: result._score });
+        return _({}).extend(result._source, { type: result._type, score: result._score });
       });
     } else {
       return [];
