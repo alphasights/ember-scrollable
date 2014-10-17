@@ -1,8 +1,8 @@
 %static-liquid-container {
   overflow: visible;
   position: static;
-  transform: none;
   -webkit-transform: none;
+  transform: none;
 
   > div {
     position: static !important;
