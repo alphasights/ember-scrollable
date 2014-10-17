@@ -15,6 +15,6 @@ export default Ember.View.extend({
   }.property('controller.type'),
 
   templateName: function() {
-    "views/quick-jump/#{this.get('type')}";
+    return `views/quick-jump/${this.get('type')}`;
   }.property('type')
 });

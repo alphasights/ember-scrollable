@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   requestPromise: null,
 
   resultSectionsOrder: [
-    'project', 'advisor', 'user', 'contact', 'entity', 'account'
+    'project', 'advisor', 'user', 'contact', 'entity', 'account', 'target'
   ],
 
   normalizedResults: function() {
@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
 
     if (query && query.length > 2) {
       this.set('requestPromise', PromiseController.create({
-        promise: request(config.APP.apiBaseUrl + '/quick_jumps', { data: { q: query } })
+        promise: request(`${config.APP.apiBaseUrl}/quick_jumps`, { data: { q: query } })
           .then(response => {
             this.set('results', _.chain(response.responses)
               .map(function(response) { return response.hits.hits; })

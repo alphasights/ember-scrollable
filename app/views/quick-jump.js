@@ -8,7 +8,7 @@ export default Ember.View.extend({
   isLoading: Ember.computed.alias('controller.requestPromise.isLoading'),
 
   clickEventName: function() {
-    "click.#{this.get('elementId')}";
+    return `click.${this.get('elementId')}`;
   }.property('elementId'),
 
   didInsertElement: function() {
