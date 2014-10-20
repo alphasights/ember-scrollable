@@ -12,7 +12,7 @@ export default Ember.View.extend({
   }.property('elementId'),
 
   didInsertElement: function() {
-    Ember.$(document).on(this.get('clickEventName'), function(event) {
+    Ember.$(document).on(this.get('clickEventName'), (event) => {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = Ember.$('.quick-jump .bar, .quick-jump .results');
 
