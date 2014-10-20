@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   normalizedResults: function() {
     var results = this.get('results');
 
-    if (!Ember.isBlank(results)) {
+    if (results != null) {
       return results.map(function(result) {
         return _({}).extend(result._source, { type: result._type, score: result._score });
       });

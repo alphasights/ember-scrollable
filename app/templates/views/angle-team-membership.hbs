@@ -1,0 +1,24 @@
+<div class="team-membership-row">
+  <div class="team-membership">
+    <a class="close fa fa-times" {{action "deleteMembership"}} title="Remove Member" href></a>
+
+    <div class="member">
+      <img class="avatar" {{bind-attr src=teamMember.avatarUrl title=teamMember.name}} alt=""/>
+    </div>
+
+    <div class="target">
+      {{#if isEditing}}
+        <label {{bind-attr for=inputId}}>Target</label>
+
+        {{as-focus-input
+          valueBinding="targetValueString"
+          action="updateTarget"
+          focus-out="updateTarget"
+          class="form-control input-lg"
+          id=inputId}}
+      {{else}}
+        <span class="editable" {{action "edit"}} title="Target">{{targetValue}}</span>
+      {{/if}}
+    </div>
+  </div>
+</div>

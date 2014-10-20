@@ -1,0 +1,27 @@
+<div class="section-heading">
+  <div class="title">
+    <h1>Teams</h1>
+  </div>
+
+  <div class="stats-bar">
+    {{render "stats"}}
+
+    {{view "Ember.Select"
+      content=sortedTeams
+      value=selectedTeam
+      change=selectedTeamDidChange
+      optionLabelPath="content.name"
+      optionGroupPath="office"}}
+
+    {{view "Ember.Select"
+      content=sortedTeamMembers
+      value=teamMemberId
+      optionLabelPath="content.nameAndInitials"
+      optionValuePath="content.initials"
+      prompt="All team members"}}
+
+    <span>Per Analyst:</span>
+  </div>
+</div>
+
+{{outlet}}
