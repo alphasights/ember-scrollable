@@ -9,7 +9,7 @@ dependencies:
     - bundle install
 
 deployment:
-  staging:
+  production:
     branch: master
     commands:
-      - "git push --force git@heroku.com:as-phoenix-staging.git HEAD:master"
+      - "git push --force git@heroku.com:as-phoenix-production.git HEAD:master"
