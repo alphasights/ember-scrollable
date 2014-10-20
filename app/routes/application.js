@@ -3,7 +3,7 @@ import config from '../config/environment';
 
 export default Ember.Route.extend({
   model: function() {
-    Ember.RSVP.hash({
+    return Ember.RSVP.hash({
       currentUser: this.store.find('user', 'me')
     });
   },
