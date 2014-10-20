@@ -10,7 +10,8 @@ export default {
 
       options.headers = {
         'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json'
       };
     });
   }
