@@ -1,26 +1,29 @@
-`import Ember from 'ember'`
-`import { test } from 'ember-qunit'`
-`import '../helpers/define-fixture'`
-`import startApp from '../helpers/start-app'`
+import Ember from 'ember';
+import { test } from 'ember-qunit';
+import '../helpers/define-fixture';
+import startApp from '../helpers/start-app';
 
-module "Quick Jump",
-  setup: ->
-    @app = startApp()
-    @app.server = new Pretender()
+module("Quick Jump", {
+  setup: function() {
+    this.app = startApp();
+    this.app.server = new Pretender();
+  },
 
-  teardown: ->
-    @app.server.shutdown()
-    Ember.run @app, @app.destroy
+  teardown: function() {
+    this.app.server.shutdown();
+    Ember.run(this.app, this.app.destroy);
+  }
+});
 
-test "Search results", ->
+test("Search results", function() {
   defineFixture('/users/me', {}, {
     "user": {
       "initials": "EU",
       "id": 1
     }
-  })
+  });
 
-  defineFixture('/quick_jumps', q: 'example', {
+  defineFixture('/quick_jumps', { q: 'example' }, {
     "responses": [
       {
         "hits": {
@@ -95,38 +98,45 @@ test "Search results", ->
         }
       }
     ]
-  })
+  });
 
-  visit '/'
-  click '.quick-jump .bar input'
-  fillIn '.quick-jump .bar input', 'example'
+  visit('/');
+  click('.quick-jump .bar input');
+  fillIn('.quick-jump .bar input', 'example');
 
-  andThen ->
-    sections = find('.quick-jump .results section').toArray().map (section) ->
-      $section = $(section)
+  andThen(function() {
+    var sections = find('.quick-jump .results section').toArray().map(function(section) {
+      var $section = $(section);
 
-      title: $section.find('h1').text()
-      results: $section.find('li').toArray().map (item) -> _.str.trim($(item).text())
+      return {
+        title: $section.find('h1').text(),
+        results: $section.find('li').toArray().map(function(item) { return _.str.trim($(item).text()); })
+      };
+    });
 
-    deepEqual sections, [{
-      title: 'Top Hit'
-      results: ['Example User']
-    }, {
-      title: 'Projects'
-      results: ['Example Project']
-    }, {
-      title: 'Advisors'
-      results: ['Example Advisor']
-    }, {
-      title: 'Users'
-      results: ['Example User']
-    }, {
-      title: 'Contacts'
-      results: ['Example Client Contact']
-    }, {
-      title: 'Entities'
-      results: ['Example Client Entity']
-    }, {
-      title: 'Accounts'
-      results: ['Example Client Account']
-    }]
+    deepEqual(sections, [
+      {
+        title: 'Top Hit',
+        results: ['Example User']
+      }, {
+        title: 'Projects',
+        results: ['Example Project']
+      }, {
+        title: 'Advisors',
+        results: ['Example Advisor']
+      }, {
+        title: 'Users',
+        results: ['Example User']
+      }, {
+        title: 'Contacts',
+        results: ['Example Client Contact']
+      }, {
+        title: 'Entities',
+        results: ['Example Client Entity']
+      }, {
+        title: 'Accounts',
+        results: ['Example Client Account']
+      }]
+    );
+  });
+});
