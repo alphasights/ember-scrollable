@@ -36,21 +36,19 @@
 {{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
   <div class="results">
     {{#liquid-if results use="crossFade" class="liquid-content"}}
-      <div class="content">
-        {{#each allSections}}
-          <section>
-            <h1>{{title}}</h1>
+      {{#each allSections}}
+        <section>
+          <h1>{{title}}</h1>
 
-            <ul>
-              {{#each result in results}}
-                <li>
-                  {{render "quick-jump/result" result tagName="article"}}
-                </li>
-              {{/each}}
-            </ul>
-          </section>
-        {{/each}}
-      </div>
+          <ul>
+            {{#each result in results}}
+              <li>
+                {{render "quick-jump/result" result tagName="article"}}
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/each}}
     {{/liquid-if}}
   </div>
 {{/liquid-if}}
