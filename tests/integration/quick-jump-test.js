@@ -16,7 +16,7 @@ module("Quick Jump", {
 });
 
 test("Search results", function() {
-  defineFixture('/users/me', {}, {
+  defineFixture('/users/me.json', {}, {
     "user": {
       "initials": "EU",
       "id": 1
