@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-const STATUSES = ['high', 'medium', 'low'];
+var STATUSES = ['high', 'medium', 'low'];
 
 export default DS.Model.extend({
   status: DS.attr('string'),

@@ -32,6 +32,8 @@
 
       .actions {
         @extend %dropdown;
+
+        width: rem-calc(150) !important;
       }
     }
   }
