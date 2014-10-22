@@ -64,7 +64,8 @@ export default Ember.Controller.extend({
             this.set('results', _.chain(response.responses)
               .map(function(response) { return response.hits.hits; })
               .flatten()
-              .value());
+              .value()
+            );
           })
         })
       );
