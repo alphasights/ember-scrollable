@@ -4,7 +4,7 @@ import config from '../config/environment';
 export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
-      currentUser: this.store.find('user', 'me.json')
+      currentUser: this.store.find('user', 'me')
     });
   },
 
