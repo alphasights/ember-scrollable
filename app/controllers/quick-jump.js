@@ -51,28 +51,28 @@ export default Ember.Controller.extend({
   }.property('normalizedResults'),
 
   queryDidChange: function() {
-    return Ember.run.debounce(this, 'search', 500);
-  }.observes('query'),
-
-  search: function() {
     var query = this.get('query');
+    var requestPromise;
 
     if (query && query.length > 2) {
-      this.set('requestPromise', PromiseController.create({
+      requestPromise = PromiseController.create({
         promise: request(`${config.APP.apiBaseUrl}/quick_jumps`, { data: { q: query } })
           .then(response => {
+            if (requestPromise !== this.get('requestPromise')) { return; }
+
             this.set('results', _.chain(response.responses)
               .map(function(response) { return response.hits.hits; })
               .flatten()
               .value()
             );
           })
-        })
-      );
+      });
+
+      this.set('requestPromise', requestPromise);
     } else {
       this.set('results', null);
     }
-  },
+  }.observes('query'),
 
   actions: {
     clear: function() {
