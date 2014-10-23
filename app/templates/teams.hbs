@@ -1,27 +1,13 @@
-<div class="section-heading">
-  <div class="title">
-    <h1>Teams</h1>
-  </div>
+<header>
+  <h1>{{selectedTeam.name}}</h1>
 
-  <div class="stats-bar">
-    {{render "stats"}}
+  {{render "stats" this tagName="section" classNames="stats"}}
+</header>
 
-    {{view "Ember.Select"
-      content=sortedTeams
-      value=selectedTeam
-      change=selectedTeamDidChange
-      optionLabelPath="content.name"
-      optionGroupPath="office"}}
-
-    {{view "Ember.Select"
-      content=sortedTeamMembers
-      value=teamMemberId
-      optionLabelPath="content.nameAndInitials"
-      optionValuePath="content.initials"
-      prompt="All team members"}}
-
-    <span>Per Analyst:</span>
-  </div>
-</div>
+<ul>
+  {{#each teams}}
+    <li>{{name}}</li>
+  {{/each}}
+</ul>
 
 {{outlet}}

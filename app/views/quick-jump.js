@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.View.extend({
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
   isActive: false,
-  templateName: 'views/quick-jump',
+  templateName: 'quick-jump',
   placeholder: null,
   isLoading: Ember.computed.alias('controller.requestPromise.isLoading'),
 
