@@ -1,14 +1,18 @@
 <header>
-  <h1>{{selectedTeam.name}}</h1>
+  <h1>
+    {{selectedTeam.name}}
+
+    <button class="change" title="Change Team" data-dropdown="teams" data-options="align: right"></button>
+
+    <ul id="teams" data-dropdown-content>
+      {{#each}}
+        <li><a href>{{name}}</a></li>
+      {{/each}}
+    </ul>
+  </h1>
 
   {{render "stats" this tagName="section" className="stats"}}
 </header>
-
-<ul>
-  {{#each teams}}
-    <li>{{name}}</li>
-  {{/each}}
-</ul>
 
 <section class="selected-team">
   {{outlet}}

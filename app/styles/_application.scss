@@ -1,13 +1,15 @@
-@import 'components/progress-indicator';
-
-@import 'views/quick-jump';
-@import 'views/sidebar';
-
 $content-section-heading-border-color: rgba(0, 0, 0, .075);
 $content-section-heading-height: rem-calc(80);
 $content-section-heading-color: $subheader-font-color;
 
-.application main > .content {
+@import 'components/progress-indicator';
+
+@import 'views/quick-jump';
+@import 'views/sidebar';
+@import 'views/stats';
+@import 'views/teams';
+
+main > .content {
   &:before {
     content: ' ';
     display: block;

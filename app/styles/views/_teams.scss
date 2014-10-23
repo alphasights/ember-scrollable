@@ -1,0 +1,15 @@
+.teams {
+  header {
+    .change {
+      @include icon(exchange);
+    }
+
+    ul {
+      @extend %dropdown;
+
+      max-height: rem-calc(300) !important;
+      overflow-x: visible;
+      overflow-y: scroll;
+    }
+  }
+}
