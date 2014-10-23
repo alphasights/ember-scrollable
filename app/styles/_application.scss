@@ -3,8 +3,34 @@
 @import 'views/quick-jump';
 @import 'views/sidebar';
 
-.application main > .content:before {
-  content: ' ';
-  display: block;
-  height: $quick-jump-height;
+$content-section-heading-border-color: rgba(0, 0, 0, .075);
+$content-section-heading-height: rem-calc(80);
+$content-section-heading-color: $subheader-font-color;
+
+.application main > .content {
+  &:before {
+    content: ' ';
+    display: block;
+    height: $quick-jump-height;
+  }
+
+  > section {
+    @extend %grid-row;
+
+    > header {
+      @extend %grid-column-12;
+
+      border-bottom: solid 1px $content-section-heading-border-color;
+
+      h1 {
+        @extend %heading-medium-uppercase;
+
+        color: $content-section-heading-color;
+        display: inline-block;
+        font-weight: $font-weight-normal;
+        line-height: $content-section-heading-height;
+        margin: 0;
+      }
+    }
+  }
 }
