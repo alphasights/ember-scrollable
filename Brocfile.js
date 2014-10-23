@@ -2,7 +2,18 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app;
+
+if (new EmberApp().env === 'production') {
+  app = new EmberApp({
+    fingerprint: {
+      prepend: 'https://d1o4b5r6n1wxod.cloudfront.net/'
+    }
+  });
+} else {
+  app = new EmberApp();
+}
+
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -49,5 +60,10 @@ app.import('bower_components/paint/images/favicon.ico', {
 app.import('bower_components/paint/images/logo.png', {
   destDir: 'assets/images'
 });
+
+app.import('bower_components/messenger/build/js/messenger.js');
+app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
+app.import('bower_components/messenger/build/css/messenger.css');
+app.import('bower_components/messenger/build/css/messenger-theme-flat.css');
 
 module.exports = app.toTree();

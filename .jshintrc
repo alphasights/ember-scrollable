@@ -5,7 +5,8 @@
     "-Promise": true,
     "_": true,
     "Spinner": true,
-    "Raven": true
+    "Raven": true,
+    "Messenger": true
   },
   "browser" : true,
   "boss" : true,
