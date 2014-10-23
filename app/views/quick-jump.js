@@ -28,6 +28,18 @@ export default Ember.View.extend({
     Ember.$(document).off(this.get('clickEventName'));
   },
 
+  keyUp: function(event) {
+    if (event.which === 27) {
+      this.set('isActive', false);
+    }
+  },
+
+  onIsActiveDidChange: function() {
+    if (!this.get('isActive')) {
+      this.$('input').blur();
+    }
+  }.observes('isActive'),
+
   actions: {
     onBarFocusIn: function() {
       this.set('isActive', true);
