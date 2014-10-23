@@ -1,0 +1,19 @@
+.stats {
+  float:right;
+
+  > ul {
+    @include inline-list;
+
+    margin-bottom: 0;
+
+    > li {
+      word-wrap: nowrap;
+
+      > div {
+        display: inline-block;
+        line-height: $content-section-heading-height;
+      }
+    }
+  }
+}
+
