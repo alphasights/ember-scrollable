@@ -10,7 +10,7 @@ export default Ember.Route.extend({
       projects: this.store.find('project', {
         team_id: params.team_id
       }),
-      
+
       team: this.store.find('team', params.team_id)
     });
   },

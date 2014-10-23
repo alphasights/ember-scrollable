@@ -14,7 +14,7 @@
 <div id="teams" class="list" data-dropdown-content>
   <ul>
     {{#each}}
-      <li><a href>{{name}}</a></li>
+      <li>{{#link-to "team" id}}{{name}}{{/link-to}}</li>
     {{/each}}
   </ul>
 </div>

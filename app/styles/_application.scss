@@ -32,7 +32,7 @@ main > .content {
           text-align: center;
         }
 
-        @media #{$large-only} {
+        @media #{$large-up} {
           float: left;
         }
       }
