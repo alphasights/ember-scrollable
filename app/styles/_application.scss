@@ -1,7 +1,3 @@
-$content-section-heading-border-color: rgba(0, 0, 0, .075);
-$content-section-heading-height: rem-calc(80);
-$content-section-heading-color: $subheader-font-color;
-
 @import 'components/progress-indicator';
 
 @import 'views/quick-jump';
@@ -22,14 +18,14 @@ main > .content {
     > header {
       @extend %grid-column-12;
 
-      border-bottom: solid 1px $content-section-heading-border-color;
+      border-bottom: solid 1px $application-content-heading-border-color;
 
       h1 {
         @extend %heading-medium-uppercase;
 
-        color: $content-section-heading-color;
+        color: $application-content-heading-color;
         font-weight: $font-weight-normal;
-        line-height: $content-section-heading-height;
+        line-height: $application-content-heading-height;
         margin: 0;
 
         @media #{$small-up} {
@@ -39,7 +35,6 @@ main > .content {
         @media #{$large-only} {
           float: left;
         }
-
       }
     }
   }
