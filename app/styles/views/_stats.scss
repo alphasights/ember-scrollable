@@ -1,6 +1,4 @@
 .stats {
-  float:right;
-
   > ul {
     @include inline-list;
 
@@ -14,6 +12,10 @@
         line-height: $content-section-heading-height;
       }
     }
+  }
+
+  @media #{$large-only} {
+    float: right;
   }
 }
 

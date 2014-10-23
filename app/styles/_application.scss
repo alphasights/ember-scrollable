@@ -26,10 +26,18 @@ $content-section-heading-color: $subheader-font-color;
         @extend %heading-medium-uppercase;
 
         color: $content-section-heading-color;
-        display: inline-block;
         font-weight: $font-weight-normal;
         line-height: $content-section-heading-height;
         margin: 0;
+
+        @media #{$small-up} {
+          text-align: center;
+        }
+
+        @media #{$large-only} {
+          float: left;
+        }
+
       }
     }
   }
