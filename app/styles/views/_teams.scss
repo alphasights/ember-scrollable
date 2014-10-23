@@ -14,9 +14,11 @@
   .list {
     @extend %dropdown;
 
+    min-width: rem-calc(300) !important;
+
     ul {
-      max-height: rem-calc(300) !important;
-      overflow-y: scroll;
+      max-height: rem-calc(400) !important;
+      overflow-y: auto;
       margin-left: 0;
     }
   }
