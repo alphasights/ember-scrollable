@@ -2,27 +2,28 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import startApp from '../helpers/start-app';
+import config from '../../config/environment';
 
 module("Quick Jump", {
   setup: function() {
-    this.app = startApp();
-    this.app.server = new Pretender();
+    window.app = startApp();
+    window.app.server = new Pretender();
+
+    defineFixture('/users/me', {}, {
+      "user": {
+        "initials": "EU",
+        "id": 1
+      }
+    });
   },
 
   teardown: function() {
-    this.app.server.shutdown();
-    Ember.run(this.app, this.app.destroy);
+    window.app.server.shutdown();
+    Ember.run(window.app, window.app.destroy);
   }
 });
 
 test("Search results", function() {
-  defineFixture('/users/me', {}, {
-    "user": {
-      "initials": "EU",
-      "id": 1
-    }
-  });
-
   defineFixture('/quick_jumps', { q: 'example' }, {
     "responses": [
       {
@@ -138,5 +139,27 @@ test("Search results", function() {
         results: ['Example Client Account']
       }]
     );
+  });
+});
+
+test("Error message", function() {
+  window.app.server.get(`${config.APP.apiBaseUrl}/quick_jumps`, function(request) {
+    if (_({ q: 'example' }).isEqual(request.queryParams)) {
+      return [
+        500,
+        { 'Content-Type': 'application/json' },
+        JSON.stringify({ errors: "generic error"})
+      ];
+    }
+  });
+
+  visit('/');
+  click('.quick-jump .bar input');
+  fillIn('.quick-jump .bar input', 'example');
+
+  andThen(function() {
+    var message = $('.messenger .messenger-message-inner').first().text();
+
+    equal(message, 'Something went wrong with that request, please try again.');
   });
 });
