@@ -1,15 +1,23 @@
 .teams {
-  header {
-    .change {
+  .change {
+    display: inline-block;
+    line-height: $application-content-heading-height;
+    margin-bottom: 0;
+
+    button {
       @include icon(exchange);
+
+      margin-left: rem-calc(10);
     }
+  }
+
+  .list {
+    @extend %dropdown;
 
     ul {
-      @extend %dropdown;
-
       max-height: rem-calc(300) !important;
-      overflow-x: visible;
       overflow-y: scroll;
+      margin-left: 0;
     }
   }
 }
