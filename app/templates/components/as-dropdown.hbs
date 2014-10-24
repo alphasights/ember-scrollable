@@ -1,0 +1,5 @@
+<button {{bind-attr title=title data-dropdown=id data-options=options}}></button>
+
+<ul {{bind-attr id=id}} data-dropdown-content>
+  {{yield}}
+</ul>

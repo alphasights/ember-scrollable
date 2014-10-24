@@ -106,18 +106,24 @@
     }
 
     .change-app {
-      @include icon(th);
+      display: inline-block;
+
+      button { @include icon(th); }
     }
 
     .add {
-      @include icon(plus);
+      display: inline-block;
+
+      button { @include icon(plus); }
     }
 
-    .apps, .add-actions {
-      @extend %dropdown;
+    .change-app, .add {
+      ul {
+        @extend %dropdown;
 
-      text-align: left;
-      min-width: rem-calc(150);
+        text-align: left;
+        min-width: rem-calc(150);
+      }
     }
   }
 

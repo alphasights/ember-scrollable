@@ -16,20 +16,16 @@
   {{#liquid-if view.isActive use="crossFade" class="liquid-actions"}}
     <button class="close" title="Close" {{action "clear"}}></button>
   {{else}}
-    <button class="change-app" title="Change App" data-dropdown="apps" data-options="align: left"></button>
-
-    <ul id="add-actions" class="add-actions" data-dropdown-content>
-      <li><a href="#">New advisor</a></li>
-      <li><a href="#">New project</a></li>
-    </ul>
-
-    <button class="add" title="Add" data-dropdown="add-actions" data-options="align: left"></button>
-
-    <ul id="apps" class="apps" data-dropdown-content>
+    {{#as-dropdown title="Change App" align="left" class="change-app" buttonClass="change-app" listClass="apps"}}
       <li><a href="#">Metrics</a></li>
       <li><a href="#">Finance</a></li>
       <li><a href="#">Clients</a></li>
-    </ul>
+    {{/as-dropdown}}
+
+    {{#as-dropdown title="Add" align="left" class="add" buttonClass="add" listClass="add-actions"}}
+      <li><a href="#">New advisor</a></li>
+      <li><a href="#">New project</a></li>
+    {{/as-dropdown}}
   {{/liquid-if}}
 </div>
 
