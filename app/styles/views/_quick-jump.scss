@@ -106,18 +106,16 @@
     }
 
     .change-app {
-      display: inline-block;
-
       button { @include icon(th); }
     }
 
     .add {
-      display: inline-block;
-
       button { @include icon(plus); }
     }
 
     .change-app, .add {
+      display: inline-block;
+
       ul {
         @extend %dropdown;
 
