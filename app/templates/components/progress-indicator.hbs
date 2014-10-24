@@ -1,5 +1,9 @@
 {{#liquid-if promise.isLoading use="crossFade" class="liquid-spinner"}}
-  {{as-spinner color="#ffffff"}}
+  {{as-spinner
+    width=spinnerWidth
+    length=spinnerLength
+    radius=spinnerRadius
+    color=spinnerColor}}
 {{else}}
   {{yield}}
 {{/liquid-if}}
