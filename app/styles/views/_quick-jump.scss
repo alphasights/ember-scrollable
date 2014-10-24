@@ -80,10 +80,6 @@
     }
   }
 
-  .liquid-actions {
-    overflow: visible;
-  }
-
   .actions {
     $actions-button-size: $quick-jump-icon-size;
 
@@ -120,10 +116,6 @@
       text-align: left;
       min-width: rem-calc(150);
     }
-  }
-
-  .liquid-results {
-    @extend %static-liquid-container;
   }
 
   .results {

@@ -1,4 +1,4 @@
-{{#liquid-if promise.isLoading use="crossFade" class="liquid-spinner"}}
+{{#liquid-if promise.isLoading containerless=true use="crossFade"}}
   {{as-spinner
     width=spinnerWidth
     length=spinnerLength

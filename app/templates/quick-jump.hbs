@@ -12,7 +12,7 @@
 </div>
 
 <div class="actions">
-  {{#liquid-if view.isActive use="crossFade" class="liquid-actions"}}
+  {{#liquid-if view.isActive use="crossFade"}}
     <button class="close" title="Close" {{action "clear"}}></button>
   {{else}}
     <button class="change-app" title="Change App" data-dropdown="apps" data-options="align: left"></button>
@@ -32,9 +32,9 @@
   {{/liquid-if}}
 </div>
 
-{{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
+{{#liquid-if view.isActive containerless=true use="crossFade"}}
   <div class="results">
-    {{#liquid-if results use="crossFade" class="liquid-content"}}
+    {{#liquid-if results use="crossFade"}}
       {{#each allSections}}
         <section>
           <h1>{{title}}</h1>
