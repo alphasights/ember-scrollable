@@ -1,16 +1,16 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  title: DS.attr('string'),
   angleTeamMemberships: DS.hasMany('angleTeamMembership'),
+  membersUpdatedAt: null,
   project: DS.belongsTo('project'),
-  angleTeamMembershipsUpdatedAt: null,
+  title: DS.attr('string'),
 
-  teamMembers: (function() {
+  members: (function() {
     return this.get('angleTeamMemberships').mapBy('teamMember');
-  }).property('angleTeamMemberships.@each.teamMember'),
+  }).property('angleTeamMemberships.[]'),
 
-  angleTeamMembershipsDidChange: (function() {
-    this.set('angleTeamMembershipsUpdatedAt', new Date());
-  }).observes('angleTeamMemberships.[]')
+  membersDidChange: function() {
+    this.set('membersUpdatedAt', new Date());
+  }.observes('members.[]')
 });

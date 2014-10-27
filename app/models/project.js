@@ -1,57 +1,37 @@
 import DS from 'ember-data';
 
-var STATUSES = ['high', 'medium', 'low'];
-
 export default DS.Model.extend({
-  status: DS.attr('string'),
-  name: DS.attr('string'),
-  proposedAdvisorsCount: DS.attr('number'),
-  leftToScheduleAdvisorsCount: DS.attr('number'),
-  upcomingInteractionsCount: DS.attr('number'),
-  clientCode: DS.attr('string'),
   analyst_1: DS.belongsTo('user'),
   angles: DS.hasMany('angle'),
-  detailsUrl: DS.attr('string'),
+  clientCode: DS.attr('string'),
   createdAt: DS.attr('date'),
-  index: DS.attr('number'),
-  teamMembersUpdatedAt: null,
+  detailsUrl: DS.attr('string'),
+  leftToScheduleAdvisorsCount: DS.attr('number'),
+  name: DS.attr('string'),
+  proposedAdvisorsCount: DS.attr('number'),
+  status: DS.attr('string'),
+  upcomingInteractionsCount: DS.attr('number'),
   targetValuesUpdatedAt: null,
 
-  teamMembers: (function() {
-    return this.get('angleTeamMemberships').mapBy('teamMember');
-  }).property('angleTeamMemberships.@each.teamMember'),
+  angleTeamMemberships: (function() {
+    return this.get('angles').
+      mapBy('angleTeamMemberships.content').
+      reduce(function(m, angleTeamMemberships) {
+        return m.concat(angleTeamMemberships);
+      }, []);
+  }).property('angles.@each.angleTeamMembershipsUpdatedAt'),
+
+  members: function() {
+    return [this.get('analyst_1')].concat(
+      _(this.get('angles').toArray()).
+        chain().
+        map(function(a) { return a.get('members'); }).
+        flatten().
+        value()
+    ).uniq(false, function(a, b) { return a.get('id') === b.get('id'); });
+  }.property('analyst_1', 'angles.@each.membersUpdatedAt'),
 
   targetValues: (function() {
     return this.get('angleTeamMemberships').mapBy('targetValue');
-  }).property('angleTeamMemberships.@each.targetValue'),
-
-  statusIndex: (function() {
-    return STATUSES.indexOf(this.get('status'));
-  }).property('status'),
-
-  nextStatusIndex: (function() {
-    return (this.get('statusIndex') + 1) % STATUSES.length;
-  }).property('statusIndex'),
-
-  nextStatus: (function() {
-    return STATUSES.objectAt(this.get('nextStatusIndex'));
-  }).property('nextStatusIndex'),
-
-  teamMembersDidChange: (function() {
-    this.set('teamMembersUpdatedAt', new Date());
-  }).observes('teamMembers.[]'),
-
-  targetValuesDidChange: (function() {
-    this.set('targetValuesUpdatedAt', new Date());
-  }).observes('angleTeamMemberships.@each.targetValue'),
-
-  angleTeamMemberships: (function() {
-    return this.get('angles').mapBy('angleTeamMemberships.content').reduce(function(m, angleTeamMemberships) {
-      return m.concat(angleTeamMemberships);
-    }, []);
-  }).property('angles.@each.angleTeamMembershipsUpdatedAt'),
-
-  cycleStatus: function() {
-    this.set('status', this.get('nextStatus'));
-  }
+  }).property('angleTeamMemberships.@each.targetValue')
 });

@@ -1,1 +1,32 @@
-{{name}}
+<div {{bind-attr class=":priority status"}}>
+  <div></div>
+</div>
+
+<div class="details">
+  <h1>
+    <span>{{name}}</span>
+    <small>{{clientCode}}</small>
+  </h1>
+</div>
+
+<div class="members">
+  {{render "user" analyst_1 classNameBindings=":lead"}}
+
+  {{#each members}}
+    {{render "user" this}}
+  {{/each}}
+</div>
+
+<div class="counts">
+  <div class="upcoming">
+    <i></i><span>{{upcomingInteractionsCount}}</span>
+  </div>
+
+  <div class="left-to-schedule">
+    <i></i><span>{{leftToScheduleAdvisorsCount}}</span>
+  </div>
+
+  <div class="daily-remaining-target">
+    <i></i><span>{{remainingTarget}}</span>
+  </div>
+</div>
