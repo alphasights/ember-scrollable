@@ -36,5 +36,9 @@
     {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}}
   />
 
-  <div class="name">{{currentUser.name}}</div>
+  <div class="name">
+    {{#link-to 'index' (query-params projectId=1)}}
+      {{currentUser.name}}
+    {{/link-to}}
+  </div>
 </section>

@@ -15,6 +15,12 @@ export default Ember.Route.extend({
       } else {
         return true;
       }
+    },
+
+    queryParamsDidChange: function(params) {
+      if(!Ember.isBlank(params.projectId)) {
+        this.render('side-panel', { into: 'side-panel' })
+      }
     }
   }
 });
