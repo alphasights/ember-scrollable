@@ -17,10 +17,18 @@ export default Ember.Route.extend({
       }
     },
 
-    queryParamsDidChange: function(params) {
-      if(!Ember.isBlank(params.projectId)) {
-        this.render('side-panel', { into: 'side-panel' })
-      }
+    showSidePanel: function() {
+      this.render('side-panel', {
+        into: 'application',
+        outlet: 'side-panel'
+      });
+    },
+
+    hideSidePanel: function() {
+      this.disconnectOutlet({
+        outlet: 'side-panel',
+        parentView: 'application'
+      });
     }
   }
 });
