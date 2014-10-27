@@ -22,12 +22,10 @@
 
 <section class="user-session">
   <div class="toggle-actions">
-    <button title="Actions" data-dropdown="session-actions" data-options="align: top"></button>
-
-    <ul id="session-actions" class="actions" data-dropdown-content>
+    {{#as-dropdown title="Actions" class="actions" align="top"}}
       <li><a href="#">Settings</a></li>
       <li><a href="#">Logout</a></li>
-    </ul>
+    {{/as-dropdown}}
   </div>
 
   <img

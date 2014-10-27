@@ -31,7 +31,7 @@
       }
 
       .actions {
-        @extend %dropdown;
+        ul { @extend %dropdown; }
       }
     }
   }
