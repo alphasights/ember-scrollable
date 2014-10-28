@@ -1,0 +1,66 @@
+.projects {
+  padding: $column-gutter / 2;
+
+  .project {
+    @extend %grid-row;
+
+    border-bottom: 1px solid $section-border-color;
+    display: table;
+    padding: $column-gutter / 2 0;
+
+    > div {
+      display: table-cell;
+      vertical-align: middle;
+      float: none !important;
+    }
+
+    .priority {
+      @extend %grid-column-1;
+
+      > div {
+        background-color: red;
+        border-radius: 50%;
+        width: rem-calc(15);
+        height: rem-calc(15);
+      }
+    }
+
+    .details {
+      @extend %grid-column-4;
+    }
+
+    .members {
+      @extend %grid-column-4;
+    }
+
+    .counts {
+      @extend %grid-column-3;
+
+      > div {
+        @extend %grid-row;
+      }
+
+      .count {
+        @extend %grid-column-4;
+
+        font-size: $h3-font-size;
+
+        i {
+          padding-right: $column-gutter / 2;
+        }
+      }
+
+      .upcoming i {
+        @include icon(clock-o);
+      }
+
+      .left-to-schedule i {
+        @include icon(refresh);
+      }
+
+      .daily-remaining-target i {
+        @include icon(check-circle-o);
+      }
+    }
+  }
+}

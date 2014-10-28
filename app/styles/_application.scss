@@ -2,6 +2,7 @@
 @import 'views/sidebar';
 @import 'views/stats';
 @import 'views/teams';
+@import 'views/projects';
 
 main > .content {
   &:before {
@@ -16,7 +17,7 @@ main > .content {
     > header {
       @extend %grid-column-12;
 
-      border-bottom: solid 1px $application-content-heading-border-color;
+      border-bottom: solid 1px $section-border-color;
 
       h1 {
         @extend %heading-medium-uppercase;
