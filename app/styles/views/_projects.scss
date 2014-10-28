@@ -1,4 +1,4 @@
-.projects {
+section.projects {
   padding: $column-gutter / 2;
 
   .project {
@@ -18,15 +18,41 @@
       @extend %grid-column-1;
 
       > div {
-        background-color: red;
         border-radius: 50%;
         width: rem-calc(15);
         height: rem-calc(15);
+        margin: 0 auto;
       }
+
+      &.high > div {
+        background-color: $alert-color;
+        border: 2px solid scale-color($alert-color, $lightness: $alert-function-factor);
+      }
+
+      &.medium > div {
+        background-color: $warning-color;
+        border: 2px solid scale-color($warning-color, $lightness: $alert-function-factor);
+      }
+
+      &.low > div {
+        background-color: $info-color;
+        border: 2px solid scale-color($info-color, $lightness: $alert-function-factor);
+      }
+
     }
 
     .details {
       @extend %grid-column-4;
+
+      h1 {
+        font-size: $base-font-size;
+
+        small {
+          display: block;
+          line-height: 100%;
+        }
+      }
+
     }
 
     .members {
@@ -43,10 +69,17 @@
       .count {
         @extend %grid-column-4;
 
-        font-size: $h3-font-size;
+        font-size: $h5-font-size;
 
         i {
           padding-right: $column-gutter / 2;
+          color: $small-font-color;
+        }
+
+        &.relevant {
+          i {
+            color: $alert-color;
+          }
         }
       }
 

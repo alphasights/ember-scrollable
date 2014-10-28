@@ -10,25 +10,17 @@
 </div>
 
 <div class="members">
-  {{render "user" analyst_1 classNameBindings=":lead"}}
+  {{render "avatar" analyst_1 class="lead"}}
 
   {{#each members}}
-    {{render "user" this}}
+    {{render "avatar" this}}
   {{/each}}
 </div>
 
 <div class="counts">
   <div>
-    <div class="upcoming count">
-      <i></i><span>{{upcomingInteractionsCount}}</span>
-    </div>
-
-    <div class="left-to-schedule count">
-      <i></i><span>{{leftToScheduleAdvisorsCount}}</span>
-    </div>
-
-    <div class="daily-remaining-target count">
-      <i></i><span>{{remainingTarget}}</span>
-    </div>
+    {{render "count" upcomingInteractionsCount class="upcoming"}}
+    {{render "count" leftToScheduleAdvisorsCount class="left-to-schedule"}}
+    {{render "count" remainingTarget class="daily-remaining-target"}}
   </div>
 </div>
