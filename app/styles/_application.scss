@@ -19,6 +19,7 @@ main > .content {
       @extend %grid-column-12;
 
       border-bottom: solid 1px $section-border-color;
+      padding: 0 $column-gutter;
 
       h1 {
         @extend %heading-medium-uppercase;

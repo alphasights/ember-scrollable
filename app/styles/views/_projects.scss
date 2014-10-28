@@ -1,5 +1,5 @@
 section.projects {
-  padding: $column-gutter / 2;
+  padding: 0 $column-gutter;
 
   .project {
     @extend %grid-row;
