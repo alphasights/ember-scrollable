@@ -7,7 +7,7 @@ import testConfig from '../test-helper';
 module("Errors", testConfig);
 
 test("Error message", function() {
-  defineFixture('/quick_jumps', { q: 'example' }, { errors: "generic error" }, 500);
+  defineFixture('/quick_jumps', { q: 'example' }, {}, 500);
 
   visit('/');
   click('.quick-jump .bar input');
