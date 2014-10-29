@@ -37,7 +37,9 @@
       line-height: $teams-selected-header-height;
 
       .order-by-label {
-        @extend %grid-column-1;
+        @extend %grid-column-small-4;
+        @extend %grid-column-medium-2;
+        @extend %grid-column-large-1;
 
         text-align: center;
 
@@ -47,7 +49,9 @@
       }
 
       .order-by-select {
-        @extend %grid-column-2;
+        @extend %grid-column-small-8;
+        @extend %grid-column-medium-3;
+        @extend %grid-column-large-2;
       }
 
       select {
@@ -56,7 +60,9 @@
       }
 
       .stats {
-        @extend %grid-column-9;
+        @extend %grid-column-small-12;
+        @extend %grid-column-medium-7;
+        @extend %grid-column-large-9;
       }
     }
   }

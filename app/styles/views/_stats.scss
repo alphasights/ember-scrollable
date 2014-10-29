@@ -33,6 +33,11 @@
 
     .name {
       font-size: $small-font-size;
+      display: none;
+
+      @media #{$large-up} {
+        display: inline-block;
+      }
     }
 
     .upcoming i {
@@ -48,7 +53,12 @@
     }
   }
 
-  @media #{$large-up} {
-    float: right;
+  @media #{$small-only} {
+    margin-top: $column-gutter / 2;
+    border-top: 1px solid $section-border-color;
+
+    > ul {
+      text-align: center;
+    }
   }
 }
