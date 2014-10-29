@@ -20,6 +20,7 @@ main > .content {
 
       border-bottom: solid 1px $section-border-color;
       padding: 0 $column-gutter;
+      text-align: center;
 
       h1 {
         @extend %heading-medium-uppercase;
@@ -28,15 +29,17 @@ main > .content {
         font-weight: $font-weight-normal;
         line-height: $application-content-heading-height;
         margin: 0;
-
-        @media #{$small-up} {
-          text-align: center;
-        }
+        display: inline-block;
 
         @media #{$large-up} {
           float: left;
         }
       }
+
+      @media #{$large-up} {
+        text-align: left;
+      }
+
     }
   }
 }
