@@ -10,6 +10,6 @@ export default Ember.Component.extend({
   }.property('element'),
 
   close: function() {
-    this.$('button').trigger('click');
+    this.$('> button').trigger('click');
   }
 });
