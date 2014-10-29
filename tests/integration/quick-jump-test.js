@@ -1,28 +1,12 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import startApp from '../helpers/start-app';
+import config from '../../config/environment';
+import testConfig from '../test-helper';
 
-module("Quick Jump", {
-  setup: function() {
-    this.app = startApp();
-    this.app.server = new Pretender();
-  },
-
-  teardown: function() {
-    this.app.server.shutdown();
-    Ember.run(this.app, this.app.destroy);
-  }
-});
+module("Quick Jump", testConfig);
 
 test("Search results", function() {
-  defineFixture('/users/me', {}, {
-    "user": {
-      "initials": "EU",
-      "id": 1
-    }
-  });
-
   defineFixture('/quick_jumps', { q: 'example' }, {
     "responses": [
       {
