@@ -2,30 +2,30 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   layoutName: 'components/as-side-panel',
-  classNames: ['side-panel'],
+  classNameBindings: [':side-panel', 'isActive:active'],
 
   open: function() {
-    this.$('.overlay').velocity({ opacity: 0.5 });
-
     this.$('.panel').velocity({
       right: 0
     }, {
       duration: 'fast'
     });
+
+    this.set('isActive', true);
   }.on('didInsertElement'),
 
   actions: {
-    close: function() {
-      this.$('.overlay').velocity({ opacity: 0 });
-
+    clear: function() {
       this.$('.panel').velocity({
-        right: '-40%'
+        right: '-70%'
       }, {
         duration: 'fast',
         complete: (() => {
-          this.sendAction('close');
+          this.sendAction('clear');
         })
       });
+
+      this.set('isActive', false);
     }
   }
 });
