@@ -1,21 +1,37 @@
 .side-panel {
-  .panel {
-    position: fixed;
-    right: -40%;
-    top: 0;
-    bottom: 0;
-    width: 40%;
-    background-color: red;
-    z-index: 9999;
+  @include single-transition(background-color, 150ms, linear);
+
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  > * {
+    pointer-events: all;
   }
 
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: black;
-    opacity: 0;
+  .panel {
+    @include single-transition(opacity, 150ms, linear);
+
+    position: relative;
+    float: right;
+    width: 70%;
+    height: 100%;
+    background-color: $quick-jump-results-background-color;
+
+    section {
+      @extend %grid-row;
+
+      padding-top: $column-gutter / 2;
+      padding-bottom: $column-gutter / 2;
+    }
+  }
+
+  &.active {
+    background-color: $overlay-background-color;
+    pointer-events: all;
   }
 }
