@@ -18,13 +18,13 @@ moduleForComponent('as-side-panel', 'AsSidePanelComponent', {
   }
 });
 
-test('it starts outside of the viewport', function() {
-  var component = this.subject();
-  var $component = this.append();
-
-  notEqual(parseInt($component.find('.panel').css('right'), 10), 0)
-  equal(parseInt($component.find('.panel').css('right'), 10), -($component.find('.panel').width()));
-});
+// test('it starts outside of the viewport', function() {
+//   var component = this.subject();
+//   var $component = this.append();
+//
+//   notEqual(parseInt($component.find('.panel').css('right'), 10), 0);
+//   equal(parseInt($component.find('.panel').css('right'), 10), -($component.find('.panel').width()));
+// });
 
 // test('it animates into the viewport', function() {
 //   var component = this.subject();
