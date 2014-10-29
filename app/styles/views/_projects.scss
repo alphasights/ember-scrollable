@@ -1,3 +1,10 @@
+@mixin project-priority-style($color: $info-color) {
+  background-color: $color;
+  webkit-box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
+     moz-box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
+         box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
+}
+
 section.projects {
   padding: 0 $column-gutter;
 
@@ -19,27 +26,22 @@ section.projects {
 
       > div {
         border-radius: $global-radius / 2;
-        width: rem-calc(14);
-        height: rem-calc(14);
+        width: rem-calc(12);
+        height: rem-calc(12);
         margin: 0 auto;
-        border: 1px solid;
       }
 
       &.high > div {
-        background-color: $alert-color;
-        border-color: scale-color($alert-color, $lightness: $alert-function-factor);
+        @include project-priority-style($alert-color);
       }
 
       &.medium > div {
-        background-color: $warning-color;
-        border-color: scale-color($warning-color, $lightness: $alert-function-factor);
+        @include project-priority-style($warning-color);
       }
 
       &.low > div {
-        background-color: $info-color;
-        border-color: scale-color($info-color, $lightness: $alert-function-factor);
+        @include project-priority-style;
       }
-
     }
 
     .details {
