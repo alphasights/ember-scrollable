@@ -103,18 +103,22 @@
     }
 
     .change-app {
-      @include icon(th);
+      button { @include icon(th); }
     }
 
     .add {
-      @include icon(plus);
+      button { @include icon(plus); }
     }
 
-    .apps, .add-actions {
-      @extend %dropdown;
+    .change-app, .add {
+      display: inline-block;
 
-      text-align: left;
-      min-width: rem-calc(150);
+      ul {
+        @extend %dropdown;
+
+        text-align: left;
+        min-width: rem-calc(150);
+      }
     }
   }
 
