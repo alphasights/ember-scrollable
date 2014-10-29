@@ -7,5 +7,9 @@ export default Ember.Component.extend({
 
   id: function() {
     return `${Ember.guidFor(this)}-dropdown`;
-  }.property('element')
+  }.property('element'),
+
+  close: function() {
+    this.$('button').trigger('click');
+  }
 });
