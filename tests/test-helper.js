@@ -15,8 +15,8 @@ document.getElementById('ember-testing-container').style.visibility = containerV
 
 export default {
   setup: function() {
-    window.app = startApp();
-    window.app.server = new Pretender();
+    this.app = startApp();
+    this.app.server = new Pretender();
 
     defineFixture('/users/me', {}, {
       "user": {
@@ -27,7 +27,7 @@ export default {
   },
 
   teardown: function() {
-    window.app.server.shutdown();
-    Ember.run(window.app, window.app.destroy);
+    this.app.server.shutdown();
+    Ember.run(this.app, this.app.destroy);
   }
 };

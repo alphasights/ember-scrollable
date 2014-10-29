@@ -7,15 +7,7 @@ import testConfig from '../test-helper';
 module("Errors", testConfig);
 
 test("Error message", function() {
-  window.app.server.get(`${config.APP.apiBaseUrl}/quick_jumps`, function(request) {
-    if (_({ q: 'example' }).isEqual(request.queryParams)) {
-      return [
-        500,
-        { 'Content-Type': 'application/json' },
-        JSON.stringify({ errors: "generic error"})
-      ];
-    }
-  });
+  defineFixture('/quick_jumps', { q: 'example' }, { errors: "generic error" }, 500);
 
   visit('/');
   click('.quick-jump .bar input');
