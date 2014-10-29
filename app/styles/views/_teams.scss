@@ -9,14 +9,11 @@
 
       margin-left: rem-calc(10);
     }
-  }
-
-  .list {
-    @extend %dropdown;
-
-    min-width: rem-calc(300) !important;
 
     ul {
+      @extend %dropdown;
+
+      min-width: rem-calc(300) !important;
       max-height: rem-calc(400) !important;
       overflow-y: auto;
       margin-left: 0;
@@ -34,6 +31,7 @@
       padding: $column-gutter / 2 0;
       width: auto;
       line-height: $teams-selected-header-height;
+      border-radius: $global-radius / 2;
 
       .order-by-label {
         @extend %grid-column-small-4;

@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  align: 'right',
+
   options: function() {
     return `align: ${this.get('align')}`;
   }.property('align'),

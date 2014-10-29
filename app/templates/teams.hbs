@@ -2,23 +2,18 @@
   <header>
     <h1>{{selectedTeam.name}}</h1>
 
-    <div class="change">
-      <button
-        title="Change Team"
-        data-dropdown="teams"
-        data-options="align: right"></button>
-    </div>
+    {{#as-dropdown title="Change Team" class="change"}}
+        {{#each}}
+          {{#as-dropdown-item}}
+            {{#link-to "team" id}}{{name}}{{/link-to}}
+          {{/as-dropdown-item}}
+        {{/each}}
+    {{/as-dropdown}}
   </header>
+{{/if}}
 
-  <div id="teams" class="list" data-dropdown-content>
-    <ul>
-      {{#each}}
-        <li>{{#link-to "team" id}}{{name}}{{/link-to}}</li>
-      {{/each}}
-    </ul>
-  </div>
-
-  <section class="selected-team">
+<section class="selected-team">
+  {{#if selectedTeam}}
     <header>
       <div class="order-by-label">
         <label for="order-by">Order by:</label>
@@ -32,7 +27,7 @@
 
       {{render "stats" this className="stats"}}
     </header>
+  {{/if}}
 
-    {{liquid-outlet containerless=true use="crossFade"}}
-  </section>
-{{/if}}
+  {{liquid-outlet containerless=true use="crossFade"}}
+</section>
