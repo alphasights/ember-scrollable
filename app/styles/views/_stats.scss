@@ -2,25 +2,27 @@
   > ul {
     @include inline-list;
 
+    line-height: $teams-selected-header-height;
     margin-bottom: 0;
     padding: 0 $column-gutter / 2;
-    line-height: $teams-selected-header-height;
+    text-align: right;
 
     > li {
-      float: right;
-      text-transform: uppercase;
-      word-wrap: nowrap;
+      display: inline-block;
+      float: none;
       margin-left: $column-gutter;
+      text-transform: uppercase;
+      white-space: nowrap;
 
       > div {
         display: inline-block;
       }
 
       i {
-        font-size: $h3-font-size !important;
-        line-height: $teams-selected-header-height !important;
-        vertical-align: middle;
         color: $small-font-color;
+        display: inline !important;
+        font-size: $h3-font-size !important;
+        vertical-align: middle;
       }
     }
 
