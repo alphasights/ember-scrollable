@@ -30,7 +30,6 @@
       @extend %grid-row;
       @include panel;
 
-      border-radius: $global-radius;
       margin: $column-gutter;
       padding: $column-gutter / 2 0;
       width: auto;
