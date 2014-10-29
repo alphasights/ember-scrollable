@@ -18,25 +18,26 @@ section.projects {
       @extend %grid-column-1;
 
       > div {
-        border-radius: 50%;
-        width: rem-calc(15);
-        height: rem-calc(15);
+        border-radius: $global-radius / 2;
+        width: rem-calc(14);
+        height: rem-calc(14);
         margin: 0 auto;
+        border: 1px solid;
       }
 
       &.high > div {
         background-color: $alert-color;
-        border: 2px solid scale-color($alert-color, $lightness: $alert-function-factor);
+        border-color: scale-color($alert-color, $lightness: $alert-function-factor);
       }
 
       &.medium > div {
         background-color: $warning-color;
-        border: 2px solid scale-color($warning-color, $lightness: $alert-function-factor);
+        border-color: scale-color($warning-color, $lightness: $alert-function-factor);
       }
 
       &.low > div {
         background-color: $info-color;
-        border: 2px solid scale-color($info-color, $lightness: $alert-function-factor);
+        border-color: scale-color($info-color, $lightness: $alert-function-factor);
       }
 
     }
