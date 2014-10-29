@@ -9,30 +9,31 @@
         data-options="align: right"></button>
     </div>
   </header>
+
+  <div id="teams" class="list" data-dropdown-content>
+    <ul>
+      {{#each}}
+        <li>{{#link-to "team" id}}{{name}}{{/link-to}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <section class="selected-team">
+    <header>
+      <div class="order-by-label">
+        <label for="order-by">Order by:</label>
+      </div>
+
+      <div class="order-by-select">
+        <select id="order-by">
+          <option value="client">Client</option>
+        </select>
+      </div>
+
+      {{render "stats" this className="stats"}}
+    </header>
+
+    {{liquid-outlet containerless=true use="crossFade"}}
+  </section>
 {{/if}}
-
-<div id="teams" class="list" data-dropdown-content>
-  <ul>
-    {{#each}}
-      <li>{{#link-to "team" id}}{{name}}{{/link-to}}</li>
-    {{/each}}
-  </ul>
-</div>
-
-<section class="selected-team">
-  <header>
-    <div class="order-by-label">
-      <label for="order-by">Order by:</label>
-    </div>
-
-    <div class="order-by-select">
-      <select id="order-by">
-        <option value="client">Client</option>
-      </select>
-    </div>
-    
-    {{render "stats" this className="stats"}}
-  </header>
-
-  {{liquid-outlet containerless=true use="crossFade"}}
-</section>
+>>>>>>> Add styles to the stats bar
