@@ -25,5 +25,41 @@
 
   .selected-team {
     @extend %grid-row;
+
+    header {
+      @extend %grid-row;
+      @include panel;
+
+      border-radius: $global-radius;
+      margin: $column-gutter;
+      padding: $column-gutter / 2 0;
+      width: auto;
+      line-height: $teams-selected-header-height;
+
+      .order-by-label {
+        @extend %grid-column-1;
+
+        text-align: center;
+
+        label {
+          @include form-label(inline, false);
+
+          margin-bottom: 0;
+        }
+      }
+
+      .order-by-select {
+        @extend %grid-column-2;
+      }
+
+      select {
+        margin-bottom: 0;
+        padding-right: rem-calc(30);
+      }
+
+      .stats {
+        @extend %grid-column-9;
+      }
+    }
   }
 }

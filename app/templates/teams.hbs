@@ -8,8 +8,6 @@
         data-dropdown="teams"
         data-options="align: right"></button>
     </div>
-
-    {{render "stats" this tagName="section" className="stats"}}
   </header>
 {{/if}}
 
@@ -22,5 +20,19 @@
 </div>
 
 <section class="selected-team">
+  <header>
+    <div class="order-by-label">
+      <label for="order-by">Order by:</label>
+    </div>
+
+    <div class="order-by-select">
+      <select id="order-by">
+        <option value="client">Client</option>
+      </select>
+    </div>
+    
+    {{render "stats" this className="stats"}}
+  </header>
+
   {{liquid-outlet containerless=true use="crossFade"}}
 </section>

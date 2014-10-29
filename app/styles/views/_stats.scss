@@ -3,18 +3,46 @@
     @include inline-list;
 
     margin-bottom: 0;
+    padding: 0 $column-gutter / 2;
+    line-height: $teams-selected-header-height;
 
     > li {
+      float: right;
+      text-transform: uppercase;
       word-wrap: nowrap;
+      margin-left: $column-gutter;
 
       > div {
         display: inline-block;
-        line-height: $stats-item-height;
-
-        &:first-child {
-          font-weight: $font-weight-bold;
-        }
       }
+
+      i {
+        font-size: $h3-font-size !important;
+        line-height: $teams-selected-header-height !important;
+        vertical-align: middle;
+        color: $small-font-color;
+      }
+    }
+
+    .count {
+      font-weight: $font-weight-bold;
+      margin: 0 $column-gutter / 4;
+    }
+
+    .name {
+      font-size: $small-font-size;
+    }
+
+    .upcoming i {
+      @include icon(clock-o);
+    }
+
+    .left-to-schedule i {
+      @include icon(refresh);
+    }
+
+    .delivered i {
+      @include icon(check-circle-o);
     }
   }
 
