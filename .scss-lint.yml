@@ -1,7 +1,5 @@
 # Default application configuration that all configurations inherit from.
 
-scss_files: "**/*.scss"
-
 linters:
   BangFormat:
     enabled: true
@@ -42,8 +40,7 @@ linters:
     present: true
 
   HexLength:
-    enabled: true
-    style: short # or 'long'
+    enabled: false
 
   HexNotation:
     enabled: true
@@ -82,7 +79,7 @@ linters:
     max_depth: 4
 
   PlaceholderInExtend:
-    enabled: true
+    enabled: false
 
   PropertySortOrder:
     enabled: true

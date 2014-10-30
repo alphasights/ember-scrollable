@@ -13,10 +13,10 @@
     ul {
       @extend %dropdown;
 
-      min-width: rem-calc(300) !important;
-      max-height: rem-calc(400) !important;
-      overflow-y: auto;
       margin-left: 0;
+      max-height: rem-calc(400) !important;
+      min-width: rem-calc(300) !important;
+      overflow-y: auto;
     }
   }
 
@@ -27,11 +27,11 @@
       @extend %grid-row;
       @include panel;
 
+      border-radius: $global-radius / 2;
+      line-height: $teams-selected-header-height;
       margin: $column-gutter;
       padding: $column-gutter / 2 0;
       width: auto;
-      line-height: $teams-selected-header-height;
-      border-radius: $global-radius / 2;
 
       .order-by-label {
         @extend %grid-column-small-4;

@@ -14,7 +14,8 @@
     pointer-events: all;
   }
 
-  .bar, .actions {
+  .bar,
+  .actions {
     padding: 0 $column-gutter / 2;
   }
 
@@ -41,8 +42,8 @@
       i {
         @include icon(search);
 
-        line-height: $quick-jump-icon-size;
         display: block;
+        line-height: $quick-jump-icon-size;
       }
     }
 
@@ -61,7 +62,7 @@
 
   &.loading {
     .results .content {
-      opacity: 0.7;
+      opacity: .7;
     }
   }
 
@@ -91,15 +92,15 @@
 
     button {
       height: $actions-button-size;
+      margin-bottom: 0;
       width: $actions-button-size;
-      margin-bottom: 0px;
     }
 
     .close {
       @include icon(times-circle);
 
-      border-width: 0;
       background-color: transparent;
+      border-width: 0;
     }
 
     .change-app {
@@ -110,14 +111,15 @@
       button { @include icon(plus); }
     }
 
-    .change-app, .add {
+    .change-app,
+    .add {
       display: inline-block;
 
       ul {
         @extend %dropdown;
 
-        text-align: left;
         min-width: rem-calc(150);
+        text-align: left;
       }
     }
   }
@@ -125,15 +127,15 @@
   .results {
     @include single-transition(opacity, 150ms, linear);
 
+    background-color: $quick-jump-results-background-color;
     position: relative;
     width: 100%;
-    background-color: $quick-jump-results-background-color;
 
     section {
       @extend %grid-row;
 
-      padding-top: $column-gutter / 2;
       padding-bottom: $column-gutter / 2;
+      padding-top: $column-gutter / 2;
 
       h1 {
         @extend .hide-for-small-only;

@@ -5,9 +5,9 @@
     .picture {
       border-radius: 50%;
       display: inline-block;
+      height: $layout-sidebar-nav-link-icon-width;
       margin-right: $layout-sidebar-nav-padding / 2;
       width: $layout-sidebar-nav-link-icon-width;
-      height: $layout-sidebar-nav-link-icon-width;
     }
 
     .name {
@@ -47,13 +47,14 @@
     }
 
     .user-session {
-      .picture, .name {
+      .picture,
+      .name {
         display: none;
       }
 
       .toggle-actions {
-        float: none;
         display: block;
+        float: none;
         text-align: center;
       }
     }

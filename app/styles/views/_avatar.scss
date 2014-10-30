@@ -1,9 +1,9 @@
 .avatar {
+  border: 1px solid $section-border-color;
   border-radius: $global-radius;
-  width: rem-calc(60);
   height: rem-calc(60);
   padding: 1px;
-  border: 1px solid $section-border-color;
+  width: rem-calc(60);
 
   &.lead {
     border-color: lighten($primary-color, 30%);

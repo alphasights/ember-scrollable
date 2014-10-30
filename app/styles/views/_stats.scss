@@ -32,8 +32,8 @@
     }
 
     .name {
-      font-size: $small-font-size;
       display: none;
+      font-size: $small-font-size;
 
       @media #{$large-up} {
         display: inline-block;
@@ -54,8 +54,8 @@
   }
 
   @media #{$small-only} {
-    margin-top: $column-gutter / 2;
     border-top: 1px solid $section-border-color;
+    margin-top: $column-gutter / 2;
 
     > ul {
       text-align: center;

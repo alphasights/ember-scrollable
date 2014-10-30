@@ -24,10 +24,10 @@ main > .content {
         @extend %heading-medium-uppercase;
 
         color: $application-content-heading-color;
+        display: inline-block;
         font-weight: $font-weight-normal;
         line-height: $application-content-heading-height;
         margin: 0;
-        display: inline-block;
       }
 
       @media #{$large-up} {

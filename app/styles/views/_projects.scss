@@ -1,8 +1,6 @@
 @mixin project-priority-style($color: $info-color) {
   background-color: $color;
-  webkit-box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
-     moz-box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
-         box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px white inset;
+  box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px #fff inset;
 }
 
 section.projects {
@@ -17,8 +15,8 @@ section.projects {
 
     > div {
       display: table-cell;
-      vertical-align: middle;
       float: none !important;
+      vertical-align: middle;
     }
 
     .priority {
@@ -26,9 +24,9 @@ section.projects {
 
       > div {
         border-radius: $global-radius / 2;
-        width: rem-calc(12);
         height: rem-calc(12);
         margin: 0 auto;
+        width: rem-calc(12);
       }
 
       &.high > div {
@@ -75,8 +73,8 @@ section.projects {
         font-size: $h5-font-size;
 
         i {
-          padding-right: $column-gutter / 2;
           color: $small-font-color;
+          padding-right: $column-gutter / 2;
         }
 
         &.relevant {
