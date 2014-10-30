@@ -5,12 +5,6 @@ export default Ember.Component.extend({
   classNameBindings: [':side-panel', 'isActive:active'],
 
   open: function() {
-    Ember.$('.application').velocity({
-      right: '10%'
-    }, {
-      duration: 300
-    });
-
     this.$('.panel').velocity({
       right: 0
     }, {
@@ -29,12 +23,6 @@ export default Ember.Component.extend({
         complete: (() => {
           this.sendAction('close');
         })
-      });
-
-      Ember.$('.application').velocity({
-        right: '0'
-      }, {
-        duration: 300
       });
 
       this.set('isActive', false);
