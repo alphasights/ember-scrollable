@@ -11,13 +11,13 @@
   .panel {
     @include single-transition(opacity, 150ms, linear);
 
-    background-color: $quick-jump-results-background-color;
+    background-color: $side-panel-background;
     float: right;
     height: 100%;
     overflow-y: auto;
     position: relative;
-    width: 70%;
-    right: -70%;
+    width: $side-panel-width;
+    right: -$side-panel-width;
 
     section {
       @extend %grid-row;
