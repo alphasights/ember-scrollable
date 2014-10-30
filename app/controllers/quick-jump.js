@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
   ],
 
-  sectionTitlesMapping: {
+  resultSectionTitlesMapping: {
     'user': 'Colleagues',
     'contact': 'Contacts',
     'advisor': 'Advisors',
@@ -55,10 +55,10 @@ export default Ember.Controller.extend({
   }.property('resultSections'),
 
   resultSections: function() {
-    var sectionTitlesMapping = this.get('sectionTitlesMapping');
+    var resultSectionTitlesMapping = this.get('resultSectionTitlesMapping');
 
     return _(this.get('normalizedResults')).chain().groupBy('type').map(function(results, type) {
-      return { title: sectionTitlesMapping[type], results: results, type: type };
+      return { title: resultSectionTitlesMapping[type], results: results, type: type };
     }).value();
   }.property('normalizedResults'),
 
