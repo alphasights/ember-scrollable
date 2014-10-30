@@ -5,10 +5,10 @@ export default Ember.Component.extend({
   classNameBindings: [':side-panel', 'isActive:active'],
 
   open: function() {
-    Ember.$('.application main, .application .sidebar').velocity({
+    Ember.$('.application').velocity({
       right: '10%'
     }, {
-      duration: 400
+      duration: 300
     });
 
     this.$('.panel').velocity({
@@ -31,10 +31,10 @@ export default Ember.Component.extend({
         })
       });
 
-      Ember.$('.application main, .application .sidebar').velocity({
+      Ember.$('.application').velocity({
         right: '0'
       }, {
-        duration: 400
+        duration: 300
       });
 
       this.set('isActive', false);
