@@ -7,7 +7,7 @@
 .application {
   position: relative;
 
-   main > .content:before {
+  main > .content:before {
     content: ' ';
     display: block;
     height: $quick-jump-height;
