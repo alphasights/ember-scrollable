@@ -5,6 +5,12 @@ export default Ember.Component.extend({
   classNameBindings: [':side-panel', 'isActive:active'],
 
   open: function() {
+    Ember.$('.application main, .application .sidebar').velocity({
+      right: '10%'
+    }, {
+      duration: 400
+    });
+
     this.$('.panel').velocity({
       right: 0
     }, {
@@ -23,6 +29,12 @@ export default Ember.Component.extend({
         complete: (() => {
           this.sendAction('clear');
         })
+      });
+
+      Ember.$('.application main, .application .sidebar').velocity({
+        right: '0'
+      }, {
+        duration: 400
       });
 
       this.set('isActive', false);
