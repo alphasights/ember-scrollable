@@ -21,13 +21,13 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   actions: {
-    clear: function() {
+    close: function() {
       this.$('.panel').velocity({
         right: '-70%'
       }, {
         duration: 'fast',
         complete: (() => {
-          this.sendAction('clear');
+          this.sendAction('close');
         })
       });
 
