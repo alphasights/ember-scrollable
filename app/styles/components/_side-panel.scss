@@ -3,12 +3,12 @@
 
   bottom: 0;
   left: 0;
-  overflow:hidden;
+  overflow: hidden;
   position: fixed;
   right: 0;
   top: 0;
 
-  .panel {
+  > div {
     @include single-transition(opacity, 150ms, linear);
 
     background-color: $side-panel-background;

@@ -1,11 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  layoutName: 'components/as-side-panel',
   classNameBindings: [':side-panel', 'isActive:active'],
+  layoutName: 'components/as-side-panel',
+
+  click: function(event) {  
+    if($(event.target).closest(this.$('> div')).length === 0) {
+      this.send('close');
+    }
+  },
 
   open: function() {
-    this.$('.panel').velocity({
+    this.$('> div').velocity({
       right: 0
     }, {
       duration: 'fast'
@@ -16,7 +22,7 @@ export default Ember.Component.extend({
 
   actions: {
     close: function() {
-      this.$('.panel').velocity({
+      this.$('> div').velocity({
         right: '-70%'
       }, {
         duration: 'fast',
