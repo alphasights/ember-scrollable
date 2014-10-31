@@ -4,8 +4,8 @@ export default Ember.Component.extend({
   classNameBindings: [':side-panel', 'isActive:active'],
   layoutName: 'components/as-side-panel',
 
-  click: function(event) {  
-    if($(event.target).closest(this.$('> div')).length === 0) {
+  click: function(event) {
+    if(Ember.$(event.target).closest(this.$('> div')).length === 0) {
       this.send('close');
     }
   },
