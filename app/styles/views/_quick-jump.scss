@@ -55,7 +55,7 @@
       box-shadow: none;
       display: inline-block;
       margin: 0;
-      text-indent: $quick-jump-icon-size + rem-calc(5);
+      text-indent: $quick-jump-icon-size * 2;
       width: 100%;
     }
   }
@@ -82,7 +82,7 @@
   }
 
   .actions {
-    $actions-button-size: $quick-jump-icon-size;
+    $actions-button-size: $button-icon-size;
 
     position: absolute;
     right: 0;
@@ -91,9 +91,7 @@
     white-space: nowrap;
 
     button {
-      height: $actions-button-size;
-      margin-bottom: 0;
-      width: $actions-button-size;
+      @extend %button-icon;
     }
 
     .close {

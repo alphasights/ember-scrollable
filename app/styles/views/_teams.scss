@@ -5,6 +5,8 @@
     margin-bottom: 0;
 
     button {
+      @extend %button-icon;
+
       @include icon(exchange);
 
       margin-right: rem-calc(10);
