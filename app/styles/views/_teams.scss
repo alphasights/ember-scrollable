@@ -3,6 +3,7 @@
     display: inline-block;
     line-height: $application-content-heading-height;
     margin-bottom: 0;
+    position: relative;
 
     button {
       @extend %button-icon;
@@ -19,6 +20,7 @@
       max-height: rem-calc(400) !important;
       min-width: rem-calc(300) !important;
       overflow-y: auto;
+      z-index: 0 !important;
     }
   }
 
