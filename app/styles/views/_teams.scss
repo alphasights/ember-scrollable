@@ -7,7 +7,7 @@
     button {
       @include icon(exchange);
 
-      margin-left: rem-calc(10);
+      margin-right: rem-calc(10);
     }
 
     ul {
@@ -25,15 +25,15 @@
 
     header {
       @extend %grid-row;
-      @include panel;
 
+      background-color: lighten($info-color, 2%);
       border-radius: $global-radius / 2;
       line-height: $teams-selected-header-height;
-      margin: $column-gutter;
+      margin-top: $column-gutter / 2;
       padding: $column-gutter / 2 0;
       width: auto;
 
-      .order-by-label {
+      .sort-by-label {
         @extend %grid-column-small-4;
         @extend %grid-column-medium-2;
         @extend %grid-column-large-1;
@@ -45,7 +45,7 @@
         }
       }
 
-      .order-by-select {
+      .sort-by-select {
         @extend %grid-column-small-8;
         @extend %grid-column-medium-3;
         @extend %grid-column-large-2;

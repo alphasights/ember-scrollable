@@ -1,3 +1,18 @@
+<header>
+  <div class="sort-by-label">
+    <label for="sort-by">Sort by:</label>
+  </div>
+
+  <div class="sort-by-select">
+    {{view "Ember.Select"
+      id="sort-by"
+      content=sortByProperties
+      optionValuePath="content.value"
+      optionLabelPath="content.label"
+      value=sortBy}}
+  </div>
+</header>
+
 {{#each itemController="project"}}
   {{render "project" this tagName="article"}}
 {{/each}}

@@ -1,33 +1,17 @@
 {{#if selectedTeam}}
   <header>
-    <h1>{{selectedTeam.name}}</h1>
-
     {{#as-dropdown title="Change Team" class="change"}}
-        {{#each}}
-          {{#as-dropdown-item}}
-            {{#link-to "team" id}}{{name}}{{/link-to}}
-          {{/as-dropdown-item}}
-        {{/each}}
+      {{#each}}
+        {{#as-dropdown-item}}
+          {{#link-to "team" id}}{{name}}{{/link-to}}
+        {{/as-dropdown-item}}
+      {{/each}}
     {{/as-dropdown}}
+
+    <h1>{{selectedTeam.name}}</h1>
   </header>
 {{/if}}
 
 <section class="selected-team">
-  {{#if selectedTeam}}
-    <header>
-      <div class="order-by-label">
-        <label for="order-by">Order by:</label>
-      </div>
-
-      <div class="order-by-select">
-        <select id="order-by">
-          <option value="client">Client</option>
-          <option value="priority">Priority</option>
-          <option value="created-at">Creation date</option>
-        </select>
-      </div>
-    </header>
-  {{/if}}
-
   {{liquid-outlet containerless=true use="crossFade"}}
 </section>

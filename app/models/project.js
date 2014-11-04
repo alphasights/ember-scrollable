@@ -1,5 +1,7 @@
 import DS from 'ember-data';
 
+var STATUSES = ['low', 'medium', 'high'];
+
 export default DS.Model.extend({
   analyst_1: DS.belongsTo('user'),
   angles: DS.hasMany('angle'),
@@ -12,6 +14,10 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   upcomingInteractionsCount: DS.attr('number'),
   targetValuesUpdatedAt: null,
+
+  priority: function() {
+    return STATUSES.indexOf(this.get('status'));
+  }.property('status'),
 
   angleTeamMemberships: (function() {
     return this.get('angles').
