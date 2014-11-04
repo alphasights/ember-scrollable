@@ -103,17 +103,17 @@ test("Search results", function() {
         title: 'Top Hit',
         results: ['Example User']
       }, {
-        title: 'Projects',
-        results: ['Example Project']
-      }, {
-        title: 'Advisors',
-        results: ['Example Advisor']
-      }, {
-        title: 'Users',
+        title: 'Colleagues',
         results: ['Example User']
       }, {
         title: 'Contacts',
         results: ['Example Client Contact']
+      }, {
+        title: 'Advisors',
+        results: ['Example Advisor']
+      }, {
+        title: 'Projects',
+        results: ['Example Project']
       }, {
         title: 'Entities',
         results: ['Example Client Entity']
