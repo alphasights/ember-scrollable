@@ -1,0 +1,8 @@
+.progress-bar {
+  @extend %progress-bar;
+
+  border: 0;
+  padding: 0;
+  margin: 0;
+  height: 3px;
+}

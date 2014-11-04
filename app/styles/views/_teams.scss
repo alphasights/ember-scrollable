@@ -55,12 +55,6 @@
         margin-bottom: 0;
         padding-right: rem-calc(30);
       }
-
-      .stats {
-        @extend %grid-column-small-12;
-        @extend %grid-column-medium-7;
-        @extend %grid-column-large-9;
-      }
     }
   }
 }

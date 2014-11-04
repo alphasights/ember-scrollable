@@ -1,4 +1,4 @@
-@mixin project-priority-style($color: $info-color) {
+@mixin project-priority($color: $info-color) {
   background-color: $color;
   box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px #fff inset;
 }
@@ -19,30 +19,30 @@ section.projects {
       vertical-align: middle;
     }
 
-    .priority {
+    > .priority {
       @extend %grid-column-1;
 
       > div {
         border-radius: $global-radius / 2;
-        height: rem-calc(12);
+        height: 12px;
         margin: 0 auto;
-        width: rem-calc(12);
+        width: 12px;
       }
 
       &.high > div {
-        @include project-priority-style($alert-color);
+        @include project-priority($alert-color);
       }
 
       &.medium > div {
-        @include project-priority-style($warning-color);
+        @include project-priority($warning-color);
       }
 
       &.low > div {
-        @include project-priority-style;
+        @include project-priority;
       }
     }
 
-    .details {
+    > .details {
       @extend %grid-column-4;
 
       h1 {
@@ -56,44 +56,52 @@ section.projects {
 
     }
 
-    .members {
+    > .members {
       @extend %grid-column-4;
     }
 
-    .counts {
+    > .progress {
       @extend %grid-column-3;
 
-      > div {
+      padding: 0 $column-gutter;
+
+      .progress-bar {
+        > div {
+          border-radius: $global-radius / 2;
+          background-color: lighten($success-color, 20%);
+        }
+      }
+
+      .details {
         @extend %grid-row;
-      }
 
-      .count {
-        @extend %grid-column-4;
+        margin-top: $column-gutter / 4;
+        font-size: 0.75rem;
 
-        font-size: $h5-font-size;
+        .proposed,
+        .target {
+          @extend %grid-column-6;
 
-        i {
-          color: $small-font-color;
-          padding-right: $column-gutter / 2;
+          padding: 0 !important;
+          color: darken($info-color, 20%);
         }
 
-        &.relevant {
-          i {
-            color: $alert-color;
-          }
+        .proposed {
+          text-align: left;
         }
-      }
 
-      .upcoming i {
-        @include icon(clock-o);
-      }
+        .target {
+          text-align: right;
+        }
 
-      .left-to-schedule i {
-        @include icon(refresh);
-      }
+        .count {
+          font-weight: $font-weight-bold;
+          margin-right: $column-gutter / 4;
+        }
 
-      .daily-remaining-target i {
-        @include icon(check-circle-o);
+        .label {
+          text-transform: uppercase;
+        }
       }
     }
   }

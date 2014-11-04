@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   align: 'right',
+  layoutName: 'components/dropdown',
 
   options: function() {
     return `align: ${this.get('align')}`;

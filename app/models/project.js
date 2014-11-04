@@ -32,5 +32,11 @@ export default DS.Model.extend({
 
   targetValues: (function() {
     return this.get('angleTeamMemberships').mapBy('targetValue');
-  }).property('angleTeamMemberships.@each.targetValue')
+  }).property('angleTeamMemberships.@each.targetValue'),
+
+  totalTarget: function() {
+    return this.get('targetValues').reduce(function(previous, current) {
+      return previous + current;
+    }, 0);
+  }.property('targetValues.[]')
 });

@@ -17,10 +17,24 @@
   {{/each}}
 </div>
 
-<div class="counts">
-  <div>
-    {{render "count" upcomingInteractionsCount class="upcoming"}}
-    {{render "count" leftToScheduleAdvisorsCount class="left-to-schedule"}}
-    {{render "count" remainingTarget class="daily-remaining-target"}}
+<div class="progress">
+  {{as-progress-bar ratio=progress}}
+
+  <div class="details">
+    <div class="proposed">
+      <span class="count">
+        {{proposedAdvisorsCount}}
+      </span>
+
+      <span class="label">proposed</span>
+    </div>
+
+    <div class="target">
+      <span class="count">
+        {{totalTarget}}
+      </span>
+
+      <span class="label">target</span>
+    </div>
   </div>
 </div>
