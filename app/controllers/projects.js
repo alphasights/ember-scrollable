@@ -12,7 +12,7 @@ export default Ember.ArrayController.extend({
     ascending: false
   }, {
     id: 'client',
-    name: 'Client Code',
+    name: 'Client',
     property: 'clientCode',
     ascending: true
   }, {
