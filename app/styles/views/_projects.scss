@@ -65,6 +65,12 @@ section.projects {
 
       padding: 0 $column-gutter;
 
+      &:hover {
+       .details .proposed {
+          opacity: 1;
+        }
+      }
+
       .progress-bar {
         > div {
           background-color: lighten($success-color, 20%);
@@ -87,7 +93,10 @@ section.projects {
         }
 
         .proposed {
+          @include single-transition(opacity, 150ms, linear);
+
           text-align: left;
+          opacity: 0;
         }
 
         .target {
