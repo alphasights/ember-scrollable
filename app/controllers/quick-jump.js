@@ -67,8 +67,15 @@ export default Ember.Controller.extend({
             if (requestPromise !== this.get('requestPromise')) { return; }
 
             this.set('results', _.chain(response.responses)
-              .map(function(response) { return response.hits.hits; })
+              .map(function(response) {
+                if (!Ember.isBlank(response.hits)) {
+                  return response.hits.hits;
+                } else {
+                  return null;
+                }
+              })
               .flatten()
+              .compact()
               .value()
             );
           })
