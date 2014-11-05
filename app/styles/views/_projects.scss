@@ -47,10 +47,11 @@ section.projects {
 
       h1 {
         font-size: $base-font-size;
+        font-weight: $font-weight-bold;
 
         small {
           display: block;
-          line-height: 100%;
+          line-height: 150%;
         }
       }
 
