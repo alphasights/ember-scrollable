@@ -6,9 +6,7 @@
     position: relative;
 
     button {
-      @extend %button-icon;
-
-      @include icon(exchange);
+      @include button-icon(exchange);
 
       margin-right: rem-calc(10);
     }

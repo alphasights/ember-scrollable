@@ -90,10 +90,6 @@
     top: ($quick-jump-height - $actions-button-size) / 2;
     white-space: nowrap;
 
-    button {
-      @extend %button-icon;
-    }
-
     .close {
       @include icon(times-circle);
 
@@ -102,11 +98,11 @@
     }
 
     .change-app {
-      button { @include icon(th); }
+      button { @include button-icon(th); }
     }
 
     .add {
-      button { @include icon(plus); }
+      button { @include button-icon(plus); }
     }
 
     .change-app,
