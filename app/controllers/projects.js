@@ -1,20 +1,36 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  sortByProperties: [{
-    value: 'clientCode',
-    label: 'Client'
+  needs: ['team'],
+  team: Ember.computed.alias('controllers.team'),
+  sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
+
+  availableSortProperties: [{
+    id: 'priority',
+    name: 'Priority',
+    property: 'priority',
+    ascending: false
   }, {
-    value: 'priority',
-    label: 'Priority'
+    id: 'client',
+    name: 'Client Code',
+    property: 'clientCode',
+    ascending: true
   }, {
-    value: 'createdAt',
-    label: 'Creation Date'
+    id: 'creation-date',
+    name: 'Creation Date',
+    property: 'createdAt',
+    ascending: false
   }],
 
-  sortBy: 'priority',
+  sortProperty: function() {
+    return this.get('availableSortProperties').findBy('id', this.get('sortPropertyId'));
+  }.property('sortPropertyId'),
 
-  arrangedContent: function() {
-    return this.get('model').sortBy(this.get('sortBy'));
-  }.property('sortBy')
+  sortProperties: function() {
+    return [this.get('sortProperty').property];
+  }.property('sortProperty'),
+
+  sortAscending: function() {
+    return this.get('sortProperty').ascending;
+  }.property('sortProperty')
 });

@@ -4,12 +4,12 @@
   </div>
 
   <div class="sort-by-select">
-    {{view "Ember.Select"
+    {{view "select"
       id="sort-by"
-      content=sortByProperties
-      optionValuePath="content.value"
-      optionLabelPath="content.label"
-      value=sortBy}}
+      content=availableSortProperties
+      optionValuePath="content.id"
+      optionLabelPath="content.name"
+      value=sortPropertyId}}
   </div>
 </header>
 
