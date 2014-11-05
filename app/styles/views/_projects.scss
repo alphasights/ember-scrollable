@@ -75,7 +75,7 @@ section.projects {
       .details {
         @extend %grid-row;
 
-        font-size: .75rem;
+        font-size: $small-font-size;
         margin-top: $column-gutter / 4;
 
         .proposed,
