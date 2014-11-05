@@ -3,12 +3,12 @@
 }
 
 %button-icon {
-  padding: 0 0;
   margin-bottom: 0;
+  padding: 0;
 
   &:before {
     display: block;
-    width: $button-icon-size;
     line-height: $button-icon-size;
+    width: $button-icon-size;
   }
 }
