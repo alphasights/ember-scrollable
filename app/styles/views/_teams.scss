@@ -3,9 +3,10 @@
     display: inline-block;
     line-height: $application-content-heading-height;
     margin-bottom: 0;
+    position: relative;
 
     button {
-      @include icon(exchange);
+      @include button-icon(exchange);
 
       margin-right: rem-calc(10);
     }
@@ -17,6 +18,7 @@
       max-height: rem-calc(400) !important;
       min-width: rem-calc(300) !important;
       overflow-y: auto;
+      z-index: 0 !important;
     }
   }
 

@@ -55,7 +55,7 @@
       box-shadow: none;
       display: inline-block;
       margin: 0;
-      text-indent: $quick-jump-icon-size + rem-calc(5);
+      text-indent: $quick-jump-icon-size * 1.15;
       width: 100%;
     }
   }
@@ -82,19 +82,13 @@
   }
 
   .actions {
-    $actions-button-size: $quick-jump-icon-size;
+    $actions-button-size: $button-icon-size;
 
     position: absolute;
     right: 0;
     text-align: right;
     top: ($quick-jump-height - $actions-button-size) / 2;
     white-space: nowrap;
-
-    button {
-      height: $actions-button-size;
-      margin-bottom: 0;
-      width: $actions-button-size;
-    }
 
     .close {
       @include icon(times-circle);
@@ -104,11 +98,11 @@
     }
 
     .change-app {
-      button { @include icon(th); }
+      button { @include button-icon(th); }
     }
 
     .add {
-      button { @include icon(plus); }
+      button { @include button-icon(plus); }
     }
 
     .change-app,

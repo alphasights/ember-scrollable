@@ -67,23 +67,23 @@ section.projects {
 
       .progress-bar {
         > div {
-          border-radius: $global-radius / 2;
           background-color: lighten($success-color, 20%);
+          border-radius: $global-radius / 2;
         }
       }
 
       .details {
         @extend %grid-row;
 
+        font-size: $small-font-size;
         margin-top: $column-gutter / 4;
-        font-size: 0.75rem;
 
         .proposed,
         .target {
           @extend %grid-column-6;
 
-          padding: 0 !important;
           color: darken($info-color, 20%);
+          padding: 0 !important;
         }
 
         .proposed {
