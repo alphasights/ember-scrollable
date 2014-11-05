@@ -22,7 +22,7 @@
       line-height: $layout-sidebar-footer-height;
 
       button {
-        @include icon(cog);
+        @include button-icon(cog);
 
         background-color: transparent;
         border-width: 0;

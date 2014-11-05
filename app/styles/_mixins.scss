@@ -1,5 +1,4 @@
 @mixin button-icon($icon) {
   @extend %button-icon;
-
   @include icon($icon);
 }
