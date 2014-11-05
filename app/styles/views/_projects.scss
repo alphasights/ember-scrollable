@@ -27,7 +27,6 @@ section.projects {
         border-radius: $global-radius / 2;
         border: 0;
         height: 12px;
-        margin: 0 auto;
         width: 12px;
         margin: $column-gutter / 3;
       }
@@ -45,6 +44,10 @@ section.projects {
       }
 
       .change-priority {
+        > button {
+          margin: 0 auto;
+        }
+
         ul {
           @extend %dropdown;
 

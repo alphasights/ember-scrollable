@@ -5,4 +5,8 @@
   height: 3px;
   margin: 0;
   padding: 0;
+
+  > div {
+    width: 0;
+  }
 }
