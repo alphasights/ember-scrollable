@@ -182,8 +182,13 @@
         }
       }
 
+      .main-info {
+        @extend %grid-column-4;
+      }
+
       .additional-info {
-        float: right;
+        @extend %grid-column-8;
+
         color: $secondary-color;
       }
     }
