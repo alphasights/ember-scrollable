@@ -1,5 +1,9 @@
-<div {{bind-attr class=":priority status"}}>
-  <div></div>
+<div class="priority">
+  {{#as-dropdown title="Change Priority" align="right" classNameBindings=":change-priority :priority status"}}
+    {{#as-dropdown-item class="low"}}<button {{action "setPriority" "low"}}></button>{{/as-dropdown-item}}
+    {{#as-dropdown-item class="medium"}}<button {{action "setPriority" "medium"}}></button>{{/as-dropdown-item}}
+    {{#as-dropdown-item class="high"}}<button {{action "setPriority" "high"}}></button>{{/as-dropdown-item}}
+  {{/as-dropdown}}
 </div>
 
 <div class="details">

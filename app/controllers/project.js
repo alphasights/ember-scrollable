@@ -2,6 +2,12 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   progress: function() {
-    return Math.random();
-  }.property()
+    return this.get('proposedAdvisorsCount') / Math.max(1, this.get('totalTarget'));
+  }.property('proposedAdvisorsCount', 'totalTarget'),
+
+  actions: {
+    setPriority: function(value) {
+      this.set('status', value);
+    }
+  }
 });

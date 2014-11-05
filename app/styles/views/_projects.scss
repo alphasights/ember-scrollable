@@ -22,23 +22,50 @@ section.projects {
     > .priority {
       @extend %grid-column-1;
 
-      > div {
+      button {
+        display: block;
         border-radius: $global-radius / 2;
+        border: 0;
         height: 12px;
         margin: 0 auto;
         width: 12px;
+        margin: $column-gutter / 3;
       }
 
-      &.high > div {
+      .high > button {
         @include project-priority($alert-color);
       }
 
-      &.medium > div {
+      .medium > button {
         @include project-priority($warning-color);
       }
 
-      &.low > div {
+      .low > button {
         @include project-priority;
+      }
+
+      .change-priority {
+        ul {
+          @extend %dropdown;
+
+          margin-top: -9px !important;
+          margin-left: 8px !important;
+          width: auto !important;
+          background-color: #202326 !important;
+          border-radius: $global-radius / 2;
+
+          &:before {
+            border-color: transparent #202326 transparent transparent !important;
+          }
+
+          li {
+            display: inline-block;
+
+            &:hover {
+              background-color: #000;
+            }
+          }
+        }
       }
     }
 
