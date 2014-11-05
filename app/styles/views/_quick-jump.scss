@@ -181,6 +181,11 @@
           background-color: lighten($quick-jump-results-background-color, 3%);
         }
       }
+
+      .additional-info {
+        float: right;
+        color: $secondary-color;
+      }
     }
   }
 }
