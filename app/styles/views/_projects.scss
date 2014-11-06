@@ -23,12 +23,12 @@ section.projects {
       @extend %grid-column-1;
 
       button {
-        display: block;
-        border-radius: $global-radius / 2;
         border: 0;
+        border-radius: $global-radius / 2;
+        display: block;
         height: 12px;
-        width: 12px;
         margin: $column-gutter / 3;
+        width: 12px;
       }
 
       .high > button {
@@ -49,11 +49,11 @@ section.projects {
         }
 
         ul {
-          margin-top: -9px !important;
-          margin-left: 8px !important;
-          width: auto !important;
           background-color: #202326 !important;
           border-radius: $global-radius / 2;
+          margin-left: 8px !important;
+          margin-top: -9px !important;
+          width: auto !important;
 
           &:before {
             border-color: transparent #202326 transparent transparent !important;

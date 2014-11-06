@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 var PRIORITIES = ['low', 'medium', 'high'];
 

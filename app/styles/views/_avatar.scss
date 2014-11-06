@@ -2,9 +2,9 @@
   border: 1px solid $section-border-color;
   border-radius: $global-radius;
   height: rem-calc(60);
+  margin: $column-gutter / 4 0;
   padding: 1px;
   width: rem-calc(60);
-  margin: $column-gutter / 4 0;
 
   &.lead {
     border-color: lighten($primary-color, 30%);
