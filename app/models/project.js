@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var STATUSES = ['low', 'medium', 'high'];
+var PRIORITIES = ['low', 'medium', 'high'];
 
 export default DS.Model.extend({
   analyst_1: DS.belongsTo('user'),
@@ -14,10 +14,11 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   upcomingInteractionsCount: DS.attr('number'),
   targetValuesUpdatedAt: null,
+  priority: Ember.computed.alias('status'),
 
-  priority: function() {
-    return STATUSES.indexOf(this.get('status'));
-  }.property('status'),
+  priorityIndex: function() {
+    return PRIORITIES.indexOf(this.get('priority'));
+  }.property('priority'),
 
   angleTeamMemberships: (function() {
     return this.get('angles').

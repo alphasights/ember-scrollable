@@ -1,8 +1,19 @@
 <div class="priority">
-  {{#as-dropdown title="Change Priority" align="right" classNameBindings=":change-priority :priority status"}}
-    {{#as-dropdown-item class="low"}}<button {{action "setPriority" "low"}}></button>{{/as-dropdown-item}}
-    {{#as-dropdown-item class="medium"}}<button {{action "setPriority" "medium"}}></button>{{/as-dropdown-item}}
-    {{#as-dropdown-item class="high"}}<button {{action "setPriority" "high"}}></button>{{/as-dropdown-item}}
+  {{#as-dropdown
+    title="Change Priority"
+    align="right"
+    classNameBindings=":change-priority :priority status"}}
+    {{#as-dropdown-item class="low" action="setPriority" param="low"}}
+      <button></button>
+    {{/as-dropdown-item}}
+
+    {{#as-dropdown-item class="medium" action="setPriority" param="medium"}}
+      <button></button>
+    {{/as-dropdown-item}}
+
+    {{#as-dropdown-item class="high" action="setPriority" param="high"}}
+      <button></button>
+    {{/as-dropdown-item}}
   {{/as-dropdown}}
 </div>
 

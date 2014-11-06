@@ -8,7 +8,7 @@ export default Ember.ArrayController.extend({
   availableSortProperties: [{
     id: 'priority',
     name: 'Priority',
-    property: 'priority',
+    property: 'priorityIndex',
     ascending: false
   }, {
     id: 'client',

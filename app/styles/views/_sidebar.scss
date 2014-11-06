@@ -29,10 +29,6 @@
         color: $layout-sidebar-nav-link-text-color;
         margin-bottom: 0;
       }
-
-      .actions {
-        ul { @extend %dropdown; }
-      }
     }
   }
 

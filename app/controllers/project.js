@@ -7,7 +7,7 @@ export default Ember.ObjectController.extend({
 
   actions: {
     setPriority: function(value) {
-      this.set('status', value);
+      this.set('priority', value);
       this.get('model').save();
     }
   }
