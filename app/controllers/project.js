@@ -2,7 +2,13 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   progress: function() {
-    return this.get('proposedAdvisorsCount') / Math.max(1, this.get('totalTarget'));
+    var totalTarget = this.get('totalTarget');
+
+    if (totalTarget === 0) {
+      return 0;
+    } else {
+      return Math.min(1, this.get('proposedAdvisorsCount') / totalTarget);
+    }
   }.property('proposedAdvisorsCount', 'totalTarget'),
 
   actions: {
