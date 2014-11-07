@@ -9,11 +9,7 @@ export default Ember.Component.extend({
   color: '#000000',
 
   onDidInsertElement: function() {
-    new Spinner({
-      width: this.get('width'),
-      length: this.get('length'),
-      radius: this.get('radius'),
-      color: this.get('color')
-    }).spin(this.$()[0]);
+    new Spinner(this.getProperties('width', 'length', 'radius', 'color'))
+      .spin(this.$()[0]);
   }.on('didInsertElement')
 });
