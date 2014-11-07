@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['progress-bar'],
-  layoutName: 'components/progress-bar',
 
   percentage: function() {
     return this.get('ratio') * 100;
