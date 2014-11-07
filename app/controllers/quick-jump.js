@@ -9,8 +9,18 @@ export default Ember.Controller.extend({
   requestPromise: null,
 
   resultSectionsOrder: [
-    'project', 'advisor', 'user', 'contact', 'entity', 'account', 'target'
+    'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
   ],
+
+  resultSectionTitlesMapping: {
+    'user': 'Colleagues',
+    'contact': 'Contacts',
+    'advisor': 'Advisors',
+    'project': 'Projects',
+    'entity': 'Entities',
+    'account': 'Accounts',
+    'target': 'Targets'
+  },
 
   normalizedResults: function() {
     var results = this.get('results');
@@ -52,8 +62,10 @@ export default Ember.Controller.extend({
   }.property('resultSections'),
 
   resultSections: function() {
+    var resultSectionTitlesMapping = this.get('resultSectionTitlesMapping');
+
     return _(this.get('normalizedResults')).chain().groupBy('type').map(function(results, type) {
-      return { title: type.capitalize().pluralize(), results: results, type: type };
+      return { title: resultSectionTitlesMapping[type], results: results, type: type };
     }).value();
   }.property('normalizedResults'),
 
