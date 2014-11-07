@@ -107,17 +107,17 @@ test("Search results", function() {
         title: 'Top Hit',
         results: ['Example User', 'Example Team Name']
       }, {
-        title: 'Projects',
-        results: ['Example Project', 'Example External Title']
-      }, {
-        title: 'Advisors',
-        results: ['Example Advisor', 'Example Best Position']
-      }, {
-        title: 'Users',
+        title: 'Colleagues',
         results: ['Example User', 'Example Team Name']
       }, {
         title: 'Contacts',
         results: ['Example Client Contact', 'Example Account Name']
+      }, {
+        title: 'Advisors',
+        results: ['Example Advisor', 'Example Best Position']
+      }, {
+        title: 'Projects',
+        results: ['Example Project', 'Example External Title']
       }, {
         title: 'Entities',
         results: ['Example Client Entity']
