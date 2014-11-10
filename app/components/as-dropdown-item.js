@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: ['dropdown-item'],
   tagName: 'li',
   param: null,
 
