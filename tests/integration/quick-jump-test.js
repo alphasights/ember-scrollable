@@ -99,10 +99,10 @@ test("Search results", function() {
       return {
         title: $section.find('> h1').text().trim(),
 
-        results: $section.
-          find('article h1, article small').
-          toArray().
-          map(function(item) { return $(item).text().trim(); })
+        results: $section
+          .find('article h1, article small')
+          .toArray()
+          .map(function(item) { return $(item).text().trim(); })
       };
     });
 

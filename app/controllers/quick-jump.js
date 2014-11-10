@@ -27,12 +27,10 @@ export default Ember.Controller.extend({
 
     if (!Ember.isBlank(results)) {
       return results.map(function(result) {
-        var _source = result._source;
-        var source = {};
-
-        Object.keys(_source).forEach(function(key) {
-          source[key.camelize()] = _source[key];
-        });
+        var source = _(result._source).reduce(function(memo, value, key) {
+          memo[key.camelize()] = value;
+          return memo;
+        }, {});
 
         return _({}).extend(source, { type: result._type, score: result._score });
       });
@@ -83,11 +81,10 @@ export default Ember.Controller.extend({
                 if (!Ember.isBlank(response.hits)) {
                   return response.hits.hits;
                 } else {
-                  return null;
+                  return [];
                 }
               })
               .flatten()
-              .compact()
               .value()
             );
           })
