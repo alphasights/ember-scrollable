@@ -18,6 +18,9 @@ main > .content {
   > section {
     @extend %grid-row;
 
+    position: relative;
+    min-height: 90%;
+
     > header {
       border-bottom: solid 1px $section-border-color;
       padding: 0 $column-gutter;
