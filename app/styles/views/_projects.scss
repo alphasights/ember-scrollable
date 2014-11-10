@@ -6,6 +6,40 @@
 section.projects {
   padding: 0 $column-gutter;
 
+  header {
+    @extend %grid-row;
+
+    background-color: lighten($info-color, 2%);
+    border-radius: $global-radius / 2;
+    line-height: $teams-selected-header-height;
+    margin-top: $column-gutter / 2;
+    padding: $column-gutter / 2 0;
+    width: auto;
+
+    .sort-by-label {
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-2;
+      @extend %grid-column-large-1;
+
+      text-align: center;
+
+      label {
+        line-height: $teams-selected-header-height;
+      }
+    }
+
+    .sort-by-select {
+      @extend %grid-column-small-8;
+      @extend %grid-column-medium-3;
+      @extend %grid-column-large-2;
+    }
+
+    select {
+      margin-bottom: 0;
+      padding-right: rem-calc(30);
+    }
+  }
+
   .project {
     @extend %grid-row;
 
