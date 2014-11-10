@@ -17,7 +17,6 @@
     "underscore": "1.7.0",
     "spinjs": "2.0.1",
     "pretender": "0.2.0",
-    "underscore.string": "2.3.3",
     "raven-js": "1.1.16",
     "messenger": "~1.4.1"
   },

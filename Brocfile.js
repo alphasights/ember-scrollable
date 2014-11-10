@@ -32,7 +32,6 @@ app.import('bower_components/raven-js/dist/raven.js');
 
 app.import('bower_components/paint/paint.scss');
 app.import('bower_components/underscore/underscore.js');
-app.import('bower_components/underscore.string/lib/underscore.string.js');
 app.import('bower_components/modernizr/modernizr.js');
 app.import('bower_components/foundation/js/foundation.js');
 app.import('bower_components/spinjs/spin.js');
