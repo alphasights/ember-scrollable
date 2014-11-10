@@ -1,0 +1,11 @@
+.quick-jump-result-content {
+  h1 {
+    @extend %grid-column-4;
+  }
+
+  .details {
+    @extend %grid-column-8;
+
+    color: $aluminum;
+  }
+}
