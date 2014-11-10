@@ -14,7 +14,7 @@ test("Error message", function() {
   fillIn('.quick-jump .bar input', 'example');
 
   andThen(function() {
-    var message = $('.messenger .messenger-message-inner').first().text();
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
 
     equal(message, 'Something went wrong with that request, please try again.');
   });

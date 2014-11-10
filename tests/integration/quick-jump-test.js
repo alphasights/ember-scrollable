@@ -16,7 +16,8 @@ test("Search results", function() {
             "_type": "contact",
             "_score": 5,
             "_source": {
-              "name": "Example Client Contact"
+              "name": "Example Client Contact",
+              "account_name": "Example Account Name"
             }
           }]
         }
@@ -52,7 +53,8 @@ test("Search results", function() {
             "_type": "advisor",
             "_score": 4,
             "_source": {
-              "name": "Example Advisor"
+              "name": "Example Advisor",
+              "best_position": "Example Best Position"
             }
           }]
         }
@@ -64,7 +66,8 @@ test("Search results", function() {
             "_type": "project",
             "_score": 2,
             "_source": {
-              "codename": "Example Project"
+              "codename": "Example Project",
+              "external_title": "Example External Title"
             }
           }]
         }
@@ -76,7 +79,8 @@ test("Search results", function() {
             "_type": "user",
             "_score": 11,
             "_source": {
-              "name": "Example User"
+              "name": "Example User",
+              "team_name": "Example Team Name"
             }
           }]
         }
@@ -93,27 +97,31 @@ test("Search results", function() {
       var $section = $(section);
 
       return {
-        title: $section.find('h1').text(),
-        results: $section.find('li').toArray().map(function(item) { return _.str.trim($(item).text()); })
+        title: $section.find('> h1').text().trim(),
+
+        results: $section
+          .find('article h1, article small')
+          .toArray()
+          .map(function(item) { return $(item).text().trim(); })
       };
     });
 
     deepEqual(sections, [
       {
         title: 'Top Hit',
-        results: ['Example User']
+        results: ['Example User', 'Example Team Name']
       }, {
         title: 'Colleagues',
-        results: ['Example User']
+        results: ['Example User', 'Example Team Name']
       }, {
         title: 'Contacts',
-        results: ['Example Client Contact']
+        results: ['Example Client Contact', 'Example Account Name']
       }, {
         title: 'Advisors',
-        results: ['Example Advisor']
+        results: ['Example Advisor', 'Example Best Position']
       }, {
         title: 'Projects',
-        results: ['Example Project']
+        results: ['Example Project', 'Example External Title']
       }, {
         title: 'Entities',
         results: ['Example Client Entity']

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: ['type'],
-  availableTypes: ['project'],
+  availableTypes: ['project', 'user', 'contact', 'advisor'],
 
   type: function() {
     var type = this.get('controller.type');
@@ -15,6 +15,6 @@ export default Ember.View.extend({
   }.property('controller.type'),
 
   templateName: function() {
-    return `views/quick-jump/${this.get('type')}`;
+    return `views/quick-jump/result/${this.get('type')}`;
   }.property('type')
 });
