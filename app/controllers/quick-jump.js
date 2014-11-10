@@ -78,10 +78,10 @@ export default Ember.Controller.extend({
 
             this.set('results', _.chain(response.responses)
               .map(function(response) {
-                if (!Ember.isBlank(response.hits)) {
-                  return response.hits.hits;
-                } else {
+                if (Ember.isBlank(response.hits)) {
                   return [];
+                } else {
+                  return response.hits.hits;
                 }
               })
               .flatten()
