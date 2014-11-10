@@ -97,8 +97,12 @@ test("Search results", function() {
       var $section = $(section);
 
       return {
-        title: $section.find('h1').text(),
-        results: $section.find('li span').toArray().map(function(item) { return _.str.trim($(item).text()); })
+        title: $section.find('> h1').text().trim(),
+
+        results: $section.
+          find('article h1, article small').
+          toArray().
+          map(function(item) { return $(item).text().trim(); })
       };
     });
 

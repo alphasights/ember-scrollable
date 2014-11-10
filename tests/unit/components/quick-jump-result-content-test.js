@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleForComponent('search-result', 'SearchResultComponent', {
+moduleForComponent('as-quick-jump-result-content', 'AsQuickJumpResultContentComponent', {
   // specify the other units that are required for this test
   // needs: ['component:foo', 'helper:bar']
 });
