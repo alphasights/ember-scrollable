@@ -1,7 +1,8 @@
 .quick-jump-result-content {
-  h1, small {
-    line-height: $quick-jump-results-item-height;
+  h1,
+  small {
     font-size: $base-font-size;
+    line-height: $quick-jump-results-item-height;
   }
 
   h1 {
