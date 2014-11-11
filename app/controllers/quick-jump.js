@@ -27,7 +27,12 @@ export default Ember.Controller.extend({
 
     if (!Ember.isBlank(results)) {
       return results.map(function(result) {
-        return _({}).extend(result._source, { type: result._type, score: result._score });
+        var source = _(result._source).reduce(function(memo, value, key) {
+          memo[key.camelize()] = value;
+          return memo;
+        }, {});
+
+        return _({}).extend(source, { type: result._type, score: result._score });
       });
     } else {
       return [];
@@ -72,7 +77,13 @@ export default Ember.Controller.extend({
             if (requestPromise !== this.get('requestPromise')) { return; }
 
             this.set('results', _.chain(response.responses)
-              .map(function(response) { return response.hits.hits; })
+              .map(function(response) {
+                if (Ember.isBlank(response.hits)) {
+                  return [];
+                } else {
+                  return response.hits.hits;
+                }
+              })
               .flatten()
               .value()
             );

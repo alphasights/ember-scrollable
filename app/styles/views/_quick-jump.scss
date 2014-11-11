@@ -142,7 +142,7 @@
       padding-top: $column-gutter / 2;
       padding-bottom: $column-gutter / 2;
 
-      h1 {
+      > h1 {
         @extend .hide-for-small-only;
         @extend %grid-column-2;
 
