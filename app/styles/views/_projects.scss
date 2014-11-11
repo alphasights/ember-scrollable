@@ -1,4 +1,4 @@
-@mixin project-priority($color: $info-color) {
+@mixin project-priority($color) {
   background-color: $color;
   box-shadow: 0 0 0 1px scale-color($color, $lightness: $alert-function-factor), 0 0 0 1px #fff inset;
 }
@@ -11,7 +11,7 @@ section.projects {
 
     background-color: lighten($info-color, 2%);
     border-radius: $global-radius / 2;
-    line-height: $teams-selected-header-height;
+    line-height: rem-calc(40);
     margin-top: $column-gutter / 2;
     padding: $column-gutter / 2 0;
     width: auto;
@@ -24,7 +24,7 @@ section.projects {
       text-align: center;
 
       label {
-        line-height: $teams-selected-header-height;
+        line-height: rem-calc(40);
       }
     }
 
@@ -74,7 +74,7 @@ section.projects {
       }
 
       .low > button {
-        @include project-priority;
+        @include project-priority($info-color);
       }
 
       .change-priority {
