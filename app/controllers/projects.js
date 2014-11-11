@@ -23,7 +23,9 @@ export default Ember.ArrayController.extend({
   }],
 
   sortProperty: function() {
-    return this.get('availableSortProperties').findBy('id', this.get('sortPropertyId'));
+    return this
+      .get('availableSortProperties')
+      .findBy('id', this.get('sortPropertyId'));
   }.property('sortPropertyId'),
 
   sortProperties: function() {

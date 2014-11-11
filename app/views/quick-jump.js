@@ -2,10 +2,10 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
+
   isActive: false,
-  templateName: 'quick-jump',
-  placeholder: null,
   isLoading: Ember.computed.alias('controller.requestPromise.isLoading'),
+  placeholder: null,
 
   clickEventName: function() {
     return `click.${this.get('elementId')}`;

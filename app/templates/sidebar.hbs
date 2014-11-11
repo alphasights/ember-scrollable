@@ -13,10 +13,21 @@
   </header>
 
   <ul>
-    <li class="dashboard">{{#link-to 'dashboard'}}<i></i><span>Dashboard</span>{{/link-to}}</li>
-    <li class="projects">{{#link-to 'projects'}}<i></i><span>Projects</span>{{/link-to}}</li>
-    <li class="teams">{{#link-to 'teams'}}<i></i><span>Teams</span>{{/link-to}}</li>
-    <li class="performances">{{#link-to 'performances'}}<i></i><span>Performances</span>{{/link-to}}</li>
+    <li class="dashboard">
+      {{#link-to 'dashboard'}}<i></i><span>Dashboard</span>{{/link-to}}
+    </li>
+
+    <li class="projects">
+      {{#link-to 'projects'}}<i></i><span>Projects</span>{{/link-to}}
+    </li>
+
+    <li class="teams">
+      {{#link-to 'teams'}}<i></i><span>Teams</span>{{/link-to}}
+    </li>
+
+    <li class="performances">
+      {{#link-to 'performances'}}<i></i><span>Performances</span>{{/link-to}}
+    </li>
   </ul>
 </nav>
 
@@ -31,7 +42,7 @@
   <img
     class="picture"
     alt="Profile Picture"
-    {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}}/>
+    {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}} />
 
   <div class="name">{{currentUser.name}}</div>
 </section>

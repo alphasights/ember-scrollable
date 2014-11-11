@@ -1,5 +1,3 @@
-# Default application configuration that all configurations inherit from.
-
 linters:
   BangFormat:
     enabled: true

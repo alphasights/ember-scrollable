@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNameBindings: [':dropdown'],
+
   align: 'right',
-  classNames: ['dropdown'],
 
   options: function() {
     return `align: ${this.get('align')}`;
@@ -14,5 +15,9 @@ export default Ember.Component.extend({
 
   close: function() {
     this.$('> button').trigger('click');
-  }
+  },
+
+  onDidInsertElement: function() {
+    this.$().foundation({ dropdown: {} });
+  }.on('didInsertElement')
 });

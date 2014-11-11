@@ -25,7 +25,7 @@
 </div>
 
 <div class="members">
-  {{render "avatar" analyst_1 class="lead"}}
+  {{render "avatar" lead class="lead"}}
 
   {{#each members}}
     {{render "avatar" this}}
@@ -36,17 +36,17 @@
   {{as-progress-bar ratio=progress}}
 
   <div class="details">
-    <div class="proposed">
+    <div class="delivered">
       <span class="count">
-        {{proposedAdvisorsCount}}
+        {{deliveredAdvisorsCount}}
       </span>
 
-      <span class="label">proposed</span>
+      <span class="label">delivered</span>
     </div>
 
     <div class="target">
       <span class="count">
-        {{totalTarget}}
+        {{deliveryTarget}}
       </span>
 
       <span class="label">target</span>

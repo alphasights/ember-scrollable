@@ -14,37 +14,36 @@ export default DS.Model.extend({
   proposedAdvisorsCount: DS.attr('number'),
   status: DS.attr('string'),
   upcomingInteractionsCount: DS.attr('number'),
-  targetValuesUpdatedAt: null,
+
+  deliveredAdvisorsCount: Ember.computed.alias('proposedAdvisorsCount'),
+  lead: Ember.computed.alias('analyst_1'),
+  notScheduledInteractionsCount: Ember.computed.alias('leftToScheduleAdvisorsCount'),
   priority: Ember.computed.alias('status'),
+  scheduledInteractionsCount: Ember.computed.alias('upcomingInteractionsCount'),
+
+  memberships: function() {
+    return _(this.get('angles').map(function(angle) {
+        return angle.get('memberships').toArray();
+    })).flatten();
+  }.property('angles.@each.membershipsUpdatedAt'),
+
+  members: function() {
+    return _(this.get('angles').mapBy('members'))
+      .chain()
+      .flatten()
+      .uniq()
+      .value();
+  }.property('angles.@each.membersUpdatedAt'),
 
   priorityIndex: function() {
     return PRIORITIES.indexOf(this.get('priority'));
   }.property('priority'),
 
-  angleTeamMemberships: (function() {
-    return this.get('angles').
-      mapBy('angleTeamMemberships.content').
-      reduce(function(m, angleTeamMemberships) {
-        return m.concat(angleTeamMemberships);
-      }, []);
-  }).property('angles.@each.angleTeamMembershipsUpdatedAt'),
-
-  members: function() {
-    return _(this.get('angles').toArray()).
-      chain().
-      map(function(a) { return a.get('members'); }).
-      flatten().
-      uniq(false, function(a) { return a.get('id'); }).
-      value();
-  }.property('angles.@each.membersUpdatedAt'),
-
-  targetValues: (function() {
-    return this.get('angleTeamMemberships').mapBy('targetValue');
-  }).property('angleTeamMemberships.@each.targetValue'),
-
-  totalTarget: function() {
-    return this.get('targetValues').reduce(function(previous, current) {
-      return previous + current;
-    }, 0);
-  }.property('targetValues.[]')
+  deliveryTarget: function() {
+    return this.get('memberships')
+      .mapBy('deliveryTarget')
+      .reduce(function(previous, current) {
+        return previous + current;
+      }, 0);
+  }.property('memberships.[]')
 });

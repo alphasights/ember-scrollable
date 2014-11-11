@@ -2,14 +2,14 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   progress: function() {
-    var totalTarget = this.get('totalTarget');
+    var deliveryTarget = this.get('deliveryTarget');
 
-    if (totalTarget === 0) {
+    if (deliveryTarget === 0) {
       return 0;
     } else {
-      return Math.min(1, this.get('proposedAdvisorsCount') / totalTarget);
+      return this.get('deliveredAdvisorsCount') / deliveryTarget;
     }
-  }.property('proposedAdvisorsCount', 'totalTarget'),
+  }.property('deliveredAdvisorsCount', 'deliveryTarget'),
 
   actions: {
     setPriority: function(value) {

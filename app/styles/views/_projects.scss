@@ -129,7 +129,7 @@ section.projects {
       padding: 0 $column-gutter;
 
       &:hover {
-        .details .proposed {
+        .details .delivered {
           opacity: 1;
         }
       }
@@ -147,7 +147,7 @@ section.projects {
         font-size: $small-font-size;
         margin-top: $column-gutter / 4;
 
-        .proposed,
+        .delivered,
         .target {
           @extend %grid-column-6;
 
@@ -155,7 +155,7 @@ section.projects {
           padding: 0 !important;
         }
 
-        .proposed {
+        .delivered {
           @include single-transition(opacity, 150ms, linear);
 
           opacity: 0;

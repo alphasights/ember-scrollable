@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  templateName: 'sidebar',
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
+
   isCollapsed: false,
 
   actions: {

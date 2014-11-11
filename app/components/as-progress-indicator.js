@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['progress-indicator'],
-  spinnerWidth: 2,
+  classNameBindings: [':progress-indicator'],
+  
+  spinnerColor: '#000000',
   spinnerLength: 3,
   spinnerRadius: 4,
-  spinnerColor: '#000000'
+  spinnerWidth: 2
 });

@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['progress-bar'],
+  classNameBindings: [':progress-bar'],
 
   percentage: function() {
-    return this.get('ratio') * 100;
+    return Math.min(1, this.get('ratio')) * 100;
   }.property('ratio'),
 
   onDidInsertElement: function() {
