@@ -3,7 +3,6 @@
     display: inline-block;
     line-height: $application-content-heading-height;
     margin-bottom: 0;
-    position: relative;
 
     button {
       @include button-icon(exchange);
