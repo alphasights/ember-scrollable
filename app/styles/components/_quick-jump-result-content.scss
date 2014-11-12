@@ -1,19 +1,19 @@
 .quick-jump-result-content {
   h1,
-  small {
-    font-size: $base-font-size;
+  .details {
     line-height: $quick-jump-results-item-height;
   }
 
   h1 {
     @extend %grid-column-4;
 
+    font-size: $base-font-size;
     margin: 0;
   }
 
-  small {
+  .details {
     @extend %grid-column-8;
 
-    color: $aluminum;
+    color: $small-font-color;
   }
 }

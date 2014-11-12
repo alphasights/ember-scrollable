@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function(params) {
+  model: function() {
     var teamId = this.controllerFor('currentUser').get('teamId');
 
     return Ember.RSVP.hash({
@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         team_id: teamId
       }),
 
-      team: this.store.find('team').then((teams) => {
+      team: this.store.find('team').then(() => {
         return this.store.find('team', teamId);
       })
     });

@@ -1,14 +1,3 @@
 .liquid-container {
   overflow: visible;
 }
-
-%button-icon {
-  margin-bottom: 0;
-  padding: 0;
-
-  &:before {
-    display: block;
-    line-height: $button-icon-size;
-    width: $button-icon-size;
-  }
-}

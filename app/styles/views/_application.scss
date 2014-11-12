@@ -1,24 +1,10 @@
-@import 'components/dropdown';
-@import 'components/progress-bar';
-@import 'components/quick-jump-result-content';
-
-@import 'views/avatar';
-@import 'views/projects';
-@import 'views/quick-jump';
-@import 'views/sidebar';
-
 main > .content {
-  &:before {
-    content: ' ';
-    display: block;
-    height: $quick-jump-height;
-  }
+  padding-top: $quick-jump-height;
 
-  > section {
+  > section, > article {
     @extend %grid-row;
 
     position: relative;
-    min-height: 90%;
 
     > header {
       border-bottom: solid 1px $section-border-color;
@@ -29,7 +15,6 @@ main > .content {
         @extend %heading-medium-uppercase;
 
         color: $application-content-heading-color;
-        display: inline-block;
         font-weight: $font-weight-normal;
         line-height: $application-content-heading-height;
         margin: 0;

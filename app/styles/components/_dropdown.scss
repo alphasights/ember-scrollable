@@ -1,11 +1,5 @@
 .dropdown {
   ul {
     @extend %dropdown;
-
-    width: auto !important;
-
-    li {
-      padding: $column-gutter / 8;
-    }
   }
 }

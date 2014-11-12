@@ -13,7 +13,7 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "1.15.0",
-    "paint": "git://github.com/alphasights/paint.git#0.2.0",
+    "paint": "git://github.com/alphasights/paint.git#0.3.0",
     "underscore": "1.7.0",
     "spinjs": "2.0.1",
     "pretender": "0.2.0",

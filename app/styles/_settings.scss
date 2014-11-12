@@ -4,11 +4,11 @@ $section-border-color: rgba(0, 0, 0, .075);
 $application-content-heading-height: rem-calc(100);
 $application-content-heading-color: $subheader-font-color;
 
-$button-icon-size: 28px;
-
 $quick-jump-height: $layout-sidebar-header-height;
 $quick-jump-background-color: #e1e5ea;
 $quick-jump-icon-size: $button-icon-size;
 $quick-jump-results-background-color: #f2f2f2;
 $quick-jump-results-heading-height: rem-calc(30);
 $quick-jump-results-item-height: rem-calc(50);
+
+$projects-header-height: rem-calc(40);
