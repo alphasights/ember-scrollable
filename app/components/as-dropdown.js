@@ -18,6 +18,6 @@ export default Ember.Component.extend({
   },
 
   onDidInsertElement: function() {
-    this.$().foundation({ dropdown: {} });
+    Ember.$(document).foundation({ dropdown: {} });
   }.on('didInsertElement')
 });
