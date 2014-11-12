@@ -15,7 +15,6 @@ test("Error message", function() {
 
   andThen(function() {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-
     equal(message, 'Something went wrong with that request, please try again.');
   });
 });

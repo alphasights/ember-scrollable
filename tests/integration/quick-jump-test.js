@@ -100,34 +100,68 @@ test("Search results", function() {
         title: $section.find('> h1').text().trim(),
 
         results: $section
-          .find('article h1, article small')
+          .find('article')
           .toArray()
-          .map(function(item) { return $(item).text().trim(); })
+          .map(function(article) {
+            var $article = $(article);
+
+            return {
+              title: $article.find('h1').text().trim(),
+              details: $article.find('.details').text().trim()
+            };
+          })
       };
     });
 
     deepEqual(sections, [
       {
         title: 'Top Hit',
-        results: ['Example User', 'Example Team Name']
+
+        results: [{
+          title: 'Example User',
+          details: 'Example Team Name'
+        }]
       }, {
         title: 'Colleagues',
-        results: ['Example User', 'Example Team Name']
+
+        results: [{
+          title: 'Example User',
+          details: 'Example Team Name'
+        }]
       }, {
         title: 'Contacts',
-        results: ['Example Client Contact', 'Example Account Name']
+
+        results: [{
+          title: 'Example Client Contact',
+          details:'Example Account Name'
+        }]
       }, {
         title: 'Advisors',
-        results: ['Example Advisor', 'Example Best Position']
+
+        results: [{
+          title: 'Example Advisor',
+          details:'Example Best Position'
+        }]
       }, {
         title: 'Projects',
-        results: ['Example Project', 'Example External Title']
+        results: [{
+          title: 'Example Project',
+          details:'Example External Title'
+        }]
       }, {
         title: 'Entities',
-        results: ['Example Client Entity']
+
+        results: [{
+          title: 'Example Client Entity',
+          details: ''
+        }]
       }, {
         title: 'Accounts',
-        results: ['Example Client Account']
+
+        results: [{
+          title: 'Example Client Account',
+          details: ''
+        }]
       }]
     );
   });
