@@ -56,6 +56,7 @@ test("Read projects list", function() {
   visit('/team');
 
   andThen(function() {
-    equal(find('.project h1').text().trim(), 'Example Project');
+    equal(find('.project h1 span').text().trim(), 'Example Project');
+    equal(find('.project h1 small').text().trim(), 'EP');
   });
 });
