@@ -1,10 +1,9 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import config from '../../config/environment';
-import testConfig from '../test-helper';
+import testHelper from '../test-helper';
 
-module("Quick Jump", testConfig);
+module("Quick Jump", testHelper);
 
 test("Search results", function() {
   defineFixture('/quick_jumps', { q: 'example' }, {

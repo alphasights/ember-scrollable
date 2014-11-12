@@ -5,10 +5,6 @@ export default Ember.Route.extend({
     var teamId = this.controllerFor('currentUser').get('teamId');
 
     return Ember.RSVP.hash({
-      users: this.store.find('user', {
-        team_id: teamId
-      }),
-
       projects: this.store.find('project', {
         team_id: teamId
       }),
@@ -22,6 +18,5 @@ export default Ember.Route.extend({
   setupController: function(controller, models) {
     controller.set('model', models.team);
     controller.set('projects', models.projects);
-    controller.set('users', models.users);
   }
 });
