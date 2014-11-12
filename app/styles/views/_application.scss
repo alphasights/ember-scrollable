@@ -1,7 +1,8 @@
 main > .content {
   padding-top: $quick-jump-height;
 
-  > section, > article {
+  > section,
+  > article {
     @extend %grid-row;
 
     position: relative;
