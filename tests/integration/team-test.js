@@ -130,3 +130,15 @@ test("Sort project list", function() {
     deepEqual(projects, ['Example Project', 'Example Project 2']);
   });
 });
+
+test("Change project priority", function() {
+  visit('/team');
+
+  click('.project:first .change-priority');
+
+  click('.project:first .change-priority .dropdown-item.low');
+
+  andThen(function() {
+    equal(find('.project:first .change-priority.low').length, 1);
+  });
+});
