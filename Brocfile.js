@@ -30,7 +30,6 @@ if (new EmberApp().env === 'production') {
 
 app.import('bower_components/raven-js/dist/raven.js');
 app.import('bower_components/underscore/underscore.js');
-app.import('bower_components/spinjs/spin.js');
 app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
 app.import('bower_components/messenger/build/css/messenger.css');
