@@ -34,6 +34,6 @@
     "ember-cli-esnext": "~0.1.0",
     "ember-cli-pretender": "^0.3.1",
     "ember-cli-velocity": "^0.1.2",
-    "ember-cli-paint": "1.0.0"
+    "ember-cli-paint": "1.2.0"
   }
 }

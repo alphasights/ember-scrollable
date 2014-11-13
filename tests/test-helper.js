@@ -1,5 +1,6 @@
 import resolver from './helpers/resolver';
 import startApp from './helpers/start-app';
+import constants from './helpers/constants';
 import Ember from 'ember';
 
 import {
@@ -24,7 +25,7 @@ export default {
         "initials": "EU",
         "id": 1,
         "teamId": 1,
-        "avatarUrl": "about:blank"
+        "avatarUrl": constants.EMPTY_IMAGE_URL
       }
     });
   },

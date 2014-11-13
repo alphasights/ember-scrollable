@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import '../helpers/request-watcher';
+import constants from '../helpers/constants';
 import testHelper from '../test-helper';
 
 module("Team", {
@@ -104,8 +105,8 @@ test("Read project list", function() {
       highPriority: true,
       mediumPriority: false,
       lowPriority: false,
-      memberAvatarUrl: 'about:blank',
-      leadAvatarUrl: 'about:blank',
+      memberAvatarUrl: constants.EMPTY_IMAGE_URL,
+      leadAvatarUrl: constants.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 4,
       progressBarWidth: '25%'
@@ -115,8 +116,8 @@ test("Read project list", function() {
       highPriority: false,
       mediumPriority: true,
       lowPriority: false,
-      memberAvatarUrl: 'about:blank',
-      leadAvatarUrl: 'about:blank',
+      memberAvatarUrl: constants.EMPTY_IMAGE_URL,
+      leadAvatarUrl: constants.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
