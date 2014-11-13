@@ -24,7 +24,7 @@ export default {
         "initials": "EU",
         "id": 1,
         "teamId": 1,
-        "avatarUrl": "http://example.com/avatar.png"
+        "avatarUrl": "about:blank"
       }
     });
   },

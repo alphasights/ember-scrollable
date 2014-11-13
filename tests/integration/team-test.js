@@ -35,7 +35,7 @@ module("Team", {
         "angle_id": 1,
         "team_member_id": 1
       },{
-        "target_value": 4,
+        "target_value": 2,
         "id": 2,
         "created_at": "2014-07-09T16:46:03.347+01:00",
         "angle_id": 2,
@@ -80,54 +80,74 @@ test("Read project list", function() {
   wait();
 
   andThen(function() {
-    equal(find('.project:first h1 span').text().trim(), 'Example Project');
-    equal(find('.project:first h1 small').text().trim(), 'EP');
-    equal(find('.project:first .priority.high').length, 1);
-    equal(find('.project:first .members .avatar').prop('src'), 'http://example.com/avatar.png');
-    equal(find('.project:first .members .avatar.lead').prop('src'), 'http://example.com/avatar.png');
-    equal(find('.project:first .progress .delivered .count').text().trim(), 1);
-    equal(find('.project:first .progress .target .count').text().trim(), 4);
-    equal(find('.project:first .progress .progress-bar > div').prop('style').width, '25%');
+    var projects = find('.project').toArray().map(function(project) {
+      var $project = $(project);
+
+      return {
+        title: $project.find('h1 span').text().trim(),
+        clientCode: $project.find('h1 small').text().trim(),
+        highPriority: $project.find('.priority.high').length === 1,
+        mediumPriority: $project.find('.priority.medium').length === 1,
+        lowPriority: $project.find('.priority.low').length === 1,
+        memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
+        leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
+        deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
+        targetCount: parseInt($project.find('.progress .target .count').text().trim(), 10),
+        progressBarWidth: $project.find('.progress .progress-bar > div').prop('style').width
+      };
+    });
+
+    deepEqual(projects, [{
+      title: 'Example Project',
+      clientCode: 'EP',
+      highPriority: true,
+      mediumPriority: false,
+      lowPriority: false,
+      memberAvatarUrl: 'about:blank',
+      leadAvatarUrl: 'about:blank',
+      deliveredCount: 1,
+      targetCount: 4,
+      progressBarWidth: '25%'
+    }, {
+      title: 'Example Project 2',
+      clientCode: '2EP',
+      highPriority: false,
+      mediumPriority: true,
+      lowPriority: false,
+      memberAvatarUrl: 'about:blank',
+      leadAvatarUrl: 'about:blank',
+      deliveredCount: 1,
+      targetCount: 2,
+      progressBarWidth: '50%'
+    }]);
   });
 });
 
 test("Sort project list", function() {
   visit('/team');
 
-  fillIn('.projects header .sort-by-select select', 'client');
+  var projectTitles = function() {
+    return find('.project').toArray().map(function(project) {
+      return $(project).find('h1 span').text().trim();
+    });
+  };
+
+  fillIn('.projects .sort-by-select select', 'client');
 
   andThen(function() {
-    var projects = find('.project').toArray().map(function(project) {
-      var $project = $(project);
-
-      return $project.find('h1 span').text().trim();
-    });
-
-    deepEqual(projects, ['Example Project 2', 'Example Project']);
+    deepEqual(projectTitles(), ['Example Project 2', 'Example Project']);
   });
 
-  fillIn('.projects header .sort-by-select select', 'creation-date');
+  fillIn('.projects .sort-by-select select', 'creation-date');
 
   andThen(function() {
-    var projects = find('.project').toArray().map(function(project) {
-      var $project = $(project);
-
-      return $project.find('h1 span').text().trim();
-    });
-
-    deepEqual(projects, ['Example Project', 'Example Project 2']);
+    deepEqual(projectTitles(), ['Example Project', 'Example Project 2']);
   });
 
-  fillIn('.projects header .sort-by-select select', 'priority');
+  fillIn('.projects .sort-by-select select', 'priority');
 
   andThen(function() {
-    var projects = find('.project').toArray().map(function(project) {
-      var $project = $(project);
-
-      return $project.find('h1 span').text().trim();
-    });
-
-    deepEqual(projects, ['Example Project', 'Example Project 2']);
+    deepEqual(projectTitles(), ['Example Project', 'Example Project 2']);
   });
 });
 
@@ -135,10 +155,9 @@ test("Change project priority", function() {
   visit('/team');
 
   click('.project:first .change-priority');
-
   click('.project:first .change-priority .dropdown-item.low');
 
   andThen(function() {
-    equal(find('.project:first .change-priority.low').length, 1);
+    equal(find('.project:last .change-priority.low').length, 1);
   });
 });
