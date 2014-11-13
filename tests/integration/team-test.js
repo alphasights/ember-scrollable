@@ -105,4 +105,28 @@ test("Sort project list", function() {
 
     deepEqual(projects, ['Example Project 2', 'Example Project']);
   });
+
+  fillIn('.projects header .sort-by-select select', 'creation-date');
+
+  andThen(function() {
+    var projects = find('.project').toArray().map(function(project) {
+      var $project = $(project);
+
+      return $project.find('h1 span').text().trim();
+    });
+
+    deepEqual(projects, ['Example Project', 'Example Project 2']);
+  });
+
+  fillIn('.projects header .sort-by-select select', 'priority');
+
+  andThen(function() {
+    var projects = find('.project').toArray().map(function(project) {
+      var $project = $(project);
+
+      return $project.find('h1 span').text().trim();
+    });
+
+    deepEqual(projects, ['Example Project', 'Example Project 2']);
+  });
 });
