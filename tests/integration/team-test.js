@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
+import '../helpers/request-watcher';
 import testHelper from '../test-helper';
 
 module("Team", {
@@ -152,12 +153,27 @@ test("Sort project list", function() {
 });
 
 test("Change project priority", function() {
+  var watcher = requestWatcher('put', '/projects/1', {}, {
+    "project": {
+      "client_code": "EP",
+      "created_at": "2009-07-14T16:05:32.909Z",
+      "details_url": "/projects/1",
+      "left_to_schedule_advisors_count": 0,
+      "name": "Example Project",
+      "proposed_advisors_count": 1,
+      "status": "low",
+      "upcoming_interactions_count": 0,
+      "analyst_1_id": "1"
+    }
+  }, {});
+
   visit('/team');
 
   click('.project:first .change-priority');
   click('.project:first .change-priority .dropdown-item.low');
 
   andThen(function() {
+    equal(watcher.called, true);
     equal(find('.project:last .change-priority.low').length, 1);
   });
 });
