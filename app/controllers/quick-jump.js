@@ -80,11 +80,11 @@ export default Ember.Controller.extend({
       }).value();
   }.property('normalizedResults'),
 
-  _queryDidChange: function() {
-    Ember.run.debounce(this, 'queryDidChange', 100);
+  queryDidChange: function() {
+    Ember.run.debounce(this, '_queryDidChange', 100);
   }.observes('query'),
 
-  queryDidChange: function() {
+  _queryDidChange: function() {
     var query = this.get('query');
 
     if (query && query.length > 2) {

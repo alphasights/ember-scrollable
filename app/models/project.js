@@ -45,5 +45,5 @@ export default DS.Model.extend({
       .reduce(function(previous, current) {
         return previous + current;
       }, 0);
-  }.property('memberships.[]')
+  }.property('memberships.@each.deliveryTarget')
 });
