@@ -5,7 +5,8 @@ export default Ember.View.extend({
   attributeBindings: ['src', 'alt', 'title'],
   tagName: 'img',
 
-  alt: Ember.computed.alias('controller.initials'),
-  src: Ember.computed.alias('controller.avatarUrl'),
-  title: Ember.computed.alias('controller.name')
+  user: null,
+  alt: Ember.computed.alias('user.initials'),
+  src: Ember.computed.alias('user.avatarUrl'),
+  title: Ember.computed.alias('user.name')
 });

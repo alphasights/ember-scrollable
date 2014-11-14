@@ -25,10 +25,10 @@
 </div>
 
 <div class="members">
-  {{render "avatar" lead class="lead"}}
+  {{as-avatar user=lead class="lead"}}
 
   {{#each members}}
-    {{render "avatar" this}}
+    {{as-avatar user=this}}
   {{/each}}
 </div>
 

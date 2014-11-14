@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':progress-bar'],
+  
   previousWidth: '0%',
 
   width: function() {
