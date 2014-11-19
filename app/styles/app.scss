@@ -5,4 +5,13 @@ $icon-font-folder-path: '/assets/fonts';
 
 @import 'settings';
 @import 'default';
-@import 'application';
+
+@import 'components/dropdown';
+@import 'components/progress-bar';
+@import 'components/quick-jump-result-content';
+
+@import 'views/avatar';
+@import 'views/projects';
+@import 'views/quick-jump';
+@import 'views/sidebar';
+@import 'views/application';

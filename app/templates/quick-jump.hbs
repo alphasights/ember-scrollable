@@ -1,5 +1,5 @@
 <div class="bar">
-  {{#as-progress-indicator promise=requestPromise}}
+  {{#as-progress-indicator promise=requestPromise spinnerColor="#ffffff"}}
     <i></i>
   {{/as-progress-indicator}}
 
@@ -8,12 +8,11 @@
     placeholder="Jump to advisors, client, projects and more..."
     value=query
     focus-in="onBarFocusIn"
-    targetObject=view
-  }}
+    targetObject=view}}
 </div>
 
 <div class="actions">
-  {{#liquid-if view.isActive use="crossFade" class="liquid-actions"}}
+  {{#liquid-if view.isActive use="crossFade"}}
     <button class="close" title="Close" {{action "clear"}}></button>
   {{else}}
     {{#as-dropdown title="Change App" align="left" class="change-app"}}
@@ -29,9 +28,9 @@
   {{/liquid-if}}
 </div>
 
-{{#liquid-if view.isActive use="crossFade" class="liquid-results"}}
+{{#liquid-if view.isActive containerless=true use="crossFade"}}
   <div class="results">
-    {{#liquid-if results use="crossFade" class="liquid-content"}}
+    {{#liquid-if results use="crossFade"}}
       {{#each allSections}}
         <section>
           <h1>{{title}}</h1>

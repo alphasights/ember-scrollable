@@ -1,0 +1,9 @@
+{{#liquid-if promise.isLoading containerless=true use="crossFade"}}
+  {{as-spinner
+    width=spinnerWidth
+    length=spinnerLength
+    radius=spinnerRadius
+    color=spinnerColor}}
+{{else}}
+  {{yield}}
+{{/liquid-if}}

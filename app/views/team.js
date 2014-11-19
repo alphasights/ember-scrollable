@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNameBindings: [':application']
+  classNameBindings: [':team'],
+  tagName: 'article'
 });

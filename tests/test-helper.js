@@ -1,6 +1,8 @@
 import resolver from './helpers/resolver';
 import startApp from './helpers/start-app';
+import constants from './helpers/constants';
 import Ember from 'ember';
+
 import {
   setResolver
 } from 'ember-qunit';
@@ -21,7 +23,9 @@ export default {
     defineFixture('/users/me', {}, {
       "user": {
         "initials": "EU",
-        "id": 1
+        "id": 1,
+        "teamId": 1,
+        "avatarUrl": constants.EMPTY_IMAGE_URL
       }
     });
   },

@@ -22,6 +22,7 @@ module.exports = function(environment) {
 
       raven: {
         url: 'https://665338a0e51643adb0c51f05dda5c368@app.getsentry.com/31225',
+
         whitelistUrls: [
           'as-phoenix-production.herokuapp.com',
           'as-phoenix-staging.herokuapp.com',
@@ -34,7 +35,7 @@ module.exports = function(environment) {
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
   }

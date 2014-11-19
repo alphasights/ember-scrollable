@@ -1,0 +1,5 @@
+.dropdown {
+  ul {
+    @extend %dropdown;
+  }
+}

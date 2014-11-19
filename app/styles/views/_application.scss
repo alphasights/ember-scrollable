@@ -1,0 +1,29 @@
+main > .content {
+  padding-top: $quick-jump-height;
+
+  > section,
+  > article {
+    @extend %grid-row;
+
+    position: relative;
+
+    > header {
+      border-bottom: solid 1px $section-border-color;
+      padding: 0 $column-gutter;
+      text-align: center;
+
+      h1 {
+        @extend %heading-medium-uppercase;
+
+        color: $application-content-heading-color;
+        font-weight: $font-weight-normal;
+        line-height: $application-content-heading-height;
+        margin: 0;
+      }
+
+      @media #{$large-up} {
+        text-align: left;
+      }
+    }
+  }
+}

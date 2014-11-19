@@ -1,10 +1,9 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import config from '../../config/environment';
-import testConfig from '../test-helper';
+import testHelper from '../test-helper';
 
-module("Errors", testConfig);
+module("Errors", testHelper);
 
 test("Error message", function() {
   defineFixture('/quick_jumps', { q: 'example' }, {}, 500);
@@ -15,7 +14,6 @@ test("Error message", function() {
 
   andThen(function() {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-
     equal(message, 'Something went wrong with that request, please try again.');
   });
 });
