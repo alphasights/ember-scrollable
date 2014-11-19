@@ -44,5 +44,5 @@
     alt="Profile Picture"
     {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}} />
 
-  <div class="name">{{currentUser.name}}</div>
+  <div class="name" {{action "showSidePanel" "angles"}}>{{currentUser.name}}</div>
 </section>

@@ -21,8 +21,8 @@ export default Ember.Route.extend({
       }
     },
 
-    showSidePanel: function() {
-      this.render('side-panel', {
+    showSidePanel: function(template) {
+      this.render(template, {
         into: 'application',
         outlet: 'side-panel'
       });
