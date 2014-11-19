@@ -1,0 +1,48 @@
+<header>
+  <img src="assets/images/logo.png" alt="Phoenix"></img>
+  <h1>Phoenix</h1>
+</header>
+
+<nav>
+  <header>
+    <div class="toggle-collapse">
+      <button {{action "toggleCollapse" target=view}}></button>
+    </div>
+
+    <h1>Menu</h1>
+  </header>
+
+  <ul>
+    <li class="dashboard">
+      {{#link-to 'dashboard'}}<i></i><span>Dashboard</span>{{/link-to}}
+    </li>
+
+    <li class="projects">
+      {{#link-to 'projects'}}<i></i><span>Projects</span>{{/link-to}}
+    </li>
+
+    <li class="team">
+      {{#link-to 'team'}}<i></i><span>Team</span>{{/link-to}}
+    </li>
+
+    <li class="performances">
+      {{#link-to 'performances'}}<i></i><span>Performances</span>{{/link-to}}
+    </li>
+  </ul>
+</nav>
+
+<section class="user-session">
+  <div class="toggle-actions">
+    {{#as-dropdown title="Actions" class="actions" align="top"}}
+      {{#as-dropdown-item}}<a href="#">Settings</a>{{/as-dropdown-item}}
+      {{#as-dropdown-item}}<a href="#">Logout</a>{{/as-dropdown-item}}
+    {{/as-dropdown}}
+  </div>
+
+  <img
+    class="picture"
+    alt="Profile Picture"
+    {{bind-attr src=currentUser.avatarUrl title=currentUser.initials}} />
+
+  <div class="name">{{currentUser.name}}</div>
+</section>

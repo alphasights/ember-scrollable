@@ -8,12 +8,14 @@
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 100;
 
   > * {
     pointer-events: all;
   }
 
-  .bar, .actions {
+  .bar,
+  .actions {
     padding: 0 $column-gutter / 2;
   }
 
@@ -40,8 +42,8 @@
       i {
         @include icon(search);
 
-        line-height: $quick-jump-icon-size;
         display: block;
+        line-height: $quick-jump-icon-size;
       }
     }
 
@@ -53,14 +55,14 @@
       box-shadow: none;
       display: inline-block;
       margin: 0;
-      text-indent: $quick-jump-icon-size + rem-calc(5);
+      text-indent: $quick-jump-icon-size * 1.15;
       width: 100%;
     }
   }
 
   &.loading {
     .results .content {
-      opacity: 0.7;
+      opacity: .7;
     }
   }
 
@@ -79,12 +81,8 @@
     }
   }
 
-  .liquid-actions {
-    overflow: visible;
-  }
-
   .actions {
-    $actions-button-size: $quick-jump-icon-size;
+    $actions-button-size: $button-icon-size;
 
     position: absolute;
     right: 0;
@@ -92,53 +90,47 @@
     top: ($quick-jump-height - $actions-button-size) / 2;
     white-space: nowrap;
 
-    button {
-      height: $actions-button-size;
-      width: $actions-button-size;
-      margin-bottom: 0px;
-    }
-
     .close {
       @include icon(times-circle);
 
-      border-width: 0;
       background-color: transparent;
+      border-width: 0;
+      margin-bottom: 0;
+      min-height: $actions-button-size;
     }
 
     .change-app {
-      @include icon(th);
+      button { @include button-icon(th); }
     }
 
     .add {
-      @include icon(plus);
+      button { @include button-icon(plus); }
     }
 
-    .apps, .add-actions {
-      @extend %dropdown;
+    .change-app,
+    .add {
+      display: inline-block;
 
-      text-align: left;
-      min-width: rem-calc(150);
+      ul {
+        text-align: left;
+      }
     }
-  }
-
-  .liquid-results {
-    @extend %static-liquid-container;
   }
 
   .results {
     @include single-transition(opacity, 150ms, linear);
 
+    background-color: $quick-jump-results-background-color;
     position: relative;
     width: 100%;
-    background-color: $quick-jump-results-background-color;
 
     section {
       @extend %grid-row;
 
-      padding-top: $column-gutter / 2;
       padding-bottom: $column-gutter / 2;
+      padding-top: $column-gutter / 2;
 
-      h1 {
+      > h1 {
         @extend .hide-for-small-only;
         @extend %grid-column-2;
 

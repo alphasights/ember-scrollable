@@ -1,0 +1,49 @@
+<div class="bar">
+  {{#as-progress-indicator promise=requestPromise spinnerColor="#ffffff"}}
+    <i></i>
+  {{/as-progress-indicator}}
+
+  {{input
+    type="text"
+    placeholder="Jump to advisors, client, projects and more..."
+    value=query
+    focus-in="onBarFocusIn"
+    targetObject=view}}
+</div>
+
+<div class="actions">
+  {{#liquid-if view.isActive use="crossFade"}}
+    <button class="close" title="Close" {{action "clear"}}></button>
+  {{else}}
+    {{#as-dropdown title="Change App" align="left" class="change-app"}}
+      {{#as-dropdown-item}}<a href="#">Metrics</a>{{/as-dropdown-item}}
+      {{#as-dropdown-item}}<a href="#">Finance</a>{{/as-dropdown-item}}
+      {{#as-dropdown-item}}<a href="#">Clients</a>{{/as-dropdown-item}}
+    {{/as-dropdown}}
+
+    {{#as-dropdown title="Add" align="left" class="add"}}
+      {{#as-dropdown-item}}<a href="#">New advisor</a>{{/as-dropdown-item}}
+      {{#as-dropdown-item}}<a href="#">New project</a>{{/as-dropdown-item}}
+    {{/as-dropdown}}
+  {{/liquid-if}}
+</div>
+
+{{#liquid-if view.isActive containerless=true use="crossFade"}}
+  <div class="results">
+    {{#liquid-if results use="crossFade"}}
+      {{#each allSections}}
+        <section>
+          <h1>{{title}}</h1>
+
+          <ul>
+            {{#each result in results}}
+              <li>
+                {{render "quick-jump/result" result tagName="article"}}
+              </li>
+            {{/each}}
+          </ul>
+        </section>
+      {{/each}}
+    {{/liquid-if}}
+  </div>
+{{/liquid-if}}

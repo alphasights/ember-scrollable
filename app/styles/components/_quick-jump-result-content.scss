@@ -1,0 +1,19 @@
+.quick-jump-result-content {
+  h1,
+  .details {
+    line-height: $quick-jump-results-item-height;
+  }
+
+  h1 {
+    @extend %grid-column-4;
+
+    font-size: $base-font-size;
+    margin: 0;
+  }
+
+  .details {
+    @extend %grid-column-8;
+
+    color: $small-font-color;
+  }
+}

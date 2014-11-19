@@ -3,8 +3,8 @@
   "dependencies": {
     "handlebars": "1.3.0",
     "jquery": "1.11.1",
-    "ember": "1.7.0",
-    "ember-data": "1.0.0-beta.10",
+    "ember": "1.8.0",
+    "ember-data": "1.0.0-beta.11+canary.d6caeca964",
     "ember-resolver": "0.1.7",
     "loader.js": "stefanpenner/loader.js#1.0.1",
     "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
@@ -13,13 +13,12 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "1.15.0",
-    "paint": "git://github.com/alphasights/paint.git#3c085ef958",
     "underscore": "1.7.0",
-    "spinjs": "2.0.1",
     "pretender": "0.2.0",
-    "underscore.string": "2.3.3",
     "raven-js": "1.1.16",
-    "messenger": "~1.4.1"
+    "messenger": "~1.4.1",
+    "paint": "0.3.1",
+    "spinjs": "2.0.1"
   },
   "resolutions": {
     "jquery": ">= 1.7.0 < 2.2.0"

@@ -1,0 +1,11 @@
+.avatar {
+  @include detached-border($color: $section-border-color);
+
+  height: rem-calc(60);
+  margin: $column-gutter / 4 0;
+  width: rem-calc(60);
+
+  &.lead {
+    @include detached-border($color: lighten($primary-color, 30%));
+  }
+}

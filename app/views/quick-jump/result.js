@@ -2,12 +2,13 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: ['type'],
-  availableTypes: ['project'],
+  
+  availableTypes: ['project', 'user', 'contact', 'advisor'],
 
   type: function() {
     var type = this.get('controller.type');
 
-    if (!Ember.isBlank(type) && this.get('availableTypes').contains(type)) {
+    if (type != null && this.get('availableTypes').contains(type)) {
       return type;
     } else {
       return 'default';
@@ -15,6 +16,6 @@ export default Ember.View.extend({
   }.property('controller.type'),
 
   templateName: function() {
-    return `views/quick-jump/${this.get('type')}`;
+    return `quick-jump/result/${this.get('type')}`;
   }.property('type')
 });

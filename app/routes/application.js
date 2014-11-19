@@ -8,6 +8,10 @@ export default Ember.Route.extend({
     });
   },
 
+  afterModel: function(models) {
+    this.controllerFor('currentUser').set('model', models.currentUser);
+  },
+
   actions: {
     error: function(error) {
       if (error.status === 401 || error.status === 404) {
