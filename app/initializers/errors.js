@@ -5,6 +5,8 @@ export default {
   name: 'errors',
 
   initialize: function(container, application) {
+    if (initialized) { return; }
+
     Ember.RSVP.on('error', function() {
       new Messenger().post({
         message: 'Something went wrong with that request, please try again.',
@@ -29,5 +31,7 @@ export default {
       // without this line errors won't show up in the console
       console.error(error);
     };
+
+    initialized = true;
   }
 };
