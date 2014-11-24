@@ -17,6 +17,7 @@ export default Ember.Route.extend({
       if (error.status === 401 || error.status === 404) {
         window.location.replace(config.APP.authUrl);
       } else {
+        Ember.onerror(error);
         return true;
       }
     }

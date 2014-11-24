@@ -10,18 +10,18 @@ export default {
     if (initialized) { return; }
 
     Ember.RSVP.on('error', function(error) {
-      if (error.jqXHR != null) {
+      Ember.onerror(error);
+    });
+
+    Ember.onerror = function(error) {
+      if(error.jqXHR != null) {
         new Messenger().post({
           message: 'Something went wrong with that request, please try again.',
           type: 'error',
           showCloseButton: true
         });
-      } else {
-        Ember.onerror(error);
       }
-    });
 
-    Ember.onerror = function(error) {
       var applicationController, currentRoute;
 
       try {
