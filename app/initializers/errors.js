@@ -6,7 +6,7 @@ var initialized = false;
 export default {
   name: 'errors',
 
-  initialize: function(container, application) {
+  initialize: function(container) {
     if (initialized) { return; }
 
     Ember.RSVP.on('error', function(error) {
@@ -25,7 +25,7 @@ export default {
       var applicationController, currentRoute;
 
       try {
-        applicationController = application.__container__.lookup('controller:application');
+        applicationController = container.lookup('controller:application');
         currentRoute = applicationController.get('currentPath');
       } catch(e) {}
 
