@@ -7,7 +7,7 @@ export default {
   initialize: function(container, application) {
     Ember.RSVP.on('error', function() {
       new Messenger().post({
-        message: 'Sorry, something went wrong.',
+        message: 'Something went wrong with that request, please try again.',
         type: 'error',
         showCloseButton: true
       });
