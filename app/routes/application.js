@@ -19,20 +19,6 @@ export default Ember.Route.extend({
       } else {
         return true;
       }
-    },
-
-    showSidePanel: function(template) {
-      this.render(template, {
-        into: 'application',
-        outlet: 'side-panel'
-      });
-    },
-
-    hideSidePanel: function() {
-      this.disconnectOutlet({
-        outlet: 'side-panel',
-        parentView: 'application'
-      });
     }
   }
 });

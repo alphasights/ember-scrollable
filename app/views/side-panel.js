@@ -15,30 +15,7 @@ export default Ember.View.extend({
     var $nonBlurringElements = this.$('> div');
 
     if($target.closest($nonBlurringElements).length === 0) {
-      this.close();
+      this.get('controller').send('hideSidePanel');
     }
   },
-
-  open: function() {
-    this.$('> div').velocity({
-      right: 0
-    }, {
-      duration: 'fast'
-    });
-
-    this.set('isActive', true);
-  }.on('didInsertElement'),
-
-  close: function() {
-    this.$('> div').velocity({
-      right: `-${this.get('initialWidth')}px`
-    }, {
-      duration: 'fast',
-      complete: (() => {
-        this.get('controller').send('hideSidePanel');
-      })
-    });
-
-    this.set('isActive', false);
-  }
 });

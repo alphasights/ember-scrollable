@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':progress-bar'],
-  
+
   previousWidth: '0%',
 
   width: function() {
@@ -17,5 +17,5 @@ export default Ember.Component.extend({
     });
 
     this.set('previousWidth', this.get('width'));
-  }.on('didInsertElement').observes('ratio')
+  }.on('didInsertElement').observes('width')
 });
