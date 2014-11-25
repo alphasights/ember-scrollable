@@ -22,15 +22,7 @@ export default {
         });
       }
 
-      var applicationController, currentRoute;
-
-      try {
-        applicationController = container.lookup('controller:application');
-        currentRoute = applicationController.get('currentPath');
-      } catch(e) {}
-
       Raven.captureException(error, {
-        currentRoute: currentRoute,
         environment: config.environment
       });
 
