@@ -6,7 +6,7 @@ var initialized = false;
 export default {
   name: 'errors',
 
-  initialize: function(container) {
+  initialize: function() {
     if (initialized) { return; }
 
     Ember.RSVP.on('error', function(error) {
