@@ -11,7 +11,8 @@ export default Ember.Route.extend({
 
   afterModel: function(models) {
     this.controllerFor('currentUser').set('model', models.currentUser);
-    this.controllerFor('application').set('preferences', models.preferences.get('content')[0]);
+    debugger
+    this.controllerFor('application').set('preferences', models.preferences.get('firstObject'));
   },
 
   actions: {
