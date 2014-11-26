@@ -4,12 +4,14 @@ import config from '../config/environment';
 export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
-      currentUser: this.store.find('user', 'me')
+      currentUser: this.store.find('user', 'me'),
+      preference: this.store.find('preference')
     });
   },
 
   afterModel: function(models) {
     this.controllerFor('currentUser').set('model', models.currentUser);
+    this.controllerFor('application').set('preference', models.preference.get('content')[0]);
   },
 
   actions: {
