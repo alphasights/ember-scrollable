@@ -9,7 +9,7 @@ export default Ember.View.extend({
     } else {
       return false;
     }
-  }.property('controller.preferences.sideBarCollapsed'),
+  }.property(),
 
   actions: {
     toggleCollapse: function() {
