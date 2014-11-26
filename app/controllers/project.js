@@ -11,6 +11,10 @@ export default Ember.ObjectController.extend({
     }
   }.property('deliveredAdvisorsCount', 'deliveryTarget'),
 
+  members: function() {
+    return _(this.get('model.members')).without(this.get('lead'));
+  }.property('model.members.[]'),
+
   actions: {
     setPriority: function(value) {
       this.set('priority', value);
