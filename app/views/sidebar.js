@@ -4,7 +4,7 @@ export default Ember.View.extend({
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
 
   isCollapsed: function() {
-    if (this.get('controller.preferences') !== null) {
+    if (this.get('controller.preferences.sideBarCollapsed') != null) {
       return this.get('controller.preferences.sideBarCollapsed');
     } else {
       return false;
