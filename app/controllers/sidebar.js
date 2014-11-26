@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
     toggleCollapse: function(isCollapsed) {
       var preferences = this.get('preferences');
 
-      if (preferences === undefined) {
+      if (preferences === null) {
         this.store.createRecord('preferences',  {
           user: this.get('controllers.currentUser.content'),
           sideBarCollapsed: isCollapsed
