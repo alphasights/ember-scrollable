@@ -4,12 +4,12 @@ export default Ember.View.extend({
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
 
   isCollapsed: function() {
-    if (this.get('controller.preference') !== null) {
-      return this.get('controller.preference.sideBarCollapsed');
+    if (this.get('controller.preferences') !== null) {
+      return this.get('controller.preferences.sideBarCollapsed');
     } else {
       return false;
     }
-  }.property('controller.preference.sideBarCollapsed'),
+  }.property('controller.preferences.sideBarCollapsed'),
 
   actions: {
     toggleCollapse: function() {

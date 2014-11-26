@@ -5,13 +5,13 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       currentUser: this.store.find('user', 'me'),
-      preference: this.store.find('preference')
+      preferences: this.store.find('preferences')
     });
   },
 
   afterModel: function(models) {
     this.controllerFor('currentUser').set('model', models.currentUser);
-    this.controllerFor('application').set('preference', models.preference.get('content')[0]);
+    this.controllerFor('application').set('preferences', models.preferences.get('content')[0]);
   },
 
   actions: {
