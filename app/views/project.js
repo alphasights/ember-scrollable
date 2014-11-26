@@ -4,6 +4,6 @@ export default Ember.View.extend({
   classNameBindings: [':project'],
 
   click: function() {
-    this.get('controller').transitionToRoute('team-project', this.get('controller.id'));
+    this.get('controller').transitionToRoute('team.project', this.get('controller.id'));
   }
 });

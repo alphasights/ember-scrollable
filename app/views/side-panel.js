@@ -7,7 +7,15 @@ export default Ember.View.extend({
   initialWidth: null,
 
   onDidInsertElement: function() {
+    this.set('isActive', true);
     this.set('initialWidth', this.$('> div').width());
+
+    this.$('> div').velocity({
+      right: 0
+    }, {
+      duration: 'fast'
+    });
+
   }.on('didInsertElement'),
 
   click: function(event) {
@@ -15,7 +23,16 @@ export default Ember.View.extend({
     var $nonBlurringElements = this.$('> div');
 
     if($target.closest($nonBlurringElements).length === 0) {
-      this.get('controller').send('hideSidePanel');
+      this.set('isActive', false);
+
+      this.$('> div').velocity({
+        right: `-${this.get('initialWidth')}px`
+      }, {
+        duration: 'fast',
+        complete: (() => {
+          this.get('controller').send('hideSidePanel');
+        })
+      });
     }
   },
 });

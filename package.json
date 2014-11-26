@@ -30,7 +30,7 @@
     "ember-data": "1.0.0-beta.10",
     "express": "^4.8.5",
     "glob": "^4.0.5",
-    "liquid-fire": "0.12.0",
+    "liquid-fire": "0.15.0",
     "ember-cli-esnext": "~0.1.0",
     "ember-cli-pretender": "^0.3.1",
     "ember-cli-velocity": "^0.1.2",
