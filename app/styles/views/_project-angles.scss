@@ -1,0 +1,99 @@
+$project-angles-text-color: $body-font-color;
+$project-angle-background-color: $snow;
+$project-angle-border-color: $smoke;
+$project-angle-heading-color: $charcoal;
+$project-angle-section-padding: $column-gutter;
+
+$input-avatar-width: $super-number-height;
+$input-avatar-border: 1px solid $smoke;
+$input-avatar-radius: $global-radius;
+$input-avatar-inner-padding: 3px;
+
+.angles {
+  @extend %angles-section;
+
+  .input-avatar {
+    @extend %input-avatar;
+  }
+
+  .angle-avatar-add {
+    @extend %grid-column-large-3;
+    @extend %grid-column-medium-6;
+    @extend %grid-column-small-12;
+
+    line-height: $input-avatar-width;
+
+    button {
+      @extend %angle-avatar-add-button;
+    }
+  }
+}
+
+%angles-section {
+  header {
+    padding: $project-angle-section-padding;
+  }
+
+  section {
+    @extend %grid-row;
+
+    @include clearfix();
+
+    background-color: $project-angle-background-color;
+    border-bottom: 1px solid $project-angle-border-color;
+    padding: $project-angle-section-padding;
+
+    h3 {
+      padding-bottom: $project-angle-section-padding;
+    }
+  }
+}
+
+%input-avatar {
+  @extend %grid-column-large-3;
+  @extend %grid-column-medium-6;
+  @extend %grid-column-small-12;
+
+  position: relative;
+
+  img {
+    border-radius: $input-avatar-radius;
+    height: $input-avatar-width;
+    overflow: hidden;
+    padding: $input-avatar-inner-padding;
+    position: absolute;
+    width: $input-avatar-width;
+    z-index: 1;
+  }
+
+  input {
+    -moz-appearance: textfield;
+    border-radius: $input-avatar-radius;
+    border: $input-avatar-border;
+    box-sizing: border-box;
+    color: $project-angles-text-color;
+    font-size: $h2-font-size;
+    height: $input-avatar-width;
+    padding: 0;
+    padding-left: $input-avatar-width + $input-avatar-inner-padding;
+    position: relative;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+}
+
+%angle-avatar-add-button {
+  @include button-icon(plus);
+
+  background-color: $primary-color;
+  color: $white;
+  margin-left: $column-gutter;
+}
