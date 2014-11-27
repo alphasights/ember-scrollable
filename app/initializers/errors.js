@@ -14,7 +14,7 @@ export default {
     });
 
     Ember.onerror = function(error) {
-      if(error.jqXHR != null) {
+      if(error.status >= 500) {
         new Messenger().post({
           message: 'Something went wrong with that request, please try again.',
           type: 'error',
@@ -26,7 +26,6 @@ export default {
         environment: config.environment
       });
 
-      // without this line errors won't show up in the console
       console.error(error);
     };
 
