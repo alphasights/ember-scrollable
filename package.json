@@ -35,6 +35,6 @@
     "ember-cli-pretender": "^0.3.1",
     "ember-cli-velocity": "^0.1.2",
     "ember-cli-paint": "1.2.1",
-    "ember-cli-super-number": "../ember-cli-super-number"
+    "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git"
   }
 }
