@@ -14,7 +14,7 @@ test("Request error message", function() {
 
   andThen(function() {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    equal(message, 'Something went wrong with that request, please try again.');
+    equal(message, "Something went wrong with that request, please try again.");
   });
 });
 
@@ -25,7 +25,7 @@ test("Application route error message", function() {
 
   andThen(function() {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    equal(message, 'Something went wrong with that request, please try again.');
+    equal(message, "Something went wrong with that request, please try again.");
   });
 });
 
@@ -33,9 +33,10 @@ test("Transition error message", function() {
   defineFixture('/teams', {}, {}, 500);
 
   visit('/');
+  visit('/team');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    equal(message, 'Sorry, something went wrong. Try refreshing the page.');
+    equal(message, "Sorry, something went wrong. Try refreshing the page.");
   });
 });

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import config from '../config/environment';
+import { logError } from '../errors';
 
 var initialized = false;
 
@@ -14,7 +14,15 @@ export default {
     });
 
     Ember.onerror = function(error) {
-      if(error.status >= 500) {
+      var status;
+
+      if (error.jqXHR != null) {
+        status = error.jqXHR.status;
+      } else {
+        status = error.status;
+      }
+
+      if (status >= 500) {
         new Messenger().post({
           message: 'Something went wrong with that request, please try again.',
           type: 'error',
@@ -22,11 +30,7 @@ export default {
         });
       }
 
-      Raven.captureException(error, {
-        environment: config.environment
-      });
-
-      console.error(error);
+      logError(error);
     };
 
     initialized = true;
