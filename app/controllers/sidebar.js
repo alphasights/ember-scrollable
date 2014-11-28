@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['currentUser'],
   currentUser: Ember.computed.alias('controllers.currentUser'),
-  preferences: Ember.computed.alias('controllers.currentUser.preferences'),
+  preferences: Ember.computed.alias('currentUser.preferences'),
 
   actions: {
     toggleCollapse: function(isCollapsed) {
