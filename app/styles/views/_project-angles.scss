@@ -1,6 +1,7 @@
 $project-angles-text-color: $body-font-color;
 $project-angle-background-color: $snow;
 $project-angle-border-color: $smoke;
+$project-angle-border: 1px solid $project-angle-border-color;
 $project-angle-heading-color: $charcoal;
 $project-angle-section-padding: $column-gutter;
 
@@ -8,6 +9,15 @@ $input-avatar-width: $super-number-height;
 $input-avatar-border: 1px solid $smoke;
 $input-avatar-radius: $global-radius;
 $input-avatar-inner-padding: 3px;
+
+$angle-avatar-add-button-size: $super-number-height * 0.6;
+$angle-avatar-add-button-color: $primary-color;
+
+@mixin angle-avatar-input-grid-size {
+  @extend %grid-column-large-3;
+  @extend %grid-column-medium-4;
+  @extend %grid-column-small-6;
+}
 
 .angles {
   @extend %angles-section;
@@ -17,9 +27,7 @@ $input-avatar-inner-padding: 3px;
   }
 
   .angle-avatar-add {
-    @extend %grid-column-large-3;
-    @extend %grid-column-medium-6;
-    @extend %grid-column-small-12;
+    @include angle-avatar-input-grid-size;
 
     line-height: $input-avatar-width;
 
@@ -32,6 +40,10 @@ $input-avatar-inner-padding: 3px;
 %angles-section {
   header {
     padding: $project-angle-section-padding;
+
+    h2 {
+      padding: $column-gutter / 2;
+    }
   }
 
   section {
@@ -40,19 +52,23 @@ $input-avatar-inner-padding: 3px;
     @include clearfix();
 
     background-color: $project-angle-background-color;
-    border-bottom: 1px solid $project-angle-border-color;
-    padding: $project-angle-section-padding;
+    border-top: $project-angle-border;
+    padding: $project-angle-section-padding / 2 $project-angle-section-padding;
 
-    h3 {
-      padding-bottom: $project-angle-section-padding;
+    &:last-child {
+      border-bottom: 1px solid $project-angle-border-color;
+    }
+
+    h5 {
+      padding-bottom: $project-angle-section-padding / 2;
+      padding-left: $column-gutter / 2;
+      padding-right: $column-gutter / 2;
     }
   }
 }
 
 %input-avatar {
-  @extend %grid-column-large-3;
-  @extend %grid-column-medium-6;
-  @extend %grid-column-small-12;
+  @include angle-avatar-input-grid-size;
 
   position: relative;
 
@@ -75,12 +91,13 @@ $input-avatar-inner-padding: 3px;
     font-size: $h2-font-size;
     height: $input-avatar-width;
     padding: 0;
-    padding-left: $input-avatar-width + $input-avatar-inner-padding;
+    padding-left: $input-avatar-width * 1.2 + $input-avatar-inner-padding;
+    padding-right: $super-number-arrow-size * 1.2;
     position: relative;
     width: 100%;
 
     &:focus {
-        outline: none;
+      outline: none;
     }
   }
 
@@ -93,7 +110,12 @@ $input-avatar-inner-padding: 3px;
 %angle-avatar-add-button {
   @include button-icon(plus);
 
-  background-color: $primary-color;
+  background-color: $angle-avatar-add-button-color;
   color: $white;
-  margin-left: $column-gutter;
+  border-color: darken($angle-avatar-add-button-color, 15%);
+
+  &:before {
+    width: $angle-avatar-add-button-size;
+    line-height: $angle-avatar-add-button-size;
+  }
 }
