@@ -14,6 +14,6 @@ test('sideBarCollapsed is set to true when collapsing the sidebar', function(){
   click('.toggle-collapse button');
 
   andThen(function(){
-    equal(window.Phoenix.__container__.lookup('controller:sidebar').get('preferences.sideBarCollapsed'), true);
+    equal(window.Phoenix.__container__.lookup('controller:currentUser').get('preferences.sideBarCollapsed'), true);
   });
 });
