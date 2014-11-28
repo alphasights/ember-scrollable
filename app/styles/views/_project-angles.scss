@@ -1,6 +1,6 @@
 $project-angles-text-color: $body-font-color;
 $project-angle-background-color: $snow;
-$project-angle-border-color: $smoke;
+$project-angle-border-color: darken($project-angle-background-color, 15%);
 $project-angle-border: 1px solid $project-angle-border-color;
 $project-angle-heading-color: $charcoal;
 $project-angle-section-padding: $column-gutter;
@@ -12,6 +12,9 @@ $input-avatar-inner-padding: 3px;
 
 $angle-avatar-add-button-size: $super-number-height * 0.6;
 $angle-avatar-add-button-color: $primary-color;
+
+$side-panel-controls-border: solid 1px $project-angle-border-color !important;
+$side-panel-controls-button-size: $angle-avatar-add-button-size;
 
 @mixin angle-avatar-input-grid-size {
   @extend %grid-column-large-3;
@@ -117,5 +120,44 @@ $angle-avatar-add-button-color: $primary-color;
   &:before {
     width: $angle-avatar-add-button-size;
     line-height: $angle-avatar-add-button-size;
+  }
+}
+
+.side-controls {
+  float: right;
+
+  ul {
+    @include button-group-container($float: true);
+
+    > li {
+      @include button-group-style($radius: $global-radius, $float: null);
+
+      button {
+        border: $side-panel-controls-border;
+
+        &.previous-project {
+          @include button-icon(angle-left);
+        }
+
+        &.next-project {
+          @include button-icon(angle-right);
+        }
+      }
+    }
+  }
+
+  .close-panel {
+    @include button-icon(close);
+
+    border: $side-panel-controls-border;
+  }
+
+  button {
+    &:before {
+      width: $side-panel-controls-button-size !important;
+      line-height: $side-panel-controls-button-size !important;
+
+      font-size: $h3-font-size;
+    }
   }
 }
