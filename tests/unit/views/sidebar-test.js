@@ -7,7 +7,6 @@ import Ember from 'ember';
 
 moduleFor('view:sidebar', 'SidebarView');
 
-// Replace this with your real tests.
 test('has a default value for isCollapsed', function() {
   var view = this.subject();
 
