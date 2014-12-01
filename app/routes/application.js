@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { logError } from '../errors';
+import logError from '../log-error';
 import config from '../config/environment';
 
 export default Ember.Route.extend({

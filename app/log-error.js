@@ -1,6 +1,6 @@
 import config from './config/environment';
 
-export function logError(error) {
+export default function (error) {
   Raven.captureException(error, {
     environment: config.environment
   });
