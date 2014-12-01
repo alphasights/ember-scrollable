@@ -9,7 +9,8 @@ $super-number-arrow-font-size: $h3-font-size;
 }
 
 %super-number-input {
-  a.increment, a.decrement {
+  a.increment,
+  a.decrement {
     background: none;
     border-radius: $global-radius;
     color: $super-number-arrow-color;
