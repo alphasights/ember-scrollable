@@ -18,14 +18,14 @@ test("Request error message", function() {
   });
 });
 
-test("Application route error message", function() {
+test("First load error message", function() {
   defineFixture('/users/me', {}, {}, 500);
 
   visit('/');
 
   andThen(function() {
-    var message = $('.messenger .messenger-message-inner').first().text().trim();
-    equal(message, "Something went wrong with that request, please try again.");
+    var message = $('.error h1').text().trim();
+    equal(message, "Sorry, something went wrong. Try refreshing the page.");
   });
 });
 

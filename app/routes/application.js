@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { logError } from '../errors';
+import config from '../config/environment';
 
 export default Ember.Route.extend({
   isLoaded: false,
@@ -23,8 +24,7 @@ export default Ember.Route.extend({
         logError(error);
 
         if(!this.get('isLoaded')) {
-          var view = this.container.lookup('view:error').append();
-          this.router.one('didTransition', view, 'destroy');
+          this.render('error');
         }
 
         return true;
