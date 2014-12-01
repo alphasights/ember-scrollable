@@ -13,7 +13,11 @@ export default Ember.View.extend({
     }
   },
 
-  isCollapsedDidChange: function() {
+  didInsertElement: function() {
+    this.addObserver('isCollapsed', this, this.animateSidebar);
+  },
+
+  animateSidebar: function() {
     var growth;
 
     if (this.get('isCollapsed')) {
@@ -27,5 +31,5 @@ export default Ember.View.extend({
     }, {
       duration: 150
     });
-  }.observes('isCollapsed')
+  }
 });
