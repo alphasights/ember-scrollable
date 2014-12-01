@@ -45,8 +45,8 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
 
   &.dropdown {
     ul {
-      width: auto;
       max-width: none;
+      width: auto;
 
       li {
         line-height: $angle-add-user-avatar-size;
@@ -73,9 +73,9 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
       i {
         @include icon(search);
 
-        position: absolute;
-        padding: $angle-add-user-search-icon-padding $column-gutter / 2;
         line-height: $angle-add-user-search-icon-height;
+        padding: $angle-add-user-search-icon-padding $column-gutter / 2;
+        position: absolute;
       }
 
       input {
