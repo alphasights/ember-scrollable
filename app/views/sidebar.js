@@ -2,16 +2,22 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
-
-  isCollapsed: false,
+  isCollapsed: Ember.computed.alias('controller.preferences.sidebarCollapsed'),
 
   actions: {
     toggleCollapse: function() {
-      this.set('isCollapsed', !this.get('isCollapsed'));
+      var isCollapsed = this.get('isCollapsed');
+
+      this.get('controller').send('toggleCollapse', isCollapsed);
+      this.set('isCollapsed', !isCollapsed);
     }
   },
 
-  isCollapsedDidChange: function() {
+  didInsertElement: function() {
+    this.addObserver('isCollapsed', this, this.animateWidth);
+  },
+
+  animateWidth: function() {
     var growth;
 
     if (this.get('isCollapsed')) {
@@ -25,5 +31,5 @@ export default Ember.View.extend({
     }, {
       duration: 150
     });
-  }.observes('isCollapsed')
+  }
 });
