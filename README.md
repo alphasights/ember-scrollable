@@ -43,6 +43,15 @@ Make use of the many generators for code, try `ember help generate` for more det
 * Wait for CI to turn green
 * `git push production master`
 
+### Troubleshooting
+
+If deploying to production environment is failing because of dependencies problems try purging the cache like so:
+
+```
+heroku plugins:install https://github.com/heroku/heroku-repo.git
+heroku repo:purge_cache -a as-phoenix-staging (or as-phoenix-production)
+```
+
 ## Further Reading / Useful Links
 
 * ember: http://emberjs.com/

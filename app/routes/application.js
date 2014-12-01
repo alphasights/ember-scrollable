@@ -4,12 +4,22 @@ import config from '../config/environment';
 export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
-      currentUser: this.store.find('user', 'me')
+      currentUser: this.store.find('user', 'me'),
+      preferences: this.store.find('preferences')
     });
   },
 
   afterModel: function(models) {
     this.controllerFor('currentUser').set('model', models.currentUser);
+
+    var preferences = models.preferences.get('firstObject');
+
+    if (preferences == null) {
+      preferences = this.store.createRecord('preferences');
+      preferences.save();
+    }
+
+    this.controllerFor('currentUser').set('preferences', preferences);
   },
 
   actions: {
