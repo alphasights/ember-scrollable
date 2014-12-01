@@ -10,11 +10,15 @@ $input-avatar-border: 1px solid $smoke;
 $input-avatar-radius: $global-radius;
 $input-avatar-inner-padding: 3px;
 
-$angle-avatar-add-button-size: $super-number-height * .6;
-$angle-avatar-add-button-color: $primary-color;
+$angle-add-user-button-size: $super-number-height * .6;
+$angle-add-user-button-color: $primary-color;
+$angle-add-user-avatar-size: $avatar-size-tiny;
+$angle-add-user-dropdown-padding: $input-avatar-inner-padding * 2;
+$angle-add-user-search-icon-padding: $form-spacing / 2;
+$angle-add-user-search-icon-height: $form-label-line-height;
 
 $side-panel-controls-border: solid 1px $project-angle-border-color !important;
-$side-panel-controls-button-size: $angle-avatar-add-button-size;
+$side-panel-controls-button-size: $angle-add-user-button-size;
 
 @mixin angle-avatar-input-grid-size {
   @extend %grid-column-large-3;
@@ -28,14 +32,57 @@ $side-panel-controls-button-size: $angle-avatar-add-button-size;
   .input-avatar {
     @extend %input-avatar;
   }
+}
 
-  .angle-avatar-add {
-    @include angle-avatar-input-grid-size;
+.angle-avatar-add {
+  @include angle-avatar-input-grid-size;
 
-    line-height: $input-avatar-width;
+  line-height: $input-avatar-width;
 
-    button {
-      @extend %angle-avatar-add-button;
+  button {
+    @extend %angle-avatar-add-button;
+  }
+
+  &.dropdown {
+    ul {
+      width: auto;
+      max-width: none;
+
+      li {
+        line-height: $angle-add-user-avatar-size;
+        white-space: nowrap;
+
+        a {
+          padding: $angle-add-user-dropdown-padding $column-gutter / 2;
+        }
+      }
+    }
+
+    img {
+      @include detached-border($color: $section-border-color);
+
+      display: inline-block;
+      height: $angle-add-user-avatar-size;
+      margin-right: $column-gutter / 4;
+      width: $angle-add-user-avatar-size;
+    }
+
+    .search {
+      padding: $input-avatar-inner-padding;
+
+      i {
+        @include icon(search);
+
+        position: absolute;
+        padding: $angle-add-user-search-icon-padding $column-gutter / 2;
+        line-height: $angle-add-user-search-icon-height;
+      }
+
+      input {
+        border-radius: $global-radius / 2;
+        margin-bottom: 0;
+        padding-left: $angle-add-user-avatar-size * 1.5;
+      }
     }
   }
 }
@@ -114,13 +161,13 @@ $side-panel-controls-button-size: $angle-avatar-add-button-size;
 %angle-avatar-add-button {
   @include button-icon(plus);
 
-  background-color: $angle-avatar-add-button-color;
-  border-color: darken($angle-avatar-add-button-color, 15%);
+  background-color: $angle-add-user-button-color;
+  border-color: darken($angle-add-user-button-color, 15%);
   color: $white;
 
   &:before {
-    line-height: $angle-avatar-add-button-size;
-    width: $angle-avatar-add-button-size;
+    line-height: $angle-add-user-button-size;
+    width: $angle-add-user-button-size;
   }
 }
 
