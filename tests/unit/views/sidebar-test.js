@@ -13,11 +13,11 @@ test('has a default value for isCollapsed', function() {
   equal(view.get('isCollapsed'), false);
 });
 
-test('isCollapsed equals the sideBarCollapsed preference if set', function() {
+test('isCollapsed equals the sidebarCollapsed preference if set', function() {
   var view = this.subject();
 
   view.set('controller', Ember.Controller.create({
-    preferences: Ember.Object.create({ sideBarCollapsed: true })
+    preferences: Ember.Object.create({ sidebarCollapsed: true })
   }));
 
   equal(view.get('isCollapsed'), true);

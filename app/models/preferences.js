@@ -4,5 +4,5 @@ import Ember from 'ember';
 Ember.Inflector.inflector.uncountable('preferences');
 
 export default DS.Model.extend({
-  sideBarCollapsed: DS.attr('boolean')
+  sidebarCollapsed: DS.attr('boolean', { defaultValue: false })
 });
