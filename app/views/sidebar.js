@@ -14,10 +14,10 @@ export default Ember.View.extend({
   },
 
   didInsertElement: function() {
-    this.addObserver('isCollapsed', this, this.animateSidebar);
+    this.addObserver('isCollapsed', this, this.animateWidth);
   },
 
-  animateSidebar: function() {
+  animateWidth: function() {
     var growth;
 
     if (this.get('isCollapsed')) {
