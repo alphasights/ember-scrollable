@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import '../helpers/request-watcher';
-import constants from '../helpers/constants';
+import fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
 module("Team", {
@@ -18,16 +18,23 @@ module("Team", {
     });
 
     defineFixture('/projects', { team_id: '1' }, {
+      "users": [{
+        "initials": "EU2",
+        "id": 2,
+        "teamId": 1,
+        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+      }],
+
       "angles": [{
         "id": 1,
         "title": "Angle 1",
         "project_id": 1,
-        "angle_team_membership_ids": [1]
-      },{
+        "angle_team_membership_ids": [1, 2]
+      }, {
         "id": 2,
         "title": "Angle 2",
         "project_id": 2,
-        "angle_team_membership_ids": [2]
+        "angle_team_membership_ids": [3]
       }],
 
       "angle_team_memberships": [{
@@ -36,9 +43,15 @@ module("Team", {
         "created_at": "2014-07-09T16:46:03.347+01:00",
         "angle_id": 1,
         "team_member_id": 1
-      },{
-        "target_value": 2,
+      }, {
+        "target_value": 0,
         "id": 2,
+        "created_at": "2014-07-09T16:46:03.347+01:00",
+        "angle_id": 1,
+        "team_member_id": 2
+      }, {
+        "target_value": 2,
+        "id": 3,
         "created_at": "2014-07-09T16:46:03.347+01:00",
         "angle_id": 2,
         "team_member_id": 1
@@ -105,8 +118,8 @@ test("Read project list", function() {
       highPriority: true,
       mediumPriority: false,
       lowPriority: false,
-      memberAvatarUrl: constants.EMPTY_IMAGE_URL,
-      leadAvatarUrl: constants.EMPTY_IMAGE_URL,
+      memberAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 4,
       progressBarWidth: '25%'
@@ -116,8 +129,8 @@ test("Read project list", function() {
       highPriority: false,
       mediumPriority: true,
       lowPriority: false,
-      memberAvatarUrl: constants.EMPTY_IMAGE_URL,
-      leadAvatarUrl: constants.EMPTY_IMAGE_URL,
+      memberAvatarUrl: undefined,
+      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
