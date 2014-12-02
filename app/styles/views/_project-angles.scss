@@ -30,6 +30,32 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
 .angles {
   @extend %angles-section;
 
+  .priority {
+    margin-left: $column-gutter / 2;
+    display: inline-block;
+
+    button {
+      margin: 4px 0;
+      border: 0;
+      display: block;
+      height: 12px;
+      width: 12px;
+    }
+
+    &.high > button {
+      @include project-priority($alert-color);
+    }
+
+    &.medium > button {
+      @include project-priority($warning-color);
+    }
+
+    &.low > button {
+      @include project-priority($info-color);
+    }
+
+  }
+
   .input-avatar {
     @extend %input-avatar;
 
@@ -121,12 +147,15 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
 
     h2 {
       padding: $column-gutter / 2;
+      display: inline-block;
+      margin: 0;
     }
 
     .counts {
       font-size: $small-font-size;
       color: $small-font-color;
       text-transform: uppercase;
+      padding-top: $project-angle-section-padding / 2;
 
       span {
         font-weight: $font-weight-bold;
