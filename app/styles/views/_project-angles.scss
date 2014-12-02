@@ -17,7 +17,7 @@ $angle-add-user-dropdown-padding: $input-avatar-inner-padding * 2;
 $angle-add-user-search-icon-padding: $form-spacing / 2;
 $angle-add-user-search-icon-height: $form-label-line-height;
 
-$side-panel-controls-border: solid 1px $project-angle-border-color !important;
+$side-panel-controls-border-color: $project-angle-border-color;
 $side-panel-controls-button-size: $angle-add-user-button-size;
 
 @mixin angle-avatar-input-grid-size {
@@ -207,7 +207,8 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
       @include button-group-style($radius: $global-radius, $float: null);
 
       button {
-        border: $side-panel-controls-border;
+        border-color: $side-panel-controls-border-color;
+        border-left: none;
 
         &.previous-project {
           @include button-icon(angle-left);
@@ -217,13 +218,17 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
           @include button-icon(angle-right);
         }
       }
+
+      &:first-child button{
+        border-left: solid 1px $side-panel-controls-border-color;
+      }
     }
   }
 
   .close-panel {
     @include button-icon(close);
 
-    border: $side-panel-controls-border;
+    border-color: $side-panel-controls-border-color;
   }
 
   button {
