@@ -122,6 +122,17 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
     h2 {
       padding: $column-gutter / 2;
     }
+
+    .counts {
+      font-size: $small-font-size;
+      color: $small-font-color;
+      text-transform: uppercase;
+
+      span {
+        font-weight: $font-weight-bold;
+        padding-left: $column-gutter / 2;
+      }
+    }
   }
 
   section {
