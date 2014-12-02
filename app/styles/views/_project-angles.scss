@@ -31,6 +31,32 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
 
   .input-avatar {
     @extend %input-avatar;
+
+    .delete {
+      @include button-icon(close);
+      @include single-transition(background-color, 100ms, linear);
+
+      border-radius: $global-rounded;
+      display: none;
+      position: absolute;
+      right: 0;
+      top: -$super-number-arrow-size / 2;
+      z-index: 1;
+
+      &:before {
+        line-height: $super-number-arrow-size;
+        width: $super-number-arrow-size;
+      }
+
+      &:hover {
+        background-color: $charcoal;
+        color: $white;
+      }
+    }
+
+    &:hover .delete{
+      display: block;
+    }
   }
 }
 
