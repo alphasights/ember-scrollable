@@ -5,10 +5,6 @@ $super-number-arrow-padding: ($super-number-height - (2 * $super-number-arrow-si
 $super-number-arrow-font-size: $h3-font-size;
 
 .super-number {
-  @extend %super-number-input;
-}
-
-%super-number-input {
   a.increment,
   a.decrement {
     background: none;
@@ -17,7 +13,6 @@ $super-number-arrow-font-size: $h3-font-size;
     font-size: $super-number-arrow-font-size;
     height: $super-number-arrow-size;
     left: auto;
-    line-height: $super-number-arrow-size;
     right: $super-number-arrow-padding;
     width: $super-number-arrow-size;
 
@@ -25,13 +20,21 @@ $super-number-arrow-font-size: $h3-font-size;
       background: lighten($super-number-arrow-color, 25%);
       color: $white;
     }
+
+    &:before {
+      line-height: $super-number-arrow-size;
+    }
   }
 
   a.increment {
+    @include icon(caret-up);
+
     top: $super-number-arrow-padding;
   }
 
   a.decrement {
+    @include icon(caret-down);
+
     top: $super-number-arrow-size + $super-number-arrow-padding;
   }
 }
