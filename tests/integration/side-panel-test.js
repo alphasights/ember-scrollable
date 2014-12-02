@@ -37,7 +37,7 @@ module("Side Panel", {
   }
 });
 
-test("Visibility", function() {
+test("Showing", function() {
   visit('/team');
   click('.project');
 
@@ -49,9 +49,9 @@ test("Visibility", function() {
 test("Hiding", function() {
   visit('/team');
   click('.project');
+  click('.side-panel');
 
   andThen(function() {
-    debugger;
     equal(find('.side-panel').length, 0);
   });
 });
