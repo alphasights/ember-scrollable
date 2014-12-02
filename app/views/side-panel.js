@@ -13,7 +13,7 @@ export default Ember.View.extend({
     this.$('> div').velocity({
       right: 0
     }, {
-      duration: 'fast'
+      duration: 200
     });
 
   }.on('didInsertElement'),
@@ -28,7 +28,8 @@ export default Ember.View.extend({
       this.$('> div').velocity({
         right: `-${this.get('initialWidth')}px`
       }, {
-        duration: 'fast',
+        duration: 200,
+
         complete: (() => {
           this.get('controller').send('hideSidePanel');
         })

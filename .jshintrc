@@ -1,12 +1,12 @@
 {
   "predef": {
+    "Spinner": true,
+    "Raven": true,
+    "Messenger": true,
     "document": true,
     "window": true,
     "-Promise": true,
-    "_": true,
-    "Spinner": true,
-    "Raven": true,
-    "Messenger": true
+    "_": true
   },
   "browser" : true,
   "boss" : true,
