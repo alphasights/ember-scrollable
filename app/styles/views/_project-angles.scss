@@ -11,7 +11,7 @@ $input-avatar-radius: $global-radius;
 $input-avatar-inner-padding: 3px;
 
 $angle-add-user-button-size: $super-number-height * .6;
-$angle-add-user-button-color: $primary-color;
+$angle-add-user-button-color: scale-color($primary-color, $lightness: -$alert-function-factor);
 $angle-add-user-avatar-size: $avatar-size-tiny;
 $angle-add-user-dropdown-padding: $input-avatar-inner-padding * 2;
 $angle-add-user-search-icon-padding: $form-spacing / 2;
@@ -188,7 +188,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
   @include button-icon(plus);
 
   background-color: $angle-add-user-button-color;
-  border-color: darken($angle-add-user-button-color, 15%);
+  border-color: darken($angle-add-user-button-color, 5%);
   color: $white;
 
   &:before {
