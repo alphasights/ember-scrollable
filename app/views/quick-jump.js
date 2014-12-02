@@ -14,9 +14,9 @@ export default Ember.View.extend({
   didInsertElement: function() {
     Ember.$(document).on(this.get('clickEventName'), (event) => {
       var $target = Ember.$(event.target);
-      var $nonBlurringElements = Ember.$('.quick-jump .bar, .quick-jump .results');
+      var $nonBlurringElements = this.$('.bar, .results');
 
-      if ($target.closest($nonBlurringElements).length <= 0) {
+      if ($target.closest($nonBlurringElements).length === 0) {
         this.set('isActive', false);
       }
 
