@@ -45,6 +45,7 @@ section.projects {
   }
 
   .project {
+    @include single-transition(background-color, 100ms, linear);
     @extend %grid-row;
 
     border-bottom: 1px solid $section-border-color;
@@ -109,6 +110,8 @@ section.projects {
 
     > .details {
       @extend %grid-column-4;
+
+      cursor: pointer;
 
       h1 {
         font-size: $base-font-size;
@@ -178,6 +181,10 @@ section.projects {
           text-transform: uppercase;
         }
       }
+    }
+
+    &:hover {
+      background-color: $project-hover-background-color;
     }
   }
 }
