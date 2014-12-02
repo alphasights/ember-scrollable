@@ -16,6 +16,7 @@ $angle-add-user-avatar-size: $avatar-size-tiny;
 $angle-add-user-dropdown-padding: $input-avatar-inner-padding * 2;
 $angle-add-user-search-icon-padding: $form-spacing / 2;
 $angle-add-user-search-icon-height: $form-label-line-height;
+$angle-add-user-search-icon-color: $angle-add-user-button-color;
 
 $side-panel-controls-border-color: $project-angle-border-color;
 $side-panel-controls-button-size: $angle-add-user-button-size;
@@ -54,7 +55,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
       }
     }
 
-    &:hover .delete{
+    &:hover .delete {
       display: block;
     }
   }
@@ -99,6 +100,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
       i {
         @include icon(search);
 
+        color: $angle-add-user-search-icon-color;
         line-height: $angle-add-user-search-icon-height;
         padding: $angle-add-user-search-icon-padding $column-gutter / 2;
         position: absolute;
@@ -208,7 +210,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
 
       button {
         border-color: $side-panel-controls-border-color;
-        border-left: none;
+        border-left: 0;
 
         &.previous-project {
           @include button-icon(angle-left);
@@ -219,7 +221,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
         }
       }
 
-      &:first-child button{
+      &:first-child button {
         border-left: solid 1px $side-panel-controls-border-color;
       }
     }
