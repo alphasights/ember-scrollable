@@ -1,3 +1,6 @@
+$application-content-heading-height: rem-calc(100);
+$application-content-heading-color: $subheader-font-color;
+
 main > .content {
   padding-top: $quick-jump-height;
 
@@ -8,7 +11,7 @@ main > .content {
     position: relative;
 
     > header {
-      border-bottom: solid 1px $section-border-color;
+      border-bottom: solid 1px $global-section-border-color;
       padding: 0 $column-gutter;
       text-align: center;
 

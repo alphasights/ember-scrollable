@@ -1,3 +1,6 @@
+$side-panel-background: $white;
+$side-panel-width: 70%;
+
 .side-panel {
   @include single-transition(background-color, 150ms, linear);
 
@@ -26,6 +29,6 @@
   }
 
   &.active {
-    background-color: $overlay-background-color;
+    background-color: $global-overlay-background-color;
   }
 }

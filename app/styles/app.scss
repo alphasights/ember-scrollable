@@ -6,12 +6,12 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'settings';
 @import 'default';
 
+@import 'components/avatar';
 @import 'components/dropdown';
 @import 'components/progress-bar';
 @import 'components/quick-jump-result-content';
-@import 'components/super-number-input';
+@import 'components/super-number';
 
-@import 'views/avatar';
 @import 'views/projects';
 @import 'views/quick-jump';
 @import 'views/sidebar';

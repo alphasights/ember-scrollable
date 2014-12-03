@@ -1,3 +1,6 @@
+$projects-header-height: rem-calc(40);
+$projects-hover-background-color: $ghost;
+
 @mixin project-priority($color: $info-color) {
   @include detached-border(
     $color: scale-color($color, $lightness: $alert-function-factor),
@@ -48,7 +51,7 @@ section.projects {
     @include single-transition(background-color, 100ms, linear);
     @extend %grid-row;
 
-    border-bottom: 1px solid $section-border-color;
+    border-bottom: 1px solid $global-section-border-color;
     display: table;
     padding: $column-gutter / 4 0;
 
@@ -184,7 +187,7 @@ section.projects {
     }
 
     &:hover {
-      background-color: $project-hover-background-color;
+      background-color: $projects-hover-background-color;
     }
   }
 }

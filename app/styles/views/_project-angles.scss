@@ -113,7 +113,7 @@ $side-panel-controls-button-size: $angle-add-user-button-size;
     }
 
     img {
-      @include detached-border($color: $section-border-color);
+      @include detached-border($color: $global-section-border-color);
 
       display: inline-block;
       height: $angle-add-user-avatar-size;
