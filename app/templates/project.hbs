@@ -17,12 +17,12 @@
   {{/as-dropdown}}
 </div>
 
-<div class="details">
+{{#link-to 'team.project' this tagName="div" class="details"}}
   <h1>
     <span>{{name}}</span>
     <small>{{clientCode}}</small>
   </h1>
-</div>
+{{/link-to}}
 
 <div class="members">
   {{as-avatar user=lead class="lead"}}
