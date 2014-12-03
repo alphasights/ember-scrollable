@@ -1,8 +1,8 @@
 $side-panel-background: $white;
 $side-panel-width: 70%;
 
-$side-panel-controls-border-color: $project-angle-border-color;
-$side-panel-controls-button-size: $angle-add-member-button-size;
+$side-panel-controls-border-color: darken($snow, 5%);
+$side-panel-controls-button-size: $super-number-height * .6;
 
 .side-panel {
   @include single-transition(background-color, 150ms, linear);

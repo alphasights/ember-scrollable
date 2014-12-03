@@ -2,7 +2,7 @@ $application-content-heading-height: rem-calc(100);
 $application-content-heading-color: $subheader-font-color;
 
 main > .content {
-  padding-top: $quick-jump-height;
+  padding-top: $layout-sidebar-header-height;
 
   > section,
   > article {
