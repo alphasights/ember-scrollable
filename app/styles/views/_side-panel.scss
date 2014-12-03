@@ -1,6 +1,9 @@
 $side-panel-background: $white;
 $side-panel-width: 70%;
 
+$side-panel-controls-border-color: $project-angle-border-color;
+$side-panel-controls-button-size: $angle-add-member-button-size;
+
 .side-panel {
   @include single-transition(background-color, 150ms, linear);
 
@@ -30,5 +33,40 @@ $side-panel-width: 70%;
 
   &.active {
     background-color: $global-overlay-background-color;
+  }
+}
+
+.side-controls {
+  float: right;
+
+  ul {
+    @include button-group-container($float: true);
+
+    > li {
+      @include button-group-style($radius: $global-radius, $float: null);
+
+      button {
+        border-color: $side-panel-controls-border-color;
+        border-left: 0;
+      }
+
+      &:first-child button {
+        border-left: solid 1px $side-panel-controls-border-color;
+      }
+    }
+  }
+
+  .close-panel {
+    @include button-icon(close);
+
+    border-color: $side-panel-controls-border-color;
+  }
+
+  button {
+    &:before {
+      font-size: $h3-font-size;
+      line-height: $side-panel-controls-button-size !important;
+      width: $side-panel-controls-button-size !important;
+    }
   }
 }
