@@ -5,8 +5,8 @@ $super-number-arrow-padding: ($super-number-height - (2 * $super-number-arrow-si
 $super-number-arrow-font-size: $h3-font-size;
 
 .super-number {
-  a.increment,
-  a.decrement {
+  .increment,
+  .decrement {
     background: none;
     border-radius: $global-radius;
     color: $super-number-arrow-color;
@@ -26,13 +26,13 @@ $super-number-arrow-font-size: $h3-font-size;
     }
   }
 
-  a.increment {
+  .increment {
     @include icon(caret-up);
 
     top: $super-number-arrow-padding;
   }
 
-  a.decrement {
+  .decrement {
     @include icon(caret-down);
 
     top: $super-number-arrow-size + $super-number-arrow-padding;
