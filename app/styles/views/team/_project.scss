@@ -24,8 +24,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   @extend %grid-column-small-6;
 }
 
-.angles {
-  @extend %angles-section;
+.project {
+  @extend %project-details-header;
 
   .priority {
     @extend %project-priority;
@@ -38,93 +38,99 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     }
   }
 
-  .input-avatar {
-    @extend %input-avatar;
-
-    .delete {
-      @include button-icon(close);
-      @include single-transition(background-color, 100ms, linear);
-
-      border: $angle-member-border;
-      border-radius: $global-rounded;
-      display: none;
-      position: absolute;
-      right: 0;
-      top: -$super-number-arrow-size / 2;
-      z-index: 1;
-
-      &:before {
-        line-height: $super-number-arrow-size;
-        width: $super-number-arrow-size;
-      }
-
-      &:hover {
-        background-color: $charcoal;
-        color: $white;
-      }
+  .angles {
+    .angle {
+      @extend %project-angle;
     }
 
-    &:hover .delete {
-      display: block;
+    .angle-member-input {
+      @extend %angle-member-input;
+
+      .delete {
+        @include button-icon(close);
+        @include single-transition(background-color, 100ms, linear);
+
+        border: $angle-member-border;
+        border-radius: $global-rounded;
+        display: none;
+        position: absolute;
+        right: 0;
+        top: -$super-number-arrow-size / 2;
+        z-index: 1;
+
+        &:before {
+          line-height: $super-number-arrow-size;
+          width: $super-number-arrow-size;
+        }
+
+        &:hover {
+          background-color: $charcoal;
+          color: $white;
+        }
+      }
+
+      &:hover .delete {
+        display: block;
+      }
     }
   }
-}
 
-.angle-avatar-add {
-  @include angle-avatar-input-grid-size;
+  .angle-avatar-add {
+    @include angle-avatar-input-grid-size;
 
-  line-height: $angle-member-width;
+    line-height: $angle-member-width;
 
-  button {
-    @extend %angle-avatar-add-button;
-  }
+    button {
+      @extend %angle-member-add-button;
+    }
 
-  &.dropdown {
-    ul {
-      max-width: none;
-      width: auto;
+    &.dropdown {
+      ul {
+        max-width: none;
+        width: auto;
 
-      li {
-        line-height: $angle-add-member-avatar-size;
-        white-space: nowrap;
+        li {
+          line-height: $angle-add-member-avatar-size;
+          white-space: nowrap;
 
-        a {
-          padding: $angle-add-member-dropdown-padding $column-gutter / 2;
+          a {
+            padding: $angle-add-member-dropdown-padding $column-gutter / 2;
+          }
+        }
+      }
+
+      img {
+        @include detached-border($color: $global-section-border-color);
+
+        display: inline-block;
+        height: $angle-add-member-avatar-size;
+        margin-right: $column-gutter / 4;
+        width: $angle-add-member-avatar-size;
+      }
+
+      .search {
+        padding: $angle-member-inner-padding;
+
+        i {
+          @include icon(search);
+
+          color: $angle-add-member-search-icon-color;
+          line-height: $angle-add-member-search-icon-height;
+          padding: $angle-add-member-search-icon-padding $column-gutter / 2;
+          position: absolute;
+        }
+
+        input {
+          border-radius: $global-radius / 2;
+          margin-bottom: 0;
+          padding-left: $angle-add-member-avatar-size * 1.5;
         }
       }
     }
-
-    img {
-      @include detached-border($color: $global-section-border-color);
-
-      display: inline-block;
-      height: $angle-add-member-avatar-size;
-      margin-right: $column-gutter / 4;
-      width: $angle-add-member-avatar-size;
-    }
-
-    .search {
-      padding: $angle-member-inner-padding;
-
-      i {
-        @include icon(search);
-
-        color: $angle-add-member-search-icon-color;
-        line-height: $angle-add-member-search-icon-height;
-        padding: $angle-add-member-search-icon-padding $column-gutter / 2;
-        position: absolute;
-      }
-
-      input {
-        border-radius: $global-radius / 2;
-        margin-bottom: 0;
-        padding-left: $angle-add-member-avatar-size * 1.5;
-      }
-    }
   }
 }
 
-%angles-section {
+%project-details-header {
   header {
     padding: $project-angle-section-padding;
 
@@ -146,29 +152,29 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       }
     }
   }
+}
 
-  section {
-    @extend %grid-row;
+%project-angle {
+  @extend %grid-row;
 
-    @include clearfix();
+  @include clearfix();
 
-    background-color: $project-angle-background-color;
-    border-top: $project-angle-border;
-    padding: $project-angle-section-padding / 2 $project-angle-section-padding;
+  background-color: $project-angle-background-color;
+  border-top: $project-angle-border;
+  padding: $project-angle-section-padding / 2 $project-angle-section-padding;
 
-    &:last-child {
-      border-bottom: 1px solid $project-angle-border-color;
-    }
+  &:last-child {
+    border-bottom: 1px solid $project-angle-border-color;
+  }
 
-    h5 {
-      padding-bottom: $project-angle-section-padding / 2;
-      padding-left: $column-gutter / 2;
-      padding-right: $column-gutter / 2;
-    }
+  h5 {
+    padding-bottom: $project-angle-section-padding / 2;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
   }
 }
 
-%input-avatar {
+%angle-member-input {
   @include angle-avatar-input-grid-size;
 
   position: relative;
@@ -184,7 +190,6 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   }
 
   input {
-    -moz-appearance: textfield;
     border: $angle-member-border;
     border-radius: $angle-member-radius;
     box-shadow: none;
@@ -203,14 +208,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       outline: none;
     }
   }
-
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    display: none;
-  }
 }
 
-%angle-avatar-add-button {
+%angle-member-add-button {
   @include button-icon(plus);
 
   background-color: $angle-add-member-button-color;
