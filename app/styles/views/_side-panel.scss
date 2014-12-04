@@ -34,39 +34,40 @@ $side-panel-controls-button-size: $super-number-height * .6;
   &.active {
     background-color: $global-overlay-background-color;
   }
-}
 
-.side-controls {
-  float: right;
+  .actions {
+    float: right;
+    padding: $column-gutter;
 
-  ul {
-    @include button-group-container($float: true);
+    ul {
+      @include button-group-container($float: true);
 
-    > li {
-      @include button-group-style($radius: $global-radius, $float: null);
+      > li {
+        @include button-group-style($radius: $global-radius, $float: null);
 
-      button {
-        border-color: $side-panel-controls-border-color;
-        border-left: 0;
-      }
+        button {
+          border-color: $side-panel-controls-border-color;
+          border-left: 0;
+        }
 
-      &:first-child button {
-        border-left: solid 1px $side-panel-controls-border-color;
+        &:first-child button {
+          border-left: solid 1px $side-panel-controls-border-color;
+        }
       }
     }
-  }
 
-  .close-panel {
-    @include button-icon(close);
+    .close {
+      @include button-icon(close);
 
-    border-color: $side-panel-controls-border-color;
-  }
+      border-color: $side-panel-controls-border-color;
+    }
 
-  button {
-    &:before {
-      font-size: $h3-font-size;
-      line-height: $side-panel-controls-button-size !important;
-      width: $side-panel-controls-button-size !important;
+    button {
+      &:before {
+        font-size: $h3-font-size;
+        line-height: $side-panel-controls-button-size !important;
+        width: $side-panel-controls-button-size !important;
+      }
     }
   }
 }

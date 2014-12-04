@@ -3,8 +3,7 @@ import Ember from 'ember';
 export default Ember.View.extend({
   classNameBindings: [':side-panel', 'isActive:active'],
   layoutName: 'side-panel',
-  tagName: 'section',
-  
+
   initialWidth: null,
 
   onDidInsertElement: function() {

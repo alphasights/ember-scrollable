@@ -8,7 +8,7 @@ export default Ember.Route.extend({
       view: 'sidePanel'
     });
 
-    this.render('error', {
+    this.render(this.sidePanelActionsTemplateName, {
       into: this.routeName,
       outlet: 'actions'
     });
