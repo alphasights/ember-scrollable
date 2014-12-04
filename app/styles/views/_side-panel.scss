@@ -1,8 +1,8 @@
 $side-panel-background: $white;
 $side-panel-width: 70%;
 
-$side-panel-controls-border-color: darken($snow, 5%);
-$side-panel-controls-button-size: $super-number-height * .6;
+$side-panel-actions-border-color: darken($snow, 5%);
+$side-panel-actions-button-size: $super-number-height * .6;
 
 .side-panel {
   @include single-transition(background-color, 150ms, linear);
@@ -46,12 +46,12 @@ $side-panel-controls-button-size: $super-number-height * .6;
         @include button-group-style($radius: $global-radius, $float: null);
 
         button {
-          border-color: $side-panel-controls-border-color;
+          border-color: $side-panel-actions-border-color;
           border-left: 0;
         }
 
         &:first-child button {
-          border-left: solid 1px $side-panel-controls-border-color;
+          border-left: solid 1px $side-panel-actions-border-color;
         }
       }
     }
@@ -59,14 +59,14 @@ $side-panel-controls-button-size: $super-number-height * .6;
     .close {
       @include button-icon(close);
 
-      border-color: $side-panel-controls-border-color;
+      border-color: $side-panel-actions-border-color;
     }
 
     button {
       &:before {
         font-size: $h3-font-size;
-        line-height: $side-panel-controls-button-size !important;
-        width: $side-panel-controls-button-size !important;
+        line-height: $side-panel-actions-button-size !important;
+        width: $side-panel-actions-button-size !important;
       }
     }
   }

@@ -16,26 +16,7 @@ $project-list-item-hover-background-color: $ghost;
 
   > .priority {
     @extend %grid-column-1;
-
-    button {
-      border: 0;
-      display: block;
-      height: 12px;
-      margin: $column-gutter / 3;
-      width: 12px;
-    }
-
-    .high > button {
-      @include project-priority($alert-color);
-    }
-
-    .medium > button {
-      @include project-priority($warning-color);
-    }
-
-    .low > button {
-      @include project-priority($info-color);
-    }
+    @extend %project-priority;
 
     .change-priority {
       > button {

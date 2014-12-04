@@ -1,8 +1,0 @@
-@mixin project-priority($color: $info-color) {
-  @include detached-border(
-  $color: scale-color($color, $lightness: $alert-function-factor),
-  $radius: $global-radius / 2
-  );
-
-  background-color: $color;
-}
