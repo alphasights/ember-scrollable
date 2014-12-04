@@ -1,7 +1,7 @@
 {
   "predef": {
     "Spinner": true,
-    "Raven": true,
+    "Honeybadger": true,
     "Messenger": true,
     "document": true,
     "window": true,
