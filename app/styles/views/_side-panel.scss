@@ -1,8 +1,15 @@
 $side-panel-background: $white;
-$side-panel-width: 70%;
+$side-panel-width-large: 70%;
+$side-panel-width-medium: 90%;
+$side-panel-width-small: 100%;
 
 $side-panel-actions-border-color: darken($snow, 5%);
 $side-panel-actions-button-size: $super-number-height * .6;
+
+@mixin side-panel-size($width) {
+  right: -$width;
+  width: $width;
+}
 
 .side-panel {
   @include single-transition(background-color, 150ms, linear);
@@ -23,11 +30,21 @@ $side-panel-actions-button-size: $super-number-height * .6;
     height: 100%;
     overflow-y: auto;
     position: relative;
-    right: -$side-panel-width;
-    width: $side-panel-width;
 
     section {
       @extend %grid-row;
+    }
+
+    @media #{$small-up} {
+      @include side-panel-size($side-panel-width-small);
+    }
+
+    @media #{$medium-up} {
+      @include side-panel-size($side-panel-width-medium);
+    }
+
+    @media #{$large-up} {
+      @include side-panel-size($side-panel-width-large);
     }
   }
 

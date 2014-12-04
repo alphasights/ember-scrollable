@@ -19,8 +19,7 @@ $angle-add-member-search-icon-height: $form-label-line-height;
 $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
 @mixin angle-avatar-input-grid-size {
-  @extend %grid-column-large-3;
-  @extend %grid-column-medium-4;
+  @extend %grid-column-medium-3;
   @extend %grid-column-small-6;
 }
 
