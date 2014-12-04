@@ -7,5 +7,10 @@ export default Ember.Route.extend({
       outlet: 'side-panel',
       view: 'sidePanel'
     });
+
+    this.render('error', {
+      into: this.routeName,
+      outlet: 'actions'
+    });
   },
 });
