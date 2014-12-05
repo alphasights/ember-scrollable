@@ -2,6 +2,7 @@
   "predef": {
     "Spinner": true,
     "Honeybadger": true,
+    "analytics": true,
     "Messenger": true,
     "document": true,
     "window": true,

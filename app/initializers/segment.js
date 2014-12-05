@@ -1,3 +1,4 @@
+/* jshint ignore:start */
 import config from '../config/environment';
 
 export default {
@@ -9,3 +10,4 @@ export default {
     }}();
   }
 };
+/* jshint ignore:end */
