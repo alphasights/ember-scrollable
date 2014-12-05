@@ -4,7 +4,7 @@ $side-panel-width-medium: 90%;
 $side-panel-width-small: 100%;
 
 $side-panel-actions-border-color: darken($snow, 5%);
-$side-panel-actions-button-size: $super-number-height * .6;
+$side-panel-actions-button-size: 35px;
 
 @mixin side-panel-size($width) {
   right: -$width;
