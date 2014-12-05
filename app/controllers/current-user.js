@@ -4,9 +4,10 @@ export default Ember.ObjectController.extend({
   preferences: null,
 
   identifyUserOnSegment: function() {
-    var jsonModel = this.get('model').toJSON();
-    jsonModel['handle'] = this.get('model.initials');
+    var model = this.get('model');
 
-    analytics.identify(jsonModel);
+    analytics.identify(_(model.toJSON()).extend({
+      handle: model.get('initials')
+    }));
   }.observes('model')
 });
