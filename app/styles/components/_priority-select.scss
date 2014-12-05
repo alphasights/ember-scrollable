@@ -1,0 +1,52 @@
+@mixin priority-select-color($color: $info-color) {
+  @include detached-border(
+    $color: scale-color($color, $lightness: $alert-function-factor),
+    $radius: $global-radius / 2
+  );
+
+  background-color: $color;
+}
+
+.priority-select {
+  button {
+    border: 0;
+    display: block;
+    height: 12px;
+    margin: $column-gutter / 3;
+    width: 12px;
+  }
+
+  .high > button {
+    @include priority-select-color($alert-color);
+  }
+
+  .medium > button {
+    @include priority-select-color($warning-color);
+  }
+
+  .low > button {
+    @include priority-select-color($info-color);
+  }
+
+  .dropdown {
+    ul {
+      background-color: #202326 !important;
+      border-radius: $global-radius / 2;
+      margin-left: 8px !important;
+      margin-top: -9px !important;
+      width: auto !important;
+
+      &:before {
+        border-color: transparent #202326 transparent transparent !important;
+      }
+
+      li {
+        display: inline-block;
+
+        &:hover {
+          background-color: #000;
+        }
+      }
+    }
+  }
+}

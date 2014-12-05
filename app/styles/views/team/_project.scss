@@ -26,13 +26,11 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 .project {
   @extend %project-details-header;
 
-  .priority {
-    @extend %project-priority;
-
+  .priority-select {
     display: inline-block;
     margin-left: $column-gutter / 2;
 
-    button {
+    .dropdown > button {
       margin: 4px 0;
     }
   }

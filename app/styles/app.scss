@@ -6,10 +6,9 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'settings';
 @import 'default';
 
-@import 'global/project';
-
 @import 'components/avatar';
 @import 'components/dropdown';
+@import 'components/priority-select';
 @import 'components/progress-bar';
 @import 'components/quick-jump-result-content';
 @import 'components/super-number';

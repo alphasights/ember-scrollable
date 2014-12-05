@@ -13,12 +13,5 @@ export default Ember.ObjectController.extend({
 
   members: function() {
     return _(this.get('model.members')).without(this.get('lead'));
-  }.property('model.members.[]'),
-
-  actions: {
-    setPriority: function(value) {
-      this.set('priority', value);
-      this.get('model').save();
-    }
-  }
+  }.property('model.members.[]')
 });
