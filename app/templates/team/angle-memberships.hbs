@@ -1,0 +1,25 @@
+<ul>
+  {{#each}}
+    <li>
+      <article>
+        {{as-avatar user=user}}
+        {{super-number value=deliveryTarget}}
+        <button class="remove"></button>
+      </article>
+    </li>
+  {{/each}}
+</ul>
+
+{{#as-dropdown title="Add Member" class="add" align="left"}}
+  {{#as-dropdown-item class="search"}}
+    <i></i>
+    {{input type="text" value=query}}
+  {{/as-dropdown-item}}
+
+  {{#as-dropdown-item}}
+    <a>
+      <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
+      Username Fullname <small>(UFu)</small>
+    </a>
+  {{/as-dropdown-item}}
+{{/as-dropdown}}

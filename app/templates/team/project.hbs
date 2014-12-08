@@ -3,91 +3,37 @@
 
   <h1>
     <span>{{name}}</span>
-    <small>ALPHA</small>
+    <small>{{clientCode}}</small>
   </h1>
 
   <ul class="stats">
     <li>
-      <span class="count">5</span>
-      <span class="name">Upcoming Interaction</span>
+      <span class="count">{{scheduledInteractionsCount}}</span>
+      <span class="name">Upcoming</span>
     </li>
 
     <li>
-      <span class="count">3</span>
+      <span class="count">{{notScheduledInteractionsCount}}</span>
       <span class="name">Left to Schedule</span>
     </li>
 
     <li>
-      <span class="count">4</span>
-      <span class="name">Delivered Today</span>
+      <span class="count">{{deliveredAdvisorsCount}}</span>
+      <span class="name">Delivered</span>
     </li>
   </ul>
 </header>
 
-<div class="angles">
-  <section class="angle">
-    <h5>Angle 1</h5>
+<section class="angles">
+  <ul>
+    {{#each angles}}
+      <li>
+        <article class="angle">
+          <h1>{{title}}</h1>
 
-    <div class="angle-member-input">
-      <img src="https://s3.amazonaws.com/assets_development.alphasights.com/avatars/6565152/thumb.jpg?1381436383" alt="" />
-      <button class="delete"></button>
-      {{super-number}}
-    </div>
-
-    <div class="angle-member-input">
-      <img src="https://s3.amazonaws.com/assets_development.alphasights.com/avatars/6565332/thumb.jpg?1404998072" alt="" />
-      <button class="delete"></button>
-      {{super-number}}
-    </div>
-
-    <div class="angle-member-input">
-      <img src="https://s3.amazonaws.com/assets_development.alphasights.com/avatars/6565338/thumb.jpg?1404997971" alt="" />
-      <button class="delete"></button>
-      {{super-number}}
-    </div>
-
-    {{#as-dropdown title="Add Team Member" class="angle-avatar-add" align="left"}}
-      {{#as-dropdown-item class="search"}}
-        <i></i>
-        <input type="text" />
-      {{/as-dropdown-item}}
-
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname <small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname Bigger<small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname <small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname Extraspace<small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname <small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-      {{#as-dropdown-item}}
-        <a>
-          <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-          Username Fullname <small>(UFu)</small>
-        </a>
-      {{/as-dropdown-item}}
-    {{/as-dropdown}}
-  </section>
-</div>
+          {{render "team.angle-memberships" memberships tagName="section"}}
+        </article>
+      </li>
+    {{/each}}
+  </ul>
+</section>

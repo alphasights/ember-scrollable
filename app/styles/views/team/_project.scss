@@ -40,10 +40,10 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %project-angle;
     }
 
-    .angle-member-input {
+    .angle-memberships article {
       @extend %angle-member-input;
 
-      .delete {
+      .remove {
         @include button-icon(close);
         @include single-transition(background-color, 100ms, linear);
 
@@ -66,13 +66,13 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         }
       }
 
-      &:hover .delete {
+      &:hover .remove {
         display: block;
       }
     }
   }
 
-  .angle-avatar-add {
+  .add {
     @include angle-avatar-input-grid-size;
 
     line-height: $angle-member-width;
@@ -137,13 +137,17 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       padding: $column-gutter / 2;
     }
 
-    .counts {
+    .stats {
       color: $small-font-color;
       font-size: $small-font-size;
       padding-top: $project-angle-section-padding / 2;
       text-transform: uppercase;
 
-      span {
+      li {
+        display: inline-block;
+      }
+
+      .count {
         font-weight: $font-weight-bold;
         padding-left: $column-gutter / 2;
       }
@@ -164,7 +168,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     border-bottom: 1px solid $project-angle-border-color;
   }
 
-  h5 {
+  h1 {
+    font-size: $h5-font-size;
     padding-bottom: $project-angle-section-padding / 2;
     padding-left: $column-gutter / 2;
     padding-right: $column-gutter / 2;
@@ -184,12 +189,13 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     position: absolute;
     width: $angle-member-width;
     z-index: 1;
+    margin: 0;
+    box-shadow: none;
   }
 
   input {
     border: $angle-member-border;
     border-radius: $angle-member-radius;
-    box-shadow: none;
     box-sizing: border-box;
     color: $project-angles-text-color;
     font-size: $h2-font-size;
