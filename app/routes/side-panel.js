@@ -14,5 +14,5 @@ export default Ember.Route.extend({
       into: this.routeName,
       outlet: 'actions'
     });
-  },
+  }
 });

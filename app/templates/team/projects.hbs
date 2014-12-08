@@ -13,6 +13,8 @@
   </div>
 </header>
 
-{{#each itemController="team/project-list-item"}}
-  {{render "team/project-list-item" model tagName="article"}}
-{{/each}}
+<ul>
+  {{#each itemController="team.project-list-item"}}
+    <li>{{render "team.project-list-item" model tagName="article"}}</li>
+  {{/each}}
+</ul>
