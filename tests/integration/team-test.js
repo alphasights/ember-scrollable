@@ -95,15 +95,15 @@ test("Read project list", function() {
   wait();
 
   andThen(function() {
-    var projects = find('.project').toArray().map(function(project) {
+    var projects = find('.project-list-item').toArray().map(function(project) {
       var $project = $(project);
 
       return {
         title: $project.find('h1 span').text().trim(),
         clientCode: $project.find('h1 small').text().trim(),
-        highPriority: $project.find('.priority.high').length === 1,
-        mediumPriority: $project.find('.priority.medium').length === 1,
-        lowPriority: $project.find('.priority.low').length === 1,
+        highPriority: $project.find('.priority-select .high').length === 1,
+        mediumPriority: $project.find('.priority-select .medium').length === 1,
+        lowPriority: $project.find('.priority-select .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -142,7 +142,7 @@ test("Sort project list", function() {
   visit('/team');
 
   var projectTitles = function() {
-    return find('.project').toArray().map(function(project) {
+    return find('.project-list-item').toArray().map(function(project) {
       return $(project).find('h1 span').text().trim();
     });
   };
@@ -183,11 +183,11 @@ test("Change project priority", function() {
 
   visit('/team');
 
-  click('.project:first .change-priority');
-  click('.project:first .change-priority .dropdown-item.low');
+  click('.project-list-item:first .priority-select');
+  click('.project-list-item:first .priority-select .low');
 
   andThen(function() {
     equal(watcher.called, true);
-    equal(find('.project:last .change-priority.low').length, 1);
+    equal(find('.project-list-item:last .change-priority.low').length, 1);
   });
 });

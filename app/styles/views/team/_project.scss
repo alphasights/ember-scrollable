@@ -183,14 +183,14 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
   img {
     border-radius: $angle-member-radius;
+    box-shadow: none;
     height: $angle-member-width;
+    margin: 0;
     overflow: hidden;
     padding: $angle-member-inner-padding;
     position: absolute;
     width: $angle-member-width;
     z-index: 1;
-    margin: 0;
-    box-shadow: none;
   }
 
   input {
