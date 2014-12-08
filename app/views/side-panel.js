@@ -23,27 +23,23 @@ export default Ember.View.extend({
     var $nonBlurringElements = this.$('> div');
 
     if($target.closest($nonBlurringElements).length === 0) {
-      this.animateAndClose();
+      this.send('close');
     }
-  },
-
-  animateAndClose: function() {
-    this.set('isActive', false);
-
-    this.$('> div').velocity({
-      right: `-${this.get('initialWidth')}px`
-    }, {
-      duration: 200,
-
-      complete: (() => {
-        this.get('controller').send('hideSidePanel');
-      })
-    });
   },
 
   actions: {
     close: function() {
-      this.animateAndClose();
+      this.set('isActive', false);
+
+      this.$('> div').velocity({
+        right: `-${this.get('initialWidth')}px`
+      }, {
+        duration: 200,
+
+        complete: (() => {
+          this.get('controller').send('hideSidePanel');
+        })
+      });
     }
   }
 });
