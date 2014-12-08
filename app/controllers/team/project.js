@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  needs: ['team/projects'],
+
   progress: function() {
     var deliveryTarget = this.get('deliveryTarget');
 
