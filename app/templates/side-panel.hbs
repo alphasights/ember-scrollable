@@ -2,7 +2,7 @@
   <div class="actions">
     {{outlet "actions"}}
 
-    <button class="close" />
+    <button class="close" {{action "close" target=view}}/>
   </div>
 
   {{yield}}
