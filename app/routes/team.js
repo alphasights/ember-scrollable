@@ -18,6 +18,6 @@ export default Ember.Route.extend({
   setupController: function(controller, models) {
     controller.set('model', models.team);
     controller.set('projects', models.projects);
-    this.controllerFor('team/projects').set('model', models.projects)
+    this.controllerFor('team/projects').set('model', models.projects);
   }
 });
