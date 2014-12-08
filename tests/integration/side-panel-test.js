@@ -46,7 +46,7 @@ test("Showing", function() {
   });
 });
 
-test("Hiding", function() {
+test("Hiding when clicking on the overlay", function() {
   visit('/team');
   click('.project');
   click('.side-panel');
@@ -55,3 +55,17 @@ test("Hiding", function() {
     equal(find('.side-panel').length, 0);
   });
 });
+
+test("Hiding when clicking on the close button", function() {
+  visit('/team');
+  click('.project');
+  click('.close');
+
+  andThen(function() {
+    equal(find('.side-panel').length, 0);
+  });
+});
+
+test("Navigating to next project", function() {});
+
+test("Navigating to previous project", function() {});
