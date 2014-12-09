@@ -1,13 +1,13 @@
 import Ember from 'ember';
 import PromiseController from '../promise';
 
-export default Ember.ArrayController.extend({
+export default Ember.ObjectController.extend({
   needs: ['team'],
   team: Ember.computed.alias('controllers.team'),
   requestPromise: null,
   query: null,
 
-  members: function() {
+  teamMembers: function() {
     if (this.get('requestPromise')) {
       return this.get('results');
     } else {
@@ -40,4 +40,17 @@ export default Ember.ArrayController.extend({
       this.set('results', null);
     }
   },
+
+  actions: {
+    add: function(user) {
+      var membership = this.store.createRecord('angleTeamMembership', {
+        user: user,
+        angle: this.get('model'),
+        project: this.get('project')
+      })
+
+      membership.save();
+      this.get('memberships').pushObject(membership);
+    }
+  }
 });

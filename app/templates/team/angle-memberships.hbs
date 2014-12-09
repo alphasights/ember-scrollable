@@ -1,5 +1,5 @@
 <ul>
-  {{#each}}
+  {{#each memberships}}
     <li>
       <article>
         {{as-avatar user=user}}
@@ -19,9 +19,9 @@
     {{input type="text" value=query click=view.onSearchClick}}
   </li>
 
-  <section class="members">
-    {{#each members}}
-      {{#as-dropdown-item}}
+  <section class="team-members">
+    {{#each teamMembers}}
+      {{#as-dropdown-item action="add" param=this}}
         <article>
           {{as-avatar user=this}}
 
