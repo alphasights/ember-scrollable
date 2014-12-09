@@ -12,12 +12,15 @@
 
 {{#as-dropdown title="Add Member" class="add" align="bottom"}}
   <li class="search">
-    <i></i>
+    {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
+      <i></i>
+    {{/as-progress-indicator}}
+
     {{input type="text" value=query click=view.onSearchClick}}
   </li>
 
-  <section class="results">
-    {{#each team.members}}
+  <section class="members">
+    {{#each members}}
       {{#as-dropdown-item}}
         <article>
           {{as-avatar user=this}}
