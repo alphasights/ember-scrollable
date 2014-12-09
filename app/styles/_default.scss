@@ -4,19 +4,19 @@
 
 // Move to paint
 %grid-column-centered {
+  float: none !important;
   margin-left: auto;
   margin-right: auto;
-  float: none !important;
 }
 
 %default-button {
   @include button(
-    $padding: $column-gutter / 2,
     $bg: $primary-input-color,
+    $padding: $column-gutter / 2,
     $radius: $global-radius
   );
 
-  text-transform: uppercase;
   font-size: $small-font-size;
   font-weight: $font-weight-bold;
+  text-transform: uppercase;
 }

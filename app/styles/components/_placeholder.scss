@@ -11,19 +11,19 @@ $placeholder-icon-padding: $column-gutter;
     @extend %grid-column-large-6;
     @extend %grid-column-centered;
 
-    text-align: center;
     margin-top: 10%;
+    text-align: center;
   }
 
   span {
-    font-weight: $font-weight-bold;
     font-size: $h4-font-size;
+    font-weight: $font-weight-bold;
   }
 
   i {
-    color: $placeholder-icon-color;
-    border-radius: $global-rounded;
     border: 2px solid $placeholder-icon-color;
+    border-radius: $global-rounded;
+    color: $placeholder-icon-color;
     height: $placeholder-icon-size + $placeholder-icon-padding * 2;
     padding: $placeholder-icon-padding 0;
     width: $placeholder-icon-size + $placeholder-icon-padding * 2;
