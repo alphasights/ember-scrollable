@@ -18,7 +18,6 @@ $placeholder-icon-padding: $column-gutter;
   span {
     font-weight: $font-weight-bold;
     font-size: $h4-font-size;
-    margin-bottom: $column-gutter;
   }
 
   i {
@@ -33,12 +32,24 @@ $placeholder-icon-padding: $column-gutter;
       font-size: $placeholder-icon-size;
     }
 
-    &.icon-projects {
+    &.default {
+      @include icon(lightbulb-o);
+    }
+
+    &.projects {
       @include icon(folder);
+    }
+
+    &.dashboard {
+      @include icon(desktop);
+    }
+
+    &.performance {
+      @include icon(bar-chart);
     }
   }
 
-  button {
+  .redirect-link {
     @extend %default-button;
   }
 }
