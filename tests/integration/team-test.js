@@ -192,11 +192,32 @@ test("Change project priority", function() {
   });
 });
 
+test("Showing project details", function() {
+  visit('/team');
+  click('.project-list-item:first .details');
+
+  andThen(function(){
+    equal(find('.project .header h1').text(), 'Example Project');
+  });
+});
+
 
 test("Navigating to next project", function() {
-  expect(0);
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.project .next');
+
+  andThen(function(){
+    equal(find('.project .header h1').text(), 'Example Project 2');
+  });
 });
 
 test("Navigating to previous project", function() {
-  expect(0);
+  visit('/team');
+  click('.project-list-item:last .details');
+  click('.project .previous');
+
+  andThen(function(){
+    equal(find('.project .header h1').text(), 'Example Project');
+  });
 });
