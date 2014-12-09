@@ -34,5 +34,6 @@ app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
 app.import('bower_components/messenger/build/css/messenger.css');
 app.import('bower_components/messenger/build/css/messenger-theme-flat.css');
+app.import('bower_components/velocity/velocity.ui.js');
 
 module.exports = app.toTree();

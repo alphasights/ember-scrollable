@@ -1,0 +1,44 @@
+$placeholder-icon-color: $small-font-color;
+$placeholder-icon-size: $h1-font-size * 2;
+$placeholder-icon-padding: $column-gutter;
+
+.placeholder {
+  @extend %grid-row;
+
+  > div {
+    @extend %grid-column-small-12;
+    @extend %grid-column-medium-8;
+    @extend %grid-column-large-6;
+    @extend %grid-column-centered;
+
+    text-align: center;
+    margin-top: 10%;
+  }
+
+  span {
+    font-weight: $font-weight-bold;
+    font-size: $h4-font-size;
+    margin-bottom: $column-gutter;
+  }
+
+  i {
+    color: $placeholder-icon-color;
+    border-radius: $global-rounded;
+    border: 2px solid $placeholder-icon-color;
+    height: $placeholder-icon-size + $placeholder-icon-padding * 2;
+    padding: $placeholder-icon-padding 0;
+    width: $placeholder-icon-size + $placeholder-icon-padding * 2;
+
+    &:before {
+      font-size: $placeholder-icon-size;
+    }
+
+    &.icon-projects {
+      @include icon(folder);
+    }
+  }
+
+  button {
+    @extend %default-button;
+  }
+}

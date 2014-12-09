@@ -1,3 +1,21 @@
 .liquid-container {
   overflow: visible;
 }
+
+%grid-column-centered {
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
+}
+
+%default-button {
+  @include button(
+    $padding: $column-gutter / 2,
+    $bg: $primary-input-color,
+    $radius: $global-radius
+  );
+
+  text-transform: uppercase;
+  font-size: $small-font-size;
+  font-weight: $font-weight-bold;
+}
