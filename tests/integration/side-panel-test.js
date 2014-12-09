@@ -39,7 +39,7 @@ module("Side Panel", {
 
 test("Showing", function() {
   visit('/team');
-  click('.project-list-item');
+  click('.project-list-item .details');
 
   andThen(function() {
     ok(find('.side-panel.active > div').children().length > 0);
@@ -48,7 +48,7 @@ test("Showing", function() {
 
 test("Hiding when clicking on the overlay", function() {
   visit('/team');
-  click('.project-list-item');
+  click('.project-list-item .details');
   click('.side-panel');
 
   andThen(function() {
@@ -58,14 +58,10 @@ test("Hiding when clicking on the overlay", function() {
 
 test("Hiding when clicking on the close button", function() {
   visit('/team');
-  click('.project-list-item');
+  click('.project-list-item .details');
   click('.close');
 
   andThen(function() {
     equal(find('.side-panel').length, 0);
   });
 });
-
-test("Navigating to next project", function() {});
-
-test("Navigating to previous project", function() {});

@@ -101,9 +101,9 @@ test("Read project list", function() {
       return {
         title: $project.find('h1 span').text().trim(),
         clientCode: $project.find('h1 small').text().trim(),
-        highPriority: $project.find('.priority-select .high').length === 1,
-        mediumPriority: $project.find('.priority-select .medium').length === 1,
-        lowPriority: $project.find('.priority-select .low').length === 1,
+        highPriority: $project.find('.priority-select > .high').length === 1,
+        mediumPriority: $project.find('.priority-select > .medium').length === 1,
+        lowPriority: $project.find('.priority-select > .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -184,10 +184,19 @@ test("Change project priority", function() {
   visit('/team');
 
   click('.project-list-item:first .priority-select');
-  click('.project-list-item:first .priority-select .low');
+  click('.project-list-item:first .priority-select .dropdown-item.low');
 
   andThen(function() {
     equal(watcher.called, true);
-    equal(find('.project-list-item:last .change-priority.low').length, 1);
+    equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
+});
+
+
+test("Navigating to next project", function() {
+  expect(0);
+});
+
+test("Navigating to previous project", function() {
+  expect(0);
 });

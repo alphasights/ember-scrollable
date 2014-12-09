@@ -6,8 +6,6 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('application_error', { path: ':id' });
-
   this.resource('team', function() {
     this.resource('team.project', { path: ':project_id' });
   });
@@ -15,6 +13,8 @@ Router.map(function() {
   this.resource('dashboard');
   this.resource('projects');
   this.resource('performances');
+
+  this.route('application_error', { path: "*path" });
 });
 
 export default Router;
