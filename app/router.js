@@ -12,7 +12,7 @@ Router.map(function() {
 
   this.resource('dashboard');
   this.resource('projects');
-  this.resource('performances');
+  this.resource('performance');
 });
 
 export default Router;
