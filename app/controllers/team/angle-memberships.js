@@ -47,7 +47,7 @@ export default Ember.ObjectController.extend({
         user: user,
         angle: this.get('model'),
         project: this.get('project')
-      })
+      });
 
       membership.save();
     },
