@@ -40,7 +40,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %project-angle;
     }
 
-    .angle-memberships article {
+    .angle-memberships > ul article {
       @extend %angle-member-input;
 
       .remove {
@@ -99,7 +99,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
           line-height: $angle-add-member-avatar-size;
           white-space: nowrap;
 
-          a {
+          article {
             padding: $angle-add-member-dropdown-padding $column-gutter / 2;
           }
         }
@@ -117,6 +117,10 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       .results {
         max-height: rem-calc(400);
         overflow: scroll;
+
+        .name {
+          display: inline;
+        }
       }
 
       .search {
@@ -190,8 +194,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   h1 {
     font-size: $h5-font-size;
     padding-bottom: $project-angle-section-padding / 2;
-    padding-left: $column-gutter / 2;
-    padding-right: $column-gutter / 2;
+    padding-left: $column-gutter;
+    padding-right: $column-gutter;
   }
 }
 

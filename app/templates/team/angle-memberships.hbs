@@ -19,10 +19,13 @@
   <section class="results">
     {{#each team.members}}
       {{#as-dropdown-item}}
-        <a>
+        <article>
           {{as-avatar user=this}}
-          {{name}} <small>({{initials}})</small>
-        </a>
+
+          <div class="name">
+            {{name}}
+          </div>
+        </article>
       {{/as-dropdown-item}}
     {{/each}}
   </section>

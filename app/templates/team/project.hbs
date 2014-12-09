@@ -1,41 +1,39 @@
-{{#liquid-with model use="crossFade" containerless=true}}
-  <header>
-    {{as-priority-select project=this}}
+<header>
+  {{as-priority-select project=model}}
 
-    <h1>
-      <span>{{name}}</span>
-      <small>{{clientCode}}</small>
-    </h1>
+  <h1>
+    <span>{{name}}</span>
+    <small>{{clientCode}}</small>
+  </h1>
 
-    <ul class="stats">
+  <ul class="stats">
+    <li>
+      <span class="count">{{scheduledInteractionsCount}}</span>
+      <span class="name">Upcoming</span>
+    </li>
+
+    <li>
+      <span class="count">{{notScheduledInteractionsCount}}</span>
+      <span class="name">Left to Schedule</span>
+    </li>
+
+    <li>
+      <span class="count">{{deliveredAdvisorsCount}}</span>
+      <span class="name">Delivered</span>
+    </li>
+  </ul>
+</header>
+
+<section class="angles">
+  <ul>
+    {{#each angles}}
       <li>
-        <span class="count">{{scheduledInteractionsCount}}</span>
-        <span class="name">Upcoming</span>
+        <article class="angle">
+          <h1>{{title}}</h1>
+
+          {{render "team.angle-memberships" memberships tagName="section"}}
+        </article>
       </li>
-
-      <li>
-        <span class="count">{{notScheduledInteractionsCount}}</span>
-        <span class="name">Left to Schedule</span>
-      </li>
-
-      <li>
-        <span class="count">{{deliveredAdvisorsCount}}</span>
-        <span class="name">Delivered</span>
-      </li>
-    </ul>
-  </header>
-
-  <section class="angles">
-    <ul>
-      {{#each angles}}
-        <li>
-          <article class="angle">
-            <h1>{{title}}</h1>
-
-            {{render "team.angle-memberships" memberships tagName="section"}}
-          </article>
-        </li>
-      {{/each}}
-    </ul>
-  </section>
-{{/liquid-with}}
+    {{/each}}
+  </ul>
+</section>
