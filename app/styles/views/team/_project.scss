@@ -73,8 +73,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   }
 
   .add {
-    @include angle-avatar-input-grid-size;
-
+    width: auto;
     line-height: $angle-member-width;
 
     button {
@@ -82,8 +81,12 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     }
 
     &.dropdown {
+      width: auto;
+
       ul {
         max-width: none;
+        max-height: rem-calc(400);
+        overflow: scroll;
         width: auto;
 
         li {
@@ -107,6 +110,11 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
       .search {
         padding: $angle-member-inner-padding;
+        cursor: auto;
+
+        &:hover {
+          background-color: transparent;
+        }
 
         i {
           @include icon(search);

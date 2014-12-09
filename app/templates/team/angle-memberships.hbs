@@ -10,16 +10,18 @@
   {{/each}}
 </ul>
 
-{{#as-dropdown title="Add Member" class="add" align="left"}}
+{{#as-dropdown title="Add Member" class="add" align="bottom"}}
   {{#as-dropdown-item class="search"}}
     <i></i>
-    {{input type="text" value=query}}
+    {{input type="text" value=query click=view.onSearchClick}}
   {{/as-dropdown-item}}
 
-  {{#as-dropdown-item}}
-    <a>
-      <img src="http://engineering.alphasights.com/img/team__1.jpg" alt="" />
-      Username Fullname <small>(UFu)</small>
-    </a>
-  {{/as-dropdown-item}}
+  {{#each team.members}}
+    {{#as-dropdown-item}}
+      <a>
+        {{as-avatar user=this}}
+        {{name}} <small>({{initials}})</small>
+      </a>
+    {{/as-dropdown-item}}
+  {{/each}}
 {{/as-dropdown}}
