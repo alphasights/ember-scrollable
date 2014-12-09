@@ -50,7 +50,10 @@ export default Ember.ObjectController.extend({
       })
 
       membership.save();
-      this.get('memberships').pushObject(membership);
+    },
+
+    remove: function(membership) {
+      membership.destroyRecord();
     }
   }
 });

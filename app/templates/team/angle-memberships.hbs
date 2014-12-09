@@ -4,7 +4,7 @@
       <article>
         {{as-avatar user=user}}
         {{super-number value=deliveryTarget}}
-        <button class="remove"></button>
+        <button class="remove" {{action "remove" this}}></button>
       </article>
     </li>
   {{/each}}
