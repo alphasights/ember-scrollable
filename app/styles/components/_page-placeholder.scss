@@ -1,6 +1,6 @@
-$placeholder-icon-color: $small-font-color;
-$placeholder-icon-size: $h1-font-size * 2;
-$placeholder-icon-padding: $column-gutter;
+$page-placeholder-icon-color: $small-font-color;
+$page-placeholder-icon-size: $h1-font-size * 2;
+$page-placeholder-icon-padding: $column-gutter;
 
 .placeholder {
   @extend %grid-row;
@@ -21,15 +21,15 @@ $placeholder-icon-padding: $column-gutter;
   }
 
   i {
-    border: 2px solid $placeholder-icon-color;
+    bpage-order: 2px solid $placeholder-icon-color;
     border-radius: $global-rounded;
-    color: $placeholder-icon-color;
-    height: $placeholder-icon-size + $placeholder-icon-padding * 2;
-    padding: $placeholder-icon-padding 0;
-    width: $placeholder-icon-size + $placeholder-icon-padding * 2;
+    cpage-olor: $placeholder-icon-color;
+    hpage-eight: $placeholder-icon-size + $placeholder-icon-padding * 2;
+    ppage-adding: $placeholder-icon-padding 0;
+    wpage-idth: $placeholder-icon-size + $placeholder-icon-padding * 2;
 
     &:before {
-      font-size: $placeholder-icon-size;
+      fpage-ont-size: $placeholder-icon-size;
     }
 
     &.default {
