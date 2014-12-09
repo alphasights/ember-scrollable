@@ -21,15 +21,15 @@ $page-placeholder-icon-padding: $column-gutter;
   }
 
   i {
-    bpage-order: 2px solid $placeholder-icon-color;
+    border: 2px solid $page-placeholder-icon-color;
     border-radius: $global-rounded;
-    cpage-olor: $placeholder-icon-color;
-    hpage-eight: $placeholder-icon-size + $placeholder-icon-padding * 2;
-    ppage-adding: $placeholder-icon-padding 0;
-    wpage-idth: $placeholder-icon-size + $placeholder-icon-padding * 2;
+    color: $page-placeholder-icon-color;
+    height: $page-placeholder-icon-size + $page-placeholder-icon-padding * 2;
+    padding: $page-placeholder-icon-padding 0;
+    width: $page-placeholder-icon-size + $page-placeholder-icon-padding * 2;
 
     &:before {
-      fpage-ont-size: $placeholder-icon-size;
+      font-size: $page-placeholder-icon-size;
     }
 
     &.default {

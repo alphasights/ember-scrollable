@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':placeholder'],
-  attributeBindings: ['icon', 'sectionName', 'link'],
+  attributeBindings: ['icon', 'pageName', 'link'],
   tagName: 'section',
 
   externalUrl: 'https://secure.alphasights.com/',
 
   icon: 'default',
-  sectionName: null,
+  pageName: null,
   link: 'system',
 
   externalLink: function() {
