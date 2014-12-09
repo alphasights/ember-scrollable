@@ -11,17 +11,19 @@
 </ul>
 
 {{#as-dropdown title="Add Member" class="add" align="bottom"}}
-  {{#as-dropdown-item class="search"}}
+  <li class="search">
     <i></i>
     {{input type="text" value=query click=view.onSearchClick}}
-  {{/as-dropdown-item}}
+  </li>
 
-  {{#each team.members}}
-    {{#as-dropdown-item}}
-      <a>
-        {{as-avatar user=this}}
-        {{name}} <small>({{initials}})</small>
-      </a>
-    {{/as-dropdown-item}}
-  {{/each}}
+  <section class="results">
+    {{#each team.members}}
+      {{#as-dropdown-item}}
+        <a>
+          {{as-avatar user=this}}
+          {{name}} <small>({{initials}})</small>
+        </a>
+      {{/as-dropdown-item}}
+    {{/each}}
+  </section>
 {{/as-dropdown}}

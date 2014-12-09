@@ -85,9 +85,15 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
       ul {
         max-width: none;
-        max-height: rem-calc(400);
-        overflow: scroll;
         width: auto;
+
+        &:before {
+          left: 12px;
+        }
+
+        &:after {
+          left: 11px;
+        }
 
         li {
           line-height: $angle-add-member-avatar-size;
@@ -106,6 +112,11 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         height: $angle-add-member-avatar-size;
         margin-right: $column-gutter / 4;
         width: $angle-add-member-avatar-size;
+      }
+
+      .results {
+        max-height: rem-calc(400);
+        overflow: scroll;
       }
 
       .search {
