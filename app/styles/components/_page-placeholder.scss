@@ -21,6 +21,8 @@ $page-placeholder-icon-padding: $column-gutter;
   }
 
   i {
+    @include single-transition(background-color);
+
     border: 2px solid $page-placeholder-icon-color;
     border-radius: $global-rounded;
     color: $page-placeholder-icon-color;
@@ -30,6 +32,11 @@ $page-placeholder-icon-padding: $column-gutter;
 
     &:before {
       font-size: $page-placeholder-icon-size;
+    }
+
+    &:hover {
+      background-color: $page-placeholder-icon-color;
+      color: $white;
     }
 
     &.default {
