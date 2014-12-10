@@ -166,7 +166,6 @@ test("Search results", function() {
   });
 });
 
-
 test("Empty search results", function() {
   defineFixture('/quick_jumps', { q: 'example' }, {
     "responses": {
