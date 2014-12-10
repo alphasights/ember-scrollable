@@ -170,5 +170,11 @@
         }
       }
     }
+
+    .empty {
+      height: $quick-jump-height;
+      line-height: $quick-jump-height;
+      padding-left: $column-gutter + rem-calc($quick-jump-icon-size);
+    }
   }
 }
