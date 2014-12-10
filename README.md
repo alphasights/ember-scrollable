@@ -9,7 +9,9 @@ A short introduction of this app could easily go here.
 You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM) and [Bower](http://bower.io/)
+* [Node.js](http://nodejs.org/)
+* [Bower](http://bower.io/)
+* [ember-cli](http://www.ember-cli.com/)
 
 ## Installation
 

@@ -165,3 +165,21 @@ test("Search results", function() {
     );
   });
 });
+
+test("Empty search results", function() {
+  defineFixture('/quick_jumps', { q: 'example' }, {
+    "responses": {
+      "hits": {
+        "hits": []
+      }
+    }
+  });
+
+  visit('/');
+  click('.quick-jump .bar input');
+  fillIn('.quick-jump .bar input', 'example');
+
+  andThen(function() {
+    equal($('.quick-jump .results strong').text().trim(), 'Your search did not match any documents.');
+  });
+});

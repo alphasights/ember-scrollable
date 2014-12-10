@@ -19,16 +19,8 @@ module.exports = function(environment) {
       // when it is created
       apiBaseUrl: '/swordfish',
       authUrl: 'http://localhost:3000/system',
-
-      raven: {
-        url: 'https://665338a0e51643adb0c51f05dda5c368@app.getsentry.com/31225',
-
-        whitelistUrls: [
-          'as-phoenix-production.herokuapp.com',
-          'as-phoenix-staging.herokuapp.com',
-          'phoenix.alphasights.com'
-        ]
-      }
+      honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
+      segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O'
     }
   };
 
@@ -60,6 +52,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authUrl = 'https://secure.alphasights.com/system';
+    ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
   }
 
   return ENV;

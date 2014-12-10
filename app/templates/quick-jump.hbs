@@ -30,20 +30,27 @@
 
 {{#liquid-if view.isActive containerless=true use="crossFade"}}
   <div class="results">
-    {{#liquid-if results use="crossFade"}}
-      {{#each allSections}}
-        <section>
-          <h1>{{title}}</h1>
+    {{#liquid-if requestPromise.isFulfilled use="crossFade"}}
+      {{#if results}}
+        {{#each allSections}}
+          <section>
+            <h1>{{title}}</h1>
 
-          <ul>
-            {{#each result in results}}
-              <li>
-                {{render "quick-jump/result" result tagName="article"}}
-              </li>
-            {{/each}}
-          </ul>
-        </section>
-      {{/each}}
+            <ul>
+              {{#each result in results}}
+                <li>
+                  {{render "quick-jump/result" result tagName="article"}}
+                </li>
+              {{/each}}
+            </ul>
+          </section>
+        {{/each}}
+      {{else}}
+        <div class="empty">
+          <strong>Your search did not match any documents.</strong>
+          Make sure that all words are spelled correctly.
+        </div>
+      {{/if}}
     {{/liquid-if}}
   </div>
 {{/liquid-if}}
