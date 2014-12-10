@@ -114,7 +114,7 @@ test("Search results", function() {
 
     deepEqual(sections, [
       {
-        title: 'Top Hit',
+        title: 'Top Hit - User',
 
         results: [{
           title: 'Example User',

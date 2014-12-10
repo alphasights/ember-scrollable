@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
 
   topHitSection: function() {
     return {
-      title: `Top Hit - ${this.get('topHit.type')}`,
+      title: `Top Hit - ${this.get('topHit.type').capitalize()}`,
       results: [this.get('topHit')]
     };
   }.property('topHit'),
