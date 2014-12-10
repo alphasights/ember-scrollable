@@ -49,7 +49,10 @@ export default Ember.Controller.extend({
   }.property('normalizedResults'),
 
   topHitSection: function() {
-    return { title: 'Top Hit', results: [this.get('topHit')] };
+    return {
+      title: `Top Hit - ${this.get('topHit.type')}`,
+      results: [this.get('topHit')]
+    };
   }.property('topHit'),
 
   allSections: function() {
