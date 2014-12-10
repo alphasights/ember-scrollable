@@ -8,7 +8,7 @@ Ember.Test.registerHelper('requestWatcher', function(app, method, url, params, b
     if (_(params).isEqual(request.queryParams) &&
         _(body).isEqual(JSON.parse(request.requestBody))) {
       watcher.called = true;
-      
+
       return [
         status,
         { 'Content-Type': 'application/json' },

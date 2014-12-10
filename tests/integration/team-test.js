@@ -186,7 +186,6 @@ test("Change project priority", function() {
   }, {});
 
   visit('/team');
-
   click('.project-list-item:first .priority-select');
   click('.project-list-item:first .priority-select .dropdown-item.low');
 
@@ -302,7 +301,6 @@ test("Change project priority from the details", function() {
   }, {});
 
   visit('/team');
-
   click('.project-list-item:first .details');
   click('.project .priority-select');
   click('.project .priority-select .dropdown-item.low');
@@ -310,5 +308,24 @@ test("Change project priority from the details", function() {
   andThen(function() {
     equal(watcher.called, true);
     equal(find('.project-list-item:last .priority-select > .low').length, 1);
+  });
+});
+
+test("Changing delivery target for an angle membership", function() {
+  var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
+    "angle_team_membership": {
+      "target_value": 6,
+      "created_at": "2014-07-09T15:46:03.347Z",
+      "angle_id": "1",
+      "team_member_id": "1"
+    }
+  }, {});
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
+
+  andThen(function() {
+    equal(watcher.called, true);
   });
 });
