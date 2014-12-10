@@ -10,6 +10,8 @@ export default Ember.ObjectController.extend({
   }.observes('model'),
 
   bootIntercom: function() {
+    if (typeof Intercom === 'undefined') { return; }
+
     var model = this.get('model');
 
     new Intercom('boot', {
