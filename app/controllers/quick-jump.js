@@ -34,7 +34,8 @@ export default Ember.Controller.extend({
 
         return _({}).extend(source, {
           type: result._type,
-          score: result._score
+          score: result._score,
+          id: result._id
         });
       });
     } else {
