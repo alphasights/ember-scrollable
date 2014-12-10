@@ -46,13 +46,13 @@ module("Team", {
       }, {
         "target_value": 0,
         "id": 2,
-        "created_at": "2014-07-09T16:46:03.347+01:00",
+        "created_at": "2014-07-09T16:46:04.347+01:00",
         "angle_id": 1,
         "team_member_id": 2
       }, {
         "target_value": 2,
         "id": 3,
-        "created_at": "2014-07-09T16:46:03.347+01:00",
+        "created_at": "2014-07-09T16:46:05.347+01:00",
         "angle_id": 2,
         "team_member_id": 1
       }],
@@ -201,7 +201,47 @@ test("Showing project details", function() {
   click('.project-list-item:first .details');
 
   andThen(function(){
-    equal(find('.project h1 span').text(), 'Example Project');
+    var $project = find('.project');
+    var $angle = $project.find('.angle');
+
+    var projectDetails = {
+      title: $project.find('h1 span').text().trim(),
+      highPriority: $project.find('.priority-select > .high').length === 1,
+      mediumPriority: $project.find('.priority-select > .medium').length === 1,
+      lowPriority: $project.find('.priority-select > .low').length === 1,
+
+      angle: {
+        title: $angle.find('> h1').text().trim(),
+
+        memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
+          var $membership = $(membership);
+
+          return {
+            avatarUrl: $membership.find('.avatar').prop('src'),
+            deliveryTarget: $membership.find('.delivery-target input').val()
+          };
+        })
+      }
+    };
+
+    deepEqual(projectDetails, {
+      title: 'Example Project',
+      highPriority: true,
+      mediumPriority: false,
+      lowPriority: false,
+
+      angle: {
+        title: 'Angle 1',
+
+        memberships: [{
+          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          deliveryTarget: '4'
+        }, {
+          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          deliveryTarget: '0'
+        }]
+      }
+    });
   });
 });
 
@@ -243,5 +283,32 @@ test("Moving back to the first project from the last", function() {
 
   andThen(function(){
     equal(find('.project h1 span').text(), 'Example Project');
+  });
+});
+
+test("Change project priority from the details", function() {
+  var watcher = requestWatcher('put', '/projects/1', {}, {
+    "project": {
+      "client_code": "EP",
+      "created_at": "2009-07-14T16:05:32.909Z",
+      "details_url": "/projects/1",
+      "left_to_schedule_advisors_count": 0,
+      "name": "Example Project",
+      "proposed_advisors_count": 1,
+      "status": "low",
+      "upcoming_interactions_count": 0,
+      "analyst_1_id": "1"
+    }
+  }, {});
+
+  visit('/team');
+
+  click('.project-list-item:first .details');
+  click('.project .priority-select');
+  click('.project .priority-select .dropdown-item.low');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
 });
