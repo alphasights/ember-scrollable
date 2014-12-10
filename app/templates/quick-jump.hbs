@@ -39,7 +39,7 @@
             <ul>
               {{#each result in results}}
                 <li>
-                  {{render "quick-jump/result" result tagName="article"}}
+                  {{render "quick-jump.result" result tagName="article"}}
                 </li>
               {{/each}}
             </ul>
@@ -48,7 +48,7 @@
       {{else}}
         <div class="empty">
           <strong>Your search did not match any documents.</strong>
-          Make sure that all words are spelled correctly.
+          <span>Make sure that all words are spelled correctly.</span>
         </div>
       {{/if}}
     {{/liquid-if}}

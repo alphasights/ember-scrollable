@@ -30,6 +30,10 @@ module("Side Panel", {
         "upcoming_interactions_count": 0
       }]
     });
+
+    defineFixture('/users', { team_id: '1' }, {
+      "users": []
+    });
   },
 
   teardown: function() {
@@ -42,7 +46,7 @@ test("Showing", function() {
   click('.project-list-item .details');
 
   andThen(function() {
-    ok(find('.side-panel.active > div').children().length > 0);
+    equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
   });
 });
 

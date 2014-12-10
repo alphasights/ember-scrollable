@@ -87,8 +87,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   }
 
   .add {
-    width: auto;
     line-height: $angle-member-width;
+    width: auto;
 
     button {
       @extend %angle-member-add-button;
@@ -138,8 +138,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       }
 
       .search {
-        padding: $angle-member-inner-padding;
         cursor: auto;
+        padding: $angle-member-inner-padding;
         position: relative;
 
         &:hover {
@@ -147,13 +147,13 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         }
 
         .progress-indicator {
-          width: 32px;
           height: 32px;
+          left: 3px;
           overflow: hidden;
           position: absolute;
-          top: 3px;
-          left: 3px;
           text-align: center;
+          top: 3px;
+          width: 32px;
         }
 
         i {
@@ -165,9 +165,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
         input {
           border-radius: $global-radius / 2;
+          height: 32px;
           margin-bottom: 0;
           padding-left: $angle-add-member-avatar-size * 1.5;
-          height: 32px;
         }
       }
     }
@@ -217,8 +217,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
   h1 {
     font-size: $h5-font-size;
-    padding-left: $column-gutter / 2;
     padding-bottom: $project-angle-section-padding / 2;
+    padding-left: $column-gutter / 2;
   }
 }
 

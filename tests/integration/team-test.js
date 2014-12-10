@@ -83,6 +83,10 @@ module("Team", {
         "upcoming_interactions_count": 0
       }]
     });
+
+    defineFixture('/users', { team_id: '1' }, {
+      "users": []
+    });
   },
 
   teardown: function() {
@@ -197,7 +201,7 @@ test("Showing project details", function() {
   click('.project-list-item:first .details');
 
   andThen(function(){
-    equal(find('.project .header h1').text(), 'Example Project');
+    equal(find('.project h1 span').text(), 'Example Project');
   });
 });
 
@@ -208,7 +212,7 @@ test("Navigating to next project", function() {
   click('.project .next');
 
   andThen(function(){
-    equal(find('.project .header h1').text(), 'Example Project 2');
+    equal(find('.project h1 span').text(), 'Example Project 2');
   });
 });
 
@@ -218,6 +222,26 @@ test("Navigating to previous project", function() {
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project .header h1').text(), 'Example Project');
+    equal(find('.project h1 span').text(), 'Example Project');
+  });
+});
+
+test("Moving back to the last project from the first", function() {
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.project .previous');
+
+  andThen(function(){
+    equal(find('.project h1 span').text(), 'Example Project 2');
+  });
+});
+
+test("Moving back to the first project from the last", function() {
+  visit('/team');
+  click('.project-list-item:last .details');
+  click('.project .next');
+
+  andThen(function(){
+    equal(find('.project h1 span').text(), 'Example Project');
   });
 });
