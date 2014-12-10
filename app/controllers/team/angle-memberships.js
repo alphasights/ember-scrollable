@@ -7,6 +7,10 @@ export default Ember.ObjectController.extend({
   requestPromise: null,
   query: null,
 
+  memberships: function() {
+    return this.get('model.memberships').sortBy('createdAt');
+  }.property('model.memberships.[]'),
+
   teamMembers: function() {
     if (this.get('requestPromise')) {
       return this.get('results');
@@ -43,6 +47,8 @@ export default Ember.ObjectController.extend({
 
   actions: {
     add: function(user) {
+      if (this.get('members').contains(user)) { return; }
+
       var membership = this.store.createRecord('angleTeamMembership', {
         user: user,
         angle: this.get('model'),

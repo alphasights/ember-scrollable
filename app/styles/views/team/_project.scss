@@ -51,36 +51,36 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
             padding-left: 0;
           }
         }
-      }
 
-      article {
-        @extend %angle-member-input;
+        article {
+          @extend %angle-member-input;
 
-        .remove {
-          @include button-icon(close);
-          @include single-transition(background-color, 100ms, linear);
+          .remove {
+            @include button-icon(close);
+            @include single-transition(background-color, 100ms, linear);
 
-          border: $angle-member-border;
-          border-radius: $global-rounded;
-          display: none;
-          position: absolute;
-          right: 0;
-          top: -$super-number-arrow-size / 2;
-          z-index: 1;
+            border: $angle-member-border;
+            border-radius: $global-rounded;
+            display: none;
+            position: absolute;
+            right: 0;
+            top: -$super-number-arrow-size / 2;
+            z-index: 1;
 
-          &:before {
-            line-height: $super-number-arrow-size;
-            width: $super-number-arrow-size;
+            &:before {
+              line-height: $super-number-arrow-size;
+              width: $super-number-arrow-size;
+            }
+
+            &:hover {
+              background-color: $charcoal;
+              color: $white;
+            }
           }
 
-          &:hover {
-            background-color: $charcoal;
-            color: $white;
+          &:hover .remove {
+            display: block;
           }
-        }
-
-        &:hover .remove {
-          display: block;
         }
       }
     }

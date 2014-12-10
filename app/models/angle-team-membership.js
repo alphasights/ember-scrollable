@@ -8,5 +8,9 @@ export default DS.Model.extend({
   targetValue: DS.attr('number', { defaultValue: 0 }),
 
   user: Ember.computed.alias('teamMember'),
-  deliveryTarget: Ember.computed.alias('targetValue')
+  deliveryTarget: Ember.computed.alias('targetValue'),
+
+  deliveryTargetDidChange: function() {
+    this.set('deliveryTarget', Math.max(0, this.get('deliveryTarget')));
+  }.observes('deliveryTarget')
 });
