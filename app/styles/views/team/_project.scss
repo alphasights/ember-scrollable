@@ -40,34 +40,48 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %project-angle;
     }
 
-    .angle-memberships > ul article {
-      @extend %angle-member-input;
+    .angle-memberships {
+      margin: 0 $column-gutter / 2;
 
-      .remove {
-        @include button-icon(close);
-        @include single-transition(background-color, 100ms, linear);
+      > ul {
+        margin-left: 0;
 
-        border: $angle-member-border;
-        border-radius: $global-rounded;
-        display: none;
-        position: absolute;
-        right: 0;
-        top: -$super-number-arrow-size / 2;
-        z-index: 1;
-
-        &:before {
-          line-height: $super-number-arrow-size;
-          width: $super-number-arrow-size;
-        }
-
-        &:hover {
-          background-color: $charcoal;
-          color: $white;
+        > li {
+          &:first-child article {
+            padding-left: 0;
+          }
         }
       }
 
-      &:hover .remove {
-        display: block;
+      article {
+        @extend %angle-member-input;
+
+        .remove {
+          @include button-icon(close);
+          @include single-transition(background-color, 100ms, linear);
+
+          border: $angle-member-border;
+          border-radius: $global-rounded;
+          display: none;
+          position: absolute;
+          right: 0;
+          top: -$super-number-arrow-size / 2;
+          z-index: 1;
+
+          &:before {
+            line-height: $super-number-arrow-size;
+            width: $super-number-arrow-size;
+          }
+
+          &:hover {
+            background-color: $charcoal;
+            color: $white;
+          }
+        }
+
+        &:hover .remove {
+          display: block;
+        }
       }
     }
   }
@@ -203,9 +217,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
   h1 {
     font-size: $h5-font-size;
+    padding-left: $column-gutter / 2;
     padding-bottom: $project-angle-section-padding / 2;
-    padding-left: $column-gutter;
-    padding-right: $column-gutter;
   }
 }
 

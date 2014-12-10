@@ -16,7 +16,7 @@ export default Ember.ObjectController.extend({
   }.property('requestPromise', 'team.members'),
 
   queryDidChange: function() {
-    if (Ember.isEmpty(this.get('query'))) {
+    if (Ember.isBlank(this.get('query'))) {
       this.set('requestPromise', null);
     }
 
