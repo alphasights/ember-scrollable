@@ -6,10 +6,10 @@ export default Ember.Controller.extend({
   preferences: Ember.computed.alias('currentUser.preferences'),
 
   actions: {
-    toggleCollapse: function(isCollapsed) {
+    toggleCollapse: function() {
       var preferences = this.get('preferences');
 
-      preferences.set('sidebarCollapsed', !isCollapsed);
+      preferences.toggleProperty('sidebarCollapsed');
       preferences.save();
     }
   }
