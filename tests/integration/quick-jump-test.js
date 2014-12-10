@@ -181,6 +181,6 @@ test("Empty search results", function() {
   fillIn('.quick-jump .bar input', 'example');
 
   andThen(function() {
-    equal($('.quick-jump .results strong').text().trim(), 'Your search did not match any documents.')
+    equal($('.quick-jump .results strong').text().trim(), 'Your search did not match any documents.');
   });
 });
