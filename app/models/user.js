@@ -5,5 +5,6 @@ export default DS.Model.extend({
   developer: DS.attr('boolean'),
   initials: DS.attr('string'),
   name: DS.attr('string'),
-  teamId: DS.attr('string')
+  teamId: DS.attr('string'),
+  intercomUserHash: DS.attr('string')
 });
