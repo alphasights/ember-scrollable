@@ -5,6 +5,10 @@ export default Ember.View.extend({
   type: Ember.computed.alias('controller.type'),
 
   templateName: function() {
-    return `quick-jump/result/${this.get('type')}`;
+    if (this.get('type') != null) {
+      return `quick-jump/result/${this.get('type')}`;
+    } else {
+      return null;
+    }
   }.property('type')
 });
