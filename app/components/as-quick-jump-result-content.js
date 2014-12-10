@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Component.extend({
   classNameBindings: [':quick-jump-result-content'],
@@ -9,6 +10,6 @@ export default Ember.Component.extend({
   path: null,
 
   url: function() {
-    return `http://secure.alphasights.com/${this.get('path')}/${this.get('id')}`;
+    return `${config.APP.apiHost}/${this.get('path')}/${this.get('id')}`;
   }.property('id', 'path')
 });

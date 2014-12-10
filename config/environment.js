@@ -18,6 +18,7 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       apiBaseUrl: '/swordfish',
+      apiHost: 'http://localhost:3000',
       authUrl: 'http://localhost:3000/system',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O'
@@ -45,11 +46,13 @@ module.exports = function(environment) {
   }
 
   if (environment === 'staging') {
+    ENV.APP.apiHost = 'https://pistachio-staging.herokuapp.com';
     ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
     ENV.APP.authUrl = 'https://pistachio-staging.herokuapp.com/system';
   }
 
   if (environment === 'production') {
+    ENV.APP.apiHost = 'https://secure.alphasights.com';
     ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authUrl = 'https://secure.alphasights.com/system';
     ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
