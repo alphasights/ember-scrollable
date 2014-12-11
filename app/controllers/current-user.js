@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.ObjectController.extend({
   preferences: null,
@@ -15,7 +16,7 @@ export default Ember.ObjectController.extend({
     var model = this.get('model');
 
     new Intercom('boot', {
-      app_id: '4rw4fi3l',
+      app_id: config.APP.intercomAppId,
       email: model.get('email'),
       created_at: model.get('createdAt'),
       name: model.get('name'),
