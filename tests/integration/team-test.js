@@ -85,7 +85,12 @@ module("Team", {
     });
 
     defineFixture('/users', { team_id: '1' }, {
-      "users": []
+      "users": [{
+        "initials": "EU3",
+        "id": 3,
+        "teamId": 1,
+        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+      }]
     });
   },
 
@@ -174,7 +179,6 @@ test("Change project priority", function() {
   var watcher = requestWatcher('put', '/projects/1', {}, {
     "project": {
       "client_code": "EP",
-      "created_at": "2009-07-14T16:05:32.909Z",
       "details_url": "/projects/1",
       "left_to_schedule_advisors_count": 0,
       "name": "Example Project",
@@ -289,7 +293,6 @@ test("Change project priority from the details", function() {
   var watcher = requestWatcher('put', '/projects/1', {}, {
     "project": {
       "client_code": "EP",
-      "created_at": "2009-07-14T16:05:32.909Z",
       "details_url": "/projects/1",
       "left_to_schedule_advisors_count": 0,
       "name": "Example Project",
@@ -315,7 +318,6 @@ test("Changing delivery target for an angle membership", function() {
   var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
     "angle_team_membership": {
       "target_value": 6,
-      "created_at": "2014-07-09T15:46:03.347Z",
       "angle_id": "1",
       "team_member_id": "1"
     }
@@ -327,5 +329,38 @@ test("Changing delivery target for an angle membership", function() {
 
   andThen(function() {
     equal(watcher.called, true);
+  });
+});
+
+test("Adding a member to an angle", function() {
+  var watcher = requestWatcher('post', '/angle_team_memberships', {}, {
+    "angle_team_membership": {
+      "target_value": 0,
+      "angle_id": "1",
+      "team_member_id": "3"
+    }
+  }, {});
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.angle-memberships .add > button');
+  click('.angle-memberships .add .team-members li');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.angle-memberships > ul article').length, 3);
+  });
+});
+
+test("Removing a member from an angle", function() {
+  var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.angle-memberships > ul article:first .remove');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.angle-memberships > ul article').length, 1);
   });
 });

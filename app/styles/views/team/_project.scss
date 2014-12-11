@@ -46,12 +46,6 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       > ul {
         margin-left: 0;
 
-        > li {
-          &:first-child article {
-            padding-left: 0;
-          }
-        }
-
         article {
           @extend %angle-member-input;
 
@@ -226,6 +220,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   @include angle-avatar-input-grid-size;
 
   position: relative;
+  padding-left: 0 !important;
 
   img {
     border-radius: $angle-member-radius;
