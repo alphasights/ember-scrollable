@@ -6,10 +6,10 @@ export default Ember.Component.extend({
 
   details: null,
   title: null,
-  id: null,
-  path: null,
+  resourceId: null,
+  resourcePath: null,
 
   url: function() {
-    return `${config.APP.apiHost}/${this.get('path')}/${this.get('id')}`;
-  }.property('id', 'path')
+    return `${config.APP.apiHost}/${this.get('resourcePath')}/${this.get('resourceId')}`;
+  }.property('resourceId', 'resourcePath')
 });
