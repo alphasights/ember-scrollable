@@ -6,7 +6,7 @@ section.projects {
   header {
     @extend %grid-row;
 
-    background-color: lighten($info-color, 2%);
+    background-color: $panel-bg;
     border-radius: $global-radius / 2;
     line-height: $projects-header-height;
     margin-top: $column-gutter / 2;

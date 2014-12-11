@@ -1,5 +1,3 @@
-$project-list-item-hover-background-color: $ghost;
-
 .project-list-item {
   @include single-transition(background-color, 100ms, linear);
   @extend %grid-row;
@@ -92,7 +90,7 @@ $project-list-item-hover-background-color: $ghost;
   }
 
   &:hover {
-    background-color: $project-list-item-hover-background-color;
+    background-color: lighten($global-section-border-color, 6%);
 
     .progress .details .delivered {
       opacity: 1;

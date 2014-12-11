@@ -1,9 +1,3 @@
-$side-panel-background: $white;
-$side-panel-width-large: 70%;
-$side-panel-width-medium: 90%;
-$side-panel-width-small: 100%;
-
-$side-panel-actions-border-color: darken($snow, 5%);
 $side-panel-actions-button-size: 35px;
 
 @mixin side-panel-size($width) {
@@ -25,7 +19,7 @@ $side-panel-actions-button-size: 35px;
   > div {
     @include single-transition(opacity, 150ms, linear);
 
-    background-color: $side-panel-background;
+    background-color: $white;
     float: right;
     height: 100%;
     overflow-y: auto;
@@ -36,15 +30,15 @@ $side-panel-actions-button-size: 35px;
     }
 
     @media #{$small-up} {
-      @include side-panel-size($side-panel-width-small);
+      @include side-panel-size(100%);
     }
 
     @media #{$medium-up} {
-      @include side-panel-size($side-panel-width-medium);
+      @include side-panel-size(90%);
     }
 
     @media #{$large-up} {
-      @include side-panel-size($side-panel-width-large);
+      @include side-panel-size(70%);
     }
   }
 
@@ -63,12 +57,12 @@ $side-panel-actions-button-size: 35px;
         @include button-group-style($radius: $global-radius, $float: null);
 
         button {
-          border-color: $side-panel-actions-border-color;
+          border-color: $global-section-border-color;
           border-left: 0;
         }
 
         &:first-child button {
-          border-left: solid 1px $side-panel-actions-border-color;
+          border-left: solid 1px $global-section-border-color;
         }
       }
     }
@@ -76,7 +70,7 @@ $side-panel-actions-button-size: 35px;
     .close {
       @include button-icon(close);
 
-      border-color: $side-panel-actions-border-color;
+      border-color: $global-section-border-color;
     }
 
     button {

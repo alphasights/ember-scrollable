@@ -205,7 +205,7 @@ test("Showing project details", function() {
 
   andThen(function(){
     var $project = find('.project');
-    var $angle = $project.find('.angle');
+    var $angle = $project.find('.angles article');
 
     var projectDetails = {
       title: $project.find('h1 span').text().trim(),

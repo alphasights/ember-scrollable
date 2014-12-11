@@ -2,7 +2,6 @@ $super-number-height: 60px;
 $super-number-arrow-color: lighten($header-font-color, 25%);
 $super-number-arrow-size: 20px;
 $super-number-arrow-padding: ($super-number-height - (2 * $super-number-arrow-size)) / 2;
-$super-number-arrow-font-size: $h3-font-size;
 
 .super-number {
   .increment,
@@ -10,7 +9,7 @@ $super-number-arrow-font-size: $h3-font-size;
     background: none;
     border-radius: $global-radius;
     color: $super-number-arrow-color;
-    font-size: $super-number-arrow-font-size;
+    font-size: $h3-font-size;
     height: $super-number-arrow-size;
     left: auto;
     right: $super-number-arrow-padding;

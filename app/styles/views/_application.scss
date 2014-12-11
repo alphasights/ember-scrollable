@@ -1,7 +1,4 @@
-$application-content-heading-height: rem-calc(100);
-$application-content-heading-color: $subheader-font-color;
-
-main > .content {
+.application main > .content {
   padding-top: $layout-sidebar-header-height;
 
   > section,
@@ -18,9 +15,9 @@ main > .content {
       h1 {
         @extend %heading-medium-uppercase;
 
-        color: $application-content-heading-color;
+        color: $subheader-font-color;
         font-weight: $font-weight-normal;
-        line-height: $application-content-heading-height;
+        line-height: rem-calc(100);
         margin: 0;
       }
 
