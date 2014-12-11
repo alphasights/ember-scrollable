@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
     var topHit = this.get('topHit');
 
     return {
-      title: `Top Hit - ${topHit.get('type').capitalize()}`,
+      title: `Top Hit - ${topHit.type.capitalize()}`,
       results: [topHit]
     };
   }.property('topHit'),
