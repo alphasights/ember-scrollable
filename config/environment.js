@@ -48,14 +48,12 @@ module.exports = function(environment) {
   if (environment === 'staging') {
     ENV.APP.pistachioUrl = 'https://pistachio-staging.herokuapp.com';
     ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
-    ENV.APP.pistachioUrl = 'https://pistachio-staging.herokuapp.com';
     ENV.APP.authUrl = 'https://pistachio-staging.herokuapp.com/system';
   }
 
   if (environment === 'production') {
     ENV.APP.pistachioUrl = 'https://secure.alphasights.com';
     ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
-    ENV.APP.pistachioUrl = 'https://secure.alphasights.com';
     ENV.APP.authUrl = 'https://secure.alphasights.com/system';
     ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
   }
