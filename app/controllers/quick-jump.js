@@ -22,6 +22,10 @@ export default Ember.Controller.extend({
     'target': 'Targets'
   },
 
+  allSections: function() {
+    return [this.get('topHitSection')].concat(this.get('sortedResultSections'));
+  }.property('sortedResultSections', 'topHitSection'),
+
   normalizedResults: function() {
     var results = this.get('results');
 
@@ -34,7 +38,8 @@ export default Ember.Controller.extend({
 
         return _({}).extend(source, {
           type: result._type,
-          score: result._score
+          score: result._score,
+          id: result._id
         });
       });
     } else {
@@ -56,10 +61,6 @@ export default Ember.Controller.extend({
       results: [topHit]
     };
   }.property('topHit'),
-
-  allSections: function() {
-    return [this.get('topHitSection')].concat(this.get('sortedResultSections'));
-  }.property('sortedResultSections', 'topHitSection'),
 
   sortedResultSections: function() {
     var resultSectionsOrder = this.get('resultSectionsOrder');
