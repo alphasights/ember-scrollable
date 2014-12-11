@@ -42,15 +42,15 @@ $page-placeholder-icon-padding: $column-gutter;
     }
   }
 
-  &.projects i{
+  &.projects i {
     @include icon(folder);
   }
 
-  &.dashboard i{
+  &.dashboard i {
     @include icon(desktop);
   }
 
-  &.performance i{
+  &.performance i {
     @include icon(bar-chart);
   }
 
