@@ -33,7 +33,8 @@ export default Ember.Route.extend({
   bootIntercom: function(user){
     if (typeof Intercom === 'undefined') { return; }
 
-    new Intercom('boot', {
+    /* jshint newcap: false */
+    Intercom('boot', {
       app_id: config.APP.intercomAppId,
       email: user.get('email'),
       created_at: user.get('createdAt'),
