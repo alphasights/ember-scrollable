@@ -42,6 +42,7 @@ export default Ember.Route.extend({
       user_id: user.get('id'),
       user_hash: user.get('intercomUserHash')
     });
+    /* jshint newcap: true */
   },
 
   actions: {
