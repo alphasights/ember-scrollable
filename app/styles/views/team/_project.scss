@@ -219,8 +219,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 %angle-member-input {
   @include angle-avatar-input-grid-size;
 
-  position: relative;
   padding-left: 0 !important;
+  position: relative;
 
   img {
     border-radius: $angle-member-radius;
