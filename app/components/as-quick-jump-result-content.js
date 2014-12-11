@@ -10,6 +10,6 @@ export default Ember.Component.extend({
   resourcePath: null,
 
   url: function() {
-    return `${config.APP.apiHost}/${this.get('resourcePath')}/${this.get('resourceId')}`;
+    return `${config.APP.pistachioUrl}/${this.get('resourcePath')}/${this.get('resourceId')}`;
   }.property('resourceId', 'resourcePath')
 });
