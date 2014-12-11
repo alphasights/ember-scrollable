@@ -6,6 +6,9 @@ export default Ember.ObjectController.extend({
   identifyUserOnSegment: function() {
     var model = this.get('model');
 
-    analytics.identify(model.get('initials'), _(model.toJSON()));
+    analytics.identify(
+      model.get('initials'),
+      _(model.toJSON()).pick('initials', 'name', 'developer')
+    );
   }.observes('model')
 });
