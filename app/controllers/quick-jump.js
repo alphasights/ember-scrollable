@@ -49,9 +49,11 @@ export default Ember.Controller.extend({
   }.property('normalizedResults'),
 
   topHitSection: function() {
+    var topHit = this.get('topHit');
+
     return {
-      title: `Top Hit - ${this.get('topHit.type').capitalize()}`,
-      results: [this.get('topHit')]
+      title: `Top Hit - ${topHit.get('type').capitalize()}`,
+      results: [topHit]
     };
   }.property('topHit'),
 
