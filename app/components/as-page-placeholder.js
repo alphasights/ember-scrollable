@@ -1,17 +1,15 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Component.extend({
-  classNameBindings: [':placeholder'],
-  attributeBindings: ['icon', 'pageName', 'link'],
+  classNameBindings: [':page-placeholder'],
   tagName: 'section',
-
-  externalUrl: 'https://secure.alphasights.com/',
 
   icon: 'default',
   pageName: null,
-  link: 'system',
+  path: 'system',
 
-  externalLink: function() {
-    return this.get('externalUrl') + this.get('link');
-  }.property('externalLink')
+  externalPath: function() {
+    return config.APP.pistachioUrl + '/' + this.get('path');
+  }.property('externalPath')
 });
