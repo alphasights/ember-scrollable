@@ -15,16 +15,15 @@
   {{#liquid-if view.isActive use="crossFade"}}
     <button class="close" title="Close" {{action "clear"}}></button>
   {{else}}
-    {{#as-dropdown title="Change App" align="left" class="change-app"}}
+    {{!-- {{#as-dropdown title="Change App" align="left" class="change-app"}}
       {{#as-dropdown-item}}<a href="#">Metrics</a>{{/as-dropdown-item}}
       {{#as-dropdown-item}}<a href="#">Finance</a>{{/as-dropdown-item}}
       {{#as-dropdown-item}}<a href="#">Clients</a>{{/as-dropdown-item}}
     {{/as-dropdown}}
-
     {{#as-dropdown title="Add" align="left" class="add"}}
       {{#as-dropdown-item}}<a href="#">New advisor</a>{{/as-dropdown-item}}
       {{#as-dropdown-item}}<a href="#">New project</a>{{/as-dropdown-item}}
-    {{/as-dropdown}}
+    {{/as-dropdown}} --}}
   {{/liquid-if}}
 </div>
 
