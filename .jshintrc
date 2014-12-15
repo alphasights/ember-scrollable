@@ -4,6 +4,7 @@
     "Honeybadger": true,
     "analytics": true,
     "Messenger": true,
+    "Intercom": true,
     "document": true,
     "window": true,
     "-Promise": true,

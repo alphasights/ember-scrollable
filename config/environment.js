@@ -21,7 +21,8 @@ module.exports = function(environment) {
       pistachioUrl: 'http://localhost:3000',
       authUrl: 'http://localhost:3000/system',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
-      segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O'
+      segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O',
+      intercomAppId: '4rw4fi3l'
     }
   };
 
@@ -43,6 +44,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.segmentWriteKey = null;
+    ENV.APP.intercomAppId = null;
   }
 
   if (environment === 'staging') {
@@ -56,6 +59,7 @@ module.exports = function(environment) {
     ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
     ENV.APP.authUrl = 'https://secure.alphasights.com/system';
     ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
+    ENV.APP.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
   }
 
   return ENV;
