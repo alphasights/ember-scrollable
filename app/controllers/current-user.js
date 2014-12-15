@@ -4,11 +4,11 @@ import config from '../config/environment';
 export default Ember.ObjectController.extend({
   preferences: null,
 
-  setupSegment: function() {
+  modelDidChange: function() {
     if (config.APP.segmentWriteKey != null) {
       analytics.identify(this.get('initials'), _(this.get('model').toJSON()));
     }
-  },
+  }.observes('model'),
 
   setupIntercom: function() {
     if (config.APP.intercomAppId != null) {
@@ -27,7 +27,6 @@ export default Ember.ObjectController.extend({
 
   actions: {
     boot: function() {
-      this.setupSegment();
       this.setupIntercom();
     }
   }
