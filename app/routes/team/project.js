@@ -4,11 +4,11 @@ export default SidePanelRoute.extend({
   viewName: 'team.project',
   sidePanelActionsTemplateName: 'team/project-side-panel-actions',
 
-  activate: function() {
-    var projects = this.controllerFor('team.projects').get('arrangedContent');
-    var project = this.controllerFor('team.project').get('model');
+  setupController: function(controller, model) {
+    this._super(controller, model);
 
-    this.set('index', projects.indexOf(project));
+    var projects = this.controllerFor('team.projects').get('arrangedContent');
+    this.set('index', projects.indexOf(model));
   },
 
   navigate: function(step) {
