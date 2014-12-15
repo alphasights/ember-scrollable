@@ -36,11 +36,6 @@ $page-placeholder-icon-size: $h1-font-size * 2;
     &:before {
       font-size: $page-placeholder-icon-size;
     }
-
-    &:hover {
-      background-color: $page-placeholder-icon-color;
-      color: $white;
-    }
   }
 
   &.projects i {
