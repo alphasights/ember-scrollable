@@ -6,6 +6,12 @@
       display: inline-block;
       margin: 0;
       padding: $column-gutter / 2;
+
+      a i {
+        @include icon(external-link);
+
+        font-size: $base-font-size;
+      }
     }
 
     .stats {
