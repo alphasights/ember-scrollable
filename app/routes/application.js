@@ -24,25 +24,7 @@ export default Ember.Route.extend({
     }
 
     this.controllerFor('currentUser').set('preferences', preferences);
-  },
-
-  setupController: function(controller, models) {
-    this.bootIntercom(models.currentUser);
-  },
-
-  bootIntercom: function(user){
-    if (typeof Intercom === 'undefined') { return; }
-
-    /* jshint newcap: false */
-    Intercom('boot', {
-      app_id: config.APP.intercomAppId,
-      email: user.get('email'),
-      created_at: user.get('createdAt'),
-      name: user.get('name'),
-      user_id: user.get('id'),
-      user_hash: user.get('intercomUserHash')
-    });
-    /* jshint newcap: true */
+    this.controllerFor('currentUser').send('boot');
   },
 
   actions: {
