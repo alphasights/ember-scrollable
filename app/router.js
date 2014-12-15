@@ -6,13 +6,13 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.resource('dashboard', { path: '/' });
+  this.resource('projects');
+  this.resource('performance');
+
   this.resource('team', function() {
     this.resource('team.project', { path: ':project_id' });
   });
-
-  this.resource('dashboard');
-  this.resource('projects');
-  this.resource('performance');
 });
 
 export default Router;
