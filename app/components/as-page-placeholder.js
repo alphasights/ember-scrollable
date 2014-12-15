@@ -6,9 +6,9 @@ export default Ember.Component.extend({
   tagName: 'section',
 
   pageName: null,
-  path: 'system',
+  path: null,
 
   url: function() {
-    return config.APP.pistachioUrl + '/' + this.get('path');
+    return `${config.APP.pistachioUrl}/${this.get('path')}`;
   }.property('externalPath')
 });
