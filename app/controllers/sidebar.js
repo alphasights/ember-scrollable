@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
   currentUser: Ember.computed.alias('controllers.currentUser'),
   preferences: Ember.computed.alias('currentUser.preferences'),
   logoutUrl: `${config.APP.pistachioUrl}/logout`,
+  oldSystemUrl: `${config.APP.pistachioUrl}/system`,
 
   actions: {
     toggleCollapse: function() {

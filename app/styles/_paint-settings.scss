@@ -3,14 +3,16 @@ $layout-sidebar-nav-classes:
   team,
   projects,
   performances,
-  settings;
+  settings,
+  old-system;
 
 $layout-sidebar-nav-icons:
   tachometer,
   tasks,
   folder,
   bar-chart,
-  cog;
+  cog,
+  reply;
 
 $layout-sidebar-footer-block: 'section.user-session';
 $layout-sidebar-header-height: 60px;
