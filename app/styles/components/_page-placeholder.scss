@@ -54,6 +54,6 @@ $page-placeholder-icon-padding: $column-gutter;
   }
 
   .redirect-link {
-    @extend %button;
+    @extend %button-primary;
   }
 }
