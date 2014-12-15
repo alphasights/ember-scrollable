@@ -255,7 +255,7 @@ test("Navigating to next project", function() {
   click('.project .next');
 
   andThen(function(){
-    equal(find('.project h1 span').text(), 'Example Project 2');
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -265,7 +265,7 @@ test("Navigating to previous project", function() {
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text(), 'Example Project');
+    equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
@@ -275,7 +275,7 @@ test("Moving back to the last project from the first", function() {
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text(), 'Example Project 2');
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -285,7 +285,7 @@ test("Moving back to the first project from the last", function() {
   click('.project .next');
 
   andThen(function(){
-    equal(find('.project h1 span').text(), 'Example Project');
+    equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
