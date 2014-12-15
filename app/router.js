@@ -14,7 +14,7 @@ Router.map(function() {
   this.resource('projects');
   this.resource('performances');
 
-  this.route('application_error', { path: "*path" });
+  this.route('application_error', { path: '*path' });
 });
 
 export default Router;
