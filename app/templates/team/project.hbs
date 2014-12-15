@@ -2,7 +2,11 @@
   {{as-priority-select project=model}}
 
   <h1>
-    <span><a {{bind-attr href=pistachioProjectUrl}}>{{name}}</a></span>
+    <span>
+      <a {{bind-attr href=pistachioProjectUrl}} target="_blank">
+        {{name}}
+      </a>
+    </span>
     <small>{{clientCode}}</small>
   </h1>
 
