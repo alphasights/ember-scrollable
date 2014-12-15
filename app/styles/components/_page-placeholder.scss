@@ -8,9 +8,8 @@ $page-placeholder-icon-padding: $column-gutter;
 
   > div {
     @extend %grid-column-small-12;
-    @extend %grid-column-medium-8;
-    @extend %grid-column-large-6;
-    @extend %grid-column-centered;
+    @extend %grid-column-medium-8-centered;
+    @extend %grid-column-large-6-centered;
 
     margin-top: $page-placeholder-top-margin;
     text-align: center;
