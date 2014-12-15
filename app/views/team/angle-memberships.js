@@ -4,6 +4,6 @@ export default Ember.View.extend({
   classNameBindings: [':angle-memberships'],
 
   onSearchClick: function(event) {
-    event.stopPropagation();
+    event.stopPropagation(); // Prevent Foundation dropdown from closing
   }
 });

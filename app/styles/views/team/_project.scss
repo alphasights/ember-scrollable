@@ -35,23 +35,25 @@
   }
 
   .angles {
-    > ul > li > article {
-      @extend %grid-row;
-
-      @include clearfix();
-
-      background-color: $panel-bg;
-      border-top: 1px solid $panel-border-color;
-      padding: $column-gutter / 2 $column-gutter;
-
-      &:last-child {
+    > ul > li {
+      &:last-child > article {
         border-bottom: 1px solid $panel-border-color;
       }
 
-      h1 {
-        font-size: $h5-font-size;
-        padding-bottom: $column-gutter/ 2;
-        padding-left: $column-gutter / 2;
+      > article {
+        @extend %grid-row;
+
+        @include clearfix();
+
+        background-color: $panel-bg;
+        border-top: 1px solid $panel-border-color;
+        padding: $column-gutter / 2 $column-gutter;
+
+        h1 {
+          font-size: $h5-font-size;
+          padding-bottom: $column-gutter/ 2;
+          padding-left: $column-gutter / 2;
+        }
       }
     }
   }

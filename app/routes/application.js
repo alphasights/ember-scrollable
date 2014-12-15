@@ -11,23 +11,23 @@ export default Ember.Route.extend({
   },
 
   afterModel: function(models) {
-    this.controllerFor('currentUser').set('model', models.currentUser);
-
     var preferences = models.preferences.get('firstObject');
+    var currentUser = this.controllerFor('currentUser');
 
     if (preferences == null) {
-      preferences = this.store.createRecord('preferences');
+      preferences = this.store.createRecord('preferences', userId: userId);
       preferences.save();
     }
-
-    this.controllerFor('currentUser').set('preferences', preferences);
-    this.controllerFor('currentUser').send('boot');
+    
+    currentUser.set('model', models.currentUser);
+    currentUser.set('preferences', preferences);
+    currentUser.send('boot');
   },
 
   actions: {
     error: function(error) {
       if (error.status === 401 || error.status === 404) {
-        window.location.replace(config.APP.authUrl);
+        window.location.replace(`${config.APP.pistachioUrl}/system`);
       } else {
         logError(error);
         return true;
