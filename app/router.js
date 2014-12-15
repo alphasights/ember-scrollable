@@ -12,7 +12,9 @@ Router.map(function() {
 
   this.resource('dashboard');
   this.resource('projects');
-  this.resource('performances');
+  this.resource('performance');
+
+  this.route('application_error', { path: '*path' });
 });
 
 export default Router;

@@ -30,6 +30,10 @@ module("Side Panel", {
         "upcoming_interactions_count": 0
       }]
     });
+
+    defineFixture('/users', { team_id: '1' }, {
+      "users": []
+    });
   },
 
   teardown: function() {
@@ -39,17 +43,27 @@ module("Side Panel", {
 
 test("Showing", function() {
   visit('/team');
-  click('.project');
+  click('.project-list-item .details');
 
   andThen(function() {
-    notEqual(find('.side-panel.active > div').children().length, 0);
+    equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
   });
 });
 
-test("Hiding", function() {
+test("Hiding when clicking on the overlay", function() {
   visit('/team');
-  click('.project');
+  click('.project-list-item .details');
   click('.side-panel');
+
+  andThen(function() {
+    equal(find('.side-panel').length, 0);
+  });
+});
+
+test("Hiding when clicking on the close button", function() {
+  visit('/team');
+  click('.project-list-item .details');
+  click('.close');
 
   andThen(function() {
     equal(find('.side-panel').length, 0);

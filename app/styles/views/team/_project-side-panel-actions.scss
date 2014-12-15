@@ -1,0 +1,11 @@
+.project .actions {
+  button {
+    &.previous {
+      @include button-icon(angle-left);
+    }
+
+    &.next {
+      @include button-icon(angle-right);
+    }
+  }
+}

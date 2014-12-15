@@ -1,17 +1,2 @@
-$overlay-background-color: rgba(0, 0, 0, .45);
-$section-border-color: rgba(0, 0, 0, .075);
-
-$application-content-heading-height: rem-calc(100);
-$application-content-heading-color: $subheader-font-color;
-
-$projects-header-height: rem-calc(40);
-
-$quick-jump-height: $layout-sidebar-header-height;
-$quick-jump-background-color: #e1e5ea;
-$quick-jump-icon-size: $button-icon-size;
-$quick-jump-results-background-color: #f2f2f2;
-$quick-jump-results-heading-height: rem-calc(30);
-$quick-jump-results-item-height: rem-calc(50);
-
-$side-panel-background: $white;
-$side-panel-width: 70%;
+$global-overlay-background-color: rgba(0, 0, 0, .45);
+$global-section-border-color: darken($snow, 5%);

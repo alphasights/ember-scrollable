@@ -1,14 +1,10 @@
 import Ember from 'ember';
 import logError from '../log-error';
 
-var initialized = false;
-
 export default {
   name: 'errors',
 
-  initialize: function() {
-    if (initialized) { return; }
-
+  initialize: _(function() {
     Ember.RSVP.on('error', function(error) {
       Ember.onerror(error);
     });
@@ -32,7 +28,5 @@ export default {
 
       logError(error);
     };
-
-    initialized = true;
-  }
+  }).once()
 };

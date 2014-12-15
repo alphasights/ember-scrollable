@@ -6,13 +6,19 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'settings';
 @import 'default';
 
+@import 'components/avatar';
 @import 'components/dropdown';
+@import 'components/priority-select';
 @import 'components/progress-bar';
 @import 'components/quick-jump-result-content';
+@import 'components/super-number';
 
-@import 'views/avatar';
-@import 'views/projects';
-@import 'views/quick-jump';
-@import 'views/sidebar';
-@import 'views/side-panel';
 @import 'views/application';
+@import 'views/quick-jump';
+@import 'views/side-panel';
+@import 'views/sidebar';
+@import 'views/team/angle-memberships';
+@import 'views/team/project';
+@import 'views/team/project-list-item';
+@import 'views/team/project-side-panel-actions';
+@import 'views/team/projects';

@@ -1,0 +1,35 @@
+<ul>
+  {{#each memberships itemController="team.angle-membership"}}
+    <li>
+      <article>
+        {{as-avatar user=user}}
+        {{super-number value=deliveryTarget class="delivery-target"}}
+        <button class="remove" {{action "remove" this bubbles=false}}></button>
+      </article>
+    </li>
+  {{/each}}
+</ul>
+
+{{#as-dropdown title="Add Member" class="add" align="bottom"}}
+  <li class="search">
+    {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
+      <i></i>
+    {{/as-progress-indicator}}
+
+    {{input type="text" value=query click=view.onSearchClick}}
+  </li>
+
+  <section class="team-members">
+    {{#each teamMembers}}
+      {{#as-dropdown-item action="add" param=this}}
+        <article>
+          {{as-avatar user=this}}
+
+          <div class="name">
+            {{name}}
+          </div>
+        </article>
+      {{/as-dropdown-item}}
+    {{/each}}
+  </section>
+{{/as-dropdown}}

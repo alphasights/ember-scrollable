@@ -1,5 +1,5 @@
-main > .content {
-  padding-top: $quick-jump-height;
+.application main > .content {
+  padding-top: $layout-sidebar-header-height;
 
   > section,
   > article {
@@ -8,16 +8,16 @@ main > .content {
     position: relative;
 
     > header {
-      border-bottom: solid 1px $section-border-color;
+      border-bottom: solid 1px $global-section-border-color;
       padding: 0 $column-gutter;
       text-align: center;
 
       h1 {
         @extend %heading-medium-uppercase;
 
-        color: $application-content-heading-color;
+        color: $subheader-font-color;
         font-weight: $font-weight-normal;
-        line-height: $application-content-heading-height;
+        line-height: rem-calc(100);
         margin: 0;
       }
 

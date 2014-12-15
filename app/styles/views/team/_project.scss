@@ -1,0 +1,66 @@
+.project {
+  header {
+    padding: $column-gutter;
+
+    h1 {
+      display: inline-block;
+      margin: 0;
+      padding: $column-gutter / 2;
+
+      a i {
+        @include icon(external-link);
+
+        font-size: $base-font-size;
+      }
+    }
+
+    .stats {
+      color: $small-font-color;
+      font-size: $small-font-size;
+      padding-top: $column-gutter / 2;
+      text-transform: uppercase;
+
+      li {
+        display: inline-block;
+      }
+
+      .count {
+        font-weight: $font-weight-bold;
+        padding-left: $column-gutter / 2;
+      }
+    }
+  }
+
+  .priority-select {
+    display: inline-block;
+    margin-left: $column-gutter / 2;
+
+    .dropdown > button {
+      margin: 4px 0;
+    }
+  }
+
+  .angles {
+    > ul > li {
+      &:last-child > article {
+        border-bottom: 1px solid $panel-border-color;
+      }
+
+      > article {
+        @extend %grid-row;
+
+        @include clearfix();
+
+        background-color: $panel-bg;
+        border-top: 1px solid $panel-border-color;
+        padding: $column-gutter / 2 $column-gutter;
+
+        h1 {
+          font-size: $h5-font-size;
+          padding-bottom: $column-gutter/ 2;
+          padding-left: $column-gutter / 2;
+        }
+      }
+    }
+  }
+}

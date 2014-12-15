@@ -1,0 +1,16 @@
+$avatar-size: 50px;
+$avatar-size-large: $avatar-size * 1.6;
+$avatar-size-small: $avatar-size * .6;
+$avatar-size-tiny: $avatar-size * .5;
+
+.avatar {
+  @include detached-border($color: $global-section-border-color);
+
+  height: $avatar-size;
+  margin: $column-gutter / 4 0;
+  width: $avatar-size;
+
+  &.lead {
+    @include detached-border($color: lighten($primary-color, 30%));
+  }
+}

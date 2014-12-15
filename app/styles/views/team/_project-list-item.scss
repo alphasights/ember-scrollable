@@ -1,0 +1,99 @@
+.project-list-item {
+  @include single-transition(background-color, 100ms, linear);
+  @extend %grid-row;
+
+  border-bottom: 1px solid $global-section-border-color;
+  display: table;
+  padding: $column-gutter / 4 0;
+
+  > div {
+    display: table-cell;
+    float: none !important;
+    vertical-align: middle;
+  }
+
+  > .priority {
+    @extend %grid-column-1;
+
+    .dropdown > button {
+      margin: 0 auto;
+    }
+  }
+
+  > .details {
+    @extend %grid-column-4;
+
+    cursor: pointer;
+
+    h1 {
+      font-size: $base-font-size;
+      font-weight: $font-weight-bold;
+
+      small {
+        display: block;
+        line-height: 150%;
+      }
+    }
+
+  }
+
+  > .members {
+    @extend %grid-column-4;
+  }
+
+  > .progress {
+    @extend %grid-column-3;
+
+    padding: 0 $column-gutter;
+
+    .progress-bar {
+      > div {
+        background-color: lighten($success-color, 20%);
+        border-radius: $global-radius / 2;
+      }
+    }
+
+    .details {
+      @extend %grid-row;
+
+      font-size: $small-font-size;
+      margin-top: $column-gutter / 4;
+
+      .delivered,
+      .target {
+        @extend %grid-column-6;
+
+        color: darken($info-color, 25%);
+        padding: 0 !important;
+      }
+
+      .delivered {
+        @include single-transition(opacity, 150ms, linear);
+
+        opacity: 0;
+        text-align: left;
+      }
+
+      .target {
+        text-align: right;
+      }
+
+      .count {
+        font-weight: $font-weight-bold;
+        margin-right: $column-gutter / 4;
+      }
+
+      .label {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: lighten($global-section-border-color, 6%);
+
+    .progress .details .delivered {
+      opacity: 1;
+    }
+  }
+}

@@ -46,13 +46,13 @@ module("Team", {
       }, {
         "target_value": 0,
         "id": 2,
-        "created_at": "2014-07-09T16:46:03.347+01:00",
+        "created_at": "2014-07-09T16:46:04.347+01:00",
         "angle_id": 1,
         "team_member_id": 2
       }, {
         "target_value": 2,
         "id": 3,
-        "created_at": "2014-07-09T16:46:03.347+01:00",
+        "created_at": "2014-07-09T16:46:05.347+01:00",
         "angle_id": 2,
         "team_member_id": 1
       }],
@@ -83,6 +83,15 @@ module("Team", {
         "upcoming_interactions_count": 0
       }]
     });
+
+    defineFixture('/users', { team_id: '1' }, {
+      "users": [{
+        "initials": "EU3",
+        "id": 3,
+        "teamId": 1,
+        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+      }]
+    });
   },
 
   teardown: function() {
@@ -95,15 +104,15 @@ test("Read project list", function() {
   wait();
 
   andThen(function() {
-    var projects = find('.project').toArray().map(function(project) {
+    var projects = find('.project-list-item').toArray().map(function(project) {
       var $project = $(project);
 
       return {
         title: $project.find('h1 span').text().trim(),
         clientCode: $project.find('h1 small').text().trim(),
-        highPriority: $project.find('.priority.high').length === 1,
-        mediumPriority: $project.find('.priority.medium').length === 1,
-        lowPriority: $project.find('.priority.low').length === 1,
+        highPriority: $project.find('.priority-select > .high').length === 1,
+        mediumPriority: $project.find('.priority-select > .medium').length === 1,
+        lowPriority: $project.find('.priority-select > .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -142,7 +151,7 @@ test("Sort project list", function() {
   visit('/team');
 
   var projectTitles = function() {
-    return find('.project').toArray().map(function(project) {
+    return find('.project-list-item').toArray().map(function(project) {
       return $(project).find('h1 span').text().trim();
     });
   };
@@ -170,7 +179,6 @@ test("Change project priority", function() {
   var watcher = requestWatcher('put', '/projects/1', {}, {
     "project": {
       "client_code": "EP",
-      "created_at": "2009-07-14T16:05:32.909Z",
       "details_url": "/projects/1",
       "left_to_schedule_advisors_count": 0,
       "name": "Example Project",
@@ -182,12 +190,177 @@ test("Change project priority", function() {
   }, {});
 
   visit('/team');
-
-  click('.project:first .change-priority');
-  click('.project:first .change-priority .dropdown-item.low');
+  click('.project-list-item:first .priority-select');
+  click('.project-list-item:first .priority-select .dropdown-item.low');
 
   andThen(function() {
     equal(watcher.called, true);
-    equal(find('.project:last .change-priority.low').length, 1);
+    equal(find('.project-list-item:last .priority-select > .low').length, 1);
+  });
+});
+
+test("Showing project details", function() {
+  visit('/team');
+  click('.project-list-item:first .details');
+
+  andThen(function(){
+    var $project = find('.project');
+    var $angle = $project.find('.angles article');
+
+    var projectDetails = {
+      title: $project.find('h1 span').text().trim(),
+      highPriority: $project.find('.priority-select > .high').length === 1,
+      mediumPriority: $project.find('.priority-select > .medium').length === 1,
+      lowPriority: $project.find('.priority-select > .low').length === 1,
+
+      angle: {
+        title: $angle.find('> h1').text().trim(),
+
+        memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
+          var $membership = $(membership);
+
+          return {
+            avatarUrl: $membership.find('.avatar').prop('src'),
+            deliveryTarget: $membership.find('.delivery-target input').val()
+          };
+        })
+      }
+    };
+
+    deepEqual(projectDetails, {
+      title: 'Example Project',
+      highPriority: true,
+      mediumPriority: false,
+      lowPriority: false,
+
+      angle: {
+        title: 'Angle 1',
+
+        memberships: [{
+          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          deliveryTarget: '4'
+        }, {
+          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          deliveryTarget: '0'
+        }]
+      }
+    });
+  });
+});
+
+
+test("Navigating to next project", function() {
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.project .next');
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+  });
+});
+
+test("Navigating to previous project", function() {
+  visit('/team');
+  click('.project-list-item:last .details');
+  click('.project .previous');
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project');
+  });
+});
+
+test("Moving back to the last project from the first", function() {
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.project .previous');
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+  });
+});
+
+test("Moving back to the first project from the last", function() {
+  visit('/team');
+  click('.project-list-item:last .details');
+  click('.project .next');
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project');
+  });
+});
+
+test("Change project priority from the details", function() {
+  var watcher = requestWatcher('put', '/projects/1', {}, {
+    "project": {
+      "client_code": "EP",
+      "details_url": "/projects/1",
+      "left_to_schedule_advisors_count": 0,
+      "name": "Example Project",
+      "proposed_advisors_count": 1,
+      "status": "low",
+      "upcoming_interactions_count": 0,
+      "analyst_1_id": "1"
+    }
+  }, {});
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.project .priority-select');
+  click('.project .priority-select .dropdown-item.low');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.project-list-item:last .priority-select > .low').length, 1);
+  });
+});
+
+test("Changing delivery target for an angle membership", function() {
+  var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
+    "angle_team_membership": {
+      "target_value": 6,
+      "angle_id": "1",
+      "team_member_id": "1"
+    }
+  }, {});
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
+
+  andThen(function() {
+    equal(watcher.called, true);
+  });
+});
+
+test("Adding a member to an angle", function() {
+  var watcher = requestWatcher('post', '/angle_team_memberships', {}, {
+    "angle_team_membership": {
+      "target_value": 0,
+      "angle_id": "1",
+      "team_member_id": "3"
+    }
+  }, {});
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.angle-memberships .add > button');
+  click('.angle-memberships .add .team-members li');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.angle-memberships > ul article').length, 3);
+  });
+});
+
+test("Removing a member from an angle", function() {
+  var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
+
+  visit('/team');
+  click('.project-list-item:first .details');
+  click('.angle-memberships > ul article:first .remove');
+
+  andThen(function() {
+    equal(watcher.called, true);
+    equal(find('.angle-memberships > ul article').length, 1);
   });
 });
