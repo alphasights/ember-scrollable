@@ -21,6 +21,7 @@ export default Ember.Route.extend({
     }
 
     this.controllerFor('currentUser').set('preferences', preferences);
+    this.controllerFor('currentUser').send('boot');
   },
 
   actions: {

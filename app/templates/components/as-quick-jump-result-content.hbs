@@ -1,7 +1,9 @@
-<h1>{{title}}</h1>
+<a {{bind-attr href=url}} target="_blank">
+  <h1>{{title}}</h1>
 
-{{#if details}}
-  <div class="details">
-    {{details}}
-  </div>
-{{/if}}
+  {{#if details}}
+    <div class="details">
+      {{details}}
+    </div>
+  {{/if}}
+</a>
