@@ -1,19 +1,66 @@
+@mixin side-panel-heading-width($max-width) {
+  max-width: $max-width;
+
+  span {
+    max-width: $max-width;
+    float: left;
+    overflow: hidden;
+    padding-left: $column-gutter / 2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .side-panel.project {
   header {
     padding: $column-gutter;
 
     h1 {
+      @extend %heading-medium-uppercase;
+
       display: inline-block;
       margin: 0;
-      padding: $column-gutter / 2;
+      padding: $column-gutter 0;
 
-      a i {
-        @include icon(external-link);
+      @media #{$small-up} {
+        @include side-panel-heading-width(95%);
 
-        font-size: $base-font-size;
-        vertical-align: middle;
+        span {
+          float: none;
+          white-space: normal;
+          padding-left: 0;
+        }
+
+        .external-link {
+          float: right;
+        }
+      }
+
+      @media #{$medium-up} {
+        @include side-panel-heading-width(60%);
+      }
+
+      @media #{$large-up} {
+        @include side-panel-heading-width(75%);
+      }
+
+      @media #{$xlarge-up} {
+        @include side-panel-heading-width(85%);
+      }
+
+      @media #{$xxlarge-up} {
+        @include side-panel-heading-width(90%);
       }
     }
+
+    .external-link i {
+      @include icon(external-link);
+
+      font-size: $base-font-size;
+      margin-left: $column-gutter / 2;
+      vertical-align: middle;
+    }
+
 
     .stats {
       color: $small-font-color;
@@ -37,7 +84,7 @@
     margin-left: $column-gutter / 2;
 
     .dropdown > button {
-      margin: 4px 0;
+      margin: 0;
     }
   }
 
