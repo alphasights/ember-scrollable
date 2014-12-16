@@ -1,4 +1,4 @@
-.project-list-item {
+.team .project-list-item {
   @include single-transition(background-color, 100ms, linear);
   @extend %grid-row;
 

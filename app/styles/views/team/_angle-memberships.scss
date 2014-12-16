@@ -11,7 +11,7 @@ $angle-add-member-search-icon-padding: $form-spacing / 2;
 $angle-add-member-search-icon-height: $form-label-line-height;
 $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
-.angle-memberships {
+.side-panel.project .angle-memberships {
   margin: 0 $column-gutter / 2;
 
   > ul {
