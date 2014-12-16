@@ -3,6 +3,7 @@
   @extend %grid-row;
 
   border-bottom: 1px solid $global-section-border-color;
+  cursor: pointer;
   display: table;
   padding: $column-gutter / 4 0;
 
@@ -22,8 +23,6 @@
 
   > .details {
     @extend %grid-column-4;
-
-    cursor: pointer;
 
     h1 {
       font-size: $base-font-size;
