@@ -40,6 +40,10 @@ $side-panel-actions-button-size: 35px;
     @media #{$large-up} {
       @include side-panel-size(70%);
     }
+
+    @media #{$xlarge-up} {
+      @include side-panel-size(50%);
+    }
   }
 
   &.active {

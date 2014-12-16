@@ -4,7 +4,7 @@
 
   span {
     float: left;
-    max-width: $max-width;
+    max-width: $max-width * .9;
     overflow: hidden;
     padding-left: $column-gutter / 2;
     text-overflow: ellipsis;
@@ -36,18 +36,17 @@
           white-space: normal;
           padding-left: 0;
         }
-
-        .external-link {
-          float: right;
-        }
       }
 
       @media #{$medium-up} {
-        @include side-panel-heading-width(70%);
+        @include side-panel-heading-width(65%);
       }
 
       @media #{$large-up} {
-        @include side-panel-heading-width(85%);
+        @include side-panel-heading-width(75%);
+      }
+      @media #{$xlarge-up} {
+        @include side-panel-heading-width(70%);
       }
     }
 
