@@ -19,7 +19,6 @@ module.exports = function(environment) {
       // when it is created
       apiBaseUrl: '/swordfish',
       pistachioUrl: 'http://localhost:3000',
-      authUrl: 'http://localhost:3000/system',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O',
       intercomAppId: '4rw4fi3l'
@@ -51,13 +50,11 @@ module.exports = function(environment) {
   if (environment === 'staging') {
     ENV.APP.pistachioUrl = 'https://pistachio-staging.herokuapp.com';
     ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
-    ENV.APP.authUrl = 'https://pistachio-staging.herokuapp.com/system';
   }
 
   if (environment === 'production') {
     ENV.APP.pistachioUrl = 'https://secure.alphasights.com';
     ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
-    ENV.APP.authUrl = 'https://secure.alphasights.com/system';
     ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
     ENV.APP.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
   }

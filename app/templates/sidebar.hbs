@@ -14,19 +14,19 @@
 
   <ul>
     <li class="dashboard">
-      {{#link-to 'dashboard'}}<i></i><span>Dashboard</span>{{/link-to}}
+      {{#link-to "dashboard"}}<i></i><span>Dashboard</span>{{/link-to}}
     </li>
 
     <li class="projects">
-      {{#link-to 'projects'}}<i></i><span>Projects</span>{{/link-to}}
+      {{#link-to "projects"}}<i></i><span>Projects</span>{{/link-to}}
     </li>
 
     <li class="team">
-      {{#link-to 'team'}}<i></i><span>Team</span>{{/link-to}}
+      {{#link-to "team"}}<i></i><span>Team</span>{{/link-to}}
     </li>
 
     <li class="performance">
-      {{#link-to 'performance'}}<i></i><span>Performance</span>{{/link-to}}
+      {{#link-to "performance"}}<i></i><span>Performance</span>{{/link-to}}
     </li>
   </ul>
 </nav>
@@ -35,7 +35,7 @@
   <div class="toggle-actions">
     {{#as-dropdown title="Actions" class="actions" align="top"}}
       {{!-- {{#as-dropdown-item}}<a href="#">Settings</a>{{/as-dropdown-item}} --}}
-      {{#as-dropdown-item}}<a {{bind-attr href=logoutUrl}}>Logout</a>{{/as-dropdown-item}}
+      {{#as-dropdown-item action="logout"}}<a>Logout</a>{{/as-dropdown-item}}
     {{/as-dropdown}}
   </div>
 

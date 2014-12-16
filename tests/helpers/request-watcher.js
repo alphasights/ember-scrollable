@@ -5,10 +5,16 @@ Ember.Test.registerHelper('requestWatcher', function(app, method, url, params, b
   var watcher = { called: false };
 
   app.server[method](`${config.APP.apiBaseUrl}${url}`, function(request) {
+    var requestBody = request.requestBody;
+
+    if(requestBody != null) {
+      requestBody = JSON.parse(requestBody);
+    }
+
     if (_(params).isEqual(request.queryParams) &&
-        _(body).isEqual(JSON.parse(request.requestBody))) {
+        _(body).isEqual(requestBody)) {
       watcher.called = true;
-      
+
       return [
         status,
         { 'Content-Type': 'application/json' },

@@ -1,3 +1,8 @@
+$quick-jump-height: $layout-sidebar-header-height;
+$quick-jump-background-color: #e1e5ea;
+$quick-jump-icon-size: $button-icon-size;
+$quick-jump-results-background-color: #f2f2f2;
+
 .quick-jump {
   @include single-transition(background-color, 150ms, linear);
 
@@ -67,7 +72,7 @@
   }
 
   &.active {
-    background-color: $overlay-background-color;
+    background-color: $global-overlay-background-color;
     pointer-events: all;
 
     .bar {

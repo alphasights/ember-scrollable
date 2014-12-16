@@ -9,10 +9,12 @@ Router.map(function() {
   this.resource('dashboard', { path: '/' });
   this.resource('performance');
   this.resource('projects');
-  
+
   this.resource('team', function() {
     this.resource('team.project', { path: ':project_id' });
   });
+
+  this.route('application_error', { path: '*path' });
 });
 
 export default Router;

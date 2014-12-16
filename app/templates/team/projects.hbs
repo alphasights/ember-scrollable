@@ -1,0 +1,20 @@
+<header>
+  <div class="sort-by-label">
+    <label for="sort-by">Sort by:</label>
+  </div>
+
+  <div class="sort-by-select">
+    {{view "select"
+      id="sort-by"
+      content=availableSortProperties
+      optionValuePath="content.id"
+      optionLabelPath="content.name"
+      value=sortPropertyId}}
+  </div>
+</header>
+
+<ul>
+  {{#each itemController="team.project-list-item"}}
+    <li>{{render "team.project-list-item" model tagName="article"}}</li>
+  {{/each}}
+</ul>

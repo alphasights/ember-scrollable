@@ -6,7 +6,10 @@ export default Ember.ObjectController.extend({
 
   modelDidChange: function() {
     if (config.APP.segmentWriteKey != null) {
-      analytics.identify(this.get('initials'), _(this.get('model').toJSON()));
+      analytics.identify(
+        this.get('initials'),
+        _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
+      );
     }
   }.observes('model'),
 

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../../config/environment';
 
 export default Ember.ObjectController.extend({
   progress: function() {
@@ -15,10 +16,7 @@ export default Ember.ObjectController.extend({
     return _(this.get('model.members')).without(this.get('lead'));
   }.property('model.members.[]'),
 
-  actions: {
-    setPriority: function(value) {
-      this.set('priority', value);
-      this.get('model').save();
-    }
-  }
+  pistachioProjectUrl: function() {
+    return `${config.APP.pistachioUrl}/projects/${this.get('id')}`;
+  }.property('id')
 });

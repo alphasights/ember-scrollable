@@ -3,16 +3,20 @@ import config from '../config/environment';
 
 export default Ember.Controller.extend({
   needs: ['currentUser'],
+
   currentUser: Ember.computed.alias('controllers.currentUser'),
   preferences: Ember.computed.alias('currentUser.preferences'),
-  logoutUrl: `${config.APP.pistachioUrl}/logout`,
 
   actions: {
-    toggleCollapse: function(isCollapsed) {
+    toggleCollapse: function() {
       var preferences = this.get('preferences');
 
-      preferences.set('sidebarCollapsed', !isCollapsed);
+      preferences.toggleProperty('sidebarCollapsed');
       preferences.save();
+    },
+
+    logout: function() {
+      window.location.replace(`${config.APP.pistachioUrl}/logout`);
     }
   }
 });

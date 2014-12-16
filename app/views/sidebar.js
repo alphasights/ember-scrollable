@@ -6,10 +6,7 @@ export default Ember.View.extend({
 
   actions: {
     toggleCollapse: function() {
-      var isCollapsed = this.get('isCollapsed');
-
-      this.get('controller').send('toggleCollapse', isCollapsed);
-      this.set('isCollapsed', !isCollapsed);
+      this.get('controller').send('toggleCollapse');
     }
   },
 
