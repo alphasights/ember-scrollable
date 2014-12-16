@@ -3,6 +3,7 @@ import PromiseController from '../promise';
 
 export default Ember.ObjectController.extend({
   needs: ['team'],
+
   team: Ember.computed.alias('controllers.team'),
   requestPromise: null,
   query: null,
