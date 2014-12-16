@@ -40,10 +40,6 @@ $side-panel-actions-button-size: 35px;
     @media #{$large-up} {
       @include side-panel-size(70%);
     }
-
-    @media #{$xlarge-up} {
-      @include side-panel-size(50%);
-    }
   }
 
   &.active {
@@ -52,7 +48,7 @@ $side-panel-actions-button-size: 35px;
 
   .actions {
     float: right;
-    padding: $column-gutter;
+    padding: $column-gutter $column-gutter 0 0;
 
     ul {
       @include button-group-container($float: true);

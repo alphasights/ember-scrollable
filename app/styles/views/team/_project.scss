@@ -1,19 +1,10 @@
-@mixin side-panel-heading-width($max-width) {
-  max-width: $max-width;
-  padding: $column-gutter 0;
-
-  span {
-    float: left;
-    max-width: $max-width * .9;
-    overflow: hidden;
-    padding-left: $column-gutter / 2;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
 .side-panel.project {
   header {
+    @extend %grid-column-xlarge-10;
+    @extend %grid-column-large-9;
+    @extend %grid-column-medium-9;
+    @extend %grid-column-small-12;
+
     padding: $column-gutter;
 
     h1 {
@@ -21,32 +12,42 @@
 
       display: inline-block;
       margin: 0;
+      max-width: 90%;
+      padding: $column-gutter 0;
+
+      span {
+        float: left;
+        max-width: 80%;
+        overflow: hidden;
+        padding-left: $column-gutter / 2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
       small {
         padding-left: $column-gutter / 2;
       }
 
-      @media #{$small-up} {
-        @include side-panel-heading-width(100%);
-
-        padding: $column-gutter / 4 $column-gutter / 2;
+      @media #{$small-only} {
+        padding: 0 $column-gutter / 2;
 
         span {
           float: none;
           white-space: normal;
           padding-left: 0;
         }
+
+        small {
+          padding-left: 0;
+        }
       }
 
-      @media #{$medium-up} {
-        @include side-panel-heading-width(65%);
-      }
+      @media #{$medium-only} {
+        max-width: 85%;
 
-      @media #{$large-up} {
-        @include side-panel-heading-width(75%);
-      }
-      @media #{$xlarge-up} {
-        @include side-panel-heading-width(70%);
+        span {
+          max-width: 75%;
+        }
       }
     }
 
@@ -90,6 +91,8 @@
   }
 
   .angles {
+    float: left;
+
     > ul > li {
       &:last-child > article {
         border-bottom: 1px solid $panel-border-color;
