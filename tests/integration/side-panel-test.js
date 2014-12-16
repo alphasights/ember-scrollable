@@ -41,7 +41,7 @@ module("Side Panel", {
   }
 });
 
-test("Showing", function() {
+test("Shows", function() {
   visit('/team');
   click('.project-list-item .details');
 
@@ -50,7 +50,7 @@ test("Showing", function() {
   });
 });
 
-test("Hiding when clicking on the overlay", function() {
+test("Hides when clicking on the overlay", function() {
   visit('/team');
   click('.project-list-item .details');
   click('.side-panel');
@@ -60,7 +60,7 @@ test("Hiding when clicking on the overlay", function() {
   });
 });
 
-test("Hiding when clicking on the close button", function() {
+test("Hides when clicking on the close button", function() {
   visit('/team');
   click('.project-list-item .details');
   click('.close');

@@ -199,7 +199,7 @@ test("Change project priority", function() {
   });
 });
 
-test("Showing project details", function() {
+test("Show project details", function() {
   visit('/team');
   click('.project-list-item:first .details');
 
@@ -249,7 +249,7 @@ test("Showing project details", function() {
 });
 
 
-test("Navigating to next project", function() {
+test("Navigate to next project", function() {
   visit('/team');
   click('.project-list-item:first .details');
   click('.project .next');
@@ -259,7 +259,7 @@ test("Navigating to next project", function() {
   });
 });
 
-test("Navigating to previous project", function() {
+test("Navigate to previous project", function() {
   visit('/team');
   click('.project-list-item:last .details');
   click('.project .previous');
@@ -269,7 +269,7 @@ test("Navigating to previous project", function() {
   });
 });
 
-test("Moving back to the last project from the first", function() {
+test("Move back to the last project from the first", function() {
   visit('/team');
   click('.project-list-item:first .details');
   click('.project .previous');
@@ -279,7 +279,7 @@ test("Moving back to the last project from the first", function() {
   });
 });
 
-test("Moving back to the first project from the last", function() {
+test("Move back to the first project from the last", function() {
   visit('/team');
   click('.project-list-item:last .details');
   click('.project .next');
@@ -314,7 +314,7 @@ test("Change project priority from the details", function() {
   });
 });
 
-test("Changing delivery target for an angle membership", function() {
+test("Change delivery target for an angle membership", function() {
   var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
     "angle_team_membership": {
       "target_value": 6,
@@ -332,7 +332,7 @@ test("Changing delivery target for an angle membership", function() {
   });
 });
 
-test("Adding a member to an angle", function() {
+test("Add a member to an angle", function() {
   var watcher = requestWatcher('post', '/angle_team_memberships', {}, {
     "angle_team_membership": {
       "target_value": 0,
@@ -352,7 +352,7 @@ test("Adding a member to an angle", function() {
   });
 });
 
-test("Removing a member from an angle", function() {
+test("Remove a member from an angle", function() {
   var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
 
   visit('/team');
