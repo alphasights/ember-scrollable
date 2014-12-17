@@ -4,7 +4,7 @@ import Ember from 'ember';
 Ember.Test.registerHelper('requestWatcher', function(app, method, url, params, body, response, status = 200) {
   var watcher = { called: false };
 
-  app.server[method](`${config.APP.apiBaseUrl}${url}`, function(request) {
+  app.server[method](`${window.EmberENV.apiBaseUrl}${url}`, function(request) {
     var requestBody = request.requestBody;
 
     if(requestBody != null) {

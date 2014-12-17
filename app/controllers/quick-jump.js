@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import PromiseController from './promise';
-import config from '../config/environment';
 import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend({
@@ -95,7 +94,7 @@ export default Ember.Controller.extend({
 
     if (query && query.length > 2) {
       var requestPromise = PromiseController.create({
-        promise: request(`${config.APP.apiBaseUrl}/quick_jumps`, {
+        promise: request(`${window.EmberENV.apiBaseUrl}/quick_jumps`, {
           data: { q: query }
         }).then(response => {
           if (requestPromise !== this.get('requestPromise')) { return; }

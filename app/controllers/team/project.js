@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from '../../config/environment';
 
 export default Ember.ObjectController.extend({
   progress: function() {
@@ -17,6 +16,6 @@ export default Ember.ObjectController.extend({
   }.property('model.members.[]'),
 
   pistachioProjectUrl: function() {
-    return `${config.APP.pistachioUrl}/projects/${this.get('id')}`;
+    return `${window.EmberENV.pistachioUrl}/projects/${this.get('id')}`;
   }.property('id')
 });

@@ -1,12 +1,10 @@
-import config from '../config/environment';
-
 export default {
   name: 'segment',
 
   initialize: _(function() {
-    if (config.APP.segmentWriteKey == null) { return; }
+    if (window.EmberENV.segmentWriteKey == null) { return; }
 
-    analytics.load(config.APP.segmentWriteKey);
+    analytics.load(window.EmberENV.segmentWriteKey);
     analytics.page();
   }).once()
 };
