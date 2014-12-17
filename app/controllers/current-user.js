@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.ObjectController.extend({
   preferences: null,
 
   modelDidChange: function() {
-    if (config.APP.segmentWriteKey != null) {
+    if (EmberENV.segmentWriteKey != null) {
       analytics.identify(
         this.get('initials'),
         _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
@@ -14,10 +13,10 @@ export default Ember.ObjectController.extend({
   }.observes('model'),
 
   setupIntercom: function() {
-    if (config.APP.intercomAppId != null) {
+    if (EmberENV.intercomAppId != null) {
       /* jshint newcap: false */
       Intercom('boot', {
-        app_id: config.APP.intercomAppId,
+        app_id: EmberENV.intercomAppId,
         email: this.get('email'),
         created_at: this.get('createdAt'),
         name: this.get('name'),

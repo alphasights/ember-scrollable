@@ -48,7 +48,7 @@ $side-panel-actions-button-size: 35px;
 
   .actions {
     float: right;
-    padding: $column-gutter;
+    padding: $column-gutter $column-gutter 0 0;
 
     ul {
       @include button-group-container($float: true);

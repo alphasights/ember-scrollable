@@ -8,6 +8,7 @@ test:
 
 dependencies:
   override:
+    - npm install -g ember-cli
     - npm install
     - bower install
     - bundle install
@@ -16,4 +17,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - "git push --force git@heroku.com:as-phoenix-staging.git HEAD:master"
+      - "ember divshot push staging token=$DIVSHOT_TOKEN"
