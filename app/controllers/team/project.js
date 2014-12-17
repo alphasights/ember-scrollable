@@ -16,6 +16,6 @@ export default Ember.ObjectController.extend({
   }.property('model.members.[]'),
 
   pistachioProjectUrl: function() {
-    return `${window.EmberENV.pistachioUrl}/projects/${this.get('id')}`;
+    return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
   }.property('id')
 });

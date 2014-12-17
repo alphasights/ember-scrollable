@@ -26,7 +26,7 @@ export default Ember.Route.extend({
   actions: {
     error: function(error) {
       if (error.status === 401 || error.status === 404) {
-        window.location.replace(`${window.EmberENV.pistachioUrl}/system`);
+        window.location.replace(`${EmberENV.pistachioUrl}/system`);
       } else {
         logError(error);
         return true;

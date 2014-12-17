@@ -8,7 +8,9 @@
     "document": true,
     "window": true,
     "-Promise": true,
-    "_": true
+    "_": true,
+    "EmberENV": true,
+    "__env": true
   },
   "browser" : true,
   "boss" : true,

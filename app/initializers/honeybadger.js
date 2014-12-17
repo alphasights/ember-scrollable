@@ -5,7 +5,7 @@ export default {
 
   initialize: _(function() {
     Honeybadger.configure({
-      api_key: window.EmberENV.honeybadgerApiKey,
+      api_key: EmberENV.honeybadgerApiKey,
       environment: config.environment
     });
   }).once()

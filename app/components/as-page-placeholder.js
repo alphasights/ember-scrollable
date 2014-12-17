@@ -8,6 +8,6 @@ export default Ember.Component.extend({
   path: null,
 
   url: function() {
-    return `${window.EmberENV.pistachioUrl}/${this.get('path')}`;
+    return `${EmberENV.pistachioUrl}/${this.get('path')}`;
   }.property('externalPath')
 });

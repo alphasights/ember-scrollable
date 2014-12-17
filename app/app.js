@@ -11,8 +11,8 @@ var App = Ember.Application.extend({
   Resolver: Resolver
 });
 
-if (window.__env != null) {
-  _(window.EmberENV).extend(window.__env);
+if (typeof __env !== 'undefined' && __env != null) {
+  _(EmberENV).extend(__env);
 }
 
 loadInitializers(App, config.modulePrefix);

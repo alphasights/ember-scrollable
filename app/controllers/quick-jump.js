@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
 
     if (query && query.length > 2) {
       var requestPromise = PromiseController.create({
-        promise: request(`${window.EmberENV.apiBaseUrl}/quick_jumps`, {
+        promise: request(`${EmberENV.apiBaseUrl}/quick_jumps`, {
           data: { q: query }
         }).then(response => {
           if (requestPromise !== this.get('requestPromise')) { return; }

@@ -48,7 +48,9 @@
     "Pretender",
     "defineFixture",
     "requestWatcher",
-    "_"
+    "_",
+    "EmberENV",
+    "__env"
   ],
   "node": false,
   "browser": false,
