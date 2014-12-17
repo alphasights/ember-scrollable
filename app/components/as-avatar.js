@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AsTooltip from './as-tooltip';
+import AsTooltip from 'ember-cli-paint/components/as-tooltip';
 
 export default AsTooltip.extend({
   classNameBindings: [':avatar'],
