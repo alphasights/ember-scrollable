@@ -1,6 +1,6 @@
-import ProjectController from './project';
+import Ember from 'ember';
 
-export default ProjectController.extend({
+export default Ember.ObjectController.extend({
   progress: function() {
     var deliveryTarget = this.get('deliveryTarget');
 
