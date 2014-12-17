@@ -17,4 +17,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - "ember divshot push staging token=$DIVSHOT_TOKEN"
+      - "ember divshot push staging token=$DIVSHOT_TOKEN --environment=staging"
