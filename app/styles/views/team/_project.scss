@@ -1,19 +1,64 @@
 .side-panel.project {
   header {
+    @extend %grid-column-xlarge-10;
+    @extend %grid-column-large-9;
+    @extend %grid-column-medium-9;
+    @extend %grid-column-small-12;
+
     padding: $column-gutter;
 
     h1 {
+      @extend %heading-medium-uppercase;
+
       display: inline-block;
       margin: 0;
-      padding: $column-gutter / 2;
+      max-width: 90%;
+      padding: $column-gutter 0;
 
-      a i {
-        @include icon(external-link);
+      span {
+        float: left;
+        max-width: 80%;
+        overflow: hidden;
+        padding-left: $column-gutter / 2;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
 
-        font-size: $base-font-size;
-        vertical-align: middle;
+      small {
+        padding-left: $column-gutter / 2;
+      }
+
+      @media #{$small-only} {
+        padding: 0 $column-gutter / 2;
+
+        span {
+          float: none;
+          padding-left: 0;
+          white-space: normal;
+        }
+
+        small {
+          padding-left: 0;
+        }
+      }
+
+      @media #{$medium-only} {
+        max-width: 85%;
+
+        span {
+          max-width: 75%;
+        }
       }
     }
+
+    .pistachio-link i {
+      @include icon(external-link);
+
+      font-size: $base-font-size;
+      margin-left: $column-gutter / 2;
+      vertical-align: middle;
+    }
+
 
     .stats {
       color: $small-font-color;
@@ -37,11 +82,17 @@
     margin-left: $column-gutter / 2;
 
     .dropdown > button {
-      margin: 4px 0;
+      margin: 0;
+    }
+
+    @media #{$small-only} {
+      display: none;
     }
   }
 
   .angles {
+    float: left;
+
     > ul > li {
       &:last-child > article {
         border-bottom: 1px solid $panel-border-color;
