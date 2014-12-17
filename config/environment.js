@@ -47,16 +47,11 @@ module.exports = function(environment) {
     ENV.APP.intercomAppId = null;
   }
 
-  if (environment === 'staging') {
-    ENV.APP.pistachioUrl = 'https://pistachio-staging.herokuapp.com';
-    ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
-  }
-
   if (environment === 'production') {
-    ENV.APP.pistachioUrl = 'https://secure.alphasights.com';
-    ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
-    ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
-    ENV.APP.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
+    ENV.APP.pistachioUrl = window.__env.pistachioUrl;
+    ENV.APP.apiBaseUrl = window.__env.apiBaseUrl;
+    ENV.APP.segmentWriteKey = window.__env.segmentWriteKey;
+    ENV.APP.intercomAppId = window.__env.intercomAppId;
   }
 
   return ENV;
