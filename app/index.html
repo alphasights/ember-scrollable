@@ -11,9 +11,8 @@
 
     <script>
       (function(){
-        var config = JSON.parse(
-          unescape(document.querySelector("meta[name='phoenix/config/environment']").getAttribute('content'))
-        );
+        var configMetaElement = document.querySelector("meta[name='phoenix/config/environment']");
+        var config = JSON.parse(unescape(configMetaElement.getAttribute('content')));
 
         if (config.environment === 'production') {
           var divshotScript = document.createElement('script');
