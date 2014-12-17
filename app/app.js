@@ -12,10 +12,7 @@ var App = Ember.Application.extend({
 });
 
 if (window.__env != null) {
-  window.EmberENV.pistachioUrl = window.__env.pistachioUrl;
-  window.EmberENV.apiBaseUrl = window.__env.apiBaseUrl;
-  window.EmberENV.segmentWriteKey = window.__env.segmentWriteKey;
-  window.EmberENV.intercomAppId = window.__env.intercomAppId;
+  _(window.EmberENV).extend(window.__env);
 }
 
 loadInitializers(App, config.modulePrefix);
