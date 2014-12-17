@@ -43,7 +43,7 @@ module("Side Panel", {
 
 test("Shows", function() {
   visit('/team');
-  click('.project-list-item .details');
+  click('.project-list-item');
 
   andThen(function() {
     equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
@@ -52,7 +52,7 @@ test("Shows", function() {
 
 test("Hides when clicking on the overlay", function() {
   visit('/team');
-  click('.project-list-item .details');
+  click('.project-list-item');
   click('.side-panel');
 
   andThen(function() {
@@ -62,7 +62,7 @@ test("Hides when clicking on the overlay", function() {
 
 test("Hides when clicking on the close button", function() {
   visit('/team');
-  click('.project-list-item .details');
+  click('.project-list-item');
   click('.close');
 
   andThen(function() {

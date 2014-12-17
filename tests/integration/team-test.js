@@ -201,7 +201,7 @@ test("Change project priority", function() {
 
 test("Show project details", function() {
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
 
   andThen(function(){
     var $project = find('.project');
@@ -248,10 +248,9 @@ test("Show project details", function() {
   });
 });
 
-
 test("Navigate to next project", function() {
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   click('.project .next');
 
   andThen(function(){
@@ -261,7 +260,7 @@ test("Navigate to next project", function() {
 
 test("Navigate to previous project", function() {
   visit('/team');
-  click('.project-list-item:last .details');
+  click('.project-list-item:last');
   click('.project .previous');
 
   andThen(function(){
@@ -271,7 +270,7 @@ test("Navigate to previous project", function() {
 
 test("Move back to the last project from the first", function() {
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   click('.project .previous');
 
   andThen(function(){
@@ -281,7 +280,7 @@ test("Move back to the last project from the first", function() {
 
 test("Move back to the first project from the last", function() {
   visit('/team');
-  click('.project-list-item:last .details');
+  click('.project-list-item:last');
   click('.project .next');
 
   andThen(function(){
@@ -304,7 +303,7 @@ test("Change project priority from the details", function() {
   }, {});
 
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   click('.project .priority-select');
   click('.project .priority-select .dropdown-item.low');
 
@@ -324,7 +323,7 @@ test("Change delivery target for an angle membership", function() {
   }, {});
 
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
   andThen(function() {
@@ -342,7 +341,7 @@ test("Add a member to an angle", function() {
   }, {});
 
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   click('.angle-memberships .add > button');
   click('.angle-memberships .add .team-members li');
 
@@ -356,7 +355,7 @@ test("Remove a member from an angle", function() {
   var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
 
   visit('/team');
-  click('.project-list-item:first .details');
+  click('.project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
   andThen(function() {

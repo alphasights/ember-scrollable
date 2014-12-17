@@ -15,7 +15,7 @@ export default Ember.ObjectController.extend({
     return _(this.get('model.members')).without(this.get('lead'));
   }.property('model.members.[]'),
 
-  pistachioProjectUrl: function() {
+  pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
   }.property('id')
 });
