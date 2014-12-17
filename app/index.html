@@ -15,9 +15,9 @@
         var config = JSON.parse(unescape(configMetaElement.getAttribute('content')));
 
         if (config.environment === 'production') {
-          var divshotScript = document.createElement('script');
-          divshotScript.src = '/__/env.js';
-          document.head.appendChild(divshotScript);
+          var divshotEnvScript = document.createElement('script');
+          divshotEnvScript.src = '/__/env.js';
+          document.head.appendChild(divshotEnvScript);
         }
       }());
     </script>
