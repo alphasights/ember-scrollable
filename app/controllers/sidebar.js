@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from '../config/environment';
 
 export default Ember.Controller.extend({
   needs: ['currentUser'],
@@ -16,7 +15,7 @@ export default Ember.Controller.extend({
     },
 
     logout: function() {
-      window.location.replace(`${config.APP.pistachioUrl}/logout`);
+      window.location.replace(`${EmberENV.pistachioUrl}/logout`);
     }
   }
 });

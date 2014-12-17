@@ -11,17 +11,18 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-      }
-    },
+      },
 
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
       apiBaseUrl: '/swordfish',
       pistachioUrl: 'http://localhost:3000',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O',
       intercomAppId: '4rw4fi3l'
+    },
+
+    APP: {
+      // Here you can pass flags/options to your application instance
+      // when it is created
     }
   };
 
@@ -43,20 +44,9 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-    ENV.APP.segmentWriteKey = null;
-    ENV.APP.intercomAppId = null;
-  }
 
-  if (environment === 'staging') {
-    ENV.APP.pistachioUrl = 'https://pistachio-staging.herokuapp.com';
-    ENV.APP.apiBaseUrl = 'https://pistachio-staging.herokuapp.com/swordfish';
-  }
-
-  if (environment === 'production') {
-    ENV.APP.pistachioUrl = 'https://secure.alphasights.com';
-    ENV.APP.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
-    ENV.APP.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
-    ENV.APP.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
+    ENV.EmberENV.segmentWriteKey = null;
+    ENV.EmberENV.intercomAppId = null;
   }
 
   return ENV;
