@@ -8,7 +8,7 @@ test:
 
 dependencies:
   override:
-    - npm install ember-cli
+    - npm install -g ember-cli
     - npm install
     - bower install
     - bundle install
