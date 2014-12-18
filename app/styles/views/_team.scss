@@ -1,5 +1,7 @@
 .team {
-  .alert-box {
+  .feedback {
+    @include alert($bg: $info-color);
+
     margin-bottom: 0;
     margin-top: rem-calc(20px);
   }
