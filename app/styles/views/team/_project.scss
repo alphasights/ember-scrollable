@@ -5,7 +5,6 @@
     @extend %grid-column-medium-9;
     @extend %grid-column-small-12;
 
-    padding: $column-gutter;
 
     h1 {
       @extend %heading-medium-uppercase;
@@ -63,7 +62,7 @@
     .stats {
       color: $small-font-color;
       font-size: $small-font-size;
-      padding-top: $column-gutter / 2;
+      padding-bottom: $column-gutter / 2;
       text-transform: uppercase;
 
       li {
@@ -100,15 +99,14 @@
 
       > article {
         @extend %grid-row;
-
         @include clearfix();
 
         background-color: $panel-bg;
         border-top: 1px solid $panel-border-color;
-        padding: $column-gutter / 2 $column-gutter;
+        padding: $column-gutter / 2;
 
         h1 {
-          font-size: $h5-font-size;
+          font-size: $h6-font-size;
           padding-bottom: $column-gutter/ 2;
           padding-left: $column-gutter / 2;
         }
