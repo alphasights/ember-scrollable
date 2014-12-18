@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  hasDeliveryTarget: Ember.computed.gt('deliveryTarget', 0),
+
   progress: function() {
     var deliveryTarget = this.get('deliveryTarget');
 
