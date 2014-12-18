@@ -5,5 +5,17 @@ export default Ember.ObjectController.extend({
     sortPropertyId: 'sort_by'
   },
 
-  sortPropertyId: 'priority'
+  sortPropertyId: 'priority',
+
+  pistachioUrl: function() {
+    return `${EmberENV.pistachioUrl}/whiteboard`;
+  }.property(),
+
+  actions: {
+    submitFeedback: function() {
+      /* jshint newcap: false */
+      Intercom('showNewMessage');
+      /* jshint newcap: true */
+    }
+  }
 });
