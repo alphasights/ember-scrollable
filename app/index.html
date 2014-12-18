@@ -9,19 +9,6 @@
 
     {{content-for 'head'}}
 
-    <script>
-      (function(){
-        var configMetaElement = document.querySelector("meta[name='phoenix/config/environment']");
-        var config = JSON.parse(unescape(configMetaElement.getAttribute('content')));
-
-        if (config.environment === 'production') {
-          var divshotEnvScript = document.createElement('script');
-          divshotEnvScript.src = '/__/env.js';
-          document.head.appendChild(divshotEnvScript);
-        }
-      }());
-    </script>
-
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/phoenix.css">
