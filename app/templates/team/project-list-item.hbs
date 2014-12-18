@@ -17,7 +17,7 @@
   {{/each}}
 </div>
 
-<div class="progress">
+<div {{bind-attr class=":progress hasDeliveryTarget::no-target"}}>
   {{as-progress-bar ratio=progress}}
 
   <div class="details">

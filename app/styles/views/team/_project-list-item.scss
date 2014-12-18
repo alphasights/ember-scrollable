@@ -86,12 +86,22 @@
         text-transform: uppercase;
       }
     }
+
+    &.no-target {
+      .target {
+        color: $info-color;
+      }
+
+      .delivered {
+        opacity: 1;
+      }
+    }
   }
 
   &:hover {
     background-color: lighten($global-section-border-color, 6%);
 
-    .progress .details .delivered {
+    .progress .delivered {
       opacity: 1;
     }
   }
