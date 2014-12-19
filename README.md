@@ -41,7 +41,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-`dumbot divshot promote as-phoenix` will promote the staging environment, updated after the CI run, to production
+`dumbot divshot promote as-phoenix` will promote the staging environment, updated after CI runs, to production
 
 ## Further Reading / Useful Links
 
