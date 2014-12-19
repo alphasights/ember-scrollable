@@ -18,32 +18,29 @@ export default Ember.ObjectController.extend({
     } else {
       return this.get('team.members');
     }
-  }.property('requestPromise', 'team.members'),
+  }.property('requestPromise', 'team.members', 'results'),
 
   queryDidChange: function() {
-    if (Ember.isBlank(this.get('query'))) {
-      this.set('requestPromise', null);
-    }
-
-    Ember.run.debounce(this, '_queryDidChange', 100);
-  }.observes('query'),
-
-  _queryDidChange: function() {
     var query = this.get('query');
 
     if (query && query.length > 1) {
-      var requestPromise = PromiseController.create({
-        promise: this.store.find('user', { query: query }).then(response => {
-          if (requestPromise === this.get('requestPromise')) {
-            this.set('results', response);
-          }
-        })
-      });
-
-      this.set('requestPromise', requestPromise);
+      Ember.run.debounce(this, '_queryDidChange', 100);
     } else {
+      this.set('requestPromise', null);
       this.set('results', null);
     }
+  }.observes('query'),
+
+  _queryDidChange: function() {
+    var requestPromise = PromiseController.create({
+      promise: this.store.find('user', { query: this.get('query') }).then(response => {
+        if (requestPromise === this.get('requestPromise')) {
+          this.set('results', response);
+        }
+      })
+    });
+
+    this.set('requestPromise', requestPromise);
   },
 
   actions: {
