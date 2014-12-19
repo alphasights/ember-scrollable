@@ -12,6 +12,8 @@ dependencies:
     - npm install
     - bower install
     - bundle install
+  cache_directories:
+    - /home/ubuntu/nvm/v0.10.22/lib/node_modules
 
 deployment:
   staging:
