@@ -2,17 +2,6 @@
   overflow: visible;
 }
 
-::-webkit-scrollbar {
-  width: 15px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-clip: content-box;
-  background-color: rgba(108, 110, 113, .7);
-  border: 4px solid transparent;
-  border-radius: 7px;
-}
-
 ul {
   list-style-type: none;
   margin-left: 0;

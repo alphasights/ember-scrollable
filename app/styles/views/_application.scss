@@ -1,11 +1,13 @@
 .application main > .content {
   bottom: 0;
+  right: 0;
+  left: 0;
   height: auto;
   position: absolute;
   top: $layout-sidebar-header-height;
 
-  > section,
-  > article {
+  > div > div > section,
+  > div > div > article {
     @extend %grid-row;
 
     position: relative;
