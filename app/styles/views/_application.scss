@@ -1,5 +1,8 @@
 .application main > .content {
-  padding-top: $layout-sidebar-header-height;
+  bottom: 0;
+  height: auto;
+  position: absolute;
+  top: $layout-sidebar-header-height;
 
   > section,
   > article {
