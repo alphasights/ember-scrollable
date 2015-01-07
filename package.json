@@ -32,7 +32,7 @@
     "ember-cli-qunit": "0.1.2",
     "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git",
     "ember-cli-velocity": "^0.1.2",
-    "ember-data": "1.0.0-beta.12",
+    "ember-data": "1.0.0-beta.14.1",
     "ember-export-application-global": "~1.0.1",
     "ember-localstorage-adapter": "~0.5.0",
     "express": "^4.8.5",
