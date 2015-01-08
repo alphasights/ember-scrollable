@@ -9,8 +9,14 @@ export default SidePanelView.extend({
 
   setupArrowKeysHandling: function() {
     this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
-      if (event.keyCode === LEFT_ARROW_KEY) { this.get('controller').send('previous'); }
-      if (event.keyCode === RIGHT_ARROW_KEY) { this.get('controller').send('next'); }
+      switch (event.keyCode) {
+        case LEFT_ARROW_KEY:
+          this.get('controller').send('previous');
+          break;
+        case RIGHT_ARROW_KEY:
+          this.get('controller').send('next');;
+          break;
+      }
     });
   }.on('didInsertElement'),
 
