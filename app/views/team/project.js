@@ -5,13 +5,13 @@ export default SidePanelView.extend({
   tagName: 'article',
 
   setupArrowKeysHandling: function() {
-    this.$(document).on('keyup.projectNavigation', (e) => {
+    this.$(document).on(`keyup.${this.get('elementId')}`, (e) => {
       if (e.keyCode === 37) { this.get('controller').send('previous'); } // left arrow
       if (e.keyCode === 39) { this.get('controller').send('next'); } // right arrow
     });
   }.on('didInsertElement'),
 
   removeArrowKeysHandling: function() {
-    this.$(document).off('keyup.projectNavigation');
+    this.$(document).off(`keyup.${this.get('elementId')}`);
   }.on('willDestroyElement')
 });
