@@ -248,7 +248,7 @@ test("Show project details", function() {
   });
 });
 
-test("Navigate to next project", function() {
+test("Navigate to next project with navigation buttons", function() {
   visit('/team');
   click('.project-list-item:first');
   click('.project .next');
@@ -258,10 +258,30 @@ test("Navigate to next project", function() {
   });
 });
 
-test("Navigate to previous project", function() {
+test("Navigate to next project with arrow keys", function() {
+  visit('/team');
+  click('.project-list-item:first');
+  keyEvent(document, 'keyup', 39);
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+  });
+});
+
+test("Navigate to previous project with navigation buttons", function() {
   visit('/team');
   click('.project-list-item:last');
   click('.project .previous');
+
+  andThen(function(){
+    equal(find('.project h1 span').text().trim(), 'Example Project');
+  });
+});
+
+test("Navigate to previous project with arrow keys", function() {
+  visit('/team');
+  click('.project-list-item:last');
+  keyEvent(document, 'keyup', 37);
 
   andThen(function(){
     equal(find('.project h1 span').text().trim(), 'Example Project');
