@@ -1,13 +1,16 @@
 import SidePanelView from '../side-panel';
 
+const LEFT_ARROW_KEY = 37;
+const RIGHT_ARROW_KEY = 39;
+
 export default SidePanelView.extend({
   classNameBindings: [':project'],
   tagName: 'article',
 
   setupArrowKeysHandling: function() {
     this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
-      if (e.keyCode === 37) { this.get('controller').send('previous'); } // left arrow
-      if (e.keyCode === 39) { this.get('controller').send('next'); } // right arrow
+      if (event.keyCode === LEFT_ARROW_KEY) { this.get('controller').send('previous'); }
+      if (event.keyCode === RIGHT_ARROW_KEY) { this.get('controller').send('next'); }
     });
   }.on('didInsertElement'),
 
