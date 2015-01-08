@@ -14,7 +14,7 @@ export default SidePanelView.extend({
           this.get('controller').send('previous');
           break;
         case RIGHT_ARROW_KEY:
-          this.get('controller').send('next');;
+          this.get('controller').send('next');
           break;
       }
     });
