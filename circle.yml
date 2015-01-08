@@ -8,10 +8,7 @@ test:
 
 dependencies:
   override:
-    - npm install -g ember-cli
-    - npm install
-    - bower install
-    - bundle install
+    - ./bin/setup
   cache_directories:
     - /home/ubuntu/nvm/v0.10.22/lib/node_modules
 
