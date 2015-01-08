@@ -5,7 +5,7 @@ export default SidePanelView.extend({
   tagName: 'article',
 
   setupArrowKeysHandling: function() {
-    this.$(document).on(`keyup.${this.get('elementId')}`, (e) => {
+    this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
       if (e.keyCode === 37) { this.get('controller').send('previous'); } // left arrow
       if (e.keyCode === 39) { this.get('controller').send('next'); } // right arrow
     });
