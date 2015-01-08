@@ -1,7 +1,7 @@
 import SidePanelView from '../side-panel';
 
-const LEFT_ARROW_KEY = 37;
-const RIGHT_ARROW_KEY = 39;
+var LEFT_ARROW_KEY = 37;
+var RIGHT_ARROW_KEY = 39;
 
 export default SidePanelView.extend({
   classNameBindings: [':project'],
