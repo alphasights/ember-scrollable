@@ -24,7 +24,5 @@ app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
 app.import('bower_components/messenger/build/css/messenger.css');
 app.import('bower_components/messenger/build/css/messenger-theme-flat.css');
-app.import('vendor/trackpad-scroll-emulator/jquery.trackpad-scroll-emulator.js');
-app.import('vendor/trackpad-scroll-emulator/trackpad-scroll-emulator.css');
 
 module.exports = app.toTree();
