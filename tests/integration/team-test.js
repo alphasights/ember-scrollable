@@ -100,7 +100,7 @@ module("Team", {
 });
 
 test("Read project list", function() {
-  visit('/team');
+  visit('/teams/1');
   wait();
 
   andThen(function() {
@@ -148,7 +148,7 @@ test("Read project list", function() {
 });
 
 test("Sort project list", function() {
-  visit('/team');
+  visit('/teams/1');
 
   var projectTitles = function() {
     return find('.project-list-item').toArray().map(function(project) {
@@ -189,7 +189,7 @@ test("Change project priority", function() {
     }
   }, {});
 
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first .priority-select');
   click('.project-list-item:first .priority-select .dropdown-item.low');
 
@@ -200,7 +200,7 @@ test("Change project priority", function() {
 });
 
 test("Show project details", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
 
   andThen(function(){
@@ -249,7 +249,7 @@ test("Show project details", function() {
 });
 
 test("Navigate to next project with navigation buttons", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   click('.project .next');
 
@@ -259,7 +259,7 @@ test("Navigate to next project with navigation buttons", function() {
 });
 
 test("Navigate to next project with arrow keys", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   keyEvent(document, 'keyup', 39);
 
@@ -269,7 +269,7 @@ test("Navigate to next project with arrow keys", function() {
 });
 
 test("Navigate to previous project with navigation buttons", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:last');
   click('.project .previous');
 
@@ -279,7 +279,7 @@ test("Navigate to previous project with navigation buttons", function() {
 });
 
 test("Navigate to previous project with arrow keys", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:last');
   keyEvent(document, 'keyup', 37);
 
@@ -289,7 +289,7 @@ test("Navigate to previous project with arrow keys", function() {
 });
 
 test("Move back to the last project from the first", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   click('.project .previous');
 
@@ -299,7 +299,7 @@ test("Move back to the last project from the first", function() {
 });
 
 test("Move back to the first project from the last", function() {
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:last');
   click('.project .next');
 
@@ -322,7 +322,7 @@ test("Change project priority from the details", function() {
     }
   }, {});
 
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   click('.project .priority-select');
   click('.project .priority-select .dropdown-item.low');
@@ -342,7 +342,7 @@ test("Change delivery target for an angle membership", function() {
     }
   }, {});
 
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
@@ -360,7 +360,7 @@ test("Add a member to an angle", function() {
     }
   }, {});
 
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   click('.angle-memberships .add > button');
   click('.angle-memberships .add .team-members li');
@@ -374,7 +374,7 @@ test("Add a member to an angle", function() {
 test("Remove a member from an angle", function() {
   var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
 
-  visit('/team');
+  visit('/teams/1');
   click('.project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
