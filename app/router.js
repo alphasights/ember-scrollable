@@ -10,7 +10,7 @@ Router.map(function() {
   this.resource('performance');
   this.resource('projects');
 
-  this.resource('team', function() {
+  this.resource('team', { path: 'teams/:team_id' }, function() {
     this.resource('team.project', { path: ':project_id' });
   });
 
