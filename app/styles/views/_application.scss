@@ -1,28 +1,35 @@
 .application main > .content {
-  padding-top: $layout-sidebar-header-height;
+  bottom: 0;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: $layout-sidebar-header-height;
 
-  > section,
-  > article {
-    @extend %grid-row;
+  > div > .content {
+    > section,
+    > article {
+      @extend %grid-row;
 
-    position: relative;
+      position: relative;
 
-    > header {
-      border-bottom: solid 1px $global-section-border-color;
-      padding: 0 $column-gutter;
-      text-align: center;
+      > header {
+        border-bottom: solid 1px $global-section-border-color;
+        padding: 0 $column-gutter;
+        text-align: center;
 
-      h1 {
-        @extend %heading-medium-uppercase;
+        h1 {
+          @extend %heading-medium-uppercase;
 
-        color: $subheader-font-color;
-        font-weight: $font-weight-normal;
-        line-height: rem-calc(100);
-        margin: 0;
-      }
+          color: $subheader-font-color;
+          font-weight: $font-weight-normal;
+          line-height: rem-calc(100);
+          margin: 0;
+        }
 
-      @media #{$large-up} {
-        text-align: left;
+        @media #{$large-up} {
+          text-align: left;
+        }
       }
     }
   }
