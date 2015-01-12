@@ -4,7 +4,11 @@
     You can <a {{bind-attr href=pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
   </div>
 
-  <h1>{{name}}</h1>
+  {{#if teamSelecting}}
+    {{view "select" content=teams value=selectedTeam change=selectedTeamDidChange optionLabelPath="content.name" class="team-selector"}}
+  {{else}}
+    <h1 {{action "selectTeam"}}>{{name}}</h1>
+  {{/if}}
 </header>
 
 {{render "team.projects" tagName="section"}}
