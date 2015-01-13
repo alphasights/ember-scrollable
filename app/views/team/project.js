@@ -1,26 +1,17 @@
 import SidePanelView from '../side-panel';
+import KeyEventsMixin from '../../mixins/key-events';
 
-var LEFT_ARROW_KEY = 37;
-var RIGHT_ARROW_KEY = 39;
-
-export default SidePanelView.extend({
+export default SidePanelView.extend(KeyEventsMixin, {
   classNameBindings: [':project'],
   tagName: 'article',
 
-  setupArrowKeysHandling: function() {
-    this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
-      switch (event.keyCode) {
-        case LEFT_ARROW_KEY:
-          this.get('controller').send('previous');
-          break;
-        case RIGHT_ARROW_KEY:
-          this.get('controller').send('next');
-          break;
-      }
-    });
-  }.on('didInsertElement'),
+  keyEvents: {
+    leftArrow: function() {
+      this.get('controller').send('previous');
+    },
 
-  removeArrowKeysHandling: function() {
-    this.$(document).off(`keyup.${this.get('elementId')}`);
-  }.on('willDestroyElement')
+    rightArrow: function() {
+      this.get('controller').send('next');
+    }
+  }
 });
