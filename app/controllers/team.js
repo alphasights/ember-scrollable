@@ -15,11 +15,15 @@ export default Ember.ObjectController.extend({
   }.property(),
 
   selectedTeamDidChange: function() {
-    this.get('controller').set('teamSelecting', false);
+    this.get('controller').send('closeTeamSelector');
     this.get('controller').transitionToRoute('team', this.get('selection.id'));
   },
 
   actions: {
+    closeTeamSelector: function() {
+      this.set('teamSelecting', false);
+    },
+
     submitFeedback: function() {
       /* jshint newcap: false */
       Intercom('showNewMessage');
