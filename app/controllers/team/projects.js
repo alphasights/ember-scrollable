@@ -5,13 +5,9 @@ export default Ember.ArrayController.extend({
 
   team: Ember.computed.alias('controllers.team'),
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
+  sortedProjects: Ember.computed.sort('model', 'sortProperties'),
 
   availableSortProperties: [{
-    id: 'priority',
-    name: 'Priority',
-    property: 'priorityIndex',
-    ascending: false
-  }, {
     id: 'client',
     name: 'Client',
     property: 'clientCode',
@@ -30,10 +26,10 @@ export default Ember.ArrayController.extend({
   }.property('sortPropertyId'),
 
   sortProperties: function() {
-    return [this.get('sortProperty').property];
+    return ['priority:asc', this.get('sortProperty').property];
   }.property('sortProperty'),
 
   sortAscending: function() {
-    return this.get('sortProperty').ascending;
+    return ['priority:asc', this.get('sortProperty').ascending];
   }.property('sortProperty')
 });
