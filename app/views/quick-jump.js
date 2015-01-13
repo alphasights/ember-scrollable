@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import KeyEventsMixin from '../mixins/key-events';
 
-export default Ember.View.extend({
+export default Ember.View.extend(KeyEventsMixin, {
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
 
   isActive: false,
@@ -28,12 +29,6 @@ export default Ember.View.extend({
     Ember.$(document).off(this.get('clickEventName'));
   },
 
-  keyUp: function(event) {
-    if (event.which === 27) {
-      this.set('isActive', false);
-    }
-  },
-
   onIsActiveDidChange: function() {
     if (!this.get('isActive')) {
       this.$('input').blur();
@@ -43,6 +38,12 @@ export default Ember.View.extend({
   actions: {
     onBarFocusIn: function() {
       this.set('isActive', true);
+    }
+  },
+
+  keyEvents: {
+    esc: function() {
+      this.set('isActive', false);
     }
   }
 });
