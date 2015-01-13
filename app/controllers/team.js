@@ -31,7 +31,9 @@ export default Ember.ObjectController.extend({
     },
 
     selectTeam: function() {
-      this.set('teamSelecting', true);
+      if (this.get('teams.content').length > 1) {
+        this.set('teamSelecting', true);
+      }
     }
   }
 });
