@@ -1,18 +1,21 @@
 import Ember from 'ember';
 
-var ESC = 27;
-var LEFT_ARROW = 37;
-var RIGHT_ARROW = 39;
+var mapping = {
+  esc: 27,
+  leftArrow: 37,
+  rightArrow: 39
+};
+
+var invertedMapping = _(mapping).invert();
 
 export default Ember.Mixin.create({
   setupArrowKeysHandling: function() {
     this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
-      if (event.keyCode === LEFT_ARROW && this.keyEvents.leftArrow) {
-        this.keyEvents.leftArrow.apply(this);
-      } else if (event.keyCode === RIGHT_ARROW && this.keyEvents.rightArrow) {
-        this.keyEvents.rightArrow.apply(this);
-      } else if (event.keyCode === ESC && this.keyEvents.esc) {
-        this.keyEvents.esc.apply(this);
+      var key = invertedMapping[event.keyCode];
+      var keyEvent = this.keyEvents[key];
+
+      if (keyEvent) {
+        keyEvent.apply(this);
       }
     });
   }.on('didInsertElement'),
