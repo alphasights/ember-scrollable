@@ -71,7 +71,7 @@ module("Team", {
         "upcoming_interactions_count": 0
       }, {
         "id": 2,
-        "status": "medium",
+        "status": "high",
         "name": "Example Project 2",
         "client_code": "2EP",
         "details_url": "/projects/2",
@@ -135,8 +135,8 @@ test("Read project list", function() {
     }, {
       title: 'Example Project 2',
       clientCode: '2EP',
-      highPriority: false,
-      mediumPriority: true,
+      highPriority: true,
+      mediumPriority: false,
       lowPriority: false,
       memberAvatarUrl: undefined,
       leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
@@ -163,12 +163,6 @@ test("Sort project list", function() {
   });
 
   fillIn('.projects .sort-by-select select', 'creation-date');
-
-  andThen(function() {
-    deepEqual(projectTitles(), ['Example Project', 'Example Project 2']);
-  });
-
-  fillIn('.projects .sort-by-select select', 'priority');
 
   andThen(function() {
     deepEqual(projectTitles(), ['Example Project', 'Example Project 2']);
