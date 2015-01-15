@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
     sortPropertyId: 'sort_by'
   },
 
-  sortPropertyId: 'priority',
+  sortPropertyId: 'creation-date',
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;
