@@ -15,6 +15,7 @@ Router.map(function() {
   });
 
   this.route('application_error', { path: '*path' });
+  this.route('not_found');
 });
 
 export default Router;
