@@ -2,7 +2,7 @@ export default {
   name: 'segment',
 
   initialize: _(function() {
-    if (EmberENV.segmentWriteKey == null) { return; }
+    if (typeof analytics === 'undefined') { return; }
 
     analytics.load(EmberENV.segmentWriteKey);
     analytics.page();
