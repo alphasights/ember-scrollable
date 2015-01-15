@@ -40,3 +40,15 @@ test("Transition error message", function() {
     equal(message, "Sorry, something went wrong. Try refreshing the page.");
   });
 });
+
+test("404 error message", function() {
+  defineFixture('/projects/99999999', {}, {}, 404);
+
+  visit('/');
+  visit('/team/99999999');
+
+  andThen(function() {
+    var message = $('.error h1').text().trim();
+    equal(message, "Sorry, the page you were looking for could not be found.");
+  });
+});
