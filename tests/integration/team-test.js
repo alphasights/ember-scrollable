@@ -81,6 +81,18 @@ module("Team", {
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 0,
         "upcoming_interactions_count": 0
+      }, {
+        "id": 3,
+        "status": "medium",
+        "name": "Example Project 3",
+        "client_code": "03EP",
+        "details_url": "/projects/2",
+        "created_at": "2008-07-14T17:05:32.909+01:00",
+        "angle_ids": [],
+        "analyst_1_id": 1,
+        "proposed_advisors_count": 0,
+        "left_to_schedule_advisors_count": 0,
+        "upcoming_interactions_count": 0
       }]
     });
 
@@ -143,6 +155,17 @@ test("Read project list", function() {
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
+    }, {
+      title: 'Example Project 3',
+      clientCode: '03EP',
+      highPriority: false,
+      mediumPriority: true,
+      lowPriority: false,
+      memberAvatarUrl: undefined,
+      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      deliveredCount: 0,
+      targetCount: 0,
+      progressBarWidth: '0px',
     }]);
   });
 });
@@ -159,13 +182,19 @@ test("Sort project list", function() {
   fillIn('.projects .sort-by-select select', 'client');
 
   andThen(function() {
-    deepEqual(projectTitles(), ['Example Project 2', 'Example Project']);
+    deepEqual(
+      projectTitles(),
+      ['Example Project 2', 'Example Project', 'Example Project 3']
+    );
   });
 
   fillIn('.projects .sort-by-select select', 'creation-date');
 
   andThen(function() {
-    deepEqual(projectTitles(), ['Example Project', 'Example Project 2']);
+    deepEqual(
+      projectTitles(),
+      ['Example Project', 'Example Project 2', 'Example Project 3']
+    );
   });
 });
 
@@ -268,7 +297,7 @@ test("Navigate to previous project with navigation buttons", function() {
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project');
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -278,7 +307,7 @@ test("Navigate to previous project with arrow keys", function() {
   keyEvent(document, 'keyup', 37);
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project');
+    equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -288,7 +317,7 @@ test("Move back to the last project from the first", function() {
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    equal(find('.project h1 span').text().trim(), 'Example Project 3');
   });
 });
 
