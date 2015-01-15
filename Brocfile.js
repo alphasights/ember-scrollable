@@ -2,8 +2,21 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var env = process.env.EMBER_ENV;
+var config = require('./config/environment')(env);
 
-var app = new EmberApp();
+var app = new EmberApp({
+  inlineContent: {
+    'analytics': {
+      file: './external_scripts/analytics.html',
+      enabled: config.EmberENV.segmentWriteKey != null
+    },
+    'intercom': {
+      file: './external_scripts/intercom.html',
+      enabled: config.EmberENV.intercomAppId != null
+    }
+  }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

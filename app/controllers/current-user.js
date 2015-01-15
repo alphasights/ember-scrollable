@@ -4,7 +4,7 @@ export default Ember.ObjectController.extend({
   preferences: null,
 
   modelDidChange: function() {
-    if (EmberENV.segmentWriteKey != null) {
+    if (typeof analytics !== 'undefined') {
       analytics.identify(
         this.get('initials'),
         _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
@@ -13,8 +13,8 @@ export default Ember.ObjectController.extend({
   }.observes('model'),
 
   setupIntercom: function() {
-    if (EmberENV.intercomAppId != null) {
-      /* jshint newcap: false */
+    /* jshint newcap: false */
+    if (typeof Intercom !== 'undefined') {
       Intercom('boot', {
         app_id: EmberENV.intercomAppId,
         email: this.get('email'),
@@ -23,8 +23,8 @@ export default Ember.ObjectController.extend({
         user_id: this.get('id'),
         user_hash: this.get('intercomUserHash')
       });
-      /* jshint newcap: true */
     }
+    /* jshint newcap: true */
   },
 
   actions: {
