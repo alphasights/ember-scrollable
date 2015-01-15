@@ -4,7 +4,7 @@ export default Ember.ObjectController.extend({
   preferences: null,
 
   modelDidChange: function() {
-    if (typeof analytics !== 'undefined' && analytics != null) {
+    if (typeof analytics !== 'undefined') {
       analytics.identify(
         this.get('initials'),
         _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
@@ -14,7 +14,7 @@ export default Ember.ObjectController.extend({
 
   setupIntercom: function() {
     /* jshint newcap: false */
-    if (typeof Intercom !== 'undefined' && Intercom != null) {
+    if (typeof Intercom !== 'undefined') {
       Intercom('boot', {
         app_id: EmberENV.intercomAppId,
         email: this.get('email'),
