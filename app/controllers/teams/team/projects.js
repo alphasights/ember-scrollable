@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ['team'],
+  needs: ['teams/team'],
 
-  team: Ember.computed.alias('controllers.teams.team'),
+  team: Ember.computed.alias('controllers.teams/team'),
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
 
   availableSortProperties: [{

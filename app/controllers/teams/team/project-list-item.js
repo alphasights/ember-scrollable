@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  needs: ['teams/team'],
+
+  team: Ember.computed.alias('controllers.teams/team'),
   hasDeliveryTarget: Ember.computed.gt('deliveryTarget', 0),
 
   progress: function() {
@@ -19,8 +22,7 @@ export default Ember.ObjectController.extend({
 
   actions: {
     show: function() {
-      var team = this.controllerFor('teams.team').get('model');
-      this.transitionToRoute('teams.team.project', team, this.get('model'));
+      this.transitionToRoute('teams.team.project', this.get('team.model'), this.get('model'));
     }
   }
 });
