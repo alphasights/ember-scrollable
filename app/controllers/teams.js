@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  teamSelecting: false,
+  showTeamSelect: false,
   selectedTeam: null,
 
   queryParams: {
@@ -15,25 +15,23 @@ export default Ember.ObjectController.extend({
   }.property(),
 
   selectedTeamDidChange: function() {
-    this.get('controller').send('closeTeamSelector');
-    this.get('controller').transitionToRoute('team', this.get('selection.id'));
+    this.get('controller').send('closeTeamSelect');
+    this.get('controller').transitionToRoute('teams.team', this.get('selectedTeam'));
   },
 
   actions: {
-    closeTeamSelector: function() {
-      this.set('teamSelecting', false);
+    closeTeamSelect: function() {
+      this.set('showTeamSelect', false);
+    },
+
+    openTeamSelect: function() {
+      this.set('showTeamSelect', true);
     },
 
     submitFeedback: function() {
       /* jshint newcap: false */
       Intercom('showNewMessage');
       /* jshint newcap: true */
-    },
-
-    selectTeam: function() {
-      if (this.get('teams.content').length > 1) {
-        this.set('teamSelecting', true);
-      }
     }
   }
 });

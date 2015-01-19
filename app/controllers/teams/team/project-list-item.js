@@ -19,7 +19,8 @@ export default Ember.ObjectController.extend({
 
   actions: {
     show: function() {
-      this.transitionToRoute('team.project', this.get('model'));
+      var team = this.controllerFor('teams.team').get('model');
+      this.transitionToRoute('teams.team.project', team, this.get('model'));
     }
   }
 });

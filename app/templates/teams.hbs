@@ -1,0 +1,22 @@
+<header>
+  <div class="beta-alert">
+    You're trying out the new Whiteboard.
+    You can <a {{bind-attr href=pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
+  </div>
+
+  <div class="team-select">
+    {{#if showTeamSelect}}
+      {{view "select"
+        content=model
+        value=selectedTeam
+        change=selectedTeamDidChange
+        optionLabelPath="content.name"}}
+
+      <button class="close" {{action "closeTeamSelect"}}></button>
+    {{else}}
+      <h1 {{action "openTeamSelect"}}>{{name}}</h1>
+    {{/if}}
+  </div>
+</header>
+
+{{outlet}}
