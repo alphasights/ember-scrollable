@@ -6,5 +6,5 @@ export default Ember.ObjectController.extend({
   }.property('id'),
 
   anglesSorting: ['createdAt:desc'],
-  sortedAngles: Ember.computed.sort('angles', 'anglesSorting')
+  angles: Ember.computed.sort('model.angles', 'anglesSorting')
 });
