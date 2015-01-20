@@ -10,7 +10,7 @@ export default Ember.ObjectController.extend({
 
   selectedTeamDidChange: function() {
     this.send('closeTeamSelect');
-    this.transitionToRoute('teams.team', this.get('selectedTeam'));
+    this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
   },
 
   actions: {

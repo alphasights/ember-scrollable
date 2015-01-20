@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import PromiseController from '../promise';
+import PromiseController from '../../promise';
 
 export default Ember.ObjectController.extend({
   needs: ['teams/team'],

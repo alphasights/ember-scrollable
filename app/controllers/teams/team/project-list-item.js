@@ -22,7 +22,7 @@ export default Ember.ObjectController.extend({
 
   actions: {
     show: function() {
-      this.transitionToRoute('teams.team.project', this.get('team.model'), this.get('model'));
+      this.transitionToRoute('teams.team.project', this.get('team.id'), this.get('id'));
     }
   }
 });

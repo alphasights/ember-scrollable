@@ -1,4 +1,4 @@
-.team {
+.teams {
   .beta-alert {
     @include alert($bg: $info-color);
 
@@ -7,19 +7,21 @@
     margin-top: rem-calc(20px);
   }
 
-  .team-name {
+  .team-select {
     @extend %grid-row;
 
     select {
       @extend %grid-column-small-10;
       @extend %grid-column-medium-10;
       @extend %grid-column-large-4;
+
       margin: rem-calc(34px) 0;
     }
 
     .close {
-      margin: rem-calc(35px) rem-calc(10px);
       @include button-icon(close);
+      
+      margin: rem-calc(35px) rem-calc(10px);
     }
   }
 }

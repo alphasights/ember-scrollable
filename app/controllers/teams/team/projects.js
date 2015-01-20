@@ -1,9 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ['teams/team'],
-
-  team: Ember.computed.alias('controllers.teams/team'),
+  team: null,
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
 
   availableSortProperties: [{
@@ -23,17 +21,17 @@ export default Ember.ArrayController.extend({
     ascending: false
   }],
 
-  sortProperty: function() {
-    return this
-      .get('availableSortProperties')
-      .findBy('id', this.get('sortPropertyId'));
-  }.property('sortPropertyId'),
-
   sortProperties: function() {
     return [this.get('sortProperty').property];
   }.property('sortProperty'),
 
   sortAscending: function() {
     return this.get('sortProperty').ascending;
-  }.property('sortProperty')
+  }.property('sortProperty'),
+
+  sortProperty: function() {
+    return this
+      .get('availableSortProperties')
+      .findBy('id', this.get('sortPropertyId'));
+  }.property('sortPropertyId')
 });

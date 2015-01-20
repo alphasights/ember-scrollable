@@ -1,4 +1,4 @@
-import SidePanelView from '../side-panel';
+import SidePanelView from 'phoenix/views/side-panel';
 
 var LEFT_ARROW_KEY = 37;
 var RIGHT_ARROW_KEY = 39;

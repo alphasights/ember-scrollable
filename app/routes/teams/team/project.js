@@ -7,12 +7,12 @@ export default SidePanelRoute.extend({
   setupController: function(controller, model) {
     this._super(controller, model);
 
-    var projects = this.controllerFor('teams.team.projects').get('arrangedContent');
+    var projects = this.controllerFor('teams.team').get('projects.arrangedContent');
     this.set('index', projects.indexOf(model));
   },
 
   navigate: function(step) {
-    var projects = this.controllerFor('teams.team.projects').get('arrangedContent');
+    var projects = this.controllerFor('teams.team').get('projects.arrangedContent');
     var team = this.controllerFor('teams.team').get('model');
     var newProjectIndex = this.get('index') + step;
 
@@ -23,12 +23,12 @@ export default SidePanelRoute.extend({
     var newProject = projects.objectAt(newProjectIndex % projects.length);
 
     this.set('index', newProjectIndex);
-    this.transitionTo('teams.team.project', team, newProject);
+    this.transitionTo('teams.team.project', team.get('id'), newProject.get('id'));
   },
 
   actions: {
     hideSidePanel: function() {
-      this.transitionTo('teams.team', this.controllerFor('teams.team').get('model'));
+      this.transitionTo('teams.team', this.controllerFor('teams.team').get('id'));
     },
 
     previous: function() {

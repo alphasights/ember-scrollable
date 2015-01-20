@@ -11,8 +11,8 @@ Router.map(function() {
   this.resource('projects');
 
   this.resource('teams', function() {
-    this.resource('teams.team', { path: ':team_id' }, function() {
-      this.resource('teams.team.project', { path: 'projects/:project_id' });
+    this.resource('teams.team', { path: '/:team_id/projects' }, function() {
+      this.resource('teams.team.project', { path: '/:project_id' });
     });
   });
 
