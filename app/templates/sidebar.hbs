@@ -3,7 +3,7 @@
   <h1>Phoenix</h1>
 </header>
 
-<nav>
+{{#as-scrollable tagName="nav"}}
   <header>
     <div class="toggle-collapse">
       <button {{action "toggleCollapse" target=view}}></button>
@@ -29,7 +29,7 @@
       {{#link-to "performance"}}<i></i><span>Performance</span>{{/link-to}}
     </li>
   </ul>
-</nav>
+{{/as-scrollable}}
 
 <section class="user-session">
   <div class="toggle-actions">

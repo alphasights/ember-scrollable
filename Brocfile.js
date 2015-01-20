@@ -2,8 +2,21 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var env = process.env.EMBER_ENV;
+var config = require('./config/environment')(env);
 
-var app = new EmberApp();
+var app = new EmberApp({
+  inlineContent: {
+    'analytics': {
+      file: './external_scripts/analytics.html',
+      enabled: config.EmberENV.segmentWriteKey != null
+    },
+    'intercom': {
+      file: './external_scripts/intercom.html',
+      enabled: config.EmberENV.intercomAppId != null
+    }
+  }
+});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -17,7 +30,6 @@ var app = new EmberApp();
 // modules that you would like to import into your application
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
-
 
 app.import('bower_components/honeybadger.js/honeybadger.js');
 app.import('bower_components/underscore/underscore.js');

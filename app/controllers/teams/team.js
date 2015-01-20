@@ -6,7 +6,7 @@ export default Ember.ObjectController.extend({
     sortPropertyId: 'sort_by'
   },
 
-  sortPropertyId: 'priority',
+  sortPropertyId: 'creation-date',
 
   init: function() {
     this._super.apply(this, arguments);

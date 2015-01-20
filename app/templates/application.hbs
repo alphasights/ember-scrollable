@@ -3,9 +3,9 @@
 <main>
   {{render "quick-jump" this tagName="section"}}
 
-  <div class="content">
+  {{#as-scrollable class="content"}}
     {{outlet}}
-  </div>
+  {{/as-scrollable}}
 </main>
 
 {{outlet "side-panel"}}

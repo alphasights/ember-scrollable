@@ -3,26 +3,25 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   team: null,
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
+  arrangedContent: Ember.computed.sort('model', 'sortProperties'),
 
   availableSortProperties: [{
-    id: 'priority',
-    name: 'Priority',
-    property: 'priorityIndex',
-    ascending: false
-  }, {
     id: 'client',
     name: 'Client',
     property: 'clientCode',
-    ascending: true
+    order: 'asc'
   }, {
     id: 'creation-date',
     name: 'Creation Date',
     property: 'createdAt',
-    ascending: false
+    order: 'desc'
   }],
 
   sortProperties: function() {
-    return [this.get('sortProperty').property];
+    return [
+      'priorityIndex:desc',
+      `${this.get('sortProperty').property}:${this.get('sortProperty').order}`
+    ];
   }.property('sortProperty'),
 
   sortAscending: function() {
