@@ -4,18 +4,18 @@
     You can <a {{bind-attr href=pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
   </div>
 
-  <div class="team-select">
+  <div {{bind-attr class=":team-select showTeamSelect:open"}}>
     {{#if showTeamSelect}}
       {{view "select"
         content=model
         value=selectedTeam
         change=selectedTeamDidChange
         optionLabelPath="content.name"}}
-
-      <button class="close" {{action "closeTeamSelect"}}></button>
     {{else}}
-      <h1 {{action "openTeamSelect"}}>{{selectedTeam.name}}</h1>
+      <h1>{{selectedTeam.name}}</h1>
     {{/if}}
+
+    <button class="toggle" {{action "toggleTeamSelect"}}></button>
   </div>
 </header>
 

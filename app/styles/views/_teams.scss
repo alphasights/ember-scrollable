@@ -4,24 +4,37 @@
 
     border: 0;
     margin-bottom: 0;
-    margin-top: rem-calc(20px);
+    margin-top: $column-gutter / 2;
   }
 
   .team-select {
-    @extend %grid-row;
-
-    select {
-      @extend %grid-column-small-10;
-      @extend %grid-column-medium-10;
-      @extend %grid-column-large-4;
-
-      margin: rem-calc(34px) 0;
+    h1, select, .toggle {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: $h1-font-size;
+      height: $h1-font-size;
     }
 
-    .close {
-      @include button-icon(close);
-      
-      margin: rem-calc(35px) rem-calc(10px);
+    h1 {
+      padding-right: $column-gutter / 2;
+    }
+
+    select {
+      width: auto;
+      margin: $column-gutter $column-gutter / 2 $column-gutter 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-right: $column-gutter;
+    }
+
+    .toggle {
+      @include button-icon(bars);
+    }
+
+    &.open {
+      .toggle {
+        background-color: $info-color;
+      }
     }
   }
 }

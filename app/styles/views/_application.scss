@@ -23,8 +23,7 @@
 
           color: $subheader-font-color;
           font-weight: $font-weight-normal;
-          line-height: rem-calc(100);
-          margin: 0;
+          margin: $column-gutter 0;
         }
 
         @media #{$large-up} {

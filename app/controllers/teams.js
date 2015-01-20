@@ -9,17 +9,13 @@ export default Ember.ObjectController.extend({
   }.property(),
 
   selectedTeamDidChange: function() {
-    this.send('closeTeamSelect');
+    this.set('showTeamSelect', false);
     this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
   },
 
   actions: {
-    closeTeamSelect: function() {
-      this.set('showTeamSelect', false);
-    },
-
-    openTeamSelect: function() {
-      this.set('showTeamSelect', true);
+    toggleTeamSelect: function() {
+      this.toggleProperty('showTeamSelect');
     },
 
     submitFeedback: function() {
