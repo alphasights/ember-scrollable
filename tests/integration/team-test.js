@@ -179,7 +179,7 @@ test("Sort project list", function() {
     });
   };
 
-  fillIn('.projects .sort-by-select select', 'client');
+  fillIn('.team .sort-by-select select', 'client');
 
   andThen(function() {
     deepEqual(
@@ -188,7 +188,7 @@ test("Sort project list", function() {
     );
   });
 
-  fillIn('.projects .sort-by-select select', 'creation-date');
+  fillIn('.team .sort-by-select select', 'creation-date');
 
   andThen(function() {
     deepEqual(
