@@ -3,15 +3,23 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
   showTeamSelect: false,
   selectedTeam: null,
+  teamSelectChanged: false,
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;
   }.property(),
 
-  selectedTeamDidChange: function() {
-    this.set('showTeamSelect', false);
-    this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
+  onTeamSelectChange: function() {
+    this.get('controller').set('teamSelectChanged', true);
   },
+
+  selectedTeamDidChange: function() {
+    if (this.get('teamSelectChanged')) {
+      this.set('teamSelectChanged', false);
+      this.set('showTeamSelect', false);
+      this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
+    }
+  }.observes('selectedTeam'),
 
   actions: {
     toggleTeamSelect: function() {

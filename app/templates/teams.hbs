@@ -9,7 +9,7 @@
       {{view "select"
         content=model
         value=selectedTeam
-        change=selectedTeamDidChange
+        change=onTeamSelectChange
         optionLabelPath="content.name"}}
     {{else}}
       <h1>{{selectedTeam.name}}</h1>
