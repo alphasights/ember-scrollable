@@ -7,10 +7,13 @@
   top: $layout-sidebar-header-height;
 
   > div > .content {
+    height: 100%;
+
     > section,
     > article {
       @extend %grid-row;
 
+      height: 100%;
       position: relative;
 
       > header {
