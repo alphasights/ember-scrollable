@@ -1,4 +1,9 @@
 .side-panel.project {
+  .project-info {
+    border-bottom: 1px solid $panel-border-color;
+    height: 125px;
+  }
+
   header {
     @extend %grid-column-xlarge-10;
     @extend %grid-column-large-9;
@@ -91,25 +96,21 @@
 
   .angles {
     float: left;
+    height: 100%;
+    overflow-y: auto;
 
-    > ul > li {
-      &:last-child > article {
-        border-bottom: 1px solid $panel-border-color;
-      }
+    > ul > li > article {
+      @extend %grid-row;
+      @include clearfix();
 
-      > article {
-        @extend %grid-row;
-        @include clearfix();
+      background-color: $panel-bg;
+      border-bottom: 1px solid $panel-border-color;
+      padding: $column-gutter / 2;
 
-        background-color: $panel-bg;
-        border-top: 1px solid $panel-border-color;
-        padding: $column-gutter / 2;
-
-        h1 {
-          font-size: $h6-font-size;
-          padding-bottom: $column-gutter/ 2;
-          padding-left: $column-gutter / 2;
-        }
+      h1 {
+        font-size: $h6-font-size;
+        padding-bottom: $column-gutter/ 2;
+        padding-left: $column-gutter / 2;
       }
     }
   }
