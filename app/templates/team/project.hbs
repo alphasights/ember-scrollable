@@ -1,32 +1,40 @@
-<header>
-  {{as-priority-select project=model}}
+<section class="project-info">
+  <div class="actions">
+    {{outlet "actions"}}
 
-  <h1>
-    <span>{{name}}</span>
-    <small>{{clientCode}}</small>
+    <button class="close" {{action "close" target=view}}></button>
+  </div>
 
-    <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
-      <i></i>
-    </a>
-  </h1>
+  <header>
+    {{as-priority-select project=model}}
 
-  <ul class="stats">
-    <li>
-      <span class="count">{{scheduledInteractionsCount}}</span>
-      <span class="name">Upcoming</span>
-    </li>
+    <h1>
+      <span>{{name}}</span>
+      <small>{{clientCode}}</small>
 
-    <li>
-      <span class="count">{{notScheduledInteractionsCount}}</span>
-      <span class="name">Left to Schedule</span>
-    </li>
+      <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
+        <i></i>
+      </a>
+    </h1>
 
-    <li>
-      <span class="count">{{deliveredAdvisorsCount}}</span>
-      <span class="name">Delivered</span>
-    </li>
-  </ul>
-</header>
+    <ul class="stats">
+      <li>
+        <span class="count">{{scheduledInteractionsCount}}</span>
+        <span class="name">Upcoming</span>
+      </li>
+
+      <li>
+        <span class="count">{{notScheduledInteractionsCount}}</span>
+        <span class="name">Left to Schedule</span>
+      </li>
+
+      <li>
+        <span class="count">{{deliveredAdvisorsCount}}</span>
+        <span class="name">Delivered</span>
+      </li>
+    </ul>
+  </header>
+</section>
 
 <section class="angles">
   <ul>
