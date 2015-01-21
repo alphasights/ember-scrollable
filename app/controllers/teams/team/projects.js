@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   team: null,
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
-  arrangedContent: Ember.computed.sort('model', 'sortProperties'),
+  arrangedContent: Ember.computed.sort('content', 'sortProperties'),
 
   availableSortProperties: [{
     id: 'client',
