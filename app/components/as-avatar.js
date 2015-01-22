@@ -5,10 +5,8 @@ export default TooltipsterComponent.extend({
   classNameBindings: [':avatar'],
   attributeBindings: ['src', 'alt', 'title'],
   tagName: 'img',
-  position: 'top',
 
-  animation: 'grow',
-  delay: 50,
+  position: 'top',
   theme: 'tooltipster-avatar',
 
   user: null,
