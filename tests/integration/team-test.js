@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
+import '../helpers/select';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
@@ -89,7 +90,7 @@ module("Team", {
         "status": "medium",
         "name": "Example Project 3",
         "client_code": "03EP",
-        "details_url": "/projects/2",
+        "details_url": "/projects/3",
         "created_at": "2008-07-14T17:05:32.909+01:00",
         "angle_ids": [],
         "analyst_1_id": 1,
@@ -99,6 +100,27 @@ module("Team", {
       }]
     }});
 
+    defineFixture('GET', '/projects', { params: { team_id: '2' }, response: {
+      "users": [],
+
+      "projects": [{
+        "id": 4,
+        "status": "high",
+        "name": "Example Project 4",
+        "client_code": "EP",
+        "details_url": "/projects/4",
+        "created_at": "2009-07-14T17:05:32.909+01:00",
+        "angle_ids": [],
+        "analyst_1_id": 1,
+        "proposed_advisors_count": 0,
+        "left_to_schedule_advisors_count": 0,
+        "upcoming_interactions_count": 0
+      }],
+
+      "angles": [],
+      "angle_team_memberships": []
+    }});
+
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
@@ -106,6 +128,10 @@ module("Team", {
         "teamId": 1,
         "avatarUrl": Fixtures.EMPTY_IMAGE_URL
       }]
+    }});
+
+    defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
+      "users": []
     }});
   },
 
@@ -170,6 +196,17 @@ test("Read project list", function() {
       targetCount: 0,
       progressBarWidth: '0px',
     }]);
+  });
+});
+
+test("Change team", function() {
+  visit('/teams');
+
+  click('.team-select button');
+  select('.team-select option:last');
+
+  andThen(function() {
+    equal(find('.project-list-item h1 span').text().trim(), 'Example Project 4');
   });
 });
 

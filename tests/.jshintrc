@@ -49,7 +49,8 @@
     "defineFixture",
     "_",
     "EmberENV",
-    "__env"
+    "__env",
+    "select"
   ],
   "node": false,
   "browser": false,
