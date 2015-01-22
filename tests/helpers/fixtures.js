@@ -41,7 +41,7 @@ var Fixtures = Ember.Object.extend({
       });
     }
 
-    handlers.pushObject(handler);
+    this.handlers[url].pushObject(handler);
 
     return handler;
   },
