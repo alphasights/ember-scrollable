@@ -1,11 +1,15 @@
 import Ember from 'ember';
-import AsTooltip from 'ember-cli-paint/components/as-tooltip';
+import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 
-export default AsTooltip.extend({
+export default TooltipsterComponent.extend({
   classNameBindings: [':avatar'],
   attributeBindings: ['src', 'alt', 'title'],
   tagName: 'img',
-  tooltipPosition: 'top',
+  position: 'top',
+
+  animation: 'grow',
+  delay: 50,
+  theme: 'tooltipster-avatar',
 
   user: null,
   alt: Ember.computed.alias('user.initials'),

@@ -10,26 +10,36 @@
   {{/each}}
 </ul>
 
-{{#as-dropdown title="Add Member" class="add" align="bottom"}}
-  <li class="search">
+{{#rl-dropdown-container class="dropdown add"}}
+  {{#rl-dropdown-toggle}}
     {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
       <i></i>
     {{/as-progress-indicator}}
+  {{/rl-dropdown-toggle}}
 
-    {{input type="text" value=query click=view.onSearchClick}}
-  </li>
+  {{#rl-dropdown tagName="ul" class="dropdown-menu team-members" closeOnChildClick="article"}}
+    <li class="search">
+      {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
+        <i></i>
+      {{/as-progress-indicator}}
 
-  <section class="team-members">
-    {{#each teamMembers}}
-      {{#as-dropdown-item action="add" param=this}}
-        <article>
-          {{as-avatar user=this}}
+      {{input type="text" value=query click=view.onSearchClick}}
+    </li>
 
-          <div class="name">
-            {{name}}
-          </div>
-        </article>
-      {{/as-dropdown-item}}
-    {{/each}}
-  </section>
-{{/as-dropdown}}
+    <li>
+      <ul>
+        {{#each teamMembers}}
+          <li {{action "add" this}}>
+            <article>
+              {{as-avatar user=this}}
+
+              <div class="name">
+                {{name}}
+              </div>
+            </article>
+          </li>
+        {{/each}}
+      </ul>
+    </li>
+  {{/rl-dropdown}}
+{{/rl-dropdown-container}}

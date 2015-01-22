@@ -1,13 +1,17 @@
-{{#as-dropdown title="Change Priority" align="right" classNameBindings="project.status"}}
-  {{#as-dropdown-item class="low" action="setPriority" param="low"}}
-    <button></button>
-  {{/as-dropdown-item}}
+{{#rl-dropdown-container class="dropdown"}}
+  {{#rl-dropdown-toggle tagName="div" classNameBindings="project.status"}}<button></button>{{/rl-dropdown-toggle}}
 
-  {{#as-dropdown-item class="medium" action="setPriority" param="medium"}}
-    <button></button>
-  {{/as-dropdown-item}}
+  {{#rl-dropdown tagName="ul" class="dropdown-menu over" closeOnChildClick="button"}}
+    <li class="low" {{action "setPriority" "low"}}>
+      <button></button>
+    </li>
 
-  {{#as-dropdown-item class="high" action="setPriority" param="high"}}
-    <button></button>
-  {{/as-dropdown-item}}
-{{/as-dropdown}}
+    <li class="medium" {{action "setPriority" "medium"}}>
+      <button></button>
+    </li>
+
+    <li class="high" {{action "setPriority" "high"}}>
+      <button></button>
+    </li>
+  {{/rl-dropdown}}
+{{/rl-dropdown-container}}

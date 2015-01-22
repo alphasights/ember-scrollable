@@ -1,3 +1,5 @@
+$priority-select-size: 14px;
+
 @mixin priority-select-color($color: $info-color) {
   @include detached-border(
     $color: scale-color($color, $lightness: $alert-function-factor),
@@ -11,9 +13,9 @@
   button {
     border: 0;
     display: block;
-    height: 12px;
-    margin: $column-gutter / 3;
-    width: 12px;
+    height: $priority-select-size;
+    margin: $column-gutter / 2;
+    width: $priority-select-size;
   }
 
   .high > button {
@@ -29,24 +31,11 @@
   }
 
   .dropdown {
-    ul {
-      background-color: #202326 !important;
-      border-radius: $global-radius / 2;
-      margin-left: 8px !important;
-      margin-top: -9px !important;
-      width: auto !important;
+    @extend %dropdown-inline;
+    @extend %dropdown-inverted;
 
-      &:before {
-        border-color: transparent #202326 transparent transparent !important;
-      }
-
-      li {
-        display: inline-block;
-
-        &:hover {
-          background-color: #000;
-        }
-      }
+    > div {
+      padding: 1px;
     }
   }
 }
