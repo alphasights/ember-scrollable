@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import '../helpers/clear-fixtures';
 import testHelper from '../test-helper';
 
 module("Errors", testHelper);
@@ -20,7 +19,6 @@ test("Request error message", function() {
 });
 
 test("First load error message", function() {
-  clearFixtures('/users/me');
   defineFixture('GET', '/users/me', { status: 500 });
 
   visit('/');

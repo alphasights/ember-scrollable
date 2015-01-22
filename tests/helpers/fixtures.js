@@ -10,10 +10,6 @@ var Fixtures = Ember.Object.extend({
     this.server.shutdown();
   },
 
-  clear: function(url) {
-    this.handlers[url] = [];
-  },
-
   define: function(method, url, fixture = {}) {
     _(fixture).defaults({
       params: {},
@@ -37,6 +33,12 @@ var Fixtures = Ember.Object.extend({
           return this._handleRequest(url, request);
         }.bind(this)
       );
+    }
+    else {
+      this.handlers[url] = handlers.reject(function(handler_) {
+        return _(handler_.fixture.params).isEqual(handler.fixture.params) &&
+               _(handler_.fixture.request).isEqual(handler.fixture.request);
+      });
     }
 
     handlers.pushObject(handler);
