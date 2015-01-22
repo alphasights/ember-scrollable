@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
+import '../helpers/clear-fixtures';
 import testHelper from '../test-helper';
 
 module("Errors", testHelper);
 
 test("Request error message", function() {
-  defineFixture('/quick_jumps', { q: 'example' }, {}, 500);
+  defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, status: 500 });
 
   visit('/');
   click('.quick-jump .bar input');
@@ -19,7 +20,8 @@ test("Request error message", function() {
 });
 
 test("First load error message", function() {
-  defineFixture('/users/me', {}, {}, 500);
+  clearFixtures('/users/me');
+  defineFixture('GET', '/users/me', { status: 500 });
 
   visit('/');
 
@@ -30,7 +32,7 @@ test("First load error message", function() {
 });
 
 test("Transition error message", function() {
-  defineFixture('/teams', {}, {}, 500);
+  defineFixture('GET', '/teams', { status: 500 });
 
   visit('/');
   visit('/team');

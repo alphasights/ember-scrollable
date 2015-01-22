@@ -1,6 +1,6 @@
 import resolver from './helpers/resolver';
 import startApp from './helpers/start-app';
-import fixtures from './helpers/fixtures';
+import Fixtures from './helpers/fixtures';
 import Ember from 'ember';
 
 import {
@@ -18,20 +18,22 @@ document.getElementById('ember-testing-container').style.visibility = containerV
 export default {
   setup: function() {
     this.app = startApp();
-    this.app.server = new Pretender();
+    this.app.fixtures = Fixtures.create();
 
-    defineFixture('/users/me', {}, {
-      "user": {
-        "initials": "EU",
-        "id": 1,
-        "teamId": 1,
-        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+    this.app.fixtures.define('GET', '/users/me', {
+      response: {
+        "user": {
+          "initials": "EU",
+          "id": 1,
+          "teamId": 1,
+          "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        }
       }
     });
   },
 
   teardown: function() {
-    this.app.server.shutdown();
+    this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);
   }
 };

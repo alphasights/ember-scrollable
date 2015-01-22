@@ -47,7 +47,7 @@
     "currentRouteName",
     "Pretender",
     "defineFixture",
-    "requestWatcher",
+    "clearFixtures",
     "_",
     "EmberENV",
     "__env"

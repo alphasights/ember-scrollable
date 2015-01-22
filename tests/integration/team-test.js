@@ -1,28 +1,31 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import '../helpers/request-watcher';
-import fixtures from '../helpers/fixtures';
+import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
 module("Team", {
   setup: function() {
     testHelper.setup.apply(this, arguments);
 
-    defineFixture('/teams', {}, {
+    defineFixture('GET', '/teams', { response: {
       "teams": [{
         "name": "Example Team",
         "id": 1,
         "office": "Example Office"
+      }, {
+        "name": "Example Team 2",
+        "id": 2,
+        "office": "Example Office"
       }]
-    });
+    }});
 
-    defineFixture('/projects', { team_id: '1' }, {
+    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU2",
         "id": 2,
         "teamId": 1,
-        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -94,16 +97,16 @@ module("Team", {
         "left_to_schedule_advisors_count": 0,
         "upcoming_interactions_count": 0
       }]
-    });
+    }});
 
-    defineFixture('/users', { team_id: '1' }, {
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
         "id": 3,
         "teamId": 1,
-        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
       }]
-    });
+    }});
   },
 
   teardown: function() {
@@ -139,8 +142,8 @@ test("Read project list", function() {
       highPriority: true,
       mediumPriority: false,
       lowPriority: false,
-      memberAvatarUrl: fixtures.EMPTY_IMAGE_URL,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 4,
       progressBarWidth: '25%'
@@ -151,7 +154,7 @@ test("Read project list", function() {
       mediumPriority: false,
       lowPriority: false,
       memberAvatarUrl: undefined,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
@@ -162,7 +165,7 @@ test("Read project list", function() {
       mediumPriority: true,
       lowPriority: false,
       memberAvatarUrl: undefined,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 0,
       targetCount: 0,
       progressBarWidth: '0px',
@@ -199,7 +202,7 @@ test("Sort project list", function() {
 });
 
 test("Change project priority", function() {
-  var watcher = requestWatcher('put', '/projects/1', {}, {
+  var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
       "details_url": "/projects/1",
@@ -210,14 +213,14 @@ test("Change project priority", function() {
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
-  }, {});
+  }});
 
   visit('/teams');
   click('.project-list-item:first .priority-select');
   click('.project-list-item:first .priority-select .dropdown-item.low');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
 });
@@ -260,10 +263,10 @@ test("Show project details", function() {
         title: 'Angle 1',
 
         memberships: [{
-          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          avatarUrl: Fixtures.EMPTY_IMAGE_URL,
           deliveryTarget: '4'
         }, {
-          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          avatarUrl: Fixtures.EMPTY_IMAGE_URL,
           deliveryTarget: '0'
         }]
       }
@@ -332,7 +335,7 @@ test("Move back to the first project from the last", function() {
 });
 
 test("Change project priority from the details", function() {
-  var watcher = requestWatcher('put', '/projects/1', {}, {
+  var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
       "details_url": "/projects/1",
@@ -343,7 +346,7 @@ test("Change project priority from the details", function() {
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
-  }, {});
+  }});
 
   visit('/teams');
   click('.project-list-item:first');
@@ -351,37 +354,37 @@ test("Change project priority from the details", function() {
   click('.project .priority-select .dropdown-item.low');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
 });
 
 test("Change delivery target for an angle membership", function() {
-  var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
+  var handler = defineFixture('PUT', '/angle_team_memberships/1', { request: {
     "angle_team_membership": {
       "target_value": 6,
       "angle_id": "1",
       "team_member_id": "1"
     }
-  }, {});
+  }});
 
   visit('/teams');
   click('.project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
   });
 });
 
 test("Add a member to an angle", function() {
-  var watcher = requestWatcher('post', '/angle_team_memberships', {}, {
+  var handler = defineFixture('POST', '/angle_team_memberships', { request: {
     "angle_team_membership": {
       "target_value": 0,
       "angle_id": "1",
       "team_member_id": "3"
     }
-  }, {});
+  }});
 
   visit('/teams');
   click('.project-list-item:first');
@@ -389,20 +392,24 @@ test("Add a member to an angle", function() {
   click('.angle-memberships .add .team-members li');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.angle-memberships > ul article').length, 3);
   });
 });
 
 test("Remove a member from an angle", function() {
-  var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
+  var handler = defineFixture('DELETE', '/angle_team_memberships/1');
 
   visit('/teams');
   click('.project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.angle-memberships > ul article').length, 1);
   });
+});
+
+test("Change selected team", function() {
+  expect(0);
 });
