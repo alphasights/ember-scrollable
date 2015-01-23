@@ -199,17 +199,6 @@ test("Read project list", function() {
   });
 });
 
-test("Change team", function() {
-  visit('/teams');
-
-  click('.team-select button');
-  select('.team-select option:last');
-
-  andThen(function() {
-    equal(find('.project-list-item h1 span').text().trim(), 'Example Project 4');
-  });
-});
-
 test("Sort project list", function() {
   visit('/teams');
 
@@ -448,5 +437,12 @@ test("Remove a member from an angle", function() {
 });
 
 test("Change selected team", function() {
-  expect(0);
+  visit('/teams');
+
+  click('.team-select button');
+  select('.team-select option:last');
+
+  andThen(function() {
+    equal(find('.project-list-item h1 span').text().trim(), 'Example Project 4');
+  });
 });

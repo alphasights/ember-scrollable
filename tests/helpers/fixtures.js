@@ -26,7 +26,7 @@ var Fixtures = Ember.Object.extend({
     var handlers = this.handlers[url];
 
     if(handlers == null) {
-      handlers = this.handlers[url] = [];
+      handlers = [];
 
       this.server[method.toLowerCase()](
         `${EmberENV.apiBaseUrl}${url}`, function(request) {
@@ -35,13 +35,14 @@ var Fixtures = Ember.Object.extend({
       );
     }
     else {
-      this.handlers[url] = handlers.reject(function(handler_) {
+      handlers = handlers.reject(function(handler_) {
         return _(handler_.fixture.params).isEqual(handler.fixture.params) &&
                _(handler_.fixture.request).isEqual(handler.fixture.request);
       });
     }
 
-    this.handlers[url].pushObject(handler);
+    this.handlers[url] = handlers;
+    handlers.pushObject(handler);
 
     return handler;
   },
