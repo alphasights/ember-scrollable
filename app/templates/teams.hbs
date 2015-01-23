@@ -15,7 +15,9 @@
       <h1>{{selectedTeam.name}}</h1>
     {{/if}}
 
-    <button class="toggle" {{action "toggleTeamSelect"}}></button>
+    {{#if multipleTeamsAvailable}}
+      <button class="toggle" {{action "toggleTeamSelect"}}></button>
+    {{/if}}
   </div>
 </header>
 

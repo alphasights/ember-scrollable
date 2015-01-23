@@ -4,6 +4,7 @@ export default Ember.ObjectController.extend({
   showTeamSelect: false,
   selectedTeam: null,
   teamSelectChanged: false,
+  multipleTeamsAvailable: Ember.computed.gt('length', 1),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;
