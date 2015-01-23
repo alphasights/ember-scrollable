@@ -1,11 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  needs: ['team'],
-
-  team: Ember.computed.alias('controllers.team'),
+  team: null,
   sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
-  arrangedContent: Ember.computed.sort('model', 'sortProperties'),
+  arrangedContent: Ember.computed.sort('content', 'sortProperties'),
 
   availableSortProperties: [{
     id: 'client',
@@ -19,16 +17,20 @@ export default Ember.ArrayController.extend({
     order: 'desc'
   }],
 
-  sortProperty: function() {
-    return this
-      .get('availableSortProperties')
-      .findBy('id', this.get('sortPropertyId'));
-  }.property('sortPropertyId'),
-
   sortProperties: function() {
     return [
       'priorityIndex:desc',
       `${this.get('sortProperty').property}:${this.get('sortProperty').order}`
     ];
   }.property('sortProperty'),
+
+  sortAscending: function() {
+    return this.get('sortProperty').ascending;
+  }.property('sortProperty'),
+
+  sortProperty: function() {
+    return this
+      .get('availableSortProperties')
+      .findBy('id', this.get('sortPropertyId'));
+  }.property('sortPropertyId')
 });

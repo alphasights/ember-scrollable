@@ -1,28 +1,32 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import '../helpers/request-watcher';
-import fixtures from '../helpers/fixtures';
+import '../helpers/select';
+import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
 module("Team", {
   setup: function() {
     testHelper.setup.apply(this, arguments);
 
-    defineFixture('/teams', {}, {
+    defineFixture('GET', '/teams', { response: {
       "teams": [{
         "name": "Example Team",
         "id": 1,
         "office": "Example Office"
+      }, {
+        "name": "Example Team 2",
+        "id": 2,
+        "office": "Example Office"
       }]
-    });
+    }});
 
-    defineFixture('/projects', { team_id: '1' }, {
+    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU2",
         "id": 2,
         "teamId": 1,
-        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -86,7 +90,7 @@ module("Team", {
         "status": "medium",
         "name": "Example Project 3",
         "client_code": "03EP",
-        "details_url": "/projects/2",
+        "details_url": "/projects/3",
         "created_at": "2008-07-14T17:05:32.909+01:00",
         "angle_ids": [],
         "analyst_1_id": 1,
@@ -94,16 +98,41 @@ module("Team", {
         "left_to_schedule_advisors_count": 0,
         "upcoming_interactions_count": 0
       }]
-    });
+    }});
 
-    defineFixture('/users', { team_id: '1' }, {
+    defineFixture('GET', '/projects', { params: { team_id: '2' }, response: {
+      "users": [],
+
+      "projects": [{
+        "id": 4,
+        "status": "high",
+        "name": "Example Project 4",
+        "client_code": "EP",
+        "details_url": "/projects/4",
+        "created_at": "2009-07-14T17:05:32.909+01:00",
+        "angle_ids": [],
+        "analyst_1_id": 1,
+        "proposed_advisors_count": 0,
+        "left_to_schedule_advisors_count": 0,
+        "upcoming_interactions_count": 0
+      }],
+
+      "angles": [],
+      "angle_team_memberships": []
+    }});
+
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
         "id": 3,
         "teamId": 1,
-        "avatarUrl": fixtures.EMPTY_IMAGE_URL
+        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
       }]
-    });
+    }});
+
+    defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
+      "users": []
+    }});
   },
 
   teardown: function() {
@@ -112,7 +141,7 @@ module("Team", {
 });
 
 test("Read project list", function() {
-  visit('/team');
+  visit('/teams');
   wait();
 
   andThen(function() {
@@ -139,8 +168,8 @@ test("Read project list", function() {
       highPriority: true,
       mediumPriority: false,
       lowPriority: false,
-      memberAvatarUrl: fixtures.EMPTY_IMAGE_URL,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 4,
       progressBarWidth: '25%'
@@ -151,7 +180,7 @@ test("Read project list", function() {
       mediumPriority: false,
       lowPriority: false,
       memberAvatarUrl: undefined,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
@@ -162,7 +191,7 @@ test("Read project list", function() {
       mediumPriority: true,
       lowPriority: false,
       memberAvatarUrl: undefined,
-      leadAvatarUrl: fixtures.EMPTY_IMAGE_URL,
+      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 0,
       targetCount: 0,
       progressBarWidth: '0px',
@@ -171,7 +200,7 @@ test("Read project list", function() {
 });
 
 test("Sort project list", function() {
-  visit('/team');
+  visit('/teams');
 
   var projectTitles = function() {
     return find('.project-list-item').toArray().map(function(project) {
@@ -179,7 +208,7 @@ test("Sort project list", function() {
     });
   };
 
-  fillIn('.projects .sort-by-select select', 'client');
+  fillIn('.team .sort-by-select select', 'client');
 
   andThen(function() {
     deepEqual(
@@ -188,7 +217,7 @@ test("Sort project list", function() {
     );
   });
 
-  fillIn('.projects .sort-by-select select', 'creation-date');
+  fillIn('.team .sort-by-select select', 'creation-date');
 
   andThen(function() {
     deepEqual(
@@ -199,7 +228,7 @@ test("Sort project list", function() {
 });
 
 test("Change project priority", function() {
-  var watcher = requestWatcher('put', '/projects/1', {}, {
+  var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
       "details_url": "/projects/1",
@@ -210,20 +239,20 @@ test("Change project priority", function() {
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
-  }, {});
+  }});
 
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first .priority-select');
   click('.project-list-item:first .priority-select .dropdown-item.low');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
 });
 
 test("Show project details", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
 
   andThen(function(){
@@ -260,10 +289,10 @@ test("Show project details", function() {
         title: 'Angle 1',
 
         memberships: [{
-          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          avatarUrl: Fixtures.EMPTY_IMAGE_URL,
           deliveryTarget: '4'
         }, {
-          avatarUrl: fixtures.EMPTY_IMAGE_URL,
+          avatarUrl: Fixtures.EMPTY_IMAGE_URL,
           deliveryTarget: '0'
         }]
       }
@@ -272,7 +301,7 @@ test("Show project details", function() {
 });
 
 test("Navigate to next project with navigation buttons", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   click('.project .next');
 
@@ -282,7 +311,7 @@ test("Navigate to next project with navigation buttons", function() {
 });
 
 test("Navigate to next project with arrow keys", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   keyEvent(document, 'keyup', 39);
 
@@ -292,7 +321,7 @@ test("Navigate to next project with arrow keys", function() {
 });
 
 test("Navigate to previous project with navigation buttons", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:last');
   click('.project .previous');
 
@@ -302,7 +331,7 @@ test("Navigate to previous project with navigation buttons", function() {
 });
 
 test("Navigate to previous project with arrow keys", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:last');
   keyEvent(document, 'keyup', 37);
 
@@ -312,7 +341,7 @@ test("Navigate to previous project with arrow keys", function() {
 });
 
 test("Move back to the last project from the first", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   click('.project .previous');
 
@@ -322,7 +351,7 @@ test("Move back to the last project from the first", function() {
 });
 
 test("Move back to the first project from the last", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:last');
   click('.project .next');
 
@@ -332,7 +361,7 @@ test("Move back to the first project from the last", function() {
 });
 
 test("Change project priority from the details", function() {
-  var watcher = requestWatcher('put', '/projects/1', {}, {
+  var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
       "details_url": "/projects/1",
@@ -343,66 +372,77 @@ test("Change project priority from the details", function() {
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
-  }, {});
+  }});
 
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   click('.project .priority-select');
   click('.project .priority-select .dropdown-item.low');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.project-list-item:last .priority-select > .low').length, 1);
   });
 });
 
 test("Change delivery target for an angle membership", function() {
-  var watcher = requestWatcher('put', '/angle_team_memberships/1', {}, {
+  var handler = defineFixture('PUT', '/angle_team_memberships/1', { request: {
     "angle_team_membership": {
       "target_value": 6,
       "angle_id": "1",
       "team_member_id": "1"
     }
-  }, {});
+  }});
 
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
   });
 });
 
 test("Add a member to an angle", function() {
-  var watcher = requestWatcher('post', '/angle_team_memberships', {}, {
+  var handler = defineFixture('POST', '/angle_team_memberships', { request: {
     "angle_team_membership": {
       "target_value": 0,
       "angle_id": "1",
       "team_member_id": "3"
     }
-  }, {});
+  }});
 
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   click('.angle-memberships .add > button');
   click('.angle-memberships .add .team-members li');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.angle-memberships > ul article').length, 3);
   });
 });
 
 test("Remove a member from an angle", function() {
-  var watcher = requestWatcher('delete', '/angle_team_memberships/1', {}, null, null);
+  var handler = defineFixture('DELETE', '/angle_team_memberships/1');
 
-  visit('/team');
+  visit('/teams');
   click('.project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
   andThen(function() {
-    equal(watcher.called, true);
+    equal(handler.called, true);
     equal(find('.angle-memberships > ul article').length, 1);
+  });
+});
+
+test("Change selected team", function() {
+  visit('/teams');
+
+  click('.team-select button');
+  select('.team-select option:last');
+
+  andThen(function() {
+    equal(find('.project-list-item h1 span').text().trim(), 'Example Project 4');
   });
 });

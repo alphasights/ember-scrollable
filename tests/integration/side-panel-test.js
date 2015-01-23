@@ -7,15 +7,15 @@ module("Side Panel", {
   setup: function() {
     testHelper.setup.apply(this, arguments);
 
-    defineFixture('/teams', {}, {
+    defineFixture('GET', '/teams', { response: {
       "teams": [{
         "name": "Example Team",
         "id": 1,
         "office": "Example Office"
       }]
-    });
+    }});
 
-    defineFixture('/projects', { team_id: '1' }, {
+    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "projects": [{
         "id": 1,
         "status": "high",
@@ -29,11 +29,11 @@ module("Side Panel", {
         "left_to_schedule_advisors_count": 0,
         "upcoming_interactions_count": 0
       }]
-    });
+    }});
 
-    defineFixture('/users', { team_id: '1' }, {
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": []
-    });
+    }});
   },
 
   teardown: function() {
@@ -42,7 +42,7 @@ module("Side Panel", {
 });
 
 test("Shows", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item');
 
   andThen(function() {
@@ -51,7 +51,7 @@ test("Shows", function() {
 });
 
 test("Hides when clicking on the overlay", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item');
   click('.side-panel');
 
@@ -61,7 +61,7 @@ test("Hides when clicking on the overlay", function() {
 });
 
 test("Hides when clicking on the close button", function() {
-  visit('/team');
+  visit('/teams');
   click('.project-list-item');
   click('.close');
 

@@ -6,7 +6,7 @@ import testHelper from '../test-helper';
 module("Quick Jump", testHelper);
 
 test("Search results", function() {
-  defineFixture('/quick_jumps', { q: 'example' }, {
+  defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, response: {
     "responses": [
       {
         "hits": {
@@ -85,7 +85,7 @@ test("Search results", function() {
         }
       }
     ]
-  });
+  }});
 
   visit('/');
   click('.quick-jump .bar input');
@@ -167,13 +167,13 @@ test("Search results", function() {
 });
 
 test("Empty search results", function() {
-  defineFixture('/quick_jumps', { q: 'example' }, {
+  defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, response: {
     "responses": {
       "hits": {
         "hits": []
       }
     }
-  });
+  }});
 
   visit('/');
   click('.quick-jump .bar input');

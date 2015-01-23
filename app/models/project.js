@@ -23,7 +23,7 @@ export default DS.Model.extend({
 
   memberships: function() {
     return _(this.get('angles').map(function(angle) {
-        return angle.get('memberships').toArray();
+      return angle.get('memberships').toArray();
     })).flatten();
   }.property('angles.@each.membershipsUpdatedAt'),
 
