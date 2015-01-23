@@ -21,6 +21,10 @@ export default Ember.ObjectController.extend({
     }
   }.observes('selectedTeam'),
 
+  multipleTeamsAvailable: function() {
+    return this.get('model.length') > 1;
+  }.property('model.[]'),
+
   actions: {
     toggleTeamSelect: function() {
       this.toggleProperty('showTeamSelect');
