@@ -4,6 +4,7 @@ export default Ember.ObjectController.extend({
   showTeamSelect: false,
   selectedTeam: null,
   teamSelectChanged: false,
+  multipleTeamsAvailable: Ember.computed.gt('length', 1),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;
@@ -20,10 +21,6 @@ export default Ember.ObjectController.extend({
       this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
     }
   }.observes('selectedTeam'),
-
-  multipleTeamsAvailable: function() {
-    return this.get('model.length') > 1;
-  }.property('model.[]'),
 
   actions: {
     toggleTeamSelect: function() {
