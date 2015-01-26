@@ -6,7 +6,7 @@ import testHelper from '../test-helper';
 module("Errors", testHelper);
 
 test("Request error message", function() {
-  defineFixture('/quick_jumps', { q: 'example' }, {}, 500);
+  defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, status: 500 });
 
   visit('/');
   click('.quick-jump .bar input');
@@ -19,7 +19,7 @@ test("Request error message", function() {
 });
 
 test("First load error message", function() {
-  defineFixture('/users/me', {}, {}, 500);
+  defineFixture('GET', '/users/me', { status: 500 });
 
   visit('/');
 
@@ -30,7 +30,7 @@ test("First load error message", function() {
 });
 
 test("Transition error message", function() {
-  defineFixture('/teams', {}, {}, 500);
+  defineFixture('GET', '/teams', { status: 500 });
 
   visit('/');
   visit('/team');
@@ -38,5 +38,17 @@ test("Transition error message", function() {
   andThen(function() {
     var message = $('.error h1').text().trim();
     equal(message, "Sorry, something went wrong. Try refreshing the page.");
+  });
+});
+
+test("404 error message", function() {
+  defineFixture('GET', '/teams', { status: 404 });
+  defineFixture('GET', '/users', { params: { team_id: 1 } });
+
+  visit('/teams/9999/projects');
+
+  andThen(function() {
+    var message = $('.error h1').text().trim();
+    equal(message, "Sorry, the page you were looking for could not be found.");
   });
 });
