@@ -7,7 +7,8 @@ var keyCodeToEventMap = {
 };
 
 export default Ember.Mixin.create({
-  keyEvents: null,
+  mergedProperties: ['keyEvents'],
+  keyEvents: {},
 
   setupKeyHandling: function() {
     this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
