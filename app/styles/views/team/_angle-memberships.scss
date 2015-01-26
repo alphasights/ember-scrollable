@@ -12,7 +12,7 @@ $angle-add-member-search-icon-height: $form-label-line-height;
 $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
 .side-panel.project .angle-memberships {
-  margin: 0 $column-gutter / 2;
+  margin-right: $column-gutter / 2;
 
   > ul {
     margin-left: 0;
@@ -21,7 +21,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %grid-column-medium-3;
       @extend %grid-column-small-6;
 
+      margin-bottom: $column-gutter / 2;
       padding-left: 0 !important;
+      padding-right: $column-gutter !important;
       position: relative;
 
       img {
@@ -63,7 +65,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         border-radius: $global-rounded;
         display: none;
         position: absolute;
-        right: 0;
+        right: $column-gutter / 2;
         top: -$super-number-arrow-size / 2;
         z-index: 1;
 
@@ -85,7 +87,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
   }
 
   .add {
+    float: left;
     line-height: $angle-member-width;
+    position: relative;
     width: auto;
 
     button {
@@ -136,7 +140,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       }
 
       .team-members {
-        max-height: rem-calc(400);
+        max-height: 10em;
         overflow: scroll;
 
         .name {

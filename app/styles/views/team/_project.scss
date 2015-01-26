@@ -78,7 +78,8 @@
 
   .priority-select {
     display: inline-block;
-    margin-left: $column-gutter / 2;
+    margin-bottom: $priority-select-size / 2;
+    vertical-align: middle;
 
     .dropdown > button {
       margin: 0;
@@ -90,25 +91,36 @@
   }
 
   .angles {
-    float: left;
+    @extend %grid-column-12;
 
-    > ul > li {
-      &:last-child > article {
-        border-bottom: 1px solid $panel-border-color;
-      }
+    padding: 0 !important;
 
-      > article {
-        @extend %grid-row;
-        @include clearfix();
+    > ul {
+      padding: 0;
 
-        background-color: $panel-bg;
-        border-top: 1px solid $panel-border-color;
-        padding: $column-gutter / 2;
+      > li {
+        &:last-child > article {
+          border-bottom: 1px solid $panel-border-color;
+        }
 
-        h1 {
-          font-size: $h6-font-size;
-          padding-bottom: $column-gutter/ 2;
-          padding-left: $column-gutter / 2;
+        > article {
+          @extend %grid-row;
+          @include clearfix();
+
+          background-color: $panel-bg;
+          border-top: 1px solid $panel-border-color;
+          padding: $column-gutter;
+
+          h3 {
+            padding-bottom: $column-gutter/ 2;
+          }
+
+          > ul {
+            @extend %grid-column-10;
+
+            position: relative;
+            padding: 0;
+          }
         }
       }
     }
