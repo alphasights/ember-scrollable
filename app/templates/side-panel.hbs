@@ -1,8 +1,12 @@
 <div>
   <div class="actions">
-    {{outlet "actions"}}
+    <div class="content">
+      {{outlet "actions"}}
+    </div>
 
-    <button class="close" {{action "close" target=view}}></button>
+    <div class="close">
+      <button {{action "close" target=view}}></button>
+    </div>
   </div>
 
   {{yield}}

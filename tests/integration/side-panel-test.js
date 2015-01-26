@@ -63,7 +63,7 @@ test("Hides when clicking on the overlay", function() {
 test("Hides when clicking on the close button", function() {
   visit('/teams');
   click('.project-list-item');
-  click('.close');
+  click('.close > button');
 
   andThen(function() {
     equal(find('.side-panel').length, 0);
