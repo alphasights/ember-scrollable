@@ -42,10 +42,10 @@ test("Transition error message", function() {
 });
 
 test("404 error message", function() {
-  defineFixture('/projects/99999999', {}, {}, 404);
+  defineFixture('GET', '/teams', { status: 404 });
+  defineFixture('GET', '/users', { params: { team_id: 1 } });
 
-  visit('/');
-  visit('/team/99999999');
+  visit('/teams/9999/projects');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
