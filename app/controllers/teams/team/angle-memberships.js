@@ -20,6 +20,12 @@ export default Ember.ObjectController.extend({
     }
   }.property('requestPromise', 'team.members', 'results'),
 
+  unusedTeamMembers: function() {
+    return _(
+      this.get('teamMembers').toArray()).difference(this.get('model.members')
+    );
+  }.property('teamMembers', 'model.members'),
+
   queryDidChange: function() {
     var query = this.get('query');
 
