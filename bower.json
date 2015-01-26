@@ -18,7 +18,8 @@
     "honeybadger.js": "0.1.2",
     "messenger": "~1.4.1",
     "paint": "0.5.2",
-    "spinjs": "2.0.1"
+    "spinjs": "2.0.1",
+    "route-recognizer": "0.1.1"
   },
   "resolutions": {
     "jquery": "1.11.1"
