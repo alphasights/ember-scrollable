@@ -8,6 +8,50 @@ $dropdown-link-active-color: $dropdown-link-color;
 $dropdown-link-active-background: lighten($dropdown-link-hover-background, 50%);
 $dropdown-link-disabled-color: #fafafa;
 
+@mixin triangle($size, $color, $direction) {
+  height: 0;
+  width: 0;
+  content: '';
+  position: absolute;
+
+  $width: nth($size, 1);
+  $height: nth($size, length($size));
+
+  $foreground-color: nth($color, 1);
+  $background-color: if(length($color) == 2, nth($color, 2), transparent);
+
+  @if ($direction == top) or ($direction == bottom) or ($direction == right) or ($direction == left) {
+
+    $width: $width / 2;
+    $height: if(length($size) > 1, $height, $height/2);
+
+    @if $direction == bottom {
+      border-bottom: $height solid $foreground-color;
+      border-left: $width solid $background-color;
+      border-right: $width solid $background-color;
+      top: - $size / 2;
+      left: $size;
+
+    } @else if $direction == right {
+      border-bottom: $width solid $background-color;
+      border-left: $height solid $foreground-color;
+      border-top: $width solid $background-color;
+
+    } @else if $direction == top {
+      border-left: $width solid $background-color;
+      border-right: $width solid $background-color;
+      border-top: $height solid $foreground-color;
+      bottom: - $size / 2;
+      left: $size;
+
+    } @else if $direction == left {
+      border-bottom: $width solid $background-color;
+      border-right: $height solid $foreground-color;
+      border-top: $width solid $background-color;
+    }
+  }
+}
+
 .dropdown {
   position: relative;
 }
@@ -92,6 +136,7 @@ $dropdown-link-disabled-color: #fafafa;
       display: none;
     }
   }
+
   &.right {
     left: auto;
     right: 0;
@@ -106,31 +151,14 @@ $dropdown-link-disabled-color: #fafafa;
     bottom: 100%;
     top: auto;
 
-    &:after,
     &:before {
-      content: '';
-      display: inline-block;
-      position: absolute;
+      @include triangle(12px, $white, top);
     }
+  }
 
+  &:not(.top):not(.over):not(.left):not(.right) {
     &:before {
-      bottom: -7px;
-      left: 10px;
-      display: inline-block;
-      border-bottom: none;
-      border-right: 7px solid transparent;
-      border-top: 7px solid $dropdown-border;
-      border-left: 7px solid transparent;
-      border-bottom-color: $dropdown-border;
-    }
-
-    &:after {
-      bottom: -6px;
-      left: 11px;
-      border-bottom: none;
-      border-right: 6px solid transparent;
-      border-top: 6px solid $dropdown-background;
-      border-left: 6px solid transparent;
+      @include triangle(12px, $white, bottom);
     }
   }
 }

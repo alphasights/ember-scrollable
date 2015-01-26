@@ -111,6 +111,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       ul {
         max-width: none;
         width: auto;
+        margin: 0;
 
         &:before {
           left: 12px;
@@ -125,7 +126,12 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
           white-space: nowrap;
 
           article {
-            padding: $angle-add-member-dropdown-padding $column-gutter / 2;
+            padding: $angle-add-member-dropdown-padding $column-gutter / 4;
+            cursor: pointer;
+
+            &:hover {
+              background-color: $white-smoke;
+            }
           }
         }
       }
@@ -133,18 +139,22 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       img {
         @include detached-border($color: $global-section-border-color);
 
-        display: inline-block;
+        display: inline;
         height: $angle-add-member-avatar-size;
         margin-right: $column-gutter / 4;
         width: $angle-add-member-avatar-size;
       }
 
       .team-members {
-        max-height: 10em;
-        overflow: scroll;
+        li > ul {
+          max-height: 15em;
+          overflow-x: hidden;
+          overflow-y: scroll;
+        }
 
         .name {
           display: inline;
+          margin-right: $angle-add-member-avatar-size;
         }
       }
 
