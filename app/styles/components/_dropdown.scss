@@ -9,10 +9,10 @@ $dropdown-link-active-background: lighten($dropdown-link-hover-background, 50%);
 $dropdown-link-disabled-color: #fafafa;
 
 @mixin triangle($size, $color, $direction) {
-  height: 0;
-  width: 0;
   content: '';
+  height: 0;
   position: absolute;
+  width: 0;
 
   $width: nth($size, 1);
   $height: nth($size, length($size));
@@ -29,8 +29,8 @@ $dropdown-link-disabled-color: #fafafa;
       border-bottom: $height solid $foreground-color;
       border-left: $width solid $background-color;
       border-right: $width solid $background-color;
-      top: - $size / 2;
       left: $size;
+      top: - $size / 2;
 
     } @else if $direction == right {
       border-bottom: $width solid $background-color;
@@ -54,6 +54,24 @@ $dropdown-link-disabled-color: #fafafa;
 
 .dropdown {
   position: relative;
+
+  .open {
+    > .dropdown-menu {
+      display: block;
+    }
+
+    > a {
+      outline: 0;
+    }
+  }
+
+  &.inline {
+    @extend %dropdown-inline;
+  }
+
+  &.inverted {
+    @extend %dropdown-inverted;
+  }
 }
 
 .dropdown-toggle:focus {
@@ -61,11 +79,11 @@ $dropdown-link-disabled-color: #fafafa;
 }
 
 .dropdown-menu {
-  background-clip: padding-box;
   background: $dropdown-background;
-  border-radius: $global-radius / 2;
+  background-clip: padding-box;
   border: 1px solid $dropdown-border;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.175);
+  border-radius: $global-radius / 2;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .175);
   display: none;
   float: left;
   font-size: $base-font-size;
@@ -160,26 +178,6 @@ $dropdown-link-disabled-color: #fafafa;
     &:before {
       @include triangle(12px, $white, bottom);
     }
-  }
-}
-
-.dropdown {
-  .open {
-    > .dropdown-menu {
-      display: block;
-    }
-
-    > a {
-      outline: 0;
-    }
-  }
-
-  &.inline {
-    @extend %dropdown-inline;
-  }
-
-  &.inverted {
-    @extend %dropdown-inverted;
   }
 }
 

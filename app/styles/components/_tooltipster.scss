@@ -4,14 +4,14 @@ $tooltipster-border-color: #eceff1;
 .tooltipster-avatar {
   @include detached-border($color: $tooltipster-border-color);
 
-  border-radius: $global-radius / 2;
   background-color: $tooltipster-bg-color;
+  border-radius: $global-radius / 2;
   color: $white;
-}
 
-.tooltipster-avatar .tooltipster-content {
-  font-size: $base-font-size;
-  white-space: nowrap;
-  line-height: $base-line-height;
-  padding: $base-spacing / 3 $base-spacing / 2;
+  .tooltipster-content {
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    padding: $base-spacing / 3 $base-spacing / 2;
+    white-space: nowrap;
+  }
 }

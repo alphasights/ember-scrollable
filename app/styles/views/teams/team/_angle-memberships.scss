@@ -109,9 +109,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       width: auto;
 
       ul {
+        margin: 0;
         max-width: none;
         width: auto;
-        margin: 0;
 
         &:before {
           left: 12px;
@@ -126,8 +126,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
           white-space: nowrap;
 
           article {
-            padding: $angle-add-member-dropdown-padding $column-gutter / 4;
             cursor: pointer;
+            padding: $angle-add-member-dropdown-padding $column-gutter / 4;
 
             &:hover {
               background-color: $white-smoke;
