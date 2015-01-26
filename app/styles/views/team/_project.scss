@@ -8,9 +8,14 @@ $team-project-header-height: rem-calc(90);
   header {
     @extend %grid-column-12;
 
+    position: relative;
     height: $team-project-header-height;
     line-height: $team-project-header-height;
     padding: 0 $column-gutter;
+    -webkit-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.075);
+    box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.075);
+    z-index: 1;
 
     > .content {
       @extend %grid-column-6;
@@ -119,9 +124,10 @@ $team-project-header-height: rem-calc(90);
       @extend %grid-row;
       @include clearfix();
 
-      background-color: $panel-bg;
       border-bottom: 1px solid $panel-border-color;
       padding: $column-gutter / 2;
+      background-color: $panel-bg;
+      position: relative;
 
       h1 {
         font-size: $h6-font-size;
