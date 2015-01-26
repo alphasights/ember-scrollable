@@ -50,9 +50,9 @@ $side-panel-actions-height: rem-calc(60);
   .actions {
     @extend %grid-row;
 
+    background-color: $info-color;
     height: $side-panel-actions-height;
     line-height: $side-panel-actions-height;
-    background-color: $info-color;
     padding: 0 $column-gutter / 2;
 
     .content {
@@ -82,7 +82,7 @@ $side-panel-actions-height: rem-calc(60);
 
     .close {
       @extend %grid-column-2;
-      
+
       padding: 0 !important;
       text-align: right;
 
