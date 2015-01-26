@@ -5,13 +5,17 @@ export default SidePanelView.extend(KeyEventsMixin, {
   classNameBindings: [':project'],
   tagName: 'article',
 
-  keyEvents: {
-    leftArrow: function() {
-      this.get('controller').send('previous');
-    },
+  init: function() {
+    this._super.apply(this, arguments);
 
-    rightArrow: function() {
-      this.get('controller').send('next');
-    }
+    this.set('keyEvents', _(this.get('keyEvents')).extend({
+      leftArrow: function() {
+        this.get('controller').send('previous');
+      },
+
+      rightArrow: function() {
+        this.get('controller').send('next');
+      }
+    }));
   }
 });
