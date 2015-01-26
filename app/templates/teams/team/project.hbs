@@ -1,31 +1,35 @@
 <header>
-  {{as-priority-select project=model}}
+  <div class="content">
+    {{as-priority-select project=model}}
 
-  <h1>
-    <span>{{name}}</span>
-    <small>{{clientCode}}</small>
+    <h1>
+      <span>{{name}}</span>
+      <small>{{clientCode}}</small>
 
-    <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
-      <i></i>
-    </a>
-  </h1>
+      <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
+        <i></i>
+      </a>
+    </h1>
+  </div>
 
-  <ul class="stats">
-    <li>
-      <span class="count">{{scheduledInteractionsCount}}</span>
-      <span class="name">Upcoming</span>
-    </li>
+  <div class="stats">
+    <ul>
+      <li>
+        <span class="count">{{scheduledInteractionsCount}}</span>
+        <span class="name">Upcoming</span>
+      </li>
 
-    <li>
-      <span class="count">{{notScheduledInteractionsCount}}</span>
-      <span class="name">Left to Schedule</span>
-    </li>
+      <li>
+        <span class="count">{{notScheduledInteractionsCount}}</span>
+        <span class="name">Left to Schedule</span>
+      </li>
 
-    <li>
-      <span class="count">{{deliveredAdvisorsCount}}</span>
-      <span class="name">Delivered</span>
-    </li>
-  </ul>
+      <li>
+        <span class="count">{{deliveredAdvisorsCount}}</span>
+        <span class="name">Delivered</span>
+      </li>
+    </ul>
+  </div>
 </header>
 
 <section class="angles">
