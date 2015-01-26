@@ -47,10 +47,10 @@
     "currentRouteName",
     "Pretender",
     "defineFixture",
-    "requestWatcher",
     "_",
     "EmberENV",
-    "__env"
+    "__env",
+    "select"
   ],
   "node": false,
   "browser": false,

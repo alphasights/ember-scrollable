@@ -7,10 +7,13 @@
   top: $layout-sidebar-header-height;
 
   > div > .content {
+    height: 100%;
+
     > section,
     > article {
       @extend %grid-row;
 
+      height: 100%;
       position: relative;
 
       > header {
@@ -23,8 +26,7 @@
 
           color: $subheader-font-color;
           font-weight: $font-weight-normal;
-          line-height: rem-calc(100);
-          margin: 0;
+          margin: $column-gutter 0;
         }
 
         @media #{$large-up} {

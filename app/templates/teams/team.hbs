@@ -6,7 +6,7 @@
   <div class="sort-by-select">
     {{view "select"
       id="sort-by"
-      content=availableSortProperties
+      content=projects.availableSortProperties
       optionValuePath="content.id"
       optionLabelPath="content.name"
       value=sortPropertyId}}
@@ -14,7 +14,7 @@
 </header>
 
 <ul>
-  {{#each itemController="team.project-list-item"}}
-    <li>{{render "team.project-list-item" model tagName="article"}}</li>
+  {{#each projects itemController="teams.team.project-list-item"}}
+    <li>{{render "teams.team.project-list-item" model tagName="article"}}</li>
   {{/each}}
 </ul>

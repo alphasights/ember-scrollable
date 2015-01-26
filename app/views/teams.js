@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNameBindings: [':projects']
+  classNameBindings: [':teams'],
+  tagName: 'section'
 });

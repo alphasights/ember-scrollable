@@ -1,9 +1,0 @@
-.team {
-  .beta-alert {
-    @include alert($bg: $info-color);
-
-    border: 0;
-    margin-bottom: 0;
-    margin-top: rem-calc(20px);
-  }
-}
