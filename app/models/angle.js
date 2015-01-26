@@ -4,6 +4,7 @@ export default DS.Model.extend({
   angleTeamMemberships: DS.hasMany('angleTeamMembership'),
   project: DS.belongsTo('project'),
   title: DS.attr('string'),
+  createdAt: DS.attr('date'),
 
   membersUpdatedAt: null,
   membershipsUpdatedAt: null,
