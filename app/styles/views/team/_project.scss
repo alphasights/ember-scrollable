@@ -1,18 +1,14 @@
+$team-project-header-height: rem-calc(150);
+
 .side-panel.project {
-  .project-info {
-    background-color: $white;
-    border-bottom: 1px solid $panel-border-color;
-    height: $panel-heading-height;
-    position: fixed;
-    z-index: 10;
+  > div {
+    overflow-y: visible;
   }
 
   header {
-    @extend %grid-column-xlarge-10;
-    @extend %grid-column-large-9;
-    @extend %grid-column-medium-9;
-    @extend %grid-column-small-12;
+    @extend %grid-column-12;
 
+    height: $team-project-header-height;
 
     h1 {
       @extend %heading-medium-uppercase;
@@ -98,8 +94,12 @@
   }
 
   .angles {
-    float: left;
-    padding-top: $panel-heading-height;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: $side-panel-actions-height + $team-project-header-height;
+    overflow-y: auto;
 
     > ul > li > article {
       @extend %grid-row;
