@@ -5,6 +5,7 @@ export default Ember.ObjectController.extend({
   needs: ['teams/team'],
 
   team: Ember.computed.alias('controllers.teams/team'),
+  hasUnusedTeamMembers: Ember.computed.gt('unusedTeamMembers.length', 0),
   requestPromise: null,
   query: null,
 
