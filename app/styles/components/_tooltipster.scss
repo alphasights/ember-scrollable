@@ -1,5 +1,5 @@
-$tooltipster-bg-color: #607d8b;
-$tooltipster-border-color: #eceff1;
+$tooltipster-bg-color: $body-font-color;
+$tooltipster-border-color: $global-section-border-color;
 
 .tooltipster-avatar {
   @include detached-border($color: $tooltipster-border-color);
