@@ -7,10 +7,13 @@ var keyCodeToEventMap = {
 };
 
 export default Ember.Mixin.create({
-  setupArrowKeysHandling: function() {
+  mergedProperties: ['keyEvents'],
+  keyEvents: {},
+
+  setupKeyHandling: function() {
     this.$(document).on(`keyup.${this.get('elementId')}`, (event) => {
       var key = keyCodeToEventMap[event.keyCode];
-      var keyEvent = this.keyEvents[key];
+      var keyEvent = this.get('keyEvents')[key];
 
       if (keyEvent) {
         keyEvent.apply(this);
@@ -18,7 +21,7 @@ export default Ember.Mixin.create({
     });
   }.on('didInsertElement'),
 
-  tearDownArrowKeysHandling: function() {
+  tearDownKeyHandling: function() {
     this.$(document).off(`keyup.${this.get('elementId')}`);
   }.on('willDestroyElement')
 });
