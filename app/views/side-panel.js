@@ -16,16 +16,15 @@ export default Ember.View.extend({
       duration: 200
     });
 
+    this.$().on('click', function(event) {
+      var $target = Ember.$(event.target);
+      var $nonBlurringElements = this.$('> div');
+
+      if($target.closest($nonBlurringElements).length === 0) {
+        this.send('close');
+      }
+    }.bind(this));
   }.on('didInsertElement'),
-
-  click: function(event) {
-    var $target = Ember.$(event.target);
-    var $nonBlurringElements = this.$('> div');
-
-    if($target.closest($nonBlurringElements).length === 0) {
-      this.send('close');
-    }
-  },
 
   actions: {
     close: function() {
