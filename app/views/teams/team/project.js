@@ -1,7 +1,6 @@
 import SidePanelView from 'phoenix/views/side-panel';
-import KeyEventsMixin from 'phoenix/mixins/key-events';
 
-export default SidePanelView.extend(KeyEventsMixin, {
+export default SidePanelView.extend({
   classNameBindings: [':project'],
   tagName: 'article',
 

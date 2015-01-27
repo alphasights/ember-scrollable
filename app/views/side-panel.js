@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import KeyEventsMixin from 'phoenix/mixins/key-events';
 
-export default Ember.View.extend({
+export default Ember.View.extend(KeyEventsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
   layoutName: 'side-panel',
 
@@ -40,6 +41,12 @@ export default Ember.View.extend({
           this.get('controller').send('hideSidePanel');
         })
       });
+    }
+  },
+
+  keyEvents: {
+    esc: function() {
+      this.send('close');
     }
   }
 });
