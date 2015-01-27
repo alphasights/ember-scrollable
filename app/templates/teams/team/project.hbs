@@ -17,7 +17,10 @@
   </div>
 
   <div class="stats">
-    {{as-project-progress deliveredCount=deliveredAdvisorsCount targetCount=deliveryTarget}}
+    {{as-project-progress
+      hasTarget=hasDeliveryTarget
+      deliveredCount=deliveredAdvisorsCount
+      targetCount=deliveryTarget}}
 
     <ul>
       <li>
