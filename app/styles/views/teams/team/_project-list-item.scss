@@ -40,10 +40,11 @@
     @extend %grid-column-4;
   }
 
-  > .progress {
+  .progress {
     @extend %grid-column-3;
 
     padding: 0 $column-gutter;
+    width: 100%;
 
     .progress-bar {
       > div {

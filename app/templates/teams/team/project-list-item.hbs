@@ -17,6 +17,6 @@
   {{/each}}
 </div>
 
-<div {{bind-attr class=":progress hasDeliveryTarget::no-target"}}>
-  {{as-project-progress deliveredCount=deliveredAdvisorsCount targetCount=deliveryTarget}}
-</div>
+<!-- <div {{bind-attr class=":progress hasDeliveryTarget::no-target"}}> -->
+{{as-project-progress hasDeliveryTarget=hasDeliveryTarget deliveredCount=deliveredAdvisorsCount targetCount=deliveryTarget}}
+<!-- </div> -->
