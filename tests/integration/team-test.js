@@ -151,9 +151,9 @@ test("Read project list", function() {
       return {
         title: $project.find('h1 span').text().trim(),
         clientCode: $project.find('h1 small').text().trim(),
-        highPriority: $project.find('.priority-select > .high').length === 1,
-        mediumPriority: $project.find('.priority-select > .medium').length === 1,
-        lowPriority: $project.find('.priority-select > .low').length === 1,
+        highPriority: $project.find('.priority-select .dropdown-menu > .high').length === 1,
+        mediumPriority: $project.find('.priority-select .dropdown-menu > .medium').length === 1,
+        lowPriority: $project.find('.priority-select .dropdown-menu > .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -242,12 +242,12 @@ test("Change project priority", function() {
   }});
 
   visit('/teams');
-  click('.project-list-item:first .priority-select');
-  click('.project-list-item:first .priority-select .dropdown-item.low');
+  click('.project-list-item:first .priority-select .dropdown');
+  click('.project-list-item:first .priority-select .dropdown-menu > .low');
 
   andThen(function() {
     equal(handler.called, true);
-    equal(find('.project-list-item:last .priority-select > .low').length, 1);
+    equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
   });
 });
 
@@ -261,9 +261,9 @@ test("Show project details", function() {
 
     var projectDetails = {
       title: $project.find('h1 span').text().trim(),
-      highPriority: $project.find('.priority-select > .high').length === 1,
-      mediumPriority: $project.find('.priority-select > .medium').length === 1,
-      lowPriority: $project.find('.priority-select > .low').length === 1,
+      highPriority: $project.find('.priority-select .dropdown-menu > .high').length === 1,
+      mediumPriority: $project.find('.priority-select .dropdown-menu > .medium').length === 1,
+      lowPriority: $project.find('.priority-select .dropdown-menu > .low').length === 1,
 
       angle: {
         title: $angle.find('> h1').text().trim(),
@@ -376,12 +376,12 @@ test("Change project priority from the details", function() {
 
   visit('/teams');
   click('.project-list-item:first');
-  click('.project .priority-select');
-  click('.project .priority-select .dropdown-item.low');
+  click('.project .priority-select .dropdown');
+  click('.project .priority-select .dropdown-menu > .low');
 
   andThen(function() {
     equal(handler.called, true);
-    equal(find('.project-list-item:last .priority-select > .low').length, 1);
+    equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
   });
 });
 
