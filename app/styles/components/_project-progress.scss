@@ -1,8 +1,4 @@
 .project-progress {
-  // @extend %grid-column-3;
-
-  // padding: 0 $column-gutter;
-
   .progress-bar {
     > div {
       background-color: lighten($success-color, 20%);
