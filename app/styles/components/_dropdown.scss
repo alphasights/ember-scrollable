@@ -80,7 +80,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 
     .divider {
       border-bottom: 1px solid $dropdown-border-color;
-      margin: $base-spacing / 4;
+      margin: $global-spacing / 4;
     }
 
     > li > a {
@@ -90,7 +90,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
       display: block;
       font-weight: $font-weight-normal;
       line-height: $base-line-height;
-      padding: 0 $base-spacing;
+      padding: 0 $global-spacing;
       white-space: nowrap;
 
       &:hover,
