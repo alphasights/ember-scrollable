@@ -151,9 +151,9 @@ test("Read project list", function() {
       return {
         title: $project.find('h1 span').text().trim(),
         clientCode: $project.find('h1 small').text().trim(),
-        highPriority: $project.find('.priority-select .dropdown-menu > .high').length === 1,
-        mediumPriority: $project.find('.priority-select .dropdown-menu > .medium').length === 1,
-        lowPriority: $project.find('.priority-select .dropdown-menu > .low').length === 1,
+        highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
+        mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
+        lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -261,12 +261,12 @@ test("Show project details", function() {
 
     var projectDetails = {
       title: $project.find('h1 span').text().trim(),
-      highPriority: $project.find('.priority-select .dropdown-menu > .high').length === 1,
-      mediumPriority: $project.find('.priority-select .dropdown-menu > .medium').length === 1,
-      lowPriority: $project.find('.priority-select .dropdown-menu > .low').length === 1,
+      highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
+      mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
+      lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
 
       angle: {
-        title: $angle.find('> h1').text().trim(),
+        title: $angle.find('> h3').text().trim(),
 
         memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
           var $membership = $(membership);
