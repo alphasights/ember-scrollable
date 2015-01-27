@@ -1,12 +1,12 @@
-$dropdown-background: $white;
-$dropdown-border: #cfd8dc;
-$dropdown-zindex: 100;
-$dropdown-link-color: #111111;
+$dropdown-background-color: $white;
+$dropdown-border-color: $global-section-border-color;
+$dropdown-z-index: 100;
+$dropdown-link-color: $body-font-color;
 $dropdown-link-hover-color: $white;
-$dropdown-link-hover-background: #607d8b;
+$dropdown-link-hover-background-color: $body-font-color;
 $dropdown-link-active-color: $dropdown-link-color;
-$dropdown-link-active-background: lighten($dropdown-link-hover-background, 50%);
-$dropdown-link-disabled-color: #fafafa;
+$dropdown-link-active-background-color: lighten($dropdown-link-hover-background-color, 50%);
+$dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 
 @mixin triangle($size, $color, $direction) {
   content: '';
@@ -55,134 +55,107 @@ $dropdown-link-disabled-color: #fafafa;
 .dropdown {
   position: relative;
 
-  .open {
-    > .dropdown-menu {
-      display: block;
-    }
-
-    > a {
-      outline: 0;
-    }
+  .toggle:focus {
+    outline: 0;
   }
 
-  &.inline {
-    @extend %dropdown-inline;
-  }
-
-  &.inverted {
-    @extend %dropdown-inverted;
-  }
-}
-
-.dropdown-toggle:focus {
-  outline: 0;
-}
-
-.dropdown-menu {
-  background: $dropdown-background;
-  background-clip: padding-box;
-  border: 1px solid $dropdown-border;
-  border-radius: $global-radius / 2;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, .175);
-  display: none;
-  float: left;
-  font-size: $base-font-size;
-  left: 0;
-  list-style: none;
-  margin: 0;
-  min-width: 160px;
-  padding: $global-radius / 2 0;
-  position: absolute;
-  text-align: left;
-  top: 100%;
-  z-index: $dropdown-zindex;
-
-  .divider {
-    border-bottom: 1px solid $dropdown-border;
-    margin: $base-spacing / 4;
-  }
-
-  > li > a {
-    clear: both;
-    color: $dropdown-link-color;
-    cursor: pointer;
-    display: block;
-    font-weight: $font-weight-normal;
-    line-height: $base-line-height;
-    padding: 0 $base-spacing;
-    white-space: nowrap;
-
-    &:hover,
-    &:focus {
-      background-color: $dropdown-link-hover-background;
-      color: $dropdown-link-hover-color;
-      text-decoration: none;
-    }
-  }
-
-  > .active > a {
-    &,
-    &:hover,
-    &:focus {
-      background-color: $dropdown-link-active-background;
-      color: $dropdown-link-active-color;
-      outline: 0;
-      text-decoration: none;
-    }
-  }
-
-  > .disabled > a {
-    &,
-    &:hover,
-    &:focus {
-      color: $dropdown-link-disabled-color;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: transparent;
-      cursor: not-allowed;
-      text-decoration: none;
-    }
-  }
-
-  &.over {
-    top: 0;
-
-    &:before,
-    &:after {
-      display: none;
-    }
-  }
-
-  &.right {
-    left: auto;
-    right: 0;
-  }
-
-  &.left {
+  .items {
+    background-clip: padding-box;
+    background-color: $dropdown-background-color;
+    border: 1px solid $dropdown-border-color;
+    border-radius: $global-radius / 2;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .175);
+    display: none;
+    float: left;
+    font-size: $base-font-size;
     left: 0;
-    right: auto;
-  }
+    list-style: none;
+    margin: 0;
+    min-width: 160px;
+    padding: $global-radius / 2 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: $dropdown-z-index;
 
-  &.top {
-    bottom: 100%;
-    top: auto;
-
-    &:before {
-      @include triangle(12px, $white, top);
+    .divider {
+      border-bottom: 1px solid $dropdown-border-color;
+      margin: $base-spacing / 4;
     }
-  }
 
-  &:not(.top):not(.over):not(.left):not(.right) {
-    &:before {
-      @include triangle(12px, $white, bottom);
+    > li > a {
+      clear: both;
+      color: $dropdown-link-color;
+      cursor: pointer;
+      display: block;
+      font-weight: $font-weight-normal;
+      line-height: $base-line-height;
+      padding: 0 $base-spacing;
+      white-space: nowrap;
+
+      &:hover,
+      &:focus {
+        background-color: $dropdown-link-hover-background-color;
+        color: $dropdown-link-hover-color;
+        text-decoration: none;
+      }
+    }
+
+    > .active > a {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $dropdown-link-active-background-color;
+        color: $dropdown-link-active-color;
+        outline: 0;
+        text-decoration: none;
+      }
+    }
+
+    > .disabled > a {
+      &,
+      &:hover,
+      &:focus {
+        color: $dropdown-link-disabled-color;
+      }
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        cursor: not-allowed;
+        text-decoration: none;
+      }
+    }
+
+    &.right {
+      left: auto;
+      right: 0;
+    }
+
+    &.left {
+      left: 0;
+      right: auto;
+    }
+
+    &.top {
+      bottom: 100%;
+      top: auto;
+
+      &:before {
+        @include triangle(12px, $white, top);
+      }
+    }
+
+    &:not(.top):not(.over):not(.left):not(.right) {
+      &:before {
+        @include triangle(12px, $white, bottom);
+      }
     }
   }
 }
 
 %dropdown-inline {
-  > .dropdown-menu {
+  > .items {
     line-height: 0;
     min-width: 0;
     padding: 0;
@@ -196,13 +169,23 @@ $dropdown-link-disabled-color: #fafafa;
 }
 
 %dropdown-inverted {
-  > .dropdown-menu {
-    background: $dropdown-link-hover-background;
+  > .items {
+    background-color: $dropdown-link-hover-background-color;
     color: $dropdown-link-hover-color;
 
     > li:hover {
-      background-color: $dropdown-background;
+      background-color: $dropdown-background-color;
       color: $dropdown-link-color;
+    }
+  }
+}
+
+%dropdown-over {
+  > .items {
+    top: 0;
+
+    &:before {
+      display: none;
     }
   }
 }

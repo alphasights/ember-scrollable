@@ -33,6 +33,7 @@ $priority-select-size: 14px;
   .dropdown {
     @extend %dropdown-inline;
     @extend %dropdown-inverted;
+    @extend %dropdown-over;
 
     > div {
       padding: 1px;
