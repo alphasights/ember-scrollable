@@ -40,56 +40,10 @@
     @extend %grid-column-4;
   }
 
-  .progress {
+  .project-progress {
     @extend %grid-column-3;
 
     padding: 0 $column-gutter;
-    width: 100%;
-
-    .progress-bar {
-      > div {
-        background-color: lighten($success-color, 20%);
-        border-radius: $global-radius / 2;
-      }
-    }
-
-    .details {
-      @extend %grid-row;
-
-      font-size: $small-font-size;
-      margin-top: $column-gutter / 4;
-
-      .delivered,
-      .target {
-        @extend %grid-column-6;
-
-        color: darken($info-color, 25%);
-        padding: 0 !important;
-      }
-
-      .delivered {
-        text-align: left;
-      }
-
-      .target {
-        text-align: right;
-      }
-
-      .count {
-        font-weight: $font-weight-bold;
-        margin-right: $column-gutter / 4;
-      }
-
-      .label {
-        text-transform: uppercase;
-      }
-    }
-
-    &.no-target {
-      .target {
-        color: $info-color;
-      }
-    }
   }
 
   &:hover {

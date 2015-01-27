@@ -18,6 +18,18 @@
 
   <div class="stats">
     {{as-project-progress deliveredCount=deliveredAdvisorsCount targetCount=deliveryTarget}}
+
+    <ul>
+      <li>
+        <span class="count">{{scheduledInteractionsCount}}</span>
+        <span class="name">Upcoming</span>
+      </li>
+
+      <li>
+        <span class="count">{{notScheduledInteractionsCount}}</span>
+        <span class="name">Left to Schedule</span>
+      </li>
+    </ul>
   </div>
 </header>
 
