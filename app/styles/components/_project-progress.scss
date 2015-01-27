@@ -26,6 +26,10 @@
 
     .target {
       text-align: right;
+
+      &.no-target {
+        color: $info-color;
+      }
     }
 
     .count {
@@ -35,12 +39,6 @@
 
     .label {
       text-transform: uppercase;
-    }
-  }
-
-  &.no-target {
-    .target {
-      color: $info-color;
     }
   }
 }
