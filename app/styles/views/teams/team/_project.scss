@@ -1,4 +1,4 @@
-$team-project-header-height: rem-calc(90);
+$team-project-header-height: rem-calc(180);
 
 .side-panel.project {
   > div {
@@ -10,7 +10,6 @@ $team-project-header-height: rem-calc(90);
 
     box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
     height: $team-project-header-height;
-    line-height: $team-project-header-height;
     padding: 0 $column-gutter;
     position: relative;
     z-index: 1;
@@ -18,6 +17,7 @@ $team-project-header-height: rem-calc(90);
     > .content {
       @extend %grid-column-7;
 
+      line-height: $team-project-header-height / 2;
       padding: 0 !important;
       white-space: nowrap;
     }
@@ -74,11 +74,20 @@ $team-project-header-height: rem-calc(90);
       vertical-align: middle;
     }
 
-    .stats {
+    .project-lead {
       @extend %grid-column-5;
 
+      line-height: $team-project-header-height / 2;
       padding: 0 !important;
       text-align: right;
+    }
+
+    .stats {
+      @extend %grid-column-12;
+
+      line-height: $team-project-header-height / 2;
+      padding: 0 !important;
+      text-align: center;
 
       > ul {
         color: $small-font-color;

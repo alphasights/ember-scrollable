@@ -53,7 +53,7 @@ $side-panel-actions-height: rem-calc(60);
     background-color: $info-color;
     height: $side-panel-actions-height;
     line-height: $side-panel-actions-height;
-    padding: 0 $column-gutter / 2;
+    padding: 0 $column-gutter;
 
     .content {
       @extend %grid-column-10;
