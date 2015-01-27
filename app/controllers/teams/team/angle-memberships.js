@@ -5,9 +5,9 @@ export default Ember.ObjectController.extend({
   needs: ['teams/team'],
 
   team: Ember.computed.alias('controllers.teams/team'),
-  hasUnusedTeamMembers: Ember.computed.gt('unusedTeamMembers.length', 0),
   requestPromise: null,
   query: null,
+  results: [],
 
   memberships: function() {
     return this.get('model.memberships').sortBy('createdAt');
@@ -22,10 +22,9 @@ export default Ember.ObjectController.extend({
   }.property('requestPromise', 'team.members', 'results'),
 
   unusedTeamMembers: function() {
-    return _(
-      this.get('teamMembers').toArray()).difference(this.get('model.members')
-    );
-  }.property('teamMembers', 'model.members'),
+    return _(this.get('teamMembers').toArray())
+      .difference(this.get('model.members'));
+  }.property('teamMembers.[]', 'model.members.[]'),
 
   queryDidChange: function() {
     var query = this.get('query');
@@ -34,7 +33,7 @@ export default Ember.ObjectController.extend({
       Ember.run.debounce(this, '_queryDidChange', 100);
     } else {
       this.set('requestPromise', null);
-      this.set('results', null);
+      this.set('results', []);
     }
   }.observes('query'),
 

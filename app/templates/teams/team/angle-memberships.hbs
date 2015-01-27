@@ -10,28 +10,26 @@
   {{/each}}
 </ul>
 
-{{#if hasUnusedTeamMembers}}
-  {{#as-dropdown title="Add Member" class="add" align="bottom"}}
-    <li class="search">
-      {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
-        <i></i>
-      {{/as-progress-indicator}}
+{{#as-dropdown title="Add Member" class="add" align="bottom"}}
+  <li class="search">
+    {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
+      <i></i>
+    {{/as-progress-indicator}}
 
-      {{input type="text" value=query click=view.onSearchClick}}
-    </li>
+    {{input type="text" value=query click=view.onSearchClick}}
+  </li>
 
-    <section class="team-members">
-      {{#each unusedTeamMembers}}
-        {{#as-dropdown-item action="add" param=this}}
-          <article>
-            {{as-avatar user=this}}
+  <section class="team-members">
+    {{#each unusedTeamMembers}}
+      {{#as-dropdown-item action="add" param=this}}
+        <article>
+          {{as-avatar user=this}}
 
-            <div class="name">
-              {{name}}
-            </div>
-          </article>
-        {{/as-dropdown-item}}
-      {{/each}}
-    </section>
-  {{/as-dropdown}}
-{{/if}}
+          <div class="name">
+            {{name}}
+          </div>
+        </article>
+      {{/as-dropdown-item}}
+    {{/each}}
+  </section>
+{{/as-dropdown}}
