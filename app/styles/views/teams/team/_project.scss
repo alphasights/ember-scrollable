@@ -1,17 +1,23 @@
+$team-project-progress-bar-height: rem-calc(4);
 $team-project-header-title-height: rem-calc(90);
 $team-project-header-stats-height: $team-project-header-title-height / 2;
-$team-project-header-height: $team-project-header-title-height + $team-project-header-stats-height + $side-panel-actions-height;
+$team-project-header-height: $team-project-progress-bar-height + $team-project-header-title-height + $team-project-header-stats-height + $side-panel-actions-height;
 
 .side-panel.project {
   > div {
     overflow-y: visible;
   }
 
+  .project-progress > div {
+    height: $team-project-progress-bar-height;
+  }
+
   header {
     box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
     position: relative;
-    z-index: 1;
     float: left;
+    width: 100%;
+    z-index: 1;
 
     .info {
       @extend %grid-column-12;
