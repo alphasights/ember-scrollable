@@ -243,7 +243,7 @@ test("Change project priority", function() {
 
   visit('/teams');
   click('.project-list-item:first .priority-select .dropdown');
-  click('.project-list-item:first .priority-select .items > .low');
+  click('.project-list-item:first .priority-select ul > .low');
 
   andThen(function() {
     equal(handler.called, true);
@@ -377,7 +377,7 @@ test("Change project priority from the details", function() {
   visit('/teams');
   click('.project-list-item:first');
   click('.project .priority-select .dropdown');
-  click('.project .priority-select .items > .low');
+  click('.project .priority-select ul > .low');
 
   andThen(function() {
     equal(handler.called, true);

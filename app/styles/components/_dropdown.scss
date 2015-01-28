@@ -59,7 +59,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
     outline: 0;
   }
 
-  .items {
+  > ul {
     background-clip: padding-box;
     background-color: $dropdown-background-color;
     border: 1px solid $dropdown-border-color;
@@ -155,7 +155,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 }
 
 %dropdown-inline {
-  > .items {
+  > ul {
     line-height: 0;
     min-width: 0;
     padding: 0;
@@ -169,7 +169,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 }
 
 %dropdown-inverted {
-  > .items {
+  > ul {
     background-color: $dropdown-link-hover-background-color;
     color: $dropdown-link-hover-color;
 
@@ -181,7 +181,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 }
 
 %dropdown-over {
-  > .items {
+  > ul {
     top: 0;
 
     &:before {
