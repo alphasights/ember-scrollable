@@ -1,19 +1,21 @@
 <header>
-  <div class="content">
-    {{as-priority-select project=model}}
+  <div class="info">
+    <div class="content">
+      {{as-priority-select project=model}}
 
-    <h1>
-      <span>{{name}}</span>
-      <small>{{clientCode}}</small>
+      <h1>
+        <span>{{name}}</span>
+        <small>{{clientCode}}</small>
 
-      <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
-        <i></i>
-      </a>
-    </h1>
-  </div>
+        <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
+          <i></i>
+        </a>
+      </h1>
+    </div>
 
-  <div class="project-lead">
-    {{as-avatar user=lead}}
+    <div class="project-lead">
+      {{as-avatar user=lead}}
+    </div>
   </div>
 
   <div class="stats">
