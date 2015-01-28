@@ -119,7 +119,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
             padding: $angle-add-member-dropdown-padding $column-gutter / 4;
 
             &:hover {
-              background-color: $white-smoke;
+              background-color: $global-section-border-color;
             }
           }
         }
