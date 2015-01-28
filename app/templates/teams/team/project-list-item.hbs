@@ -17,7 +17,24 @@
   {{/each}}
 </div>
 
-{{as-project-progress
-  hasTarget=hasDeliveryTarget
-  deliveredCount=deliveredAdvisorsCount
-  targetCount=deliveryTarget}}
+<div {{bind-attr class=":progress hasDeliveryTarget::no-target"}}>
+  {{as-progress-bar ratio=progress}}
+
+  <div class="details">
+    <div class="delivered">
+      <span class="count">
+        {{deliveredAdvisorsCount}}
+      </span>
+
+      <span class="label">delivered</span>
+    </div>
+
+    <div class="target">
+      <span class="count">
+        {{deliveryTarget}}
+      </span>
+
+      <span class="label">target</span>
+    </div>
+  </div>
+</div>

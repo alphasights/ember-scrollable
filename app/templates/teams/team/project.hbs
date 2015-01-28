@@ -17,11 +17,6 @@
   </div>
 
   <div class="stats">
-    {{as-project-progress
-      hasTarget=hasDeliveryTarget
-      deliveredCount=deliveredAdvisorsCount
-      targetCount=deliveryTarget}}
-
     <ul>
       <li>
         <span class="count">{{scheduledInteractionsCount}}</span>
@@ -31,6 +26,11 @@
       <li>
         <span class="count">{{notScheduledInteractionsCount}}</span>
         <span class="name">Left to Schedule</span>
+      </li>
+
+      <li>
+        <span class="count">{{deliveredAdvisorsCount}}</span>
+        <span class="name">Delivered</span>
       </li>
     </ul>
   </div>
