@@ -16,6 +16,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
   > ul {
     margin-left: 0;
+    padding: 0;
 
     > li > article {
       @extend %grid-column-medium-3;
@@ -110,6 +111,8 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %dropdown-over;
 
       ul {
+        padding: 0;
+
         li {
           line-height: $angle-add-member-avatar-size;
           white-space: nowrap;
