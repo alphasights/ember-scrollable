@@ -162,6 +162,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         .progress-indicator {
           height: $angle-add-member-search-icon-size;
           left: $angle-member-inner-padding;
+          margin: $angle-member-inner-padding * 2 0;
           overflow: hidden;
           position: absolute;
           text-align: center;
@@ -174,7 +175,6 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
           color: $angle-add-member-search-icon-color;
           line-height: $angle-add-member-button-size;
-          margin: $angle-member-inner-padding * 2 0;
         }
 
         input {
