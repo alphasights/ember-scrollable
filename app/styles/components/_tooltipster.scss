@@ -1,7 +1,7 @@
 $tooltipster-bg-color: $body-font-color;
 $tooltipster-border-color: $global-section-border-color;
 
-.tooltipster-avatar {
+.tooltipster-base {
   @include detached-border($color: $tooltipster-border-color);
 
   background-color: $tooltipster-bg-color;

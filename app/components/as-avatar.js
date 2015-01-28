@@ -7,7 +7,6 @@ export default TooltipsterComponent.extend({
   tagName: 'img',
 
   position: 'top',
-  theme: 'tooltipster-avatar',
 
   user: null,
   alt: Ember.computed.alias('user.initials'),
