@@ -8,7 +8,7 @@ $dropdown-link-active-color: $dropdown-link-color;
 $dropdown-link-active-background-color: lighten($dropdown-link-hover-background-color, 50%);
 $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 
-@mixin triangle($size, $color, $direction) {
+@mixin dropdown-triangle($size, $color, $direction) {
   content: '';
   height: 0;
   position: absolute;
@@ -142,13 +142,13 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
       top: auto;
 
       &:before {
-        @include triangle(12px, $white, top);
+        @include dropdown-triangle(12px, $white, top);
       }
     }
 
     &:not(.top):not(.left):not(.right) {
       &:before {
-        @include triangle(12px, $white, bottom);
+        @include dropdown-triangle(12px, $white, bottom);
       }
     }
   }
