@@ -1,26 +1,27 @@
-$team-project-header-height: rem-calc(180);
+$team-project-header-title-height: rem-calc(90);
+$team-project-header-stats-height: $team-project-header-title-height / 2;
+$team-project-header-height: $team-project-header-title-height + $team-project-header-stats-height + $side-panel-actions-height;
 
 .side-panel.project {
   > div {
     overflow-y: visible;
   }
 
-
   header {
     box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
-    height: $team-project-header-height;
     position: relative;
     z-index: 1;
+    float: left;
 
     .info {
       @extend %grid-column-12;
 
       padding: 0 $column-gutter;
+      line-height: $team-project-header-title-height;
 
       > .content {
         @extend %grid-column-9;
 
-        line-height: $team-project-header-height / 2;
         padding: 0 !important;
         white-space: nowrap;
       }
@@ -32,7 +33,7 @@ $team-project-header-height: rem-calc(180);
       display: inline-block;
       margin: 0;
       max-width: 90%;
-      padding: $column-gutter 0;
+      padding: 0;
 
       span {
         float: left;
@@ -81,8 +82,9 @@ $team-project-header-height: rem-calc(180);
     .project-lead {
       @extend %grid-column-3;
 
-      line-height: $team-project-header-height / 2;
+      // line-height: $team-project-header-height / 2;
       padding: 0 !important;
+      margin: 0;
       text-align: right;
     }
 
@@ -90,19 +92,33 @@ $team-project-header-height: rem-calc(180);
       @extend %grid-column-12;
 
       border-top: 1px solid $panel-border-color;
-      line-height: $team-project-header-height / 2;
       padding: 0 !important;
       text-align: center;
 
       > ul {
+        @extend %grid-column-12;
+
         color: $small-font-color;
-        display: inline-block;
         font-size: $small-font-size;
-        padding-bottom: $column-gutter / 2;
+        margin-bottom: 0;
+        padding: 0 $column-gutter / 2;
         text-transform: uppercase;
 
         li {
-          display: inline-block;
+          @extend %grid-column-3;
+
+          line-height: $team-project-header-stats-height;
+
+          &:first-child {
+            font-weight: $font-weight-extrabold;
+            padding-left: 0;
+            text-align: left;
+          }
+
+          &:last-child {
+            font-weight: $font-weight-extrabold;
+            text-align: right;
+          }
         }
 
         .count {
@@ -131,7 +147,7 @@ $team-project-header-height: rem-calc(180);
     overflow-y: auto;
     position: absolute;
     right: 0;
-    top: $side-panel-actions-height + $team-project-header-height;
+    top: $team-project-header-height;
 
     > ul > li > article {
       @extend %grid-row;
