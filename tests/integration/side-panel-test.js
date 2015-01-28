@@ -73,7 +73,7 @@ test("Hides when clicking on the close button", function() {
 test("Hides when pressing the esc key", function() {
   visit('/teams');
   click('.project-list-item');
-  keyEvent(window, 'keyup', 27);
+  keyEvent(document, 'keyup', 27);
 
   andThen(function() {
     equal(find('.side-panel').length, 0);
