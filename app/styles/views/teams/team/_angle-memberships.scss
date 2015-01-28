@@ -8,7 +8,7 @@ $angle-add-member-button-color: scale-color($primary-color, $lightness: -$alert-
 $angle-add-member-avatar-size: $avatar-size-tiny;
 $angle-add-member-dropdown-padding: $angle-member-inner-padding * 2;
 $angle-add-member-search-icon-padding: $form-spacing / 2;
-$angle-add-member-search-icon-height: $form-label-line-height;
+$angle-add-member-search-icon-size: 32px;
 $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
 .side-panel.project .angle-memberships {
@@ -44,6 +44,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         box-sizing: border-box;
         color: $body-font-color;
         font-size: $h2-font-size;
+        font-weight: $font-weight-normal;
         height: $angle-member-width;
         padding-bottom: 0;
         padding-left: $angle-member-width * 1.2 + $angle-member-inner-padding;
@@ -106,21 +107,9 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     }
 
     &.dropdown {
-      width: auto;
+      @extend %dropdown-over;
 
       ul {
-        margin: 0;
-        max-width: none;
-        width: auto;
-
-        &:before {
-          left: 12px;
-        }
-
-        &:after {
-          left: 11px;
-        }
-
         li {
           line-height: $angle-add-member-avatar-size;
           white-space: nowrap;
@@ -168,26 +157,27 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         }
 
         .progress-indicator {
-          height: 32px;
-          left: 3px;
+          height: $angle-add-member-search-icon-size;
+          left: $angle-member-inner-padding;
           overflow: hidden;
           position: absolute;
           text-align: center;
-          top: 3px;
-          width: 32px;
+          top: $angle-member-inner-padding;
+          width: $angle-add-member-search-icon-size;
         }
 
         i {
           @include icon(search);
 
           color: $angle-add-member-search-icon-color;
-          line-height: 32px;
+          line-height: $angle-add-member-button-size;
+          margin: $angle-member-inner-padding * 2 0;
         }
 
         input {
           border-radius: $global-radius / 2;
-          height: 32px;
-          margin-bottom: 0;
+          height: $angle-add-member-button-size;
+          margin: $angle-member-inner-padding * 2 0;
           padding-left: $angle-add-member-avatar-size * 1.5;
         }
       }
