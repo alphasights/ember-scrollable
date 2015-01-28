@@ -16,6 +16,8 @@ export default Ember.View.extend({
       duration: 200
     });
 
+    // TODO: Figure out why using the Ember `click` instance method resulted in
+    // the event handler to be called twice.
     this.$().on('click', function(event) {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = this.$('> div');
