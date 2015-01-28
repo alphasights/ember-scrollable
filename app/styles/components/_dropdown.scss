@@ -9,16 +9,15 @@ $dropdown-link-active-background-color: lighten($dropdown-link-hover-background-
 $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
 
 @mixin dropdown-triangle($size, $color, $direction) {
+  $background-color: if(length($color) == 2, nth($color, 2), transparent);
+  $foreground-color: nth($color, 1);
+  $height: nth($size, length($size));
+  $width: nth($size, 1);
+
   content: '';
   height: 0;
   position: absolute;
   width: 0;
-
-  $width: nth($size, 1);
-  $height: nth($size, length($size));
-
-  $foreground-color: nth($color, 1);
-  $background-color: if(length($color) == 2, nth($color, 2), transparent);
 
   @if ($direction == top) or ($direction == bottom) or ($direction == right) or ($direction == left) {
 
