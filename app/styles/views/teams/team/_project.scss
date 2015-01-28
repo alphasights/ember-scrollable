@@ -14,16 +14,16 @@ $team-project-header-height: $team-project-progress-bar-height + $team-project-h
 
   header {
     box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
-    position: relative;
     float: left;
+    position: relative;
     width: 100%;
     z-index: 1;
 
     .info {
       @extend %grid-column-12;
 
-      padding: 0 $column-gutter;
       line-height: $team-project-header-title-height;
+      padding: 0 $column-gutter;
 
       > .content {
         @extend %grid-column-9;
@@ -88,9 +88,8 @@ $team-project-header-height: $team-project-progress-bar-height + $team-project-h
     .project-lead {
       @extend %grid-column-3;
 
-      // line-height: $team-project-header-height / 2;
-      padding: 0 !important;
       margin: 0;
+      padding: 0 !important;
       text-align: right;
     }
 
