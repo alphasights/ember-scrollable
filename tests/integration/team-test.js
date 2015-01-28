@@ -266,7 +266,7 @@ test("Show project details", function() {
       lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
 
       angle: {
-        title: $angle.find('> h3').text().trim(),
+        title: $angle.find('> .title').text().trim(),
 
         memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
           var $membership = $(membership);

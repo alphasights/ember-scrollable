@@ -136,7 +136,9 @@ $team-project-header-height: rem-calc(90);
           border-top: 1px solid $panel-border-color;
           padding: $column-gutter;
 
-          h3 {
+          .title {
+            font-size: $h3-font-size;
+            font-weight: $font-weight-normal;
             padding-bottom: $column-gutter/ 2;
           }
 
