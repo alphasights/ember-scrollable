@@ -24,7 +24,7 @@
   > .details {
     @extend %grid-column-4;
 
-    h1 {
+    > div {
       font-size: $base-font-size;
       font-weight: $font-weight-bold;
 
