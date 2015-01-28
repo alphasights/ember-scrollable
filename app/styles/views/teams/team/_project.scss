@@ -16,9 +16,10 @@ $team-project-header-height: rem-calc(90);
     z-index: 1;
 
     > .content {
-      @extend %grid-column-6;
+      @extend %grid-column-7;
 
       padding: 0 !important;
+      white-space: nowrap;
     }
 
     h1 {
@@ -74,7 +75,7 @@ $team-project-header-height: rem-calc(90);
     }
 
     .stats {
-      @extend %grid-column-6;
+      @extend %grid-column-5;
 
       padding: 0 !important;
       text-align: right;

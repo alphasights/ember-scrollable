@@ -17,16 +17,17 @@ export default Ember.View.extend(KeyEventsMixin, {
       duration: 200
     });
 
+    // TODO: Figure out why using the Ember `click` instance method resulted in
+    // the event handler to be called twice.
+    this.$().on('click', function(event) {
+      var $target = Ember.$(event.target);
+      var $nonBlurringElements = this.$('> div');
+
+      if($target.closest($nonBlurringElements).length === 0) {
+        this.send('close');
+      }
+    }.bind(this));
   }.on('didInsertElement'),
-
-  click: function(event) {
-    var $target = Ember.$(event.target);
-    var $nonBlurringElements = this.$('> div');
-
-    if($target.closest($nonBlurringElements).length === 0) {
-      this.send('close');
-    }
-  },
 
   actions: {
     close: function() {
