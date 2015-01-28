@@ -1,0 +1,17 @@
+$tooltipster-bg-color: $body-font-color;
+$tooltipster-border-color: $global-section-border-color;
+
+.tooltipster-base {
+  @include detached-border($color: $tooltipster-border-color);
+
+  background-color: $tooltipster-bg-color;
+  border-radius: $global-radius / 2;
+  color: $white;
+
+  .tooltipster-content {
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    padding: $column-gutter / 4 $column-gutter / 2;
+    white-space: nowrap;
+  }
+}
