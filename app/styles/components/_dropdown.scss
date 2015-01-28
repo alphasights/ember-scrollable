@@ -146,7 +146,7 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
       }
     }
 
-    &:not(.top):not(.over):not(.left):not(.right) {
+    &:not(.top):not(.left):not(.right) {
       &:before {
         @include triangle(12px, $white, bottom);
       }
