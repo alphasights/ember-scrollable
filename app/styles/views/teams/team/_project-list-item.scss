@@ -24,17 +24,14 @@
   > .details {
     @extend %grid-column-4;
 
-    > div {
-      font-size: $base-font-size;
-      font-weight: $font-weight-bold;
+    font-size: $base-font-size;
+    font-weight: $font-weight-bold;
 
-      small {
-        color: $small-font-color;
-        display: block;
-        line-height: 150%;
-      }
+    small {
+      color: $small-font-color;
+      display: block;
+      line-height: 150%;
     }
-
   }
 
   > .members {

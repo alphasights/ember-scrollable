@@ -149,8 +149,8 @@ test("Read project list", function() {
       var $project = $(project);
 
       return {
-        title: $project.find('h1 span').text().trim(),
-        clientCode: $project.find('h1 small').text().trim(),
+        title: $project.find('> .details span').text().trim(),
+        clientCode: $project.find('> .details small').text().trim(),
         highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
         mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
         lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
@@ -204,7 +204,7 @@ test("Sort project list", function() {
 
   var projectTitles = function() {
     return find('.project-list-item').toArray().map(function(project) {
-      return $(project).find('h1 span').text().trim();
+      return $(project).find('> .details span').text().trim();
     });
   };
 
@@ -443,6 +443,6 @@ test("Change selected team", function() {
   select('.team-select option:last');
 
   andThen(function() {
-    equal(find('.project-list-item h1 span').text().trim(), 'Example Project 4');
+    equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
   });
 });
