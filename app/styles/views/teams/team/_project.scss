@@ -1,7 +1,11 @@
 $team-project-progress-bar-height: rem-calc(4);
 $team-project-header-title-height: rem-calc(90);
 $team-project-header-stats-height: $team-project-header-title-height / 2;
-$team-project-header-height: $team-project-progress-bar-height + $team-project-header-title-height + $team-project-header-stats-height + $side-panel-actions-height;
+$team-project-header-height:
+  $team-project-progress-bar-height +
+  $team-project-header-title-height +
+  $team-project-header-stats-height +
+  $side-panel-actions-height;
 
 .side-panel.project {
   > div {
@@ -19,13 +23,13 @@ $team-project-header-height: $team-project-progress-bar-height + $team-project-h
     width: 100%;
     z-index: 1;
 
-    .info {
+    .content {
       @extend %grid-column-12;
 
       line-height: $team-project-header-title-height;
       padding: 0 $column-gutter;
 
-      > .content {
+      > .info {
         @extend %grid-column-9;
 
         padding: 0 !important;
