@@ -2,12 +2,14 @@
   overflow: visible;
 }
 
-ul, li {
+ul,
+li {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-input, select {
+input,
+select {
   font-weight: $font-weight-bold;
 }
