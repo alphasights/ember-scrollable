@@ -23,8 +23,6 @@ $team-project-header-height: rem-calc(90);
     }
 
     h1 {
-      @extend %heading-medium-uppercase;
-
       display: inline-block;
       margin: 0;
       max-width: 90%;

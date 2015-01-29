@@ -22,8 +22,6 @@
         text-align: center;
 
         h1 {
-          @extend %heading-medium-uppercase;
-
           color: $subheader-font-color;
           font-weight: $font-weight-normal;
           margin: $column-gutter 0;
