@@ -120,6 +120,7 @@ $team-project-header-height:
 
           line-height: $team-project-header-stats-height;
           padding: 0 !important;
+          white-space: nowrap;
 
           &:first-child {
             font-weight: $font-weight-extrabold;
