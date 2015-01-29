@@ -85,7 +85,7 @@ $team-project-header-height: $team-project-progress-bar-height + $team-project-h
       vertical-align: middle;
     }
 
-    .project-lead {
+    .lead {
       @extend %grid-column-3;
 
       margin: 0;
