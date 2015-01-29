@@ -119,6 +119,7 @@ $team-project-header-height:
           @extend %grid-column-3;
 
           line-height: $team-project-header-stats-height;
+          padding: 0 !important;
 
           &:first-child {
             font-weight: $font-weight-extrabold;
