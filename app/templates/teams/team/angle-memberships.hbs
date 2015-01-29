@@ -4,7 +4,7 @@
       <article>
         {{as-avatar user=membership.user}}
         {{super-number value=membership.deliveryTarget class="delivery-target"}}
-        <button class="remove" tabindex="-1" {{action "remove" membership bubbles=false}}></button>
+        <button class="remove" tabindex="-1" {{action "remove" membership.model bubbles=false}}></button>
       </article>
     </li>
   {{/each}}
