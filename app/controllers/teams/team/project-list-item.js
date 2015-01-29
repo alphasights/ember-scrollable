@@ -1,20 +1,11 @@
 import Ember from 'ember';
+import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
-export default Ember.ObjectController.extend({
+export default Ember.ObjectController.extend(ProjectProgressMixin, {
   needs: ['teams/team'],
 
   team: Ember.computed.alias('controllers.teams/team'),
   hasDeliveryTarget: Ember.computed.gt('deliveryTarget', 0),
-
-  progress: function() {
-    var deliveryTarget = this.get('deliveryTarget');
-
-    if (deliveryTarget === 0) {
-      return 0;
-    } else {
-      return this.get('deliveredAdvisorsCount') / deliveryTarget;
-    }
-  }.property('deliveredAdvisorsCount', 'deliveryTarget'),
 
   members: function() {
     return _(this.get('model.members')).without(this.get('lead'));

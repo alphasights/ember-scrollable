@@ -43,13 +43,6 @@
 
     padding: 0 $column-gutter;
 
-    .progress-bar {
-      > div {
-        background-color: lighten($success-color, 20%);
-        border-radius: $global-radius / 2;
-      }
-    }
-
     .details {
       @extend %grid-row;
 
