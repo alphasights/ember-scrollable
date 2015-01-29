@@ -23,13 +23,13 @@ $team-project-header-height:
     width: 100%;
     z-index: 1;
 
-    .content {
+    > .content {
       @extend %grid-column-12;
 
       line-height: $team-project-header-title-height;
       padding: 0 $column-gutter;
 
-      > .info {
+      .info {
         @extend %grid-column-9;
 
         padding: 0 !important;
