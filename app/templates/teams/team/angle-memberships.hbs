@@ -1,10 +1,10 @@
 <ul>
-  {{#each memberships itemController="teams.team.angle-membership"}}
+  {{#each membership in memberships itemController="teams.team.angle-membership"}}
     <li>
       <article>
-        {{as-avatar user=user}}
-        {{super-number value=deliveryTarget class="delivery-target"}}
-        <button class="remove" tabindex="-1" {{action "remove" this bubbles=false}}></button>
+        {{as-avatar user=membership.user}}
+        {{super-number value=membership.deliveryTarget class="delivery-target"}}
+        <button class="remove" tabindex="-1" {{action "remove" membership bubbles=false}}></button>
       </article>
     </li>
   {{/each}}
