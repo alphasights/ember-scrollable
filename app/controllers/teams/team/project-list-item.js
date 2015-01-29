@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import ProjectProgress from 'phoenix/mixins/project-progress';
+import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
-export default Ember.ObjectController.extend(ProjectProgress, {
+export default Ember.ObjectController.extend(ProjectProgressMixin, {
   needs: ['teams/team'],
 
   team: Ember.computed.alias('controllers.teams/team'),
