@@ -93,10 +93,10 @@ $team-project-header-height:
       @extend %grid-column-medium-2;
       @extend %grid-column-small-3;
 
+      float: none;
       margin: 0;
       padding: 0 !important;
       text-align: right;
-      float: none;
     }
 
     .stats {
