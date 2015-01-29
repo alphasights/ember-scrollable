@@ -32,6 +32,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.EmberENV.isDevelopment = true;
   }
 
   if (environment === 'test') {
@@ -47,6 +49,7 @@ module.exports = function(environment) {
 
     ENV.EmberENV.segmentWriteKey = null;
     ENV.EmberENV.intercomAppId = null;
+    ENV.EmberENV.isDevelopment = true;
   }
 
   return ENV;
