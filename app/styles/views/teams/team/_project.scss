@@ -30,18 +30,25 @@ $team-project-header-height:
       padding: 0 $column-gutter;
 
       .info {
-        @extend %grid-column-9;
+        @extend %grid-column-medium-10;
+        @extend %grid-column-small-9;
 
         padding: 0 !important;
         white-space: nowrap;
       }
     }
 
-    h1 {
+    h1,
+    .priority-select,
+    .lead {
       display: inline-block;
+      vertical-align: middle;
+    }
+
+    h1 {
       margin: 0;
-      max-width: 90%;
       padding: 0;
+      width: 100%;
 
       span {
         float: left;
@@ -57,14 +64,9 @@ $team-project-header-height:
       }
 
       @media #{$small-only} {
-        padding: 0 $column-gutter / 2;
+        padding: 0;
 
-        span {
-          float: none;
-          padding-left: 0;
-          white-space: normal;
-        }
-
+        span,
         small {
           padding-left: 0;
         }
@@ -88,11 +90,13 @@ $team-project-header-height:
     }
 
     .lead {
-      @extend %grid-column-3;
+      @extend %grid-column-medium-2;
+      @extend %grid-column-small-3;
 
       margin: 0;
       padding: 0 !important;
       text-align: right;
+      float: none;
     }
 
     .stats {
@@ -137,16 +141,12 @@ $team-project-header-height:
   }
 
   .priority-select {
-    display: inline-block;
-    margin-bottom: $priority-select-size / 2;
-    vertical-align: middle;
-
     .dropdown > button {
       margin: 0;
     }
 
     @media #{$small-only} {
-      display: none;
+      display: none !important;
     }
   }
 
