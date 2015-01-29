@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ProjectProgress from '../../../mixins/project-progress';
 
-export default Ember.ObjectController.extend({
+export default Ember.ObjectController.extend(ProjectProgress, {
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
   }.property('id'),

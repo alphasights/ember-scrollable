@@ -18,9 +18,7 @@
 </div>
 
 <div {{bind-attr class=":progress hasDeliveryTarget::no-target"}}>
-  {{as-project-progress
-    deliveredCount=deliveredAdvisorsCount
-    targetCount=deliveryTarget}}
+  {{as-progress-bar ratio=progress}}
 
   <div class="details">
     <div class="delivered">

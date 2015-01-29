@@ -8,7 +8,7 @@ $team-project-header-height: $team-project-progress-bar-height + $team-project-h
     overflow-y: visible;
   }
 
-  .project-progress > div {
+  .progress-bar {
     height: $team-project-progress-bar-height;
   }
 
