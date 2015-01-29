@@ -100,7 +100,7 @@ $team-project-header-height:
     .stats {
       @extend %grid-column-12;
 
-      border-top: 1px solid $panel-border-color;
+      border-top: 1px solid $global-section-border-color;
       padding: 0 !important;
       text-align: center;
 
