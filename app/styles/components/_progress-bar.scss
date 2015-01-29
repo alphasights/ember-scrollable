@@ -1,3 +1,8 @@
 .progress-bar {
   @extend %progress-bar;
+
+  > div {
+    background-color: lighten($success-color, 20%);
+    border-radius: $global-radius / 2;
+  }
 }
