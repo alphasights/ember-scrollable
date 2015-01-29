@@ -10,6 +10,7 @@ $tooltipster-border-color: $global-section-border-color;
 
   .tooltipster-content {
     font-size: $base-font-size;
+    font-family: $header-font-family;
     line-height: $base-line-height;
     padding: $column-gutter / 4 $column-gutter / 2;
     white-space: nowrap;
