@@ -119,7 +119,7 @@ $team-project-header-height:
           @extend %grid-column-3;
 
           line-height: $team-project-header-stats-height;
-          padding: 0 !important;
+          padding: 0;
           white-space: nowrap;
 
           &:first-child {
@@ -130,6 +130,7 @@ $team-project-header-height:
 
           &:last-child {
             font-weight: $font-weight-extrabold;
+            padding-right: $column-gutter / 2;
             text-align: right;
           }
         }
