@@ -26,13 +26,13 @@
 
     <li>
       <ul>
-        {{#each unusedTeamMembers}}
-          <li {{action "add" this}}>
+        {{#each member in unusedTeamMembers}}
+          <li {{action "add" member}}>
             <article>
-              {{as-avatar user=this}}
+              {{as-avatar user=member}}
 
               <div class="name">
-                {{name}}
+                {{member.name}}
               </div>
             </article>
           </li>
