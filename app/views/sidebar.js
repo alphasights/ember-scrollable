@@ -18,9 +18,9 @@ export default Ember.View.extend({
     var growth;
 
     if (this.get('isCollapsed')) {
-      growth = '-= 170px';
+      growth = '-= 200px';
     } else {
-      growth = '+= 170px';
+      growth = '+= 200px';
     }
 
     this.$().velocity({
