@@ -31,12 +31,12 @@
   <div class="results">
     {{#liquid-if requestPromise.isFulfilled use="crossFade"}}
       {{#if results}}
-        {{#each allSections}}
+        {{#each section in allSections}}
           <section>
-            <h1>{{title}}</h1>
+            <h1>{{section.title}}</h1>
 
             <ul>
-              {{#each result in results}}
+              {{#each result in section.results}}
                 <li>
                   {{render "quick-jump.result" result tagName="article"}}
                 </li>
