@@ -26,7 +26,10 @@ export default Ember.View.extend({
     this.$().velocity({
       width: growth
     }, {
-      duration: 150
+      duration: 150,
+      progress: function() {
+        Ember.$('.scrollable').TrackpadScrollEmulator('recalculate');
+      }
     });
   }
 });
