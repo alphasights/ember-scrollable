@@ -14,10 +14,6 @@ $page-placeholder-icon-size: $h1-font-size * 2;
     text-align: center;
   }
 
-  p {
-    font-size: $h4-font-size;
-  }
-
   i {
     @include icon(lightbulb-o);
     @include single-transition(background-color);

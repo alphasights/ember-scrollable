@@ -36,4 +36,8 @@ $super-number-arrow-padding: ($super-number-height - (2 * $super-number-arrow-si
 
     top: $super-number-arrow-size + $super-number-arrow-padding;
   }
+
+  input {
+    font-family: $header-font-family;
+  }
 }

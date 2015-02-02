@@ -96,7 +96,7 @@ test("Search results", function() {
       var $section = $(section);
 
       return {
-        title: $section.find('> h1').text().trim(),
+        title: $section.find('> .title').text().trim(),
 
         results: $section
           .find('article')
@@ -105,7 +105,7 @@ test("Search results", function() {
             var $article = $(article);
 
             return {
-              title: $article.find('h1').text().trim(),
+              title: $article.find('.title').text().trim(),
               details: $article.find('.details').text().trim()
             };
           })

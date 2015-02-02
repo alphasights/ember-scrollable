@@ -132,16 +132,15 @@ $quick-jump-results-background-color: #f2f2f2;
     section {
       @extend %grid-row;
 
+      font-size: $small-font-size;
       padding-bottom: $column-gutter / 2;
       padding-top: $column-gutter / 2;
 
-      > h1 {
+      > .title {
         @extend .hide-for-small-only;
         @extend %grid-column-2;
 
         color: $primary-color;
-        font-size: $small-font-size;
-        font-weight: $font-weight-bold;
         line-height: $quick-jump-results-item-height;
         margin-bottom: 0;
         margin-top: 0;
@@ -172,6 +171,11 @@ $quick-jump-results-background-color: #f2f2f2;
 
         &:hover {
           background-color: lighten($quick-jump-results-background-color, 3%);
+        }
+
+        .title {
+          color: $body-font-color;
+          line-height: $quick-jump-results-item-height;
         }
       }
     }
