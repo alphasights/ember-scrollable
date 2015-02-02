@@ -47,12 +47,12 @@
 
 <section class="angles">
   <ul>
-    {{#each angles}}
+    {{#each angle in angles}}
       <li>
         <article>
-          <div class="title">{{title}}</div>
+          <div class="title">{{angle.title}}</div>
 
-          {{render "teams.team.angle-memberships" this tagName="section"}}
+          {{render "teams.team.angle-memberships" angle tagName="section"}}
         </article>
       </li>
     {{/each}}

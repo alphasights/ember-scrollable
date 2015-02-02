@@ -10,8 +10,8 @@
 <div class="members">
   {{as-avatar user=lead class="lead"}}
 
-  {{#each members}}
-    {{as-avatar user=this}}
+  {{#each member in members}}
+    {{as-avatar user=member}}
   {{/each}}
 </div>
 
