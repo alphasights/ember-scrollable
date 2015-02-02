@@ -14,6 +14,10 @@ var app = new EmberApp({
     'intercom': {
       file: './external_scripts/intercom.html',
       enabled: config.EmberENV.intercomAppId != null
+    },
+    'development-styles': {
+      file: './app/styles/development-styles.css',
+      enabled: env === 'development' || env === 'test'
     }
   }
 });

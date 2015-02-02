@@ -17,8 +17,7 @@ module.exports = function(environment) {
       pistachioUrl: 'http://localhost:3000',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O',
-      intercomAppId: '4rw4fi3l',
-      environment: environment
+      intercomAppId: '4rw4fi3l'
     },
 
     APP: {
