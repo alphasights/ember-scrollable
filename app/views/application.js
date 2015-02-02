@@ -4,6 +4,6 @@ export default Ember.View.extend({
   classNameBindings: [':application', 'isDevelopment:dev-border'],
 
   isDevelopment: function() {
-    return EmberENV.isDevelopment === true;
+    return (_.contains(['development', 'test'], EmberENV.environment));
   }.property()
 });
