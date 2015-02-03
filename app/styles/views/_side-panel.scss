@@ -58,6 +58,7 @@ $side-panel-actions-height: rem-calc(60);
     .content {
       @extend %grid-column-10;
 
+      min-height: $side-panel-actions-height;
       padding: 0 !important;
 
       > ul {
