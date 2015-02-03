@@ -24,7 +24,7 @@
   > .details {
     @extend %grid-column-4;
 
-    font-size: $base-font-size;
+    font-size: $h4-font-size;
     font-weight: $font-weight-bold;
 
     small {
@@ -46,7 +46,7 @@
     .details {
       @extend %grid-row;
 
-      font-size: $small-font-size;
+      font-size: $h5-font-size;
       margin-top: $column-gutter / 4;
 
       .delivered,
@@ -54,6 +54,7 @@
         @extend %grid-column-6;
 
         color: darken($info-color, 25%);
+        font-size: $small-font-size;
         padding: 0 !important;
       }
 
