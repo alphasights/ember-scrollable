@@ -9,6 +9,7 @@ export default DS.Model.extend({
   clientCode: DS.attr('string'),
   createdAt: DS.attr('date'),
   detailsUrl: DS.attr('string'),
+  interactions: DS.hasMany('interaction'),
   leftToScheduleAdvisorsCount: DS.attr('number'),
   name: DS.attr('string'),
   proposedAdvisorsCount: DS.attr('number'),
