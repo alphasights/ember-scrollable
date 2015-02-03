@@ -24,7 +24,7 @@
   > .details {
     @extend %grid-column-4;
 
-    font-size: 16px;
+    font-size: $h4-font-size;
     font-weight: $font-weight-bold;
 
     small {
