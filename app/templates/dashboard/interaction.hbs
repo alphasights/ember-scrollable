@@ -1,5 +1,56 @@
-<h1>Project Name: {{model.project.name}}</h1>
-<h1>Advisor Name: {{model.advisor.name}}</h1>
-<h1>Client Contact Name: {{model.clientContact.name}}</h1>
+<header>
+  <div class="schedule">
+    <span class="date"></span>
+    <span class="time"></span>
+  </div>
+
+  <div class="project">
+    <h1>{{project.name}}</h1>
+  </div>
+
+  <div class="details">
+    <a href="#"></a>
+  </div>
+</header>
+
+<section class="advisor">
+  <div class="header">Advisor</div>
+
+  <div class="profile">
+    <div class="image">
+      <img {{bind-attr src=advisor.avatarUrl}} class="avatar" />
+    </div>
+
+    <div class="details">
+      <span class="name">{{advisor.name}}</span>
+      <span class="job-title"></span>
+    </div>
+  </div>
+
+  <div class="contact-details">
+    <div class="email"></div>
+    <div class="phone"></div>
+  </div>
+</section>
+
+<section class="client-contact">
+  <div class="header">Client Contact</div>
+
+  <div class="profile">
+    <div class="image">
+      <img {{bind-attr src=clientContact.avatarUrl}} class="avatar" />
+    </div>
+
+    <div class="details">
+      <span class="name">{{clientContact.name}}</span>
+      <span class="company-title"></span>
+    </div>
+  </div>
+
+  <div class="contact-details">
+    <div class="email"></div>
+    <div class="phone"></div>
+  </div>
+</section>
 
 {{outlet}}
