@@ -1,7 +1,7 @@
 <header>
   <div class="schedule">
-    <span class="date"></span>
-    <span class="time"></span>
+    <span class="date">{{ago scheduledCallTime}}</span>
+    <span class="time">{{moment scheduledCallTime 'h:mm a'}}</span>
   </div>
 
   <div class="project">
