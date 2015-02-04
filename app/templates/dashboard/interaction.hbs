@@ -23,13 +23,13 @@
 
     <div class="details">
       <span class="name">{{advisor.name}}</span>
-      <span class="job-title"></span>
+      <span class="job-title">-</span>
     </div>
   </div>
 
   <div class="contact-details">
-    <div class="email"></div>
-    <div class="phone"></div>
+    <div class="email">{{advisor.emails}}</div>
+    <div class="phone">{{advisor.phoneNumbers}}</div>
   </div>
 </section>
 
@@ -43,13 +43,13 @@
 
     <div class="details">
       <span class="name">{{clientContact.name}}</span>
-      <span class="company-title"></span>
+      <span class="company-title">{{clientContact.clientAccount.name}}</span>
     </div>
   </div>
 
   <div class="contact-details">
-    <div class="email"></div>
-    <div class="phone"></div>
+    <div class="email">{{clientContact.emails}}</div>
+    <div class="phone">{{clientContact.phoneNumbers}}</div>
   </div>
 </section>
 
