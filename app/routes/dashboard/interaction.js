@@ -5,5 +5,11 @@ export default SidePanelRoute.extend({
     var interactionId = params.interaction_id;
 
     return this.store.find('interaction', interactionId);
+  },
+
+  actions: {
+    hideSidePanel: function() {
+      this.transitionTo('dashboard');
+    }
   }
 });
