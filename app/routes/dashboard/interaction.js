@@ -1,6 +1,8 @@
 import SidePanelRoute from 'phoenix/routes/side-panel';
 
 export default SidePanelRoute.extend({
+  viewName: 'dashboard.interaction',
+
   model: function(params) {
     var interactionId = params.interaction_id;
 
