@@ -10,44 +10,45 @@
   </div>
 </header>
 
-<section class="advisor">
-  <div class="header">Advisor</div>
+<div class="contents">
+  <section class="advisor">
+    <div class="header">Advisor</div>
 
-  <div class="profile">
-    <div class="image">
-      <img {{bind-attr src=advisor.avatarUrl}} class="avatar" />
+    <div class="profile">
+      <div class="image">
+        <img {{bind-attr src=advisor.avatarUrl}} class="avatar" />
+      </div>
+
+      <div class="details">
+        <span class="name">{{advisor.name}}</span>
+        <span class="job-title">-</span>
+      </div>
     </div>
 
-    <div class="details">
-      <span class="name">{{advisor.name}}</span>
-      <span class="job-title">-</span>
+    <div class="contact-details">
+      <div class="email">{{advisor.emails}}</div>
+      <div class="phone">{{advisor.phoneNumbers}}</div>
     </div>
-  </div>
+  </section>
 
-  <div class="contact-details">
-    <div class="email">{{advisor.emails}}</div>
-    <div class="phone">{{advisor.phoneNumbers}}</div>
-  </div>
-</section>
+  <section class="client-contact">
+    <div class="header">Client Contact</div>
 
-<section class="client-contact">
-  <div class="header">Client Contact</div>
+    <div class="profile">
+      <div class="image">
+        <img {{bind-attr src=clientContact.avatarUrl}} class="avatar" />
+      </div>
 
-  <div class="profile">
-    <div class="image">
-      <img {{bind-attr src=clientContact.avatarUrl}} class="avatar" />
+      <div class="details">
+        <span class="name">{{clientContact.name}}</span>
+        <span class="company-title">{{clientContact.clientAccount.name}}</span>
+      </div>
     </div>
 
-    <div class="details">
-      <span class="name">{{clientContact.name}}</span>
-      <span class="company-title">{{clientContact.clientAccount.name}}</span>
+    <div class="contact-details">
+      <div class="email">{{clientContact.emails}}</div>
+      <div class="phone">{{clientContact.phoneNumbers}}</div>
     </div>
-  </div>
-
-  <div class="contact-details">
-    <div class="email">{{clientContact.emails}}</div>
-    <div class="phone">{{clientContact.phoneNumbers}}</div>
-  </div>
-</section>
-
+  </section>
+</div>
 {{outlet}}

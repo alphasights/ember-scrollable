@@ -1,8 +1,21 @@
-$interaction-header-height: rem-calc(120);
+$interaction-header-title-height: rem-calc(120);
+$interaction-header-height:
+  $interaction-header-title-height +
+  $column-gutter * 2 +
+  $side-panel-actions-height;
 
 .side-panel.interaction {
   > div {
     overflow-y: visible;
+
+    .contents {
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      position: absolute;
+      right: 0;
+      top: $interaction-header-height;
+    }
   }
 
   header {
@@ -22,7 +35,7 @@ $interaction-header-height: rem-calc(120);
         background-color: $primary-color;
         color: $white;
         display: block;
-        line-height: $interaction-header-height / 2;
+        line-height: $interaction-header-title-height / 2;
         text-align: center;
         text-transform: uppercase;
 
@@ -44,14 +57,14 @@ $interaction-header-height: rem-calc(120);
       @extend %grid-column-10;
 
       h1 {
-        line-height: $interaction-header-height / 2;
+        line-height: $interaction-header-title-height / 2;
         margin: 0;
       }
 
       a {
         border-top: solid 1px $global-section-border-color;
         display: block;
-        line-height: $interaction-header-height / 2;
+        line-height: $interaction-header-title-height / 2;
       }
     }
   }
