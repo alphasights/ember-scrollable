@@ -14,14 +14,14 @@ Interaction.reopenClass({
       advisor: 1,
       clientContact: 1,
       project: 29976,
-      scheduledCallTime: '2015-02-27T16:46:03.347+01:00'
+      scheduledCallTime: '2015-02-27T16:46:03.347'
     },
     {
       id: 2,
       advisor: 2,
       clientContact: 2,
       project: 101,
-      scheduledCallTime: '2015-02-21T16:46:03.347+01:00'
+      scheduledCallTime: '2015-02-05T16:46:03.347'
     }
   ]
 });
