@@ -8,16 +8,14 @@ var config = require('./config/environment')(env);
 var app = new EmberApp({
   inlineContent: {
     'analytics': {
-      file: './external_scripts/analytics.html',
-      enabled: config.EmberENV.segmentWriteKey != null
+      file: './inline-content/analytics.html'
     },
     'intercom': {
-      file: './external_scripts/intercom.html',
-      enabled: config.EmberENV.intercomAppId != null
+      file: './inline-content/intercom.html'
     },
     'development-styles': {
-      file: './app/styles/development-styles.css',
-      enabled: env === 'development' || env === 'test'
+      file: './inline-content/development-styles.css',
+      enabled: env === 'development'
     }
   }
 });

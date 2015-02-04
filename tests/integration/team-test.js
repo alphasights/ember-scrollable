@@ -208,7 +208,7 @@ test("Sort project list", function() {
     });
   };
 
-  fillIn('.team .sort-by-select select', 'client');
+  select('.team .sort-by-select option[value="client"]');
 
   andThen(function() {
     deepEqual(
@@ -217,7 +217,7 @@ test("Sort project list", function() {
     );
   });
 
-  fillIn('.team .sort-by-select select', 'creation-date');
+  select('.team .sort-by-select option[value="creation-date"]');
 
   andThen(function() {
     deepEqual(
