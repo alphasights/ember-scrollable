@@ -14,10 +14,11 @@ module.exports = function(environment) {
       },
 
       apiBaseUrl: '/swordfish',
-      pistachioUrl: 'http://localhost:3000',
+      blankAvatarUrl: 'https://dzaqm99ko40cm.cloudfront.net/assets/avatars/default_large-7494586099c783d8e2cf6e056dc88a20.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
-      segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O',
-      intercomAppId: '4rw4fi3l'
+      intercomAppId: '4rw4fi3l',
+      pistachioUrl: 'http://localhost:3000',
+      segmentWriteKey: 'pDNExxGmPPnX3rx86MuEfqz6yQTViY1O'
     },
 
     APP: {

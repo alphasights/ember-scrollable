@@ -2,7 +2,7 @@
   {{#each membership in memberships itemController="teams.team.angle-membership"}}
     <li>
       <article>
-        {{as-avatar user=membership.user}}
+        {{as-avatar person=membership.user}}
         {{super-number value=membership.deliveryTarget class="delivery-target"}}
         <button class="remove" tabindex="-1" {{action "remove" membership.model bubbles=false}}></button>
       </article>
@@ -29,7 +29,7 @@
         {{#each member in unusedTeamMembers}}
           <li {{action "add" member}}>
             <article>
-              {{as-avatar user=member}}
+              {{as-avatar person=member}}
 
               <div class="name">
                 {{member.name}}
