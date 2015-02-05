@@ -6,8 +6,8 @@ import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
 module("Team", {
-  setup: function() {
-    testHelper.setup.apply(this, arguments);
+  beforeEach: function() {
+    testHelper.beforeEach.apply(this, arguments);
 
     defineFixture('GET', '/teams', { response: {
       "teams": [{
@@ -135,8 +135,8 @@ module("Team", {
     }});
   },
 
-  teardown: function() {
-    testHelper.teardown.apply(this, arguments);
+  afterEach: function() {
+    testHelper.afterEach.apply(this, arguments);
   }
 });
 
