@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   email: DS.attr('string'),
-  createdAt: DS.attr('date'),
+  createdAt: DS.attr('utc'),
   avatarUrl: DS.attr('string'),
   developer: DS.attr('boolean'),
   initials: DS.attr('string'),

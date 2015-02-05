@@ -7,7 +7,7 @@ export default DS.Model.extend({
   analyst_1: DS.belongsTo('user'),
   angles: DS.hasMany('angle'),
   clientCode: DS.attr('string'),
-  createdAt: DS.attr('date'),
+  createdAt: DS.attr('utc'),
   detailsUrl: DS.attr('string'),
   interactions: DS.hasMany('interaction'),
   leftToScheduleAdvisorsCount: DS.attr('number'),
