@@ -7,7 +7,22 @@ var Advisor = DS.Model.extend({
   interactions: DS.hasMany('interaction', { async: true }),
   jobTitle: DS.attr('string'),
   name: DS.attr('string'),
-  phoneNumbers: DS.attr()
+  phoneNumbers: DS.attr(),
+
+  currentPosition: function() {
+    var jobTitle = this.get('jobTitle');
+    var companyName = this.get('companyName');
+
+    if (jobTitle && companyName) {
+      return `${jobTitle} at ${companyName}`;
+    } else if (jobTitle) {
+      return jobTitle;
+    } else if (companyName) {
+      return companyName;
+    } else {
+      return '';
+    }
+  }.property('jobTitle', 'companyName')
 });
 
 Advisor.reopenClass({
