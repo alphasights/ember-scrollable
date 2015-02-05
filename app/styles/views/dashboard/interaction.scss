@@ -12,10 +12,10 @@ $interaction-header-height:
       bottom: 0;
       left: 0;
       overflow-y: auto;
+      padding: $column-gutter $column-gutter / 2;
       position: absolute;
       right: 0;
       top: $interaction-header-height;
-      padding: $column-gutter $column-gutter / 2;
     }
   }
 
@@ -118,8 +118,8 @@ $interaction-header-height:
         }
 
         &.name {
-          font-weight: $font-weight-extrabold;
           color: $primary-color;
+          font-weight: $font-weight-extrabold;
         }
       }
     }
