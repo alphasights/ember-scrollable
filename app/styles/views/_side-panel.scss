@@ -30,16 +30,24 @@ $side-panel-actions-height: rem-calc(60);
       @extend %grid-row;
     }
 
-    @media #{$small-up} {
+    @media #{$small-only} {
       @include side-panel-size(100%);
     }
 
-    @media #{$medium-up} {
-      @include side-panel-size(90%);
+    @media #{$medium-only} {
+      @include side-panel-size($global-small-screen);
     }
 
-    @media #{$large-up} {
-      @include side-panel-size(70%);
+    @media #{$large-only} {
+      @include side-panel-size($global-medium-screen);
+    }
+
+    @media #{$xlarge-only} {
+      @include side-panel-size($global-large-screen);
+    }
+
+    @media #{$xxlarge-up} {
+      @include side-panel-size($global-xlarge-screen);
     }
   }
 
