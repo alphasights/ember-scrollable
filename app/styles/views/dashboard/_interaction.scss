@@ -28,13 +28,15 @@ $interaction-header-height:
     padding: $column-gutter / 4 0;
 
     .image {
-      @extend %grid-column-2;
+      @extend %grid-column-large-2;
+      @extend %grid-column-small-3;
 
-      text-align: right;
+      padding-right: 0 !important;
     }
 
     .details {
-      @extend %grid-column-10;
+      @extend %grid-column-large-10;
+      @extend %grid-column-small-9;
 
       span {
         display: block;
@@ -57,19 +59,21 @@ $interaction-header-height:
     padding: $column-gutter / 4 0 !important;
 
     > div {
-      span {
-        @extend %grid-column-10;
-      }
-
       i {
-        @extend %grid-column-2;
+        @extend %grid-column-large-2;
+        @extend %grid-column-small-3;
 
         color: $small-font-color;
         text-align: right;
       }
 
-      span,
-      i {
+      span {
+        @extend %grid-column-large-10;
+        @extend %grid-column-small-9;
+      }
+
+      i,
+      span {
         line-height: $base-line-height * 1.5 !important;
       }
 
@@ -92,7 +96,9 @@ $interaction-header-height:
     width: 100%;
 
     .schedule {
-      @extend %grid-column-2;
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-3;
+      @extend %grid-column-large-2;
 
       span {
         background-color: $primary-color;
@@ -117,11 +123,16 @@ $interaction-header-height:
     }
 
     .details {
-      @extend %grid-column-10;
+      @extend %grid-column-small-8;
+      @extend %grid-column-medium-9;
+      @extend %grid-column-large-10;
 
       h1 {
         line-height: $interaction-header-title-height / 2;
         margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       a {
@@ -132,21 +143,28 @@ $interaction-header-height:
     }
   }
 
+  .contents {
+    @extend %grid-column-12;
+  }
+
   .advisor,
   .client-contact {
     @extend %grid-column-small-12;
-    @extend %grid-column-medium-6;
+    @extend %grid-column-medium-12;
+    @extend %grid-column-large-6;
+
+    margin-bottom: $column-gutter / 2;
 
     > div {
       @extend %interaction-person-panel;
     }
   }
 
-  .actions {
-    @extend %navigation-arrows;
+  .checklist-items {
+    @extend %grid-column-12;
   }
 
-  .checklist-items {
-    clear: both;
+  .actions {
+    @extend %navigation-arrows;
   }
 }
