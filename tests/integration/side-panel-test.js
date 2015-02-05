@@ -4,8 +4,8 @@ import '../helpers/define-fixture';
 import testHelper from '../test-helper';
 
 module("Side Panel", {
-  setup: function() {
-    testHelper.setup.apply(this, arguments);
+  beforeEach: function() {
+    testHelper.beforeEach.apply(this, arguments);
 
     defineFixture('GET', '/teams', { response: {
       "teams": [{
@@ -36,8 +36,8 @@ module("Side Panel", {
     }});
   },
 
-  teardown: function() {
-    testHelper.teardown.apply(this, arguments);
+  afterEach: function() {
+    testHelper.afterEach.apply(this, arguments);
   }
 });
 

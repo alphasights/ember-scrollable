@@ -8,16 +8,16 @@ var currentUser = function() {
 };
 
 module('Preferences', {
-  setup: function() {
-    testHelper.setup.apply(this, arguments);
+  beforeEach: function() {
+    testHelper.beforeEach.apply(this, arguments);
 
     if (window.localStorage != null) {
       window.localStorage.clear();
     }
   },
 
-  teardown: function() {
-    testHelper.teardown.apply(this, arguments);
+  afterEach: function() {
+    testHelper.afterEach.apply(this, arguments);
   }
 });
 
