@@ -1,5 +1,9 @@
 $side-panel-actions-button-size: 35px;
 $side-panel-actions-height: rem-calc(60);
+$side-panel-small-screen-size: 45em;
+$side-panel-medium-screen-size: 75em;
+$side-panel-large-screen-size: 90em;
+$side-panel-xlarge-screen-size: 120em;
 
 @mixin side-panel-size($width) {
   right: -$width;
@@ -35,19 +39,19 @@ $side-panel-actions-height: rem-calc(60);
     }
 
     @media #{$medium-only} {
-      @include side-panel-size($global-small-screen);
+      @include side-panel-size($side-panel-small-screen-size);
     }
 
     @media #{$large-only} {
-      @include side-panel-size($global-medium-screen);
+      @include side-panel-size($side-panel-medium-screen-size);
     }
 
     @media #{$xlarge-only} {
-      @include side-panel-size($global-large-screen);
+      @include side-panel-size($side-panel-large-screen-size);
     }
 
     @media #{$xxlarge-up} {
-      @include side-panel-size($global-xlarge-screen);
+      @include side-panel-size($side-panel-xlarge-screen-size);
     }
   }
 
