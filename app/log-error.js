@@ -1,4 +1,4 @@
 export default function (error) {
   Honeybadger.notify(error);
-  console.error(error);
+  console.assert(false, error);
 }
