@@ -10,7 +10,8 @@
     "-Promise": true,
     "_": true,
     "EmberENV": true,
-    "__env": true
+    "__env": true,
+    "moment"
   },
   "browser" : true,
   "boss" : true,
