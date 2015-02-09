@@ -10,20 +10,21 @@ export default TooltipsterComponent.extend({
   showTooltip: true,
   person: null,
 
+  disableTootlipster: function() {
+    if (!this.get('showTooltip')) {
+      this.$().tooltipster('disable');
+    }
+  }.on('didInsertElement'),
+
   alt: function() {
-    var alt = this.get('person.initials') ? 'initials' : 'name';
-    return this.get(`person.${alt}`);
+    return this.get('person.initials') || this.get('person.name');
   }.property('person.initials', 'person.name'),
 
   src: function() {
-    if (this.get('person.avatarUrl')) {
-      return this.get('person.avatarUrl');
-    } else {
-      return EmberENV.blankAvatarUrl;
-    }
+    return this.get('person.avatarUrl') || EmberENV.blankAvatarUrl;
   }.property('person.avatarUrl'),
 
   title: function() {
-    return (this.get('showTooltip')) ? this.get('person.name') : null;
-  }.property('showTooltip', 'person.name')
+    return this.get('person.name');
+  }.property('person.name')
 });
