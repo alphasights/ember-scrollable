@@ -4,6 +4,7 @@ import KeyEventsMixin from 'phoenix/mixins/key-events';
 export default Ember.View.extend(KeyEventsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
   layoutName: 'side-panel',
+  tagName: 'article',
 
   initialWidth: null,
 
@@ -48,6 +49,14 @@ export default Ember.View.extend(KeyEventsMixin, {
   keyEvents: {
     esc: function() {
       this.send('close');
+    },
+
+    leftArrow: function() {
+      this.get('controller').send('previous');
+    },
+
+    rightArrow: function() {
+      this.get('controller').send('next');
     }
   }
 });
