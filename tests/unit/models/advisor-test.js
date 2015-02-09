@@ -5,7 +5,7 @@ import {
 import Ember from 'ember';
 
 moduleForModel('advisor', 'Advisor', {
-  needs: ['model:interaction', 'model:client-contact']
+  needs: ['model:interaction', 'model:client-contact', 'model:project']
 });
 
 test('it exists', function() {
@@ -15,7 +15,7 @@ test('it exists', function() {
 
 test('currentPosition joins jobTitle and companyName', function() {
   var model = this.subject(
-    {jobTitle: 'Big Boss Man', companyName: 'LOL Incorporated'}
+    { jobTitle: 'Big Boss Man', companyName: 'LOL Incorporated' }
   );
 
   equal(
@@ -25,7 +25,7 @@ test('currentPosition joins jobTitle and companyName', function() {
   );
 
   Ember.run(function() {
-    model.set({companyName: ''});
+    model.set('companyName', '');
   });
 
   equal(
