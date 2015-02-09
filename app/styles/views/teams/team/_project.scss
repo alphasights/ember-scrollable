@@ -52,7 +52,7 @@ $team-project-header-height:
 
       span {
         float: left;
-        max-width: 80%;
+        max-width: 85%;
         overflow: hidden;
         padding-left: $column-gutter / 2;
         text-overflow: ellipsis;
@@ -66,17 +66,18 @@ $team-project-header-height:
       @media #{$small-only} {
         padding: 0;
 
-        span,
-        small {
+        span {
+          max-width: 70%;
           padding-left: 0;
         }
       }
 
       @media #{$medium-only} {
-        max-width: 85%;
+        max-width: 95%;
 
         span {
-          max-width: 75%;
+          max-width: 80%;
+          padding-left: 0;
         }
       }
     }
@@ -149,6 +150,10 @@ $team-project-header-height:
     }
 
     @media #{$small-only} {
+      display: none !important;
+    }
+
+    @media #{$medium-only} {
       display: none !important;
     }
   }

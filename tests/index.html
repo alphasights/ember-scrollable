@@ -13,21 +13,8 @@
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/phoenix.css">
     <link rel="stylesheet" href="assets/test-support.css">
+
     <style>
-      #ember-testing-container {
-        position: absolute;
-        background: white;
-        bottom: 0;
-        right: 0;
-        width: 640px;
-        height: 384px;
-        overflow: auto;
-        z-index: 9999;
-        border: 1px solid #ccc;
-      }
-      #ember-testing {
-        zoom: 50%;
-      }
       html, body {
         overflow: auto
       }
@@ -40,12 +27,15 @@
 
     {{content-for 'body'}}
     {{content-for 'test-body'}}
+
     <script src="assets/vendor.js"></script>
     <script src="assets/test-support.js"></script>
     <script src="assets/phoenix.js"></script>
     <script src="testem.js"></script>
     <script src="assets/test-loader.js"></script>
 
+    {{content-for 'analytics'}}
+    {{content-for 'intercom'}}
     {{content-for 'body-footer'}}
     {{content-for 'test-body-footer'}}
   </body>

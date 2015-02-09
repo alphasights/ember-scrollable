@@ -19,8 +19,10 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
     padding: 0;
 
     > li > article {
-      @extend %grid-column-medium-3;
       @extend %grid-column-small-6;
+      @extend %grid-column-medium-4;
+      @extend %grid-column-large-3;
+      @extend %grid-column-xlarge-2;
 
       margin-bottom: $column-gutter / 2;
       padding-left: 0 !important;
