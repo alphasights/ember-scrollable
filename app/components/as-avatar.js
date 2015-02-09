@@ -10,6 +10,7 @@ export default TooltipsterComponent.extend({
 
   showTooltip: true,
   person: null,
+  title: Ember.computed.alias('person.name'),
 
   disableTootlipster: function() {
     if (!this.get('showTooltip')) {
@@ -25,9 +26,5 @@ export default TooltipsterComponent.extend({
 
   src: function() {
     return this.get('person.avatarUrl') || EmberENV.blankAvatarUrl;
-  }.property('person.avatarUrl'),
-
-  title: function() {
-    return this.get('person.name');
-  }.property('person.name')
+  }.property('person.avatarUrl')
 });
