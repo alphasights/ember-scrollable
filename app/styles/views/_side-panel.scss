@@ -112,6 +112,14 @@ $side-panel-xlarge-screen-size: 120em;
         line-height: $side-panel-actions-button-size !important;
         width: $side-panel-actions-button-size !important;
       }
+
+      &.previous {
+        @include button-icon(angle-left);
+      }
+
+      &.next {
+        @include button-icon(angle-right);
+      }
     }
   }
 }
