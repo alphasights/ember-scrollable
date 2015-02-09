@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 
 export default TooltipsterComponent.extend({
@@ -12,7 +13,9 @@ export default TooltipsterComponent.extend({
 
   disableTootlipster: function() {
     if (!this.get('showTooltip')) {
-      this.$().tooltipster('disable');
+      Ember.run.schedule('afterRender', () => {
+        this.$().tooltipster('disable');
+      });
     }
   }.on('didInsertElement'),
 
