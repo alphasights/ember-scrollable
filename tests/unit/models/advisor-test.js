@@ -12,12 +12,12 @@ test('#currentPosition', function() {
   expect(4);
 
   var model = this.subject(
-    { jobTitle: 'Big Boss Man', companyName: 'LOL Incorporated' }
+    { jobTitle: 'Job Title', companyName: 'Company Name' }
   );
 
   equal(
     model.get('currentPosition'),
-    'Big Boss Man at LOL Incorporated',
+    'Job Title at Company Name',
     'returns both title and company name when available'
   );
 
@@ -26,17 +26,17 @@ test('#currentPosition', function() {
   });
   equal(
     model.get('currentPosition'),
-    'Big Boss Man',
+    'Job Title',
     'only returns job title when there is no company name'
   );
 
   Ember.run(function() {
     model.set('jobTitle', '');
-    model.set('companyName', 'LOL Incorporated');
+    model.set('companyName', 'Company Name');
   });
   equal(
     model.get('currentPosition'),
-    'LOL Incorporated',
+    'Company Name',
     'only returns company name when there is no job title'
   );
 
