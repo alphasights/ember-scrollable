@@ -3,7 +3,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   angle: DS.belongsTo('angle'),
-  createdAt: DS.attr('utc', { defaultValue: function() { return new Date(); } }),
+  createdAt: DS.attr('date', { defaultValue: function() { return new Date(); } }),
   teamMember: DS.belongsTo('user'),
   targetValue: DS.attr('number', { defaultValue: 0 }),
 
