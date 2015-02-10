@@ -5,6 +5,8 @@ export default {
   name: 'errors',
 
   initialize: _(function() {
+    Ember.RSVP.off('error', Ember.RSVP.onerrorDefault);
+
     Ember.RSVP.on('error', function(error) {
       Ember.onerror(error);
     });
