@@ -4,7 +4,7 @@ export default DS.Model.extend({
   avatarUrl: DS.attr('string'),
   companyName: DS.attr('string'),
   emails: DS.attr(),
-  interactions: DS.hasMany('interaction', { async: true }),
+  interactions: DS.hasMany('interaction'),
   jobTitle: DS.attr('string'),
   name: DS.attr('string'),
   phoneNumbers: DS.attr(),
