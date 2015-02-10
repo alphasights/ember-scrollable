@@ -6,6 +6,8 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'settings';
 @import 'default';
 
+@import 'mixins/navigation-arrows';
+
 @import 'components/avatar';
 @import 'components/dropdown';
 @import 'components/page-placeholder';
