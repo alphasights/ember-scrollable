@@ -1,5 +1,5 @@
 $team-project-progress-bar-height: rem-calc(4);
-$team-project-header-title-height: rem-calc(90);
+$team-project-header-title-height: rem-calc(120);
 $team-project-header-stats-height: $team-project-header-title-height / 2;
 $team-project-header-height:
   $team-project-progress-bar-height +
@@ -197,5 +197,9 @@ $team-project-header-height:
         }
       }
     }
+  }
+
+  .actions {
+    @extend %navigation-arrows;
   }
 }

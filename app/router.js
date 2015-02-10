@@ -6,7 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('dashboard');
+  this.resource('dashboard', function() {
+    this.resource('dashboard.interaction', { path: '/interactions/:interaction_id' });
+  });
+
   this.resource('performance');
   this.resource('projects');
 

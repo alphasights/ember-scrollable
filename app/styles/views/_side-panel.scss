@@ -70,6 +70,7 @@ $side-panel-xlarge-screen-size: 120em;
     .content {
       @extend %grid-column-10;
 
+      min-height: $side-panel-actions-height;
       padding: 0 !important;
 
       > ul {

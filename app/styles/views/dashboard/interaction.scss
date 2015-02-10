@@ -1,0 +1,163 @@
+$interaction-header-title-height: rem-calc(120);
+$interaction-header-height:
+  $interaction-header-title-height +
+  $column-gutter * 2 +
+  $side-panel-actions-height;
+
+.side-panel.interaction {
+  > div {
+    overflow-y: visible;
+
+    .contents {
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      padding: $column-gutter $column-gutter / 2;
+      position: absolute;
+      right: 0;
+      top: $interaction-header-height;
+    }
+  }
+
+  header {
+    @extend %grid-row;
+
+    box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
+    float: left;
+    padding: $column-gutter $column-gutter / 2;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    .schedule {
+      @extend %grid-column-2;
+
+      span {
+        background-color: $primary-color;
+        color: $white;
+        display: block;
+        line-height: $interaction-header-title-height / 2;
+        text-align: center;
+        text-transform: uppercase;
+
+        &:first-child {
+          @include side-radius(top, $global-radius / 2);
+
+          background-color: lighten($primary-color, 10%);
+        }
+
+        &:last-child {
+          @include side-radius(bottom, $global-radius / 2);
+
+          margin-top: 1px;
+        }
+      }
+    }
+
+    .details {
+      @extend %grid-column-10;
+
+      h1 {
+        line-height: $interaction-header-title-height / 2;
+        margin: 0;
+      }
+
+      a {
+        border-top: solid 1px $global-section-border-color;
+        display: block;
+        line-height: $interaction-header-title-height / 2;
+      }
+    }
+  }
+
+  .advisor,
+  .client-contact {
+    @extend %grid-column-small-12;
+    @extend %grid-column-medium-6;
+
+    > div {
+      @extend %interaction-person-panel;
+    }
+  }
+}
+
+%interaction-person-panel {
+  @include clearfix();
+
+  border: solid 1px $global-section-border-color;
+  border-radius: $global-radius;
+
+  .header {
+    @extend %grid-column-12;
+
+    color: $small-font-color;
+    font-size: $h5-font-size;
+    font-weight: $font-weight-bold;
+    padding: $column-gutter / 4 $column-gutter / 2;
+    text-transform: uppercase;
+  }
+
+  .profile {
+    @extend %grid-column-12;
+
+    background-color: $panel-bg;
+    padding: $column-gutter / 4 0;
+
+    .image {
+      @extend %grid-column-2;
+    }
+
+    .details {
+      @extend %grid-column-10;
+
+      span {
+        display: block;
+
+        &:first-child {
+          padding-top: $column-gutter / 4;
+        }
+
+        &.name {
+          color: $primary-color;
+          font-weight: $font-weight-extrabold;
+        }
+      }
+    }
+  }
+
+  .contact {
+    @extend %grid-column-12;
+
+    padding: $column-gutter / 4 0 !important;
+
+    > div {
+      span {
+        @extend %grid-column-10;
+      }
+
+      i {
+        @extend %grid-column-2;
+
+        color: $small-font-color;
+        text-align: right;
+      }
+
+      span,
+      i {
+        line-height: $base-line-height * 1.5 !important;
+      }
+
+      &.email i {
+        @include icon(envelope);
+      }
+
+      &.phone i {
+        @include icon(phone);
+      }
+    }
+  }
+
+  .actions {
+    @extend %navigation-arrows;
+  }
+}

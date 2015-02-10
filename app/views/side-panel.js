@@ -4,6 +4,7 @@ import KeyEventsMixin from 'phoenix/mixins/key-events';
 export default Ember.View.extend(KeyEventsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
   layoutName: 'side-panel',
+  tagName: 'article',
 
   initialWidth: null,
 

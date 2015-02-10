@@ -1,0 +1,59 @@
+<header>
+  <div class="schedule">
+    <span class="date">{{ago scheduledCallTime}}</span>
+    <span class="time">{{moment scheduledCallTime 'h:mm a'}}</span>
+  </div>
+
+  <div class="details">
+    <h1>{{project.name}}</h1>
+    <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
+  </div>
+</header>
+
+<div class="contents">
+  <section class="advisor">
+    <div>
+      <div class="header">Advisor</div>
+
+      <div class="profile">
+        <div class="image">
+          {{as-avatar person=advisor showTooltip=false alt=advisor.name}}
+        </div>
+
+        <div class="details">
+          <span class="name">{{advisor.name}}</span>
+          <span class="job-title">{{advisor.currentPosition}}</span>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="email"><i></i><span>{{advisor.emails}}</span></div>
+        <div class="phone"><i></i><span>{{advisor.phoneNumbers}}</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="client-contact">
+    <div>
+      <div class="header">Client Contact</div>
+
+      <div class="profile">
+        <div class="image">
+          {{as-avatar person=clientContact showTooltip=false alt=clientContact.name}}
+        </div>
+
+        <div class="details">
+          <span class="name">{{clientContact.name}}</span>
+          <span class="company-name">{{clientContact.clientAccount.name}}</span>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="email"><i></i><span>{{clientContact.emails}}</span></div>
+        <div class="phone"><i></i><span>{{clientContact.phoneNumbers}}</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{{outlet}}
