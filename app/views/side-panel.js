@@ -49,14 +49,6 @@ export default Ember.View.extend(KeyEventsMixin, {
   keyEvents: {
     esc: function() {
       this.send('close');
-    },
-
-    leftArrow: function() {
-      this.get('controller').send('previous');
-    },
-
-    rightArrow: function() {
-      this.get('controller').send('next');
     }
   }
 });
