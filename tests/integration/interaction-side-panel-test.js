@@ -19,73 +19,63 @@ module("Interaction Side Panel", {
     testHelper.beforeEach.apply(this, arguments);
 
     defineFixture('GET', '/interactions', { response: {
-     "advisors":[
+     "advisors": [
         {
-           "id":256512,
-           "avatar_url":null,
-           "emails":[
-             advisorEmail
-           ],
-           "name": advisorName,
-           "phone_numbers":[
-             advisorPhoneNumber
-           ],
-           "job_title": advisorJobTitle,
-           "company_name": advisorCompanyName
+          "id": 256512,
+          "avatar_url": null,
+          "emails": [advisorEmail],
+          "name": advisorName,
+          "phone_numbers": [advisorPhoneNumber],
+          "job_title": advisorJobTitle,
+          "company_name": advisorCompanyName
         }
      ],
-     "client_contacts":[
+     "client_contacts": [
         {
-           "id":21387,
-           "avatar_url":null,
-           "emails":[
-             clientEmail
-           ],
-           "name": clientContactName,
-           "phone_numbers":[
-             clientPhoneNumber
-           ],
-           "client_account_id":485
+          "id": 21387,
+          "avatar_url": null,
+          "emails": [clientEmail],
+          "name": clientContactName,
+          "phone_numbers": [clientPhoneNumber],
+          "client_account_id": 485
         }
      ],
-     "client_accounts":[
+     "client_accounts": [
         {
-           "id":485,
+           "id": 485,
            "name": clientAccountName
         }
      ],
-     "projects":[
+     "projects": [
         {
-           "id":32522,
-           "status":"high",
+           "id": 32522,
+           "status": "high",
            "name": projectName,
-           "client_code":"MCKU",
-           "details_url":"/projects/32522",
-           "index":3,
-           "created_at":"2015-01-23T21:01:33.615+00:00",
-           "angle_ids":[
-              40380
-           ],
-           "analyst_1_id":6565389
+           "client_code": "MCKU",
+           "details_url": "/projects/32522",
+           "index": 3,
+           "created_at": "2015-01-23T21:01:33.615+00:00",
+           "angle_ids": [40380],
+           "analyst_1_id": 6565389
         }
      ],
-     "angles":[],
-     "angle_team_memberships":[],
-     "users":[],
-     "interactions":[
+     "angles": [],
+     "angle_team_memberships": [],
+     "users": [],
+     "interactions": [
         {
-           "id":1909535,
-           "scheduled_call_time":"2015-02-20T10:00:00.000-08:00",
-           "advisor_id":256512,
-           "client_contact_id":21387,
-           "project_id":32522
+          "id": 1909535,
+          "scheduled_call_time": "2015-02-20T10:00:00.000-08:00",
+          "advisor_id": 256512,
+          "client_contact_id": 21387,
+          "project_id": 32522
         }
-     ]
-  }});
+      ]
+    }});
 
-  defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-    "users": []
-  }});
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
+      "users": []
+    }});
   },
 
   afterEach: function() {
@@ -94,8 +84,6 @@ module("Interaction Side Panel", {
 });
 
 test("Visting Interaction Side Panel Show Page", function() {
-  expect(9);
-
   visit('/interactions/1909535');
 
   andThen(function() {
