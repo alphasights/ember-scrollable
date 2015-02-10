@@ -64,7 +64,7 @@ module("Interaction Side Panel", {
      "users": [],
      "interactions": [
         {
-          "id": 1909535,
+          "id": 1,
           "scheduled_call_time": "2015-02-20T10:00:00.000-08:00",
           "advisor_id": 256512,
           "client_contact_id": 21387,
@@ -83,78 +83,32 @@ module("Interaction Side Panel", {
   }
 });
 
-test("Visting Interaction Side Panel Show Page", function() {
-  visit('/interactions/1909535');
+test("Show interaction details", function() {
+  visit('/interactions/1');
 
   andThen(function() {
-    equal(
-      find('.interaction h1').text().trim(),
-      projectName,
-      'displays the project title in the heading'
-    );
-  });
+    var interactionDetails = {
+      projectName: find('.interaction h1').text().trim(),
+      advisorName: find('.advisor .name').text().trim(),
+      currentPosition: find('.job-title').text().trim(),
+      advisorEmail: find('.advisor .email span').text().trim(),
+      advisorPhoneNumber: find('.advisor .phone span').text().trim(),
+      clientContactName: find('.client-contact .name').text().trim(),
+      clientAccountName: find('.company-name').text().trim(),
+      clientEmail: find('.client-contact .email span').text().trim(),
+      clientPhoneNumber: find('.client-contact .phone span').text().trim()
+    };
 
-  andThen(function() {
-    equal(
-      find('.advisor .name').text().trim(),
-      advisorName,
-      "displays the advisor's name"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.job-title').text().trim(),
-      `${advisorJobTitle} at ${advisorCompanyName}`,
-      "displays the advisor's current position"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.advisor .email span').text().trim(),
-      advisorEmail,
-      "displays the advisor's email address"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.advisor .phone span').text().trim(),
-      advisorPhoneNumber,
-      "displays the advisor's phone number"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.client-contact .name').text().trim(),
-      clientContactName,
-      "displays the client contact's name"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.company-name').text().trim(),
-      clientAccountName,
-      "displays the client contact's company name"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.client-contact .email span').text().trim(),
-      clientEmail,
-      "displays the client contact's current email address"
-    );
-  });
-
-  andThen(function() {
-    equal(
-      find('.client-contact .phone span').text().trim(),
-      clientPhoneNumber,
-      "displays the client contact's phone number"
-    );
+    deepEqual(interactionDetails, {
+      projectName: projectName,
+      advisorName: advisorName,
+      currentPosition: `${advisorJobTitle} at ${advisorCompanyName}`,
+      advisorEmail: advisorEmail,
+      advisorPhoneNumber: advisorPhoneNumber,
+      clientContactName: clientContactName,
+      clientAccountName: clientAccountName,
+      clientEmail: clientEmail,
+      clientPhoneNumber: clientPhoneNumber
+    });
   });
 });

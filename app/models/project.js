@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import Ember from 'ember';
 
-var PRIORITIES = ['low', 'medium', 'high'];
+const PRIORITIES = ['low', 'medium', 'high'];
 
 export default DS.Model.extend({
   analyst_1: DS.belongsTo('user'),
