@@ -10,9 +10,11 @@ export default Ember.Route.extend({
       view: this.viewName
     });
 
-    this.render(this.sidePanelActionsTemplateName, {
-      into: this.routeName,
-      outlet: 'actions'
-    });
+    if (this.sidePanelActionsTemplateName != null) {
+      this.render(this.sidePanelActionsTemplateName, {
+        into: this.routeName,
+        outlet: 'actions'
+      });
+    }
   }
 });

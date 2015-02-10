@@ -2,14 +2,24 @@ import Ember from 'ember';
 import TooltipsterComponent from 'ember-cli-tooltipster/components/tool-tipster';
 
 export default TooltipsterComponent.extend({
+  blankAvatarUrl: EmberENV.blankAvatarUrl,
   classNameBindings: [':avatar'],
   attributeBindings: ['src', 'alt', 'title'],
   tagName: 'img',
 
   position: 'top',
 
-  user: null,
-  alt: Ember.computed.alias('user.initials'),
-  src: Ember.computed.alias('user.avatarUrl'),
-  title: Ember.computed.alias('user.name')
+  showTooltip: true,
+  person: null,
+  title: Ember.computed.alias('person.name'),
+  alt: Ember.computed.alias('person.initials'),
+  src: Ember.computed.any('person.avatarUrl', 'blankAvatarUrl'),
+
+  disableTootlipster: function() {
+    if (!this.get('showTooltip')) {
+      Ember.run.schedule('afterRender', () => {
+        this.$().tooltipster('disable');
+      });
+    }
+  }.observes('showTooltip').on('init')
 });

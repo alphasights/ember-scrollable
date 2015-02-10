@@ -1,4 +1,4 @@
-.side-panel.project .actions {
+%navigation-arrows {
   button {
     &.previous {
       @include button-icon(angle-left);
