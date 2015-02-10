@@ -1,4 +1,6 @@
+import Ember from 'ember';
+
 export default function (error) {
   Honeybadger.notify(error);
-  console.assert(false, error);
+  Ember.Logger.error(error.stack);
 }
