@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 export default Ember.Mixin.create({
   keyEvents: {
     leftArrow: function() {
@@ -8,4 +10,4 @@ export default Ember.Mixin.create({
       this.get('controller').send('next');
     }
   }
-})
+});
