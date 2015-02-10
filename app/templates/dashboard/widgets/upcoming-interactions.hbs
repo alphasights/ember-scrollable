@@ -1,9 +1,11 @@
 <ul>
-  <li>
-    <article>
-      <div class="time">11:00</div>
-      <div class="project-name">Payment Industry</div>
-      <div class="checklist-status complete">Complete</div>
-    </article>
-  </li>
+  {{#each interaction in this}}
+    <li>
+      {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
+        <div class="time">{{moment scheduledCallTime "hh:ss"}}</div>
+        <div class="project-name">{{interaction.project.name}}</div>
+        <div class="checklist-status complete">Complete</div>
+      {{/link-to}}
+    </li>
+  {{/each}}
 </ul>

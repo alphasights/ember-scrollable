@@ -79,6 +79,10 @@ $interaction-header-height:
       @extend %interaction-person-panel;
     }
   }
+
+  .actions {
+    @extend %navigation-arrows;
+  }
 }
 
 %interaction-person-panel {
@@ -105,6 +109,8 @@ $interaction-header-height:
 
     .image {
       @extend %grid-column-2;
+
+      text-align: right;
     }
 
     .details {
@@ -155,9 +161,5 @@ $interaction-header-height:
         @include icon(phone);
       }
     }
-  }
-
-  .actions {
-    @extend %navigation-arrows;
   }
 }

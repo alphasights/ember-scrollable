@@ -1,0 +1,40 @@
+.dashboard .widget.upcoming-interactions {
+  article {
+    @extend %grid-row;
+    @include single-transition(background-color, 100ms, linear);
+
+    cursor: pointer;
+
+    .time, .checklist-status {
+      text-align: center;
+    }
+
+    .time {
+      @extend %grid-column-2;
+    }
+
+    .project-name {
+      @extend %grid-column-6;
+    }
+
+    .checklist-status {
+      @extend %grid-column-4;
+    }
+
+    > div {
+      padding: $column-gutter / 2;
+    }
+
+    &:hover {
+      background-color: lighten($global-section-border-color, 6%);
+    }
+  }
+
+  ul {
+    margin-left: 0;
+  }
+
+  li {
+    border-bottom: 1px solid #eaeaea;
+  }
+}
