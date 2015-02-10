@@ -1,0 +1,9 @@
+.dashboard {
+  .widgets {
+    @extend %grid-row;
+
+    > li {
+      @extend %grid-column-4;
+    }
+  }
+}

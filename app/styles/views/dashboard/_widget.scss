@@ -1,0 +1,18 @@
+.dashboard .widget {
+  margin: $column-gutter / 2;
+  border-radius: $global-radius / 2;
+  min-height: rem-calc(350);
+  border: 1px solid #eaeaea;
+
+  header {
+    border-radius: $global-radius / 2 $global-radius / 2 0 0;
+    padding: $column-gutter / 2;
+    background-color: #1082E4;
+
+    h1 {
+      font-size: $base-font-size;
+      letter-spacing: inherit;
+      color: white;
+    }
+  }
+}

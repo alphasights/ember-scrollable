@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('dashboard', { path: '/' });
+  this.resource('dashboard');
   this.resource('performance');
   this.resource('projects');
 
