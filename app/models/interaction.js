@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 
-var Interaction = DS.Model.extend({
+export default DS.Model.extend({
   advisor: DS.belongsTo('advisor', { async: true }),
   clientContact: DS.belongsTo('clientContact', { async: true }),
   project: DS.belongsTo('project', { async: true }),
@@ -10,24 +10,3 @@ var Interaction = DS.Model.extend({
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
   }.property()
 });
-
-Interaction.reopenClass({
-  FIXTURES: [
-    {
-      id: 1,
-      advisor: 1,
-      clientContact: 1,
-      project: 29976,
-      scheduledCallTime: '2015-02-27T16:46:03.347'
-    },
-    {
-      id: 2,
-      advisor: 2,
-      clientContact: 2,
-      project: 101,
-      scheduledCallTime: '2015-02-05T16:46:03.347'
-    }
-  ]
-});
-
-export default Interaction;
