@@ -56,27 +56,4 @@
   </section>
 </div>
 
-<section class="checklist-items">
-  <header>
-    <span>Checklist {{checklistStatus}}</span>
-
-    {{#liquid-if isChecklistComplete use="crossFade"}}
-      <span class="tick">Complete!</span>
-    {{else}}
-      <span class="count">
-        {{incompleteChecklistItems.length}}
-      </span>
-    {{/liquid-if}}
-  </header>
-
-  <ul>
-    {{#each checklistItem in incompleteChecklistItems
-      itemController="dashboard.interaction.checklist-item"}}
-      <li>
-        <article>
-          <div class="name">{{checklistItem.description}}</div>
-        </article>
-      </li>
-    {{/each}}
-  </ul>
-</section>
+{{render 'dashboard.interaction.checklist-items' checklistItems}}

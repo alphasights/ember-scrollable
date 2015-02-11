@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
-  incompleteChecklistItems: Ember.computed.filterBy('checklistItems', 'completed', false),
+export default Ember.Controller.extend({
+  incompleteChecklistItems: Ember.computed.filterBy('model', 'completed', false),
   isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
 
   checklistStatus: function() {
