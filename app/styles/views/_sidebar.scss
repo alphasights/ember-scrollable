@@ -8,9 +8,9 @@
       margin-right: $layout-sidebar-nav-padding;
 
       img {
+        border-radius: 50%;
         height: $layout-sidebar-nav-link-icon-width;
         width: $layout-sidebar-nav-link-icon-width;
-        border-radius: 50%;
       }
     }
 
