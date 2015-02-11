@@ -1,15 +1,5 @@
 import Ember from 'ember';
+import ChecklistItemsControllerMixin from 'phoenix/mixins/checklist-items-controller';
 
-export default Ember.Controller.extend({
-  incompleteChecklistItems: Ember.computed.filterBy('model', 'completed', false),
-  isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
-
-  checklistStatus: function() {
-    if (this.get('isChecklistComplete')) {
-      return 'Complete';
-    }
-    else {
-      return 'Incomplete';
-    }
-  }.property('isChecklistComplete')
+export default Ember.Controller.extend(ChecklistItemsControllerMixin, {
 });
