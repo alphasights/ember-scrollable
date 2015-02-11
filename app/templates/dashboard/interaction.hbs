@@ -56,4 +56,15 @@
   </section>
 </div>
 
-{{outlet}}
+<section class="checklist-items">
+  <ul>
+    {{#each checklistItem in checklistItems
+      itemController="dashboard.interaction.checklist-item"}}
+      <li>
+        <article>
+          <div class="name">{{checklistItem.description}}</div>
+        </article>
+      </li>
+    {{/each}}
+  </ul>
+</section>

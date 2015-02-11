@@ -7,9 +7,18 @@ export default SidePanelRoute.extend({
   model: function(params) {
     var interactionId = params.interaction_id;
 
-    return this.store.find('interaction').then(() => {
-      return this.store.find('interaction', interactionId);
+    return Ember.RSVP.hash({
+      interaction: this.store.find('interaction').then(() => {
+        return this.store.find('interaction', interactionId);
+      }),
+
+      checklistItems: this.store.find('checklistItem')
     });
+  },
+
+  setupController: function(controller, models) {
+    controller.set('model', models.interaction);
+    controller.set('checklistItems', models.checklistItems);
   },
 
   actions: {

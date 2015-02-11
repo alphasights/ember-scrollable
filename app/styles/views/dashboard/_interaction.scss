@@ -1,32 +1,16 @@
 $interaction-header-title-height: rem-calc(120);
+
 $interaction-header-height:
   $interaction-header-title-height +
   $column-gutter * 2 +
   $side-panel-actions-height;
 
 .side-panel.interaction {
-  > div {
-    overflow-y: visible;
-
-    .contents {
-      bottom: 0;
-      left: 0;
-      overflow-y: auto;
-      padding: $column-gutter $column-gutter / 2;
-      position: absolute;
-      right: 0;
-      top: $interaction-header-height;
-    }
-  }
-
   header {
     @extend %grid-row;
 
-    float: left;
     padding: $column-gutter $column-gutter / 2;
-    position: relative;
     width: 100%;
-    z-index: 1;
 
     .schedule {
       @extend %grid-column-2;
@@ -85,7 +69,7 @@ $interaction-header-height:
 }
 
 %interaction-person-panel {
-  @include clearfix();
+  @extend %grid-row;
 
   border: solid 1px $global-section-border-color;
   border-radius: $global-radius;
