@@ -1,10 +1,10 @@
 <ul>
-  {{#each interaction in this}}
+  {{#each interaction in this itemController="dashboard.interaction"}}
     <li>
       {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
         <div class="time">{{moment scheduledCallTime "hh:ss"}}</div>
         <div class="project-name">{{interaction.project.name}}</div>
-        <div class="checklist-status complete">Complete</div>
+        <div class="checklist-status complete">{{checklistStatus}}</div>
       {{/link-to}}
     </li>
   {{/each}}

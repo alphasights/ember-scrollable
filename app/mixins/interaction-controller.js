@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  incompleteChecklistItems: Ember.computed.filterBy('model', 'completed', false),
+  incompleteChecklistItems: Ember.computed.filterBy('checklistItems', 'completed', false),
   isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
 
   checklistStatus: function() {
