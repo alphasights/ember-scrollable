@@ -1,19 +1,24 @@
 .sidebar {
   .user-session {
     padding: 0 $layout-sidebar-nav-padding;
+    white-space: nowrap;
 
     .picture {
-      border-radius: 50%;
-      display: inline-block;
-      height: $layout-sidebar-nav-link-icon-width;
-      margin-right: $layout-sidebar-nav-padding / 2;
-      width: $layout-sidebar-nav-link-icon-width;
+      float: left;
+      margin-right: $layout-sidebar-nav-padding;
+
+      img {
+        height: $layout-sidebar-nav-link-icon-width;
+        width: $layout-sidebar-nav-link-icon-width;
+        border-radius: 50%;
+      }
     }
 
     .name {
       color: $layout-sidebar-nav-link-text-color;
-      display: inline-block;
       margin-right: $layout-sidebar-nav-padding / 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .toggle-actions {

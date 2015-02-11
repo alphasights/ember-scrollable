@@ -22,7 +22,6 @@ $interaction-header-height:
   header {
     @extend %grid-row;
 
-    box-shadow: 1px 2px 2px 0 rgba(0, 0, 0, .075);
     float: left;
     padding: $column-gutter $column-gutter / 2;
     position: relative;
@@ -104,7 +103,7 @@ $interaction-header-height:
   .profile {
     @extend %grid-column-12;
 
-    background-color: $panel-bg;
+    background-color: lighten($panel-bg, 2%);
     padding: $column-gutter / 4 0;
 
     .image {
