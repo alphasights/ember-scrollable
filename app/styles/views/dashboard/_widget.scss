@@ -9,14 +9,12 @@ $widget-header-line-height: 4rem;
   header {
     background-color: $anchor-font-color;
     border-radius: $global-radius / 2 $global-radius / 2 0 0;
-    float: left;
     line-height: $widget-header-line-height;
     padding: 0 $column-gutter / 2;
-    width: 100%;
 
     h1 {
       color: $white;
-      float: left;
+      display: inline-block;
       font-size: $base-font-size;
       font-weight: $font-weight-bold;
       letter-spacing: inherit;
