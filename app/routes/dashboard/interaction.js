@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import SidePanelRoute from 'phoenix/routes/side-panel';
 
 export default SidePanelRoute.extend({
