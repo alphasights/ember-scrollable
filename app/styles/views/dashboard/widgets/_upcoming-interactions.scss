@@ -12,13 +12,38 @@
     }
 
     .project-name {
-      @extend %grid-column-6;
+      @extend %grid-column-5;
     }
 
     .checklist-status {
-      @extend %grid-column-4;
+      @extend %grid-column-5;
 
+      color: #ff3000;
       text-align: right;
+
+      .count, .tick {
+        color: white;
+        border-radius: 50%;
+        display: inline-block;
+        font-size: 12px;
+        height: 17px;
+        line-height: 17px;
+        margin-left: 5px;
+        text-align: center;
+        width: 17px;
+      }
+
+      .count {
+        background-color: #ff3000;
+      }
+
+      .tick {
+        background-color: #2d9409;
+      }
+
+      &.complete {
+        color: #2d9409;
+      }
     }
 
     > div {

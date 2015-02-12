@@ -60,13 +60,13 @@
   <header>
     <span>Checklist {{checklistStatus}}</span>
 
-    {{#liquid-if isChecklistComplete use="crossFade"}}
-      <span class="tick">Complete!</span>
+    {{#if isChecklistComplete use="crossFade"}}
+      <span class="tick">✓</span>
     {{else}}
       <span class="count">
         {{incompleteChecklistItems.length}}
       </span>
-    {{/liquid-if}}
+    {{/if}}
   </header>
 
   <ul>

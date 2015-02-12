@@ -4,7 +4,16 @@
       {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
         <div class="time">{{moment interaction.scheduledCallTime "h:mm a"}}</div>
         <div class="project-name">{{interaction.project.name}}</div>
-        <div class="checklist-status complete">{{interaction.checklistStatus}}</div>
+        <div {{bind-attr class=":checklist-status interaction.isChecklistComplete:complete"}}>
+          <span>Checklist {{interaction.checklistStatus}}</span>
+          {{#if interaction.isChecklistComplete use="crossFade"}}
+            <span class="tick">✓</span>
+          {{else}}
+            <span class="count">
+              {{interaction.incompleteChecklistItems.length}}
+            </span>
+          {{/if}}
+        </div>
       {{/link-to}}
     </li>
   {{/each}}
