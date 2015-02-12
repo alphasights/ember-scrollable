@@ -1,4 +1,15 @@
 import Ember from 'ember';
-import InteractionControllerMixin from 'phoenix/mixins/interaction-controller';
 
-export default Ember.Controller.extend(InteractionControllerMixin);
+export default Ember.ObjectController.extend({
+  incompleteChecklistItems: Ember.computed.filterBy('checklistItems', 'completed', false),
+  isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
+
+  checklistStatus: function() {
+    if (this.get('isChecklistComplete')) {
+      return 'Complete';
+    }
+    else {
+      return 'Incomplete';
+    }
+  }.property('isChecklistComplete')
+});
