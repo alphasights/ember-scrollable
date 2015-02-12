@@ -1,0 +1,9 @@
+{{#rl-dropdown-container class="dropdown"}}
+  {{#rl-dropdown-toggle}}{{filter.name}}{{/rl-dropdown-toggle}}
+
+  {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
+    {{#each filter in availableFilters}}
+      <li><a {{action "setFilter" filter}}>{{filter.name}}</a></li>
+    {{/each}}
+  {{/rl-dropdown}}
+{{/rl-dropdown-container}}
