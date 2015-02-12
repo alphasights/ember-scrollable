@@ -57,12 +57,12 @@
     }
   }
 
-  ul {
+  > ul {
     margin-left: 0;
-  }
 
-  li {
-    border-bottom: 1px solid $global-section-border-color;
+    > li {
+      border-bottom: 1px solid $global-section-border-color;
+    }
   }
 
   .filters {

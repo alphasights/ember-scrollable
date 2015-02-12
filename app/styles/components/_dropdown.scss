@@ -71,7 +71,6 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
     list-style: none;
     margin: 0;
     min-width: 160px;
-    padding: $global-radius / 2 0;
     position: absolute;
     text-align: left;
     top: 100%;
@@ -80,6 +79,14 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
     .divider {
       border-bottom: 1px solid $dropdown-border-color;
       margin: $column-gutter / 4;
+    }
+
+    > li {
+      border-bottom: 1px solid $dropdown-border-color;
+
+      &:last-child {
+        border-bottom: 0;
+      }
     }
 
     > li > a {
