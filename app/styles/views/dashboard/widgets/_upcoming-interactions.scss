@@ -5,13 +5,10 @@
 
     cursor: pointer;
 
-    .time,
-    .checklist-status {
-      text-align: center;
-    }
-
     .time {
       @extend %grid-column-2;
+
+      text-align: center;
     }
 
     .project-name {
@@ -20,6 +17,8 @@
 
     .checklist-status {
       @extend %grid-column-4;
+
+      text-align: right;
     }
 
     > div {
@@ -36,6 +35,6 @@
   }
 
   li {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid $global-section-border-color;
   }
 }
