@@ -1,18 +1,37 @@
+$widget-header-line-height: 4rem;
+
 .dashboard .widget {
-  border: 1px solid #eaeaea;
+  border: 1px solid $global-section-border-color;
   border-radius: $global-radius / 2;
   margin: $column-gutter / 2;
   min-height: rem-calc(350);
 
   header {
-    background-color: #1082e4;
+    background-color: $global-link-color;
     border-radius: $global-radius / 2 $global-radius / 2 0 0;
-    padding: $column-gutter / 2;
+    float: left;
+    line-height: $widget-header-line-height;
+    padding: 0 $column-gutter / 2;
+    width: 100%;
 
     h1 {
-      color: #ffffff;
+      color: $white;
+      float: left;
       font-size: $base-font-size;
+      font-weight: $font-weight-bold;
       letter-spacing: inherit;
+      line-height: $widget-header-line-height;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .filters {
+      float: right;
+      line-height: $widget-header-line-height;
+
+      button {
+        margin: 0;
+      }
     }
   }
 }
