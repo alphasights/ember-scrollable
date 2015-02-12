@@ -21,14 +21,5 @@ $widget-header-line-height: 4rem;
       line-height: $widget-header-line-height;
       margin: 0;
     }
-
-    .filters {
-      float: right;
-      line-height: $widget-header-line-height;
-
-      button {
-        margin: 0;
-      }
-    }
   }
 }

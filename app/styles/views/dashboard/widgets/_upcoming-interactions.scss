@@ -11,7 +11,7 @@
       text-align: center;
     }
 
-    .project-name {
+    .advisor-name {
       @extend %grid-column-5;
     }
 
@@ -21,24 +21,26 @@
       color: #ff3000;
       text-align: right;
 
-      .count, .tick {
-        color: white;
-        border-radius: 50%;
-        display: inline-block;
-        font-size: 12px;
-        height: 17px;
-        line-height: 17px;
-        margin-left: 5px;
-        text-align: center;
-        width: 17px;
+      .tick {
+        @include icon('check');
+
+        background-color: #2d9409;
       }
 
       .count {
         background-color: #ff3000;
       }
 
-      .tick {
-        background-color: #2d9409;
+      .count, .tick {
+        color: white;
+        border-radius: 50%;
+        display: inline-block;
+        font-size: 11px;
+        height: 17px;
+        line-height: 17px;
+        margin-left: 5px;
+        text-align: center;
+        width: 17px;
       }
 
       &.complete {
@@ -61,5 +63,23 @@
 
   li {
     border-bottom: 1px solid $global-section-border-color;
+  }
+
+  .filters {
+    float: right;
+    line-height: $widget-header-line-height;
+
+    button {
+      margin: 0;
+      background-color: transparent;
+      border-color: transparent;
+      color: $white;
+
+      i {
+        @include icon('chevron-down');
+
+        margin-left: 3px;
+      }
+    }
   }
 }
