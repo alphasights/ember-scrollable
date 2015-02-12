@@ -14,22 +14,19 @@ export default Ember.ArrayController.extend({
     },
     {
       name: 'All',
+      startDate: moment().startOf('day').toDate(),
       endDate: null
     }
   ],
 
   arrangedContent: function() {
     var filter = this.get('filter');
-    var model = this.get('model');
 
-    if (filter.endDate == null) {
-      return model;
-    }
+    return this.get('model').filter((interaction) => {
+      var scheduledCallTime = interaction.get('scheduledCallTime');
 
-    return model.filter(function(interaction) {
-      var callTime = interaction.get('scheduledCallTime');
-
-      return (callTime >= filter.startDate) && (callTime <= filter.endDate);
+      return (!filter.startDate || scheduledCallTime >= filter.startDate) &&
+             (!filter.endDate || scheduledCallTime <= filter.endDate);
     });
   }.property('filter', 'model'),
 
