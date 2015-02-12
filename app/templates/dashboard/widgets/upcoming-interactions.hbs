@@ -2,7 +2,7 @@
   {{#each interaction in this itemController="dashboard.interaction"}}
     <li>
       {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
-        <div class="time">{{moment interaction.scheduledCallTime "hh:mm a"}}</div>
+        <div class="time">{{moment interaction.scheduledCallTime "h:mm a"}}</div>
         <div class="project-name">{{interaction.project.name}}</div>
         <div class="checklist-status complete">{{interaction.checklistStatus}}</div>
       {{/link-to}}

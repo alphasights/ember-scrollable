@@ -1,7 +1,7 @@
 <header>
   <div class="schedule">
     <span class="date">{{ago scheduledCallTime}}</span>
-    <span class="time">{{moment scheduledCallTime 'h:mm a'}}</span>
+    <span class="time">{{moment scheduledCallTime "h:mm a"}}</span>
   </div>
 
   <div class="details">
@@ -56,4 +56,27 @@
   </section>
 </div>
 
-{{render 'dashboard.interaction.checklist-items' checklistItems}}
+<section class="checklist-items">
+  <header>
+    <span>Checklist {{checklistStatus}}</span>
+
+    {{#liquid-if isChecklistComplete use="crossFade"}}
+      <span class="tick">Complete!</span>
+    {{else}}
+      <span class="count">
+        {{incompleteChecklistItems.length}}
+      </span>
+    {{/liquid-if}}
+  </header>
+
+  <ul>
+    {{#each checklistItem in incompleteChecklistItems
+      itemController="dashboard.interaction.checklist-item"}}
+      <li>
+        <article>
+          <div class="name">{{checklistItem.description}}</div>
+        </article>
+      </li>
+    {{/each}}
+  </ul>
+</section>
