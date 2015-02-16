@@ -40,6 +40,9 @@ $interaction-header-height:
 
       span {
         display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         &:first-child {
           padding-top: $column-gutter / 4;
@@ -145,6 +148,11 @@ $interaction-header-height:
 
   .contents {
     @extend %grid-column-12;
+
+    @media #{$large-up} {
+      align-items: stretch;
+      display: flex;
+    }
   }
 
   .advisor,
@@ -153,6 +161,7 @@ $interaction-header-height:
     @extend %grid-column-medium-12;
     @extend %grid-column-large-6;
 
+    display: flex;
     margin-bottom: $column-gutter / 2;
 
     > div {
