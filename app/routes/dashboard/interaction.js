@@ -9,11 +9,5 @@ export default SidePanelRoute.extend({
     return this.store.find('interaction').then(() => {
       return this.store.find('interaction', interactionId);
     });
-  },
-
-  actions: {
-    hideSidePanel: function() {
-      this.transitionTo('dashboard');
-    }
   }
 });
