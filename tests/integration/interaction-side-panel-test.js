@@ -100,8 +100,6 @@ test("Show interaction details", function() {
       clientPhoneNumber: find('.client-contact .phone span').text().trim()
     };
 
-    debugger
-
     deepEqual(interactionDetails, {
       projectName: projectName,
       titleAdvisorName: advisorName,
