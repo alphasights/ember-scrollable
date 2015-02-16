@@ -2,11 +2,16 @@
   {{#each interaction in this itemController="dashboard.interaction"}}
     <li>
       {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
-        <div class="time">{{moment interaction.scheduledCallTime "h:mm a"}}</div>
-        <div class="advisor-name">{{interaction.advisor.name}}</div>
+        <div class="name">
+          <span>{{interaction.advisor.name}}</span>
+          <small>{{interaction.project.name}}</small>
+        </div>
+
+        <div class="time">{{ago interaction.scheduledCallTime}}</div>
+
         <div {{bind-attr class=":checklist-status interaction.isChecklistComplete:complete"}}>
           <span>Checklist {{interaction.checklistStatus}}</span>
-          {{#if interaction.isChecklistComplete use="crossFade"}}
+          {{#if interaction.isChecklistComplete}}
             <span class="tick"></span>
           {{else}}
             <span class="count">

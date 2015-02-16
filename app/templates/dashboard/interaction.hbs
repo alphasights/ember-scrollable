@@ -5,7 +5,11 @@
   </div>
 
   <div class="details">
-    <h1>{{project.name}}</h1>
+    <h1>
+      <span>{{advisor.name}}</span>
+      <small>{{project.name}}</small>
+    </h1>
+
     <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
   </div>
 </header>
@@ -63,28 +67,3 @@
     </div>
   </section>
 </div>
-
-<section class="checklist-items">
-  <header>
-    <span>Checklist {{checklistStatus}}</span>
-
-    {{#if isChecklistComplete use="crossFade"}}
-      <span class="tick"></span>
-    {{else}}
-      <span class="count">
-        {{incompleteChecklistItems.length}}
-      </span>
-    {{/if}}
-  </header>
-
-  <ul>
-    {{#each checklistItem in incompleteChecklistItems
-      itemController="dashboard.interaction.checklist-item"}}
-      <li>
-        <article>
-          <div class="name">{{checklistItem.description}}</div>
-        </article>
-      </li>
-    {{/each}}
-  </ul>
-</section>

@@ -4,15 +4,27 @@
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
+    display: table !important;
 
-    .time {
-      @extend %grid-column-2;
-
-      text-align: center;
+    > div {
+      display: table-cell !important;
+      vertical-align: middle;
+      padding: $column-gutter / 2;
+      float: none !important;
     }
 
-    .advisor-name {
-      @extend %grid-column-5;
+    .time {
+      @extend %grid-column-3;
+    }
+
+    .name {
+      @extend %grid-column-4;
+
+      small {
+        display: block;
+        font-size: $base-font-size;
+        color: $small-font-color;
+      }
     }
 
     .checklist-status {
@@ -47,10 +59,6 @@
       &.complete {
         color: #2d9409;
       }
-    }
-
-    > div {
-      padding: $column-gutter / 2;
     }
 
     &:hover {
