@@ -84,7 +84,7 @@ module("Interaction Side Panel", {
 });
 
 test("Show interaction details", function() {
-  visit('/interactions/1');
+  visit('/dashboard/interactions/1');
 
   andThen(function() {
     var interactionDetails = {
