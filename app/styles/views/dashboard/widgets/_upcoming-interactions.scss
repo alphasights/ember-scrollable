@@ -8,9 +8,9 @@
 
     > div {
       display: table-cell !important;
-      vertical-align: middle;
-      padding: $column-gutter / 2;
       float: none !important;
+      padding: $column-gutter / 2;
+      vertical-align: middle;
     }
 
     .time {
@@ -21,9 +21,9 @@
       @extend %grid-column-4;
 
       small {
+        color: $small-font-color;
         display: block;
         font-size: $base-font-size;
-        color: $small-font-color;
       }
     }
 
