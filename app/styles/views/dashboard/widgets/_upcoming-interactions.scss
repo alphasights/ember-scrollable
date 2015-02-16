@@ -31,9 +31,10 @@
         background-color: #ff3000;
       }
 
-      .count, .tick {
-        color: white;
+      .count,
+      .tick {
         border-radius: 50%;
+        color: #ffffff;
         display: inline-block;
         font-size: 11px;
         height: 17px;
@@ -70,10 +71,10 @@
     line-height: $widget-header-line-height;
 
     button {
-      margin: 0;
       background-color: transparent;
       border-color: transparent;
       color: $white;
+      margin: 0;
 
       i {
         @include icon('chevron-down');

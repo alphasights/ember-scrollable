@@ -87,23 +87,23 @@ $dropdown-link-disabled-color: lighten($dropdown-link-color, 50%);
       &:last-child {
         border-bottom: 0;
       }
-    }
 
-    > li > a {
-      clear: both;
-      color: $dropdown-link-color;
-      cursor: pointer;
-      display: block;
-      font-weight: $font-weight-normal;
-      line-height: $base-line-height;
-      padding: 0 $column-gutter / 2;
-      white-space: nowrap;
+      > a {
+        clear: both;
+        color: $dropdown-link-color;
+        cursor: pointer;
+        display: block;
+        font-weight: $font-weight-normal;
+        line-height: $base-line-height;
+        padding: 0 $column-gutter / 2;
+        white-space: nowrap;
 
-      &:hover,
-      &:focus {
-        background-color: $dropdown-link-hover-background-color;
-        color: $dropdown-link-hover-color;
-        text-decoration: none;
+        &:hover,
+        &:focus {
+          background-color: $dropdown-link-hover-background-color;
+          color: $dropdown-link-hover-color;
+          text-decoration: none;
+        }
       }
     }
 
