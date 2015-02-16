@@ -148,6 +148,9 @@ $interaction-header-height:
 
   .contents {
     @extend %grid-column-12;
+
+    align-items: stretch;
+    display: flex;
   }
 
   .advisor,
@@ -156,6 +159,7 @@ $interaction-header-height:
     @extend %grid-column-medium-12;
     @extend %grid-column-large-6;
 
+    display: flex;
     margin-bottom: $column-gutter / 2;
 
     > div {
