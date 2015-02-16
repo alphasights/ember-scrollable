@@ -8,15 +8,27 @@ $ui-checklist-label-width: 16px;
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
+    display: table !important;
 
-    .time {
-      @extend %grid-column-2;
-
-      text-align: center;
+    > div {
+      display: table-cell !important;
+      float: none !important;
+      padding: $column-gutter / 2;
+      vertical-align: middle;
     }
 
-    .advisor-name {
-      @extend %grid-column-5;
+    .time {
+      @extend %grid-column-3;
+    }
+
+    .title {
+      @extend %grid-column-4;
+
+      small {
+        color: $small-font-color;
+        display: block;
+        font-size: $base-font-size;
+      }
     }
 
     .checklist-status {
@@ -51,10 +63,6 @@ $ui-checklist-label-width: 16px;
       &.complete {
         color: $ui-checklist-complete-color;
       }
-    }
-
-    > div {
-      padding: $column-gutter / 2;
     }
 
     &:hover {

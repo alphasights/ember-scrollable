@@ -3,6 +3,11 @@ import Ember from 'ember';
 export default Ember.ArrayController.extend({
   availableFilters: [
     {
+      name: 'All',
+      startDate: null,
+      endDate: null
+    },
+    {
       name: 'Today',
       startDate: moment().startOf('day').toDate(),
       endDate: moment().endOf('day').toDate()
@@ -11,11 +16,6 @@ export default Ember.ArrayController.extend({
       name: 'Tomorrow',
       startDate: moment().startOf('day').add(1, 'days').toDate(),
       endDate: moment().endOf('day').add(1, 'days').toDate()
-    },
-    {
-      name: 'All',
-      startDate: moment().startOf('day').toDate(),
-      endDate: null
     }
   ],
 
