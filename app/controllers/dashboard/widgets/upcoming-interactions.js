@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  defaultFilterName: 'All',
-
   availableFilters: [
+    {
+      name: 'All',
+      startDate: null,
+      endDate: null
+    },
     {
       name: 'Today',
       startDate: moment().startOf('day').toDate(),
@@ -13,11 +16,6 @@ export default Ember.ArrayController.extend({
       name: 'Tomorrow',
       startDate: moment().startOf('day').add(1, 'days').toDate(),
       endDate: moment().endOf('day').add(1, 'days').toDate()
-    },
-    {
-      name: 'All',
-      startDate: null,
-      endDate: null
     }
   ],
 
@@ -32,12 +30,8 @@ export default Ember.ArrayController.extend({
     });
   }.property('filter', 'model'),
 
-  defaultFilter: function() {
-    return this.get('availableFilters').findBy('name', this.get('defaultFilterName'));
-  }.property('defaultFilterName'),
-
   initializeFilter: function() {
-    this.set('filter', this.get('defaultFilter'));
+    this.set('filter', this.get('availableFilters.firstObject'));
   }.on('init'),
 
   actions: {
