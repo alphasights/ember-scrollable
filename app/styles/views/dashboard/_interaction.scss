@@ -149,8 +149,10 @@ $interaction-header-height:
   .contents {
     @extend %grid-column-12;
 
-    align-items: stretch;
-    display: flex;
+    @media #{$large-up} {
+      align-items: stretch;
+      display: flex;
+    }
   }
 
   .advisor,
