@@ -40,6 +40,9 @@ $interaction-header-height:
 
       span {
         display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
 
         &:first-child {
           padding-top: $column-gutter / 4;
