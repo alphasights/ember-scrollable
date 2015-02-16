@@ -4,12 +4,13 @@ import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigationMixin, {
   needs: ['teams/team'],
-  navigableModels: Ember.computed.alias('team.projects.arrangedContent'),
   team: Ember.computed.alias('controllers.teams/team'),
 
+  navigableModels: Ember.computed.alias('team.projects.arrangedContent'),
+
   modelRouteParams: function () {
-    return ['teams.team.project', this.get('team.model.id')];
-  }.property('team.model.id'),
+    return ['teams.team.project', this.get('team.id')];
+  }.property('team.id'),
 
   anglesSorting: ['createdAt:desc'],
   angles: Ember.computed.sort('model.angles', 'anglesSorting'),
