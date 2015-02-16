@@ -88,8 +88,8 @@ test("Show interaction details", function() {
 
   andThen(function() {
     var interactionDetails = {
-      projectName: find('.interaction h1 .project').text().trim(),
-      titleAdvisorName: find('.interaction h1 .advisor').text().trim(),
+      projectName: find('.interaction h1 .project-name').text().trim(),
+      titleAdvisorName: find('.interaction h1 .advisor-name').text().trim(),
       advisorName: find('.advisor .name').text().trim(),
       currentPosition: find('.job-title').text().trim(),
       advisorEmail: find('.advisor .email span').text().trim(),
