@@ -88,7 +88,8 @@ test("Show interaction details", function() {
 
   andThen(function() {
     var interactionDetails = {
-      projectName: find('.interaction h1').text().trim(),
+      projectName: find('.interaction h1 .project').text().trim(),
+      titleAdvisorName: find('.interaction h1 .advisor').text().trim(),
       advisorName: find('.advisor .name').text().trim(),
       currentPosition: find('.job-title').text().trim(),
       advisorEmail: find('.advisor .email span').text().trim(),
@@ -99,8 +100,11 @@ test("Show interaction details", function() {
       clientPhoneNumber: find('.client-contact .phone span').text().trim()
     };
 
+    debugger
+
     deepEqual(interactionDetails, {
       projectName: projectName,
+      titleAdvisorName: advisorName,
       advisorName: advisorName,
       currentPosition: `${advisorJobTitle} at ${advisorCompanyName}`,
       advisorEmail: advisorEmail,
