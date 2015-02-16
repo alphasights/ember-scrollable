@@ -5,10 +5,11 @@ export default Ember.Mixin.create({
   navigableModels: null,
   modelRouteParams: [],
 
-  onInit: function() {
-    var models = this.get('navigableModels');
-    this.set('index', models.indexOf(this.get('model')));
-  }.on('init'),
+  initializeIndex: function() {
+    if (this.get('index') == null) {
+      this.set('index', this.get('navigableModels').indexOf(this.get('model')));
+    }
+  }.observes('model'),
 
   navigate: function(step) {
     var models = this.get('navigableModels');

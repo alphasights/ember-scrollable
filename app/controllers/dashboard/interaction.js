@@ -3,10 +3,11 @@ import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
-  navigableModels: Ember.computed.alias('dashboard.upcomingInteractions.arrangedContent'),
+  dashboard: Ember.computed.alias('controllers.dashboard'),
+
+  navigableModels: Ember.computed.alias('dashboard.upcomingInteractions.content'),
   modelRouteParams: ['dashboard.interaction'],
 
-  dashboard: Ember.computed.alias('controllers.dashboard'),
   incompleteChecklistItems: Ember.computed.filterBy('checklistItems', 'completed', false),
   isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
 
