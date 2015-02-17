@@ -174,10 +174,10 @@ $interaction-header-height:
     @extend %grid-column-12;
 
     .checklist-status {
+      color: $body-font-color;
       display: inline-block;
       font-weight: $font-weight-bold;
       line-height: $interaction-checklist-header-height;
-      color: $body-font-color;
     }
 
     header {

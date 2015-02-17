@@ -10,8 +10,7 @@ export default Ember.Component.extend({
   status: function() {
     if (this.get('isComplete')) {
       return 'Complete';
-    }
-    else {
+    } else {
       return 'Incomplete';
     }
   }.property('isComplete'),
