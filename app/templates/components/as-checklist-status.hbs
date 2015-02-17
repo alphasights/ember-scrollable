@@ -1,0 +1,9 @@
+<span>Checklist {{status}}</span>
+
+{{#if isComplete}}
+  <span class="tick"></span>
+{{else}}
+  <span class="count">
+    {{incompleteItems.length}}
+  </span>
+{{/if}}

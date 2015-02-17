@@ -10,7 +10,7 @@ export default Ember.ObjectController.extend({
   results: [],
 
   memberships: function() {
-    // Remove the filterBy when https://github.com/emberjs/data/issues/2666 is fixed
+    // TODO: Remove the filterBy when https://github.com/emberjs/data/issues/2666 is fixed
     return this.get('model.memberships').sortBy('createdAt').filterBy('isDeleted', false);
   }.property('model.memberships.[]'),
 

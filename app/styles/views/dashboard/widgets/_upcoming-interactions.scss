@@ -29,36 +29,6 @@
 
     .checklist-status {
       @extend %grid-column-5;
-
-      color: $ui-checklist-incomplete-color;
-      text-align: right;
-
-      .count {
-        background-color: $ui-checklist-incomplete-color;
-      }
-
-      .tick {
-        @include icon('check');
-
-        background-color: $ui-checklist-complete-color;
-      }
-
-      .count,
-      .tick {
-        border-radius: $global-rounded;
-        color: $white;
-        display: inline-block;
-        font-size: $small-font-size;
-        height: $ui-checklist-label-width;
-        line-height: $ui-checklist-label-width;
-        margin: 0 $column-gutter / 4;
-        text-align: center;
-        width: $ui-checklist-label-width;
-      }
-
-      &.complete {
-        color: $ui-checklist-complete-color;
-      }
     }
 
     &:hover {

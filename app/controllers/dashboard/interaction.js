@@ -8,17 +8,13 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.alias('dashboard.upcomingInteractions.content'),
   modelRouteParams: ['dashboard.interaction'],
 
-  incompleteChecklistItems: Ember.computed.filterBy('checklistItems', 'completed', false),
-  isChecklistComplete: Ember.computed.empty('incompleteChecklistItems'),
+  pistachioUrl: function() {
+    return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
+  }.property('id'),
 
-  checklistStatus: function() {
-    if (this.get('isChecklistComplete')) {
-      return 'Complete';
-    }
-    else {
-      return 'Incomplete';
-    }
-  }.property('isChecklistComplete'),
+  checklistUrl: function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
+  }.property('id', 'project.id'),
 
   actions: {
     hideSidePanel: function() {

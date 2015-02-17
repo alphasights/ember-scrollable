@@ -9,16 +9,7 @@
 
         <div class="time">{{ago interaction.scheduledCallTime}}</div>
 
-        <div {{bind-attr class=":checklist-status interaction.isChecklistComplete:complete"}}>
-          <span>Checklist {{interaction.checklistStatus}}</span>
-          {{#if interaction.isChecklistComplete}}
-            <span class="tick"></span>
-          {{else}}
-            <span class="count">
-              {{interaction.incompleteChecklistItems.length}}
-            </span>
-          {{/if}}
-        </div>
+        {{as-checklist-status items=checklistItems}}
       {{/link-to}}
     </li>
   {{/each}}
