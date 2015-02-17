@@ -1,20 +1,22 @@
 $quick-jump-results-item-height: rem-calc(50);
 
 .quick-jump-result-content {
-  h1,
+  .title,
   .details {
-    line-height: $quick-jump-results-item-height;
+      line-height: $quick-jump-results-item-height;
   }
 
-  h1 {
-    @extend %grid-column-4;
+  .title {
+    @extend %grid-column-small-12;
+    @extend %grid-column-large-4;
 
     font-size: $base-font-size;
     margin: 0;
   }
 
   .details {
-    @extend %grid-column-8;
+    @extend %grid-column-small-12;
+    @extend %grid-column-large-8;
 
     color: $small-font-color;
   }
