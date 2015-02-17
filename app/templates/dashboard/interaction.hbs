@@ -80,17 +80,7 @@
 
 <section class="checklist-items">
   <header>
-    <div {{bind-attr class=":status isChecklistComplete:complete"}}>
-      <span>Checklist {{checklistStatus}}</span>
-
-      {{#if isChecklistComplete}}
-        <span class="tick"></span>
-      {{else}}
-        <span class="count">
-          {{incompleteChecklistItems.length}}
-        </span>
-      {{/if}}
-    </div>
+    {{as-checklist-status items=checklistItems}}
 
     <a target="_blank" {{bind-attr href=checklistUrl}}>Show checklist</a>
   </header>

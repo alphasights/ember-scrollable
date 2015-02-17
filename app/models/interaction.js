@@ -5,13 +5,5 @@ export default DS.Model.extend({
   checklistItems: DS.hasMany('checklistItem'),
   clientContact: DS.belongsTo('clientContact'),
   project: DS.belongsTo('project'),
-  scheduledCallTime: DS.attr('date'),
-
-  pistachioUrl: function() {
-    return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
-  }.property('id'),
-
-  checklistUrl: function() {
-    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
-  }.property('id', 'project.id')
+  scheduledCallTime: DS.attr('date')
 });

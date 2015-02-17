@@ -173,33 +173,11 @@ $interaction-header-height:
   .checklist-items {
     @extend %grid-column-12;
 
-    .status {
+    .checklist-status {
+      color: $body-font-color;
       display: inline-block;
       font-weight: $font-weight-bold;
       line-height: $interaction-checklist-header-height;
-
-      .count {
-        background-color: $ui-checklist-incomplete-color;
-      }
-
-      .tick {
-        @include icon('check');
-
-        background-color: $ui-checklist-complete-color;
-      }
-
-      .count,
-      .tick {
-        border-radius: $global-rounded;
-        color: $white;
-        display: inline-block;
-        font-size: $small-font-size;
-        height: $ui-checklist-label-width;
-        line-height: $ui-checklist-label-width;
-        margin: 0 $column-gutter / 4;
-        text-align: center;
-        width: $ui-checklist-label-width;
-      }
     }
 
     header {
