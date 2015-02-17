@@ -1,11 +1,15 @@
 .dashboard {
   .widgets {
-    @extend %grid-row;
+    @extend %grid-column-12;
 
     margin: $column-gutter 0;
 
     > li {
-      @extend %grid-column-6;
+      @extend %grid-column-small-12;
+      @extend %grid-column-large-6;
+      @extend %grid-column-xlarge-4;
+
+      margin-bottom: $column-gutter;
     }
   }
 }

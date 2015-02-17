@@ -26,7 +26,15 @@
 
         <div class="details">
           <span class="name">{{advisor.name}}</span>
-          <span class="job-title">{{advisor.currentPosition}}</span>
+          
+          {{#tool-tipster
+            title=advisor.currentPosition
+            position="bottom-left"
+            tagName="span"
+            class="job-title"
+            maxWidth=400}}
+            {{advisor.currentPosition}}
+          {{/tool-tipster}}
         </div>
       </div>
 

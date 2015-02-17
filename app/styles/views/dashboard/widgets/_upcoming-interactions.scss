@@ -1,3 +1,7 @@
+$ui-checklist-complete-color: $success-color;
+$ui-checklist-incomplete-color: $alert-color;
+$ui-checklist-label-width: 16px;
+
 .dashboard .widget.upcoming-interactions {
   article {
     @extend %grid-row;
@@ -30,34 +34,34 @@
     .checklist-status {
       @extend %grid-column-5;
 
-      color: #ff3000;
+      color: $ui-checklist-incomplete-color;
       text-align: right;
+
+      .count {
+        background-color: $ui-checklist-incomplete-color;
+      }
 
       .tick {
         @include icon('check');
 
-        background-color: #2d9409;
-      }
-
-      .count {
-        background-color: #ff3000;
+        background-color: $ui-checklist-complete-color;
       }
 
       .count,
       .tick {
-        border-radius: 50%;
-        color: #ffffff;
+        border-radius: $global-rounded;
+        color: $white;
         display: inline-block;
-        font-size: 11px;
-        height: 17px;
-        line-height: 17px;
-        margin-left: 5px;
+        font-size: $small-font-size;
+        height: $ui-checklist-label-width;
+        line-height: $ui-checklist-label-width;
+        margin: 0 $column-gutter / 4;
         text-align: center;
-        width: 17px;
+        width: $ui-checklist-label-width;
       }
 
       &.complete {
-        color: #2d9409;
+        color: $ui-checklist-complete-color;
       }
     }
 
