@@ -6,14 +6,14 @@
     background-color: $ui-checklist-incomplete-color;
   }
 
-  .tick {
+  i {
     @include icon('check');
 
     background-color: $ui-checklist-complete-color;
   }
 
   .count,
-  .tick {
+  i {
     border-radius: $global-rounded;
     color: $white;
     display: inline-block;
