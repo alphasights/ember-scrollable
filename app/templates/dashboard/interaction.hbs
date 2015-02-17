@@ -26,7 +26,7 @@
 
         <div class="details">
           <span class="name">{{advisor.name}}</span>
-          
+
           {{#tool-tipster
             title=advisor.currentPosition
             position="bottom-left"
@@ -69,7 +69,7 @@
         {{#each email in clientContact.emails}}
           <div class="email"><i></i><span>{{email}}</span></div>
         {{/each}}
-        
+
         {{#each phoneNumber in clientContact.phoneNumbers}}
           <div class="phone"><i></i><span>{{phoneNumber}}</span></div>
         {{/each}}
@@ -77,3 +77,27 @@
     </div>
   </section>
 </div>
+
+<section class="checklist-items">
+  <header>
+    <div {{bind-attr class=":status isChecklistComplete:complete"}}>
+      <span>Checklist {{checklistStatus}}</span>
+
+      {{#if isChecklistComplete}}
+        <span class="tick"></span>
+      {{else}}
+        <span class="count">
+          {{incompleteChecklistItems.length}}
+        </span>
+      {{/if}}
+    </div>
+
+    <a target="_blank" {{bind-attr href=pistachioUrl}}>Show checklist</a>
+  </header>
+
+  <ul>
+    {{#each checklistItem in checklistItems itemController="dashboard.interaction.checklistItem"}}
+      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.description}}</li>
+    {{/each}}
+  </ul>
+</section>
