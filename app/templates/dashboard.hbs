@@ -1,1 +1,11 @@
-{{as-page-placeholder pageName="dashboard" path="system" class="dashboard"}}
+<header>
+  <h1>Dashboard</h1>
+</header>
+
+<ul class="widgets">
+  <li>
+    {{render "dashboard.widgets.upcoming-interactions"
+      upcomingInteractions
+      tagName="section"}}
+  </li>
+</ul>

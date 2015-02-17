@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
-import '../helpers/define-fixture';
-import testHelper from '../test-helper';
+import '../../helpers/define-fixture';
+import testHelper from '../../test-helper';
 
 const projectName = 'Project Name',
       advisorName = 'Johnny Advisor',
@@ -12,9 +12,11 @@ const projectName = 'Project Name',
       clientContactName = 'Bob Client',
       clientAccountName = 'McKinsey & Company San Francisco',
       clientEmail = 'client@email.com',
-      clientPhoneNumber = '+1 555-321-9000';
+      clientPhoneNumber = '+1 555-321-9000',
+      checklistStatus = 'Checklist Complete',
+      scheduledCallTime = "2015-02-20T10:00:00.000-08:00";
 
-module("Interaction Side Panel", {
+module("Upcoming interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -65,7 +67,7 @@ module("Interaction Side Panel", {
      "interactions": [
         {
           "id": 1,
-          "scheduled_call_time": "2015-02-20T10:00:00.000-08:00",
+          "scheduled_call_time": scheduledCallTime,
           "advisor_id": 256512,
           "client_contact_id": 21387,
           "project_id": 32522
@@ -84,11 +86,12 @@ module("Interaction Side Panel", {
 });
 
 test("Show interaction details", function() {
-  visit('/interactions/1');
+  visit('/dashboard/interactions/1');
 
   andThen(function() {
     var interactionDetails = {
-      projectName: find('.interaction h1').text().trim(),
+      titleProjectName: find('.interaction h1 .project-name').text().trim(),
+      titleAdvisorName: find('.interaction h1 .advisor-name').text().trim(),
       advisorName: find('.advisor .name').text().trim(),
       currentPosition: find('.job-title').text().trim(),
       advisorEmail: find('.advisor .email span').text().trim(),
@@ -100,7 +103,8 @@ test("Show interaction details", function() {
     };
 
     deepEqual(interactionDetails, {
-      projectName: projectName,
+      titleProjectName: projectName,
+      titleAdvisorName: advisorName,
       advisorName: advisorName,
       currentPosition: `${advisorJobTitle} at ${advisorCompanyName}`,
       advisorEmail: advisorEmail,
@@ -109,6 +113,26 @@ test("Show interaction details", function() {
       clientAccountName: clientAccountName,
       clientEmail: clientEmail,
       clientPhoneNumber: clientPhoneNumber
+    });
+  });
+});
+
+test("Show upcoming interactions list", function() {
+  visit('/dashboard');
+
+  andThen(function() {
+    var interactionListItem = {
+      advisorName: find('.upcoming-interactions .advisor-name').text().trim(),
+      projectName: find('.upcoming-interactions .project-name').text().trim(),
+      checklistStatus: find('.upcoming-interactions .checklist-status span').text().trim(),
+      scheduledCallTime: find('.upcoming-interactions .time').text().trim(),
+    };
+    
+    deepEqual(interactionListItem, {
+      advisorName: advisorName,
+      projectName: projectName,
+      checklistStatus: checklistStatus,
+      scheduledCallTime: moment(scheduledCallTime).fromNow(),
     });
   });
 });

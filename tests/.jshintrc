@@ -50,7 +50,8 @@
     "_",
     "EmberENV",
     "__env",
-    "select"
+    "select",
+    "moment"
   ],
   "node": false,
   "browser": false,

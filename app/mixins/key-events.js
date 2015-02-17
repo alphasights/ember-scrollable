@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var keyCodeToEventMap = {
+const keyCodeToEventMap = {
   27: 'esc',
   37: 'leftArrow',
   39: 'rightArrow'

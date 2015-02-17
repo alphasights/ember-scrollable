@@ -155,7 +155,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
       .search {
         cursor: auto;
-        padding: $angle-member-inner-padding;
+        padding: $angle-member-inner-padding $angle-member-inner-padding * 2;
         position: relative;
 
         &:hover {

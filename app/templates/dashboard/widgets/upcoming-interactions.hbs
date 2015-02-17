@@ -1,0 +1,25 @@
+<ul>
+  {{#each interaction in this itemController="dashboard.interaction"}}
+    <li>
+      {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
+        <div class="title">
+          <span class="advisor-name">{{interaction.advisor.name}}</span>
+          <small class="project-name">{{interaction.project.name}}</small>
+        </div>
+
+        <div class="time">{{ago interaction.scheduledCallTime}}</div>
+
+        <div {{bind-attr class=":checklist-status interaction.isChecklistComplete:complete"}}>
+          <span>Checklist {{interaction.checklistStatus}}</span>
+          {{#if interaction.isChecklistComplete}}
+            <span class="tick"></span>
+          {{else}}
+            <span class="count">
+              {{interaction.incompleteChecklistItems.length}}
+            </span>
+          {{/if}}
+        </div>
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>

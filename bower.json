@@ -16,12 +16,12 @@
     "underscore": "1.7.0",
     "pretender": "0.2.0",
     "honeybadger.js": "0.1.2",
-    "messenger": "~1.4.1",
+    "messenger": "1.4.1",
     "paint": "0.6.2",
     "spinjs": "2.0.1",
-    "tooltipster": "~3.3.0",
+    "tooltipster": "3.3.0",
     "route-recognizer": "0.1.1",
-    "ember-cli-moment-shim": "~0.0.3"
+    "ember-cli-moment-shim": "0.0.3"
   },
   "resolutions": {
     "jquery": "1.11.1"
