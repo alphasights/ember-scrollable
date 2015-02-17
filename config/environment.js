@@ -14,7 +14,7 @@ module.exports = function(environment) {
       },
 
       apiBaseUrl: '/swordfish',
-      blankAvatarUrl: 'http://localhost:3000/assets/avatars/default_thumb.png',
+      blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       intercomAppId: '4rw4fi3l',
       pistachioUrl: 'http://localhost:3000',
