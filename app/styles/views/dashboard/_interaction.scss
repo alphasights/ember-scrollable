@@ -1,4 +1,5 @@
 $interaction-header-title-height: rem-calc(120);
+$interaction-checklist-header-height: $column-gutter + $h5-font-size;
 
 $interaction-header-height:
   $interaction-header-title-height +
@@ -171,6 +172,55 @@ $interaction-header-height:
 
   .checklist-items {
     @extend %grid-column-12;
+
+    .status {
+      display: inline-block;
+      line-height: $interaction-checklist-header-height;
+      font-weight: $font-weight-bold;
+
+      .count {
+        background-color: $ui-checklist-incomplete-color;
+      }
+
+      .tick {
+        @include icon('check');
+
+        background-color: $ui-checklist-complete-color;
+      }
+
+      .count,
+      .tick {
+        border-radius: $global-rounded;
+        color: $white;
+        display: inline-block;
+        font-size: $small-font-size;
+        height: $ui-checklist-label-width;
+        line-height: $ui-checklist-label-width;
+        margin: 0 $column-gutter / 4;
+        text-align: center;
+        width: $ui-checklist-label-width;
+      }
+    }
+
+    header {
+      a {
+        @extend %button-primary;
+
+        float: right;
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      @extend %grid-column-12;
+
+      li {
+        @extend %grid-row;
+
+        border-top: 1px solid $global-section-border-color;
+        padding: $column-gutter / 2 0;
+      }
+    }
   }
 
   .actions {
