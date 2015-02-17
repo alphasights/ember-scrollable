@@ -175,8 +175,8 @@ $interaction-header-height:
 
     .status {
       display: inline-block;
-      line-height: $interaction-checklist-header-height;
       font-weight: $font-weight-bold;
+      line-height: $interaction-checklist-header-height;
 
       .count {
         background-color: $ui-checklist-incomplete-color;
@@ -219,6 +219,17 @@ $interaction-header-height:
 
         border-top: 1px solid $global-section-border-color;
         padding: $column-gutter / 2 0;
+
+        &:after {
+          color: $ui-checklist-incomplete-color;
+          content: '•';
+          display: inline;
+          margin-left: $column-gutter / 2;
+        }
+
+        &.completed:after {
+          color: $ui-checklist-complete-color;
+        }
       }
     }
   }

@@ -97,7 +97,7 @@
 
   <ul>
     {{#each checklistItem in checklistItems itemController="dashboard.interaction.checklistItem"}}
-      <li>{{checklistItem.description}}</li>
+      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.description}}</li>
     {{/each}}
   </ul>
 </section>
