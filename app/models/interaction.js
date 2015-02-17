@@ -9,5 +9,9 @@ export default DS.Model.extend({
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
-  }.property()
+  }.property('id'),
+
+  checklistUrl: function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
+  }.property('id', 'project.id')
 });
