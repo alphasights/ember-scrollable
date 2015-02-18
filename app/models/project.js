@@ -46,5 +46,9 @@ export default DS.Model.extend({
       .reduce(function(previous, current) {
         return previous + current;
       }, 0);
-  }.property('memberships.@each.deliveryTarget')
+  }.property('memberships.@each.deliveryTarget'),
+
+  pistachioUrl: function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
+  }.property('id'),
 });

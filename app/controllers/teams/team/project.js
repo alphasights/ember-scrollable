@@ -15,10 +15,6 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigat
   anglesSorting: ['createdAt:desc'],
   angles: Ember.computed.sort('model.angles', 'anglesSorting'),
 
-  pistachioUrl: function() {
-    return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
-  }.property('id'),
-
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('teams.team', this.get('team.id'));

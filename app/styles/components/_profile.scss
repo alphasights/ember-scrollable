@@ -36,15 +36,12 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+      }
 
-        &:first-child {
-          padding-top: $column-gutter / 4;
-        }
-
-        &.name {
-          color: $anchor-font-color;
-          font-weight: $font-weight-extrabold;
-        }
+      .name {
+        display: block;
+        font-weight: $font-weight-extrabold;
+        padding: $column-gutter / 4 0;
       }
     }
   }
