@@ -1,15 +1,17 @@
+$checklist-status-label-width: 16px;
+
 .checklist-status {
-  color: $ui-checklist-incomplete-color;
+  color: $alert-color;
   text-align: right;
 
   .count {
-    background-color: $ui-checklist-incomplete-color;
+    background-color: $alert-color;
   }
 
   i {
     @include icon('check');
 
-    background-color: $ui-checklist-complete-color;
+    background-color: $success-color;
   }
 
   .count,
@@ -18,14 +20,14 @@
     color: $white;
     display: inline-block;
     font-size: $small-font-size;
-    height: $ui-checklist-label-width;
-    line-height: $ui-checklist-label-width;
+    height: $checklist-status-label-width;
+    line-height: $checklist-status-label-width;
     margin: 0 $column-gutter / 4;
     text-align: center;
-    width: $ui-checklist-label-width;
+    width: $checklist-status-label-width;
   }
 
   &.complete {
-    color: $ui-checklist-complete-color;
+    color: $success-color;
   }
 }

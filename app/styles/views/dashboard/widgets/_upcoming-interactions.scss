@@ -13,6 +13,10 @@
       vertical-align: middle;
     }
 
+    .time, .checklist-status {
+      white-space: nowrap;
+    }
+
     .time {
       @extend %grid-column-3;
     }
@@ -36,11 +40,21 @@
     }
   }
 
+  .empty {
+    text-align: center;
+    color: $small-font-color;
+    line-height: 4rem + $column-gutter / 2;
+  }
+
   > ul {
     margin-left: 0;
 
     > li {
       border-bottom: 1px solid $global-section-border-color;
+
+      &:last-child {
+        border-width: 0;
+      }
     }
   }
 
