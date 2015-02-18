@@ -1,82 +1,25 @@
 <header>
-  <div class="schedule">
-    <span class="date">{{ago scheduledCallTime}}</span>
-    <span class="time">{{moment scheduledCallTime "h:mm a"}}</span>
+  <div class="time">
+    <span class="from-now">{{ago scheduledCallTime}}</span>
+    <span class="absolute">{{moment scheduledCallTime "h:mm a"}}</span>
   </div>
 
-  <div class="details">
+  <div class="content">
     <h1>
-      <span class="advisor-name">{{advisor.name}}</span>
-      <small class="project-name">{{project.name}}</small>
+      <span>{{advisor.name}}</span>
+      <small>{{project.name}}</small>
     </h1>
 
     <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
   </div>
 </header>
 
-<div class="contents">
-  <section class="advisor">
-    <div>
-      <div class="header">Advisor</div>
-
-      <div class="profile">
-        <div class="image">
-          {{as-avatar person=advisor showTooltip=false alt=advisor.name}}
-        </div>
-
-        <div class="details">
-          <span class="name">{{advisor.name}}</span>
-
-          {{#tool-tipster
-            title=advisor.currentPosition
-            position="bottom-left"
-            tagName="span"
-            class="job-title"
-            maxWidth=400}}
-            {{advisor.currentPosition}}
-          {{/tool-tipster}}
-        </div>
-      </div>
-
-      <div class="contact">
-        {{#each email in advisor.emails}}
-          <div class="email"><i></i><span>{{email}}</span></div>
-        {{/each}}
-
-        {{#each phoneNumber in advisor.phoneNumbers}}
-          <div class="phone"><i></i><span>{{phoneNumber}}</span></div>
-        {{/each}}
-      </div>
-    </div>
-  </section>
-
-  <section class="client-contact">
-    <div>
-      <div class="header">Client</div>
-
-      <div class="profile">
-        <div class="image">
-          {{as-avatar person=clientContact showTooltip=false alt=clientContact.name}}
-        </div>
-
-        <div class="details">
-          <span class="name">{{clientContact.name}}</span>
-          <span class="company-name">{{clientContact.clientAccount.name}}</span>
-        </div>
-      </div>
-
-      <div class="contact">
-        {{#each email in clientContact.emails}}
-          <div class="email"><i></i><span>{{email}}</span></div>
-        {{/each}}
-
-        {{#each phoneNumber in clientContact.phoneNumbers}}
-          <div class="phone"><i></i><span>{{phoneNumber}}</span></div>
-        {{/each}}
-      </div>
-    </div>
-  </section>
-</div>
+<section class="profiles">
+  <ul>
+    <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
+    <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+  </ul>
+</section>
 
 <section class="checklist-items">
   <header>

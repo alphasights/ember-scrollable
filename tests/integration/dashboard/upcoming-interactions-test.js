@@ -89,17 +89,21 @@ test("Show interaction details", function() {
   visit('/dashboard/interactions/1');
 
   andThen(function() {
+    var $interaction = find('.interaction');
+
     var interactionDetails = {
-      titleProjectName: find('.interaction h1 .project-name').text().trim(),
-      titleAdvisorName: find('.interaction h1 .advisor-name').text().trim(),
-      advisorName: find('.advisor .name').text().trim(),
-      currentPosition: find('.job-title').text().trim(),
-      advisorEmail: find('.advisor .email span').text().trim(),
-      advisorPhoneNumber: find('.advisor .phone span').text().trim(),
-      clientContactName: find('.client-contact .name').text().trim(),
-      clientAccountName: find('.company-name').text().trim(),
-      clientEmail: find('.client-contact .email span').text().trim(),
-      clientPhoneNumber: find('.client-contact .phone span').text().trim()
+      titleProjectName: $interaction.find('h1 small').text().trim(),
+      titleAdvisorName: $interaction.find('h1 span').text().trim(),
+      advisorName: $interaction.find('.advisor .name').text().trim(),
+      currentPosition: $interaction.find('.advisor .current-position').text().trim(),
+      advisorEmail: $interaction.find('.advisor .email span').text().trim(),
+      advisorPhoneNumber: $interaction.find('.advisor .phone-number span').text().trim(),
+      clientContactName: $interaction.find('.client .name').text().trim(),
+      clientAccountName: $interaction.find('.client .current-position').text().trim(),
+      clientEmail: $interaction.find('.client .email span').text().trim(),
+      clientPhoneNumber: $interaction.find('.client .phone-number span').text().trim(),
+      callTimeFromNow: $interaction.find('.time .from-now').text().trim(),
+      absoluteCallTime: $interaction.find('.time .absolute').text().trim()
     };
 
     deepEqual(interactionDetails, {
@@ -112,7 +116,9 @@ test("Show interaction details", function() {
       clientContactName: clientContactName,
       clientAccountName: clientAccountName,
       clientEmail: clientEmail,
-      clientPhoneNumber: clientPhoneNumber
+      clientPhoneNumber: clientPhoneNumber,
+      callTimeFromNow: moment(scheduledCallTime).fromNow(),
+      absoluteCallTime: moment(scheduledCallTime).format('h:mm a')
     });
   });
 });
@@ -121,13 +127,15 @@ test("Show upcoming interactions list", function() {
   visit('/dashboard');
 
   andThen(function() {
+    var $interaction = find('.upcoming-interactions article:first');
+
     var interactionListItem = {
-      advisorName: find('.upcoming-interactions .advisor-name').text().trim(),
-      projectName: find('.upcoming-interactions .project-name').text().trim(),
-      checklistStatus: find('.upcoming-interactions .checklist-status span').text().trim(),
-      scheduledCallTime: find('.upcoming-interactions .time').text().trim(),
+      advisorName: $interaction.find('.title span').text().trim(),
+      projectName: $interaction.find('.title small').text().trim(),
+      checklistStatus: $interaction.find('.checklist-status span').text().trim(),
+      scheduledCallTime: $interaction.find('.time').text().trim(),
     };
-    
+
     deepEqual(interactionListItem, {
       advisorName: advisorName,
       projectName: projectName,
