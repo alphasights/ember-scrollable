@@ -39,7 +39,7 @@
       }
 
       .name {
-        display: block;
+        display: inline-block;
         font-weight: $font-weight-extrabold;
         padding: $column-gutter / 4 0;
       }
