@@ -13,7 +13,8 @@
       vertical-align: middle;
     }
 
-    .time, .checklist-status {
+    .time,
+    .checklist-status {
       white-space: nowrap;
     }
 
@@ -41,9 +42,9 @@
   }
 
   .empty-message {
-    text-align: center;
     color: $small-font-color;
     line-height: 4rem + $column-gutter / 2;
+    text-align: center;
   }
 
   > ul {
