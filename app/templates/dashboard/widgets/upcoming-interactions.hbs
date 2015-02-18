@@ -1,16 +1,20 @@
-<ul>
-  {{#each interaction in this itemController="dashboard.interaction"}}
-    <li>
-      {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
-        <div class="title">
-          <span>{{interaction.advisor.name}}</span>
-          <small>{{interaction.project.name}}</small>
-        </div>
+{{#if this}}
+  <ul>
+    {{#each interaction in this itemController="dashboard.interaction"}}
+      <li>
+        {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
+          <div class="title">
+            <span>{{interaction.advisor.name}}</span>
+            <small>{{interaction.project.name}}</small>
+          </div>
 
-        <div class="time">{{ago interaction.scheduledCallTime}}</div>
+          <div class="time">{{ago interaction.scheduledCallTime}}</div>
 
-        {{as-checklist-status items=checklistItems}}
-      {{/link-to}}
-    </li>
-  {{/each}}
-</ul>
+          {{as-checklist-status items=checklistItems}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <div class="empty-message">You have no upcoming interactions.</div>
+{{/if}}
