@@ -55,7 +55,7 @@
       border-bottom: 1px solid $global-section-border-color;
 
       &:last-child {
-        border-width: 0;
+        border-bottom: 0;
       }
     }
   }

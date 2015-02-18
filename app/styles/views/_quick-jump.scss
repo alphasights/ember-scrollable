@@ -56,7 +56,7 @@ $quick-jump-results-background-color: #f2f2f2;
       @include single-transition(all, 150ms, linear);
 
       background-color: transparent;
-      border-width: 0;
+      border: 0;
       box-shadow: none;
       display: inline-block;
       margin: 0;
@@ -99,7 +99,7 @@ $quick-jump-results-background-color: #f2f2f2;
       @include icon(times-circle);
 
       background-color: transparent;
-      border-width: 0;
+      border: 0;
       margin-bottom: 0;
       min-height: $actions-button-size;
     }
