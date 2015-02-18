@@ -95,13 +95,13 @@ test("Show interaction details", function() {
       titleProjectName: $interaction.find('h1 small').text().trim(),
       titleAdvisorName: $interaction.find('h1 span').text().trim(),
       advisorName: $interaction.find('.advisor .name').text().trim(),
-      currentPosition: $interaction.find('.job-title').text().trim(),
+      currentPosition: $interaction.find('.advisor .current-position').text().trim(),
       advisorEmail: $interaction.find('.advisor .email span').text().trim(),
       advisorPhoneNumber: $interaction.find('.advisor .phone span').text().trim(),
-      clientContactName: $interaction.find('.client-contact .name').text().trim(),
-      clientAccountName: $interaction.find('.company-name').text().trim(),
-      clientEmail: $interaction.find('.client-contact .email span').text().trim(),
-      clientPhoneNumber: $interaction.find('.client-contact .phone span').text().trim(),
+      clientContactName: $interaction.find('.client .name').text().trim(),
+      clientAccountName: $interaction.find('.client .current-position').text().trim(),
+      clientEmail: $interaction.find('.client .email span').text().trim(),
+      clientPhoneNumber: $interaction.find('.client .phone span').text().trim(),
       callTimeFromNow: $interaction.find('.time .from-now').text().trim(),
       absoluteCallTime: $interaction.find('.time .absolute').text().trim()
     };
