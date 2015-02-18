@@ -36,6 +36,12 @@
 
   > .members {
     @extend %grid-column-4;
+
+    .avatar {
+      &.lead {
+        @include detached-border($color: lighten($primary-color, 30%));
+      }
+    }
   }
 
   > .progress {
