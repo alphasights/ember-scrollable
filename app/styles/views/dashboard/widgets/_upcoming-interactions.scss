@@ -43,8 +43,7 @@
 
   .empty-message {
     color: $small-font-color;
-    line-height: $paragraph-line-height * 2;
-    padding: $column-gutter / 2;
+    line-height: $widget-min-height - $widget-header-line-height;
     text-align: center;
   }
 
