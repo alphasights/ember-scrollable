@@ -6,7 +6,10 @@
   </div>
 
   <section class="details">
-    <span class="name">{{person.name}}</span>
+    <a
+      target="_blank"
+      class="name"
+      {{bind-attr href=person.pistachioUrl}}>{{person.name}}</a>
 
     {{#tool-tipster
       title=person.currentPosition

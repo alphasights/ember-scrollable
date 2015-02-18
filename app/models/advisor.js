@@ -22,5 +22,9 @@ export default DS.Model.extend({
     } else {
       return '';
     }
-  }.property('jobTitle', 'companyName')
+  }.property('jobTitle', 'companyName'),
+
+  pistachioUrl: function() {
+    return `${EmberENV.pistachioUrl}/advisors/${this.get('id')}`;
+  }.property('id')
 });

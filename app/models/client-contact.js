@@ -9,5 +9,9 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   phoneNumbers: DS.attr(),
 
-  currentPosition: Ember.computed.alias('clientAccount.name')
+  currentPosition: Ember.computed.alias('clientAccount.name'),
+
+  pistachioUrl: function() {
+    return `${EmberENV.pistachioUrl}/client/contacts/${this.get('id')}`;
+  }.property('id')
 });
