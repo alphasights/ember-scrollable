@@ -1,38 +1,38 @@
-<div>
-  <h1>{{title}}</h1>
+<h1>{{title}}</h1>
 
-  <div class="content">
-    <div class="avatar-container">
-      {{as-avatar person=person showTooltip=false alt=person.name}}
-    </div>
-
-    <div class="details">
-      <span class="name">{{person.name}}</span>
-
-      {{#tool-tipster
-        title=person.currentPosition
-        position="bottom-left"
-        tagName="span"
-        class="current-position"
-        maxWidth=400}}
-        {{person.currentPosition}}
-      {{/tool-tipster}}
-    </div>
+<div class="content">
+  <div class="avatar-container">
+    {{as-avatar person=person showTooltip=false alt=person.name}}
   </div>
 
-  <div class="contact">
+  <section class="details">
+    <span class="name">{{person.name}}</span>
+
+    {{#tool-tipster
+      title=person.currentPosition
+      position="bottom-left"
+      tagName="span"
+      class="current-position"
+      maxWidth=400}}
+      {{person.currentPosition}}
+    {{/tool-tipster}}
+  </section>
+</div>
+
+<section class="contact">
+  <ul>
     {{#each email in person.emails}}
-      <div class="email">
+      <li class="email">
         <i></i>
         <span>{{email}}</span>
-      </div>
+      </li>
     {{/each}}
 
     {{#each phoneNumber in person.phoneNumbers}}
-      <div class="phone">
+      <li class="phone-number">
         <i></i>
         <span>{{phoneNumber}}</span>
-      </div>
+      </li>
     {{/each}}
-  </div>
-</div>
+  </ul>
+</section>

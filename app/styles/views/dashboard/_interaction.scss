@@ -63,18 +63,20 @@ $interaction-header-height:
   .profiles {
     @extend %grid-column-12;
 
-    @media #{$large-up} {
-      align-items: stretch;
-      display: flex;
-    }
+    > ul {
+      @media #{$large-up} {
+        align-items: stretch;
+        display: flex;
+      }
 
-    .profile {
-      @extend %grid-column-small-12;
-      @extend %grid-column-medium-12;
-      @extend %grid-column-large-6;
+      > li {
+        @extend %grid-column-small-12;
+        @extend %grid-column-medium-12;
+        @extend %grid-column-large-6;
 
-      display: flex;
-      margin-bottom: $column-gutter / 2;
+        display: flex;
+        margin-bottom: $column-gutter / 2;
+      }
     }
   }
 

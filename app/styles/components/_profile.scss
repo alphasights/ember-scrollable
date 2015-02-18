@@ -1,45 +1,8 @@
 .profile {
-  > div {
-    @extend %grid-row;
+  @extend %grid-row;
 
-    border: solid 1px $global-section-border-color;
-    border-radius: $global-radius;
-
-    > .content {
-      @extend %grid-column-12;
-
-      background-color: lighten($panel-bg, 2%);
-      padding: $column-gutter / 4 0;
-
-      .avatar-container {
-        @extend %grid-column-large-2;
-        @extend %grid-column-small-3;
-
-        padding-right: 0 !important;
-      }
-
-      .details {
-        @extend %grid-column-large-10;
-        @extend %grid-column-small-9;
-
-        span {
-          display: block;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-
-          &:first-child {
-            padding-top: $column-gutter / 4;
-          }
-
-          &.name {
-            color: $anchor-font-color;
-            font-weight: $font-weight-extrabold;
-          }
-        }
-      }
-    }
-  }
+  border: solid 1px $global-section-border-color;
+  border-radius: $global-radius;
 
   h1 {
     @extend %grid-column-12;
@@ -51,12 +14,47 @@
     text-transform: uppercase;
   }
 
+  > .content {
+    @extend %grid-column-12;
+
+    background-color: lighten($panel-bg, 2%);
+    padding: $column-gutter / 4 0;
+
+    .avatar-container {
+      @extend %grid-column-large-2;
+      @extend %grid-column-small-3;
+
+      padding-right: 0 !important;
+    }
+
+    .details {
+      @extend %grid-column-large-10;
+      @extend %grid-column-small-9;
+
+      span {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &:first-child {
+          padding-top: $column-gutter / 4;
+        }
+
+        &.name {
+          color: $anchor-font-color;
+          font-weight: $font-weight-extrabold;
+        }
+      }
+    }
+  }
+
   .contact {
     @extend %grid-column-12;
 
     padding: $column-gutter / 4 0 !important;
 
-    > div {
+    > ul > li {
       i {
         @extend %grid-column-large-2;
         @extend %grid-column-small-3;
@@ -74,14 +72,14 @@
       span {
         line-height: $base-line-height * 1.5 !important;
       }
+    }
 
-      &.email i {
-        @include icon(envelope);
-      }
+    .email i {
+      @include icon(envelope);
+    }
 
-      &.phone i {
-        @include icon(phone);
-      }
+    .phone-number i {
+      @include icon(phone);
     }
   }
 }
