@@ -6,92 +6,6 @@ $interaction-header-height:
   $column-gutter * 2 +
   $side-panel-actions-height;
 
-%interaction-person-panel {
-  @extend %grid-row;
-
-  border: solid 1px $global-section-border-color;
-  border-radius: $global-radius;
-
-  .header {
-    @extend %grid-column-12;
-
-    color: $small-font-color;
-    font-size: $h5-font-size;
-    font-weight: $font-weight-bold;
-    padding: $column-gutter / 4 $column-gutter / 2;
-    text-transform: uppercase;
-  }
-
-  .profile {
-    @extend %grid-column-12;
-
-    background-color: lighten($panel-bg, 2%);
-    padding: $column-gutter / 4 0;
-
-    .image {
-      @extend %grid-column-large-2;
-      @extend %grid-column-small-3;
-
-      padding-right: 0 !important;
-    }
-
-    .details {
-      @extend %grid-column-large-10;
-      @extend %grid-column-small-9;
-
-      span {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &:first-child {
-          padding-top: $column-gutter / 4;
-        }
-
-        &.name {
-          color: $anchor-font-color;
-          font-weight: $font-weight-extrabold;
-        }
-      }
-    }
-  }
-
-  .contact {
-    @extend %grid-column-12;
-
-    padding: $column-gutter / 4 0 !important;
-
-    > div {
-      i {
-        @extend %grid-column-large-2;
-        @extend %grid-column-small-3;
-
-        color: $small-font-color;
-        text-align: right;
-      }
-
-      span {
-        @extend %grid-column-large-10;
-        @extend %grid-column-small-9;
-      }
-
-      i,
-      span {
-        line-height: $base-line-height * 1.5 !important;
-      }
-
-      &.email i {
-        @include icon(envelope);
-      }
-
-      &.phone i {
-        @include icon(phone);
-      }
-    }
-  }
-}
-
 .side-panel.interaction {
   header {
     @extend %grid-row;
@@ -99,7 +13,7 @@ $interaction-header-height:
     padding: $column-gutter $column-gutter / 2;
     width: 100%;
 
-    .schedule {
+    .time {
       @extend %grid-column-small-4;
       @extend %grid-column-medium-3;
       @extend %grid-column-large-2;
@@ -111,27 +25,28 @@ $interaction-header-height:
         line-height: $interaction-header-title-height / 2;
         text-align: center;
         text-transform: uppercase;
+      }
 
-        &:first-child {
-          @include side-radius(top, $global-radius / 2);
+      .from-now {
+        @include side-radius(top, $global-radius / 2);
 
-          background-color: lighten($primary-color, 10%);
-        }
+        background-color: lighten($primary-color, 10%);
+      }
 
-        &:last-child {
-          @include side-radius(bottom, $global-radius / 2);
+      .absolute {
+        @include side-radius(bottom, $global-radius / 2);
 
-          margin-top: 1px;
-        }
+        margin-top: 1px;
       }
     }
 
-    .details {
+    > .content {
       @extend %grid-column-small-8;
       @extend %grid-column-medium-9;
       @extend %grid-column-large-10;
 
       h1 {
+        border-bottom: solid 1px $global-section-border-color;
         line-height: $interaction-header-title-height / 2;
         margin: 0;
         overflow: hidden;
@@ -140,45 +55,31 @@ $interaction-header-height:
       }
 
       a {
-        border-top: solid 1px $global-section-border-color;
-        display: block;
         line-height: $interaction-header-title-height / 2;
       }
     }
   }
 
-  .contents {
+  .profiles {
     @extend %grid-column-12;
 
     @media #{$large-up} {
       align-items: stretch;
       display: flex;
     }
-  }
 
-  .advisor,
-  .client-contact {
-    @extend %grid-column-small-12;
-    @extend %grid-column-medium-12;
-    @extend %grid-column-large-6;
+    .profile {
+      @extend %grid-column-small-12;
+      @extend %grid-column-medium-12;
+      @extend %grid-column-large-6;
 
-    display: flex;
-    margin-bottom: $column-gutter / 2;
-
-    > div {
-      @extend %interaction-person-panel;
+      display: flex;
+      margin-bottom: $column-gutter / 2;
     }
   }
 
   .checklist-items {
     @extend %grid-column-12;
-
-    .checklist-status {
-      color: $body-font-color;
-      display: inline-block;
-      font-weight: $font-weight-bold;
-      line-height: $interaction-checklist-header-height;
-    }
 
     header {
       a {
@@ -210,9 +111,12 @@ $interaction-header-height:
         }
       }
     }
-  }
 
-  .actions {
-    @extend %navigation-arrows;
+    .checklist-status {
+      color: $body-font-color;
+      display: inline-block;
+      font-weight: $font-weight-bold;
+      line-height: $interaction-checklist-header-height;
+    }
   }
 }

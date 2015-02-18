@@ -6,5 +6,7 @@ export default DS.Model.extend({
   emails: DS.attr(),
   interactions: DS.hasMany('interaction'),
   name: DS.attr('string'),
-  phoneNumbers: DS.attr()
+  phoneNumbers: DS.attr(),
+
+  currentPosition: Ember.computed.alias('clientAccount.name')
 });

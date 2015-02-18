@@ -1,0 +1,38 @@
+<div>
+  <h1>{{title}}</h1>
+
+  <div class="content">
+    <div class="avatar-container">
+      {{as-avatar person=person showTooltip=false alt=person.name}}
+    </div>
+
+    <div class="details">
+      <span class="name">{{person.name}}</span>
+
+      {{#tool-tipster
+        title=person.currentPosition
+        position="bottom-left"
+        tagName="span"
+        class="current-position"
+        maxWidth=400}}
+        {{person.currentPosition}}
+      {{/tool-tipster}}
+    </div>
+  </div>
+
+  <div class="contact">
+    {{#each email in person.emails}}
+      <div class="email">
+        <i></i>
+        <span>{{email}}</span>
+      </div>
+    {{/each}}
+
+    {{#each phoneNumber in person.phoneNumbers}}
+      <div class="phone">
+        <i></i>
+        <span>{{phoneNumber}}</span>
+      </div>
+    {{/each}}
+  </div>
+</div>

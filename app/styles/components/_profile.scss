@@ -1,0 +1,87 @@
+.profile {
+  > div {
+    @extend %grid-row;
+
+    border: solid 1px $global-section-border-color;
+    border-radius: $global-radius;
+
+    > .content {
+      @extend %grid-column-12;
+
+      background-color: lighten($panel-bg, 2%);
+      padding: $column-gutter / 4 0;
+
+      .avatar-container {
+        @extend %grid-column-large-2;
+        @extend %grid-column-small-3;
+
+        padding-right: 0 !important;
+      }
+
+      .details {
+        @extend %grid-column-large-10;
+        @extend %grid-column-small-9;
+
+        span {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:first-child {
+            padding-top: $column-gutter / 4;
+          }
+
+          &.name {
+            color: $anchor-font-color;
+            font-weight: $font-weight-extrabold;
+          }
+        }
+      }
+    }
+  }
+
+  h1 {
+    @extend %grid-column-12;
+
+    color: $small-font-color;
+    font-size: $h5-font-size;
+    font-weight: $font-weight-bold;
+    padding: $column-gutter / 4 $column-gutter / 2;
+    text-transform: uppercase;
+  }
+
+  .contact {
+    @extend %grid-column-12;
+
+    padding: $column-gutter / 4 0 !important;
+
+    > div {
+      i {
+        @extend %grid-column-large-2;
+        @extend %grid-column-small-3;
+
+        color: $small-font-color;
+        text-align: right;
+      }
+
+      span {
+        @extend %grid-column-large-10;
+        @extend %grid-column-small-9;
+      }
+
+      i,
+      span {
+        line-height: $base-line-height * 1.5 !important;
+      }
+
+      &.email i {
+        @include icon(envelope);
+      }
+
+      &.phone i {
+        @include icon(phone);
+      }
+    }
+  }
+}
