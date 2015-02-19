@@ -140,7 +140,7 @@ test("Show upcoming interactions list", function() {
       advisorName: advisorName,
       projectName: projectName,
       isChecklistComplete: true,
-      scheduledCallTime: '10:00 AM, 20 February',
+      scheduledCallTime: '10:00 AM, 20 Feb',
     });
   });
 });
