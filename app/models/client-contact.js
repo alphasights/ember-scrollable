@@ -8,6 +8,7 @@ export default DS.Model.extend({
   interactions: DS.hasMany('interaction'),
   name: DS.attr('string'),
   phoneNumbers: DS.attr(),
+  timeZone: DS.attr('string'),
 
   currentPosition: Ember.computed.alias('clientAccount.name'),
 

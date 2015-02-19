@@ -21,7 +21,8 @@
     "spinjs": "2.0.1",
     "tooltipster": "3.3.0",
     "route-recognizer": "0.1.1",
-    "ember-cli-moment-shim": "0.0.3"
+    "ember-cli-moment-shim": "0.0.3",
+    "moment-timezone": "~0.3.0"
   },
   "resolutions": {
     "jquery": "1.11.1"
