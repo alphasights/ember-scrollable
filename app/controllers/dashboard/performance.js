@@ -42,7 +42,6 @@ export default Ember.Controller.extend({
     return weekdayHours;
   }.property(),
 
-
   monthCompletedFloat: function() {
     var hoursSince = this.get('weekDayHoursSinceBeginningOfMonth');
     var totalHours = this.get('totalWeekDayHoursInCurrentMonth');
@@ -52,7 +51,7 @@ export default Ember.Controller.extend({
     'weekDayHoursSinceBeginningOfMonth', 'totalWeekDayHoursInCurrentMonth'
   ),
 
-  targetCreditProgressFraction: function() {
+  onPaceCreditTarget: function() {
     var monthCompletedFloat = this.get('monthCompletedFloat');
     var target = this.get('model.monthlyTarget');
 
