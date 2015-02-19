@@ -19,11 +19,13 @@
     }
 
     .time {
-      @extend %grid-column-3;
+      @extend %grid-column-6;
+
+      text-align: right;
     }
 
     .title {
-      @extend %grid-column-4;
+      @extend %grid-column-5;
 
       small {
         color: $small-font-color;
@@ -33,7 +35,7 @@
     }
 
     .checklist-status {
-      @extend %grid-column-5;
+      @extend %grid-column-1;
     }
 
     &:hover {

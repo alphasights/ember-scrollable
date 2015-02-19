@@ -14,7 +14,7 @@ const projectName = 'Project Name',
       clientEmail = 'client@email.com',
       clientPhoneNumber = '+1 555-321-9000',
       checklistStatus = 'Checklist Complete',
-      scheduledCallTime = "2015-02-20T10:00:00.000-08:00";
+      scheduledCallTime = "2015-02-20T10:00:00.000+00:00";
 
 module("Upcoming interactions", {
   beforeEach: function() {
@@ -102,8 +102,8 @@ test("Show interaction details", function() {
       clientAccountName: $interaction.find('.client .current-position').text().trim(),
       clientEmail: $interaction.find('.client .email span').text().trim(),
       clientPhoneNumber: $interaction.find('.client .phone-number span').text().trim(),
-      callTimeFromNow: $interaction.find('.time .from-now').text().trim(),
-      absoluteCallTime: $interaction.find('.time .absolute').text().trim()
+      callDate: $interaction.find('.date-time .date').text().trim(),
+      callTime: $interaction.find('.date-time .time').text().trim()
     };
 
     deepEqual(interactionDetails, {
@@ -117,8 +117,8 @@ test("Show interaction details", function() {
       clientAccountName: clientAccountName,
       clientEmail: clientEmail,
       clientPhoneNumber: clientPhoneNumber,
-      callTimeFromNow: moment(scheduledCallTime).fromNow(),
-      absoluteCallTime: moment(scheduledCallTime).format('h:mm a')
+      callDate: 'Feb 20th',
+      callTime: '10:00 AM'
     });
   });
 });
@@ -132,15 +132,15 @@ test("Show upcoming interactions list", function() {
     var interactionListItem = {
       advisorName: $interaction.find('.title span').text().trim(),
       projectName: $interaction.find('.title small').text().trim(),
-      checklistStatus: $interaction.find('.checklist-status span').text().trim(),
+      isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
       scheduledCallTime: $interaction.find('.time').text().trim(),
     };
 
     deepEqual(interactionListItem, {
       advisorName: advisorName,
       projectName: projectName,
-      checklistStatus: checklistStatus,
-      scheduledCallTime: moment(scheduledCallTime).fromNow(),
+      isChecklistComplete: true,
+      scheduledCallTime: 'Feb 20th, 10:00 AM',
     });
   });
 });

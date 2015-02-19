@@ -22,8 +22,12 @@ export default Ember.Controller.extend({
   },
 
   allSections: function() {
-    return [this.get('topHitSection')].concat(this.get('sortedResultSections'));
-  }.property('sortedResultSections', 'topHitSection'),
+    if (Ember.isPresent(this.get('results'))) {
+      return [this.get('topHitSection')].concat(this.get('sortedResultSections'));
+    } else {
+      return [];
+    }
+  }.property('sortedResultSections', 'topHitSection', 'results'),
 
   normalizedResults: function() {
     var results = this.get('results');
@@ -115,7 +119,7 @@ export default Ember.Controller.extend({
 
       this.set('requestPromise', requestPromise);
     } else {
-      this.set('results', null);
+      this.setProperties({ requestPromise: null, results: null });
     }
   },
 

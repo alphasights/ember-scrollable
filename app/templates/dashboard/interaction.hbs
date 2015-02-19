@@ -1,13 +1,18 @@
 <header>
-  <div class="time">
-    <span class="from-now">{{ago scheduledCallTime}}</span>
-    <span class="absolute">{{moment scheduledCallTime "h:mm a"}}</span>
+  <div class="date-time">
+    <span class="date">{{moment scheduledCallTime "MMM Do"}}</span>
+    <span class="time">{{moment scheduledCallTime "h:mm A"}}</span>
   </div>
 
   <div class="content">
     <h1>
       <span>{{advisor.name}}</span>
-      <small>{{project.name}}</small>
+
+      <small>
+        <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+          {{project.name}}
+        </a>
+      </small>
     </h1>
 
     <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>

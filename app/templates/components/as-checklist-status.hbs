@@ -1,9 +1,16 @@
-<span>Checklist {{status}}</span>
+{{#unless showTooltip}}
+  <span>Checklist {{status}}</span>
+{{/unless}}
 
-{{#if isComplete}}
-  <i></i>
-{{else}}
-  <span class="count">
-    {{incompleteItems.length}}
-  </span>
-{{/if}}
+{{#tool-tipster
+  title=title
+  position="top"
+  tagName="span"}}
+  {{#if isComplete}}
+    <i></i>
+  {{else}}
+    <span class="count">
+      {{incompleteItems.length}}
+    </span>
+  {{/if}}
+{{/tool-tipster}}
