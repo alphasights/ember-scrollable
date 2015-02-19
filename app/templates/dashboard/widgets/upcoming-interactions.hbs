@@ -8,7 +8,7 @@
             <small>{{interaction.project.name}}</small>
           </div>
 
-          <div class="time">{{moment interaction.scheduledCallTime "MMM Do, h:mm A"}}</div>
+          <div class="time">{{moment interaction.scheduledCallTime "h:mm A, D MMMM"}}</div>
 
           {{as-checklist-status items=checklistItems showTooltip=true}}
         {{/link-to}}

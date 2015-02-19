@@ -117,7 +117,7 @@ test("Show interaction details", function() {
       clientAccountName: clientAccountName,
       clientEmail: clientEmail,
       clientPhoneNumber: clientPhoneNumber,
-      callDate: 'Feb 20th',
+      callDate: '20 February',
       callTime: '10:00 AM'
     });
   });
@@ -140,7 +140,7 @@ test("Show upcoming interactions list", function() {
       advisorName: advisorName,
       projectName: projectName,
       isChecklistComplete: true,
-      scheduledCallTime: 'Feb 20th, 10:00 AM',
+      scheduledCallTime: '10:00 AM, 20 February',
     });
   });
 });
