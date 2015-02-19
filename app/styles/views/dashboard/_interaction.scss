@@ -13,7 +13,7 @@ $interaction-header-height:
     padding: $column-gutter $column-gutter / 2;
     width: 100%;
 
-    .time {
+    .date-time {
       @extend %grid-column-small-4;
       @extend %grid-column-medium-3;
       @extend %grid-column-large-2;
@@ -27,13 +27,13 @@ $interaction-header-height:
         text-transform: uppercase;
       }
 
-      .from-now {
+      .date {
         @include side-radius(top, $global-radius / 2);
 
         background-color: lighten($primary-color, 10%);
       }
 
-      .absolute {
+      .time {
         @include side-radius(bottom, $global-radius / 2);
 
         margin-top: 1px;
@@ -52,6 +52,10 @@ $interaction-header-height:
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        small a {
+          color: $small-font-color;
+        }
       }
 
       a {
@@ -94,6 +98,8 @@ $interaction-header-height:
 
     ul {
       @extend %grid-column-12;
+
+      padding-bottom: $column-gutter / 2;
 
       li {
         @extend %grid-row;

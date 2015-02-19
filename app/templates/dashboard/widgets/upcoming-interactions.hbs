@@ -8,9 +8,9 @@
             <small>{{interaction.project.name}}</small>
           </div>
 
-          <div class="time">{{ago interaction.scheduledCallTime}}</div>
+          <div class="time">{{moment interaction.scheduledCallTime "MMM Do, h:mm A"}}</div>
 
-          {{as-checklist-status items=checklistItems}}
+          {{as-checklist-status items=checklistItems showTooltip=true}}
         {{/link-to}}
       </li>
     {{/each}}
