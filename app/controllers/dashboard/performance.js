@@ -54,5 +54,5 @@ export default Ember.Controller.extend({
     var target = this.get('model.monthlyTarget');
 
     return target * monthCompletedFloat;
-  }.property('monthCompletedFraction', 'model.monthlyTarget')
+  }.property('monthCompletedFloat', 'model.monthlyTarget')
 });
