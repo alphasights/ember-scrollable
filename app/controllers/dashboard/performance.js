@@ -2,42 +2,37 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   weekDayHoursSinceBeginningOfMonth: function() {
-    var todaysDate = moment().date();
-    var dateCounter = 1;
     var weekdayHours = 0;
+    var todaysDate = moment().date();
 
-    while (dateCounter <= todaysDate) {
+    for (var dateCounter = 1; dateCounter <= todaysDate; dateCounter++) {
       var date = moment().date(dateCounter);
 
-      if (date.day() != 6 || date.day() != 0) {
+      if (date.day() !== 6 || date.day() !== 0) {
         if (todaysDate === dateCounter) {
           var now = moment();
           var todaysStart = moment().startOf('day');
-          var duration = moment.duration(now.diff(todaysStart));
-          var hours = Math.floor(duration.asHours());
+          var timeSinceTodaysStart = moment.duration(now.diff(todaysStart));
 
-          weekdayHours += hours;
+          weekdayHours += Math.floor(timeSinceTodaysStart.asHours());
         } else {
           weekdayHours += 24;
         }
       }
-      dateCounter++;
     }
     return weekdayHours;
   }.property(),
 
   totalWeekDayHoursInCurrentMonth: function() {
-    var endOfMonthDate = moment().endOf('month').date();
-    var dateCounter = 1;
     var weekdayHours = 0;
+    var endOfMonthDate = moment().endOf('month').date();
 
-    while (dateCounter <= endOfMonthDate) {
+    for (var dateCounter = 1; dateCounter <= endOfMonthDate; dateCounter++) {
       var date = moment().date(dateCounter);
 
-      if (date.day() != 6 || date.day() != 0) {
+      if (date.day() !== 6 || date.day() !== 0) {
         weekdayHours += 24;
       }
-      dateCounter++;
     }
     return weekdayHours;
   }.property(),
