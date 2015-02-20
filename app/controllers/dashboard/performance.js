@@ -5,9 +5,9 @@ export default Ember.Controller.extend({
   isOnPace: Ember.computed.gte('currentMonthCreditCount', 'onPaceCreditTarget'),
 
   performanceBarClass: function() {
-    if (this.get('hasFulfilledTarget') {
+    if (this.get('hasFulfilledTarget')) {
       return 'gold-bar';
-    } else if (this.get('isOnPace') {
+    } else if (this.get('isOnPace')) {
       return 'green-bar';
     } else {
       return 'red-bar';
