@@ -13,11 +13,7 @@ export default Ember.Controller.extend({
 
       if (date.day() !== 6 || date.day() !== 0) {
         if (todaysDate === dateCounter) {
-          var now = moment();
-          var todaysStart = moment().startOf('day');
-          var timeSinceTodaysStart = moment.duration(now.diff(todaysStart));
-
-          weekdayHours += Math.floor(timeSinceTodaysStart.asHours());
+          weekdayHours += this.get('hoursSinceTodaysStart');
         } else {
           weekdayHours += 24;
         }
@@ -54,5 +50,13 @@ export default Ember.Controller.extend({
     var target = this.get('model.monthlyTarget');
 
     return target * monthCompletedFloat;
-  }.property('monthCompletedFloat', 'model.monthlyTarget')
+  }.property('monthCompletedFloat', 'model.monthlyTarget'),
+
+  hoursSinceTodaysStart: function() {
+    var now = moment();
+    var todaysStart = moment().startOf('day');
+    var timeSinceTodaysStart = moment.duration(now.diff(todaysStart));
+
+    return Math.floor(timeSinceTodaysStart.asHours());
+  }.property()
 });
