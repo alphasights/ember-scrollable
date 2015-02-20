@@ -4,6 +4,16 @@ export default Ember.Controller.extend({
   hasFulfilledTarget: Ember.computed.gte('currentMonthCreditCount', 'monthlyTarget'),
   isOnPace: Ember.computed.gte('currentMonthCreditCount', 'onPaceCreditTarget'),
 
+  performanceBarClass: function() {
+    if (this.get('hasFulfilledTarget') {
+      return 'gold-bar';
+    } else if (this.get('isOnPace') {
+      return 'green-bar';
+    } else {
+      return 'red-bar';
+    }
+  }.property('hasFulFilledTarget', 'isOnPace'),
+
   weekDayHoursSinceBeginningOfMonth: function() {
     var weekdayHours = 0;
     var todaysDate = moment().date();
