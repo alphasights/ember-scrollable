@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  hasFulfilledTarget: Ember.computed.gte('currentMonthCreditCount', 'monthlyTarget'),
+  isOnPace: Ember.computed.gte('currentMonthCreditCount', 'onPaceCreditTarget'),
+
   weekDayHoursSinceBeginningOfMonth: function() {
     var weekdayHours = 0;
     var todaysDate = moment().date();
