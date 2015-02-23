@@ -34,6 +34,7 @@
     "ember-cli-pretender": "0.3.1",
     "ember-cli-qunit": "0.3.4",
     "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git",
+    "ember-cli-timecop": "0.0.1",
     "ember-cli-tooltipster": "0.0.6",
     "ember-cli-uglify": "1.0.1",
     "ember-cli-velocity": "0.1.2",
