@@ -14,59 +14,42 @@ export default Ember.Controller.extend({
     }
   }.property('hasFulFilledTarget', 'isOnPace'),
 
+  onPaceCreditTarget: function() {
+    return Math.round(
+      (this.get('model.monthlyTarget') * this.monthCompletionProgress()
+    ) * 10) / 10;
+  }.property('model.monthlyTarget'),
+
   weekDayHoursSinceBeginningOfMonth: function() {
-    var weekdayHours = 0;
-    var todaysDate = moment().date();
+    var yesterdaysDate = moment().date() - 1;
 
-    for (var dateCounter = 1; dateCounter <= todaysDate; dateCounter++) {
-      var date = moment().date(dateCounter);
-
-      if (date.day() !== 6 || date.day() !== 0) {
-        if (todaysDate === dateCounter) {
-          weekdayHours += this.get('hoursSinceTodaysStart');
-        } else {
-          weekdayHours += 24;
-        }
-      }
-    }
-    return weekdayHours;
-  }.property(),
+    return this.numberOfWeekdayHoursUntil(yesterdaysDate)
+      + this.hoursSinceTodaysStart();
+  },
 
   totalWeekDayHoursInCurrentMonth: function() {
-    var weekdayHours = 0;
-    var endOfMonthDate = moment().endOf('month').date();
+    return this.numberOfWeekdayHoursUntil(moment().endOf('month').date());
+  },
 
-    for (var dateCounter = 1; dateCounter <= endOfMonthDate; dateCounter++) {
-      var date = moment().date(dateCounter);
+  monthCompletionProgress: function() {
+    return this.weekDayHoursSinceBeginningOfMonth()
+      / this.totalWeekDayHoursInCurrentMonth();
+  },
 
-      if (date.day() !== 6 || date.day() !== 0) {
-        weekdayHours += 24;
-      }
-    }
-    return weekdayHours;
-  }.property(),
-
-  monthCompletedFloat: function() {
-    var hoursSince = this.get('weekDayHoursSinceBeginningOfMonth');
-    var totalHours = this.get('totalWeekDayHoursInCurrentMonth');
-
-    return Math.round((hoursSince / totalHours) * 100) / 100;
-  }.property(
-    'weekDayHoursSinceBeginningOfMonth', 'totalWeekDayHoursInCurrentMonth'
-  ),
-
-  onPaceCreditTarget: function() {
-    var monthCompletedFloat = this.get('monthCompletedFloat');
-    var target = this.get('model.monthlyTarget');
-
-    return target * monthCompletedFloat;
-  }.property('monthCompletedFloat', 'model.monthlyTarget'),
+  numberOfWeekdayHoursUntil: function(endDate) {
+    return _.range(1, endDate)
+      .map(function(day) { return moment().date(day); })
+      .reduce(function(memo, date) {
+        if (date.day() !== 6 || date.day() !== 0) {
+          return memo += 24;
+        }
+      }, 0);
+  },
 
   hoursSinceTodaysStart: function() {
-    var now = moment();
     var todaysStart = moment().startOf('day');
-    var timeSinceTodaysStart = moment.duration(now.diff(todaysStart));
+    var timeSinceTodaysStart = moment.duration(moment().diff(todaysStart));
 
-    return Math.floor(timeSinceTodaysStart.asHours());
-  }.property()
+    return Math.round(timeSinceTodaysStart.asHours());
+  }
 });
