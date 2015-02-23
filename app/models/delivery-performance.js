@@ -14,27 +14,29 @@ export default DS.Model.extend({
     ) * 10) / 10;
   }.property('monthlyTarget'),
 
-  weekDayHoursSinceBeginningOfMonth: function() {
+  weekdayHoursSinceBeginningOfMonth: function() {
     var yesterdaysDate = moment().date() - 1;
 
     return this.numberOfWeekdayHoursUntil(yesterdaysDate)
       + this.hoursSinceTodaysStart();
   },
 
-  totalWeekDayHoursInCurrentMonth: function() {
+  totalWeekdayHoursInCurrentMonth: function() {
     return this.numberOfWeekdayHoursUntil(moment().endOf('month').date());
   },
 
   monthCompletionProgress: function() {
-    return this.weekDayHoursSinceBeginningOfMonth()
-      / this.totalWeekDayHoursInCurrentMonth();
+    return this.weekdayHoursSinceBeginningOfMonth()
+      / this.totalWeekdayHoursInCurrentMonth();
   },
 
   numberOfWeekdayHoursUntil: function(endDate) {
     return _.range(1, endDate)
       .map(function(day) { return moment().date(day); })
       .reduce(function(memo, date) {
-        if (date.day() !== 6 || date.day() !== 0) {
+        if (date.day() === 6 || date.day() === 0) {
+          return memo;
+        } else {
           return memo += 24;
         }
       }, 0);
