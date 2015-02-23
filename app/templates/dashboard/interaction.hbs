@@ -21,8 +21,21 @@
 
 <section class="profiles">
   <ul>
-    <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
-    <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+    {{#each profile in profiles}}
+      <li>
+        {{#as-profile
+          person=profile.person
+          title=profile.title
+          class=profile.id}}
+          <div class="call-time">
+            {{#tool-tipster title="Local Time"}}
+              <i></i>
+              <span>{{profile.callTime}}</span>
+            {{/tool-tipster}}
+          </div>
+        {{/as-profile}}
+      </li>
+    {{/each}}
   </ul>
 </section>
 
