@@ -13,6 +13,12 @@
       vertical-align: middle;
     }
 
+    small {
+      color: $small-font-color;
+      display: block;
+      font-size: $base-font-size;
+    }
+
     .time,
     .checklist-status {
       white-space: nowrap;
@@ -26,12 +32,6 @@
 
     .title {
       @extend %grid-column-5;
-
-      small {
-        color: $small-font-color;
-        display: block;
-        font-size: $base-font-size;
-      }
     }
 
     .checklist-status {

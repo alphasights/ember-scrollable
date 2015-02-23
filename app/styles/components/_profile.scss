@@ -8,10 +8,9 @@
     @extend %grid-column-12;
 
     color: $small-font-color;
-    font-size: $h5-font-size;
+    font-size: $h4-font-size;
     font-weight: $font-weight-bold;
     padding: $column-gutter / 4 $column-gutter / 2;
-    text-transform: uppercase;
   }
 
   > .content {
