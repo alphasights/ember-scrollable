@@ -133,14 +133,16 @@ test("Show upcoming interactions list", function() {
       advisorName: $interaction.find('.title span').text().trim(),
       projectName: $interaction.find('.title small').text().trim(),
       isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
-      scheduledCallTime: $interaction.find('.time').text().trim(),
+      absoluteCallTime: $interaction.find('.time span').text().trim(),
+      relativeCallTime: $interaction.find('.time small').text().trim()
     };
 
     deepEqual(interactionListItem, {
       advisorName: advisorName,
       projectName: projectName,
       isChecklistComplete: true,
-      scheduledCallTime: '10:00 AM, 20 Feb',
+      absoluteCallTime: '20 Feb, 10:00 AM',
+      relativeCallTime: moment(scheduledCallTime).fromNow()
     });
   });
 });
