@@ -1,0 +1,36 @@
+$performance-bar-height: 10px;
+$performance-above-target-color: $success-color;
+$performance-on-target-color: $warning-color;
+$performance-below-target-color: $alert-color;
+
+.dashboard .widget.performance {
+  min-height: 0;
+  background-color: $global-section-border-color;
+
+  &.above-target .current > div {
+    background-color: $performance-above-target-color;
+  }
+
+  &.below-target .current > div {
+    background-color: $performance-below-target-color;
+  }
+
+  &.on-target .current > div {
+    background-color: $performance-on-target-color;
+  }
+
+  .current {
+    background-color: $white;
+    border-radius: $global-radius / 2;
+    height: $performance-bar-height;
+    margin: $column-gutter / 2;
+
+    .tip {
+      background-color: lighten($global-overlay-background-color, 50%);
+      border-radius: $global-radius / 2;
+      float: right;
+      height: $performance-bar-height;
+      width: $performance-bar-height;
+    }
+  }
+}

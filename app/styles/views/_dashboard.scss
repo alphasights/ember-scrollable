@@ -6,10 +6,18 @@
 
     > li {
       @extend %grid-column-small-12;
-      @extend %grid-column-large-6;
-      @extend %grid-column-xlarge-4;
 
       margin-bottom: $column-gutter;
+
+      &.upcoming-interactions {
+        @extend %grid-column-large-6;
+        @extend %grid-column-xlarge-4;
+      }
+
+      &.performance {
+        @extend %grid-column-large-12;
+        @extend %grid-column-xlarge-12;
+      }
     }
   }
 }

@@ -1,10 +1,15 @@
 <header>
   <h1>Dashboard</h1>
-  {{render "dashboard.performance" deliveryPerformance}}
 </header>
 
 <ul class="widgets">
-  <li>
+  <li class="performance">
+    {{render "dashboard.widgets.performance"
+      deliveryPerformance
+      tagName="section"}}
+  </li>
+
+  <li class="upcoming-interactions">
     {{render "dashboard.widgets.upcoming-interactions"
       upcomingInteractions
       tagName="section"}}
