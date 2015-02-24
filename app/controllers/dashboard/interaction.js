@@ -16,16 +16,16 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
       person: advisor,
       id: 'advisor',
       title: 'Advisor',
-      callTime: this.localTime(advisor)
+      callTime: this.localCallTime(advisor),
     }, {
       person: clientContact,
       id: 'client',
       title: 'Client',
-      callTime: this.localTime(clientContact)
+      callTime: this.localCallTime(clientContact)
     }];
   }.property('advisor', 'clientContact', 'scheduledCallTime'),
 
-  localTime: function(person) {
+  localCallTime: function(person) {
     return moment
       .tz(this.get('scheduledCallTime'), person.get('timeZone'))
       .format('h:mm A z');
