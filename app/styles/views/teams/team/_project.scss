@@ -135,6 +135,10 @@ $team-project-header-height:
             padding-right: $column-gutter / 2;
             text-align: right;
           }
+
+          .name {
+            padding-left: $column-gutter / 4;
+          }
         }
 
         .count {

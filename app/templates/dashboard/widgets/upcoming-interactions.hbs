@@ -1,6 +1,6 @@
 {{#if this}}
   <ul>
-    {{#each interaction in this itemController="dashboard.interaction"}}
+    {{#each interaction in this}}
       <li>
         {{#link-to "dashboard.interaction" interaction.id tagName="article"}}
           <div class="title">
@@ -8,9 +8,12 @@
             <small>{{interaction.project.name}}</small>
           </div>
 
-          <div class="time">{{moment interaction.scheduledCallTime "MMM Do, h:mm A"}}</div>
+          <div class="time">
+            <span>{{moment interaction.scheduledCallTime "D MMM, h:mm A"}}</span>
+            <small>{{ago interaction.scheduledCallTime}}</small>
+          </div>
 
-          {{as-checklist-status items=checklistItems showTooltip=true}}
+          {{as-checklist-status items=interaction.checklistItems showTooltip=true}}
         {{/link-to}}
       </li>
     {{/each}}

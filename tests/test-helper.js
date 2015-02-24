@@ -9,6 +9,8 @@ import {
 
 setResolver(resolver);
 
+QUnit.urlParams.nocontainer = true;
+
 export default {
   beforeEach: function() {
     this.app = startApp();
