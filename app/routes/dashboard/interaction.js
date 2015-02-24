@@ -7,6 +7,6 @@ export default SidePanelRoute.extend({
   model: function(params) {
     var interactionId = params.interaction_id;
 
-    return this.modelFor('dashboard').upcomingInteractions.findBy('id', interactionId);
+    return this.store.find('interaction', interactionId);
   }
 });
