@@ -25,13 +25,13 @@
     }
 
     .time {
-      @extend %grid-column-6;
+      @extend %grid-column-4;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-5;
+      @extend %grid-column-7;
     }
 
     .checklist-status {
