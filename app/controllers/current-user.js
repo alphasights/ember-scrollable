@@ -18,7 +18,8 @@ export default Ember.ObjectController.extend({
       created_at: this.get('createdAt'),
       name: this.get('name'),
       user_id: this.get('id'),
-      user_hash: this.get('intercomUserHash')
+      user_hash: this.get('intercomUserHash'),
+      visited_phoenix: true
     });
     /* jshint newcap: true */
   },
