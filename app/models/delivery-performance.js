@@ -17,8 +17,8 @@ export default DS.Model.extend({
   weekdayHoursSinceBeginningOfMonth: function() {
     var yesterdaysDate = moment().date() - 1;
 
-    return this.numberOfWeekdayHoursUntil(yesterdaysDate)
-      + this.hoursSinceTodaysStart();
+    return this.numberOfWeekdayHoursUntil(yesterdaysDate) +
+      this.hoursSinceTodaysStart();
   },
 
   totalWeekdayHoursInCurrentMonth: function() {
@@ -26,8 +26,8 @@ export default DS.Model.extend({
   },
 
   monthCompletionProgress: function() {
-    return this.weekdayHoursSinceBeginningOfMonth()
-      / this.totalWeekdayHoursInCurrentMonth();
+    return this.weekdayHoursSinceBeginningOfMonth() /
+      this.totalWeekdayHoursInCurrentMonth();
   },
 
   numberOfWeekdayHoursUntil: function(endDate) {

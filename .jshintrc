@@ -11,8 +11,7 @@
     "_": true,
     "EmberENV": true,
     "__env": true,
-    "moment": true,
-    "Timecop": true
+    "moment": true
   },
   "browser" : true,
   "boss" : true,
