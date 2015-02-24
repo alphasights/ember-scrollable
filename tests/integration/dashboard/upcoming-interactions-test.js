@@ -20,6 +20,15 @@ module("Upcoming interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
+    defineFixture('GET', '/delivery_performances/me', { response: {
+      "delivery_performance":{
+        "id": 1,
+        "user_id": 1,
+        "current_month_credit_count": 0,
+        "monthly_target": 0
+      }
+    }});
+
     defineFixture('GET', '/interactions', { response: {
      "advisors": [
         {
