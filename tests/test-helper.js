@@ -9,6 +9,10 @@ import {
 
 setResolver(resolver);
 
+QUnit.urlParams.nocontainer = true;
+QUnit.urlParams.notrycatch = true;
+QUnit.urlParams.nojshint = true;
+
 export default {
   beforeEach: function() {
     this.app = startApp();
