@@ -18,4 +18,16 @@ export default Ember.ObjectController.extend({
   pace: function() {
     return Math.min(1, this.get('onPaceCreditTarget') / this.get('monthlyTarget'));
   }.property('onPaceCreditTarget', 'currentMonthCreditCount'),
+
+  monthlyTargetTitle: function() {
+    return `Target: ${this.get('monthlyTarget')}`;
+  }.property('monthlyTarget'),
+
+  onPaceCreditTargetTitle: function() {
+    return `On Pace Target: ${this.get('onPaceCreditTarget')}`;
+  }.property('onPaceCreditTarget'),
+
+  currentMonthCreditCountTitle: function() {
+    return `Credits: ${this.get('currentMonthCreditCount')}`;
+  }.property('currentMonthCreditCount')
 });
