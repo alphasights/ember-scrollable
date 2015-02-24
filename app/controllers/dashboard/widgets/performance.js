@@ -13,5 +13,9 @@ export default Ember.ObjectController.extend({
 
   progress: function() {
     return Math.min(1, this.get('currentMonthCreditCount') / this.get('monthlyTarget'));
-  }.property('monthlyTarget', 'currentMonthCreditCount')
+  }.property('monthlyTarget', 'currentMonthCreditCount'),
+
+  pace: function() {
+    return Math.min(1, this.get('onPaceCreditTarget') / this.get('monthlyTarget'));
+  }.property('onPaceCreditTarget', 'currentMonthCreditCount'),
 });

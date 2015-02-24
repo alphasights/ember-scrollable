@@ -1,9 +1,9 @@
 {{#as-progress-bar class="target" ratio=1}}
-  {{tool-tipster class="tip" title=monthlyTarget}}
+  {{tool-tipster class="tip" title=monthlyTarget position="bottom"}}
 {{/as-progress-bar}}
 
-{{#as-progress-bar class="pace" ratio=0.6}}
-  {{tool-tipster class="tip" title="test"}}
+{{#as-progress-bar class="pace" ratio=pace}}
+  {{tool-tipster class="tip" title=onPaceCreditTarget position="bottom"}}
 {{/as-progress-bar}}
 
 {{#as-progress-bar class="current" ratio=progress}}
