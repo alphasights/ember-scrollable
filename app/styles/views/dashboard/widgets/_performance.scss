@@ -6,6 +6,7 @@ $performance-default-color: $alert-color;
 
 .dashboard .widget.performance {
   background-color: $global-section-border-color;
+  padding: $performance-bar-margin;
   min-height: 0;
   position: relative;
 
@@ -17,35 +18,42 @@ $performance-default-color: $alert-color;
     background-color: $performance-on-pace-color;
   }
 
+  .target,
+  .pace,
   .current {
-    background-color: $white;
+    background-color: transparent;
     border-radius: $global-radius / 2;
     height: $performance-bar-height;
-    margin: $performance-bar-margin;
 
     > div {
       background-color: $performance-default-color;
       position: relative;
       min-width: $performance-bar-height;
     }
-
-    .tip {
-      right: 0;
-      z-index: 1;
-    }
   }
 
-  .tip,
-  .target {
+  .target,
+  .pace {
+    position: absolute;
+    top: $performance-bar-margin;
+    width: calc(100% - #{$performance-bar-margin * 2});
+  }
+
+  .target > div {
+    background-color: $white;
+  }
+
+  .pace > div {
+    background-color: lighten($performance-on-pace-color, 50%);
+  }
+
+  .tip {
     background-color: lighten($global-overlay-background-color, 60%);
     border-radius: $global-radius / 2;
     height: $performance-bar-height;
     position: absolute;
     width: $performance-bar-height;
-  }
-
-  .target {
-    top: $performance-bar-margin;
-    right: $performance-bar-margin;
+    right: 0;
+    z-index: 1;
   }
 }
