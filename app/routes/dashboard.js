@@ -3,7 +3,9 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
-      upcomingInteractions: this.store.find('interaction')
+      upcomingInteractions: this.store.find('interaction').then(function(response) {
+        response.content.filterBy('scheduledCallTime');
+      })
     });
   }
 });
