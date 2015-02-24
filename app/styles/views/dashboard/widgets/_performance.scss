@@ -55,5 +55,6 @@ $performance-default-color: $alert-color;
     width: $performance-bar-height;
     right: 0;
     z-index: 1;
+    visibility: hidden;
   }
 }
