@@ -5,9 +5,7 @@ import {
 import Ember from 'ember';
 
 moduleForModel('delivery-performance', 'DeliveryPerformance', {
-  needs: [
-    'model:user'
-  ],
+  needs: ['model:user'],
 
   beforeEach: function() {
     Timecop.install();
