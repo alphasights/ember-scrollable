@@ -2,12 +2,16 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   performanceBarClass: function() {
-    if (this.get('model.hasFulfilledTarget')) {
-      return 'gold-bar';
-    } else if (this.get('model.isOnPace')) {
-      return 'green-bar';
+    if (this.get('hasFulfilledTarget')) {
+      return 'on-target';
+    } else if (this.get('isOnPace')) {
+      return 'on-pace';
     } else {
-      return 'red-bar';
+      return null;
     }
-  }.property('model.hasFulFilledTarget', 'model.isOnPace')
+  }.property('hasFulfilledTarget', 'isOnPace'),
+
+  progress: function() {
+    return Math.min(1, this.get('currentMonthCreditCount') / this.get('monthlyTarget'));
+  }.property('monthlyTarget', 'currentMonthCreditCount')
 });
