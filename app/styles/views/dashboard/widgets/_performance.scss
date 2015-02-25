@@ -1,4 +1,4 @@
-$performance-bar-height: 10px;
+$performance-bar-height: rem-calc(12);
 $performance-bar-margin: $column-gutter / 2;
 $performance-on-target-color: $warning-color;
 $performance-on-pace-color: $success-color;
@@ -39,8 +39,18 @@ $performance-default-color: $alert-color;
     width: calc(100% - #{$performance-bar-margin * 2});
   }
 
+  .target,
   .target > div {
     background-color: $white;
+
+    .tip {
+      @extend %performance-target-tip;
+
+      visibility: visible;
+      top: -$performance-bar-margin;
+      height: $performance-bar-height + $performance-bar-margin * 2;
+      background-color: transparent;
+    }
   }
 
   .pace > div {
@@ -56,5 +66,37 @@ $performance-default-color: $alert-color;
     visibility: hidden;
     width: $performance-bar-height;
     z-index: 1;
+  }
+}
+
+%performance-target-tip {
+  $performance-target-tip-width: $performance-bar-height;
+  $performance-target-tip-height: $performance-bar-height / 2;
+  $performance-target-tip-color: $white;
+
+  &:before,
+  &:after {
+    left: -$performance-target-tip-width / 2;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: $performance-target-tip-width;
+    height: $performance-target-tip-height;
+  }
+
+  &:before {
+    border-bottom: $performance-target-tip-height solid $performance-target-tip-color;
+    border-left: $performance-target-tip-width solid transparent;
+    border-right: $performance-target-tip-width solid transparent;
+
+    bottom: -1px;
+  }
+
+  &:after {
+    border-left: $performance-target-tip-width solid transparent;
+    border-right: $performance-target-tip-width solid transparent;
+    border-top: $performance-target-tip-height solid $performance-target-tip-color;
+
+    top: -1px;
   }
 }
