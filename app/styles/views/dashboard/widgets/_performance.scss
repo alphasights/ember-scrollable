@@ -76,27 +76,23 @@ $performance-default-color: $alert-color;
 
   &:before,
   &:after {
-    left: -$performance-target-tip-width / 2;
+    border-left: $performance-target-tip-width solid transparent;
+    border-right: $performance-target-tip-width solid transparent;
     content: '';
+    height: $performance-target-tip-height;
     height: 0;
+    left: -$performance-target-tip-width / 2;
     position: absolute;
     width: $performance-target-tip-width;
-    height: $performance-target-tip-height;
   }
 
   &:before {
     border-bottom: $performance-target-tip-height solid $performance-target-tip-color;
-    border-left: $performance-target-tip-width solid transparent;
-    border-right: $performance-target-tip-width solid transparent;
-
     bottom: -1px;
   }
 
   &:after {
-    border-left: $performance-target-tip-width solid transparent;
-    border-right: $performance-target-tip-width solid transparent;
     border-top: $performance-target-tip-height solid $performance-target-tip-color;
-
     top: -1px;
   }
 }
