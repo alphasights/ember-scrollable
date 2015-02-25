@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
-  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions.content'),
+  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
   actions: {
