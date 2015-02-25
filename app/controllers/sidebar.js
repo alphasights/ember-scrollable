@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['currentUser'],
 
-  currentUser: Ember.computed.alias('controllers.currentUser'),
-  preferences: Ember.computed.alias('currentUser.preferences'),
+  currentUser: Ember.computed.oneWay('controllers.currentUser'),
+  preferences: Ember.computed.oneWay('currentUser.preferences'),
 
   actions: {
     toggleCollapse: function() {

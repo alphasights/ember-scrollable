@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
-  isCollapsed: Ember.computed.alias('controller.preferences.sidebarCollapsed'),
+  isCollapsed: Ember.computed.oneWay('controller.preferences.sidebarCollapsed'),
 
   actions: {
     toggleCollapse: function() {

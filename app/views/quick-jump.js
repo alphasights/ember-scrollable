@@ -5,7 +5,7 @@ export default Ember.View.extend(KeyEventsMixin, {
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
 
   isActive: false,
-  isLoading: Ember.computed.alias('controller.requestPromise.isLoading'),
+  isLoading: Ember.computed.oneWay('controller.requestPromise.isLoading'),
   placeholder: null,
 
   clickEventName: function() {
