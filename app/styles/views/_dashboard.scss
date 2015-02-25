@@ -1,3 +1,13 @@
+@mixin dashboard-default-widget-size() {
+  @extend %grid-column-large-6;
+  @extend %grid-column-xlarge-4;
+}
+
+@mixin dashboard-large-widget-size() {
+  @extend %grid-column-large-12;
+  @extend %grid-column-xlarge-12;
+}
+
 .dashboard {
   .widgets {
     @extend %grid-column-12;
@@ -10,13 +20,11 @@
       margin-bottom: $column-gutter;
 
       &.upcoming-interactions {
-        @extend %grid-column-large-6;
-        @extend %grid-column-xlarge-4;
+        @include dashboard-default-widget-size();
       }
 
       &.performance {
-        @extend %grid-column-large-12;
-        @extend %grid-column-xlarge-12;
+        @include dashboard-large-widget-size();
       }
     }
   }
