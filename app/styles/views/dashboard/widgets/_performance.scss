@@ -27,7 +27,6 @@ $performance-default-color: $alert-color;
 
     > div {
       background-color: $performance-default-color;
-      min-width: $performance-bar-height;
       position: relative;
     }
   }
