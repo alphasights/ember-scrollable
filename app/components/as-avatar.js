@@ -16,16 +16,12 @@ export default TooltipsterComponent.extend({
   src: Ember.computed.any('person.avatarUrl', 'blankAvatarUrl'),
 
   setupTooltipster: function() {
-    var method;
-
-    if (this.get('showTooltip')) {
-      method = 'enable';
-    } else {
-      method = 'disable';
-    }
-
     Ember.run.schedule('afterRender', () => {
-      this.$().tooltipster(method);
+      if (this.get('showTooltip')) {
+        this.$().tooltipster('enable');
+      } else {
+        this.$().tooltipster('disable');
+      }
     });
   }.observes('showTooltip').on('didInsertElement')
 });

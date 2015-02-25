@@ -1,16 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  statusClass: function() {
-    if (this.get('isOnTarget')) {
-      return 'on-target';
-    } else if (this.get('isOnPace')) {
-      return 'on-pace';
-    } else {
-      return null;
-    }
-  }.property('isOnTarget', 'isOnPace'),
-
   maxCreditCount: function() {
     return this.get('monthlyTarget') * 2;
   }.property('monthlyTarget'),
