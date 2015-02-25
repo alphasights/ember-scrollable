@@ -14,5 +14,9 @@ export default DS.Model.extend({
 
   checklistUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
+  }.property('id', 'project.id'),
+
+  schedulingUrl: function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
   }.property('id', 'project.id')
 });
