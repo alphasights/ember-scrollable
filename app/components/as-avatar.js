@@ -15,11 +15,13 @@ export default TooltipsterComponent.extend({
   alt: Ember.computed.oneWay('person.initials'),
   src: Ember.computed.any('person.avatarUrl', 'blankAvatarUrl'),
 
-  disableTootlipster: function() {
-    if (!this.get('showTooltip')) {
-      Ember.run.schedule('afterRender', () => {
+  setupTooltipster: function() {
+    Ember.run.schedule('afterRender', () => {
+      if (this.get('showTooltip')) {
+        this.$().tooltipster('enable');
+      } else {
         this.$().tooltipster('disable');
-      });
-    }
-  }.observes('showTooltip').on('init')
+      }
+    });
+  }.observes('showTooltip').on('didInsertElement')
 });
