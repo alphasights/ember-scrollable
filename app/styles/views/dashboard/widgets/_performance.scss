@@ -46,10 +46,10 @@ $performance-default-color: $alert-color;
     .tip {
       @extend %performance-target-tip;
 
-      visibility: visible;
-      top: -$performance-bar-margin;
-      height: $performance-bar-height + $performance-bar-margin * 2;
       background-color: transparent;
+      height: $performance-bar-height + $performance-bar-margin * 2;
+      top: -$performance-bar-margin;
+      visibility: visible;
     }
   }
 
