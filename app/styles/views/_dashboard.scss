@@ -19,12 +19,12 @@
 
       margin-bottom: $column-gutter;
 
-      &.upcoming-interactions {
-        @include dashboard-default-widget-size();
-      }
-
       &.performance {
         @include dashboard-large-widget-size();
+      }
+
+      &.upcoming-interactions {
+        @include dashboard-default-widget-size();
       }
     }
   }
