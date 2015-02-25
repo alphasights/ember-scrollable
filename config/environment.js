@@ -26,6 +26,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
+    contentSecurityPolicyHeader: 'Content-Security-Policy',
+
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' cdn.segment.com widget.intercom.io cdn.heapanalytics.com js.intercomcdn.com heapanalytics.com",
