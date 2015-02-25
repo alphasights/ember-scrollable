@@ -5,8 +5,6 @@ export default SidePanelRoute.extend({
   sidePanelActionsTemplateName: 'side-panel/navigation-actions',
 
   model: function(params) {
-    var interactionId = params.interaction_id;
-
-    return this.store.find('interaction', interactionId);
+    return this.store.find('interaction', params.interaction_id);
   }
 });
