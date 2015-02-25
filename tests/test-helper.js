@@ -23,7 +23,7 @@ export default {
           "id": 1,
           "teamId": 1,
           "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
-          "timeZone": "UTC"
+          "timeZone": "Etc/UTC"
         }
       }
     });

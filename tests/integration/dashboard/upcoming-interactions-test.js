@@ -9,12 +9,14 @@ const projectName = 'Project Name',
       advisorCompanyName = 'Apple',
       advisorEmail = 'advisor@email.com',
       advisorPhoneNumber = '+1 555-123-4567',
+      advisorTimeZone = 'Europe/Moscow',
       clientContactName = 'Bob Client',
       clientAccountName = 'McKinsey & Company San Francisco',
       clientEmail = 'client@email.com',
       clientPhoneNumber = '+1 555-321-9000',
+      clientTimeZone = 'Australia/Sydney',
       checklistStatus = 'Checklist Complete',
-      scheduledCallTime = "2015-02-20T10:00:00.000+00:00";
+      scheduledCallTime = '2015-02-20T10:00:00.000+00:00';
 
 module("Upcoming interactions", {
   beforeEach: function() {
@@ -30,7 +32,7 @@ module("Upcoming interactions", {
           "phone_numbers": [advisorPhoneNumber],
           "job_title": advisorJobTitle,
           "company_name": advisorCompanyName,
-          "time_zone": "Europe/Moscow"
+          "time_zone": advisorTimeZone
         }
      ],
      "client_contacts": [
@@ -41,7 +43,7 @@ module("Upcoming interactions", {
           "name": clientContactName,
           "phone_numbers": [clientPhoneNumber],
           "client_account_id": 485,
-          "time_zone": "Australia/Sydney"
+          "time_zone": clientTimeZone
         }
      ],
      "client_accounts": [
