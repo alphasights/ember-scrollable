@@ -9,8 +9,7 @@
           </div>
 
           <div class="time">
-            <span>Requested at {{moment interaction.requestedAt "D MMM, h:mm A"}}</span>
-            <small>{{ago interaction.requestedAt}}</small>
+            <span>Requested {{ago interaction.requestedAt}}</span>
           </div>
 
           {{as-checklist-status items=interaction.checklistItems showTooltip=true}}
