@@ -11,13 +11,21 @@ export default Ember.ObjectController.extend({
     }
   }.property('isOnTarget', 'isOnPace'),
 
-  progress: function() {
-    return this.get('currentMonthCreditCount') / this.get('monthlyTarget');
-  }.property('monthlyTarget', 'currentMonthCreditCount'),
+  maxCreditCount: function() {
+    return this.get('monthlyTarget') * 2;
+  }.property('monthlyTarget'),
 
-  pace: function() {
-    return this.get('onPaceCreditTarget') / this.get('monthlyTarget');
-  }.property('onPaceCreditTarget', 'currentMonthCreditCount'),
+  progress: function() {
+    return this.get('currentMonthCreditCount') / this.get('maxCreditCount');
+  }.property('maxCreditCount', 'currentMonthCreditCount'),
+
+  targetRatio: function() {
+    return this.get('monthlyTarget') / this.get('maxCreditCount');
+  }.property('monthlyTarget', 'maxCreditCount'),
+
+  paceRatio: function() {
+    return this.get('onPaceCreditTarget') / this.get('maxCreditCount');
+  }.property('onPaceCreditTarget', 'maxCreditCount'),
 
   monthlyTargetTitle: function() {
     return `Target: ${this.get('monthlyTarget')}`;
