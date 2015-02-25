@@ -4,14 +4,10 @@ export default Ember.ObjectController.extend({
   preferences: null,
 
   modelDidChange: function() {
-    var model = this.get('model');
-
     analytics.identify(
       this.get('initials'),
-      _(model.toJSON()).pick('initials', 'name', 'developer')
+      _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
     );
-
-    moment.tz.setDefault(model.get('timeZone'));
   }.observes('model'),
 
   setupIntercom: function() {
