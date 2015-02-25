@@ -10,7 +10,7 @@ export default Ember.ObjectController.extend({
   interactionsToSchedule: function() {
     return this.get('interactions').filter(function(interaction) {
       return Ember.isPresent(interaction.get('requestedAt')) &&
-        Ember.isBlank(interaction.get('scheduledCallTime'))
-    })
+        Ember.isBlank(interaction.get('scheduledCallTime'));
+    });
   }.property('interactions.@each.{scheduledCallTime,requestedAt}')
 });
