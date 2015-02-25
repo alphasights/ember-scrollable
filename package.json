@@ -24,6 +24,7 @@
     "ember-cli-6to5": "3.0.0",
     "ember-cli-app-version": "0.3.1",
     "ember-cli-autoprefixer": "0.3.0",
+    "ember-cli-content-security-policy": "0.3.0",
     "ember-cli-dependency-checker": "0.0.7",
     "ember-cli-divshot": "git+https://git@github.com/matteodepalo/ember-cli-divshot.git",
     "ember-cli-htmlbars": "0.6.0",

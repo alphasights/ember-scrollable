@@ -11,8 +11,8 @@ export default TooltipsterComponent.extend({
 
   showTooltip: true,
   person: null,
-  title: Ember.computed.alias('person.name'),
-  alt: Ember.computed.alias('person.initials'),
+  title: Ember.computed.oneWay('person.name'),
+  alt: Ember.computed.oneWay('person.initials'),
   src: Ember.computed.any('person.avatarUrl', 'blankAvatarUrl'),
 
   setupTooltipster: function() {

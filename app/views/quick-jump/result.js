@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   classNameBindings: ['type'],
-  type: Ember.computed.alias('controller.type'),
+  type: Ember.computed.oneWay('controller.type'),
 
   templateName: function() {
     if (this.get('type') != null) {

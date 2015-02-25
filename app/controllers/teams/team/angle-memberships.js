@@ -4,7 +4,7 @@ import PromiseController from '../../promise';
 export default Ember.ObjectController.extend({
   needs: ['teams/team'],
 
-  team: Ember.computed.alias('controllers.teams/team'),
+  team: Ember.computed.oneWay('controllers.teams/team'),
   requestPromise: null,
   query: null,
   results: [],
