@@ -90,7 +90,7 @@ test("Show interactions to schedule list", function() {
   visit('/dashboard');
 
   andThen(function() {
-    var $interaction = find('.interactions-to-schedule');
+    var $interaction = find('.interactions-to-schedule article:first');
 
     var interactionListItem = {
       advisorName: $interaction.find('.title span').text().trim(),
