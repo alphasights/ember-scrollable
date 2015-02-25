@@ -8,6 +8,7 @@ export default DS.Model.extend({
   jobTitle: DS.attr('string'),
   name: DS.attr('string'),
   phoneNumbers: DS.attr(),
+  timeZone: DS.attr('string'),
 
   currentPosition: function() {
     var jobTitle = this.get('jobTitle');

@@ -3,7 +3,13 @@
 </header>
 
 <ul class="widgets">
-  <li>
+  <li class="performance">
+    {{render "dashboard.widgets.performance"
+      deliveryPerformance
+      tagName="section"}}
+  </li>
+
+  <li class="upcoming-interactions">
     {{render "dashboard.widgets.upcoming-interactions"
       upcomingInteractions
       tagName="section"}}

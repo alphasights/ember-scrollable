@@ -3,7 +3,9 @@
 }
 
 ul,
-li {
+li,
+ul li ul,
+ul li ul li {
   list-style-type: none;
   margin: 0;
   padding: 0;

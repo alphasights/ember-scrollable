@@ -51,7 +51,8 @@
     "EmberENV",
     "__env",
     "select",
-    "moment"
+    "moment",
+    "Timecop"
   ],
   "node": false,
   "browser": false,

@@ -22,7 +22,8 @@ export default {
           "initials": "EU",
           "id": 1,
           "teamId": 1,
-          "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+          "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
+          "timeZone": "Etc/UTC"
         }
       }
     });

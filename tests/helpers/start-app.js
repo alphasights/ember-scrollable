@@ -10,6 +10,7 @@ export default function startApp(attrs) {
   attributes = Ember.merge(attributes, attrs); // use defaults, but you can override;
 
   $.Velocity.mock = true;
+  moment.tz.setDefault('Etc/UTC');
 
   Router.reopen({
     location: 'none'

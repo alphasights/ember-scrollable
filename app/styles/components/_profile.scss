@@ -4,13 +4,13 @@
   border: solid 1px $global-section-border-color;
   border-radius: $global-radius;
 
-  h1 {
-    @extend %grid-column-12;
-
-    color: $small-font-color;
-    font-size: $h4-font-size;
-    font-weight: $font-weight-bold;
-    padding: $column-gutter / 4 $column-gutter / 2;
+  header {
+    h1 {
+      color: $small-font-color;
+      font-size: $h4-font-size;
+      font-weight: $font-weight-bold;
+      padding: $column-gutter / 4 $column-gutter / 2;
+    }
   }
 
   > .content {
@@ -23,7 +23,7 @@
       @extend %grid-column-large-2;
       @extend %grid-column-small-3;
 
-      padding-right: 0 !important;
+      text-align: right;
     }
 
     .details {

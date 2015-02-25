@@ -82,10 +82,6 @@ HTML elements global styling (a.k.a reset) should be put inside the `styles/_def
 
 ## Coding style and best practices
 
-### General
-
-- Use `Ember.computed.oneWay` instead of `Ember.computed.alias` unless there is a specific reason for wanting to propagate changes back to the source.
-
 ### Templates
 A `render` statement should always refer to a view, never directly to a template.
 Templates should not contain the root element with the main view class. Add the main class to the `classNameBindings` property in the view file.
@@ -236,6 +232,10 @@ If you have to handle optional/togglable classes for a certain selector, put the
 ```
 
 ### JavaScript
+
+Use `Ember.computed.oneWay` instead of `Ember.computed.alias` unless there is a specific reason for propagating changes back to the source.
+
+---
 
 Don't use `Ember.computed` for array/collection functions (like `sort`, `filter`, etc.). It appears to be bugged in the current state.
 
