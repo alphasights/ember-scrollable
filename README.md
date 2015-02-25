@@ -82,6 +82,10 @@ HTML elements global styling (a.k.a reset) should be put inside the `styles/_def
 
 ## Coding style and best practices
 
+### General
+
+- Use `Ember.computed.oneWay` instead of `Ember.computed.alias` except in models.
+
 ### Templates
 A `render` statement should always refer to a view, never directly to a template.
 Templates should not contain the root element with the main view class. Add the main class to the `classNameBindings` property in the view file.
@@ -204,11 +208,11 @@ If you have to handle optional/togglable classes for a certain selector, put the
 ```scss
 .project-list-item {
   padding: 5px;
-  
+
   > div {
     color: white;
   }
- 
+
   &.no-target {
     background-color: red;
   }
@@ -220,11 +224,11 @@ If you have to handle optional/togglable classes for a certain selector, put the
 ```scss
 .project-list-item {
   padding: 5px;
-  
+
   &.no-target {
     background-color: red;
   }
-  
+
   > div {
     color: white;
   }
@@ -270,7 +274,7 @@ keyUp: function(event) {
   if (event.which === 27) {
     return;
   }
-  
+
   this.set('isActive', false);
 }
 ```
@@ -351,8 +355,8 @@ export default SidePanelRoute.extend({
 });
 ```
 
-Assigning a `viewName` and `sidePanelActionsTemplateName` is optional. 
-`viewName` should be used when you need a custom view for the side panel (e.g. you need to setup events on `didInsertElement`). 
+Assigning a `viewName` and `sidePanelActionsTemplateName` is optional.
+`viewName` should be used when you need a custom view for the side panel (e.g. you need to setup events on `didInsertElement`).
 `sidePanelActionsTemplateName` should be used when you need buttons to be displayed at the top of the side panel in the actions header.
 
 Views specified with `viewName` should inherit from the `side-panel` view.

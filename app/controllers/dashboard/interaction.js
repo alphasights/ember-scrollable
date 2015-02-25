@@ -3,9 +3,9 @@ import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
-  dashboard: Ember.computed.alias('controllers.dashboard'),
+  dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
-  navigableModels: Ember.computed.alias('dashboard.upcomingInteractions'),
+  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
   actions: {

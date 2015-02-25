@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   team: null,
-  sortPropertyId: Ember.computed.alias('team.sortPropertyId'),
+  sortPropertyId: Ember.computed.oneWay('team.sortPropertyId'),
   arrangedContent: Ember.computed.sort('content', 'sortProperties'),
 
   availableSortProperties: [{

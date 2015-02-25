@@ -4,7 +4,7 @@ import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 export default Ember.ObjectController.extend(ProjectProgressMixin, {
   needs: ['teams/team'],
 
-  team: Ember.computed.alias('controllers.teams/team'),
+  team: Ember.computed.oneWay('controllers.teams/team'),
   hasDeliveryTarget: Ember.computed.gt('deliveryTarget', 0),
 
   members: function() {

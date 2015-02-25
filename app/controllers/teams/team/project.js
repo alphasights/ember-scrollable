@@ -4,9 +4,9 @@ import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigationMixin, {
   needs: ['teams/team'],
-  team: Ember.computed.alias('controllers.teams/team'),
+  team: Ember.computed.oneWay('controllers.teams/team'),
 
-  navigableModels: Ember.computed.alias('team.projects.arrangedContent'),
+  navigableModels: Ember.computed.oneWay('team.projects.arrangedContent'),
 
   modelRouteParams: function () {
     return ['teams.team.project', this.get('team.id')];
