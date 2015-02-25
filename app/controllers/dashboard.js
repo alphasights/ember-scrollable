@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  upcomingInteractions: Ember.computed.filterBy('interactions', 'scheduledCallTime')
+  upcomingInteractions: function() {
+    return this.get('interactions')
+      .filterBy('scheduledCallTime')
+      .sortBy('scheduledCallTime');
+  }.property('interactions.@each.scheduledCallTime')
 });
