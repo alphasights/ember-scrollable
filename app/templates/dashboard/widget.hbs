@@ -1,7 +1,9 @@
 <header>
   <h1>{{view.name}}</h1>
-  
-  {{partial view.headerTemplateName}}
+
+  {{#if view.headerTemplateName}}
+    {{partial view.headerTemplateName}}
+  {{/if}}
 </header>
 
 {{yield}}

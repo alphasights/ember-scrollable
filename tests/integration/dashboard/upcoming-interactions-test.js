@@ -9,12 +9,14 @@ const projectName = 'Project Name',
       advisorCompanyName = 'Apple',
       advisorEmail = 'advisor@email.com',
       advisorPhoneNumber = '+1 555-123-4567',
+      advisorTimeZone = 'Europe/Moscow',
       clientContactName = 'Bob Client',
       clientAccountName = 'McKinsey & Company San Francisco',
       clientEmail = 'client@email.com',
       clientPhoneNumber = '+1 555-321-9000',
+      clientTimeZone = 'Australia/Sydney',
       checklistStatus = 'Checklist Complete',
-      scheduledCallTime = "2015-02-20T10:00:00.000+00:00";
+      scheduledCallTime = '2015-02-20T10:00:00.000+00:00';
 
 module("Upcoming interactions", {
   beforeEach: function() {
@@ -29,7 +31,8 @@ module("Upcoming interactions", {
           "name": advisorName,
           "phone_numbers": [advisorPhoneNumber],
           "job_title": advisorJobTitle,
-          "company_name": advisorCompanyName
+          "company_name": advisorCompanyName,
+          "time_zone": advisorTimeZone
         }
      ],
      "client_contacts": [
@@ -39,7 +42,8 @@ module("Upcoming interactions", {
           "emails": [clientEmail],
           "name": clientContactName,
           "phone_numbers": [clientPhoneNumber],
-          "client_account_id": 485
+          "client_account_id": 485,
+          "time_zone": clientTimeZone
         }
      ],
      "client_accounts": [
@@ -103,7 +107,9 @@ test("Show interaction details", function() {
       clientEmail: $interaction.find('.client .email span').text().trim(),
       clientPhoneNumber: $interaction.find('.client .phone-number span').text().trim(),
       callDate: $interaction.find('.date-time .date').text().trim(),
-      callTime: $interaction.find('.date-time .time').text().trim()
+      callTime: $interaction.find('.date-time .time').text().trim(),
+      advisorCallTime: $interaction.find('.profiles .advisor .call-time span').text().trim(),
+      clientCallTime: $interaction.find('.profiles .client .call-time span').text().trim()
     };
 
     deepEqual(interactionDetails, {
@@ -118,7 +124,9 @@ test("Show interaction details", function() {
       clientEmail: clientEmail,
       clientPhoneNumber: clientPhoneNumber,
       callDate: '20 February',
-      callTime: '10:00 AM'
+      callTime: '10:00 AM',
+      advisorCallTime: '1:00 PM MSK',
+      clientCallTime: '9:00 PM AEDT'
     });
   });
 });

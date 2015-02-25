@@ -63,6 +63,35 @@ $interaction-header-height:
     }
   }
 
+  .profile header {
+    @extend %grid-row;
+
+    padding: 0 $column-gutter / 2;
+
+    h1,
+    .call-time {
+      @extend %grid-column-6;
+
+      line-height: 3rem;
+      margin: 0;
+      padding: 0 !important;
+    }
+
+    .call-time {
+      color: $primary-color;
+      font-size: $h5-font-size;
+      text-align: right;
+
+      > div {
+        display: inline-block;
+      }
+
+      i {
+        @include icon('clock-o');
+      }
+    }
+  }
+
   .profiles {
     @extend %grid-column-12;
 

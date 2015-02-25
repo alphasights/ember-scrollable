@@ -34,6 +34,7 @@ var app = new EmberApp({
 // along with the exports of each module as its value.
 
 app.import('bower_components/honeybadger.js/honeybadger.js');
+app.import('bower_components/moment-timezone/builds/moment-timezone-with-data.js');
 app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
