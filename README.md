@@ -233,9 +233,11 @@ If you have to handle optional/togglable classes for a certain selector, put the
 
 ### JavaScript
 
-- Use `Ember.computed.oneWay` instead of `Ember.computed.alias` unless there is a specific reason for propagating changes back to the source.
+Use `Ember.computed.oneWay` instead of `Ember.computed.alias` unless there is a specific reason for propagating changes back to the source.
 
-- Don't use `Ember.computed` for array/collection functions (like `sort`, `filter`, etc.). It appears to be bugged in the current state.
+---
+
+Don't use `Ember.computed` for array/collection functions (like `sort`, `filter`, etc.). It appears to be bugged in the current state.
 
 **Do this:**
 
