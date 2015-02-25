@@ -23,7 +23,8 @@
         @include dashboard-large-widget-size();
       }
 
-      &.upcoming-interactions, &.interactions-to-schedule  {
+      &.upcoming-interactions,
+      &.interactions-to-schedule {
         @include dashboard-default-widget-size();
       }
     }
