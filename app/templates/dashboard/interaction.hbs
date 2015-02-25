@@ -27,12 +27,14 @@
           person=profile.person
           title=profile.title
           class=profile.class}}
-          <div class="call-time">
-            {{#tool-tipster title="Local Call Time"}}
-              <i></i>
-              <span>{{profile.callTime}}</span>
-            {{/tool-tipster}}
-          </div>
+          {{#if profile.person.timeZone}}
+            <div class="call-time">
+              {{#tool-tipster title="Local Call Time"}}
+                <i></i>
+                <span>{{profile.callTime}}</span>
+              {{/tool-tipster}}
+            </div>
+          {{/if}}
         {{/as-profile}}
       </li>
     {{/each}}
