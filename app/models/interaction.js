@@ -6,6 +6,7 @@ export default DS.Model.extend({
   clientContact: DS.belongsTo('clientContact'),
   project: DS.belongsTo('project'),
   scheduledCallTime: DS.attr('date'),
+  requestedAt: DS.attr('date'),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;

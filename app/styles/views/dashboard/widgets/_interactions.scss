@@ -1,4 +1,4 @@
-.dashboard .widget.upcoming-interactions {
+.dashboard .widget.interactions {
   article {
     @extend %grid-row;
     @include single-transition(background-color, 100ms, linear);

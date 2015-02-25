@@ -1,0 +1,41 @@
+<header>
+  <div class="date-time">
+    <span class="date">{{moment requestedAt "D MMMM"}}</span>
+    <span class="time">{{moment requestedAt "h:mm A"}}</span>
+  </div>
+
+  <div class="content">
+    <h1>
+      <span>{{advisor.name}}</span>
+
+      <small>
+        <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+          {{project.name}}
+        </a>
+      </small>
+    </h1>
+
+    <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
+  </div>
+</header>
+
+<section class="profiles">
+  <ul>
+    <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
+    <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+  </ul>
+</section>
+
+<section class="checklist-items">
+  <header>
+    {{as-checklist-status items=checklistItems}}
+
+    <a target="_blank" {{bind-attr href=checklistUrl}}>Show checklist</a>
+  </header>
+
+  <ul>
+    {{#each checklistItem in checklistItems itemController="dashboard.interaction.checklistItem"}}
+      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.description}}</li>
+    {{/each}}
+  </ul>
+</section>
