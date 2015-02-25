@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 
 export default DS.Model.extend({
   currentMonthCreditCount: DS.attr('number'),
@@ -47,7 +46,7 @@ export default DS.Model.extend({
     return Math.round(timeSinceTodaysStart.asHours());
   },
 
-  hasFulfilledTarget: function() {
+  isOnTarget: function() {
     return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
   }.property('currentMonthCreditCount', 'monthlyTarget'),
 

@@ -1,22 +1,22 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  performanceBarClass: function() {
-    if (this.get('hasFulfilledTarget')) {
+  statusClass: function() {
+    if (this.get('isOnTarget')) {
       return 'on-target';
     } else if (this.get('isOnPace')) {
       return 'on-pace';
     } else {
       return null;
     }
-  }.property('hasFulfilledTarget', 'isOnPace'),
+  }.property('isOnTarget', 'isOnPace'),
 
   progress: function() {
-    return Math.min(1, this.get('currentMonthCreditCount') / this.get('monthlyTarget'));
+    return this.get('currentMonthCreditCount') / this.get('monthlyTarget');
   }.property('monthlyTarget', 'currentMonthCreditCount'),
 
   pace: function() {
-    return Math.min(1, this.get('onPaceCreditTarget') / this.get('monthlyTarget'));
+    return this.get('onPaceCreditTarget') / this.get('monthlyTarget');
   }.property('onPaceCreditTarget', 'currentMonthCreditCount'),
 
   monthlyTargetTitle: function() {
@@ -24,7 +24,7 @@ export default Ember.ObjectController.extend({
   }.property('monthlyTarget'),
 
   onPaceCreditTargetTitle: function() {
-    return `On Pace Target: ${this.get('onPaceCreditTarget')}`;
+    return `To be on Pace: ${this.get('onPaceCreditTarget')}`;
   }.property('onPaceCreditTarget'),
 
   currentMonthCreditCountTitle: function() {

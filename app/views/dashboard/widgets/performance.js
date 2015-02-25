@@ -1,13 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNameBindings: [':widget', ':performance', 'controller.performanceBarClass'],
+  classNameBindings: [':widget', ':performance', 'controller.statusClass'],
 
-  onDidInsertElement: function() {
-    this.$().hover(() => {
-      this.$('.tooltipstered').tooltipster('show');
-    }, () => {
-      this.$('.tooltipstered').tooltipster('hide');
+  setupTooltipster: function() {
+    Ember.run.schedule('afterRender', () => {
+      this.$().hover(() => {
+        this.$('.tooltipstered').tooltipster('show');
+      }, () => {
+        this.$('.tooltipstered').tooltipster('hide');
+      });
     });
   }.on('didInsertElement')
 });
