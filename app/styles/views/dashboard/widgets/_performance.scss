@@ -60,6 +60,7 @@ $performance-default-color: $alert-color;
     background-color: lighten($global-overlay-background-color, 60%);
     border-radius: $global-radius / 2;
     height: $performance-bar-height;
+    pointer-events: none;
     position: absolute;
     right: 0;
     visibility: hidden;
