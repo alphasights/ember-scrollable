@@ -63,14 +63,14 @@ $performance-default-color: $alert-color;
     position: absolute;
     right: 0;
     visibility: hidden;
-    width: $performance-bar-height;
+    width: 0;
     z-index: 1;
   }
 }
 
 %performance-target-tip {
-  $performance-target-tip-width: $performance-bar-height;
-  $performance-target-tip-height: $performance-bar-height / 2;
+  $performance-target-tip-width: 8px;
+  $performance-target-tip-height: $performance-target-tip-width / 2;
   $performance-target-tip-color: $white;
 
   &:before,
@@ -80,7 +80,7 @@ $performance-default-color: $alert-color;
     content: '';
     height: $performance-target-tip-height;
     height: 0;
-    left: -$performance-target-tip-width / 2;
+    left: -$performance-target-tip-width;
     position: absolute;
     width: $performance-target-tip-width;
   }
