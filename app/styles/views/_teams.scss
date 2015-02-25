@@ -14,8 +14,12 @@
     .toggle {
       display: inline-block;
       height: $h1-font-size;
-      line-height: $h1-font-size;
       vertical-align: middle;
+    }
+
+    h1,
+    select {
+      line-height: $h1-font-size;
     }
 
     h1 {
@@ -31,7 +35,7 @@
     }
 
     .toggle {
-      @include button-icon(bars);
+      margin-bottom: 0;
     }
 
     &.open {

@@ -24,6 +24,18 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    contentSecurityPolicyHeader: 'Content-Security-Policy',
+
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' cdn.segment.com widget.intercom.io cdn.heapanalytics.com js.intercomcdn.com heapanalytics.com",
+      'font-src': "'self' fonts.gstatic.com",
+      'connect-src': "'self' api.segment.io wss://*.intercom.io api-ping.intercom.io",
+      'img-src': "'self' s3.amazonaws.com heapanalytics.com js.intercomcdn.com",
+      'style-src': "'self' 'unsafe-inline' cdn.mxpnl.com fonts.googleapis.com",
+      'media-src': "'self'"
     }
   };
 

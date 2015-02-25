@@ -84,7 +84,7 @@ HTML elements global styling (a.k.a reset) should be put inside the `styles/_def
 
 ### General
 
-- Use `Ember.computed.oneWay` instead of `Ember.computed.alias` except in models.
+- Use `Ember.computed.oneWay` instead of `Ember.computed.alias` unless there is a specific reason for wanting to propagate changes back to the source.
 
 ### Templates
 A `render` statement should always refer to a view, never directly to a template.
