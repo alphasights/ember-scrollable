@@ -29,7 +29,8 @@ module("Upcoming interactions", {
           "name": advisorName,
           "phone_numbers": [advisorPhoneNumber],
           "job_title": advisorJobTitle,
-          "company_name": advisorCompanyName
+          "company_name": advisorCompanyName,
+          "time_zone": "Europe/Moscow"
         }
      ],
      "client_contacts": [
@@ -39,7 +40,8 @@ module("Upcoming interactions", {
           "emails": [clientEmail],
           "name": clientContactName,
           "phone_numbers": [clientPhoneNumber],
-          "client_account_id": 485
+          "client_account_id": 485,
+          "time_zone": "Australia/Sydney"
         }
      ],
      "client_accounts": [
@@ -103,7 +105,9 @@ test("Show interaction details", function() {
       clientEmail: $interaction.find('.client .email span').text().trim(),
       clientPhoneNumber: $interaction.find('.client .phone-number span').text().trim(),
       callDate: $interaction.find('.date-time .date').text().trim(),
-      callTime: $interaction.find('.date-time .time').text().trim()
+      callTime: $interaction.find('.date-time .time').text().trim(),
+      advisorCallTime: $interaction.find('.profiles .advisor .call-time span').text().trim(),
+      clientCallTime: $interaction.find('.profiles .client .call-time span').text().trim()
     };
 
     deepEqual(interactionDetails, {
@@ -118,7 +122,9 @@ test("Show interaction details", function() {
       clientEmail: clientEmail,
       clientPhoneNumber: clientPhoneNumber,
       callDate: '20 February',
-      callTime: '10:00 AM'
+      callTime: '10:00 AM',
+      advisorCallTime: '1:00 PM MSK',
+      clientCallTime: '9:00 PM AEDT'
     });
   });
 });

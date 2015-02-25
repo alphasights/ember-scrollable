@@ -21,12 +21,12 @@
 
 <section class="profiles">
   <ul>
-    {{#each profile in profiles}}
+    {{#each profile in profiles itemController="dashboard.interaction.profile"}}
       <li>
         {{#as-profile
           person=profile.person
           title=profile.title
-          class=profile.id}}
+          class=profile.class}}
           <div class="call-time">
             {{#tool-tipster title="Local Call Time"}}
               <i></i>

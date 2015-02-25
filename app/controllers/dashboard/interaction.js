@@ -9,27 +9,16 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   modelRouteParams: ['dashboard.interaction'],
 
   profiles: function() {
-    var advisor = this.get('advisor');
-    var clientContact = this.get('clientContact');
-
     return [{
-      person: advisor,
-      id: 'advisor',
-      title: 'Advisor',
-      callTime: this.localCallTime(advisor),
+      person: this.get('advisor'),
+      class: 'advisor',
+      title: 'Advisor'
     }, {
-      person: clientContact,
-      id: 'client',
-      title: 'Client',
-      callTime: this.localCallTime(clientContact)
+      person: this.get('clientContact'),
+      class: 'client',
+      title: 'Client'
     }];
-  }.property('advisor', 'clientContact', 'scheduledCallTime'),
-
-  localCallTime: function(person) {
-    return moment
-      .tz(this.get('scheduledCallTime'), person.get('timeZone'))
-      .format('h:mm A z');
-  },
+  }.property('advisor', 'clientContact'),
 
   actions: {
     hideSidePanel: function() {
