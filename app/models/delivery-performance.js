@@ -1,12 +1,9 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 
 export default DS.Model.extend({
   currentMonthCreditCount: DS.attr('number'),
   monthlyTarget: DS.attr('number'),
   user: DS.belongsTo('user'),
-  hasFulfilledTarget: Ember.computed.gte('currentMonthCreditCount', 'monthlyTarget'),
-  isOnPace: Ember.computed.gte('currentMonthCreditCount', 'onPaceCreditTarget'),
 
   onPaceCreditTarget: function() {
     return Math.round(
@@ -47,5 +44,13 @@ export default DS.Model.extend({
     var timeSinceTodaysStart = moment.duration(moment().diff(todaysStart));
 
     return Math.round(timeSinceTodaysStart.asHours());
-  }
+  },
+
+  isOnTarget: function() {
+    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
+  }.property('currentMonthCreditCount', 'monthlyTarget'),
+
+  isOnPace: function() {
+    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
+  }.property('currentMonthCreditCount', 'onPaceCreditTarget')
 });

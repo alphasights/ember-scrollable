@@ -1,9 +1,7 @@
-$tooltipster-bg-color: $body-font-color;
+$tooltipster-bg-color: lighten($body-font-color, 25%);
 $tooltipster-border-color: $global-section-border-color;
 
 .tooltipster-base {
-  @include detached-border($color: $tooltipster-border-color);
-
   background-color: $tooltipster-bg-color;
   border-radius: $global-radius / 2;
   color: $white;
@@ -12,6 +10,6 @@ $tooltipster-border-color: $global-section-border-color;
     font-family: $header-font-family;
     font-size: $base-font-size;
     line-height: $base-line-height;
-    padding: $column-gutter / 4 $column-gutter / 2;
+    padding: 0 $column-gutter / 2;
   }
 }
