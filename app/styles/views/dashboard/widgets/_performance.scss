@@ -6,8 +6,8 @@ $performance-default-color: $alert-color;
 
 .dashboard .widget.performance {
   background-color: $global-section-border-color;
-  padding: $performance-bar-margin;
   min-height: 0;
+  padding: $performance-bar-margin;
   position: relative;
 
   &.on-target .current > div {
@@ -27,8 +27,8 @@ $performance-default-color: $alert-color;
 
     > div {
       background-color: $performance-default-color;
-      position: relative;
       min-width: $performance-bar-height;
+      position: relative;
     }
   }
 
@@ -52,9 +52,9 @@ $performance-default-color: $alert-color;
     border-radius: $global-radius / 2;
     height: $performance-bar-height;
     position: absolute;
-    width: $performance-bar-height;
     right: 0;
     z-index: 1;
     visibility: hidden;
+    width: $performance-bar-height;
   }
 }
