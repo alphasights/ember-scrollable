@@ -25,7 +25,7 @@ $widget-min-height: $widget-header-line-height * 2;
     }
   }
 
-  .expand-results {
+  .toggle-collapse {
     @include single-transition(background-color, 150ms, linear);
 
     background-color: $anchor-font-color;
@@ -37,7 +37,6 @@ $widget-min-height: $widget-header-line-height * 2;
 
     &:after {
       color: $white;
-      content: '\2022 \2022 \2022';
       font-size: $small-font-size;
       letter-spacing: 2px;
       line-height: $base-line-height / 2;
@@ -47,10 +46,12 @@ $widget-min-height: $widget-header-line-height * 2;
       background-color: lighten($anchor-font-color, 10%);
     }
 
-    &.less {
-      &:after {
-        content: '\2022';
-      }
+    &.expand:after {
+      content: '\2022 \2022 \2022';
+    }
+
+    &.contract:after {
+      content: '\2022';
     }
   }
 }
