@@ -17,8 +17,8 @@ export default Ember.ArrayController.extend({
   }.property('model.length', 'arrangedContent.length'),
 
   isShowingMore: function() {
-    return (this.get('visibleInteractions.length') > this.get('initiallyVisibleNumberOfItems'));
-  }.property('visibleInteractions.length'),
+    return (this.get('arrangedContent.length') > this.get('initiallyVisibleNumberOfItems'));
+  }.property('arrangedContent.length'),
 
   actions: {
     showMore: function() {
