@@ -13,8 +13,8 @@ export default Ember.ArrayController.extend({
   }.property('model', 'showMore'),
 
   canShowMoreInteractions: function() {
-    return this.get('model.length') >= this.get('initialVisibleLimit') && !this.get('showMore');
-  }.property('model.length', 'initialVisibleLimit', 'showMore'),
+    return this.get('visibleInteractions.length') < this.get('model.length')
+  }.property('model.length', 'visibleInteractions.length'),
 
   actions: {
     showMore: function() {
