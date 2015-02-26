@@ -20,6 +20,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
     }];
   }.property('advisor', 'clientContact'),
 
+  checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
+  checklistItemsSorting: ['completed', 'createdAt'],
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
