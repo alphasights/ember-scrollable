@@ -22,7 +22,6 @@ test('#onPaceCreditTarget calculates the on pace credit target, rounded to the n
   // Five weekdays prior to February 8 of a possible total of 20 weekdays.
   // Therefore 25% of the month has been completed.
   Timecop.freeze(moment('2015-02-08T00:00:00.000+00:00'));
-  // debugger;
 
   Ember.run(() => {
     this.model.set('monthlyTarget', 30);
