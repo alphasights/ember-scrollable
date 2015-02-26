@@ -3,7 +3,7 @@ $performance-bar-margin: $column-gutter / 2;
 $performance-on-target-start-color: #ffeb00;
 $performance-on-target-end-color: #ffc100;
 $performance-on-pace-color: #4cc417;
-$performance-default-color: #00B0FF;
+$performance-default-color: #00b0ff;
 
 .dashboard .widget.performance {
   background-color: lighten($global-section-border-color, 2%);
