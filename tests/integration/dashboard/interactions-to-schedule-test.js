@@ -67,6 +67,42 @@ module("Interactions To Schedule", {
           "project_id": 32522,
           "checklist_item_ids": [1],
           "requested_at": interactionToSchedule.requestedAt
+        },
+        {
+          "id": 2,
+          "scheduled_call_time": null,
+          "advisor_id": 1,
+          "client_contact_id": 21387,
+          "project_id": 32522,
+          "checklist_item_ids": [1],
+          "requested_at": interactionToSchedule.requestedAt
+        },
+        {
+          "id": 3,
+          "scheduled_call_time": null,
+          "advisor_id": 1,
+          "client_contact_id": 21387,
+          "project_id": 32522,
+          "checklist_item_ids": [1],
+          "requested_at": interactionToSchedule.requestedAt
+        },
+        {
+          "id": 4,
+          "scheduled_call_time": null,
+          "advisor_id": 1,
+          "client_contact_id": 21387,
+          "project_id": 32522,
+          "checklist_item_ids": [1],
+          "requested_at": interactionToSchedule.requestedAt
+        },
+        {
+          "id": 5,
+          "scheduled_call_time": null,
+          "advisor_id": 1,
+          "client_contact_id": 21387,
+          "project_id": 32522,
+          "checklist_item_ids": [1],
+          "requested_at": interactionToSchedule.requestedAt
         }
       ],
       "checklist_items": [
@@ -117,5 +153,32 @@ test("Show interactions to schedule list", function() {
       isChecklistComplete: true,
       relativeRequestedAtTime: 'Requested 30 minutes ago'
     });
+  });
+});
+
+test("Show max 4 interactions to schedule", function() {
+  visit('/dashboard');
+
+  andThen(function() {
+    equal(find('.interactions-to-schedule article').length, 4);
+  });
+});
+
+test("Expand interactions to schedule list", function() {
+  visit('/dashboard');
+  click('.interactions-to-schedule .toggle-collapse');
+
+  andThen(function() {
+    equal(find('.interactions-to-schedule article').length, 5);
+  });
+});
+
+test("Collapse interactions to schedule list", function() {
+  visit('/dashboard');
+  click('.interactions-to-schedule .toggle-collapse');
+  click('.interactions-to-schedule .toggle-collapse');
+
+  andThen(function() {
+    equal(find('.interactions-to-schedule article').length, 4);
   });
 });
