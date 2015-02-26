@@ -22,6 +22,9 @@ module("Upcoming interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
+    Timecop.install();
+    Timecop.freeze(new Date(2015, 1, 20, 9, 30));
+
     defineFixture('GET', '/delivery_performances/me', { response: {
       "delivery_performance":{
         "id": 1,
@@ -95,6 +98,7 @@ module("Upcoming interactions", {
 
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
+    Timecop.uninstall();
   }
 });
 
@@ -159,7 +163,7 @@ test("Show upcoming interactions list", function() {
       projectName: projectName,
       isChecklistComplete: true,
       absoluteCallTime: '20 Feb, 10:00 AM',
-      relativeCallTime: moment(scheduledCallTime).fromNow()
+      relativeCallTime: 'in 30 minutes'
     });
   });
 });

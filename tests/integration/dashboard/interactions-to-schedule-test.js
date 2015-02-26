@@ -14,6 +14,9 @@ module("Interactions To Schedule", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
+    Timecop.install();
+    Timecop.freeze(new Date(2015, 1, 18, 10, 30));
+
     defineFixture('GET', '/interactions', { response: {
      "advisors": [
         {
@@ -112,7 +115,7 @@ test("Show interactions to schedule list", function() {
       advisorName: interactionToSchedule.advisorName,
       projectName: interactionToSchedule.projectName,
       isChecklistComplete: true,
-      relativeRequestedAtTime: `Requested ${moment(interactionToSchedule.requestedAt).fromNow()}`
+      relativeRequestedAtTime: 'Requested 30 minutes ago'
     });
   });
 });
