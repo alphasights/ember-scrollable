@@ -135,14 +135,14 @@ $interaction-header-height:
         border-top: 1px solid $global-section-border-color;
         padding: $column-gutter / 2 0;
 
-        &:after {
+        &:before {
           color: $alert-color;
           content: '•';
           display: inline;
-          margin-left: $column-gutter / 2;
+          margin-right: $column-gutter / 2;
         }
 
-        &.completed:after {
+        &.completed:before {
           color: $success-color;
         }
       }
