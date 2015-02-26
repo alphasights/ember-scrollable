@@ -12,7 +12,7 @@ export default Ember.ArrayController.extend({
     }
   }.property('model.[]', 'isShowingAll'),
 
-  canShowMoreInteractions: function() {
+  canShowMore: function() {
     return this.get('visibleInteractions.length') < this.get('model.length');
   }.property('model.length', 'visibleInteractions.length'),
 
