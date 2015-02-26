@@ -15,6 +15,6 @@ const typeToTitleMap = {
 
 export default Ember.ObjectController.extend({
   title: function() {
-    return typeToNameMap[this.get('type')];
+    return typeToTitleMap[this.get('type')];
   }.property('type')
 });
