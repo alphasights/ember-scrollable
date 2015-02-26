@@ -1,24 +1,22 @@
 {{#if this}}
-  {{#liquid-spacer}}
-    <ul>
-      {{#each interaction in visibleInteractions}}
-        <li>
-          {{#link-to "dashboard.schedule-interaction" interaction.id tagName="article"}}
-            <div class="title">
-              <span>{{interaction.advisor.name}}</span>
-              <small>{{interaction.project.name}}</small>
-            </div>
+  <ul>
+    {{#each interaction in visibleInteractions}}
+      <li>
+        {{#link-to "dashboard.schedule-interaction" interaction.id tagName="article"}}
+          <div class="title">
+            <span>{{interaction.advisor.name}}</span>
+            <small>{{interaction.project.name}}</small>
+          </div>
 
-            <div class="time">
-              <span>Requested {{ago interaction.requestedAt}}</span>
-            </div>
+          <div class="time">
+            <span>Requested {{ago interaction.requestedAt}}</span>
+          </div>
 
-            {{as-checklist-status items=interaction.checklistItems showTooltip=true}}
-          {{/link-to}}
-        </li>
-      {{/each}}
-    </ul>
-  {{/liquid-spacer}}
+          {{as-checklist-status items=interaction.checklistItems showTooltip=true}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </ul>
 
   {{#if canShowMoreInteractions}}
     <button class="show-more" {{action "showMore"}}>Show More</button>

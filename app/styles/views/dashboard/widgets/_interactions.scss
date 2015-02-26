@@ -49,10 +49,10 @@
     text-align: center;
   }
 
-  ul {
+  > ul {
     margin-left: 0;
 
-    li {
+    > li {
       border-bottom: 1px solid $global-section-border-color;
 
       &:last-child {
