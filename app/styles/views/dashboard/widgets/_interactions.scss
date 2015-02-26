@@ -55,28 +55,10 @@
     }
   }
 
-  h1,
-  .other {
-    color: $white;
-    font-weight: $font-weight-bold;
-    line-height: $widget-header-line-height;
-  }
-
-  h1 {
-    display: inline-block;
-    font-size: $base-font-size;
-    margin: 0;
-  }
-
   .empty-message {
     color: $small-font-color;
     line-height: $widget-min-height - $widget-header-line-height;
     text-align: center;
-  }
-
-  .other {
-    float: right;
-    -webkit-font-smoothing: $header-font-smoothing;
   }
 
   .toggle-collapse {
