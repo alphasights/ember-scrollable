@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   showMore: false,
-  initialVisibleLimit: 5,
+  initialVisibleLimit: 4,
 
   visibleInteractions: function() {
     if (this.get('showMore')) {
