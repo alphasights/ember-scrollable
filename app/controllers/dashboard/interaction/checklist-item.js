@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const typeToNameMap = {
+const typeToTitleMap = {
   termsOfEngagement: "Obtain Advisor's agreement to ToE",
   advisorVettingTest: "Vet Advisor",
   complianceOfficerNotification: "Notify Compliance of upcoming Interaction",
@@ -14,7 +14,7 @@ const typeToNameMap = {
 };
 
 export default Ember.ObjectController.extend({
-  name: function() {
+  title: function() {
     return typeToNameMap[this.get('type')];
   }.property('type')
 });
