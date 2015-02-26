@@ -1,28 +1,34 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  isShowingAll: false,
-  initiallyVisibleNumberOfItems: 4,
+  isCollapsed: true,
+  collapsedMaxVisibleItems: 4,
 
-  arrangedContent: function() {
-    if (this.get('isShowingAll')) {
-      return this.get('model');
+  visibleContent: function() {
+    var arrangedContent = this.get('arrangedContent');
+
+    if (this.get('isCollapsed')) {
+      return arrangedContent.slice(0, this.get('collapsedMaxVisibleItems'));
     } else {
-      return this.get('model').slice(0, this.get('initiallyVisibleNumberOfItems'));
+      return arrangedContent;
     }
-  }.property('model.[]', 'isShowingAll'),
+  }.property('arrangedContent.[]', 'isCollapsed'),
 
-  canShowMore: function() {
-    return this.get('arrangedContent.length') < this.get('model.length');
-  }.property('model.length', 'arrangedContent.length'),
+  hasMoreItems: function() {
+    return this.get('arrangedContent.length') >= this.get('collapsedMaxVisibleItems');
+  }.property('collapsedMaxVisibleItems', 'arrangedContent.length'),
+
+  collapseTitle: function() {
+    if (this.get('isCollapsed')) {
+      return 'Show Less';
+    } else {
+      return 'Show More';
+    }
+  }.property('isCollapsed'),
 
   actions: {
-    showMore: function() {
-      this.set('isShowingAll', true);
-    },
-
-    showLess: function() {
-      this.set('isShowingAll', false);
+    toggleCollapse: function() {
+      this.toggleProperty('isCollapsed');
     }
   }
 });

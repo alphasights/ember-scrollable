@@ -20,10 +20,9 @@ export default InteractionsController.extend({
   ],
 
   arrangedContent: function() {
-    var content = this._super.apply(this, arguments);
     var filter = this.get('filter');
 
-    return content.filter((interaction) => {
+    return this.get('model').filter((interaction) => {
       var scheduledCallTime = interaction.get('scheduledCallTime');
 
       return (!filter.startDate || scheduledCallTime >= filter.startDate) &&

@@ -1,4 +1,16 @@
 .dashboard .widget.interactions {
+  > ul {
+    margin-left: 0;
+
+    > li {
+      border-bottom: 1px solid $global-section-border-color;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
   article {
     @extend %grid-row;
     @include single-transition(background-color, 100ms, linear);
@@ -41,38 +53,56 @@
     &:hover {
       background-color: lighten($global-section-border-color, 3%);
     }
-  }
 
-  .empty-message {
-    color: $small-font-color;
-    line-height: $widget-min-height - $widget-header-line-height;
-    text-align: center;
-  }
-
-  > ul {
-    margin-left: 0;
-
-    > li {
-      border-bottom: 1px solid $global-section-border-color;
-
-      &:last-child {
-        border-bottom: 0;
-      }
-    }
-  }
-
-  .filters {
-    button {
-      background-color: transparent;
-      border-color: transparent;
+    h1,
+    .other {
       color: $white;
+      font-weight: $font-weight-bold;
+      line-height: $widget-header-line-height;
+    }
+
+    h1 {
+      display: inline-block;
+      font-size: $base-font-size;
       margin: 0;
+    }
 
-      i {
-        @include icon('chevron-down');
+    .empty-message {
+      color: $small-font-color;
+      line-height: $widget-min-height - $widget-header-line-height;
+      text-align: center;
+    }
 
-        margin-left: 3px;
+    .other {
+      float: right;
+      -webkit-font-smoothing: $header-font-smoothing;
+    }
+
+    .toggle-collapse {
+      @include single-transition(background-color, 150ms, linear);
+
+      background-color: $anchor-font-color;
+      border-bottom-left-radius: $global-radius / 2;
+      border-bottom-right-radius: $global-radius / 2;
+      cursor: pointer;
+      position: relative;
+      text-align: center;
+
+      &:after {
+        color: $white;
+        font-size: $small-font-size;
+        letter-spacing: 2px;
+        line-height: $base-line-height / 2;
+        content: '\2022';
+      }
+
+      &:hover {
+        background-color: lighten($anchor-font-color, 10%);
       }
     }
+  }
+
+  &.collapsed .toggle-collapse:after {
+    content: '\2022 \2022 \2022';
   }
 }

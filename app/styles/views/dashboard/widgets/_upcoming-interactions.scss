@@ -1,0 +1,16 @@
+.dashboard .widget.upcoming-interactions {
+  .filters {
+    button {
+      background-color: transparent;
+      border-color: transparent;
+      color: $white;
+      margin: 0;
+
+      i {
+        @include icon('chevron-down');
+
+        margin-left: 3px;
+      }
+    }
+  }
+}
