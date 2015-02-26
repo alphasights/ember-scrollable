@@ -17,12 +17,19 @@ $widget-min-height: $widget-header-line-height * 2;
     h1,
     .other {
       color: $white;
+      font-weight: $font-weight-bold;
+      line-height: $widget-header-line-height;
+    }
+
+    h1 {
       display: inline-block;
       font-size: $base-font-size;
-      font-weight: $font-weight-bold;
-      letter-spacing: inherit;
-      line-height: $widget-header-line-height;
       margin: 0;
+    }
+
+    .other {
+      float: right;
+      -webkit-font-smoothing: $header-font-smoothing;
     }
   }
 
