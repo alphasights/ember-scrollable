@@ -1,8 +1,9 @@
 $performance-bar-height: rem-calc(12);
 $performance-bar-margin: $column-gutter / 2;
-$performance-on-target-background: linear-gradient(to right, #ffeb00, #ffc100);
+$performance-on-target-start-color: #ffeb00;
+$performance-on-target-end-color: #ffc100;
 $performance-on-pace-color: #4cc417;
-$performance-default-color: #f62817;
+$performance-default-color: $anchor-font-color;
 
 .dashboard .widget.performance {
   background-color: lighten($global-section-border-color, 2%);
@@ -11,7 +12,11 @@ $performance-default-color: #f62817;
   position: relative;
 
   &.on-target .current > div {
-    background: $performance-on-target-background;
+    background: linear-gradient(
+      to right,
+      $performance-on-target-start-color,
+      $performance-on-target-end-color
+    );
   }
 
   &.on-pace .current > div {
@@ -44,7 +49,7 @@ $performance-default-color: #f62817;
     background-color: $white;
 
     .tip {
-      background-color: $performance-default-color;
+      background-color: $performance-on-target-end-color;
       width: 3px;
     }
   }
