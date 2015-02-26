@@ -15,7 +15,7 @@ export default Ember.ArrayController.extend({
   }.property('arrangedContent.[]', 'isCollapsed'),
 
   hasMoreItems: function() {
-    return this.get('arrangedContent.length') >= this.get('collapsedMaxVisibleItems');
+    return this.get('arrangedContent.length') > this.get('collapsedMaxVisibleItems');
   }.property('collapsedMaxVisibleItems', 'arrangedContent.length'),
 
   collapseTitle: function() {
