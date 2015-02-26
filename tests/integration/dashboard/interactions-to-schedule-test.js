@@ -18,7 +18,7 @@ module("Interactions To Schedule", {
     Timecop.freeze(new Date(2015, 1, 18, 10, 30));
 
     defineFixture('GET', '/interactions', { response: {
-     "advisors": [
+      "advisors": [
         {
           "id": 1,
           "avatar_url": null,
@@ -28,8 +28,8 @@ module("Interactions To Schedule", {
           "job_title": 'Vice President',
           "company_name": 'Apple'
         }
-     ],
-     "client_contacts": [
+      ],
+      "client_contacts": [
         {
           "id": 21387,
           "avatar_url": null,
@@ -38,14 +38,14 @@ module("Interactions To Schedule", {
           "phone_numbers": ['+1 555-321-9000'],
           "client_account_id": 485
         }
-     ],
-     "client_accounts": [
+      ],
+      "client_accounts": [
         {
            "id": 485,
            "name": 'McKinsey & Company San Francisco'
         }
-     ],
-     "projects": [
+      ],
+      "projects": [
         {
            "id": 32522,
            "status": "high",
@@ -57,8 +57,8 @@ module("Interactions To Schedule", {
            "angle_ids": [40380],
            "analyst_1_id": 6565389
         }
-     ],
-     "interactions": [
+      ],
+      "interactions": [
         {
           "id": 1,
           "scheduled_call_time": null,
