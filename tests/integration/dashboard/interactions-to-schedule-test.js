@@ -15,7 +15,7 @@ module("Interactions To Schedule", {
     testHelper.beforeEach.apply(this, arguments);
 
     Timecop.install();
-    Timecop.freeze(new Date(2015, 1, 18, 10, 30));
+    Timecop.freeze(moment('2015-02-18T10:30:00.000+00:00'));
 
     defineFixture('GET', '/interactions', { response: {
       "advisors": [
@@ -130,6 +130,7 @@ module("Interactions To Schedule", {
 
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
+    Timecop.uninstall();
   }
 });
 

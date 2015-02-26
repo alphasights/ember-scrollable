@@ -23,7 +23,7 @@ module("Upcoming interactions", {
     testHelper.beforeEach.apply(this, arguments);
 
     Timecop.install();
-    Timecop.freeze(new Date(2015, 1, 20, 9, 30));
+    Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
     defineFixture('GET', '/delivery_performances/me', { response: {
       "delivery_performance":{
@@ -154,7 +154,7 @@ test("Show upcoming interactions list", function() {
       advisorName: $interaction.find('.title span').text().trim(),
       projectName: $interaction.find('.title small').text().trim(),
       isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
-      absoluteCallTime: $interaction.find('.time span').text().trim(),
+      localCallTime: $interaction.find('.time span').text().trim(),
       relativeCallTime: $interaction.find('.time small').text().trim()
     };
 
@@ -162,7 +162,7 @@ test("Show upcoming interactions list", function() {
       advisorName: advisorName,
       projectName: projectName,
       isChecklistComplete: true,
-      absoluteCallTime: '20 Feb, 10:00 AM',
+      localCallTime: '20 Feb, 10:00 AM',
       relativeCallTime: 'in 30 minutes'
     });
   });
