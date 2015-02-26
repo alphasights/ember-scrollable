@@ -1,6 +1,5 @@
-import SidePanelView from 'phoenix/views/side-panel';
-import NavigationArrowsMixin from 'phoenix/mixins/navigation-arrows';
+import InteractionView from 'phoenix/views/dashboard/interaction';
 
-export default SidePanelView.extend(NavigationArrowsMixin, {
-  classNameBindings: [':interaction', ':schedule-interaction']
+export default InteractionView.extend({
+  classNameBindings: [':schedule-interaction']
 });
