@@ -22,7 +22,7 @@ export default Ember.ObjectController.extend({
   }.property('monthlyTarget'),
 
   onPaceCreditTargetTitle: function() {
-    return `To be on pace: ${this.get('onPaceCreditTarget')}`;
+    return `On Pace: ${this.get('onPaceCreditTarget')}`;
   }.property('onPaceCreditTarget'),
 
   currentMonthCreditCountTitle: function() {

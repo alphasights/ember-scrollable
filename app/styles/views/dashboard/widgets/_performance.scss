@@ -1,26 +1,29 @@
 $performance-bar-height: rem-calc(12);
 $performance-bar-margin: $column-gutter / 2;
-$performance-on-target-color: $warning-color;
-$performance-on-pace-color: $success-color;
-$performance-default-color: $alert-color;
+$performance-on-target-start-color: #ffeb00;
+$performance-on-target-end-color: #ffc100;
+$performance-on-pace-color: #4cc417;
+$performance-default-color: $anchor-font-color;
 
 .dashboard .widget.performance {
-  background-color: $global-section-border-color;
+  background-color: lighten($global-section-border-color, 2%);
   min-height: 0;
   padding: $performance-bar-margin;
   position: relative;
 
   &.on-target .current > div {
-    background-color: $performance-on-target-color;
+    background: linear-gradient(
+      to right,
+      $performance-on-target-start-color,
+      $performance-on-target-end-color
+    );
   }
 
   &.on-pace .current > div {
     background-color: $performance-on-pace-color;
   }
 
-  .target,
-  .pace,
-  .current {
+  .progress-bar {
     background-color: transparent;
     border-radius: $global-radius / 2;
     height: $performance-bar-height;
@@ -36,63 +39,29 @@ $performance-default-color: $alert-color;
     position: absolute;
     top: $performance-bar-margin;
     width: calc(100% - #{$performance-bar-margin * 2});
-  }
 
-  .target,
-  .target > div {
-    background-color: $white;
-
-    .tip {
-      @extend %performance-target-tip;
-
+    > div {
       background-color: transparent;
-      height: $performance-bar-height + $performance-bar-margin * 2;
-      top: -$performance-bar-margin;
-      visibility: visible;
     }
   }
 
-  .pace > div {
-    background-color: lighten($performance-on-pace-color, 50%);
+  .target {
+    background-color: $white;
+
+    .tip {
+      background-color: $performance-on-target-end-color;
+      width: 3px;
+    }
+  }
+
+  .pace .tip {
+    border-left: 2px dotted $performance-on-pace-color;
   }
 
   .tip {
-    background-color: lighten($global-overlay-background-color, 60%);
-    border-radius: $global-radius / 2;
     height: $performance-bar-height;
     pointer-events: none;
     position: absolute;
     right: 0;
-    visibility: hidden;
-    width: 0;
-    z-index: 1;
-  }
-}
-
-%performance-target-tip {
-  $performance-target-tip-width: 8px;
-  $performance-target-tip-height: $performance-target-tip-width / 2;
-  $performance-target-tip-color: $white;
-
-  &:before,
-  &:after {
-    border-left: $performance-target-tip-width solid transparent;
-    border-right: $performance-target-tip-width solid transparent;
-    content: '';
-    height: $performance-target-tip-height;
-    height: 0;
-    left: -$performance-target-tip-width;
-    position: absolute;
-    width: $performance-target-tip-width;
-  }
-
-  &:before {
-    border-bottom: $performance-target-tip-height solid $performance-target-tip-color;
-    bottom: -1px;
-  }
-
-  &:after {
-    border-top: $performance-target-tip-height solid $performance-target-tip-color;
-    top: -1px;
   }
 }
