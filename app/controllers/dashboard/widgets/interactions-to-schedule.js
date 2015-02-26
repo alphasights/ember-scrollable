@@ -12,6 +12,10 @@ export default Ember.ArrayController.extend({
     }
   }.property('model.[]', 'isShowingAll'),
 
+  totalLength: function() {
+    return this.get('model.length');
+  }.property('model.length'),
+
   canShowMore: function() {
     return this.get('arrangedContent.length') < this.get('model.length');
   }.property('model.length', 'arrangedContent.length'),
