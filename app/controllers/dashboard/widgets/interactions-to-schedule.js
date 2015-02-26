@@ -4,7 +4,7 @@ export default Ember.ArrayController.extend({
   isShowingAll: false,
   initiallyVisibleNumberOfItems: 4,
 
-  visibleInteractions: function() {
+  arrangedContent: function() {
     if (this.get('isShowingAll')) {
       return this.get('model');
     } else {
@@ -13,8 +13,8 @@ export default Ember.ArrayController.extend({
   }.property('model.[]', 'isShowingAll'),
 
   canShowMore: function() {
-    return this.get('visibleInteractions.length') < this.get('model.length');
-  }.property('model.length', 'visibleInteractions.length'),
+    return this.get('arrangedContent.length') < this.get('model.length');
+  }.property('model.length', 'arrangedContent.length'),
 
   actions: {
     showMore: function() {

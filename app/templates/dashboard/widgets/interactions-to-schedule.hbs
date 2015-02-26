@@ -1,6 +1,6 @@
 {{#if this}}
   <ul>
-    {{#each interaction in visibleInteractions}}
+    {{#each interaction in this}}
       <li>
         {{#link-to "dashboard.schedule-interaction" interaction.id tagName="article"}}
           <div class="title">
