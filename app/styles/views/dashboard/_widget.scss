@@ -39,8 +39,8 @@ $widget-min-height: $widget-header-line-height * 2;
       color: $white;
       content: '\2022 \2022 \2022';
       font-size: $small-font-size;
-      line-height: $base-line-height / 2;
       letter-spacing: 2px;
+      line-height: $base-line-height / 2;
     }
 
     &:hover {
