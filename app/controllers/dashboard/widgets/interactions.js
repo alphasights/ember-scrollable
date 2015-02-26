@@ -20,9 +20,9 @@ export default Ember.ArrayController.extend({
 
   collapseTitle: function() {
     if (this.get('isCollapsed')) {
-      return 'Show Less';
-    } else {
       return 'Show More';
+    } else {
+      return 'Collapse';
     }
   }.property('isCollapsed'),
 
