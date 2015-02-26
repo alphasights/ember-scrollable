@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const typeToTaskMap = {
+const typeToNameMap = {
   termsOfEngagement: "Obtain Advisor's agreement to ToE",
   advisorVettingTest: "Vet Advisor",
   complianceOfficerNotification: "Notify Compliance of upcoming Interaction",
@@ -14,7 +14,7 @@ const typeToTaskMap = {
 };
 
 export default Ember.ObjectController.extend({
-  task: function() {
-    return typeToTaskMap[this.get('type')];
+  name: function() {
+    return typeToNameMap[this.get('type')];
   }.property('type')
 });
