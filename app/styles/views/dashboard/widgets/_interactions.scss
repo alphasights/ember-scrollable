@@ -61,10 +61,12 @@
     }
   }
 
-  .filters {
+  .extras {
+    -webkit-font-smoothing: antialiased;
     float: right;
-    line-height: $widget-header-line-height;
+  }
 
+  .filters {
     button {
       background-color: transparent;
       border-color: transparent;

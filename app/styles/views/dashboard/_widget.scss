@@ -14,7 +14,7 @@ $widget-min-height: $widget-header-line-height * 2;
     line-height: $widget-header-line-height;
     padding: 0 $column-gutter / 2;
 
-    h1 {
+    h1, .extras {
       color: $white;
       display: inline-block;
       font-size: $base-font-size;
