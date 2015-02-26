@@ -91,10 +91,10 @@
 
     &:after {
       color: $white;
+      content: '\2022';
       font-size: $small-font-size;
       letter-spacing: 2px;
       line-height: $base-line-height / 2;
-      content: '\2022';
     }
 
     &:hover {
