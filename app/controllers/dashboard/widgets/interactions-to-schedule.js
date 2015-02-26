@@ -1,26 +1,28 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  allVisible: false,
+  showMore: false,
   initialVisibleLimit: 5,
 
   visibleInteractions: function() {
-    if (this.get('allVisible')) {
+    if (this.get('showMore')) {
       return this.get('model');
     } else {
       return this.get('model').slice(0, this.get('initialVisibleLimit'));
     }
-  }.property('model', 'allVisible'),
+  }.property('model', 'showMore'),
 
-  initializeAllVisible: function() {
-    if (this.get('model.length') <= this.get('initialVisibleLimit')) {
-      this.set('allVisible', true);
-    }
-  }.on('init'),
+  canShowMoreInteractions: function() {
+    return this.get('model.length') >= this.get('initialVisibleLimit') && !this.get('showMore');
+  }.property('model.length', 'initialVisibleLimit', 'showMore'),
 
   actions: {
-    makeAllVisible: function() {
-      this.set('allVisible', true);
+    showMore: function() {
+      this.set('showMore', true);
+    },
+
+    showLess: function() {
+      this.set('showMore', false);
     }
   }
 });
