@@ -1,5 +1,6 @@
 $interaction-header-title-height: rem-calc(120);
 $interaction-checklist-header-height: $column-gutter + $h5-font-size;
+$interaction-checklist-dot-size: 8px;
 
 $interaction-header-height:
   $interaction-header-title-height +
@@ -135,15 +136,17 @@ $interaction-header-height:
         border-top: 1px solid $global-section-border-color;
         padding: $column-gutter / 2 0;
 
-        &:after {
-          color: $alert-color;
-          content: '•';
-          display: inline;
-          margin-left: $column-gutter / 2;
+        &:before {
+          background-color: $alert-color;
+          border-radius: $global-rounded;
+          display: inline-block;
+          height: $interaction-checklist-dot-size;
+          margin-right: $column-gutter / 2;
+          width: $interaction-checklist-dot-size;
         }
 
-        &.completed:after {
-          color: $success-color;
+        &.completed:before {
+          background-color: $success-color;
         }
       }
     }
