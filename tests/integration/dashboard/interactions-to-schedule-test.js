@@ -153,13 +153,7 @@ test("Show interactions to schedule list", function() {
       isChecklistComplete: true,
       relativeRequestedAtTime: 'Requested 30 minutes ago'
     });
-  });
-});
 
-test("Don't show more than 4 interactions to schedule", function() {
-  visit('/dashboard');
-
-  andThen(function() {
     equal(find('.interactions-to-schedule article').length, 4);
   });
 });
