@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
   isShowingAll: false,
-  initiallyVisibleItemsNumber: 4,
+  initiallyVisibleNumberOfItems: 4,
 
   visibleInteractions: function() {
     if (this.get('isShowingAll')) {
       return this.get('model');
     } else {
-      return this.get('model').slice(0, this.get('initiallyVisibleItemsNumber'));
+      return this.get('model').slice(0, this.get('initiallyVisibleNumberOfItems'));
     }
   }.property('model.[]', 'isShowingAll'),
 
