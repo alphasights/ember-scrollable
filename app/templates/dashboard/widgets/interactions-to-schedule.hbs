@@ -21,7 +21,9 @@
   {{#if canShowMore}}
     <div class="toggle-collapse expand" {{action "showMore"}} title="Show More"></div>
   {{else}}
-    <div class="toggle-collapse contract" {{action "showLess"}} title="Show Less"></div>
+    {{#if isShowingMore}}
+      <div class="toggle-collapse contract" {{action "showLess"}} title="Show Less"></div>
+    {{/if}}
   {{/if}}
 {{else}}
   <div class="empty-message">You have no interactions to schedule.</div>
