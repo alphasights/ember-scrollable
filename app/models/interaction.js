@@ -6,6 +6,7 @@ export default DS.Model.extend({
   clientContact: DS.belongsTo('clientContact'),
   project: DS.belongsTo('project'),
   scheduledCallTime: DS.attr('date'),
+  requestedAt: DS.attr('date'),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
@@ -13,5 +14,9 @@ export default DS.Model.extend({
 
   checklistUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
+  }.property('id', 'project.id'),
+
+  schedulingUrl: function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
   }.property('id', 'project.id')
 });

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import InteractionsController from './interactions';
 
-export default Ember.ArrayController.extend({
+export default InteractionsController.extend({
   availableFilters: [
     {
       name: 'All',

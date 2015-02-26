@@ -1,0 +1,15 @@
+{{#if this}}
+  <ul>
+    {{#each interaction in visibleContent}}
+      <li>
+        {{partial view.listItemTemplateName}}
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#if hasMoreItems}}
+    <div class="toggle-collapse" {{bind-attr title=collapseTitle}} {{action "toggleCollapse"}}></div>
+  {{/if}}
+{{else}}
+  <div class="empty-message">{{view.emptyMessage}}</div>
+{{/if}}
