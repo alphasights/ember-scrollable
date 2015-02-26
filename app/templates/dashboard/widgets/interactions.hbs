@@ -1,0 +1,17 @@
+{{#if this}}
+  <ul>
+    {{#each interaction in this}}
+      <li>
+        {{partial view.listItemTemplateName}}
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#if canShowMore}}
+    <div class="toggle-collapse expand" {{action "showMore"}} title="Show More"></div>
+  {{else}}
+    <div class="toggle-collapse contract" {{action "showLess"}} title="Show Less"></div>
+  {{/if}}
+{{else}}
+  <div class="empty-message">{{view.emptyMessage}}</div>
+{{/if}}

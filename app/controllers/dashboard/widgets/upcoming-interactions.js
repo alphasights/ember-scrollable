@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import InteractionsController from './interactions';
 
-export default Ember.ArrayController.extend({
+export default InteractionsController.extend({
   availableFilters: [
     {
       name: 'All',
@@ -20,9 +20,10 @@ export default Ember.ArrayController.extend({
   ],
 
   arrangedContent: function() {
+    var content = this._super.apply(this, arguments);
     var filter = this.get('filter');
 
-    return this.get('model').filter((interaction) => {
+    return content.filter((interaction) => {
       var scheduledCallTime = interaction.get('scheduledCallTime');
 
       return (!filter.startDate || scheduledCallTime >= filter.startDate) &&

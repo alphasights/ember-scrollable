@@ -1,5 +1,7 @@
 import WidgetView from '../widget';
 
 export default WidgetView.extend({
-  classNameBindings: [':interactions']
+  templateName: 'dashboard/widgets/interactions',
+  classNameBindings: [':interactions'],
+  listItemTemplateName: null
 });
