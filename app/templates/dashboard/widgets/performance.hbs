@@ -3,7 +3,9 @@
 {{/as-progress-bar}}
 
 {{#as-progress-bar class="pace" ratio=paceRatio}}
-  {{tool-tipster class="tip" title=onPaceCreditTargetTitle position="top"}}
+  {{#unless isOnPace}}
+    {{tool-tipster class="tip" title=onPaceCreditTargetTitle position="top"}}
+  {{/unless}}
 {{/as-progress-bar}}
 
 {{#as-progress-bar class="current" ratio=progress}}
