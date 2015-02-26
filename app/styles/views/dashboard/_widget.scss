@@ -24,4 +24,34 @@ $widget-min-height: $widget-header-line-height * 2;
       margin: 0;
     }
   }
+
+  .toggle-collapse {
+    @include single-transition(background-color, 150ms, linear);
+
+    background-color: $anchor-font-color;
+    border-bottom-left-radius: $global-radius / 2;
+    border-bottom-right-radius: $global-radius / 2;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+
+    &:after {
+      color: $white;
+      font-size: $small-font-size;
+      letter-spacing: 2px;
+      line-height: $base-line-height / 2;
+    }
+
+    &:hover {
+      background-color: lighten($anchor-font-color, 10%);
+    }
+
+    &.expand:after {
+      content: '\2022 \2022 \2022';
+    }
+
+    &.contract:after {
+      content: '\2022';
+    }
+  }
 }
