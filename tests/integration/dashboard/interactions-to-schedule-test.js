@@ -156,7 +156,7 @@ test("Show interactions to schedule list", function() {
   });
 });
 
-test("Show max 4 interactions to schedule", function() {
+test("Don't show more than 4 interactions to schedule", function() {
   visit('/dashboard');
 
   andThen(function() {
