@@ -24,4 +24,33 @@ $widget-min-height: $widget-header-line-height * 2;
       margin: 0;
     }
   }
+
+  .expand-results {
+    @include single-transition(background-color, 150ms, linear);
+
+    background-color: $anchor-font-color;
+    border-bottom-left-radius: $global-radius / 2;
+    border-bottom-right-radius: $global-radius / 2;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+
+    &:after {
+      color: $white;
+      content: '\2022 \2022 \2022';
+      font-size: $small-font-size;
+      line-height: $base-line-height / 2;
+      letter-spacing: 2px;
+    }
+
+    &:hover {
+      background-color: lighten($anchor-font-color, 10%);
+    }
+
+    &.less {
+      &:after {
+        content: '\2022';
+      }
+    }
+  }
 }

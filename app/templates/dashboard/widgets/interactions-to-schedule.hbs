@@ -19,9 +19,9 @@
   </ul>
 
   {{#if canShowMoreInteractions}}
-    <button class="show-more" {{action "showMore"}}>Show More</button>
+    <div class="expand-results" {{action "showMore"}} title="Show More"></div>
   {{else}}
-    <button class="show-less" {{action "showLess"}}>Show Less</button>
+    <div class="expand-results less" {{action "showLess"}} title="Show Less"></div>
   {{/if}}
 {{else}}
   <div class="empty-message">You have no interactions to schedule.</div>
