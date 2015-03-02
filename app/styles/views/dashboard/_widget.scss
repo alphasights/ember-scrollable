@@ -13,6 +13,7 @@ $widget-min-height: $widget-header-line-height * 2;
     border-radius: $global-radius / 2 $global-radius / 2 0 0;
     line-height: $widget-header-line-height;
     padding: 0 $column-gutter / 2;
+    color: $white;
 
     h1,
     .other {

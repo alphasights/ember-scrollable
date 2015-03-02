@@ -1,5 +1,9 @@
 <header>
   <h1>{{view.name}}</h1>
+  
+  {{#if length}}
+    <span>({{visibleContent.length}} of {{length}})</span>
+  {{/if}}
 
   {{#if view.headerTemplateName}}
     <div class="other">
