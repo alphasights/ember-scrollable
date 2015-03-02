@@ -9,10 +9,12 @@ export default WidgetView.extend({
   listItemTemplateName: null,
 
   title: function() {
-    if (Ember.isPresent(this.get('controller.visibleContent'))) {
-      return `${this.get('name')} (${this.get('controller.visibleContent.length')} of ${this.get('controller.length')})`;
+    var visibleContent = this.get('controller.visibleContent');
+
+    if (Ember.isPresent(visibleContent)) {
+      return `${this.get('name')} (${visibleContent.get('length')} of ${this.get('controller.length')})`;
     } else {
       return this.get('name');
     }
-  }.property('name', 'visibleContent.length', 'length')
+  }.property('name', 'visibleContent.length', 'controller.length')
 });
