@@ -28,25 +28,27 @@
       color: $small-font-color;
       display: block;
       font-size: $base-font-size;
-    }
 
-    .time,
-    .checklist-status {
-      white-space: nowrap;
+      @media #{$small-only} {
+        font-size: $small-font-size;
+      }
     }
 
     .time {
-      @extend %grid-column-4;
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-4;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-7;
+      @extend %grid-column-small-6;
+      @extend %grid-column-medium-7;
     }
 
     .checklist-status {
-      @extend %grid-column-1;
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-1;
     }
 
     &:hover {
