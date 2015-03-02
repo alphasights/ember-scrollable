@@ -140,7 +140,7 @@ module("Team", {
   }
 });
 
-test("Read project list", function() {
+test("Read project list", function(assert) {
   visit('/teams');
   wait();
 
@@ -162,7 +162,7 @@ test("Read project list", function() {
       };
     });
 
-    deepEqual(projects, [{
+    assert.deepEqual(projects, [{
       title: 'Example Project',
       clientCode: 'EP',
       highPriority: true,
@@ -199,7 +199,7 @@ test("Read project list", function() {
   });
 });
 
-test("Sort project list", function() {
+test("Sort project list", function(assert) {
   visit('/teams');
 
   var projectTitles = function() {
@@ -211,7 +211,7 @@ test("Sort project list", function() {
   select('.team .sort-by-select option[value="client"]');
 
   andThen(function() {
-    deepEqual(
+    assert.deepEqual(
       projectTitles(),
       ['Example Project 2', 'Example Project', 'Example Project 3']
     );
@@ -220,14 +220,14 @@ test("Sort project list", function() {
   select('.team .sort-by-select option[value="creation-date"]');
 
   andThen(function() {
-    deepEqual(
+    assert.deepEqual(
       projectTitles(),
       ['Example Project', 'Example Project 2', 'Example Project 3']
     );
   });
 });
 
-test("Change project priority", function() {
+test("Change project priority", function(assert) {
   var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
@@ -246,12 +246,12 @@ test("Change project priority", function() {
   click('.project-list-item:first .priority-select ul > .low');
 
   andThen(function() {
-    equal(handler.called, true);
-    equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+    assert.equal(handler.called, true);
+    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
   });
 });
 
-test("Show project details", function() {
+test("Show project details", function(assert) {
   visit('/teams');
   click('.project-list-item:first');
 
@@ -279,7 +279,7 @@ test("Show project details", function() {
       }
     };
 
-    deepEqual(projectDetails, {
+    assert.deepEqual(projectDetails, {
       title: 'Example Project',
       highPriority: true,
       mediumPriority: false,
@@ -300,67 +300,67 @@ test("Show project details", function() {
   });
 });
 
-test("Navigate to next project with navigation buttons", function() {
+test("Navigate to next project with navigation buttons", function(assert) {
   visit('/teams');
   click('.project-list-item:first');
   click('.project .next');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
-test("Navigate to next project with arrow keys", function() {
+test("Navigate to next project with arrow keys", function(assert) {
   visit('/teams');
   click('.project-list-item:first');
   keyEvent(document, 'keyup', 39);
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
-test("Navigate to previous project with navigation buttons", function() {
+test("Navigate to previous project with navigation buttons", function(assert) {
   visit('/teams');
   click('.project-list-item:last');
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
-test("Navigate to previous project with arrow keys", function() {
+test("Navigate to previous project with arrow keys", function(assert) {
   visit('/teams');
   click('.project-list-item:last');
   keyEvent(document, 'keyup', 37);
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
-test("Move back to the last project from the first", function() {
+test("Move back to the last project from the first", function(assert) {
   visit('/teams');
   click('.project-list-item:first');
   click('.project .previous');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project 3');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 3');
   });
 });
 
-test("Move back to the first project from the last", function() {
+test("Move back to the first project from the last", function(assert) {
   visit('/teams');
   click('.project-list-item:last');
   click('.project .next');
 
   andThen(function(){
-    equal(find('.project h1 span').text().trim(), 'Example Project');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
-test("Change project priority from the details", function() {
+test("Change project priority from the details", function(assert) {
   var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
       "client_code": "EP",
@@ -380,12 +380,12 @@ test("Change project priority from the details", function() {
   click('.project .priority-select ul > .low');
 
   andThen(function() {
-    equal(handler.called, true);
-    equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+    assert.equal(handler.called, true);
+    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
   });
 });
 
-test("Change delivery target for an angle membership", function() {
+test("Change delivery target for an angle membership", function(assert) {
   var handler = defineFixture('PUT', '/angle_team_memberships/1', { request: {
     "angle_team_membership": {
       "target_value": 6,
@@ -399,11 +399,11 @@ test("Change delivery target for an angle membership", function() {
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
   andThen(function() {
-    equal(handler.called, true);
+    assert.equal(handler.called, true);
   });
 });
 
-test("Add a member to an angle", function() {
+test("Add a member to an angle", function(assert) {
   var handler = defineFixture('POST', '/angle_team_memberships', { request: {
     "angle_team_membership": {
       "target_value": 0,
@@ -418,12 +418,12 @@ test("Add a member to an angle", function() {
   click('.angle-memberships .add .team-members li');
 
   andThen(function() {
-    equal(handler.called, true);
-    equal(find('.angle-memberships > ul article').length, 3);
+    assert.equal(handler.called, true);
+    assert.equal(find('.angle-memberships > ul article').length, 3);
   });
 });
 
-test("Remove a member from an angle", function() {
+test("Remove a member from an angle", function(assert) {
   var handler = defineFixture('DELETE', '/angle_team_memberships/1');
 
   visit('/teams');
@@ -431,18 +431,18 @@ test("Remove a member from an angle", function() {
   click('.angle-memberships > ul article:first .remove');
 
   andThen(function() {
-    equal(handler.called, true);
-    equal(find('.angle-memberships > ul article').length, 1);
+    assert.equal(handler.called, true);
+    assert.equal(find('.angle-memberships > ul article').length, 1);
   });
 });
 
-test("Change selected team", function() {
+test("Change selected team", function(assert) {
   visit('/teams');
 
   click('.team-select button');
   select('.team-select option:last');
 
   andThen(function() {
-    equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
+    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
   });
 });

@@ -5,7 +5,7 @@ import testHelper from '../test-helper';
 
 module("Quick Jump", testHelper);
 
-test("Search results", function() {
+test("Search results", function(assert) {
   defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, response: {
     "responses": [
       {
@@ -112,7 +112,7 @@ test("Search results", function() {
       };
     });
 
-    deepEqual(sections, [
+    assert.deepEqual(sections, [
       {
         title: 'Top Hit - User',
 
@@ -166,7 +166,7 @@ test("Search results", function() {
   });
 });
 
-test("Empty search results", function() {
+test("Empty search results", function(assert) {
   defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, response: {
     "responses": {
       "hits": {
@@ -180,6 +180,6 @@ test("Empty search results", function() {
   fillIn('.quick-jump .bar input', 'example');
 
   andThen(function() {
-    equal($('.quick-jump .results strong').text().trim(), 'Your search did not match any documents.');
+    assert.equal($('.quick-jump .results strong').text().trim(), 'Your search did not match any documents.');
   });
 });

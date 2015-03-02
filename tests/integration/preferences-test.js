@@ -21,11 +21,11 @@ module('Preferences', {
   }
 });
 
-test('sidebarCollapsed updates when toggling the sidebar', function() {
+test('sidebarCollapsed updates when toggling the sidebar', function(assert) {
   visit('/');
   click('.toggle-collapse button');
 
   andThen(function(){
-    equal(currentUser().get('preferences.sidebarCollapsed'), true);
+    assert.equal(currentUser().get('preferences.sidebarCollapsed'), true);
   });
 });

@@ -5,7 +5,7 @@ import testHelper from '../test-helper';
 
 module("Errors", testHelper);
 
-test("Request error message", function() {
+test("Request error message", function(assert) {
   defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, status: 500 });
 
   visit('/');
@@ -14,22 +14,22 @@ test("Request error message", function() {
 
   andThen(function() {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    equal(message, "Something went wrong with that request, please try again.");
+    assert.equal(message, "Something went wrong with that request, please try again.");
   });
 });
 
-test("First load error message", function() {
+test("First load error message", function(assert) {
   defineFixture('GET', '/users/me', { status: 500 });
 
   visit('/');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    equal(message, "Sorry, something went wrong. Try refreshing the page.");
+    assert.equal(message, "Sorry, something went wrong. Try refreshing the page.");
   });
 });
 
-test("Transition error message", function() {
+test("Transition error message", function(assert) {
   defineFixture('GET', '/teams', { status: 500 });
 
   visit('/');
@@ -37,11 +37,11 @@ test("Transition error message", function() {
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    equal(message, "Sorry, something went wrong. Try refreshing the page.");
+    assert.equal(message, "Sorry, something went wrong. Try refreshing the page.");
   });
 });
 
-test("404 error message", function() {
+test("404 error message", function(assert) {
   defineFixture('GET', '/teams', { status: 404 });
   defineFixture('GET', '/users', { params: { team_id: 1 } });
 
@@ -49,6 +49,6 @@ test("404 error message", function() {
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    equal(message, "Sorry, the page you were looking for could not be found.");
+    assert.equal(message, "Sorry, the page you were looking for could not be found.");
   });
 });
