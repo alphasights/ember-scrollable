@@ -1,8 +1,9 @@
 %vertically-aligned-container {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
 %vertically-aligned-child {
+  flex-shrink: 0;
 }

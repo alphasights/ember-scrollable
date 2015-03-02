@@ -49,6 +49,8 @@
     .checklist-status {
       @extend %grid-column-small-2;
       @extend %grid-column-medium-1;
+
+      padding-left: 0 !important;
     }
 
     &:hover {
