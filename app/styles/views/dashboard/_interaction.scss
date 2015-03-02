@@ -73,14 +73,14 @@ $interaction-header-height:
     .call-time {
       @extend %grid-column-6;
 
-      line-height: 3rem;
+      line-height: $base-line-height * 2;
       margin: 0;
       padding: 0 !important;
     }
 
     .call-time {
       color: $primary-color;
-      font-size: $h5-font-size;
+      font-size: $h4-font-size;
       text-align: right;
 
       > div {
