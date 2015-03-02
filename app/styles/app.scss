@@ -6,6 +6,8 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'settings';
 @import 'default';
 
+@import 'helpers/vertical-align';
+
 @import 'components/avatar';
 @import 'components/checklist-status';
 @import 'components/dropdown';

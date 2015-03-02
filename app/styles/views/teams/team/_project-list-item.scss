@@ -1,16 +1,14 @@
 .team .project-list-item {
-  @include single-transition(background-color, 100ms, linear);
   @extend %grid-row;
+  @extend %vertical-align-container;
+  @include single-transition(background-color, 100ms, linear);
 
   border-bottom: 1px solid $global-section-border-color;
   cursor: pointer;
-  display: table;
   padding: $column-gutter / 4 0;
 
   > div {
-    display: table-cell;
-    float: none !important;
-    vertical-align: middle;
+    @extend %vertical-align-child;
   }
 
   > .priority {

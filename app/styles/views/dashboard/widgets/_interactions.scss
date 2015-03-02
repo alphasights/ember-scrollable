@@ -13,16 +13,15 @@
 
   article {
     @extend %grid-row;
+    @extend %vertical-align-container;
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
-    display: table !important;
 
     > div {
-      display: table-cell !important;
-      float: none !important;
+      @extend %vertical-align-child;
+
       padding: $column-gutter / 2;
-      vertical-align: middle;
     }
 
     small {
