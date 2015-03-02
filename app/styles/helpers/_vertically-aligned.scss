@@ -1,9 +1,9 @@
 %vertically-aligned-container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+  display: table !important;
 }
 
 %vertically-aligned-child {
-  flex-shrink: 0;
+  display: table-cell;
+  float: none !important;
+  vertical-align: middle;
 }
