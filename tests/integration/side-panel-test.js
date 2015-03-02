@@ -41,41 +41,41 @@ module("Side Panel", {
   }
 });
 
-test("Shows", function() {
+test("Shows", function(assert) {
   visit('/teams');
   click('.project-list-item');
 
   andThen(function() {
-    equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
+    assert.equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
   });
 });
 
-test("Hides when clicking on the overlay", function() {
+test("Hides when clicking on the overlay", function(assert) {
   visit('/teams');
   click('.project-list-item');
   click('.side-panel');
 
   andThen(function() {
-    equal(find('.side-panel').length, 0);
+    assert.equal(find('.side-panel').length, 0);
   });
 });
 
-test("Hides when clicking on the close button", function() {
+test("Hides when clicking on the close button", function(assert) {
   visit('/teams');
   click('.project-list-item');
   click('.close > button');
 
   andThen(function() {
-    equal(find('.side-panel').length, 0);
+    assert.equal(find('.side-panel').length, 0);
   });
 });
 
-test("Hides when pressing the esc key", function() {
+test("Hides when pressing the esc key", function(assert) {
   visit('/teams');
   click('.project-list-item');
   keyEvent(document, 'keyup', 27);
 
   andThen(function() {
-    equal(find('.side-panel').length, 0);
+    assert.equal(find('.side-panel').length, 0);
   });
 });

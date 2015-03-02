@@ -102,7 +102,7 @@ module("Upcoming interactions", {
   }
 });
 
-test("Show interaction details", function() {
+test("Show interaction details", function(assert) {
   visit('/dashboard/interactions/1');
 
   andThen(function() {
@@ -125,7 +125,7 @@ test("Show interaction details", function() {
       clientCallTime: $interaction.find('.profiles .client .call-time span').text().trim()
     };
 
-    deepEqual(interactionDetails, {
+    assert.deepEqual(interactionDetails, {
       titleProjectName: projectName,
       titleAdvisorName: advisorName,
       advisorName: advisorName,
@@ -144,7 +144,7 @@ test("Show interaction details", function() {
   });
 });
 
-test("Show upcoming interactions list", function() {
+test("Show upcoming interactions list", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
@@ -158,7 +158,7 @@ test("Show upcoming interactions list", function() {
       relativeCallTime: $interaction.find('.time small').text().trim()
     };
 
-    deepEqual(interactionListItem, {
+    assert.deepEqual(interactionListItem, {
       advisorName: advisorName,
       projectName: projectName,
       isChecklistComplete: true,

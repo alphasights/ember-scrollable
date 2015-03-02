@@ -135,7 +135,7 @@ module("Interactions To Schedule", {
 });
 
 
-test("Show interactions to schedule list", function() {
+test("Show interactions to schedule list", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
@@ -148,32 +148,32 @@ test("Show interactions to schedule list", function() {
       relativeRequestedAtTime: $interaction.find('.time span').text().trim()
     };
 
-    deepEqual(interactionListItem, {
+    assert.deepEqual(interactionListItem, {
       advisorName: interactionToSchedule.advisorName,
       projectName: interactionToSchedule.projectName,
       isChecklistComplete: true,
       relativeRequestedAtTime: 'Requested 30 minutes ago'
     });
 
-    equal(find('.interactions-to-schedule article').length, 4);
+    assert.equal(find('.interactions-to-schedule article').length, 4);
   });
 });
 
-test("Expand interactions to schedule list", function() {
+test("Expand interactions to schedule list", function(assert) {
   visit('/dashboard');
   click('.interactions-to-schedule .toggle-collapse');
 
   andThen(function() {
-    equal(find('.interactions-to-schedule article').length, 5);
+    assert.equal(find('.interactions-to-schedule article').length, 5);
   });
 });
 
-test("Collapse interactions to schedule list", function() {
+test("Collapse interactions to schedule list", function(assert) {
   visit('/dashboard');
   click('.interactions-to-schedule .toggle-collapse');
   click('.interactions-to-schedule .toggle-collapse');
 
   andThen(function() {
-    equal(find('.interactions-to-schedule article').length, 4);
+    assert.equal(find('.interactions-to-schedule article').length, 4);
   });
 });
