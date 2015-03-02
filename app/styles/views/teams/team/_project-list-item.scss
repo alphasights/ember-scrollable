@@ -1,6 +1,6 @@
 .team .project-list-item {
   @extend %grid-row;
-  @extend %vertical-align-container;
+  @extend %vertically-aligned-container;
   @include single-transition(background-color, 100ms, linear);
 
   border-bottom: 1px solid $global-section-border-color;
@@ -8,7 +8,7 @@
   padding: $column-gutter / 4 0;
 
   > div {
-    @extend %vertical-align-child;
+    @extend %vertically-aligned-child;
   }
 
   > .priority {
