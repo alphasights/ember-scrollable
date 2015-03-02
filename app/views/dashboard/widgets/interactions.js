@@ -10,9 +10,10 @@ export default WidgetView.extend({
 
   title: function() {
     var visibleContent = this.get('controller.visibleContent');
+    var length = this.get('controller.length');
 
     if (Ember.isPresent(visibleContent)) {
-      return `${this.get('name')} (${visibleContent.get('length')} of ${this.get('controller.length')})`;
+      return `${this.get('name')} (${visibleContent.get('length')} of ${length})`;
     } else {
       return this.get('name');
     }
