@@ -5,17 +5,16 @@ export default WidgetView.extend({
   templateName: 'dashboard/widgets/interactions',
   classNameBindings: [':interactions', 'isCollapsed:collapsed'],
 
-  isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
   listItemTemplateName: null,
-
+  hasMoreItems: Ember.computed.oneWay('controller.hasMoreItems'),
+  isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
+  paginationInfo: Ember.computed.oneWay('controller.paginationInfo'),
+  
   title: function() {
-    var visibleContent = this.get('controller.visibleContent');
-    var length = this.get('controller.length');
-
-    if (Ember.isPresent(visibleContent)) {
-      return `${this.get('name')} (${visibleContent.get('length')} of ${length})`;
+    if (this.get('hasMoreItems')) {
+      return `${this.get('name')} (${this.get('paginationInfo')})`;
     } else {
       return this.get('name');
     }
-  }.property('name', 'visibleContent.length', 'controller.length')
+  }.property('name', 'hasMoreItems', 'paginationInfo')
 });
