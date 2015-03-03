@@ -13,14 +13,12 @@
 
   article {
     @extend %grid-row;
-    @extend %vertically-aligned-container;
+    @extend %vertical-align;
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
 
     > div {
-      @extend %vertically-aligned-child;
-
       padding: $column-gutter / 2;
     }
 
