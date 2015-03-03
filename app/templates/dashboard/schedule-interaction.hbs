@@ -19,16 +19,9 @@
   </ul>
 </section>
 
-<section class="checklist-items">
-  <header>
-    {{as-checklist-status items=checklistItems}}
-
-    <a target="_blank" {{bind-attr href=schedulingUrl}}>Schedule</a>
-  </header>
-
-  <ul>
-    {{#each checklistItem in checklistItems itemController="dashboard.interaction.checklistItem"}}
-      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
-    {{/each}}
-  </ul>
+<section class="scheduling">
+  {{as-calendar
+    value=scheduledCallTime
+    timeZones=timeZones
+    disabledTimeSlots=disabledTimeSlots}}
 </section>

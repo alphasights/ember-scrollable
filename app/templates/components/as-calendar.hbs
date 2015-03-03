@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>TZ</th>
+
+      {{#each day in days}}
+        <th>{{moment day "ddd D/M"}}</th>
+      {{/each}}
+    </tr>
+  </thead>
+
+  <tbody>
+    {{#each slot in slots}}
+      <tr>
+        <th>{{moment slot.time "h:mm a"}}</th>
+
+        {{#each date in slot.dates}}
+          <th {{bind-attr class=date.class}} {{action "setValue" date.value}}></th>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
