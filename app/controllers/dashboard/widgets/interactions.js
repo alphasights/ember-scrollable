@@ -26,6 +26,10 @@ export default Ember.ArrayController.extend({
     }
   }.property('isCollapsed'),
 
+  paginationInfo: function() {
+    return `${this.get('visibleContent.length')} of ${this.get('length')}`;
+  }.property('visibleContent.length', 'length'),
+
   actions: {
     toggleCollapse: function() {
       this.toggleProperty('isCollapsed');
