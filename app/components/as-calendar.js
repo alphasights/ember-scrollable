@@ -31,12 +31,14 @@ var TimeSlot = Ember.Object.extend({
     var days = this.get('days');
     var dates = [];
 
-    days.forEach(function(day) {
+    days.forEach((day) => {
       dates.pushObject(TimeSlotDate.create({
         day: day,
         slot: this
       }));
     });
+
+    return dates;
   }.property('days.[]')
 });
 
@@ -47,11 +49,11 @@ export default Ember.Component.extend({
   referenceTime: moment().startOf('day'),
   value: null,
 
-  startingTime: function() {
+  dayStartingTime: function() {
     return moment(this.get('referenceTime')).add(7, 'hour');
   }.property('referenceTime'),
 
-  endingTime: function() {
+  dayEndingTime: function() {
     return moment(this.get('referenceTime')).add(22, 'hour');
   }.property('referenceTime'),
 
@@ -69,10 +71,10 @@ export default Ember.Component.extend({
   }.property('startingDate'),
 
   timeSlots: function() {
-    var currentTime = moment(this.get('startingTime'));
+    var currentTime = moment(this.get('dayStartingTime'));
     var timeSlots = [];
 
-    while (currentTime.toDate() <= this.get('endingTime').toDate()) {
+    while (currentTime.toDate() <= this.get('dayEndingTime').toDate()) {
       timeSlots.pushObject(TimeSlot.create({
         time: currentTime,
         component: this
@@ -82,7 +84,7 @@ export default Ember.Component.extend({
     }
 
     return timeSlots;
-  }.property('startingTime', 'endingTime'),
+  }.property('dayStartingTime', 'dayEndingTime'),
 
   actions: {
     setValue: function(value) {
