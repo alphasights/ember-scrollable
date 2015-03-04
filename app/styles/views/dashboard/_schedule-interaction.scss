@@ -76,6 +76,15 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
     padding: 0 $form-input-padding / 2;
   }
 
+  textarea {
+    @extend %form-input-shared-properties;
+
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    min-height: $form-input-height * 3;
+    padding: $form-input-padding / 2;
+  }
+
   .select {
     > div {
       @extend %form-select-arrow;
