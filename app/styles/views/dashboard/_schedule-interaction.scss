@@ -21,16 +21,15 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
     @extend %grid-column-12;
 
     background-color: lighten($panel-bg, 2%);
-    border-radius: $global-radius;
     border: solid 1px $global-section-border-color;
+    border-radius: $global-radius;
     padding: 0 !important;
   }
 
   fieldset {
-    border: none;
-    padding: $column-gutter / 2;
-    padding-bottom: 0;
+    border: 0;
     margin-bottom: 0;
+    padding: $column-gutter / 2 $column-gutter / 2 0;
 
     &:not(:last-of-type) {
       border-bottom: 1px solid $global-section-border-color;
@@ -43,6 +42,8 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
 
   .control {
     @extend %grid-column-small-12;
+
+    padding-bottom: $column-gutter / 2;
 
     &.small {
       @extend %grid-column-medium-6;
@@ -58,13 +59,11 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
       @extend %grid-column-medium-12;
       @extend %grid-column-large-12;
     }
-
-    padding-bottom: $column-gutter / 2;
   }
 
   label {
-    font-weight: $font-weight-bold;
     font-size: $h5-font-size;
+    font-weight: $font-weight-bold;
     line-height: $base-line-height;
   }
 
@@ -94,17 +93,18 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
       @extend %form-select-arrow;
       @extend %form-input-shared-properties;
 
-      position: relative;
-      overflow: hidden;
       background: $white;
-      line-height: $form-input-height;
       background-image: $form-select-background !important;
+      line-height: $form-input-height;
+      overflow: hidden;
+      position: relative;
     }
 
     select {
+      -webkit-appearance: none;
       background: rgba($black, 0);
-      border-radius: $global-radius;
       border: 0;
+      border-radius: $global-radius;
       color: $form-input-text-color;
       font-size: $base-font-size;
       margin: 0;
@@ -112,22 +112,21 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
       position: relative;
       text-shadow: 0 1px $white;
       width: 130%;
-      -webkit-appearance: none;
 
       &:focus {
-        z-index: 1;
-        width: 100%;
         color: $anchor-font-color;
         outline: none;
+        width: 100%;
+        z-index: 1;
       }
 
       > option {
-        margin: 3px;
-        padding: 3px 8px;
-        text-shadow: none;
         background: darken($white, 10%);
         border-radius: $global-radius;
         cursor: pointer;
+        margin: 3px;
+        padding: 3px 8px;
+        text-shadow: none;
       }
     }
   }
@@ -136,9 +135,9 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
     @extend %grid-column-12;
 
     background-color: $white;
-    border-top: 1px solid $global-section-border-color;
     border-bottom-left-radius: $global-radius;
     border-bottom-right-radius: $global-radius;
+    border-top: 1px solid $global-section-border-color;
     padding: $column-gutter !important;
 
     button {
@@ -157,40 +156,41 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
 }
 
 %form-select-arrow {
-  &:before, &:after {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    top: ($form-input-padding + $form-select-arrow-size) / 2;
-    right: $form-input-padding / 2;
-    width: 0;
-    height: 0;
+  &:before,
+  &:after {
     border: $form-select-arrow-size dashed;
     border-color: $small-font-color transparent;
+    content: '';
+    height: 0;
     pointer-events: none;
+    position: absolute;
+    right: $form-input-padding / 2;
+    top: ($form-input-padding + $form-select-arrow-size) / 2;
+    width: 0;
+    z-index: 1;
   }
 
   &:before {
     border-bottom-style: solid;
-    border-top: none;
+    border-top: 0;
   }
 
   &:after {
-    margin-top: $form-select-arrow-size * 2;
+    border-bottom: 0;
     border-top-style: solid;
-    border-bottom: none;
+    margin-top: $form-select-arrow-size * 2;
   }
 }
 
 %form-input-shared-properties {
   background-image: $form-input-background;
-  border-radius: $global-radius;
   border: 1px solid;
-  border-color: $form-input-border-color darken($form-input-border-color, 5%) $form-input-border-color;
+  border-color: $form-input-border-color darken($form-input-border-color, 5%);
+  border-radius: $global-radius;
   box-shadow: 0 1px 1px rgba($black, .08);
   color: $form-input-text-color;
-  text-shadow: 0 1px $white;
   height: auto;
+  text-shadow: 0 1px $white;
 
 
   &:hover {
