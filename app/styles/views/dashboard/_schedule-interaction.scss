@@ -4,6 +4,14 @@
   }
 }
 
+$form-input-height: 36px;
+$form-input-text-color: $small-font-color;
+$form-input-border-color: darken($white, 10%);
+$form-input-padding: $form-input-height - $base-font-size;
+$form-select-arrow-size: 4px;
+$form-select-background: linear-gradient(top, transparent, rgba($black, .03));
+$form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
+
 .scheduling-form {
   @extend %grid-column-12;
 
@@ -60,37 +68,41 @@
     line-height: $base-line-height;
   }
 
+  input {
+    @extend %form-input-shared-properties;
+
+    font-size: $base-font-size;
+    line-height: $base-font-size;
+    padding: $form-input-padding / 2;
+  }
+
   .select {
     > div {
       @extend %form-select-arrow;
+      @extend %form-input-shared-properties;
 
       position: relative;
       overflow: hidden;
       background: $white;
-      border: 1px solid;
-      border-color: darken($white, 10%) darken($white, 20%) darken($white, 10%);
-      border-radius: $global-radius;
-      background-image: linear-gradient(top, transparent, rgba($black, .03));
-      box-shadow: 0 1px 1px rgba($black, .08);
-
-      &:hover {
-        box-shadow: 0 1px 2px rgba($black, .1);
-      }
+      line-height: $form-input-height;
+      background-image: $form-select-background !important;
     }
 
     select {
-      position: relative;
-      width: 130%;
-      margin: 0;
-      color: $input-font-color;
-      text-shadow: 0 1px $white;
       background: rgba($black, 0);
-      border: 0;
       border-radius: $global-radius;
+      border: 0;
+      color: $form-input-text-color;
+      font-size: $base-font-size;
+      margin: 0;
+      padding: 0 $form-input-padding / 2;
+      position: relative;
+      text-shadow: 0 1px $white;
+      width: 130%;
       -webkit-appearance: none;
 
       &:focus {
-        z-index: 3;
+        z-index: 1;
         width: 100%;
         color: $anchor-font-color;
         outline: none;
@@ -98,7 +110,7 @@
 
       > option {
         margin: 3px;
-        padding: 6px 8px;
+        padding: 3px 8px;
         text-shadow: none;
         background: darken($white, 10%);
         border-radius: $global-radius;
@@ -135,12 +147,12 @@
   &:before, &:after {
     content: '';
     position: absolute;
-    z-index: 2;
-    top: 10px;
-    right: 10px;
+    z-index: 1;
+    top: ($form-input-padding + $form-select-arrow-size) / 2;
+    right: $form-input-padding / 2;
     width: 0;
     height: 0;
-    border: 4px dashed;
+    border: $form-select-arrow-size dashed;
     border-color: $small-font-color transparent;
     pointer-events: none;
   }
@@ -151,8 +163,24 @@
   }
 
   &:after {
-    margin-top: 7px;
+    margin-top: $form-select-arrow-size * 2;
     border-top-style: solid;
     border-bottom: none;
+  }
+}
+
+%form-input-shared-properties {
+  background-image: $form-input-background;
+  border-radius: $global-radius;
+  border: 1px solid;
+  border-color: $form-input-border-color darken($form-input-border-color, 5%) $form-input-border-color;
+  box-shadow: 0 1px 1px rgba($black, .08);
+  color: $form-input-text-color;
+  text-shadow: 0 1px $white;
+  height: auto;
+
+
+  &:hover {
+    box-shadow: 0 1px 2px rgba($black, .1);
   }
 }
