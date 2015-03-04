@@ -72,8 +72,8 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
     @extend %form-input-shared-properties;
 
     font-size: $base-font-size;
-    line-height: $base-font-size;
-    padding: $form-input-padding / 2;
+    line-height: $form-input-height;
+    padding: 0 $form-input-padding / 2;
   }
 
   .select {
