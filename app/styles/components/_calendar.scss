@@ -1,6 +1,7 @@
 $calendar-border-color: #e0e0e0;
 $calendar-header-background-color: #ededed;
 $calendar-header-text-color: #757575;
+$calendar-time-slot-height: 30px;
 
 .calendar {
   border-radius: $global-radius;
@@ -17,6 +18,8 @@ $calendar-header-text-color: #757575;
     border-bottom: 1px solid $calendar-border-color;
     text-align: center;
     color: $calendar-header-text-color;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
 
     &, .days {
       padding: 0 !important;
@@ -55,9 +58,11 @@ $calendar-header-text-color: #757575;
       border-right: 1px solid $calendar-border-color;
       text-align: center;
       color: $calendar-header-text-color;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
 
       > li {
-        padding: $column-gutter / 2;
+        height: $calendar-time-slot-height * 2;
       }
     }
 
@@ -69,13 +74,24 @@ $calendar-header-text-color: #757575;
       > li {
         width: (100% / 7) !important;
         float: left;
+
+        &:first-child > .dates > li {
+          border-left: 0;
+        }
       }
 
       .dates > li {
+        height: $calendar-time-slot-height;
         border: 1px solid $calendar-border-color;
+        border-right: 0;
+        border-bottom: 0;
 
         &:before {
           content: '\00a0';
+        }
+
+        &:first-child {
+          border-top: 0;
         }
       }
     }
