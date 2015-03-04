@@ -12,8 +12,12 @@
   <tbody>
     {{#each timeSlot in timeSlots}}
       <tr>
-        <th>{{moment timeSlot.time "h:mm a"}}</th>
-
+        {{#if timeSlot.showHeader}}
+          <th {{bind-attr rowspan=timeSlot.headerSpan}}>
+            {{moment timeSlot.time "h:mm a"}}
+          </th>
+        {{/if}}
+        
         {{#each date in timeSlot.dates}}
           <th {{bind-attr class=date.class}} {{action "setValue" date.value}}></th>
         {{/each}}

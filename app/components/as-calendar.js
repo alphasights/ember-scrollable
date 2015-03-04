@@ -20,6 +20,12 @@ var TimeSlot = Ember.Object.extend({
   component: null,
   time: null,
   days: Ember.computed.oneWay('component.days'),
+  timeSlots: Ember.computed.oneWay('component.timeSlots'),
+  headerSpan: 2,
+
+  showHeader: function() {
+    return (this.get('timeSlots').indexOf(this) % this.get('headerSpan')) === 0;
+  }.property('timeSlots.[]', 'headerSpan'),
 
   dates: function() {
     var days = this.get('days');
@@ -72,7 +78,7 @@ export default Ember.Component.extend({
         component: this
       }));
 
-      currentTime = moment(currentTime).add(1, 'hour');
+      currentTime = moment(currentTime).add(30, 'minute');
     }
 
     return timeSlots;
