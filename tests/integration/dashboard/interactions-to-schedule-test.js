@@ -66,7 +66,8 @@ module("Interactions To Schedule", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [1],
-          "requested_at": interactionToSchedule.requestedAt
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": false
         },
         {
           "id": 2,
@@ -75,7 +76,8 @@ module("Interactions To Schedule", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [1],
-          "requested_at": interactionToSchedule.requestedAt
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": false
         },
         {
           "id": 3,
@@ -84,7 +86,8 @@ module("Interactions To Schedule", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [1],
-          "requested_at": interactionToSchedule.requestedAt
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": false
         },
         {
           "id": 4,
@@ -93,7 +96,8 @@ module("Interactions To Schedule", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [1],
-          "requested_at": interactionToSchedule.requestedAt
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": false
         },
         {
           "id": 5,
@@ -102,7 +106,18 @@ module("Interactions To Schedule", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [1],
-          "requested_at": interactionToSchedule.requestedAt
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": false
+        },
+        {
+          "id": 6,
+          "scheduled_call_time": null,
+          "advisor_id": 1,
+          "client_contact_id": 21387,
+          "project_id": 32522,
+          "checklist_item_ids": [1],
+          "requested_at": interactionToSchedule.requestedAt,
+          "actioned": true
         }
       ],
       "checklist_items": [

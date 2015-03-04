@@ -86,7 +86,8 @@ module("Upcoming interactions", {
           "scheduled_call_time": scheduledCallTime,
           "advisor_id": 256512,
           "client_contact_id": 21387,
-          "project_id": 32522
+          "project_id": 32522,
+          "actioned": false
         }
       ]
     }});
