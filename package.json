@@ -46,6 +46,7 @@
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
     "express": "4.8.5",
     "glob": "4.0.5",
-    "liquid-fire": "0.17.1"
+    "liquid-fire": "0.17.1",
+    "rifraf": "2.2.8"
   }
 }
