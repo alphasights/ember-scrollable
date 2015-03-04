@@ -42,11 +42,11 @@ export default Ember.Component.extend({
   value: null,
 
   startingTime: function() {
-    return moment(this.get('referenceTime')).add(9, 'hour');
+    return moment(this.get('referenceTime')).add(7, 'hour');
   }.property('referenceTime'),
 
   endingTime: function() {
-    return moment(this.get('referenceTime')).add(18, 'hour');
+    return moment(this.get('referenceTime')).add(22, 'hour');
   }.property('referenceTime'),
 
   days: function() {
