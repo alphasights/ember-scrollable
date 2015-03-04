@@ -3,3 +3,83 @@
     @extend %grid-column-medium-12;
   }
 }
+
+.scheduling-form {
+  @extend %grid-column-12;
+
+  padding: $column-gutter !important;
+
+  > div {
+    @extend %grid-column-12;
+
+    background-color: lighten($panel-bg, 2%);
+    border-radius: $global-radius;
+    border: solid 1px $global-section-border-color;
+    padding: 0 !important;
+  }
+
+  fieldset {
+    border: none;
+    padding: $column-gutter / 2;
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid $global-section-border-color;
+    }
+
+    legend {
+      display: none;
+    }
+  }
+
+  .control {
+    @extend %grid-column-small-12;
+
+    &.small {
+      @extend %grid-column-medium-6;
+      @extend %grid-column-large-4;
+    }
+
+    &.medium {
+      @extend %grid-column-medium-6;
+      @extend %grid-column-large-6;
+    }
+
+    &.large {
+      @extend %grid-column-medium-12;
+      @extend %grid-column-large-12;
+    }
+
+    padding-bottom: $column-gutter / 2;
+  }
+
+  label {
+    font-weight: $font-weight-bold;
+    font-size: $h5-font-size;
+    line-height: $base-line-height;
+  }
+
+  .submission {
+    @extend %grid-column-12;
+
+    background-color: $white;
+    border-top: 1px solid $global-section-border-color;
+    border-bottom-left-radius: $global-radius;
+    border-bottom-right-radius: $global-radius;
+    padding: $column-gutter !important;
+
+    button {
+      margin-bottom: 0 !important;
+
+      &.button-primary {
+        @extend %button-primary;
+      }
+
+      &.button-secondary {
+        float: right;
+        padding: $column-gutter / 2;
+      }
+    }
+  }
+}

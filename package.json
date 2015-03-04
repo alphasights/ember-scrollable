@@ -40,6 +40,7 @@
     "ember-cli-uglify": "1.0.1",
     "ember-cli-velocity": "0.1.2",
     "ember-data": "1.0.0-beta.14.1",
+    "ember-easy-form-extensions": "0.2.2",
     "ember-export-application-global": "1.0.1",
     "ember-localstorage-adapter": "0.5.0",
     "ember-moment": "1.0.0",

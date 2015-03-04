@@ -54,3 +54,26 @@
     {{/each}}
   </ul>
 </section>
+
+<section class="scheduling-form">
+  <div>
+    {{#form-wrapper}}
+      {{#form-controls legend=' '}}
+        {{input date as='select' label="Interaction Date" class="small"}}
+        {{input from as='select' class="small"}}
+        {{input to as='select' class="small"}}
+        {{input interactionType as='select' class="small"}}
+        {{input speak as='select' class="small"}}
+      {{/form-controls}}
+
+      {{#form-controls legend=' '}}
+        {{input testa class="medium"}}
+        {{input testb as='select' class="medium"}}
+        {{input testc class="large"}}
+        {{input testd as='text' class="large"}}
+      {{/form-controls}}
+
+      {{form-submission submitText='Schedule Interaction'}}
+    {{/form-wrapper}}
+  </div>
+</section>
