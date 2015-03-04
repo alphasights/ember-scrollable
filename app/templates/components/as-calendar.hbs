@@ -10,11 +10,11 @@
   </thead>
 
   <tbody>
-    {{#each slot in slots}}
+    {{#each timeSlot in timeSlots}}
       <tr>
-        <th>{{moment slot.time "h:mm a"}}</th>
+        <th>{{moment timeSlot.time "h:mm a"}}</th>
 
-        {{#each date in slot.dates}}
+        {{#each date in timeSlot.dates}}
           <th {{bind-attr class=date.class}} {{action "setValue" date.value}}></th>
         {{/each}}
       </tr>

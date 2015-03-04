@@ -1,23 +1,24 @@
 import Ember from 'ember';
 
-var SlotDate = Ember.Object.extend({
+var TimeSlotDate = Ember.Object.extend({
   day: null,
   slot: null,
   component: Ember.computed.oneWay('slot.component'),
-  prototypeDay: Ember.computed.oneWay('component.prototypeDay'),
+  referenceTime: Ember.computed.oneWay('component.referenceTime'),
+  time: Ember.computed.oneWay('slot.time'),
 
   offset: function() {
-    return moment(this.get('slot.time')).diff(this.get('prototypeDay'));
-  }.property('prototypeDay', 'slot.time'),
+    return moment(this.get('time')).diff(this.get('referenceTime'));
+  }.property('referenceTime', 'time'),
 
   value: function() {
     return moment(this.get('day')).add(this.get('offset'));
   }.property('day', 'offset')
 });
 
-var Slot = Ember.Object.extend({
-  time: null,
+var TimeSlot = Ember.Object.extend({
   component: null,
+  time: null,
   days: Ember.computed.oneWay('component.days'),
 
   dates: function() {
@@ -25,49 +26,48 @@ var Slot = Ember.Object.extend({
     var dates = [];
 
     days.forEach(function(day) {
-      dates.pushObject(SlotDate.create({
+      dates.pushObject(TimeSlotDate.create({
         day: day,
         slot: this
       }));
     });
-  }.property('time')
+  }.property('days.[]')
 });
 
 export default Ember.Component.extend({
   classNameBindings: [':calendar'],
 
-  date: moment(),
+  startingDate: moment().startOf('week'),
+  referenceTime: moment().startOf('day'),
   value: null,
-  prototypeDay: moment().startOf('day'),
 
-  startOfDay: function() {
-    return moment(this.get('prototypeDay')).add(9, 'hour');
-  }.property('prototypeDay'),
+  startingTime: function() {
+    return moment(this.get('referenceTime')).add(9, 'hour');
+  }.property('referenceTime'),
 
-  endOfDay: function() {
-    return moment(this.get('startOfDay')).add(9, 'hour');
-  }.property('startOfDay'),
+  endingTime: function() {
+    return moment(this.get('referenceTime')).add(18, 'hour');
+  }.property('referenceTime'),
 
   days: function() {
-    var date = this.get('date');
-    var currentDate = moment(date).startOf('week');
+    var startingDate = this.get('startingDate');
+    var currentDate = startingDate;
     var days = [];
 
-    while (currentDate.week() === date.week()) {
+    while (currentDate.week() === startingDate.week()) {
       days.pushObject(currentDate.toDate());
       currentDate = moment(currentDate).add(1, 'day');
     }
 
     return days;
-  }.property('date'),
+  }.property('startingDate'),
 
-  slots: function() {
-    var prototypeDay = this.get('prototypeDay');
-    var currentTime = moment(prototypeDay).add(this.get('startOfDay'));
-    var slots = [];
+  timeSlots: function() {
+    var currentTime = moment(this.get('startingTime'));
+    var timeSlots = [];
 
-    while (currentTime.toDate() <= this.get('endOfDay').toDate()) {
-      slots.pushObject(Slot.create({
+    while (currentTime.toDate() <= this.get('endingTime').toDate()) {
+      timeSlots.pushObject(TimeSlot.create({
         time: currentTime,
         component: this
       }));
@@ -75,8 +75,8 @@ export default Ember.Component.extend({
       currentTime = moment(currentTime).add(1, 'hour');
     }
 
-    return slots;
-  }.property('prototypeDay'),
+    return timeSlots;
+  }.property('startingTime', 'endingTime'),
 
   actions: {
     setValue: function(value) {
