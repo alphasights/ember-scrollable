@@ -74,6 +74,10 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03));
     font-size: $base-font-size;
     line-height: $form-input-height;
     padding: 0 $form-input-padding / 2;
+
+    &::-webkit-input-placeholder {
+      color: lighten($form-input-text-color, 20%);
+    }
   }
 
   textarea {
