@@ -6,4 +6,10 @@
       line-height: $header-line-height;
     }
   }
+
+  .scheduling {
+    @extend %grid-column-12;
+
+    padding: $column-gutter / 2 $column-gutter !important;
+  }
 }

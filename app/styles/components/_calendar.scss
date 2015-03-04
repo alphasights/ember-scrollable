@@ -1,0 +1,83 @@
+$calendar-border-color: #e0e0e0;
+$calendar-header-background-color: #ededed;
+$calendar-header-text-color: #757575;
+
+.calendar {
+  border-radius: $global-radius;
+  border: 1px solid $calendar-border-color;
+
+  ul {
+    line-height: $base-line-height;
+  }
+
+  header {
+    @extend %grid-row;
+
+    background-color: $calendar-header-background-color;
+    border-bottom: 1px solid $calendar-border-color;
+    text-align: center;
+    color: $calendar-header-text-color;
+
+    &, .days {
+      padding: 0 !important;
+    }
+
+    .time-zone, .days > ul > li {
+      padding: $column-gutter / 2;
+    }
+
+    .time-zone {
+      @extend %grid-column-1;
+    }
+
+    .days {
+      @extend %grid-column-11;
+
+      ul {
+        @extend %grid-row;
+
+        > li {
+          width: (100% / 7) !important;
+          float: left;
+        }
+      }
+    }
+  }
+
+  > div {
+    max-height: 300px;
+    overflow: auto;
+
+    .times {
+      @extend %grid-column-1;
+
+      padding: 0 !important;
+      border-right: 1px solid $calendar-border-color;
+      text-align: center;
+      color: $calendar-header-text-color;
+
+      > li {
+        padding: $column-gutter / 2;
+      }
+    }
+
+    .days {
+      @extend %grid-column-11;
+
+      padding: 0 !important;
+
+      > li {
+        width: (100% / 7) !important;
+        float: left;
+      }
+
+      .dates > li {
+        border: 1px solid $calendar-border-color;
+
+        &:before {
+          content: '\00a0';
+        }
+      }
+    }
+  }
+}

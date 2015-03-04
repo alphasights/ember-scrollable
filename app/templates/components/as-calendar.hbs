@@ -1,27 +1,31 @@
-<table>
-  <thead>
-    <tr>
-      <th>{{moment value "ddd D/M h:mm a"}}</th>
+<header>
+  <div class="time-zone">TZ</div>
 
+  <div class="days">
+    <ul>
       {{#each day in days}}
-        <th>{{moment day "ddd D/M"}}</th>
+        <li>{{moment day.value "ddd D/M"}}</li>
       {{/each}}
-    </tr>
-  </thead>
+    </ul>
+  </div>
+</header>
 
-  <tbody>
-    {{#each timeSlot in timeSlots}}
-      <tr>
-        {{#if timeSlot.showHeader}}
-          <th {{bind-attr rowspan=timeSlot.headerSpan}}>
-            {{moment timeSlot.time "h:mm a"}}
-          </th>
-        {{/if}}
-
-        {{#each date in timeSlot.dates}}
-          <th {{bind-attr class=date.class}} {{action "setValue" date.value}}></th>
-        {{/each}}
-      </tr>
+<div>
+  <ul class="times">
+    {{#each time in headerTimes}}
+      <li>{{moment time.value "h a"}}</li>
     {{/each}}
-  </tbody>
-</table>
+  </ul>
+
+  <ul class="days">
+    {{#each day in days}}
+      <li>
+        <ul class="dates">
+          {{#each date in day.dates}}
+            <li {{action "setValue" date}}></li>
+          {{/each}}
+        </ul>
+      </li>
+    {{/each}}
+  </ul>
+</div>

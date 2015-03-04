@@ -1,48 +1,33 @@
 import Ember from 'ember';
 
-var TimeSlotDate = Ember.Object.extend({
-  day: null,
-  slot: null,
-  component: Ember.computed.oneWay('slot.component'),
+var Time = Ember.Object.extend({
+  value: null,
+  component: null,
   referenceTime: Ember.computed.oneWay('component.referenceTime'),
-  time: Ember.computed.oneWay('slot.time'),
 
   offset: function() {
-    return moment(this.get('time')).diff(this.get('referenceTime'));
-  }.property('referenceTime', 'time'),
-
-  value: function() {
-    return moment(this.get('day')).add(this.get('offset'));
-  }.property('day', 'offset')
+    return moment(this.get('value')).diff(this.get('referenceTime'));
+  }.property('referenceTime', 'value')
 });
 
-var TimeSlot = Ember.Object.extend({
+var Day = Ember.Object.extend({
+  value: null,
   component: null,
-  time: null,
-  days: Ember.computed.oneWay('component.days'),
-  timeSlots: Ember.computed.oneWay('component.timeSlots'),
-  headerSpan: 2,
-
-  showHeader: function() {
-    return (this.get('timeSlots').indexOf(this) % this.get('headerSpan')) === 0;
-  }.property('timeSlots.[]', 'headerSpan'),
+  times: Ember.computed.oneWay('component.times'),
 
   dates: function() {
-    var days = this.get('days');
     var dates = [];
 
-    days.forEach((day) => {
-      dates.pushObject(TimeSlotDate.create({
-        day: day,
-        slot: this
-      }));
+    this.get('times').forEach((time) => {
+      dates.pushObject(moment(this.get('value')).add(time.get('offset')));
     });
 
     return dates;
-  }.property('days.[]')
+  }.property('value', 'times.@each.offset')
 });
 
 export default Ember.Component.extend({
+  tagName: 'section',
   classNameBindings: [':calendar'],
 
   startingDate: moment().startOf('week'),
@@ -63,28 +48,40 @@ export default Ember.Component.extend({
     var days = [];
 
     while (currentDate.week() === startingDate.week()) {
-      days.pushObject(currentDate.toDate());
+      days.pushObject(Day.create({
+        value: currentDate.toDate(),
+        component: this
+      }));
+
       currentDate = moment(currentDate).add(1, 'day');
     }
 
     return days;
   }.property('startingDate'),
 
-  timeSlots: function() {
+  times: function() {
     var currentTime = moment(this.get('dayStartingTime'));
-    var timeSlots = [];
+    var times = [];
 
     while (currentTime.toDate() <= this.get('dayEndingTime').toDate()) {
-      timeSlots.pushObject(TimeSlot.create({
-        time: currentTime,
+      times.pushObject(Time.create({
+        value: currentTime.toDate(),
         component: this
       }));
 
       currentTime = moment(currentTime).add(30, 'minute');
     }
 
-    return timeSlots;
+    return times;
   }.property('dayStartingTime', 'dayEndingTime'),
+
+  headerTimes: function() {
+    var times = this.get('times');
+
+    return _(times).filter(function(time) {
+      return (times.indexOf(time) % 2) === 0;
+    });
+  }.property('times.[]'),
 
   actions: {
     setValue: function(value) {
