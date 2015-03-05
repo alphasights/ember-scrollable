@@ -61,6 +61,10 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     &.large {
       @include form-item-large();
     }
+
+    > div {
+      position: relative;
+    }
   }
 
   label {
@@ -79,10 +83,6 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     &::-webkit-input-placeholder {
       color: lighten($form-input-text-color, 20%);
     }
-  }
-
-  .input_wrapper {
-    position: relative;
   }
 
   #{$form-error-wrapper} {
