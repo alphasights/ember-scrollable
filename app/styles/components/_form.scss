@@ -1,6 +1,6 @@
 $form-include-wrapper: true !default;
 $form-inline-wrapper: 'fieldset' !default;
-$form-input-wrapper: '.control' !default;
+$form-element-wrapper: '.control' !default;
 $form-select-wrapper: '.select' !default;
 $form-submit-wrapper: '.submission' !default;
 
@@ -8,6 +8,7 @@ $form-input-height: 36px !default;
 $form-input-text-color: $small-font-color !default;
 $form-input-border-color: darken($white, 10%) !default;
 $form-input-padding: $form-input-height - $base-font-size !default;
+$form-input-shadow-color: rgba($black, .08);
 $form-select-arrow-size: 4px !default;
 $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !default;
 $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
@@ -43,7 +44,7 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) 
     }
   }
 
-  #{$form-input-wrapper} {
+  #{$form-element-wrapper} {
     @extend %grid-column-small-12;
 
     padding-bottom: $column-gutter / 2;
@@ -77,6 +78,37 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) 
     &::-webkit-input-placeholder {
       color: lighten($form-input-text-color, 20%);
     }
+  }
+
+  .input_wrapper {
+    position: relative;
+  }
+
+  .error {
+    border: 1px solid darken($alert-color, 5%);
+    border-bottom-right-radius: $global-radius;
+    border-top-right-radius: $global-radius;
+    box-shadow: 1px 0 1px $form-input-shadow-color;
+    display: inline-block;
+    line-height: $form-input-height;
+    margin: 0;
+    padding: 0 $column-gutter / 2;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+
+    i {
+      @include icon(question-circle);
+
+      color: $white;
+      font-size: $h4-font-size;
+      cursor: pointer;
+    }
+  }
+
+  select + .error {
+    border: 0;
   }
 
   textarea {
@@ -187,7 +219,7 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) 
   border: 1px solid;
   border-color: $form-input-border-color darken($form-input-border-color, 5%);
   border-radius: $global-radius;
-  box-shadow: 0 1px 1px rgba($black, .08);
+  box-shadow: 0 1px 1px $form-input-shadow-color;
   color: $form-input-text-color;
   height: auto;
   text-shadow: 0 1px $white;

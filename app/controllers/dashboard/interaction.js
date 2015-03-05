@@ -8,6 +8,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, Saving, {
   validations: {
     speakDialIn: {
       presence: true
+    },
+    from: {
+      presence: true
     }
   },
 
