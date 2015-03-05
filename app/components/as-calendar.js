@@ -39,7 +39,9 @@ export default Ember.Component.extend({
   }.property('referenceTime'),
 
   dayEndingTime: function() {
-    return moment(this.get('referenceTime')).add(22, 'hour');
+    return moment(this.get('referenceTime'))
+      .add(22, 'hour')
+      .subtract(30, 'minute');
   }.property('referenceTime'),
 
   days: function() {

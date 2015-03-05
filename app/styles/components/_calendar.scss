@@ -55,14 +55,18 @@ $calendar-time-slot-height: 30px;
       @extend %grid-column-1;
 
       padding: 0 !important;
-      border-right: 1px solid $calendar-border-color;
       text-align: center;
       color: $calendar-header-text-color;
       font-weight: $font-weight-bold;
       text-transform: uppercase;
+      margin-top: - ($calendar-time-slot-height / 2);
 
       > li {
         height: $calendar-time-slot-height * 2;
+
+        &:first-child {
+          color: transparent;
+        }
       }
     }
 
@@ -74,10 +78,6 @@ $calendar-time-slot-height: 30px;
       > li {
         width: (100% / 7) !important;
         float: left;
-
-        &:first-child > .dates > li {
-          border-left: 0;
-        }
       }
 
       .dates > li {
