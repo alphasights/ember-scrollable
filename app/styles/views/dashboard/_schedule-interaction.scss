@@ -2,14 +2,14 @@
   header > .content {
     @extend %grid-column-medium-12;
   }
-}
 
-.scheduling-form {
-  @extend %grid-column-12;
+  .scheduling-form {
+    @extend %grid-column-12;
 
-  padding: $column-gutter !important;
+    padding: $column-gutter !important;
 
-  form {
-    @include form();
+    form {
+      @include form();
+    }
   }
 }

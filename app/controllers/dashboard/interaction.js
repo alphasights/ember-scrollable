@@ -1,22 +1,7 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
-import Saving from 'ember-easy-form-extensions/mixins/controllers/saving';
 
-export default Ember.ObjectController.extend(ModelsNavigationMixin, Saving, {
-
-  // Validations run out of the box
-  validations: {
-    speakDialIn: {
-      presence: true
-    },
-    from: {
-      presence: true
-    },
-    majorTextArea: {
-      presence: true
-    }
-  },
-
+export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
