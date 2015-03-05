@@ -4,25 +4,25 @@
   <div class="days">
     <ul>
       {{#each day in days}}
-        <li>{{moment day.value "ddd D/M"}}</li>
+        <li>{{moment day.date "ddd D/M"}}</li>
       {{/each}}
     </ul>
   </div>
 </header>
 
 <div>
-  <ul class="times">
-    {{#each time in headerTimes}}
-      <li>{{moment time.value "h a"}}</li>
+  <ul class="time-slots">
+    {{#each timeSlot in headerTimeSlots}}
+      <li>{{moment timeSlot.date "h a"}}</li>
     {{/each}}
   </ul>
 
   <ul class="days">
     {{#each day in days}}
       <li>
-        <ul class="dates">
-          {{#each date in day.dates}}
-            <li {{action "setValue" date}}></li>
+        <ul class="times">
+          {{#each time in day.times}}
+            <li {{action "setValue" time}}></li>
           {{/each}}
         </ul>
       </li>

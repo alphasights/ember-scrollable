@@ -2,6 +2,7 @@ $calendar-border-color: #e0e0e0;
 $calendar-header-background-color: #ededed;
 $calendar-header-text-color: #757575;
 $calendar-time-slot-height: 30px;
+$calendar-number-of-days: 7;
 
 .calendar {
   border: 1px solid $calendar-border-color;
@@ -27,7 +28,7 @@ $calendar-time-slot-height: 30px;
     }
 
     .time-zone,
-    .days li {
+    .days > ul > li {
       padding: $column-gutter / 4;
     }
 
@@ -43,7 +44,7 @@ $calendar-time-slot-height: 30px;
 
         > li {
           float: left;
-          width: (100% / 7) !important;
+          width: (100% / $calendar-number-of-days) !important;
         }
       }
     }
@@ -53,7 +54,7 @@ $calendar-time-slot-height: 30px;
     max-height: 300px;
     overflow: auto;
 
-    .times {
+    .time-slots {
       @extend %grid-column-1;
 
       color: $calendar-header-text-color;
@@ -79,10 +80,10 @@ $calendar-time-slot-height: 30px;
 
       > li {
         float: left;
-        width: (100% / 7) !important;
+        width: (100% / $calendar-number-of-days) !important;
       }
 
-      .dates > li {
+      .times > li {
         border: 1px solid lighten($calendar-border-color, 3%);
         border-bottom: 0;
         border-right: 0;
