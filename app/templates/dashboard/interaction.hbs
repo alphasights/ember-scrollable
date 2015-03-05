@@ -56,25 +56,23 @@
 </section>
 
 <section class="scheduling-form">
-  <div>
-    {{#form-wrapper}}
-      {{#form-controls legend=' '}}
-        {{input date as='select' label="Interaction Date" class="small select" prompt="Select Interaction Date"}}
-        {{input from as='select' class="small select"}}
-        {{input to as='select' class="small select"}}
-        {{input interactionType as='select' class="small select"}}
-        {{input speak as='select' class="small select" prompt="Yes"}}
-        {{input speakDialIn label="Speak Dial-in Number" class="small" placeholder="+44 077"}}
-      {{/form-controls}}
+  {{#form-wrapper}}
+    {{#form-controls legend=' '}}
+      {{input date as='select' label="Interaction Date" class="small select" prompt="Select Interaction Date"}}
+      {{input from as='select' class="small select"}}
+      {{input to as='select' class="small select"}}
+      {{input interactionType as='select' class="small select"}}
+      {{input speak as='select' class="small select" prompt="Yes"}}
+      {{input speakDialIn label="Speak Dial-in Number" class="small" placeholder="+44 077"}}
+    {{/form-controls}}
 
-      {{#form-controls legend=' '}}
-        {{input halfHalf class="medium"}}
-        {{input theOtherHalfHalf as='select' class="medium select"}}
-        {{input fullSizeInput class="large"}}
-        {{input majorTextArea as='text' class="large"}}
-      {{/form-controls}}
+    {{#form-controls legend=' '}}
+      {{input halfHalf class="medium"}}
+      {{input theOtherHalfHalf as='select' class="medium select"}}
+      {{input fullSizeInput class="large"}}
+      {{input majorTextArea as='text' class="large"}}
+    {{/form-controls}}
 
-      {{form-submission submitText='Schedule Interaction'}}
-    {{/form-wrapper}}
-  </div>
+    {{form-submission submitText='Schedule Interaction'}}
+  {{/form-wrapper}}
 </section>
