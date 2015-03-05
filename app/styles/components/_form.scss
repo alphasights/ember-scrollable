@@ -3,15 +3,16 @@ $form-inline-wrapper: 'fieldset' !default;
 $form-element-wrapper: '.control' !default;
 $form-select-wrapper: '.select' !default;
 $form-submit-wrapper: '.submission' !default;
+$form-error-wrapper: '.error' !default;
 
 $form-input-height: 36px !default;
 $form-input-text-color: $small-font-color !default;
 $form-input-border-color: darken($white, 10%) !default;
 $form-input-padding: $form-input-height - $base-font-size !default;
-$form-input-shadow-color: rgba($black, .08);
+$form-input-shadow-color: rgba($black, .08) !default;
+$form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
 $form-select-arrow-size: 4px !default;
 $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !default;
-$form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
 
 @mixin form() {
   @extend %grid-column-12;
@@ -84,7 +85,7 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) 
     position: relative;
   }
 
-  .error {
+  #{$form-error-wrapper} {
     border: 1px solid darken($alert-color, 5%);
     border-bottom-right-radius: $global-radius;
     border-top-right-radius: $global-radius;
@@ -107,8 +108,18 @@ $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) 
     }
   }
 
-  select + .error {
+  select + #{$form-error-wrapper} {
     border: 0;
+  }
+
+  textarea + #{$form-error-wrapper} {
+    border-width: 0 1px 0 0;
+    height: 100%;
+    background-color: transparent;
+
+    i {
+      color: $alert-color;
+    }
   }
 
   textarea {

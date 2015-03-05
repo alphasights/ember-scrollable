@@ -11,6 +11,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, Saving, {
     },
     from: {
       presence: true
+    },
+    majorTextArea: {
+      presence: true
     }
   },
 
