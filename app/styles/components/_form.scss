@@ -85,40 +85,48 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     }
   }
 
-  #{$form-error-wrapper} {
-    border: 1px solid darken($alert-color, 5%);
-    border-bottom-right-radius: $global-radius;
-    border-top-right-radius: $global-radius;
-    box-shadow: 1px 0 1px $form-input-shadow-color;
-    display: inline-block;
-    line-height: $form-input-height;
-    margin: 0;
-    padding: 0 $column-gutter / 2;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
+  #{$form-element-wrapper}-error {
+    #{$form-error-wrapper} {
+      border-bottom-right-radius: $global-radius;
+      border-top-right-radius: $global-radius;
+      display: inline-block;
+      line-height: $form-input-height;
+      margin: 0;
+      padding: 0 $column-gutter / 2;
+      position: absolute;
+      right: 0;
+      top: 1px;
+      z-index: 2;
 
-    i {
-      @include icon(question-circle);
+      i {
+        @include icon(question-circle);
 
-      color: $white;
-      font-size: $h4-font-size;
-      cursor: pointer;
+        color: $white;
+        font-size: $h4-font-size;
+        cursor: pointer;
+      }
     }
-  }
 
-  select + #{$form-error-wrapper} {
-    border: 0;
-  }
+    input,
+    textarea,
+    &#{$form-select-wrapper} > div {
+      border-color: lighten($alert-color, 10%);
+    }
 
-  textarea + #{$form-error-wrapper} {
-    border-width: 0 1px 0 0;
-    height: 100%;
-    background-color: transparent;
+    select + #{$form-error-wrapper} {
+      border: 0;
+      top: 0;
+      right: -1px;
+    }
 
-    i {
-      color: $alert-color;
+    textarea + #{$form-error-wrapper} {
+      border-width: 0 1px 0 0;
+      height: 100%;
+      background-color: transparent;
+
+      i {
+        color: $alert-color;
+      }
     }
   }
 
