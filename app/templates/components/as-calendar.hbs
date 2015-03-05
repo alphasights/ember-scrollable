@@ -1,10 +1,14 @@
 <header>
-  <div class="time-zone">TZ</div>
+  <div class="time-zone">
+    <div>TZ</div>
+  </div>
 
   <div class="days">
     <ul>
       {{#each day in days}}
-        <li>{{moment day.date "ddd D/M"}}</li>
+        <li {{bind-attr style=dayStyle}}>
+          {{moment day.date "ddd D/M"}}
+        </li>
       {{/each}}
     </ul>
   </div>
@@ -13,13 +17,13 @@
 <div>
   <ul class="time-slots">
     {{#each timeSlot in headerTimeSlots}}
-      <li>{{moment timeSlot.date "h a"}}</li>
+      <li>{{moment timeSlot.date "h A"}}</li>
     {{/each}}
   </ul>
 
   <ul class="days">
     {{#each day in days}}
-      <li>
+      <li {{bind-attr style=dayStyle}}>
         <ul class="times">
           {{#each time in day.times}}
             <li {{action "setValue" time}}></li>

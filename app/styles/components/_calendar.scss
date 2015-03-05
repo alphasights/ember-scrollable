@@ -1,33 +1,37 @@
-$calendar-border-color: #e0e0e0;
-$calendar-header-background-color: #ededed;
-$calendar-header-text-color: #757575;
 $calendar-time-slot-height: 30px;
-$calendar-number-of-days: 7;
 
 .calendar {
-  border: 1px solid $calendar-border-color;
+  border: 1px solid $global-section-border-color;
   border-radius: $global-radius;
 
   ul {
     line-height: $base-line-height;
   }
 
+  header,
+  .time-slots {
+    color: $small-font-color;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+
+  header .days > ul > li,
+  > div .days > li {
+    float: left;
+  }
+
   header {
     @extend %grid-row;
 
-    background-color: $calendar-header-background-color;
-    border-bottom: 1px solid $calendar-border-color;
-    color: $calendar-header-text-color;
-    font-weight: $font-weight-bold;
-    text-align: center;
-    text-transform: uppercase;
+    background-color: $info-color;
+    border-bottom: 1px solid $global-section-border-color;
+    padding: 0 !important;
 
-    &,
-    .days {
+    > * {
       padding: 0 !important;
     }
 
-    .time-zone,
+    .time-zone > div,
     .days > ul > li {
       padding: $column-gutter / 4;
     }
@@ -39,30 +43,26 @@ $calendar-number-of-days: 7;
     .days {
       @extend %grid-column-11;
 
-      ul {
+      > ul {
         @extend %grid-row;
-
-        > li {
-          float: left;
-          width: (100% / $calendar-number-of-days) !important;
-        }
       }
     }
   }
 
   > div {
+    @extend %grid-row;
+
     max-height: 300px;
     overflow: auto;
+
+    > * {
+      padding: 0 !important;
+    }
 
     .time-slots {
       @extend %grid-column-1;
 
-      color: $calendar-header-text-color;
-      font-weight: $font-weight-bold;
       margin-top: - ($calendar-time-slot-height / 2);
-      padding: 0 !important;
-      text-align: center;
-      text-transform: uppercase;
 
       > li {
         height: $calendar-time-slot-height * 2;
@@ -76,18 +76,11 @@ $calendar-number-of-days: 7;
     .days {
       @extend %grid-column-11;
 
-      padding: 0 !important;
-
-      > li {
-        float: left;
-        width: (100% / $calendar-number-of-days) !important;
-      }
-
       .times > li {
-        border: 1px solid lighten($calendar-border-color, 3%);
+        border: 1px solid $global-section-border-color;
         border-bottom: 0;
         border-right: 0;
-        border-top-color: darken($calendar-border-color, 2%);
+        border-top-color: darken($global-section-border-color, 2%);
         height: $calendar-time-slot-height;
 
         &:first-child {
@@ -95,7 +88,7 @@ $calendar-number-of-days: 7;
         }
 
         &:nth-child(even) {
-          border-top-color: lighten($calendar-border-color, 6%);
+          border-top-color: lighten($global-section-border-color, 3%);
         }
       }
     }

@@ -85,6 +85,10 @@ export default Ember.Component.extend({
     });
   }.property('timeSlots.[]'),
 
+  dayStyle: function() {
+    return `width: ${100 / this.get('days.length')}%;`;
+  }.property('days.length'),
+
   actions: {
     setValue: function(value) {
       this.set('value', value);
