@@ -1,13 +1,13 @@
 import Ember from 'ember';
 
 var TimeSlot = Ember.Object.extend({
-  date: null,
+  time: null,
   component: null,
   referenceTime: Ember.computed.oneWay('component.referenceTime'),
 
   offset: function() {
-    return moment(this.get('date')).diff(this.get('referenceTime'));
-  }.property('date', 'referenceTime')
+    return moment(this.get('time')).diff(this.get('referenceTime'));
+  }.property('time', 'referenceTime')
 });
 
 var Day = Ember.Object.extend({
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
   tagName: 'section',
   classNameBindings: [':calendar'],
 
-  startingDay: moment().startOf('week'),
+  startingDate: moment().startOf('week'),
   referenceTime: moment().startOf('day'),
   value: null,
 
@@ -45,11 +45,11 @@ export default Ember.Component.extend({
   }.property('referenceTime'),
 
   days: function() {
-    var startingDay = this.get('startingDay');
-    var currentDate = startingDay;
+    var startingDate = this.get('startingDate');
+    var currentDate = startingDate;
     var days = [];
 
-    while (currentDate.week() === startingDay.week()) {
+    while (currentDate.week() === startingDate.week()) {
       days.push(Day.create({
         date: currentDate,
         component: this
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
     }
 
     return days;
-  }.property('startingDay'),
+  }.property('startingDate'),
 
   timeSlots: function() {
     var currentTime = moment(this.get('dayStartingTime'));
@@ -67,7 +67,7 @@ export default Ember.Component.extend({
 
     while (currentTime.toDate() <= this.get('dayEndingTime').toDate()) {
       timeSlots.pushObject(TimeSlot.create({
-        date: currentTime,
+        time: currentTime,
         component: this
       }));
 
