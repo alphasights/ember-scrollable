@@ -1,0 +1,16 @@
+.calendar-time {
+  height: $calendar-time-slot-height;
+
+  .occurrences {
+    li {
+      border: 1px solid;
+      padding-left: $column-gutter / 4;
+
+      &.interaction {
+        background-color: #6ab1dd;
+        border-color: darken(#6ab1dd, 5%);
+        color: #ffffff;
+      }
+    }
+  }
+}

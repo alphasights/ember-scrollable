@@ -33,6 +33,19 @@ export default Ember.Component.extend({
   startingDate: moment().startOf('week'),
   referenceTime: moment().startOf('day'),
   value: null,
+  timeSlotDuration: moment.duration(30, 'minute'),
+
+  occurrences: function() {
+    if (this.get('value') != null) {
+      return [Ember.Object.create({
+        type: 'interaction',
+        time: moment(this.get('value')),
+        title: 'Interaction'
+      })];
+    } else {
+      return [];
+    }
+  }.property('value'),
 
   dayStartingTime: function() {
     return moment(this.get('referenceTime')).add(7, 'hour');
@@ -62,7 +75,7 @@ export default Ember.Component.extend({
   }.property('startingDate'),
 
   timeSlots: function() {
-    var currentTime = moment(this.get('dayStartingTime'));
+    var currentTime = this.get('dayStartingTime');
     var timeSlots = [];
 
     while (currentTime.toDate() <= this.get('dayEndingTime').toDate()) {
@@ -71,11 +84,11 @@ export default Ember.Component.extend({
         component: this
       }));
 
-      currentTime = moment(currentTime).add(30, 'minute');
+      currentTime = moment(currentTime).add(this.get('timeSlotDuration'));
     }
 
     return timeSlots;
-  }.property('dayStartingTime', 'dayEndingTime'),
+  }.property('dayStartingTime', 'dayEndingTime', 'timeSlotDuration'),
 
   headerTimeSlots: function() {
     var timeSlots = this.get('timeSlots');
@@ -87,11 +100,5 @@ export default Ember.Component.extend({
 
   dayStyle: function() {
     return `width: ${100 / this.get('days.length')}%;`;
-  }.property('days.length'),
-
-  actions: {
-    setValue: function(value) {
-      this.set('value', value);
-    }
-  }
+  }.property('days.length')
 });
