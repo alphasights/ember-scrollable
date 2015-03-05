@@ -10,7 +10,8 @@ export default Ember.ObjectController.extend({
   interactionsToSchedule: function() {
     return this.get('interactions').filter(function(interaction) {
       return interaction.get('requestedAt') != null &&
-        interaction.get('scheduledCallTime') == null;
+        interaction.get('scheduledCallTime') == null &&
+        !interaction.get('actioned');
     }).sort(function(a, b) {
       return -Ember.compare(a.get('requestedAt'), b.get('requestedAt'));
     });

@@ -9,7 +9,7 @@
       i {
         @include icon('chevron-down');
 
-        margin-left: 3px;
+        margin-left: $column-gutter / 4;
       }
     }
   }
