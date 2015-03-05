@@ -13,41 +13,42 @@
 
   article {
     @extend %grid-row;
+    @extend %vertical-align;
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
-    display: table !important;
 
     > div {
-      display: table-cell !important;
-      float: none !important;
       padding: $column-gutter / 2;
-      vertical-align: middle;
     }
 
     small {
       color: $small-font-color;
       display: block;
       font-size: $base-font-size;
-    }
 
-    .time,
-    .checklist-status {
-      white-space: nowrap;
+      @media #{$small-only} {
+        font-size: $small-font-size;
+      }
     }
 
     .time {
-      @extend %grid-column-4;
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-4;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-7;
+      @extend %grid-column-small-6;
+      @extend %grid-column-medium-7;
     }
 
     .checklist-status {
-      @extend %grid-column-1;
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-1;
+
+      padding-left: 0 !important;
     }
 
     &:hover {
