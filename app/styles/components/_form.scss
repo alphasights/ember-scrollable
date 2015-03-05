@@ -202,6 +202,16 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
         padding: $column-gutter / 2;
       }
     }
+
+    a {
+      display: inline-block;
+      padding: 0 $column-gutter;
+      color: $small-font-color;
+
+      &:hover {
+        color: $body-font-color;
+      }
+    }
   }
 }
 
