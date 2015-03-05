@@ -4,8 +4,8 @@ $calendar-header-text-color: #757575;
 $calendar-time-slot-height: 30px;
 
 .calendar {
-  border-radius: $global-radius;
   border: 1px solid $calendar-border-color;
+  border-radius: $global-radius;
 
   ul {
     line-height: $base-line-height;
@@ -16,17 +16,19 @@ $calendar-time-slot-height: 30px;
 
     background-color: $calendar-header-background-color;
     border-bottom: 1px solid $calendar-border-color;
-    text-align: center;
     color: $calendar-header-text-color;
     font-weight: $font-weight-bold;
+    text-align: center;
     text-transform: uppercase;
 
-    &, .days {
+    &,
+    .days {
       padding: 0 !important;
     }
 
-    .time-zone, .days > ul > li {
-      padding: $column-gutter / 2;
+    .time-zone,
+    .days li {
+      padding: $column-gutter / 4;
     }
 
     .time-zone {
@@ -40,8 +42,8 @@ $calendar-time-slot-height: 30px;
         @extend %grid-row;
 
         > li {
-          width: (100% / 7) !important;
           float: left;
+          width: (100% / 7) !important;
         }
       }
     }
@@ -54,12 +56,12 @@ $calendar-time-slot-height: 30px;
     .times {
       @extend %grid-column-1;
 
-      padding: 0 !important;
-      text-align: center;
       color: $calendar-header-text-color;
       font-weight: $font-weight-bold;
-      text-transform: uppercase;
       margin-top: - ($calendar-time-slot-height / 2);
+      padding: 0 !important;
+      text-align: center;
+      text-transform: uppercase;
 
       > li {
         height: $calendar-time-slot-height * 2;
@@ -76,22 +78,23 @@ $calendar-time-slot-height: 30px;
       padding: 0 !important;
 
       > li {
-        width: (100% / 7) !important;
         float: left;
+        width: (100% / 7) !important;
       }
 
       .dates > li {
-        height: $calendar-time-slot-height;
-        border: 1px solid $calendar-border-color;
-        border-right: 0;
+        border: 1px solid lighten($calendar-border-color, 3%);
         border-bottom: 0;
-
-        &:before {
-          content: '\00a0';
-        }
+        border-right: 0;
+        border-top-color: darken($calendar-border-color, 2%);
+        height: $calendar-time-slot-height;
 
         &:first-child {
           border-top: 0;
+        }
+
+        &:nth-child(even) {
+          border-top-color: lighten($calendar-border-color, 6%);
         }
       }
     }
