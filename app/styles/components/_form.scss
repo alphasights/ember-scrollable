@@ -31,8 +31,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
     @if $form-include-wrapper {
       padding: $column-gutter / 2 $column-gutter / 2 0;
-    }
-    @else {
+    } @else {
       padding: 0;
     }
 
@@ -102,8 +101,8 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
         @include icon(question-circle);
 
         color: $white;
-        font-size: $h4-font-size;
         cursor: pointer;
+        font-size: $h4-font-size;
       }
     }
 
@@ -115,14 +114,14 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
     select + #{$form-error-wrapper} {
       border: 0;
-      top: 0;
       right: -1px;
+      top: 0;
     }
 
     textarea + #{$form-error-wrapper} {
+      background-color: transparent;
       border-width: 0 1px 0 0;
       height: 100%;
-      background-color: transparent;
 
       i {
         color: $alert-color;
