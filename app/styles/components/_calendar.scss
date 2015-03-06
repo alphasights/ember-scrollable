@@ -70,18 +70,20 @@
       @extend %grid-column-11;
 
       .times > li {
+        &:first-child .calendar-time {
+          border-top: 0;
+        }
+
+        &:nth-child(even) .calendar-time {
+          border-top-color: lighten($global-section-border-color, 3%);
+        }
+      }
+
+      .calendar-time {
         border: 1px solid $global-section-border-color;
         border-bottom: 0;
         border-right: 0;
         border-top-color: darken($global-section-border-color, 2%);
-
-        &:first-child {
-          border-top: 0;
-        }
-
-        &:nth-child(even) {
-          border-top-color: lighten($global-section-border-color, 3%);
-        }
       }
     }
   }
