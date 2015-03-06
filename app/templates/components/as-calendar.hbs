@@ -25,9 +25,9 @@
     {{#each day in days}}
       <li {{bind-attr style=dayStyle}}>
         <ul class="times">
-          {{#each time in day.times}}
+          {{#each timeSlot in timeSlots}}
             <li>
-              {{as-calendar-time time=time calendar=this}}
+              {{as-calendar-time timeSlot=timeSlot day=day calendar=this}}
             </li>
           {{/each}}
         </ul>

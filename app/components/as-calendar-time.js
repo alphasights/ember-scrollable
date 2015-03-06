@@ -4,17 +4,21 @@ export default Ember.Component.extend({
   tagName: 'article',
   classNameBindings: [':calendar-time'],
 
-  time: null,
+  timeSlot: null,
+  day: null,
   calendar: null,
-  timeSlotDuration: Ember.computed.oneWay('calendar.timeSlotDuration'),
+
+  time: function() {
+    return moment(this.get('day.date')).add(this.get('timeSlot.offset'));
+  }.property('day.date', 'timeSlot.offset'),
+
+  endingTime: function() {
+    return moment(this.get('day.date')).add(this.get('timeSlot.endingOffset'));
+  }.property('day.date', 'timeSlot.endingOffset'),
 
   click: function() {
     this.set('calendar.value', this.get('time').toDate());
   },
-
-  endingTime: function() {
-    return moment(this.get('time')).add(this.get('timeSlotDuration'));
-  }.property('time', 'timeSlotDuration'),
 
   occurrences: function() {
     var time = this.get('time').toDate();
@@ -24,5 +28,5 @@ export default Ember.Component.extend({
       var occurrenceTime = occurrence.get('time').toDate();
       return occurrenceTime >= time && occurrenceTime < endingTime;
     });
-  }.property('time', 'calendar.occurrences', 'timeSlotDuration')
+  }.property('time', 'endingTime', 'calendar.occurrences.@each.time')
 });
