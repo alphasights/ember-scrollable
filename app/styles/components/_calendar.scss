@@ -1,5 +1,3 @@
-$calendar-time-slot-height: 30px;
-
 .calendar {
   border: 1px solid $global-section-border-color;
   border-radius: $global-radius;
@@ -61,11 +59,7 @@ $calendar-time-slot-height: 30px;
     .time-slots {
       @extend %grid-column-1;
 
-      margin-top: - ($calendar-time-slot-height / 2);
-
       > li {
-        height: $calendar-time-slot-height * 2;
-
         &:first-child {
           color: transparent;
         }
@@ -80,7 +74,6 @@ $calendar-time-slot-height: 30px;
         border-bottom: 0;
         border-right: 0;
         border-top-color: darken($global-section-border-color, 2%);
-        height: $calendar-time-slot-height;
 
         &:first-child {
           border-top: 0;

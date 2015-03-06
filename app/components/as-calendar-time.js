@@ -3,10 +3,16 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: 'article',
   classNameBindings: [':calendar-time'],
+  attributeBindings: ['style'],
 
   timeSlot: null,
   day: null,
   calendar: null,
+  timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
+
+  style: function() {
+    return `height: ${this.get('timeSlotHeight')}px;`;
+  }.property('timeSlotHeight'),
 
   time: function() {
     return moment(this.get('day.date')).add(this.get('timeSlot.offset'));

@@ -17,7 +17,7 @@
 <div>
   <ul class="time-slots">
     {{#each timeSlot in headerTimeSlots}}
-      <li>{{moment timeSlot.time "h A"}}</li>
+      <li {{bind-attr style=headerTimeSlotStyle}}>{{moment timeSlot.time "h A"}}</li>
     {{/each}}
   </ul>
 

@@ -1,7 +1,8 @@
 .calendar-time {
-  height: $calendar-time-slot-height;
-
   .occurrences {
+    position: relative;
+    z-index: 1;
+    
     li {
       border: 1px solid;
       padding-left: $column-gutter / 4;

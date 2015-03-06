@@ -1,5 +1,5 @@
 <ul class="occurrences">
   {{#each occurrence in occurrences}}
-    <li {{bind-attr class=occurrence.type}}>{{occurrence.title}}</li>
+    <li {{bind-attr class=occurrence.type style=occurrence.style}}>{{occurrence.title}}</li>
   {{/each}}
 </ul>
