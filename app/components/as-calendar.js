@@ -1,16 +1,10 @@
 import Ember from 'ember';
 
 var Occurrence = Ember.Object.extend({
-  calendar: null,
   type: null,
   time: null,
   title: null,
-  duration: 1,
-  timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
-
-  style: function() {
-    return `height: ${this.get('duration') * this.get('timeSlotHeight')}px;`;
-  }.property('duration', 'timeSlotHeight')
+  duration: 1
 });
 
 var TimeSlot = Ember.Object.extend({
@@ -52,7 +46,6 @@ export default Ember.Component.extend({
   occurrences: function() {
     if (this.get('value') != null) {
       return [Occurrence.create({
-        calendar: this,
         type: 'interaction',
         time: moment(this.get('value')),
         title: 'Interaction',
@@ -97,6 +90,10 @@ export default Ember.Component.extend({
       return (timeSlots.indexOf(timeSlot) % 2) === 0;
     });
   }.property('timeSlots.[]'),
+
+  timeSlotsStyle: function() {
+    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`;
+  }.property('timeSlotHeight'),
 
   dayStyle: function() {
     return `width: ${100 / this.get('days.length')}%;`;
