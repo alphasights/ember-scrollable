@@ -15,7 +15,7 @@ var Time = Ember.Object.extend({
       return value;
     }
   }.property('value', 'timeZone')
-})
+});
 
 var TimeSlot = Time.extend({
   offset: moment.duration(),
