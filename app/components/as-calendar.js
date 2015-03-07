@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import TimeZoneOption from './as-calendar/time-zone-option';
 
 var Time = Ember.Object.extend({
   calendar: null,
@@ -37,15 +38,6 @@ var Day = Time.extend({
   value: function() {
     return moment(this.get('startingDate')).add(this.get('offset'), 'day');
   }.property('startingDate', 'offset')
-});
-
-export var TimeZoneOption = Ember.Object.extend({
-  title: null,
-  abbreviation: null,
-
-  description: function() {
-    return `${this.get('title')} (${this.get('abbreviation')})`;
-  }.property('title', 'abbreviation')
 });
 
 export default Ember.Component.extend({

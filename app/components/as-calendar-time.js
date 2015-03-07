@@ -56,11 +56,7 @@ export default Ember.Component.extend({
 
     return !this.get('calendar.occurrences').any(function(occurrence) {
       var occurrenceTime = occurrence.get('time').toDate();
-
-      var occurrenceEndingTime =
-        moment(occurrenceTime)
-          .add(occurrence.get('duration'))
-          .toDate();
+      var occurrenceEndingTime = occurrence.get('endingTime').toDate();
 
       return (endingTime >= occurrenceTime && endingTime < occurrenceEndingTime) ||
              (time >= occurrenceTime && time < occurrenceEndingTime);

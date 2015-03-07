@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
-import { TimeZoneOption } from 'phoenix/components/as-calendar';
+import TimeZoneOption from 'phoenix/components/as-calendar/time-zone-option';
+import Occurrence from 'phoenix/components/as-calendar/occurrence';
 
-var Occurrence = Ember.Object.extend({
+var InteractionOccurrence = Occurrence.extend({
   interaction: null,
   duration: moment.duration(60, 'minute'),
   scheduledCallTime: Ember.computed.oneWay('interaction.scheduledCallTime'),
@@ -38,13 +39,13 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   modelRouteParams: ['dashboard.schedule-interaction'],
 
   unavailabilities: [
-    Ember.Object.create({
+    Occurrence.create({
       type: 'alpha-call',
       time: moment().startOf('week').add(10, 'hour'),
       duration: moment.duration(5, 'hour')
     }),
 
-    Ember.Object.create({
+    Occurrence.create({
       type: 'alpha-call',
       time: moment().startOf('week').add(8, 'hour').add(3, 'day'),
       duration: moment.duration(2, 'hour')
@@ -53,7 +54,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
 
   occurrence: function() {
     if (this.get('scheduledCallTime') != null) {
-      return Occurrence.create({ interaction: this });
+      return InteractionOccurrence.create({ interaction: this });
     } else {
       return null;
     }
