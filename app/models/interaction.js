@@ -8,6 +8,8 @@ export default DS.Model.extend({
   scheduledCallTime: DS.attr('date'),
   requestedAt: DS.attr('date'),
 
+  scheduledCallDuration: moment.duration(60, 'minute'),
+
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
   }.property('id'),

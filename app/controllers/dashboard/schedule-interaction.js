@@ -8,18 +8,13 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
 
-  occurrences: function() {
-    if (this.get('scheduledCallTime') != null) {
-      return [Ember.Object.create({
-        type: 'interaction',
-        time: moment(this.get('scheduledCallTime')),
-        title: 'Scheduled Call',
-        duration: moment.duration(60, 'minute')
-      })];
-    } else {
-      return [];
-    }
-  }.property('scheduledCallTime'),
+  occurrences: [
+    Ember.Object.create({
+      type: 'alpha-call',
+      time: moment().startOf('week').add(10, 'hour'),
+      duration: moment.duration(5, 'hour')
+    })
+  ],
 
   actions: {
     hideSidePanel: function() {

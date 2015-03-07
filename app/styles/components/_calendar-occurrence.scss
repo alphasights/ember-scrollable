@@ -6,4 +6,8 @@ $calendar-occurrence-default-color: $anchor-font-color;
   border-color: darken($calendar-occurrence-default-color, 5%);
   color: $white;
   padding-left: $column-gutter / 4;
+
+  &.selection {
+    opacity: 0.8;
+  }
 }
