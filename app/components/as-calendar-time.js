@@ -10,11 +10,10 @@ export default Ember.Component.extend({
   calendar: null,
   timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
   selection: Ember.computed.alias('calendar.selection'),
-  selectionOccurrence: Ember.computed.oneWay('calendar.selectionOccurrence'),
 
   click: function() {
     if (this.get('canBeSelected')) {
-      return this.set('selection', this.get('time').toDate());
+      this.set('selection.time', this.get('time'));
     }
   },
 
@@ -32,14 +31,14 @@ export default Ember.Component.extend({
 
   allOccurrences: function() {
     var calendarOccurrences = this.get('calendar.occurrences');
-    var selectionOccurrence = this.get('selectionOccurrence');
+    var selection = this.get('selection');
 
-    if (selectionOccurrence != null) {
-      return calendarOccurrences.concat(selectionOccurrence);
+    if (selection != null) {
+      return calendarOccurrences.concat(selection);
     } else {
       return calendarOccurrences;
     }
-  }.property('calendar.occurrences.[]', 'selectionOccurrence'),
+  }.property('calendar.occurrences.[]', 'selection'),
 
   occurrences: function() {
     var time = this.get('time').toDate();

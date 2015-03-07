@@ -1,16 +1,5 @@
 import Ember from 'ember';
 
-var SelectionOccurrence = Ember.Object.extend({
-  calendar: null,
-  selection: Ember.computed.oneWay('calendar.selection'),
-  title: Ember.computed.oneWay('calendar.selectionTitle'),
-  duration: Ember.computed.oneWay('calendar.selectionDuration'),
-
-  time: function() {
-    return moment(this.get('selection'));
-  }.property('selection')
-});
-
 var TimeSlot = Ember.Object.extend({
   offset: moment.duration(),
   calendar: null,
@@ -44,19 +33,8 @@ export default Ember.Component.extend({
   timeSlotsRange: [moment.duration('7:00'), moment.duration('21:30')],
   timeSlotDuration: moment.duration(30, 'minute'),
   timeSlotHeight: 30,
-  selection: null,
-  selectionDuration: moment.duration(30, 'minute'),
   occurrences: [],
-
-  selectionOccurrence: function() {
-    var selection = this.get('selection');
-
-    if (selection != null) {
-      return SelectionOccurrence.create({ calendar: this });
-    } else {
-      return null;
-    }
-  }.property('selection'),
+  selection: null,
 
   days: function() {
     return _.range(this.get('numberOfDays')).map((offset) => {
