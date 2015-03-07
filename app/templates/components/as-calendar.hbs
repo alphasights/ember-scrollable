@@ -23,7 +23,9 @@
     <ul>
       {{#each day in days}}
         <li {{bind-attr style=dayStyle}}>
-          {{moment day.localValue "ddd D/M"}}
+          {{#liquid-with day.localValue as localValue use="toDown"}}
+            {{moment localValue "ddd D/M"}}
+          {{/liquid-with}}
         </li>
       {{/each}}
     </ul>
@@ -34,7 +36,9 @@
   <ul class="time-slots" {{bind-attr style=timeSlotsHeaderStyle}}>
     {{#each timeSlot in headerTimeSlots}}
       <li {{bind-attr style=headerTimeSlotStyle}}>
-        {{moment timeSlot.localValue "h A"}}
+        {{#liquid-with timeSlot.localValue as localValue use="toDown"}}
+          {{moment localValue "h A"}}
+        {{/liquid-with}}
       </li>
     {{/each}}
   </ul>

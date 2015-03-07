@@ -26,7 +26,7 @@ var TimeZoneOption = Ember.Object.extend({
   value: Ember.computed.oneWay('person.timeZone'),
 
   abbreviation: function() {
-    return moment().tz(this.get('value')).zoneAbbr();
+    return moment().tz(this.get('value')).format('z');
   }.property('value'),
 
   description: function() {
