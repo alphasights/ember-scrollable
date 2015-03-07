@@ -15,9 +15,9 @@
 </header>
 
 <div>
-  <ul class="time-slots">
+  <ul class="time-slots" {{bind-attr style=timeSlotsHeaderStyle}}>
     {{#each timeSlot in headerTimeSlots}}
-      <li>{{moment timeSlot.time "h A"}}</li>
+      <li {{bind-attr style=headerTimeSlotStyle}}>{{moment timeSlot.time "h A"}}</li>
     {{/each}}
   </ul>
 
@@ -25,8 +25,10 @@
     {{#each day in days}}
       <li {{bind-attr style=dayStyle}}>
         <ul class="times">
-          {{#each time in day.times}}
-            <li {{action "setValue" time}}></li>
+          {{#each timeSlot in timeSlots}}
+            <li>
+              {{as-calendar-time timeSlot=timeSlot day=day calendar=this}}
+            </li>
           {{/each}}
         </ul>
       </li>

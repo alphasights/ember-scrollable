@@ -1,0 +1,13 @@
+$calendar-occurrence-default-color: $anchor-font-color;
+
+.calendar-occurrence {
+  background-color: $calendar-occurrence-default-color;
+  border: 1px solid;
+  border-color: darken($calendar-occurrence-default-color, 5%);
+  color: $white;
+  padding-left: $column-gutter / 4;
+
+  &.selection {
+    opacity: .8;
+  }
+}

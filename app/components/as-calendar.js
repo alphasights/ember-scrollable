@@ -1,29 +1,27 @@
 import Ember from 'ember';
 
 var TimeSlot = Ember.Object.extend({
-  time: null,
-  component: null,
-  referenceTime: Ember.computed.oneWay('component.referenceTime'),
+  offset: moment.duration(),
+  calendar: null,
+  duration: Ember.computed.oneWay('calendar.timeSlotDuration'),
 
-  offset: function() {
-    return moment(this.get('time')).diff(this.get('referenceTime'));
-  }.property('time', 'referenceTime')
+  endingOffset: function() {
+    return moment.duration(this.get('offset')).add(this.get('duration'));
+  }.property('offset', 'duration'),
+
+  time: function() {
+    return moment().startOf('day').add(this.get('offset'));
+  }.property('offset')
 });
 
 var Day = Ember.Object.extend({
-  date: null,
-  component: null,
-  timeSlots: Ember.computed.oneWay('component.timeSlots'),
+  offset: 0,
+  calendar: null,
+  startingDate: Ember.computed.oneWay('calendar.startingDate'),
 
-  times: function() {
-    var times = [];
-
-    this.get('timeSlots').forEach((timeSlot) => {
-      times.push(moment(this.get('date')).add(timeSlot.get('offset')));
-    });
-
-    return times;
-  }.property('date', 'timeSlots.@each.offset')
+  date: function() {
+    return moment(this.get('startingDate')).add(this.get('offset'), 'day');
+  }.property('startingDate', 'offset')
 });
 
 export default Ember.Component.extend({
@@ -31,51 +29,39 @@ export default Ember.Component.extend({
   classNameBindings: [':calendar'],
 
   startingDate: moment().startOf('week'),
-  referenceTime: moment().startOf('day'),
-  value: null,
-
-  dayStartingTime: function() {
-    return moment(this.get('referenceTime')).add(7, 'hour');
-  }.property('referenceTime'),
-
-  dayEndingTime: function() {
-    return moment(this.get('referenceTime'))
-      .add(22, 'hour')
-      .subtract(30, 'minute');
-  }.property('referenceTime'),
+  numberOfDays: 7,
+  timeSlotsRange: [moment.duration('7:00'), moment.duration('21:30')],
+  timeSlotDuration: moment.duration(30, 'minute'),
+  timeSlotHeight: 30,
+  occurrences: [],
+  selection: null,
 
   days: function() {
-    var startingDate = this.get('startingDate');
-    var currentDate = startingDate;
-    var days = [];
-
-    while (currentDate.week() === startingDate.week()) {
-      days.push(Day.create({
-        date: currentDate,
-        component: this
-      }));
-
-      currentDate = moment(currentDate).add(1, 'day');
-    }
-
-    return days;
-  }.property('startingDate'),
+    return _.range(this.get('numberOfDays')).map((offset) => {
+      return Day.create({
+        offset: offset,
+        calendar: this
+      });
+    });
+  }.property('numberOfDays'),
 
   timeSlots: function() {
-    var currentTime = moment(this.get('dayStartingTime'));
+    var timeSlotsRange = this.get('timeSlotsRange');
+    var currentOffset = timeSlotsRange[0];
     var timeSlots = [];
 
-    while (currentTime.toDate() <= this.get('dayEndingTime').toDate()) {
-      timeSlots.pushObject(TimeSlot.create({
-        time: currentTime,
-        component: this
-      }));
+    while (currentOffset.as('milliseconds') <= timeSlotsRange[1].as('milliseconds')) {
+      var timeSlot = TimeSlot.create({
+        offset: currentOffset,
+        calendar: this
+      });
 
-      currentTime = moment(currentTime).add(30, 'minute');
+      timeSlots.push(timeSlot);
+      currentOffset = timeSlot.get('endingOffset');
     }
 
     return timeSlots;
-  }.property('dayStartingTime', 'dayEndingTime'),
+  }.property('timeSlotsRange.[]'),
 
   headerTimeSlots: function() {
     var timeSlots = this.get('timeSlots');
@@ -85,13 +71,15 @@ export default Ember.Component.extend({
     });
   }.property('timeSlots.[]'),
 
+  timeSlotsHeaderStyle: function() {
+    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`;
+  }.property('timeSlotHeight'),
+
   dayStyle: function() {
     return `width: ${100 / this.get('days.length')}%;`;
   }.property('days.length'),
 
-  actions: {
-    setValue: function(value) {
-      this.set('value', value);
-    }
-  }
+  headerTimeSlotStyle: function() {
+    return `height: ${2 * this.get('timeSlotHeight')}px;`;
+  }.property('timeSlotHeight')
 });
