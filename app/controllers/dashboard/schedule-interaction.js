@@ -1,6 +1,39 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 
+var Occurrence = Ember.Object.extend({
+  interaction: null,
+  duration: moment.duration(60, 'minute'),
+  scheduledCallTime: Ember.computed.oneWay('interaction.scheduledCallTime'),
+  title: 'Scheduled Call',
+
+  time: function(key, value) {
+    if (arguments.length > 1) {
+      if (value != null) {
+        this.set('scheduledCallTime', value.toDate());
+      } else {
+        this.set('scheduledCallTime', null);
+      }
+    }
+
+    return moment(this.get('scheduledCallTime'));
+  }.property('scheduledCallTime')
+});
+
+var TimeZoneOption = Ember.Object.extend({
+  person: null,
+  title: null,
+  value: Ember.computed.oneWay('person.timeZone'),
+
+  abbreviation: function() {
+    return moment().tz(this.get('value')).zoneAbbr();
+  }.property('value'),
+
+  description: function() {
+    return `${this.get('title')} (${this.get('abbreviation')})`;
+  }.property('title', 'abbreviation')
+});
+
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
@@ -21,6 +54,36 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
       duration: moment.duration(2, 'hour')
     })
   ],
+
+  occurrence: function() {
+    if (this.get('scheduledCallTime') != null) {
+      return Occurrence.create({ interaction: this });
+    } else {
+      return null;
+    }
+  }.property('scheduledCallTime'),
+
+  timeZoneOptions: function() {
+    var timeZoneOptions = [];
+    var advisor = this.get('advisor');
+    var clientContact = this.get('clientContact');
+
+    if (advisor.get('timeZone') != null) {
+      timeZoneOptions.push(TimeZoneOption.create({
+        person: advisor,
+        title: 'Advisor Time Zone'
+      }));
+    }
+
+    if (clientContact.get('timeZone') != null) {
+      timeZoneOptions.push(TimeZoneOption.create({
+        person: clientContact,
+        title: 'Client Time Zone'
+      }));
+    }
+
+    return timeZoneOptions;
+  }.property('advisor.timeZone', 'clientContact.timeZone'),
 
   actions: {
     hideSidePanel: function() {

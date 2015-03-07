@@ -22,12 +22,12 @@ export default Ember.Component.extend({
   }.property('timeSlotHeight'),
 
   time: function() {
-    return moment(this.get('day.date')).add(this.get('timeSlot.offset'));
-  }.property('day.date', 'timeSlot.offset'),
+    return moment(this.get('day.value')).add(this.get('timeSlot.offset'));
+  }.property('day.value', 'timeSlot.offset'),
 
   endingTime: function() {
-    return moment(this.get('day.date')).add(this.get('timeSlot.endingOffset'));
-  }.property('day.date', 'timeSlot.endingOffset'),
+    return moment(this.get('day.value')).add(this.get('timeSlot.endingOffset'));
+  }.property('day.value', 'timeSlot.endingOffset'),
 
   allOccurrences: function() {
     var calendarOccurrences = this.get('calendar.occurrences');

@@ -39,6 +39,10 @@
 
     .time-zone {
       @extend %grid-column-1;
+
+      .dropdown {
+        display: inline-block;
+      }
     }
 
     .days {
