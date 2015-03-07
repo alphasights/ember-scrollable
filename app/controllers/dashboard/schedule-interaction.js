@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
+import { TimeZoneOption } from 'phoenix/components/as-calendar';
 
 var Occurrence = Ember.Object.extend({
   interaction: null,
@@ -20,18 +21,13 @@ var Occurrence = Ember.Object.extend({
   }.property('scheduledCallTime')
 });
 
-var TimeZoneOption = Ember.Object.extend({
+var PersonTimeZoneOption = TimeZoneOption.extend({
   person: null,
-  title: null,
   value: Ember.computed.oneWay('person.timeZone'),
 
   abbreviation: function() {
     return moment().tz(this.get('value')).format('z');
-  }.property('value'),
-
-  description: function() {
-    return `${this.get('title')} (${this.get('abbreviation')})`;
-  }.property('title', 'abbreviation')
+  }.property('value')
 });
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
@@ -69,14 +65,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
     var clientContact = this.get('clientContact');
 
     if (advisor.get('timeZone') != null) {
-      timeZoneOptions.push(TimeZoneOption.create({
+      timeZoneOptions.push(PersonTimeZoneOption.create({
         person: advisor,
         title: 'Advisor Time Zone'
       }));
     }
 
     if (clientContact.get('timeZone') != null) {
-      timeZoneOptions.push(TimeZoneOption.create({
+      timeZoneOptions.push(PersonTimeZoneOption.create({
         person: clientContact,
         title: 'Client Time Zone'
       }));

@@ -39,6 +39,15 @@ var Day = Time.extend({
   }.property('startingDate', 'offset')
 });
 
+export var TimeZoneOption = Ember.Object.extend({
+  title: null,
+  abbreviation: null,
+
+  description: function() {
+    return `${this.get('title')} (${this.get('abbreviation')})`;
+  }.property('title', 'abbreviation')
+});
+
 export default Ember.Component.extend({
   tagName: 'section',
   classNameBindings: [':calendar'],
@@ -64,9 +73,9 @@ export default Ember.Component.extend({
   allTimeZoneOptions: function() {
     var systemTimeZoneAbbreviation = this.get('systemTimeZoneAbbreviation');
 
-    return [Ember.Object.create({
+    return [TimeZoneOption.create({
       value: null,
-      description: `System Time Zone (${systemTimeZoneAbbreviation})`,
+      title: 'System Time Zone',
       abbreviation: systemTimeZoneAbbreviation
     })].concat(this.get('timeZoneOptions'));
   }.property('timeZoneOptions.[]', 'systemTimeZoneAbbreviation'),
