@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
-import TimeZoneOption from 'phoenix/components/as-calendar/time-zone-option';
-import Occurrence from 'phoenix/components/as-calendar/occurrence';
+import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
+import Occurrence from 'phoenix/models/as-calendar/occurrence';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,

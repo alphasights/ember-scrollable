@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   calendar: null,
   timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
   selection: Ember.computed.alias('calendar.selection'),
+  timeSlots: Ember.computed.oneWay('calendar.timeSlots'),
 
   click: function() {
     if (this.get('canBeSelected')) {
@@ -28,6 +29,11 @@ export default Ember.Component.extend({
   endingTime: function() {
     return moment(this.get('day.value')).add(this.get('timeSlot.endingOffset'));
   }.property('day.value', 'timeSlot.endingOffset'),
+
+  lastTimeSlotEndingTime: function() {
+    return moment(this.get('day.value'))
+             .add(this.get('timeSlots.lastObject.endingOffset'));
+  }.property('day.value', 'timeSlots.lastObject.endingOffset'),
 
   allOccurrences: function() {
     var calendarOccurrences = this.get('calendar.occurrences');
@@ -50,16 +56,25 @@ export default Ember.Component.extend({
     });
   }.property('time', 'endingTime', 'allOccurrences.@each.time'),
 
-  canBeSelected: function() {
+  isBlockedByAnyOccurrence: function() {
     var time = this.get('time').toDate();
     var endingTime = this.get('endingTime').toDate();
 
-    return !this.get('calendar.occurrences').any(function(occurrence) {
+    return this.get('calendar.occurrences').any(function(occurrence) {
       var occurrenceTime = occurrence.get('time').toDate();
       var occurrenceEndingTime = occurrence.get('endingTime').toDate();
 
       return (endingTime >= occurrenceTime && endingTime < occurrenceEndingTime) ||
              (time >= occurrenceTime && time < occurrenceEndingTime);
     });
-  }.property('time', 'endingTime', 'calendar.occurrences.@each.{time,duration}')
+  }.property('time', 'endingTime', 'calendar.occurrences.@each.{time,duration}'),
+
+  isInsideCalendar: function() {
+    return this.get('endingTime').toDate() <
+           this.get('lastTimeSlotEndingTime').toDate();
+  }.property('endingTime', 'lastTimeSlotEndingTime'),
+
+  canBeSelected: function() {
+    return this.get('isInsideCalendar') && !this.get('isBlockedByAnyOccurrence');
+  }.property('isInsideCalendar', 'isBlockedByAnyOccurrence')
 });

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import TimeZoneOption from './as-calendar/time-zone-option';
+import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 
 var Time = Ember.Object.extend({
   calendar: null,
