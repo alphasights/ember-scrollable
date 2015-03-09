@@ -116,11 +116,5 @@ export default Ember.Component.extend({
 
   headerTimeSlotStyle: function() {
     return `height: ${2 * this.get('timeSlotHeight')}px;`;
-  }.property('timeSlotHeight'),
-
-  actions: {
-    setTimeZone: function(value) {
-      this.set('timeZone', value);
-    }
-  }
+  }.property('timeSlotHeight')
 });

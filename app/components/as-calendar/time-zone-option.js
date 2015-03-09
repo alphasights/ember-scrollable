@@ -4,15 +4,16 @@ export default Ember.Component.extend({
   tagName: 'a',
   classNameBindings: [':calendar-time-zone-option', 'isSelected:selected'],
 
-  value: null,
+  timeZoneOption: null,
   calendar: null,
-  selectedTimeZoneOption: Ember.computed.alias('calendar.selectedTimeZoneOption'),
+  selectedTimeZoneOption: Ember.computed.oneWay('calendar.selectedTimeZoneOption'),
+  timeZone: Ember.computed.alias('calendar.timeZone'),
 
   isSelected: function() {
-    return this.get('value') === this.get('selectedTimeZoneOption');
-  }.property('value', 'selectedTimeZoneOption'),
+    return this.get('timeZoneOption') === this.get('selectedTimeZoneOption');
+  }.property('timeZoneOption', 'selectedTimeZoneOption'),
 
   click: function() {
-    this.set('selectedTimeZoneOption', this.get('value'));
+    this.set('timeZone', this.get('timeZoneOption.value'));
   }
 });

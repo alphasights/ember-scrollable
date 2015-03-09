@@ -9,7 +9,9 @@
         {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
           {{#each timeZoneOption in allTimeZoneOptions}}
             <li>
-              {{as-calendar/time-zone-option value=timeZoneOption calendar=this}}
+              {{as-calendar/time-zone-option
+                timeZoneOption=timeZoneOption
+                calendar=this}}
             </li>
           {{/each}}
         {{/rl-dropdown}}
