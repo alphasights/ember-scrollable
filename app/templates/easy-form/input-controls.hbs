@@ -1,0 +1,17 @@
+<div>
+  {{input-field
+    propertyBinding='view.property'
+    inputOptionsBinding='view.inputOptionsValues'
+  }}
+</div>
+
+{{#if view.showError}}
+  {{error-field propertyBinding='view.property'}}
+{{/if}}
+
+{{#if view.hint}}
+  {{hint-field
+    propertyBinding='view.property'
+    textBinding='view.hint'
+  }}
+{{/if}}
