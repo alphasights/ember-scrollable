@@ -14,11 +14,8 @@ $projects-header-height: rem-calc(40);
     width: auto;
 
     .sort-by-label {
-      @extend %grid-column-small-4;
-      @extend %grid-column-medium-3;
-      @extend %grid-column-large-2;
-      @extend %grid-column-xlarge-1;
-
+      float: left;
+      padding: 0 $column-gutter;
       text-align: center;
 
       label {
