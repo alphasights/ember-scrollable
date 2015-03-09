@@ -11,6 +11,7 @@ $form-input-border-color: darken($white, 10%) !default;
 $form-input-padding: $form-input-height - $base-font-size !default;
 $form-input-shadow-color: rgba($black, .08) !default;
 $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
+$form-label-height: $form-input-height;
 $form-select-arrow-size: 4px !default;
 $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !default;
 
@@ -47,7 +48,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   #{$form-element-wrapper} {
     @extend %grid-column-small-12;
 
-    padding-bottom: $column-gutter / 2;
+    min-height: $form-input-height * 3;
 
     &.small {
       @include form-item-small();
@@ -69,7 +70,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   label {
     font-size: $h5-font-size;
     font-weight: $font-weight-bold;
-    line-height: $base-line-height;
+    line-height: $form-label-height;
   }
 
   input {
@@ -78,6 +79,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     font-size: $base-font-size;
     line-height: $form-input-height;
     padding: 0 $form-input-padding / 2;
+    margin-bottom: 0;
 
     &::-webkit-input-placeholder {
       color: lighten($form-input-text-color, 20%);
@@ -86,46 +88,17 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
   #{$form-element-wrapper}-error {
     #{$form-error-wrapper} {
-      border-bottom-right-radius: $global-radius;
-      border-top-right-radius: $global-radius;
-      display: inline-block;
-      line-height: $form-input-height;
+      background-color: transparent;
+      color: $alert-color;
       margin: 0;
-      padding: 0 $column-gutter / 2;
-      position: absolute;
-      right: 0;
-      top: 1px;
-      z-index: 2;
-
-      i {
-        @include icon(question-circle);
-
-        color: $white;
-        cursor: pointer;
-        font-size: $h4-font-size;
-      }
+      padding-left: $column-gutter / 2;
+      line-height: $form-input-height / 2;
     }
 
     input,
     textarea,
-    &#{$form-select-wrapper} > div {
+    &#{$form-select-wrapper} > div > div  {
       border-color: lighten($alert-color, 10%);
-    }
-
-    select + #{$form-error-wrapper} {
-      border: 0;
-      right: -1px;
-      top: 0;
-    }
-
-    textarea + #{$form-error-wrapper} {
-      background-color: transparent;
-      border-width: 0 1px 0 0;
-      height: 100%;
-
-      i {
-        color: $alert-color;
-      }
     }
   }
 
@@ -138,7 +111,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     padding: $form-input-padding / 2;
   }
 
-  #{$form-select-wrapper} {
+  #{$form-select-wrapper} > div {
     > div {
       @extend %form-select-arrow;
       @extend %form-input-shared;
