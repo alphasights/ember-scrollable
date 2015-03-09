@@ -22,15 +22,6 @@ var InteractionOccurrence = Occurrence.extend({
   }.property('scheduledCallTime')
 });
 
-var PersonTimeZoneOption = TimeZoneOption.extend({
-  person: null,
-  value: Ember.computed.oneWay('person.timeZone'),
-
-  abbreviation: function() {
-    return moment().tz(this.get('value')).format('z');
-  }.property('value')
-});
-
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
@@ -62,19 +53,19 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
 
   timeZoneOptions: function() {
     var timeZoneOptions = [];
-    var advisor = this.get('advisor');
-    var clientContact = this.get('clientContact');
+    var advisorTimeZone = this.get('advisor.timeZone');
+    var clientTimeZone = this.get('clientContact.timeZone');
 
-    if (advisor.get('timeZone') != null) {
-      timeZoneOptions.push(PersonTimeZoneOption.create({
-        person: advisor,
+    if (advisorTimeZone != null) {
+      timeZoneOptions.push(TimeZoneOption.create({
+        value: advisorTimeZone,
         title: 'Advisor Time Zone'
       }));
     }
 
-    if (clientContact.get('timeZone') != null) {
-      timeZoneOptions.push(PersonTimeZoneOption.create({
-        person: clientContact,
+    if (clientTimeZone != null) {
+      timeZoneOptions.push(TimeZoneOption.create({
+        value: clientTimeZone,
         title: 'Client Time Zone'
       }));
     }

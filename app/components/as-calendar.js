@@ -66,7 +66,6 @@ export default Ember.Component.extend({
     var systemTimeZoneAbbreviation = this.get('systemTimeZoneAbbreviation');
 
     return [TimeZoneOption.create({
-      value: null,
       title: 'System Time Zone',
       abbreviation: systemTimeZoneAbbreviation
     })].concat(this.get('timeZoneOptions'));
