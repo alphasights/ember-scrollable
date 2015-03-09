@@ -78,8 +78,8 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
     font-size: $base-font-size;
     line-height: $form-input-height;
-    padding: 0 $form-input-padding / 2;
     margin-bottom: 0;
+    padding: 0 $form-input-padding / 2;
 
     &::-webkit-input-placeholder {
       color: lighten($form-input-text-color, 20%);
@@ -90,14 +90,14 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     #{$form-error-wrapper} {
       background-color: transparent;
       color: $alert-color;
+      line-height: $form-input-height / 2;
       margin: 0;
       padding-left: $column-gutter / 2;
-      line-height: $form-input-height / 2;
     }
 
     input,
     textarea,
-    &#{$form-select-wrapper} > div > div  {
+    &#{$form-select-wrapper} > div > div {
       border-color: lighten($alert-color, 10%);
     }
   }
@@ -177,9 +177,9 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     }
 
     a {
+      color: $small-font-color;
       display: inline-block;
       padding: 0 $column-gutter;
-      color: $small-font-color;
 
       &:hover {
         color: $body-font-color;
@@ -228,6 +228,11 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
   &:hover {
     box-shadow: 0 1px 2px rgba($black, .1);
+  }
+
+  &:focus {
+    background-color: $white;
+    background-image: none;
   }
 }
 
