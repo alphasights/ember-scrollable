@@ -18,7 +18,13 @@ var InteractionOccurrence = Occurrence.extend({
       }
     }
 
-    return moment(this.get('scheduledCallTime'));
+    var scheduledCallTime = this.get('scheduledCallTime');
+
+    if (scheduledCallTime != null) {
+      return moment(this.get('scheduledCallTime'));
+    } else {
+      return null;
+    }
   }.property('scheduledCallTime')
 });
 
@@ -44,12 +50,8 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   ],
 
   occurrence: function() {
-    if (this.get('scheduledCallTime') != null) {
-      return InteractionOccurrence.create({ interaction: this });
-    } else {
-      return null;
-    }
-  }.property('scheduledCallTime'),
+    return InteractionOccurrence.create({ interaction: this });
+  }.property(),
 
   timeZoneOptions: function() {
     var timeZoneOptions = [];

@@ -38,13 +38,14 @@ export default Ember.Component.extend({
   allOccurrences: function() {
     var calendarOccurrences = this.get('calendar.occurrences');
     var selection = this.get('selection');
+    var selectionTime = selection.get('time');
 
-    if (selection != null) {
+    if (selectionTime != null) {
       return calendarOccurrences.concat(selection);
     } else {
       return calendarOccurrences;
     }
-  }.property('calendar.occurrences.[]', 'selection'),
+  }.property('calendar.occurrences.[]', 'selection.time'),
 
   occurrences: function() {
     var time = this.get('time').toDate();
