@@ -68,9 +68,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   label {
-    font-size: $h5-font-size;
-    font-weight: $font-weight-bold;
-    line-height: $form-label-height;
+    @include form-label();
   }
 
   input {
@@ -113,44 +111,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
   #{$form-select-wrapper} > div {
     > div {
-      @extend %form-select-arrow;
-      @extend %form-input-shared;
-
-      background: $white;
-      background-image: $form-select-background !important;
-      line-height: $form-input-height;
-      overflow: hidden;
-      position: relative;
-    }
-
-    select {
-      -webkit-appearance: none;
-      background: rgba($black, 0);
-      border: 0;
-      border-radius: $global-radius;
-      color: $form-input-text-color;
-      font-size: $base-font-size;
-      margin: 0;
-      padding: 0 $form-input-padding / 2;
-      position: relative;
-      text-shadow: 0 1px $white;
-      width: 130%;
-
-      &:focus {
-        color: $anchor-font-color;
-        outline: none;
-        width: 100%;
-        z-index: 1;
-      }
-
-      > option {
-        background: darken($white, 10%);
-        border-radius: $global-radius;
-        cursor: pointer;
-        margin: 3px;
-        padding: 3px 8px;
-        text-shadow: none;
-      }
+      @include form-select();
     }
   }
 
@@ -186,6 +147,58 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
       }
     }
   }
+}
+
+@mixin form-select($inline: false) {
+  @extend %form-select-arrow;
+  @extend %form-input-shared;
+
+  background: $white;
+  background-image: $form-select-background !important;
+  line-height: $form-input-height;
+  overflow: hidden;
+  position: relative;
+
+  @if $inline {
+    float: left;
+    padding-right: $column-gutter;
+  }
+
+  select {
+    -webkit-appearance: none;
+    background: rgba($black, 0);
+    border: 0;
+    border-radius: $global-radius;
+    color: $form-input-text-color;
+    font-size: $base-font-size;
+    margin: 0;
+    padding: 0 $form-input-padding / 2;
+    position: relative;
+    text-shadow: 0 1px $white;
+    width: 130%;
+
+    &:focus {
+      color: $anchor-font-color;
+      outline: none;
+      width: 100%;
+      z-index: 1;
+    }
+
+    > option {
+      background: darken($white, 10%);
+      border-radius: $global-radius;
+      cursor: pointer;
+      margin: 3px;
+      padding: 3px 8px;
+      text-shadow: none;
+    }
+  }
+}
+
+@mixin form-label() {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+  line-height: $form-label-height;
 }
 
 %form-select-arrow {

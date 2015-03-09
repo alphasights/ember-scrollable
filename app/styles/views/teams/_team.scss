@@ -15,25 +15,19 @@ $projects-header-height: rem-calc(40);
 
     .sort-by-label {
       @extend %grid-column-small-4;
-      @extend %grid-column-medium-2;
-      @extend %grid-column-large-1;
+      @extend %grid-column-medium-3;
+      @extend %grid-column-large-2;
+      @extend %grid-column-xlarge-1;
 
       text-align: center;
 
       label {
-        line-height: $projects-header-height;
+        @include form-label();
       }
     }
 
     .sort-by-select {
-      @extend %grid-column-small-8;
-      @extend %grid-column-medium-3;
-      @extend %grid-column-large-2;
-    }
-
-    select {
-      margin-bottom: 0;
-      padding-right: rem-calc(30);
+      @include form-select($inline: true);
     }
   }
 }
