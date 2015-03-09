@@ -1,13 +1,29 @@
 <header>
   <div class="time-zone">
-    <div>TZ</div>
+    <div>
+      {{#rl-dropdown-container class="dropdown"}}
+        {{#rl-dropdown-toggle tagName="a"}}
+          {{selectedTimeZoneOption.abbreviation}}
+        {{/rl-dropdown-toggle}}
+
+        {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
+          {{#each timeZoneOption in allTimeZoneOptions}}
+            <li>
+              {{as-calendar/time-zone-option value=timeZoneOption calendar=this}}
+            </li>
+          {{/each}}
+        {{/rl-dropdown}}
+      {{/rl-dropdown-container}}
+    </div>
   </div>
 
   <div class="days">
     <ul>
       {{#each day in days}}
         <li {{bind-attr style=dayStyle}}>
-          {{moment day.date "ddd D/M"}}
+          {{#liquid-with day.localValue as localValue use="toDown"}}
+            {{moment localValue "ddd D/M"}}
+          {{/liquid-with}}
         </li>
       {{/each}}
     </ul>
@@ -17,7 +33,11 @@
 <div>
   <ul class="time-slots" {{bind-attr style=timeSlotsHeaderStyle}}>
     {{#each timeSlot in headerTimeSlots}}
-      <li {{bind-attr style=headerTimeSlotStyle}}>{{moment timeSlot.time "h A"}}</li>
+      <li {{bind-attr style=headerTimeSlotStyle}}>
+        {{#liquid-with timeSlot.localValue as localValue use="toDown"}}
+          {{moment localValue "h A"}}
+        {{/liquid-with}}
+      </li>
     {{/each}}
   </ul>
 
@@ -27,7 +47,7 @@
         <ul class="times">
           {{#each timeSlot in timeSlots}}
             <li>
-              {{as-calendar-time timeSlot=timeSlot day=day calendar=this}}
+              {{as-calendar/time timeSlot=timeSlot day=day calendar=this}}
             </li>
           {{/each}}
         </ul>

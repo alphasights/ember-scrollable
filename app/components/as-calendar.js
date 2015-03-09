@@ -1,25 +1,41 @@
 import Ember from 'ember';
+import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 
-var TimeSlot = Ember.Object.extend({
-  offset: moment.duration(),
+var Time = Ember.Object.extend({
   calendar: null,
+  value: null,
+  timeZone: Ember.computed.oneWay('calendar.timeZone'),
+
+  localValue: function() {
+    var timeZone = this.get('timeZone');
+    var value = this.get('value');
+
+    if (timeZone != null) {
+      return moment(value).tz(timeZone);
+    } else {
+      return value;
+    }
+  }.property('value', 'timeZone')
+});
+
+var TimeSlot = Time.extend({
+  offset: moment.duration(),
   duration: Ember.computed.oneWay('calendar.timeSlotDuration'),
 
   endingOffset: function() {
     return moment.duration(this.get('offset')).add(this.get('duration'));
   }.property('offset', 'duration'),
 
-  time: function() {
+  value: function() {
     return moment().startOf('day').add(this.get('offset'));
   }.property('offset')
 });
 
-var Day = Ember.Object.extend({
+var Day = Time.extend({
   offset: 0,
-  calendar: null,
   startingDate: Ember.computed.oneWay('calendar.startingDate'),
 
-  date: function() {
+  value: function() {
     return moment(this.get('startingDate')).add(this.get('offset'), 'day');
   }.property('startingDate', 'offset')
 });
@@ -34,7 +50,26 @@ export default Ember.Component.extend({
   timeSlotDuration: moment.duration(30, 'minute'),
   timeSlotHeight: 30,
   occurrences: [],
+  timeZoneOptions: [],
+  timeZone: null,
   selection: null,
+
+  selectedTimeZoneOption: function() {
+    return this.get('allTimeZoneOptions').findBy('value', this.get('timeZone'));
+  }.property('timeZone', 'allTimeZoneOptions.@each.value'),
+
+  systemTimeZoneAbbreviation: function() {
+    return new Date().toString().split(' ').slice(-1)[0].slice(1, -1);
+  }.property(),
+
+  allTimeZoneOptions: function() {
+    var systemTimeZoneAbbreviation = this.get('systemTimeZoneAbbreviation');
+
+    return [TimeZoneOption.create({
+      title: 'System Time Zone',
+      abbreviation: systemTimeZoneAbbreviation
+    })].concat(this.get('timeZoneOptions'));
+  }.property('timeZoneOptions.[]', 'systemTimeZoneAbbreviation'),
 
   days: function() {
     return _.range(this.get('numberOfDays')).map((offset) => {
@@ -81,5 +116,11 @@ export default Ember.Component.extend({
 
   headerTimeSlotStyle: function() {
     return `height: ${2 * this.get('timeSlotHeight')}px;`;
-  }.property('timeSlotHeight')
+  }.property('timeSlotHeight'),
+
+  actions: {
+    setTimeZone: function(value) {
+      this.set('timeZone', value);
+    }
+  }
 });
