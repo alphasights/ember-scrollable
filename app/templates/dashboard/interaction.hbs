@@ -31,7 +31,7 @@
             <div class="call-time">
               {{#tool-tipster title="Local Call Time"}}
                 <i></i>
-                <span>{{moment-timezone scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                <span>{{moment-timezone scheduledCallTime profile.person.timeZone "h:mm A z"}}</span>
               {{/tool-tipster}}
             </div>
           {{/if}}
