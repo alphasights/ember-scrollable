@@ -21,7 +21,7 @@
 
 <section class="profiles">
   <ul>
-    {{#each profile in profiles itemController="dashboard.interaction.profile"}}
+    {{#each profile in profiles}}
       <li>
         {{#as-profile
           person=profile.person
@@ -31,7 +31,7 @@
             <div class="call-time">
               {{#tool-tipster title="Local Call Time"}}
                 <i></i>
-                <span>{{profile.callTime}}</span>
+                <span>{{moment-timezone scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
               {{/tool-tipster}}
             </div>
           {{/if}}
