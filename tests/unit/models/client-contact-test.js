@@ -22,5 +22,5 @@ test("#pistachioUrl returns the correct url for the advisor", function(assert) {
   assert.equal(
     this.model.get('pistachioUrl'),
     'http://localhost:3000/client/contacts/99'
-  )
+  );
 });

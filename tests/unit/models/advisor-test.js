@@ -49,5 +49,5 @@ test('#currentPosition returns an empty string when there is no job title or com
 test("#pistachioUrl returns the correct url for the advisor", function(assert) {
   this.model.set('id', '99');
 
-  assert.equal(this.model.get('pistachioUrl'),'http://localhost:3000/advisors/99')
+  assert.equal(this.model.get('pistachioUrl'),'http://localhost:3000/advisors/99');
 });
