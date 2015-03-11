@@ -19,4 +19,11 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     speakDialIn: {
       presence: true
     }
+  },
+
+  interactionTypes: [
+    { id: 1, name: 'Interaction type 1' },
+    { id: 2, name: 'Interaction type 2' },
+    { id: 3, name: 'Interaction type 3' }
+  ]
 });

@@ -1,11 +1,11 @@
-<label {{bindAttr for="view.name"}}> {{view.label}}</label>
+<label {{bindAttr for=name}}>{{label}}</label>
 
 <div>
   {{view "select"
-    nameBindings='view.name'
-    contentBindings='view.contents'
+    name=name
+    content=content
     optionValuePath="content.id"
     optionLabelPath="content.name"
-    promptBindings='view.prompt'
+    prompt=prompt
   }}
 </div>
