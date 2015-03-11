@@ -26,7 +26,7 @@ test("#pistachioUrl returns the correct url for the interaction", function(asser
 
 test("checklistUrl returns the correct url for the interaction", function(assert) {
   Ember.run(() => {
-    var project = this.store().createRecord('project', { id: 101 })
+    var project = this.store().createRecord('project', { id: 101 });
 
     this.model.setProperties({id: 99, project: project});
   });
@@ -39,7 +39,7 @@ test("checklistUrl returns the correct url for the interaction", function(assert
 
 test("schedulingUrl returns the correct url for the interaction", function(assert) {
   Ember.run(() => {
-    var project = this.store().createRecord('project', { id: 101 })
+    var project = this.store().createRecord('project', { id: 101 });
 
     this.model.setProperties({id: 99, project: project});
   });

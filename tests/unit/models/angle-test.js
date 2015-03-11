@@ -33,20 +33,22 @@ test("#memberships returns the angleTeamMemberships", function(assert) {
   );
 });
 
-//
-// test("#members returns the users connected via angle team membership", function(assert) {
-//   Ember.run(() => {
-//     var user = this.store().createRecord('user');
-//     var angleTeamMembership = this.store().createRecord('angleTeamMembership');
-//     angleTeamMembership.setProperties({angle: this.model, teamMember: user});
-//   });
-//
-//   assert.equal(this.model.get('members.length'), 1);
-//   assert.equal(
-//     this.model.get('members'), this.store().find('user')
-//   );
-// });
-//
+
+test("#members returns the users connected via angle team membership", function(assert) {
+  Ember.run(() => {
+    var user = this.store().createRecord('user');
+    var angleTeamMembership = this.store().createRecord('angleTeamMembership');
+    angleTeamMembership.setProperties({angle: this.model, teamMember: user});
+  });
+
+  assert.equal(this.model.get('members.length'), 1);
+
+  // assert.equal(
+  //   this.model.get('members'), this.store().find('user')
+  // );
+});
+
+
 // test("changing memberships updates the membershipsUpdateAt timestamp", function(assert) {
 //   assert.equal(this.model.get('membershipsUpdatedAt'), null);
 //
