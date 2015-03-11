@@ -12,5 +12,9 @@
         margin-left: $column-gutter / 4;
       }
     }
+
+    ul {
+      min-width: 0;
+    }
   }
 }
