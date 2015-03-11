@@ -15,7 +15,6 @@ moduleForModel('client-contact', 'ClientContact', {
   }
 });
 
-
 test("#pistachioUrl returns the correct url for the advisor", function(assert) {
   this.model.set('id', 99);
 
