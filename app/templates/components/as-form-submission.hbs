@@ -1,9 +1,9 @@
 {{#if formSubmitted}}
-  {{loading-spinner}}
+  {{as-spinner length=6 width=2 radius=6 color="#555555"}}
 {{else}}
   {{#if submit}}
-    <button class="button-primary" type="submit">
-      <span class="text">{{submitText}}</span>
+    <button type="submit">
+      {{submitText}}
     </button>
   {{/if}}
 

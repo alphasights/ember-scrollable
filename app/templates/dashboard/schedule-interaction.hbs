@@ -34,16 +34,16 @@
 </section>
 
 <section class="scheduling-form">
-  {{#form-wrapper}}
-    {{#form-controls legend=' '}}
-      {{input date as='select' label="Interaction Date" class="small select" prompt="Select Interaction Date"}}
-      {{input from as='select' class="small select"}}
-      {{input to as='select' class="small select"}}
-      {{input interactionType as='select' class="small select"}}
-      {{input speak as='select' class="small select" prompt="Yes"}}
-      {{input speakDialIn label="Speak Dial-in Number" class="small" placeholder="+44 077"}}
-    {{/form-controls}}
+  {{#as-form}}
+    {{#as-form-controls}}
+      {{as-select name="date" label="Interaction Date" prompt="Select Interaction Date" class="small"}}
+      {{as-select name="from" class="small" label="From" }}
+      {{as-select name="to" class="small" label="To"}}
+      {{as-select name="interactionType" class="small" label="Interaction Type"}}
+      {{as-select name="speak" class="small" prompt="Yes" label="Use Speak?"}}
+      {{as-input name="speakDialIn" label="Speak Dial-in Number" class="small" placeholder="+44 077"}}
+    {{/as-form-controls}}
 
-    {{form-submission submitText='Schedule Interaction'}}
-  {{/form-wrapper}}
+    {{as-form-submission submitText='Schedule Interaction'}}
+  {{/as-form}}
 </section>
