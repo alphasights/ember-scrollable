@@ -22,29 +22,37 @@ moduleForModel('angle', 'Angle', {
 });
 
 test("#memberships returns the angleTeamMemberships", function(assert) {
+  var angleTeamMembership;
+
   Ember.run(() => {
-    var angleTeamMembership = this.store().createRecord('angleTeamMembership');
-    angleTeamMembership.set('angle', this.model);
+    angleTeamMembership = this.store().createRecord(
+      'angleTeamMembership', { angle: this.model }
+    );
   });
 
   assert.equal(this.model.get('memberships.length'), 1);
-  assert.equal(
-    this.model.get('memberships'), this.model.get('angleTeamMemberships')
+  assert.ok(
+    this.model.get('memberships').indexOf(angleTeamMembership) === 0,
+    "returns the correct membership in the angle's memberships"
   );
 });
 
 
 test("#members returns the users connected via angle team membership", function(assert) {
+  var user;
+
   Ember.run(() => {
-    var user = this.store().createRecord('user');
-    var angleTeamMembership = this.store().createRecord('angleTeamMembership');
-    angleTeamMembership.setProperties({angle: this.model, teamMember: user});
+    user = this.store().createRecord('user');
+    var angleTeamMembership = this.store().createRecord(
+      'angleTeamMembership', { angle: this.model }
+    );
   });
 
   assert.equal(this.model.get('members.length'), 1);
 
-  // assert.equal(
-  //   this.model.get('members'), this.store().find('user')
+  // assert.ok(
+  //   this.model.get('members').indexOf(user) === 0,
+  //   "returns the correct member in the angle's members"
   // );
 });
 
@@ -57,8 +65,10 @@ test("#members returns the users connected via angle team membership", function(
 //
 //   Ember.run(() => {
 //     var angleTeamMembership = this.store().createRecord('angleTeamMembership');
-//     angleTeamMembership.set('angle', this.model);
+//     this.model.get('angleTeamMemberships').pushObject(angleTeamMembership);
 //   });
+//
+//   debugger;
 //
 //   assert.equal(
 //     this.model.get('membershipsUpdatedAt'), timecopTime.toDate().toTimeString()
