@@ -18,17 +18,11 @@ export default Ember.Component.extend({
     Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
   }.observes('name').on('init'),
 
-  hasErrors: function() {
-    var name = this.get('name');
-
-    return this.get('model.errors.' + name).length;
-  }.property('model.errors'),
-
   errors: function() {
     var name = this.get('name');
 
     return _(this.get('model.errors.' + name)).map(function(value, key) {
       return value;
     });
-  }.property('model.errors')
+  }.property('model.errors', 'model.isValid')
 });

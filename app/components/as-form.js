@@ -21,5 +21,5 @@ export default Ember.Component.extend({
     return _(this.get('model.errors')).map(function(value, key) {
       return value;
     });
-  }.property('model.errors')
+  }.property('model.errors', 'model.isValid')
 });
