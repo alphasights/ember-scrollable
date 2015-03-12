@@ -26,10 +26,6 @@
       float: right;
       line-height: $layout-sidebar-footer-height;
 
-      .dropdown ul {
-        min-width: 0;
-      }
-
       button {
         @include button-icon(cog);
 
