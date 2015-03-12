@@ -17,53 +17,64 @@ moduleForModel('project', 'Project', {
 });
 
 test("#memberships returns all the memberships across a project's angles", function(assert) {
+  var firstMembership;
+  var secondMembership;
+  var thirdMembership;
+
   Ember.run(() => {
     var firstAngle = this.store().createRecord('angle', { project: this.model });
     var secondAngle = this.store().createRecord('angle', { project: this.model });
 
-    var firstMembership = this.store().createRecord(
+    firstMembership = this.store().createRecord(
       'angleTeamMembership', { angle: firstAngle }
     );
-    var secondMembership = this.store().createRecord(
+    secondMembership = this.store().createRecord(
       'angleTeamMembership', { angle: firstAngle }
     );
-    var thirdMembership = this.store().createRecord(
+    thirdMembership = this.store().createRecord(
       'angleTeamMembership', { angle: secondAngle}
     );
   });
 
   assert.equal(this.model.get('memberships.length'), 3);
 
-  // assert.equal(
-  //   this.model.get('memberships'),
-  //   this.store().find('angleTeamMembership')
-  // );
+  [
+    firstMembership,
+    secondMembership,
+    thirdMembership
+  ].forEach((membership) => {
+    assert.ok(this.model.get('memberships').indexOf(membership) >= 0,
+    "contains each membership in the project's memberships' array");
+  });
 });
 
 test("#members returns all the unique users working on a project", function(assert) {
+  var firstMember;
+  var secondMember;
+
   Ember.run(() => {
     var firstAngle = this.store().createRecord('angle', { project: this.model });
     var secondAngle = this.store().createRecord('angle', { project: this.model });
-    var johnCST = this.store().createRecord('user');
-    var joeCST = this.store().createRecord('user');
+    firstMember = this.store().createRecord('user');
+    secondMember = this.store().createRecord('user');
 
     var firstMembership = this.store().createRecord(
-      'angleTeamMembership', { angle: firstAngle, teamMember: johnCST }
+      'angleTeamMembership', { angle: firstAngle, teamMember: firstMember }
     );
     var secondMembership = this.store().createRecord(
-      'angleTeamMembership', { angle: firstAngle, teamMember: johnCST }
+      'angleTeamMembership', { angle: firstAngle, teamMember: firstMember }
     );
     var thirdMembership = this.store().createRecord(
-      'angleTeamMembership', { angle: secondAngle, teamMember: joeCST }
+      'angleTeamMembership', { angle: secondAngle, teamMember: secondMember }
     );
   });
 
   assert.equal(this.model.get('members.length'), 2);
 
-  // assert.equal(
-  //   this.model.get('members'),
-  //   this.store().find('user')
-  // );
+  [firstMember, secondMember].forEach((member) => {
+    assert.ok(this.model.get('members').indexOf(member) >= 0,
+    "contains each member in the project's members' array");
+  });
 });
 
 test("#priorityIndex returns the index of the corresponding priority", function(assert) {
