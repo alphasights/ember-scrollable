@@ -5,7 +5,16 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       currentUser: this.store.find('user', 'me'),
-      preferences: this.store.find('preferences')
+
+      preferences: this.store.find('preferences').then((preferences) => {
+        if (Ember.isEmpty(preferences)) {
+          var newPreferences = this.store.createRecord('preferences');
+          newPreferences.save();
+          preferences.pushObject(newPreferences);
+        }
+
+        return preferences;
+      })
     });
   },
 

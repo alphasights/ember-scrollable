@@ -30,7 +30,8 @@
     "__env",
     "select",
     "moment",
-    "Timecop"
+    "Timecop",
+    "lookup"
   ],
   "node": false,
   "browser": false,
