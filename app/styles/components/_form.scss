@@ -91,6 +91,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
       line-height: $form-input-height / 2;
       margin: 0;
       padding-left: $column-gutter / 2;
+      font-size: $small-font-size;
     }
 
     input,
