@@ -1,5 +1,13 @@
 <label {{bindAttr for=name}}>{{label}}</label>
 
 <div>
-  {{input type="text" name=name placeholder=placeholder}}
+  {{input type="text" name=name placeholder=placeholder value=value}}
 </div>
+
+{{#if hasErrors}}
+  <div class="error">
+    {{#each error in errors}}
+      {{error}}
+    {{/each}}
+  </div>
+{{/if}}

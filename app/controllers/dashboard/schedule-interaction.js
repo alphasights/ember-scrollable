@@ -17,6 +17,10 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
   validations: {
     speakDialIn: {
+      presence: true,
+      numericality: true
+    },
+    'interactionTypes.id': {
       presence: true
     }
   },
