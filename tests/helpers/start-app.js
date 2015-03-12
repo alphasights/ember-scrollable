@@ -22,7 +22,5 @@ export default function startApp(attrs) {
     application.injectTestHelpers();
   });
 
-  application.reset(); // this shouldn't be needed, i want to be able to "start an app at a specific URL"
-
   return application;
 }

@@ -1,13 +1,10 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
+import '../helpers/lookup';
 import testHelper from '../test-helper';
 
-var currentUser = function() {
-  return window.Phoenix.__container__.lookup('controller:currentUser');
-};
-
-module('Preferences', {
+QUnit.module('Preferences', {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -25,7 +22,7 @@ test('sidebarCollapsed updates when toggling the sidebar', function(assert) {
   visit('/');
   click('.toggle-collapse button');
 
-  andThen(function(){
-    assert.equal(currentUser().get('preferences.sidebarCollapsed'), true);
+  andThen(function() {
+    assert.equal(lookup('controller:currentUser').get('preferences.sidebarCollapsed'), true);
   });
 });

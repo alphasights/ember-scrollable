@@ -18,7 +18,7 @@ const projectName = 'Project Name',
       checklistStatus = 'Checklist Complete',
       scheduledCallTime = '2015-02-20T10:00:00.000+00:00';
 
-module("Upcoming interactions", {
+QUnit.module("Upcoming interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 

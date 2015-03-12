@@ -3,7 +3,7 @@ import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import testHelper from '../test-helper';
 
-module("Side Panel", {
+QUnit.module("Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 

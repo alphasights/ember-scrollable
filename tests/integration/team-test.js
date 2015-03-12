@@ -5,7 +5,7 @@ import '../helpers/select';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
-module("Team", {
+QUnit.module("Team", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
