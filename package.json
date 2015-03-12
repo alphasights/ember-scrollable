@@ -1,6 +1,5 @@
 {
   "name": "phoenix",
-  "version": "0.0.0",
   "description": "The system, reinvented",
   "private": true,
   "directories": {

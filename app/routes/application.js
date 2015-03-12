@@ -22,7 +22,7 @@ export default Ember.Route.extend({
     var currentUser = this.controllerFor('currentUser');
 
     currentUser.set('model', models.currentUser);
-    currentUser.set('preferences', models.preferences.get('firstObject'));
+    currentUser.set('preferences', models.preferences);
     currentUser.send('boot');
   },
 
