@@ -7,7 +7,7 @@ var currentUser = function() {
   return window.Phoenix.__container__.lookup('controller:currentUser');
 };
 
-module('Preferences', {
+QUnit.module('Preferences', {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
