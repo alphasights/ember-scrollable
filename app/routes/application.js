@@ -10,16 +10,10 @@ export default Ember.Route.extend({
   },
 
   afterModel: function(models) {
-    var preferences = models.preferences.get('firstObject');
     var currentUser = this.controllerFor('currentUser');
 
-    if (preferences == null) {
-      preferences = this.store.createRecord('preferences');
-      preferences.save();
-    }
-
     currentUser.set('model', models.currentUser);
-    currentUser.set('preferences', preferences);
+    currentUser.set('preferences', models.preferences.get('firstObject'));
     currentUser.send('boot');
   },
 

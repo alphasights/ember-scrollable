@@ -27,6 +27,11 @@ export default Ember.ObjectController.extend({
   actions: {
     boot: function() {
       this.setupIntercom();
+
+      if (this.get('preferences') === null) {
+        this.set('preferences', this.store.createRecord('preferences'));
+        this.get('preferences').save();
+      }
     }
   }
 });
