@@ -10,10 +10,10 @@ export default Ember.Route.extend({
         if (Ember.isEmpty(preferences)) {
           var newPreferences = this.store.createRecord('preferences');
           newPreferences.save();
-          preferences.pushObject(newPreferences);
+          return newPreferences;
+        } else {
+          return preferences.get('firsObject');
         }
-
-        return preferences;
       })
     });
   },
