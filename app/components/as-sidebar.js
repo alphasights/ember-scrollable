@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   actions: {
     toggleCollapse: function() {
       this.toggleProperty('isCollapsed');
-      this.sendAction('toggle');
+      this.sendAction('toggleCollapse');
     },
 
     logout: function() {
