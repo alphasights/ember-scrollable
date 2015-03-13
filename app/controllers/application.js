@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
   }],
 
   actions: {
-    onSidebarToggle: function() {
+    savePreferences: function() {
       this.get('preferences').save();
     },
 
