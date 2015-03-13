@@ -4,11 +4,12 @@ export default Ember.Controller.extend({
   needs: ['currentUser'],
 
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
+  preferences: Ember.computed.oneWay('currentUser.preferences'),
 
   actions: {
     toggleCollapse: function() {
-      var preferences = this.get('currentUser.preferences');
-
+      var preferences = this.get('preferences');
+      
       preferences.toggleProperty('sidebarCollapsed');
       preferences.save();
     },

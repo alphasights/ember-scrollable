@@ -26,3 +26,14 @@ test('sidebarCollapsed updates when toggling the sidebar', function(assert) {
     assert.equal(lookup('controller:currentUser').get('preferences.sidebarCollapsed'), true);
   });
 });
+
+test('sidebarCollapsed persists on page reload', function(assert) {
+  visit('/');
+  click('.toggle-collapse button');
+  visit('/');
+  click('.toggle-collapse button');
+
+  andThen(function() {
+    assert.equal(lookup('controller:currentUser').get('preferences.sidebarCollapsed'), false);
+  });
+});
