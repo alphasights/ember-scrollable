@@ -12,5 +12,11 @@ export default Ember.Controller.extend({
     id: 'team', name: 'Teams', routeName: 'teams'
   }, {
     id: 'performance', name: 'Performance', routeName: 'performance'
-  }]
+  }],
+
+  actions: {
+    onSidebarToggle: function() {
+      this.get('currentUser.preferences').save();
+    }
+  }
 });

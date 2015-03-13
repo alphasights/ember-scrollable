@@ -5,14 +5,12 @@ export default Ember.Component.extend({
   preferences: Ember.Object.create({ sidebarCollapsed: false }),
 
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
-  isCollapsed: Ember.computed.oneWay('preferences.sidebarCollapsed'),
+  isCollapsed: Ember.computed.alias('preferences.sidebarCollapsed'),
 
   actions: {
     toggleCollapse: function() {
-      var preferences = this.get('preferences');
-
-      preferences.toggleProperty('sidebarCollapsed');
-      if (typeof preferences.save === 'function') { preferences.save(); }
+      this.toggleProperty('isCollapsed');
+      this.sendAction('toggle');
     },
 
     logout: function() {
