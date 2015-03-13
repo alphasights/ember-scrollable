@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     },
 
     logout: function() {
-      window.location.replace(`${EmberENV.pistachioUrl}/logout`);
+      this.sendAction('logout');
     }
   },
 

@@ -18,6 +18,10 @@ export default Ember.Controller.extend({
   actions: {
     onSidebarToggle: function() {
       this.get('preferences').save();
+    },
+
+    logout: function() {
+      window.location.replace(`${EmberENV.pistachioUrl}/logout`);
     }
   }
 });
