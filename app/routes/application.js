@@ -12,7 +12,7 @@ export default Ember.Route.extend({
           newPreferences.save();
           return newPreferences;
         } else {
-          return preferences.get('firsObject');
+          return preferences.get('firstObject');
         }
       })
     });
