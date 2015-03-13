@@ -1,4 +1,7 @@
-{{as-sidebar currentUser=currentUser navigationItems=navigationItems}}
+{{as-sidebar
+  currentUser=currentUser
+  navigationItems=navigationItems
+  preferences=currentUser.preferences}}
 
 <main>
   {{render "quick-jump" this tagName="section"}}
