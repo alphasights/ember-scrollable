@@ -1,12 +1,21 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
+export default Ember.Component.extend({
+  currentUser: null,
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
-  isCollapsed: Ember.computed.oneWay('controller.preferences.sidebarCollapsed'),
+  preferences: Ember.computed.oneWay('currentUser.preferences'),
+  isCollapsed: Ember.computed.oneWay('preferences.sidebarCollapsed'),
 
   actions: {
     toggleCollapse: function() {
-      this.get('controller').send('toggleCollapse');
+      var preferences = this.get('preferences');
+
+      preferences.toggleProperty('sidebarCollapsed');
+      preferences.save();
+    },
+
+    logout: function() {
+      window.location.replace(`${EmberENV.pistachioUrl}/logout`);
     }
   },
 
