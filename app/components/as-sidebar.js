@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  currentUser: null,
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
+  
+  currentUser: null,
   navigationItems: [],
   isCollapsed: false,
 
