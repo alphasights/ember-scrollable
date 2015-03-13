@@ -30,11 +30,11 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' cdn.segment.com widget.intercom.io cdn.heapanalytics.com js.intercomcdn.com heapanalytics.com api.segment.io api-ping.intercom.io",
-      'font-src': "'self' fonts.gstatic.com",
-      'connect-src': "'self' api.segment.io wss://*.intercom.io api-ping.intercom.io",
-      'img-src': "'self' data: s3.amazonaws.com heapanalytics.com js.intercomcdn.com api.honeybadger.io",
-      'style-src': "'self' 'unsafe-inline' cdn.mxpnl.com fonts.googleapis.com",
+      'script-src': "'self' 'unsafe-inline' *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com",
+      'font-src': "'self' *.gstatic.com",
+      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io",
+      'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io",
+      'style-src': "'self' 'unsafe-inline' *.mxpnl.com *.googleapis.com",
       'media-src': "'self'"
     }
   };
