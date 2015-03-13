@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   needs: ['currentUser'],
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
+  preferences: Ember.computed.oneWay('currentUser.preferences'),
 
   navigationItems: [{
     id: 'dashboard', name: 'Dashboard', routeName: 'dashboard'
@@ -16,7 +17,7 @@ export default Ember.Controller.extend({
 
   actions: {
     onSidebarToggle: function() {
-      this.get('currentUser.preferences').save();
+      this.get('preferences').save();
     }
   }
 });
