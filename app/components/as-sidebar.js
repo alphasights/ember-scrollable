@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   currentUser: null,
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
+  navigationItems: [],
+  isCollapsed: false,
 
   actions: {
     toggleCollapse: function() {
