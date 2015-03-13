@@ -13,21 +13,11 @@
   </header>
 
   <ul>
-    <li class="dashboard">
-      {{#link-to "dashboard"}}<i></i><span>Dashboard</span>{{/link-to}}
-    </li>
-
-    <li class="projects">
-      {{#link-to "projects"}}<i></i><span>Projects</span>{{/link-to}}
-    </li>
-
-    <li class="team">
-      {{#link-to "teams"}}<i></i><span>Teams</span>{{/link-to}}
-    </li>
-
-    <li class="performance">
-      {{#link-to "performance"}}<i></i><span>Performance</span>{{/link-to}}
-    </li>
+    {{#each item in navigationItems}}
+      <li {{bind-attr class=item.id}}>
+        {{#link-to item.routeName}}<i></i><span>{{item.name}}</span>{{/link-to}}
+      </li>
+    {{/each}}
   </ul>
 {{/as-scrollable}}
 
