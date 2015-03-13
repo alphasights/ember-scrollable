@@ -2,7 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   currentUser: null,
-  preferences: null,
+  
+  preferences: Ember.Object.create({
+    sidebarCollapsed: false,
+    save: function() {}
+  }),
 
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
   isCollapsed: Ember.computed.oneWay('preferences.sidebarCollapsed'),
