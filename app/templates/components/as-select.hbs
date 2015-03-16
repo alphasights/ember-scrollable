@@ -1,6 +1,6 @@
 <label {{bindAttr for=name}}>{{label}}</label>
 
-<div>
+<div class="content">
   {{view "select"
     name=name
     content=content
@@ -11,10 +11,10 @@
   }}
 </div>
 
-{{#if hasErrors}}
-  <div class="error">
-    {{#each error in errors}}
+{{#if showErrors}}
+  {{#if error}}
+    <div class="error">
       {{error}}
-    {{/each}}
-  </div>
+    </div>
+  {{/if}}
 {{/if}}

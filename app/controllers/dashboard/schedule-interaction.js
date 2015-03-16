@@ -20,7 +20,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       presence: true,
       numericality: true
     },
-    'interactionTypes.id': {
+    interactionType: {
       presence: true
     }
   },

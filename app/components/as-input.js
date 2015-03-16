@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   formView: Ember.computed.oneWay('formControlsView.parentView'),
   model: Ember.computed.oneWay('formView.model'),
   name: null,
+  error: Ember.computed.alias('errors.firstObject'),
+  showErrors: Ember.computed.alias('formView.showErrors'),
 
   nameDidChange: function() {
     var name = this.get('name');
@@ -16,13 +18,6 @@ export default Ember.Component.extend({
     if (!name) { return; }
 
     Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
-  }.observes('name').on('init'),
-
-  errors: function() {
-    var name = this.get('name');
-
-    return _(this.get('model.errors.' + name)).map(function(value, key) {
-      return value;
-    });
-  }.property('model.errors', 'model.isValid')
+    Ember.defineProperty(this, 'errors', Ember.computed.alias('model.errors.' + name));
+  }.observes('name').on('init')
 });

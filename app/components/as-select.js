@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  attributeBindings: ['name', 'content', 'prompt', 'value'],
+  attributeBindings: ['name', 'placeholder', 'value'],
   classNameBindings: ['className'],
   className: 'control select',
 
@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   formView: Ember.computed.oneWay('formControlsView.parentView'),
   model: Ember.computed.oneWay('formView.model'),
   name: null,
+  error: Ember.computed.alias('errors.firstObject'),
+  showErrors: Ember.computed.alias('formView.showErrors'),
 
   nameDidChange: function() {
     var name = this.get('name');
@@ -16,5 +18,6 @@ export default Ember.Component.extend({
     if (!name) { return; }
 
     Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
-  }.observes('name').on('init'),
+    Ember.defineProperty(this, 'errors', Ember.computed.alias('model.errors.' + name));
+  }.observes('name').on('init')
 });

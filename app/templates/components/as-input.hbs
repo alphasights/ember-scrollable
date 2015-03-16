@@ -4,8 +4,10 @@
   {{input type="text" name=name placeholder=placeholder value=value}}
 </div>
 
-<div class="error">
-  {{#each error in errors}}
-    {{error}}
-  {{/each}}
-</div>
+{{#if showErrors}}
+  {{#if error}}
+    <div class="error">
+      {{error}}
+    </div>
+  {{/if}}
+{{/if}}
