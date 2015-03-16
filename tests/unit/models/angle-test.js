@@ -13,7 +13,13 @@ moduleForModel('angle', 'Angle', {
   beforeEach: function() {
     Timecop.install();
 
-    this.model = this.subject();
+    Ember.run(() => {
+      this.store().unloadAll('angle');
+      this.store().unloadAll('angleTeamMembership');
+      this.store().unloadAll('user');
+
+      this.model = this.store().push('angle', { id: 1 });
+    });
   },
 
   afterEach: function() {
@@ -25,9 +31,7 @@ test("#memberships returns the angleTeamMemberships", function(assert) {
   var angleTeamMembership;
 
   Ember.run(() => {
-    angleTeamMembership = this.store().createRecord(
-      'angleTeamMembership', { angle: this.model }
-    );
+    angleTeamMembership = this.store().push('angleTeamMembership', { id: 3, angle: 1 });
   });
 
   assert.equal(this.model.get('memberships.length'), 1);
@@ -39,21 +43,19 @@ test("#memberships returns the angleTeamMemberships", function(assert) {
 
 
 test("#members returns the users connected via angle team membership", function(assert) {
-  var user;
+  var user, angleTeamMembership;
 
   Ember.run(() => {
-    user = this.store().createRecord('user');
-    var angleTeamMembership = this.store().createRecord(
-      'angleTeamMembership', { angle: this.model }
-    );
+    user = this.store().push('user', { id: 2, angles: [1] });
+    angleTeamMembership = this.store().push('angleTeamMembership', { id: 3, angle: 1, teamMember: 2 });
   });
 
   assert.equal(this.model.get('members.length'), 1);
 
-  // assert.ok(
-  //   this.model.get('members').indexOf(user) === 0,
-  //   "returns the correct member in the angle's members"
-  // );
+  assert.ok(
+    this.model.get('members').indexOf(user) === 0,
+    "returns the correct member in the angle's members"
+  );
 });
 
 
@@ -67,8 +69,6 @@ test("#members returns the users connected via angle team membership", function(
 //     var angleTeamMembership = this.store().createRecord('angleTeamMembership');
 //     this.model.get('angleTeamMemberships').pushObject(angleTeamMembership);
 //   });
-//
-//   debugger;
 //
 //   assert.equal(
 //     this.model.get('membershipsUpdatedAt'), timecopTime.toDate().toTimeString()
