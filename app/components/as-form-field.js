@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: [':form-field'],
+  tagName: '',
 
-  _context: Ember.computed.alias('parentView')
+  error: Ember.computed.oneWay('parentView.error'),
+  showErrors: Ember.computed.oneWay('parentView.showErrors'),
+  name: Ember.computed.oneWay('parentView.name'),
+  label: Ember.computed.oneWay('parentView.label'),
 });
