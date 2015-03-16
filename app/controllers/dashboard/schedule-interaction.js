@@ -12,6 +12,10 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
+    },
+
+    cancel: function() {
+      alert("Cancelling dinner");
     }
   },
 

@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['className'],
-  className: 'controls',
+  classNameBindings: [':form-fieldset'],
   tagName: 'fieldset'
 });

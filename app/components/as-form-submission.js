@@ -1,9 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  cancel: true,
-  cancelText: 'Cancel',
-  classNames: ['submission'],
-  submit: true,
-  submitText: 'Save'
+  classNameBindings: [':form-submission'],
+
+  label: 'Save',
+  showCancel: true,
+  cancelLabel: 'Cancel',
+
+  actions: {
+    cancel: function() {
+      this.sendAction('cancel');
+    }
+  }
 });

@@ -1,0 +1,13 @@
+<label {{bind-attr for=name}}>{{label}}</label>
+
+<div class="content">
+  {{yield}}
+</div>
+
+{{#if showErrors}}
+  {{#if error}}
+    <div class="error">
+      {{error}}
+    </div>
+  {{/if}}
+{{/if}}

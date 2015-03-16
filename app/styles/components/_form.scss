@@ -1,8 +1,8 @@
 $form-include-wrapper: true !default;
-$form-inline-wrapper: 'fieldset' !default;
-$form-element-wrapper: '.control' !default;
-$form-select-wrapper: '.select' !default;
-$form-submit-wrapper: '.submission' !default;
+$form-inline-wrapper: '.form-fieldset' !default;
+$form-element-wrapper: '.form-field' !default;
+$form-select-wrapper: '.form-select' !default;
+$form-submit-wrapper: '.form-submission' !default;
 $form-error-wrapper: '.error' !default;
 
 $form-input-height: 36px !default;
@@ -49,18 +49,6 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     @extend %grid-column-small-12;
 
     min-height: $form-input-height * 3;
-
-    &.small {
-      @include form-item-small();
-    }
-
-    &.medium {
-      @include form-item-medium();
-    }
-
-    &.large {
-      @include form-item-large();
-    }
 
     > div {
       position: relative;
