@@ -49,7 +49,7 @@
   </header>
 
   <ul>
-    {{#each checklistItem in checklistItems itemController="dashboard.interaction.checklistItem"}}
+    {{#each checklistItem in checklistItems}}
       <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
     {{/each}}
   </ul>

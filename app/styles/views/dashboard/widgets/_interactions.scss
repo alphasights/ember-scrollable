@@ -11,6 +11,13 @@
     }
   }
 
+  article,
+  .toggle-collapse {
+    &:hover {
+      background-color: lighten($global-section-border-color, 3%);
+    }
+  }
+
   article {
     @extend %grid-row;
     @extend %vertical-align;
@@ -50,10 +57,6 @@
 
       padding-left: 0 !important;
     }
-
-    &:hover {
-      background-color: lighten($global-section-border-color, 3%);
-    }
   }
 
   .empty-message {
@@ -65,9 +68,9 @@
   .toggle-collapse {
     @include single-transition(background-color, 150ms, linear);
 
-    background-color: $global-section-border-color;
     border-bottom-left-radius: $global-radius / 2;
     border-bottom-right-radius: $global-radius / 2;
+    border-top: 1px solid $global-section-border-color;
     cursor: pointer;
     position: relative;
     text-align: center;
@@ -78,10 +81,6 @@
       font-size: $small-font-size;
       letter-spacing: 2px;
       line-height: $base-line-height / 2;
-    }
-
-    &:hover {
-      background-color: darken($global-section-border-color, 10%);
     }
   }
 
