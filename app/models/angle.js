@@ -11,7 +11,7 @@ export default DS.Model.extend({
 
   memberships: function() {
     return this.get('angleTeamMemberships');
-  }.property('angleTeamMemberships'),
+  }.property('angleTeamMemberships.[]'),
 
   members: function() {
     return this.get('memberships').mapBy('user');
