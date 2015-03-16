@@ -3,7 +3,7 @@ import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import testHelper from '../test-helper';
 
-module("Quick Jump", testHelper);
+QUnit.module("Quick Jump", testHelper);
 
 test("Search results", function(assert) {
   defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, response: {

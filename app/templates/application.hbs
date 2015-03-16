@@ -1,4 +1,9 @@
-{{render "sidebar"}}
+{{as-sidebar
+  currentUser=currentUser
+  navigationItems=navigationItems
+  isCollapsed=preferences.sidebarCollapsed
+  toggleCollapse="savePreferences"
+  logout="logout"}}
 
 <main>
   {{render "quick-jump" this tagName="section"}}

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import {module, test} from 'qunit';
 import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
-module('ProjectProgressMixin');
+QUnit.module('ProjectProgressMixin');
 
 test('#progress returns 0 when the deliveryTarget is 0', function(assert) {
   var ProjectProgressObject = Ember.Object.extend(ProjectProgressMixin, {
