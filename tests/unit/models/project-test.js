@@ -42,8 +42,8 @@ test("#memberships returns all the memberships across a project's angles", funct
     firstMembership,
     secondMembership,
     thirdMembership
-  ].forEach((membership) => {
-    assert.ok(this.model.get('memberships').indexOf(membership) >= 0,
+  ].forEach((membership, index) => {
+    assert.ok(this.model.get('memberships')[index] === membership,
     "contains each membership in the project's memberships' array");
   });
 });
