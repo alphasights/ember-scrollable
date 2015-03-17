@@ -6,6 +6,7 @@ $form-select-wrapper: '.form-select' !default;
 $form-submit-wrapper: '.form-submission' !default;
 $form-submit-with-confirm: '.form-submission.with-confirm' !default;
 $form-error-wrapper: '.error' !default;
+$form-cancel-border-color: transparentize($white, .65) !default;
 
 $form-input-height: 36px !default;
 $form-input-text-color: $small-font-color !default;
@@ -130,12 +131,24 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
         padding: $column-gutter / 2 0;
       }
 
+      button:not([type="submit"]) {
+        background-color: transparent;
+        border: solid 1px $form-cancel-border-color;
+        color: $white;
+
+        &:hover {
+          background-color: $form-cancel-border-color;
+        }
+      }
+
       a {
         color: $white;
       }
     }
 
     button {
+      @include single-transition(background-color, 150ms, linear);
+
       margin-bottom: 0 !important;
 
       &[type="submit"] {
