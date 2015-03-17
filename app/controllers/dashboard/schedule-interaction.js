@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 import EmberValidations from 'ember-validations';
+import { request } from 'ic-ajax';
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
@@ -15,7 +16,12 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     cancel: function() {
-      alert("Cancelled scheduling");
+      request(
+        { url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`, type: 'DELETE' }
+      ).then( response => {
+        this.store.pushPayload(response);
+        this.send('hideSidePanel');
+      });
     }
   },
 

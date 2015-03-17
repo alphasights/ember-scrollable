@@ -1,11 +1,11 @@
 {{#if isCancelling}}
   <span>{{cancelConfirmationMessage}}</span>
   <a {{action "toggleCancelling"}}>Back</a>
-  <button {{action "cancel"}}>{{cancelConfirmationLabel}}</button>
+  <button {{action "cancel"}} {{bind-attr class="cancelConfirmClass"}}>{{cancelConfirmationLabel}}</button>
 {{else}}
   <button type="submit">{{label}}</button>
 
   {{#if showCancel}}
-    <a {{action "toggleCancelling"}}>{{cancelLabel}}</a>
+    <a {{action "toggleCancelling"}}  {{bind-attr class="cancelClass"}}>{{cancelLabel}}</a>
   {{/if}}
 {{/if}}

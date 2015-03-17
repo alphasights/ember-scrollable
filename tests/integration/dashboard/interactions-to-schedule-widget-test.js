@@ -10,7 +10,7 @@ const interactionToSchedule = {
   checklistItemCompletionStatus: true
 };
 
-QUnit.module("Interactions To Schedule", {
+QUnit.module("Interactions To Schedule Widget", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
