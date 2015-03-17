@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   classNameBindings: [':form-field', 'hasErrors:with-errors'],
-  layoutName: 'components/as-form-field',
+  layoutName: 'components/as-form/field',
 
   fieldsetView: Ember.computed.oneWay('parentView'),
   formView: Ember.computed.oneWay('fieldsetView.parentView'),
