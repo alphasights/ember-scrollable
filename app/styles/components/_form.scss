@@ -1,6 +1,7 @@
 $form-include-wrapper: true !default;
 $form-inline-wrapper: '.form-fieldset' !default;
 $form-element-wrapper: '.form-field' !default;
+$form-element-with-errors: '.form-field.with-errors' !default;
 $form-select-wrapper: '.form-select' !default;
 $form-submit-wrapper: '.form-submission' !default;
 $form-error-wrapper: '.error' !default;
@@ -72,7 +73,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     }
   }
 
-  #{$form-element-wrapper}-error {
+  #{$form-element-with-errors} {
     #{$form-error-wrapper} {
       background-color: transparent;
       color: $alert-color;
@@ -85,6 +86,8 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     input,
     textarea,
     &#{$form-select-wrapper} > div {
+      @include single-transition(border-color, 150ms, linear);
+
       border-color: lighten($alert-color, 10%);
     }
   }

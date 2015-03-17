@@ -6,5 +6,5 @@ export default Ember.Component.extend({
   error: Ember.computed.oneWay('parentView.error'),
   showErrors: Ember.computed.oneWay('parentView.showErrors'),
   name: Ember.computed.oneWay('parentView.name'),
-  label: Ember.computed.oneWay('parentView.label'),
+  label: Ember.computed.oneWay('parentView.label')
 });

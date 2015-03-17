@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  classNameBindings: [':form-field'],
+  classNameBindings: [':form-field', 'hasErrors:with-errors'],
   layoutName: 'components/as-form-field',
 
   fieldsetView: Ember.computed.oneWay('parentView'),
@@ -19,5 +19,11 @@ export default Ember.Mixin.create({
       Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
       Ember.defineProperty(this, 'errors', Ember.computed.alias('model.errors.' + name));
     }
-  }.observes('name').on('init')
+  }.observes('name').on('init'),
+
+  hasErrors: function() {
+    if (this.get('showErrors')) {
+      return this.get('error') != null;
+    }
+  }.property('error', 'showErrors')
 });
