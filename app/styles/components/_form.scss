@@ -78,10 +78,10 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     #{$form-error-wrapper} {
       background-color: transparent;
       color: $alert-color;
+      font-size: $small-font-size;
       line-height: $form-input-height / 2;
       margin: 0;
       padding-left: $column-gutter / 2;
-      font-size: $small-font-size;
     }
 
     input,
@@ -125,9 +125,9 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
       text-align: right;
 
       span {
-        padding: $column-gutter / 2 0;
         float: left;
         line-height: 100%;
+        padding: $column-gutter / 2 0;
       }
 
       a {
