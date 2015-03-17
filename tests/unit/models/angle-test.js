@@ -34,11 +34,9 @@ test("#memberships returns the angleTeamMemberships", function(assert) {
     angleTeamMembership = this.store().push('angleTeamMembership', { id: 3, angle: 1 });
   });
 
-  assert.equal(this.model.get('memberships.length'), 1);
-  assert.ok(
-    this.model.get('memberships').indexOf(angleTeamMembership) === 0,
-    "returns the correct membership in the angle's memberships"
-  );
+  this.model.get('memberships').forEach((membership) => {
+    assert.ok(membership === angleTeamMembership);
+  }, 'contains the correct angle team membership in the memberships array');
 });
 
 
@@ -50,12 +48,9 @@ test("#members returns the users connected via angle team membership", function(
     angleTeamMembership = this.store().push('angleTeamMembership', { id: 3, angle: 1, teamMember: 2 });
   });
 
-  assert.equal(this.model.get('members.length'), 1);
-
-  assert.ok(
-    this.model.get('members').indexOf(user) === 0,
-    "returns the correct member in the angle's members"
-  );
+  this.model.get('members').forEach((member) => {
+    assert.ok(member === user);
+  }, 'contains the correct user in the members array');
 });
 
 
