@@ -11,17 +11,17 @@ export default DS.Model.extend({
 
   memberships: function() {
     return this.get('angleTeamMemberships');
-  }.property('angleTeamMemberships'),
+  }.property('angleTeamMemberships.[]'),
 
   members: function() {
     return this.get('memberships').mapBy('user');
   }.property('memberships.[]'),
 
-  membersDidChange: function() {
-    this.set('membersUpdatedAt', new Date());
-  }.observes('members.[]'),
-
   membershipsDidChange: function() {
     this.set('membershipsUpdatedAt', new Date());
-  }.observes('memberships.[]')
+  }.observes('memberships.[]'),
+
+  membersDidChange: function() {
+    this.set('membersUpdatedAt', new Date());
+  }.observes('members.[]')
 });
