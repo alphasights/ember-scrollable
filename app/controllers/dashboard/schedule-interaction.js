@@ -15,7 +15,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     cancel: function() {
-      alert("Cancelling dinner");
+      alert("Cancelled scheduling");
     }
   },
 
