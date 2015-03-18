@@ -25,6 +25,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
         }).then(response => {
           this.store.pushPayload(response);
           this.send('hideSidePanel');
+          this.notify.info('The interaction has been cancelled.');
         })
       });
 
