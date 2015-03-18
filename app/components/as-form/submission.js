@@ -6,7 +6,6 @@ export default Ember.Component.extend({
   model: null,
   label: 'Save',
   showCancel: true,
-  cancelClass: 'cancel',
   cancelLabel: 'Cancel',
   cancelConfirmationClass: 'confirm-cancel',
   cancelConfirmationLabel: 'Confirm',
