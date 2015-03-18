@@ -11,7 +11,7 @@
     form {
       @include form();
 
-      #{$form-element-wrapper} {
+      #{$form-field-selector} {
         @include form-item-small();
       }
     }
