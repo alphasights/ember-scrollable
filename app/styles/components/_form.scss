@@ -30,32 +30,11 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   #{$form-fieldset-selector} {
-    border: 0;
-    margin-bottom: 0;
-
-    @if $with-border {
-      padding: $column-gutter / 2 $column-gutter / 2 0;
-    } @else {
-      padding: 0;
-    }
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid $global-section-border-color;
-    }
-
-    legend {
-      display: none;
-    }
+    @include form-fieldset($with-border: $form-with-border);
   }
 
   #{$form-field-selector} {
-    @extend %grid-column-small-12;
-
-    min-height: $form-input-height * 3;
-
-    > div {
-      position: relative;
-    }
+    @include form-field();
   }
 
   label {
@@ -63,16 +42,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   input {
-    @include form-input-shared-properties();
-
-    font-size: $base-font-size;
-    line-height: $form-input-height;
-    margin-bottom: 0;
-    padding: 0 $form-input-padding / 2;
-
-    &::-webkit-input-placeholder {
-      color: lighten($form-input-text-color, 20%);
-    }
+    @include form-input();
   }
 
   #{$form-field-with-errors} {
@@ -95,12 +65,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   textarea {
-    @extend %form-input-shared;
-
-    font-size: $base-font-size;
-    line-height: $base-line-height;
-    min-height: $form-input-height * 3;
-    padding: $form-input-padding / 2;
+    @include form-textarea();
   }
 
   #{$form-select-selector} {
@@ -176,6 +141,50 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 }
 
+@mixin form-fieldset($with-border: $form-with-border) {
+  border: 0;
+  margin-bottom: 0;
+
+  @if $with-border {
+    padding: $column-gutter / 2 $column-gutter / 2 0;
+  } @else {
+    padding: 0;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $global-section-border-color;
+  }
+
+  legend {
+    display: none;
+  }
+}
+
+@mixin form-field() {
+  @extend %grid-column-small-12;
+
+  min-height: $form-input-height * 3;
+}
+
+@mixin form-label() {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+  line-height: $form-label-height;
+}
+
+@mixin form-input() {
+  @include form-input-shared-properties();
+
+  font-size: $base-font-size;
+  line-height: $form-input-height;
+  margin-bottom: 0;
+  padding: 0 $form-input-padding / 2;
+
+  &::-webkit-input-placeholder {
+    color: lighten($form-input-text-color, 20%);
+  }
+}
+
 @mixin form-select($inline: false) {
   @include form-input-shared-properties();
   @include form-select-arrow();
@@ -222,10 +231,13 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 }
 
-@mixin form-label() {
-  font-size: $h5-font-size;
-  font-weight: $font-weight-bold;
-  line-height: $form-label-height;
+@mixin form-textarea() {
+  @include form-input-shared-properties();
+
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  min-height: $form-input-height * 3;
+  padding: $form-input-padding / 2;
 }
 
 @mixin form-select-arrow() {
