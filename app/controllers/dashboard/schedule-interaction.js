@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 import EmberValidations from 'ember-validations';
+import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
@@ -9,6 +10,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
+  requestPromise: null,
 
   actions: {
     hideSidePanel: function() {
@@ -16,12 +18,17 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     cancel: function() {
-      request(
-        { url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`, type: 'DELETE' }
-      ).then( response => {
-        this.store.pushPayload(response);
-        this.send('hideSidePanel');
+      var requestPromise = PromiseController.create({
+        promise: request({
+          url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
+          type: 'DELETE'
+        }).then(response => {
+          this.store.pushPayload(response);
+          this.send('hideSidePanel');
+        })
       });
+
+      this.set('requestPromise', requestPromise);
     }
   },
 
