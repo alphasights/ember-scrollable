@@ -5,13 +5,13 @@ export default Ember.Component.extend({
   tagName: 'form',
 
   model: null,
-  showErrors: false,
+  hasSubmitted: false,
 
   submit: function(event) {
     event.preventDefault();
     event.stopPropagation();
 
-    this.set('showErrors', true);
+    this.set('hasSubmitted', true);
     this.get('model').validate();
   }
 });
