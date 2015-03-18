@@ -63,7 +63,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   input {
-    @extend %form-input-shared;
+    @include form-input-shared-properties();
 
     font-size: $base-font-size;
     line-height: $form-input-height;
@@ -177,8 +177,8 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 }
 
 @mixin form-select($inline: false) {
-  @extend %form-select-arrow;
-  @extend %form-input-shared;
+  @include form-input-shared-properties();
+  @include form-select-arrow();
 
   background: $white;
   background-image: $form-select-background !important;
@@ -228,7 +228,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   line-height: $form-label-height;
 }
 
-%form-select-arrow {
+@mixin form-select-arrow() {
   &:before,
   &:after {
     border: $form-select-arrow-size dashed;
@@ -255,7 +255,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 }
 
-%form-input-shared {
+@mixin form-input-shared-properties() {
   background-image: $form-input-background;
   border: 1px solid;
   border-color: $form-input-border-color darken($form-input-border-color, 5%);
