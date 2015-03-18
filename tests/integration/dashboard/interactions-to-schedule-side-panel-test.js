@@ -124,7 +124,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click('a.cancel');
+  click('.form-submission a');
   click('button.confirm-cancel');
 
   andThen(function() {
