@@ -45,6 +45,18 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     @include form-input();
   }
 
+  textarea {
+    @include form-textarea();
+  }
+
+  #{$form-select-selector} {
+    @include form-select();
+  }
+
+  #{$form-submission-selector} {
+    @include form-submission($with-border: $form-with-border);
+  }
+
   #{$form-field-with-errors} {
     #{$form-field-error-selector} {
       color: $alert-color;
@@ -60,18 +72,6 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
       border-color: lighten($alert-color, 10%);
     }
-  }
-
-  textarea {
-    @include form-textarea();
-  }
-
-  #{$form-select-selector} {
-    @include form-select();
-  }
-
-  #{$form-submission-selector} {
-    @include form-submission($with-border: $form-with-border);
   }
 }
 
