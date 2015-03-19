@@ -38,22 +38,22 @@
     selection=occurrence
     timeZoneOptions=timeZoneOptions
     occurrences=unavailabilities}}
-</section>
 
-<section class="details-form">
-  {{#as-form model=this}}
-    {{#as-form/fieldset}}
-      {{as-form/select name="date" label="Interaction Date"}}
-      {{as-form/select name="from" label="From"}}
-      {{as-form/select name="to" label="To"}}
-      {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
-      {{as-form/select name="speak" label="Use Speak?" prompt="Yes"}}
-      {{as-form/input name="speakDialIn" label="Speak Dial-in Number"}}
-    {{/as-form/fieldset}}
+  <section class="form">
+    {{#as-form model=this}}
+      {{#as-form/fieldset}}
+        {{as-form/select name="date" label="Interaction Date"}}
+        {{as-form/select name="from" label="From"}}
+        {{as-form/select name="to" label="To"}}
+        {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
+        {{as-form/select name="speak" label="Use Speak?" prompt="Yes"}}
+        {{as-form/input name="speakDialIn" label="Speak Dial-in Number"}}
+      {{/as-form/fieldset}}
 
-    {{as-form/submission
-      label="Schedule Interaction"
-      cancel="cancel"
-      cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"}}
-  {{/as-form}}
+      {{as-form/submission
+        label="Schedule Interaction"
+        cancel="cancel"
+        cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"}}
+    {{/as-form}}
+  </section>
 </section>

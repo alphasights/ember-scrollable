@@ -12,6 +12,11 @@
 
     padding: $column-gutter / 2 $column-gutter !important;
 
+    .calendar {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .calendar-occurrence {
       &.alpha-call {
         background-color: $alert-color;
@@ -21,13 +26,13 @@
     }
   }
 
-  .details-form {
-    @extend %grid-column-12;
-
-    padding: $column-gutter !important;
-
+  .form {
     form {
       @include form();
+
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: none;
 
       #{$form-field-selector} {
         @include form-item-small();
