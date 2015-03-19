@@ -1,0 +1,3 @@
+.form-submission {
+  @include form-submission($with-border: $form-with-border);
+}

@@ -1,13 +1,10 @@
 $form-with-border: true !default;
-$form-fieldset-selector: '.form-fieldset' !default;
-$form-field-selector: '.form-field' !default;
 $form-field-with-errors: '.with-errors' !default;
-$form-select-selector: '.form-select' !default;
-$form-submission-selector: '.form-submission' !default;
-$form-submission-with-confirm: '.form-submission.with-confirm' !default;
 $form-field-error-selector: '.error' !default;
+$form-select-selector: '.form-select' !default;
+$form-submission-with-confirm: '.with-confirm' !default;
 
-$form-cancel-border-color: transparentize($white, .65) !default;
+$form-confirm-border-color: transparentize($white, .65) !default;
 $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
 $form-input-border-color: darken($white, 10%) !default;
 $form-input-height: 36px !default;
@@ -27,34 +24,6 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     background-color: lighten($panel-bg, 2%);
     border: solid 1px $global-section-border-color;
     border-radius: $global-radius;
-  }
-
-  #{$form-fieldset-selector} {
-    @include form-fieldset($with-border: $form-with-border);
-  }
-
-  #{$form-field-selector} {
-    @include form-field();
-  }
-
-  label {
-    @include form-label();
-  }
-
-  input {
-    @include form-input();
-  }
-
-  textarea {
-    @include form-textarea();
-  }
-
-  #{$form-select-selector} {
-    @include form-select();
-  }
-
-  #{$form-submission-selector} {
-    @include form-submission($with-border: $form-with-border);
   }
 }
 
@@ -205,11 +174,11 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
 
       button {
         background-color: transparent;
-        border: solid 1px $form-cancel-border-color;
+        border: solid 1px $form-confirm-border-color;
         color: $white;
 
         &:hover {
-          background-color: $form-cancel-border-color;
+          background-color: $form-confirm-border-color;
         }
       }
 
