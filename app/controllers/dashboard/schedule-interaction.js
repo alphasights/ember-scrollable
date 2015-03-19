@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import EmberValidations from 'ember-validations';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
@@ -28,7 +29,7 @@ var InteractionOccurrence = Occurrence.extend({
   }.property('scheduledCallTime')
 });
 
-export default Ember.ObjectController.extend(ModelsNavigationMixin, {
+export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
@@ -78,6 +79,26 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
+    },
+
+    cancel: function() {
+      alert("Cancelled scheduling");
     }
-  }
+  },
+
+  validations: {
+    speakDialIn: {
+      presence: true,
+      numericality: true
+    },
+    interactionType: {
+      presence: true
+    }
+  },
+
+  interactionTypes: [
+    { id: 1, name: 'Interaction type 1' },
+    { id: 2, name: 'Interaction type 2' },
+    { id: 3, name: 'Interaction type 3' }
+  ]
 });

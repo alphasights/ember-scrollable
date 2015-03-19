@@ -20,4 +20,18 @@
       }
     }
   }
+
+  .details-form {
+    @extend %grid-column-12;
+
+    padding: $column-gutter !important;
+
+    form {
+      @include form();
+
+      #{$form-field-selector} {
+        @include form-item-small();
+      }
+    }
+  }
 }

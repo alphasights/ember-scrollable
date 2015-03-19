@@ -44,6 +44,7 @@
     "ember-localstorage-adapter": "0.5.2",
     "ember-moment": "1.1.1",
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
+    "ember-validations": "^2.0.0-alpha.3",
     "liquid-fire": "0.17.1"
   }
 }
