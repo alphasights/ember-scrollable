@@ -23,9 +23,13 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
           type: 'DELETE'
         }).then(response => {
-          this.store.pushPayload(response);
-          this.send('hideSidePanel');
-          this.notify.info('The interaction has been cancelled.');
+          Ember.run.next(() => {
+            this.store.pushPayload(response);
+            this.send('hideSidePanel');
+            this.notify.success('The interaction has been cancelled.');
+          });
+        }, _error => {
+          this.notify.alert('The interaction could not be cancelled.');
         })
       });
 
