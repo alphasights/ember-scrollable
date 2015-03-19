@@ -3,9 +3,9 @@ $form-fieldset-selector: '.form-fieldset' !default;
 $form-field-selector: '.form-field' !default;
 $form-field-with-errors: '.with-errors' !default;
 $form-select-selector: '.form-select' !default;
-$form-submit-selector: '.form-submission' !default;
-$form-submit-with-confirm: '.form-submission.with-confirm' !default;
-$form-error-selector: '.error' !default;
+$form-submission-selector: '.form-submission' !default;
+$form-submission-with-confirm: '.form-submission.with-confirm' !default;
+$form-field-error-selector: '.error' !default;
 
 $form-cancel-border-color: transparentize($white, .65) !default;
 $form-input-background: linear-gradient(bottom, transparent, rgba($black, .03)) !default;
@@ -46,12 +46,10 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   }
 
   #{$form-field-with-errors} {
-    #{$form-error-selector} {
-      background-color: transparent;
+    #{$form-field-error-selector} {
       color: $alert-color;
       font-size: $small-font-size;
       line-height: $form-input-height / 2;
-      margin: 0;
       padding-left: $column-gutter / 2;
     }
 
@@ -74,70 +72,8 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
     }
   }
 
-  #{$form-submit-selector} {
-    @extend %grid-column-12;
-    @include single-transition(background-color, 150ms, linear);
-
-    background-color: $white;
-    border-bottom-left-radius: $global-radius;
-    border-bottom-right-radius: $global-radius;
-    border-top: 1px solid $global-section-border-color;
-
-    @if $with-border {
-      padding: $column-gutter !important;
-    } @else {
-      padding: $column-gutter $column-gutter / 2 !important;
-    }
-
-    &#{$form-submit-with-confirm} {
-      background-color: lighten($alert-color, 0%);
-      color: $white;
-      text-align: right;
-
-      span {
-        float: left;
-        line-height: 100%;
-        padding: $column-gutter / 2 0;
-      }
-
-      button:not([type="submit"]) {
-        background-color: transparent;
-        border: solid 1px $form-cancel-border-color;
-        color: $white;
-
-        &:hover {
-          background-color: $form-cancel-border-color;
-        }
-      }
-
-      a {
-        color: $white;
-      }
-    }
-
-    button {
-      @include single-transition(background-color, 150ms, linear);
-
-      margin-bottom: 0 !important;
-
-      &[type="submit"] {
-        @extend %button-primary;
-      }
-
-      &:not([type="submit"]) {
-        padding: $column-gutter / 2;
-      }
-    }
-
-    a {
-      color: $small-font-color;
-      display: inline-block;
-      padding: 0 $column-gutter;
-
-      &:hover {
-        color: $body-font-color;
-      }
-    }
+  #{$form-submission-selector} {
+    @include form-submission($with-border: $form-with-border);
   }
 }
 
@@ -238,6 +174,74 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   line-height: $base-line-height;
   min-height: $form-input-height * 3;
   padding: $form-input-padding / 2;
+}
+
+@mixin form-submission($with-border: $form-with-border, $with-confirm: true) {
+  @extend %grid-column-12;
+  @include single-transition(background-color, 150ms, linear);
+
+  background-color: $white;
+  border-bottom-left-radius: $global-radius;
+  border-bottom-right-radius: $global-radius;
+  border-top: 1px solid $global-section-border-color;
+
+  @if $with-border {
+    padding: $column-gutter !important;
+  } @else {
+    padding: $column-gutter $column-gutter / 2 !important;
+  }
+
+  @if $with-confirm {
+    &#{$form-submission-with-confirm} {
+      background-color: lighten($alert-color, 0%);
+      color: $white;
+      text-align: right;
+
+      span {
+        float: left;
+        line-height: 100%;
+        padding: $column-gutter / 2 0;
+      }
+
+      button:not([type="submit"]) {
+        background-color: transparent;
+        border: solid 1px $form-cancel-border-color;
+        color: $white;
+
+        &:hover {
+          background-color: $form-cancel-border-color;
+        }
+      }
+
+      a {
+        color: $white;
+      }
+    }
+  }
+
+  button {
+    @include single-transition(background-color, 150ms, linear);
+
+    margin-bottom: 0 !important;
+
+    &[type="submit"] {
+      @extend %button-primary;
+    }
+
+    &:not([type="submit"]) {
+      padding: $column-gutter / 2;
+    }
+  }
+
+  a {
+    color: $small-font-color;
+    display: inline-block;
+    padding: 0 $column-gutter;
+
+    &:hover {
+      color: $body-font-color;
+    }
+  }
 }
 
 @mixin form-select-arrow() {
