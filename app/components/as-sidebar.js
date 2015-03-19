@@ -1,12 +1,20 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
+export default Ember.Component.extend({
   classNameBindings: [':sidebar', 'isCollapsed:collapsed'],
-  isCollapsed: Ember.computed.oneWay('controller.preferences.sidebarCollapsed'),
+  
+  currentUser: null,
+  navigationItems: [],
+  isCollapsed: false,
 
   actions: {
     toggleCollapse: function() {
-      this.get('controller').send('toggleCollapse');
+      this.toggleProperty('isCollapsed');
+      this.sendAction('toggleCollapse');
+    },
+
+    logout: function() {
+      this.sendAction('logout');
     }
   },
 

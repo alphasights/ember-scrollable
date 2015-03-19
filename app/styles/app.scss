@@ -1,5 +1,3 @@
-$icon-font-folder-path: '/assets/fonts';
-
 @import 'paint-settings';
 @import 'bower_components/paint/paint';
 
@@ -18,6 +16,7 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'components/profile';
 @import 'components/progress-bar';
 @import 'components/quick-jump-result-content';
+@import 'components/sidebar';
 @import 'components/super-number';
 @import 'components/tooltipster';
 
@@ -32,7 +31,6 @@ $icon-font-folder-path: '/assets/fonts';
 @import 'views/dashboard/widgets/upcoming-interactions';
 @import 'views/dashboard/widgets/performance';
 @import 'views/quick-jump';
-@import 'views/sidebar';
 @import 'views/teams';
 @import 'views/teams/team';
 @import 'views/teams/team/angle-memberships';

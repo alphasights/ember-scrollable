@@ -5,21 +5,24 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.RSVP.hash({
       currentUser: this.store.find('user', 'me'),
-      preferences: this.store.find('preferences')
+
+      preferences: this.store.find('preferences').then((preferences) => {
+        if (Ember.isEmpty(preferences)) {
+          var newPreferences = this.store.createRecord('preferences');
+          newPreferences.save();
+          return newPreferences;
+        } else {
+          return preferences.get('firstObject');
+        }
+      })
     });
   },
 
   afterModel: function(models) {
-    var preferences = models.preferences.get('firstObject');
     var currentUser = this.controllerFor('currentUser');
 
-    if (preferences == null) {
-      preferences = this.store.createRecord('preferences');
-      preferences.save();
-    }
-
     currentUser.set('model', models.currentUser);
-    currentUser.set('preferences', preferences);
+    currentUser.set('preferences', models.preferences);
     currentUser.send('boot');
   },
 

@@ -1,7 +1,3 @@
-machine:
-  node:
-    version: 0.10.22
-
 test:
   override:
     - ./bin/ci
@@ -9,11 +5,9 @@ test:
 dependencies:
   override:
     - ./bin/setup
-  cache_directories:
-    - /home/ubuntu/nvm/v0.10.22/lib/node_modules
 
 deployment:
   staging:
     branch: master
     commands:
-      - "ember divshot push staging token=$DIVSHOT_TOKEN"
+      - "ember divshot push staging --token $DIVSHOT_TOKEN --org AlphaSights"

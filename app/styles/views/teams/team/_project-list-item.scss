@@ -1,20 +1,14 @@
 .team .project-list-item {
-  @include single-transition(background-color, 100ms, linear);
   @extend %grid-row;
+  @extend %vertical-align;
+  @include single-transition(background-color, 100ms, linear);
 
   border-bottom: 1px solid $global-section-border-color;
   cursor: pointer;
-  display: table;
   padding: $column-gutter / 4 0;
 
-  > div {
-    display: table-cell;
-    float: none !important;
-    vertical-align: middle;
-  }
-
   > .priority {
-    @extend %grid-column-1;
+    @extend %grid-column-medium-1;
 
     .dropdown > button {
       margin: 0 auto;
@@ -22,7 +16,8 @@
   }
 
   > .details {
-    @extend %grid-column-4;
+    @extend %grid-column-small-8;
+    @extend %grid-column-medium-4;
 
     font-size: $h4-font-size;
     font-weight: $font-weight-bold;
@@ -35,17 +30,24 @@
   }
 
   > .members {
-    @extend %grid-column-4;
+    @extend %grid-column-small-3;
+    @extend %grid-column-medium-4;
 
     .avatar {
       &.lead {
         @include detached-border($color: lighten($primary-color, 30%));
       }
     }
+
+    @media #{$small-only} {
+      .avatar:not(&.lead) {
+        display: none;
+      }
+    }
   }
 
   > .progress {
-    @extend %grid-column-3;
+    @extend %grid-column-medium-3;
 
     padding: 0 $column-gutter;
 
@@ -86,6 +88,10 @@
       .target {
         color: $info-color;
       }
+    }
+
+    @media #{$small-only} {
+      display: none;
     }
   }
 

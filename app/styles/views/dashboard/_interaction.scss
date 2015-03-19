@@ -67,13 +67,13 @@ $interaction-header-height:
   .profile header {
     @extend %grid-row;
 
-    padding: 0 $column-gutter / 2;
+    padding: $column-gutter / 4 $column-gutter / 2;
 
     h1,
     .call-time {
       @extend %grid-column-6;
 
-      line-height: 3rem;
+      line-height: $base-line-height;
       margin: 0;
       padding: 0 !important;
     }

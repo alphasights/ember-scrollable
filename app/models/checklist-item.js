@@ -4,5 +4,5 @@ export default DS.Model.extend({
   createdAt: DS.attr('date'),
   completed: DS.attr('boolean'),
   interaction: DS.belongsTo('interaction'),
-  type: DS.attr('symbol')
+  title: DS.attr('string')
 });

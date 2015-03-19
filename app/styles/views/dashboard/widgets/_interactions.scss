@@ -11,47 +11,51 @@
     }
   }
 
+  article,
+  .toggle-collapse {
+    &:hover {
+      background-color: lighten($global-section-border-color, 3%);
+    }
+  }
+
   article {
     @extend %grid-row;
+    @extend %vertical-align;
     @include single-transition(background-color, 100ms, linear);
 
     cursor: pointer;
-    display: table !important;
 
     > div {
-      display: table-cell !important;
-      float: none !important;
       padding: $column-gutter / 2;
-      vertical-align: middle;
     }
 
     small {
       color: $small-font-color;
       display: block;
       font-size: $base-font-size;
-    }
 
-    .time,
-    .checklist-status {
-      white-space: nowrap;
+      @media #{$small-only} {
+        font-size: $small-font-size;
+      }
     }
 
     .time {
-      @extend %grid-column-4;
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-4;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-7;
+      @extend %grid-column-small-6;
+      @extend %grid-column-medium-7;
     }
 
     .checklist-status {
-      @extend %grid-column-1;
-    }
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-1;
 
-    &:hover {
-      background-color: lighten($global-section-border-color, 3%);
+      padding-left: 0 !important;
     }
   }
 
@@ -64,9 +68,9 @@
   .toggle-collapse {
     @include single-transition(background-color, 150ms, linear);
 
-    background-color: $global-section-border-color;
     border-bottom-left-radius: $global-radius / 2;
     border-bottom-right-radius: $global-radius / 2;
+    border-top: 1px solid $global-section-border-color;
     cursor: pointer;
     position: relative;
     text-align: center;
@@ -77,10 +81,6 @@
       font-size: $small-font-size;
       letter-spacing: 2px;
       line-height: $base-line-height / 2;
-    }
-
-    &:hover {
-      background-color: darken($global-section-border-color, 10%);
     }
   }
 

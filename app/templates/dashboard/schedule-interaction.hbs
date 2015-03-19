@@ -19,6 +19,20 @@
   </ul>
 </section>
 
+<section class="checklist-items">
+  <header>
+    {{as-checklist-status items=checklistItems}}
+
+    <a target="_blank" {{bind-attr href=schedulingUrl}}>Schedule</a>
+  </header>
+
+  <ul>
+    {{#each checklistItem in checklistItems}}
+      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
+    {{/each}}
+  </ul>
+</section>
+
 <section class="scheduling">
   {{as-calendar
     selection=occurrence
