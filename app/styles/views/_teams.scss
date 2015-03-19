@@ -17,21 +17,21 @@
       vertical-align: middle;
     }
 
-    h1,
-    select {
-      line-height: $h1-font-size;
-    }
-
     h1 {
+      line-height: $h1-font-size;
       padding-right: $column-gutter / 2;
     }
 
-    select {
-      margin: $column-gutter $column-gutter / 2 $column-gutter 0;
-      padding-bottom: 0;
-      padding-right: $column-gutter;
-      padding-top: 0;
-      width: auto;
+    .select {
+      @include form-select($inline: true);
+
+      margin-right: $column-gutter / 2;
+    }
+
+    label {
+      @include form-label();
+
+      display: inline-block;
     }
 
     .toggle {
@@ -39,6 +39,8 @@
     }
 
     &.open {
+      margin: $column-gutter 0;
+
       .toggle {
         background-color: $info-color;
       }
