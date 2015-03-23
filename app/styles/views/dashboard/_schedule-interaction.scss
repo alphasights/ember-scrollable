@@ -37,11 +37,17 @@
       #{$form-field-selector} {
         @include form-item-small();
       }
-    }
-  }
 
-  .confirm-cancel {
-    height: 45px;
-    width: 75px;
+      .confirm-cancel {
+        &:before,
+        &:after {
+          content: '\00a0';
+        }
+
+        .progress-indicator {
+          display: inline-block;
+        }
+      }
+    }
   }
 }
