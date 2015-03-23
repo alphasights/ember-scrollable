@@ -7,8 +7,10 @@ export default Ember.Component.extend({
   label: 'Save',
   showCancel: true,
   cancelLabel: 'Cancel',
+  cancelConfirmationClass: 'confirm-cancel',
   cancelConfirmationLabel: 'Confirm',
   cancelConfirmationMessage: 'Are you sure?',
+  requestPromise: null,
 
   isCancelling: false,
 
