@@ -24,7 +24,7 @@ $projects-header-height: rem-calc(40);
     }
 
     .sort-by-select {
-      @include form-select($inline: true);
+      @include form-select($inner-wrapper: null, $inline: true);
     }
   }
 }

@@ -23,7 +23,7 @@
     }
 
     .select {
-      @include form-select($inline: true);
+      @include form-select($inner-wrapper: null, $inline: true);
 
       margin-right: $column-gutter / 2;
     }
