@@ -113,7 +113,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     submit: function() {
+      var advisorName = this.get('advisor.name');
+      var clientName = this.get('clientContact.name');
 
+      new Messenger().post({
+        message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
+        type: 'success',
+        showCloseButton: true
+      });
     }
   },
 
@@ -128,8 +135,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   },
 
   interactionTypes: [
-    { id: 1, name: 'Interaction type 1' },
-    { id: 2, name: 'Interaction type 2' },
-    { id: 3, name: 'Interaction type 3' }
+    { id: 'call', name: 'One-on-One Call' },
+    { id: 'half_hour_call', name: 'Half-Hour Call' },
+    { id: 'hosted_call', name: 'Hosted Call' }
   ]
+
 });

@@ -3,6 +3,10 @@ import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
+const interaction = {
+  id: 1
+};
+
 QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
@@ -50,7 +54,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
       ],
       "interactions": [
         {
-          "id": 1,
+          "id": interaction.id,
           "scheduled_call_time": null,
           "advisor_id": 1,
           "client_contact_id": 21387,
@@ -80,6 +84,49 @@ QUnit.module("Interactions To Schedule Side Panel", {
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
   }
+});
+
+test("Schedule interaction makes an API request and displays a notification", function(assert) {
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { params: {
+    "interaction": {
+      "interaction_type": "half_hour_call",
+      "speak": true,
+      "dial_in_number": "123456789",      
+      "scheduled_call_time": "Monday"
+
+      // The following params are also accepted in the API. However, I'm not sure if we need
+      // to be changing them in phoenix as part of this request.
+      // "advisor_time_zone": "Central Time (US & Canada)",
+      // "client_time_zone": "Eastern Time (US & Canada)",
+      // "advisor_phone_country_code": "",
+      // "advisor_phone_number": "",
+      // "client_access_number_country": "US",
+      // "primary_contact_id": @analyst_1.id
+    }
+  }});
+
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+
+
+
+  // Select time slot from calendar
+  var monday7am = find("ul.days > li:nth-child(2) .times li:nth-child(1) article");
+  click(monday7am);
+
+  // Select interaction type
+
+  // Fill in dial number
+
+  // Submit form
+  click('.form-submission button');
+
+  andThen(function() {
+    assert.equal(handler.called, true);
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
+  });
 });
 
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
