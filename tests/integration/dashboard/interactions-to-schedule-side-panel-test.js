@@ -129,3 +129,33 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
     assert.equal(message, "The interaction has been cancelled.");
   });
 });
+
+test("Cancel Interaction Failure", function(assert) {
+  defineFixture('DELETE', '/interests/1', { status: 500 });
+
+  visit('/dashboard');
+
+  andThen(function() {
+    assert.equal(find('.interactions-to-schedule article').length, 1,
+    'shows the original interaction to schedule in the widget');
+  });
+
+  click('.interactions-to-schedule article:first');
+  click('.form-submission a');
+  click('button.confirm-cancel');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/dashboard',
+      'returns the user to dashboard after cancelling'
+    );
+
+    assert.equal(find('.interactions-to-schedule article').length, 1,
+      'does not remove the interaction from the widget'
+    );
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "The interaction could not be cancelled.",
+      'displays a message that it could not be cancelled'
+    );
+  });
+});
