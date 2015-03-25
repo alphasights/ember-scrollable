@@ -1,7 +1,12 @@
 {{#if isCancelling}}
   <span>{{cancelConfirmationMessage}}</span>
   <a {{action "toggleCancelling"}}>Back</a>
-  <button type="submit" {{action "cancel"}}>{{cancelConfirmationLabel}}</button>
+  <button type="submit" {{action "cancel"}} {{bind-attr class="cancelConfirmationClass"}}>
+    {{#as-progress-indicator promise=requestPromise spinnerColor="#ffffff"}}
+      {{cancelConfirmationLabel}}
+    {{/as-progress-indicator}}
+  </button>
+
 {{else}}
   <button type="submit">{{label}}</button>
 

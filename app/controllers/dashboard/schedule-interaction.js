@@ -3,6 +3,8 @@ import EmberValidations from 'ember-validations';
 import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
+import PromiseController from 'phoenix/controllers/promise';
+import { request } from 'ic-ajax';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -35,6 +37,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
+  requestPromise: null,
 
   unavailabilities: [
     Occurrence.create({
@@ -82,7 +85,31 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     cancel: function() {
-      alert("Cancelled scheduling");
+      var requestPromise = PromiseController.create({
+        promise: request({
+          url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
+          type: 'DELETE'
+        }).then(response => {
+          Ember.run.next(() => {
+            this.store.pushPayload(response);
+            this.send('hideSidePanel');
+
+            new Messenger().post({
+              message: "The interaction has been cancelled.",
+              type: 'success',
+              showCloseButton: true
+            });
+          });
+        }, () => {
+          new Messenger().post({
+            message: "The interaction could not be cancelled.",
+            type: 'error',
+            showCloseButton: true
+          });
+        })
+      });
+
+      this.set('requestPromise', requestPromise);
     }
   },
 
