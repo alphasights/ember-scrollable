@@ -15,6 +15,10 @@ export default Ember.Component.extend({
   isCancelling: false,
 
   actions: {
+    submit: function() {
+      this.sendAction('submit');
+    },
+
     toggleCancelling: function() {
       this.toggleProperty('isCancelling');
     },

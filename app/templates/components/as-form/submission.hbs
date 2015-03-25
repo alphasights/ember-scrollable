@@ -8,7 +8,7 @@
   </button>
 
 {{else}}
-  <button type="submit">{{label}}</button>
+  <button type="submit" {{action "submit"}}>{{label}}</button>
 
   {{#if showCancel}}
     <a {{action "toggleCancelling"}}>{{cancelLabel}}</a>

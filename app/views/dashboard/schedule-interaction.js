@@ -7,6 +7,10 @@ export default InteractionView.extend({
     cancel: function() {
       this.get('controller').send('cancel');
       this.send('close');
+    },
+
+    submit: function() {
+      this.get('controller').send('submit');	
     }
   }
 });

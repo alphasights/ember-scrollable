@@ -110,6 +110,10 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       });
 
       this.set('requestPromise', requestPromise);
+    },
+
+    submit: function() {
+
     }
   },
 
