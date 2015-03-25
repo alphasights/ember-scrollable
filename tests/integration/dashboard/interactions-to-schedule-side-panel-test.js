@@ -3,19 +3,10 @@ import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
-const interactionToSchedule = {
-  advisorName: 'Johnny Advisor',
-  projectName: 'Project Name',
-  requestedAt: '2015-02-18T10:00:00.000+00:00',
-  checklistItemCompletionStatus: true
-};
 
 QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
-
-    Timecop.install();
-    Timecop.freeze(moment('2015-02-18T10:30:00.000+00:00'));
 
     defineFixture('GET', '/interactions', { response: {
       "advisors": [
@@ -23,7 +14,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "id": 1,
           "avatar_url": null,
           "emails": ['advisor@email.com'],
-          "name": interactionToSchedule.advisorName,
+          "name": 'Johnny Advisor',
           "phone_numbers": ['+1 555-123-4567'],
           "job_title": 'Vice President',
           "company_name": 'Apple'
@@ -49,7 +40,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
         {
            "id": 32522,
            "status": "high",
-           "name": interactionToSchedule.projectName,
+           "name": 'Project Name',
            "client_code": "MCKU",
            "details_url": "/projects/32522",
            "index": 3,
@@ -66,7 +57,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "client_contact_id": 21387,
           "project_id": 32522,
           "checklist_item_ids": [],
-          "requested_at": interactionToSchedule.requestedAt,
+          "requested_at": '2015-02-18T10:00:00.000+00:00',
           "actioned": false
         }
       ],
@@ -89,7 +80,6 @@ QUnit.module("Interactions To Schedule Side Panel", {
 
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
-    Timecop.uninstall();
   }
 });
 
