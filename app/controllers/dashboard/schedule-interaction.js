@@ -93,10 +93,19 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           Ember.run.next(() => {
             this.store.pushPayload(response);
             this.send('hideSidePanel');
-            this.notify.success('The interaction has been cancelled.');
+
+            new Messenger().post({
+              message: "The interaction has been cancelled.",
+              type: 'success',
+              showCloseButton: true
+            });
           });
         }, () => {
-          this.notify.alert('The interaction could not be cancelled.');
+          new Messenger().post({
+            message: "The interaction could not be cancelled.",
+            type: 'error',
+            showCloseButton: true
+          });
         })
       });
 

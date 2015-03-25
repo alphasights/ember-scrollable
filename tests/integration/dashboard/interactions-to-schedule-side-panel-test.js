@@ -83,7 +83,6 @@ QUnit.module("Interactions To Schedule Side Panel", {
   }
 });
 
-
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { response: {
     "interactions": [
@@ -125,5 +124,8 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
     assert.equal(find('.interactions-to-schedule article').length, 0,
       'removes the interaction from the widget'
     );
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "The interaction has been cancelled.");
   });
 });
