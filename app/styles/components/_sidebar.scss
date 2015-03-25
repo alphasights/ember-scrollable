@@ -1,5 +1,5 @@
 .sidebar {
-  .user-session {
+  footer {
     padding: 0 $layout-sidebar-nav-padding;
     white-space: nowrap;
 
@@ -47,7 +47,7 @@
       }
     }
 
-    .user-session {
+    footer {
       .picture,
       .name {
         display: none;
