@@ -95,7 +95,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
             this.send('hideSidePanel');
             this.notify.success('The interaction has been cancelled.');
           });
-        }, _error => {
+        }, () => {
           this.notify.alert('The interaction could not be cancelled.');
         })
       });
