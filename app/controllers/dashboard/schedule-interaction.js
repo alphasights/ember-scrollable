@@ -125,10 +125,6 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   },
 
   validations: {
-    speakDialIn: {
-      presence: true,
-      numericality: true
-    },
     interactionType: {
       presence: true
     }
@@ -138,6 +134,15 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     { id: 'call', name: 'One-on-One Call' },
     { id: 'half_hour_call', name: 'Half-Hour Call' },
     { id: 'hosted_call', name: 'Hosted Call' }
-  ]
+  ],
 
+  speakDialInCountries: [
+    { id: 'HK', name: 'Hong Kong' },
+    { id: 'US', name: 'United States' },
+    { id: 'UK', name: 'United Kingdom' }
+  ],
+
+  yesNo: [
+    { id: true, name: 'Yes'}, { id: false, name: 'No' }
+  ]
 });

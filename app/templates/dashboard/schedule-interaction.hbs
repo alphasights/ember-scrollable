@@ -44,8 +44,12 @@
         {{as-form/select name="from" label="From"}}
         {{as-form/select name="to" label="To"}}
         {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
-        {{as-form/select name="speak" label="Use Speak?" prompt="Yes"}}
-        {{as-form/input name="speakDialIn" label="Speak Dial-in Number"}}
+        {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
+        {{#if model.speak}}
+          {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-in Number" content=speakDialInCountries}}
+        {{else}}
+          {{as-form/input name="dialInNumber" label="Additional Contact Details"}}
+        {{/if}}
       {{/as-form/fieldset}}
 
       {{as-form/submission
