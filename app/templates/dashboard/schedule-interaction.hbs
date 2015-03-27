@@ -41,8 +41,6 @@
     {{#as-form model=this}}
       {{#as-form/fieldset}}
         {{as-form/select name="date" label="Interaction Date"}}
-        {{as-form/select name="from" label="From"}}
-        {{as-form/select name="to" label="To"}}
         {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
         {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
         {{#if model.speak}}
