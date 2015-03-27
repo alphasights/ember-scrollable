@@ -5,6 +5,9 @@ test:
 dependencies:
   override:
     - ./bin/setup
+  cache_directories:
+    - "bower_components"
+    - "~/.rvm/gems/"
 
 deployment:
   staging:

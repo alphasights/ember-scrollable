@@ -2,8 +2,6 @@
 
 set -e
 
-npm install -g ember-cli
-npm install -g bower
 npm install
-bower install
+node_modules/.bin/bower install
 bundle install
