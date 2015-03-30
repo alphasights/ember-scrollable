@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   cancelConfirmationLabel: 'Confirm',
   cancelConfirmationMessage: 'Are you sure?',
   requestPromise: null,
-
   isCancelling: false,
 
   actions: {
