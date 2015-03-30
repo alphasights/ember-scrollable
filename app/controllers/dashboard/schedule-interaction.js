@@ -90,17 +90,15 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
           type: 'DELETE'
         }).then(response => {
-          Ember.run.next(() => {
-            this.store.pushPayload(response);
+          this.store.pushPayload(response);
 
-            new Messenger().post({
-              message: "The interaction has been cancelled.",
-              type: 'success',
-              showCloseButton: true
-            });
-
-            this.get('sidePanel').send('close');
+          new Messenger().post({
+            message: "The interaction has been cancelled.",
+            type: 'success',
+            showCloseButton: true
           });
+
+          this.get('sidePanel').send('close');
         }, () => {
           new Messenger().post({
             message: "The interaction could not be cancelled.",

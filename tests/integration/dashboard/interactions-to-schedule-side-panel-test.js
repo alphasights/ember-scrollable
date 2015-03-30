@@ -91,7 +91,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
     "interaction": {
       "interaction_type": "half_hour_call",
       "speak": true,
-      "dial_in_number": "123456789",      
+      "dial_in_number": "123456789",
       "scheduled_call_time": "Monday"
 
       // The following params are also accepted in the API. However, I'm not sure if we need
@@ -191,10 +191,6 @@ test("Cancel Interaction Failure", function(assert) {
   click('button.confirm-cancel');
 
   andThen(function() {
-    assert.equal(currentURL(), '/dashboard',
-      'returns the user to dashboard after cancelling'
-    );
-
     assert.equal(find('.interactions-to-schedule article').length, 1,
       'does not remove the interaction from the widget'
     );
