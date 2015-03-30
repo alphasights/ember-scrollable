@@ -1,5 +1,3 @@
-import SidePanelRoute from 'phoenix/routes/side-panel';
+import SidePanelRouteMixin from 'phoenix/mixins/side-panel-route';
 
-export default SidePanelRoute.extend({
-  sidePanelActionsTemplateName: 'side-panel/navigation-actions'
-});
+export default Ember.Route.extend(SidePanelRouteMixin);

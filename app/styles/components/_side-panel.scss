@@ -114,4 +114,14 @@ $side-panel-xlarge-screen-size: 120em;
       }
     }
   }
+
+  .navigation-actions {
+    .previous {
+      @include button-icon(angle-left);
+    }
+
+    .next {
+      @include button-icon(angle-right);
+    }
+  }
 }

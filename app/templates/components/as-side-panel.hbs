@@ -1,11 +1,14 @@
 <div>
   <div class="actions">
     <div class="content">
-      {{outlet "actions"}}
+      <ul class="navigation-actions">
+        <li><button class="previous" {{action "previous"}}></button></li>
+        <li><button class="next" {{action "next"}}></button></li>
+      </ul>
     </div>
 
     <div class="close">
-      <button {{action "close" target=view}}></button>
+      <button {{action "close"}}></button>
     </div>
   </div>
 

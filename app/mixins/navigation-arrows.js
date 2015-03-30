@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   keyEvents: {
     leftArrow: function() {
-      this.get('controller').send('previous');
+      this.sendAction('previous');
     },
 
     rightArrow: function() {
-      this.get('controller').send('next');
+      this.sendAction('next');
     }
   }
 });

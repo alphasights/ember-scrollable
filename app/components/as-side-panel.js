@@ -43,12 +43,28 @@ export default Ember.Component.extend(KeyEventsMixin, NavigationArrowsMixin, {
           this.sendAction('close');
         })
       });
+    },
+
+    next: function() {
+      this.sendAction('next');
+    },
+
+    previous: function() {
+      this.sendAction('previous');
     }
   },
 
   keyEvents: {
     esc: function() {
       this.send('close');
+    },
+
+    leftArrow: function() {
+      this.send('previous');
+    },
+
+    rightArrow: function() {
+      this.send('next');
     }
   }
 });
