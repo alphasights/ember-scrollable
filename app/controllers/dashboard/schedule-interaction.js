@@ -9,7 +9,7 @@ import { request } from 'ic-ajax';
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
   duration: moment.duration(60, 'minute'),
-  scheduledCallTime: Ember.computed.oneWay('interaction.scheduledCallTime'),
+  scheduledCallTime: Ember.computed.alias('interaction.scheduledCallTime'),
   title: 'Scheduled Call',
 
   time: function(key, value) {
@@ -115,10 +115,21 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       var advisorName = this.get('advisor.name');
       var clientName = this.get('clientContact.name');
 
-      new Messenger().post({
-        message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
-        type: 'success',
-        showCloseButton: true
+      this.get('model').setProperties({
+        scheduledCallTime: this.get('scheduledCallTime'),
+        interactionType: 'call'
+      }).save().then(function() {
+        new Messenger().post({
+          message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
+          type: 'success',
+          showCloseButton: true
+        });
+      }, function() {
+        new Messenger().post({
+          message: `There has been an error scheduling the interaction.`,
+          type: 'error',
+          showCloseButton: true
+        });
       });
     }
   },

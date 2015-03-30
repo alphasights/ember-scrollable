@@ -11,6 +11,7 @@ export default DS.Model.extend({
   requestedAt: DS.attr('date'),
   scheduledCallTime: DS.attr('date'),
   speak: DS.attr('boolean'),
+  interactionType: DS.attr('string'),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
