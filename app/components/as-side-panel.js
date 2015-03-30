@@ -1,9 +1,9 @@
 import Ember from 'ember';
 import KeyEventsMixin from 'phoenix/mixins/key-events';
+import NavigationArrowsMixin from 'phoenix/mixins/navigation-arrows';
 
-export default Ember.View.extend(KeyEventsMixin, {
+export default Ember.Component.extend(KeyEventsMixin, NavigationArrowsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
-  layoutName: 'side-panel',
   tagName: 'article',
 
   initialWidth: null,
@@ -40,7 +40,7 @@ export default Ember.View.extend(KeyEventsMixin, {
         duration: 200,
 
         complete: (() => {
-          this.get('controller').send('hideSidePanel');
+          this.sendAction('close');
         })
       });
     }
