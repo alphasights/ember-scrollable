@@ -19,18 +19,6 @@
   </ul>
 </section>
 
-<section class="checklist-items">
-  <header>
-    {{as-checklist-status items=checklistItems}}
-  </header>
-
-  <ul>
-    {{#each checklistItem in checklistItems}}
-      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
-    {{/each}}
-  </ul>
-</section>
-
 <section class="scheduling">
   {{as-calendar
     selection=occurrence
