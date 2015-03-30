@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import KeyEventsMixin from 'phoenix/mixins/key-events';
-import NavigationArrowsMixin from 'phoenix/mixins/navigation-arrows';
 
-export default Ember.Component.extend(KeyEventsMixin, NavigationArrowsMixin, {
+export default Ember.Component.extend(KeyEventsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
   tagName: 'article',
 
