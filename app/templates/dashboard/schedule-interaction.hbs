@@ -1,50 +1,52 @@
-<header>
-  <div class="content">
-    <h1>
-      <span>{{advisor.name}}</span>
+{{#as-side-panel class="interaction schedule-interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
+  <header>
+    <div class="content">
+      <h1>
+        <span>{{advisor.name}}</span>
 
-      <small>
-        <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
-          {{project.name}}
-        </a>
-      </small>
-    </h1>
-  </div>
-</header>
+        <small>
+          <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+            {{project.name}}
+          </a>
+        </small>
+      </h1>
+    </div>
+  </header>
 
-<section class="profiles">
-  <ul>
-    <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
-    <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
-  </ul>
-</section>
-
-<section class="scheduling">
-  {{as-calendar
-    selection=occurrence
-    timeZoneOptions=timeZoneOptions
-    occurrences=unavailabilities}}
-
-  <section class="form">
-    {{#as-form model=this}}
-      {{#as-form/fieldset}}
-        {{as-form/select name="date" label="Interaction Date"}}
-        {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
-        {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
-        {{#if model.speak}}
-          {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-in Number" content=speakDialInCountries}}
-        {{else}}
-          {{as-form/input name="dialInNumber" label="Additional Contact Details"}}
-        {{/if}}
-      {{/as-form/fieldset}}
-
-      {{as-form/submission
-        label="Schedule Interaction"
-        cancel="cancel"
-        submit="submit"
-        targetObject=view
-        cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"
-        requestPromise=requestPromise}}
-    {{/as-form}}
+  <section class="profiles">
+    <ul>
+      <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
+      <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+    </ul>
   </section>
-</section>
+
+  <section class="scheduling">
+    {{as-calendar
+      selection=occurrence
+      timeZoneOptions=timeZoneOptions
+      occurrences=unavailabilities}}
+
+    <section class="form">
+      {{#as-form model=this}}
+        {{#as-form/fieldset}}
+          {{as-form/select name="date" label="Interaction Date"}}
+          {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
+          {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
+          {{#if model.speak}}
+            {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-in Number" content=speakDialInCountries}}
+          {{else}}
+            {{as-form/input name="dialInNumber" label="Additional Contact Details"}}
+          {{/if}}
+        {{/as-form/fieldset}}
+
+        {{as-form/submission
+          label="Schedule Interaction"
+          cancel="cancel"
+          submit="submit"
+          targetObject=view
+          cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"
+          requestPromise=requestPromise}}
+      {{/as-form}}
+    </section>
+  </section>
+{{/as-side-panel}}

@@ -1,3 +1,18 @@
 <div>
-  {{yield}}
+  <div class="actions">
+    <div class="content">
+      <ul class="navigation-actions">
+        <li><button class="previous" {{action "previous"}}></button></li>
+        <li><button class="next" {{action "next"}}></button></li>
+      </ul>
+    </div>
+
+    <div class="close">
+      <button {{action "close"}}></button>
+    </div>
+  </div>
+
+  <div class="content">
+    {{yield}}
+  </div>
 </div>

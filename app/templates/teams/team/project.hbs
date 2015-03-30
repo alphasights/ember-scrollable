@@ -1,60 +1,62 @@
-{{as-progress-bar ratio=progress}}
+{{#as-side-panel class="project" close="hideSidePanel" previous="previous" next="next"}}
+  {{as-progress-bar ratio=progress}}
 
-<header>
-  <div class="content">
-    <div class="info">
-      {{as-priority-select project=model}}
+  <header>
+    <div class="content">
+      <div class="info">
+        {{as-priority-select project=model}}
 
-      <h1>
-        <span>{{name}}</span>
-        <small>{{clientCode}}</small>
+        <h1>
+          <span>{{name}}</span>
+          <small>{{clientCode}}</small>
 
-        <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
-          <i></i>
-        </a>
-      </h1>
+          <a class="pistachio-link" {{bind-attr href=pistachioUrl}} target="_blank">
+            <i></i>
+          </a>
+        </h1>
+      </div>
+
+      <div class="lead">
+        {{as-avatar person=lead}}
+      </div>
     </div>
 
-    <div class="lead">
-      {{as-avatar person=lead}}
-    </div>
-  </div>
+    <div class="stats">
+      <ul>
+        <li>
+          <span class="count">{{deliveredAdvisorsCount}}</span>
+          <span class="name">Delivered</span>
+        </li>
 
-  <div class="stats">
+        <li>
+          <span class="count">{{scheduledInteractionsCount}}</span>
+          <span class="name">Upcoming</span>
+        </li>
+
+        <li>
+          <span class="count">{{notScheduledInteractionsCount}}</span>
+          <span class="name">To Schedule</span>
+        </li>
+
+        <li>
+          <span class="count">{{deliveryTarget}}</span>
+          <span class="name">Target</span>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="angles">
     <ul>
-      <li>
-        <span class="count">{{deliveredAdvisorsCount}}</span>
-        <span class="name">Delivered</span>
-      </li>
+      {{#each angle in angles}}
+        <li>
+          <article>
+            <div class="title">{{angle.title}}</div>
 
-      <li>
-        <span class="count">{{scheduledInteractionsCount}}</span>
-        <span class="name">Upcoming</span>
-      </li>
-
-      <li>
-        <span class="count">{{notScheduledInteractionsCount}}</span>
-        <span class="name">To Schedule</span>
-      </li>
-
-      <li>
-        <span class="count">{{deliveryTarget}}</span>
-        <span class="name">Target</span>
-      </li>
+            {{render "teams.team.angle-memberships" angle tagName="section"}}
+          </article>
+        </li>
+      {{/each}}
     </ul>
-  </div>
-</header>
-
-<section class="angles">
-  <ul>
-    {{#each angle in angles}}
-      <li>
-        <article>
-          <div class="title">{{angle.title}}</div>
-
-          {{render "teams.team.angle-memberships" angle tagName="section"}}
-        </article>
-      </li>
-    {{/each}}
-  </ul>
-</section>
+  </section>
+{{/as-side-panel}}

@@ -99,6 +99,8 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
               type: 'success',
               showCloseButton: true
             });
+
+            this.get('sidePanel').send('close');
           });
         }, () => {
           new Messenger().post({

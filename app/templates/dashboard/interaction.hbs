@@ -1,56 +1,58 @@
-<header>
-  <div class="date-time">
-    <span class="date">{{moment scheduledCallTime "D MMMM"}}</span>
-    <span class="time">{{moment scheduledCallTime "h:mm A"}}</span>
-  </div>
-
-  <div class="content">
-    <h1>
-      <span>{{advisor.name}}</span>
-
-      <small>
-        <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
-          {{project.name}}
-        </a>
-      </small>
-    </h1>
-
-    <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
-  </div>
-</header>
-
-<section class="profiles">
-  <ul>
-    {{#each profile in profiles}}
-      <li>
-        {{#as-profile
-          person=profile.person
-          title=profile.title
-          class=profile.class}}
-          {{#if profile.person.timeZone}}
-            <div class="call-time">
-              {{#tool-tipster title="Local Call Time"}}
-                <i></i>
-                <span>{{local-moment scheduledCallTime profile.person.timeZone "h:mm A z"}}</span>
-              {{/tool-tipster}}
-            </div>
-          {{/if}}
-        {{/as-profile}}
-      </li>
-    {{/each}}
-  </ul>
-</section>
-
-<section class="checklist-items">
+{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
   <header>
-    {{as-checklist-status items=checklistItems}}
+    <div class="date-time">
+      <span class="date">{{moment scheduledCallTime "D MMMM"}}</span>
+      <span class="time">{{moment scheduledCallTime "h:mm A"}}</span>
+    </div>
 
-    <a target="_blank" {{bind-attr href=checklistUrl}}>Show checklist</a>
+    <div class="content">
+      <h1>
+        <span>{{advisor.name}}</span>
+
+        <small>
+          <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+            {{project.name}}
+          </a>
+        </small>
+      </h1>
+
+      <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
+    </div>
   </header>
 
-  <ul>
-    {{#each checklistItem in checklistItems}}
-      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
-    {{/each}}
-  </ul>
-</section>
+  <section class="profiles">
+    <ul>
+      {{#each profile in profiles}}
+        <li>
+          {{#as-profile
+            person=profile.person
+            title=profile.title
+            class=profile.class}}
+            {{#if profile.person.timeZone}}
+              <div class="call-time">
+                {{#tool-tipster title="Local Call Time"}}
+                  <i></i>
+                  <span>{{local-moment scheduledCallTime profile.person.timeZone "h:mm A z"}}</span>
+                {{/tool-tipster}}
+              </div>
+            {{/if}}
+          {{/as-profile}}
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+
+  <section class="checklist-items">
+    <header>
+      {{as-checklist-status items=checklistItems}}
+
+      <a target="_blank" {{bind-attr href=checklistUrl}}>Show checklist</a>
+    </header>
+
+    <ul>
+      {{#each checklistItem in checklistItems}}
+        <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
+      {{/each}}
+    </ul>
+  </section>
+{{/as-side-panel}}
