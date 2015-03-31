@@ -87,36 +87,27 @@ QUnit.module("Interactions To Schedule Side Panel", {
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
-  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { params: {
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
-      "interaction_type": "half_hour_call",
-      "speak": true,
-      "dial_in_number": "123456789",
-      "scheduled_call_time": "Monday"
-
-      // The following params are also accepted in the API. However, I'm not sure if we need
-      // to be changing them in phoenix as part of this request.
-      // "advisor_time_zone": "Central Time (US & Canada)",
-      // "client_time_zone": "Eastern Time (US & Canada)",
-      // "advisor_phone_country_code": "",
-      // "advisor_phone_number": "",
-      // "client_access_number_country": "US",
-      // "primary_contact_id": @analyst_1.id
+      "actioned": false,
+      "advisor_id": "1",
+      "client_access_number_country": null,
+      "client_contact_id": "21387",
+      "dial_in_number": null,
+      "interaction_type": "call",
+      "project_id": "32522",
+      "requested_at": "2015-02-18T10:00:00.000Z",
+      "scheduled_call_time": "2015-03-30T07:00:00.000Z",
+      "speak": false
     }
   }});
 
   visit('/dashboard');
   click('.interactions-to-schedule article:first');
 
-
-
   // Select time slot from calendar
-  var monday7am = find("ul.days > li:nth-child(2) .times li:nth-child(1) article");
-  click(monday7am);
-
-  // Select interaction type
-
-  // Fill in dial number
+  // Monday 7 AM
+  click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Submit form
   click('.form-submission button');

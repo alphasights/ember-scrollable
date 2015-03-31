@@ -3,6 +3,15 @@ import Ember from 'ember';
 var Fixtures = Ember.Object.extend({
   init: function() {
     this.server = new Pretender();
+
+    this.server.unhandledRequest = function(verb, path, request) {
+      console.log('------------');
+      console.log('The following request was not handled');
+      console.log(`${verb}, ${path}`);
+      console.log(request);
+      console.log('------------');
+    };
+
     this.handlers = {};
   },
 
