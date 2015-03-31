@@ -1,34 +1,36 @@
-<header>
-  <div class="content">
-    <h1>
-      <span>{{advisor.name}}</span>
-
-      <small>
-        <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
-          {{project.name}}
-        </a>
-      </small>
-    </h1>
-  </div>
-</header>
-
-<section class="profiles">
-  <ul>
-    <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
-    <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
-  </ul>
-</section>
-
-<section class="checklist-items">
+{{#as-side-panel class="interaction schedule-interaction" close="hideSidePanel" previous="previous" next="next"}}
   <header>
-    {{as-checklist-status items=checklistItems}}
+    <div class="content">
+      <h1>
+        <span>{{advisor.name}}</span>
 
-    <a target="_blank" {{bind-attr href=schedulingUrl}}>Schedule</a>
+        <small>
+          <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+            {{project.name}}
+          </a>
+        </small>
+      </h1>
+    </div>
   </header>
 
-  <ul>
-    {{#each checklistItem in checklistItems}}
-      <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
-    {{/each}}
-  </ul>
-</section>
+  <section class="profiles">
+    <ul>
+      <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
+      <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+    </ul>
+  </section>
+
+  <section class="checklist-items">
+    <header>
+      {{as-checklist-status items=checklistItems}}
+
+      <a target="_blank" {{bind-attr href=schedulingUrl}}>Schedule</a>
+    </header>
+
+    <ul>
+      {{#each checklistItem in checklistItems}}
+        <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
+      {{/each}}
+    </ul>
+  </section>
+{{/as-side-panel}}

@@ -1,6 +1,4 @@
-import SidePanelRoute from 'phoenix/routes/side-panel';
+import Ember from 'ember';
+import SidePanelRouteMixin from 'phoenix/mixins/side-panel-route';
 
-export default SidePanelRoute.extend({
-  viewName: 'teams.team.project',
-  sidePanelActionsTemplateName: 'side-panel/navigation-actions'
-});
+export default Ember.Route.extend(SidePanelRouteMixin);
