@@ -1,4 +1,6 @@
-$interaction-header-title-height: rem-calc(120);
+$side-panel-actions-height: side-panel-settings(actions-bar, height);
+
+$interaction-header-title-height: $side-panel-actions-height * 2;
 $interaction-checklist-header-height: $column-gutter + $h5-font-size;
 $interaction-checklist-dot-size: 8px;
 
