@@ -60,7 +60,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     return this.get('unavailabilities').map(function(unavailability) {
       return UnavailabilityOccurrence.create({ unavailability: unavailability});
     });
-  }.property('unavailability.@each.{startsAt,endsAt}'),
+  }.property('unavailabilities.[]'),
 
   occurrence: function() {
     return InteractionOccurrence.create({ interaction: this });
