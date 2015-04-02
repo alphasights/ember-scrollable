@@ -39,19 +39,15 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
 
-  unavailabilities: [
-    Occurrence.create({
-      type: 'alpha-call',
-      time: moment().startOf('week').add(10, 'hour'),
-      duration: moment.duration(5, 'hour')
-    }),
-
-    Occurrence.create({
-      type: 'alpha-call',
-      time: moment().startOf('week').add(8, 'hour').add(3, 'day'),
-      duration: moment.duration(2, 'hour')
-    })
-  ],
+  occurrences: function() {
+    return this.get('unavailabilities').map(function(unavailability) {
+      return Occurrence.create({
+        type: 'alpha-call',
+        time: moment(unavailability.get('startsAt')),
+        endingTime: moment(unavailability.get('endsAt'))
+      })
+    });
+  }.property('unavailabilities.@each.{startsAt,endsAt}'),
 
   occurrence: function() {
     return InteractionOccurrence.create({ interaction: this });

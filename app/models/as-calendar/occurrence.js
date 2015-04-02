@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Object.extend({
-  duration: moment.duration(),
   title: null,
   time: null,
+  endingTime: null,
 
-  endingTime: function() {
-    return moment(this.get('time')).add(this.get('duration'));
-  }.property('time', 'duration')
+  duration: function() {
+    return moment.duration(moment(this.get('endingTime')).diff(this.get('time')));
+  }.property('time', 'endingTime')
 });
