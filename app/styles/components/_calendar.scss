@@ -33,7 +33,8 @@
     padding: 0 !important;
 
     .time-zone > div,
-    .days > ul > li {
+    .days > ul > li,
+    .navigation > div {
       padding: $column-gutter / 4;
     }
 
@@ -46,10 +47,46 @@
     }
 
     .days {
-      @extend %grid-column-11;
+      @extend %grid-column-10;
 
       > ul {
         @extend %grid-row;
+      }
+    }
+
+    .navigation {
+      @extend %grid-column-1;
+
+      a {
+        display: inline-block;
+        width: rem-calc(20);
+        vertical-align: middle;
+        color: $small-font-color;
+      }
+
+      .previous-week {
+        @include icon('caret-left');
+      }
+
+      .current-week {
+        border-radius: $global-rounded;
+        background-color: $small-font-color;
+        width: rem-calc(10);
+        height: rem-calc(10);
+        transition: opacity .25s ease-in-out;
+
+        &.selected {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+
+      .next-week {
+        @include icon('caret-right');
+      }
+
+      a:before {
+        font-size: $h3-font-size;
       }
     }
   }
@@ -71,11 +108,11 @@
     }
 
     .days {
-      @extend %grid-column-11;
+      @extend %grid-column-10;
 
       .times > li {
         &:first-child .calendar-time {
-          border-top: 0;
+          border-top-width: 0;
         }
 
         &:nth-child(even) .calendar-time {
@@ -85,9 +122,15 @@
 
       .calendar-time {
         border: 1px solid $global-section-border-color;
-        border-bottom: 0;
-        border-right: 0;
+        border-bottom-width: 0;
+        border-right-width: 0;
         border-top-color: darken($global-section-border-color, 2%);
+      }
+
+      > li:last-child {
+        .calendar-time {
+          border-right-width: 1px;
+        }
       }
     }
   }

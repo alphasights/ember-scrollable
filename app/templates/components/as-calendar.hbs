@@ -30,18 +30,36 @@
       {{/each}}
     </ul>
   </div>
+
+  <div class="navigation">
+    <div>
+      {{#tool-tipster
+        title="Previous Week"
+        position="bottom"
+        tagName="span"}}
+        <a class="previous-week" {{action "navigateWeek" -1}}></a>
+      {{/tool-tipster}}
+
+      {{#tool-tipster
+        title="Current Week"
+        position="bottom"
+        tagName="span"}}
+        <a {{action "goToCurrentWeek"}}
+           {{bind-attr class=":current-week isShowingCurrentWeek:selected"}}></a>
+      {{/tool-tipster}}
+
+      {{#tool-tipster
+        title="Next Week"
+        position="bottom"
+        tagName="span"}}
+        <a class="next-week" {{action "navigateWeek" 1}}></a>
+      {{/tool-tipster}}
+    </div>
+  </div>
 </header>
 
 <div>
-  <ul class="time-slots" {{bind-attr style=timeSlotsHeaderStyle}}>
-    {{#each timeSlot in headerTimeSlots}}
-      <li {{bind-attr style=headerTimeSlotStyle}}>
-        {{#liquid-with timeSlot.localValue as localValue use="toDown"}}
-          {{moment localValue "h A"}}
-        {{/liquid-with}}
-      </li>
-    {{/each}}
-  </ul>
+  {{partial "components/as-calendar/time-slots"}}
 
   <ul class="days">
     {{#each day in days}}
@@ -56,4 +74,6 @@
       </li>
     {{/each}}
   </ul>
+
+  {{partial "components/as-calendar/time-slots"}}
 </div>
