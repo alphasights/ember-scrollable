@@ -31,6 +31,23 @@ var InteractionOccurrence = Occurrence.extend({
   }.property('scheduledCallTime')
 });
 
+var UnavailabilityOccurrence = Occurrence.extend({
+  unavailability: null,
+  title: 'alpha-call',
+
+  time: function() {
+    return moment(this.get('unavailability.startsAt'));
+  }.property('unavailability.startsAt'),
+
+  endingTime: function() {
+    return moment(this.get('unavailability.endsAt'));
+  }.property('unavailability.endsAt'),
+
+  duration: function() {
+    return moment.duration(moment(this.get('unavailability.endingTime')).diff(this.get('unavailability.time')));
+  }.property('unavailability.time', 'unavailability.endingTime')
+});
+
 export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
@@ -38,6 +55,12 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
+
+  unavailabilityOccurrences: function() {
+    return this.get('unavailabilities').map(function(unavailability) {
+      return UnavailabilityOccurrence.create({ unavailability: unavailability});
+    });
+  }.property('unavailability.@each.{startsAt,endsAt}'),
 
   occurrence: function() {
     return InteractionOccurrence.create({ interaction: this });
