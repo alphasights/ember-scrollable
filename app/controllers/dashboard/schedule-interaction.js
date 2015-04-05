@@ -44,8 +44,8 @@ var UnavailabilityOccurrence = Occurrence.extend({
   }.property('unavailability.endsAt'),
 
   duration: function() {
-    return moment.duration(moment(this.get('unavailability.endingTime')).diff(this.get('unavailability.time')));
-  }.property('unavailability.time', 'unavailability.endingTime')
+    return moment.duration(this.get('unavailability.endingTime').diff(this.get('unavailability.time')));
+  }.property('unavailability.startsAt', 'unavailability.endsAt')
 });
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
@@ -56,11 +56,19 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
 
-  unavailabilityOccurrences: function() {
-    return this.get('unavailabilities').map(function(unavailability) {
-      return UnavailabilityOccurrence.create({ unavailability: unavailability});
+  visibleUnavailabilities: function() {
+    return this.get('unavailabilities').filter((unavailability) => {
+      return unavailability.get('advisorId') === this.get('advisorId') &&
+             unavailability.get('projectId') === this.get('projectId') &&
+             unavailability.get('startsAt') === this.get('scheduledCallTime');
     });
-  }.property('unavailabilities.[]'),
+  }.property('unavailabilities.@each.{advisorId,projectId,startsAt}', 'advisorId', 'projectId', 'scheduledCallTime'),
+
+  unavailabilityOccurrences: function() {
+    return this.get('visibleUnavailabilities').map(function(unavailability) {
+      return UnavailabilityOccurrence.create({ unavailability: unavailability });
+    });
+  }.property('visibleUnavailabilities.[]'),
 
   occurrence: function() {
     return InteractionOccurrence.create({ interaction: this });
