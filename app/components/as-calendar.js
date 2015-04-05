@@ -40,11 +40,12 @@ var Day = Time.extend({
   }.property('startingDate', 'offset')
 });
 
+var startOfCurrentWeek = moment().startOf('week');
+
 export default Ember.Component.extend({
   tagName: 'section',
   classNameBindings: [':calendar'],
 
-  startingDate: moment().startOf('week'),
   numberOfDays: 7,
   timeSlotsRange: [moment.duration('7:00'), moment.duration('21:30')],
   timeSlotDuration: moment.duration(30, 'minute'),
@@ -53,6 +54,11 @@ export default Ember.Component.extend({
   timeZoneOptions: [],
   timeZone: null,
   selection: null,
+  startingDate: startOfCurrentWeek,
+
+  isShowingCurrentWeek: function() {
+    return moment(this.get('startingDate')).startOf('week').isSame(startOfCurrentWeek);
+  }.property('startingDate'),
 
   selectedTimeZoneOption: function() {
     return this.get('allTimeZoneOptions').findBy('value', this.get('timeZone'));
@@ -116,5 +122,15 @@ export default Ember.Component.extend({
 
   headerTimeSlotStyle: function() {
     return `height: ${2 * this.get('timeSlotHeight')}px;`;
-  }.property('timeSlotHeight')
+  }.property('timeSlotHeight'),
+
+  actions: {
+    navigateWeek: function(index) {
+      this.set('startingDate', moment(this.get('startingDate')).add(index, 'week'));
+    },
+
+    goToCurrentWeek: function() {
+      this.set('startingDate', startOfCurrentWeek);
+    }
+  }
 });
