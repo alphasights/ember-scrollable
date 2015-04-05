@@ -33,7 +33,8 @@ var InteractionOccurrence = Occurrence.extend({
 
 var UnavailabilityOccurrence = Occurrence.extend({
   unavailability: null,
-  title: 'alpha-call',
+  title: 'AlphaCall',
+  type: 'alpha-call',
 
   time: function() {
     return moment(this.get('unavailability.startsAt'));
