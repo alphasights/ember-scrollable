@@ -12,11 +12,11 @@ export default Ember.Component.extend({
 
   title: function() {
     return this.get(`result.${this.get('resultProperties.titlePath')}`);
-  }.property('resultProperties'),
+  }.property('result', 'resultProperties'),
 
   details: function() {
     return this.get(`result.${this.get('resultProperties.detailsPath')}`);
-  }.property('resultProperties'),
+  }.property('result', 'resultProperties'),
 
   path: function() {
     return this.get('resultProperties.path');
