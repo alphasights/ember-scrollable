@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 
   type: Ember.computed.oneWay('result.type'),
   id: Ember.computed.oneWay('result.id'),
+  path: Ember.computed.oneWay('resultProperties.path'),
 
   url: function() {
     return `${EmberENV.pistachioUrl}/${this.get('id')}/${this.get('path')}`;
@@ -17,10 +18,6 @@ export default Ember.Component.extend({
   details: function() {
     return this.get(`result.${this.get('resultProperties.detailsPath')}`);
   }.property('result', 'resultProperties'),
-
-  path: function() {
-    return this.get('resultProperties.path');
-  }.property('resultProperties'),
 
   resultProperties: function() {
     return this.typeProperties[this.get('type')];
