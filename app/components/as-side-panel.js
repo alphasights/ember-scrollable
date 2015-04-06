@@ -1,9 +1,8 @@
 import Ember from 'ember';
 import KeyEventsMixin from 'phoenix/mixins/key-events';
 
-export default Ember.View.extend(KeyEventsMixin, {
+export default Ember.Component.extend(KeyEventsMixin, {
   classNameBindings: [':side-panel', 'isActive:active'],
-  layoutName: 'side-panel',
   tagName: 'article',
 
   initialWidth: null,
@@ -20,14 +19,14 @@ export default Ember.View.extend(KeyEventsMixin, {
 
     // TODO: Figure out why using the Ember `click` instance method resulted in
     // the event handler to be called twice.
-    this.$().on('click', function(event) {
+    this.$().on('click', (event) => {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = this.$('> div');
 
       if($target.closest($nonBlurringElements).length === 0) {
         this.send('close');
       }
-    }.bind(this));
+    });
   }.on('didInsertElement'),
 
   actions: {
@@ -40,15 +39,31 @@ export default Ember.View.extend(KeyEventsMixin, {
         duration: 200,
 
         complete: (() => {
-          this.get('controller').send('hideSidePanel');
+          this.sendAction('close');
         })
       });
+    },
+
+    next: function() {
+      this.sendAction('next');
+    },
+
+    previous: function() {
+      this.sendAction('previous');
     }
   },
 
   keyEvents: {
     esc: function() {
       this.send('close');
+    },
+
+    leftArrow: function() {
+      this.send('previous');
+    },
+
+    rightArrow: function() {
+      this.send('next');
     }
   }
 });
