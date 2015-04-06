@@ -37,7 +37,7 @@
             <ul>
               {{#each result in section.results}}
                 <li>
-                  {{render "quick-jump.result" result tagName="article"}}
+                  {{as-quick-jump-result result=result tagName="article"}}
                 </li>
               {{/each}}
             </ul>
