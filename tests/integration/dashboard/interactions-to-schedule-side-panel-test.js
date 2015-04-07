@@ -79,6 +79,25 @@ QUnit.module("Interactions To Schedule Side Panel", {
         "monthly_target": 0
       }
     }});
+
+    defineFixture('GET', '/interaction_types', { response: {
+      "interaction_types": {
+        "interaction_types": {
+          "call": "One-on-one Call",
+          "hosted_call": 'Hosted Call',
+          "summarised_call": 'Interaction Summary'
+        },
+        "classifications": {
+          "hosted": [
+            "hosted_call",
+            "summarised_call"
+          ],
+          "duration_based": [
+            "call"
+          ]
+        }
+      }
+    }});
   },
 
   afterEach: function() {
@@ -108,6 +127,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
   // Select time slot from calendar
   // Monday 7 AM
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
+
+  // Set the interaction type
+  fillIn('.ember-select:first', 'One-on-one Call');
 
   // Submit form
   click('.form-submission button');
