@@ -175,7 +175,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     });
 
     return _.flatten(types);
-  }.property('interactionTypesResponse'),
+  }.property('interactionTypes', 'interactionClassifications'),
 
   speakDialInCountries: [
     { id: 'HK', name: 'Hong Kong' },
