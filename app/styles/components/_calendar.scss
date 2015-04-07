@@ -58,10 +58,10 @@
       @extend %grid-column-1;
 
       a {
-        display: inline-block;
-        width: rem-calc(20);
-        vertical-align: middle;
         color: $small-font-color;
+        display: inline-block;
+        vertical-align: middle;
+        width: rem-calc(20);
       }
 
       .previous-week {
@@ -69,11 +69,11 @@
       }
 
       .current-week {
-        border-radius: $global-rounded;
         background-color: $small-font-color;
-        width: rem-calc(10);
+        border-radius: $global-rounded;
         height: rem-calc(10);
         transition: opacity .25s ease-in-out;
+        width: rem-calc(10);
 
         &.selected {
           opacity: 0;
