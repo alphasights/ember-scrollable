@@ -30,7 +30,14 @@
       {{#as-form model=this}}
         {{#as-form/fieldset}}
           {{as-form/select name="date" label="Interaction Date"}}
-          {{as-form/select name="interactionType" label="Interaction Type" content=interactionTypes}}
+          {{as-form/select
+            name="interactionType"
+            label="Interaction Type"
+            contentBinding="interactionTypesContent"
+            optionLabelPath="content.title"
+            optionValuePath="content.id"
+            optionGroupPath="classification"
+          }}
           {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
           {{#if model.speak}}
             {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-in Number" content=speakDialInCountries}}

@@ -158,11 +158,24 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     }
   },
 
-  interactionTypes: [
-    { id: 'call', name: 'One-on-One Call' },
-    { id: 'half_hour_call', name: 'Half-Hour Call' },
-    { id: 'hosted_call', name: 'Hosted Call' }
-  ],
+  interactionTypesContent: function() {
+    var classifications = this.get('interactionClassifications');
+    var interactionTypes = this.get('interactionTypes');
+
+    var types = _.map(classifications, function(typeIds, classification) {
+      return _.map(typeIds, function(typeId) {
+        return {
+          id: typeId,
+          name: interactionTypes[typeId],
+          classification: _.map(classification.split('_'), function(word){
+            return word.capitalize();
+          }).join(' ')
+        };
+      });
+    });
+
+    return _.flatten(types);
+  }.property('interactionTypesResponse'),
 
   speakDialInCountries: [
     { id: 'HK', name: 'Hong Kong' },
