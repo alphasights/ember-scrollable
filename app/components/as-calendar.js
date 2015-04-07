@@ -66,10 +66,10 @@ export default Ember.Component.extend({
   },
 
   initializeStartingDate: function() {
-    var selection = this.get('selection');
+    var selectionTime = this.get('selection.time');
 
-    if (selection != null) {
-      this.set('startingDate', moment(selection.get('time')).startOf('week'));
+    if (selectionTime != null) {
+      this.set('startingDate', moment(selectionTime).startOf('week'));
     } else {
       this.set('startingDate', startOfCurrentWeek);
     }
