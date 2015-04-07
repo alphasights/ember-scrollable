@@ -7,7 +7,7 @@ var Fixtures = Ember.Object.extend({
     this.server.unhandledRequest = function(verb, path, request) {
       console.log('------------');
       console.log('The following request was not handled');
-      console.log(`${verb}, ${path}`);
+      console.log(`${verb} ${path}`);
       console.log(request);
       console.log('------------');
     };
