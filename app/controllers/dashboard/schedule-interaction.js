@@ -164,13 +164,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     { id: 'hosted_call', name: 'Hosted Call' }
   ],
 
-  speakDialInCountries: [
-    { id: 'HK', name: 'Hong Kong' },
-    { id: 'US', name: 'United States' },
-    { id: 'UK', name: 'United Kingdom' }
-  ],
+  speakDialIns: function() {
+    var dialInCountries = this.get('speakDialInCountries');
 
-  yesNo: [
-    { id: true, name: 'Yes'}, { id: false, name: 'No' }
-  ]
+    var dialInOptions = _.map(dialInCountries, function(country, countryCode) {
+      return { id: countryCode, name: country };
+    });
+
+    dialInOptions.unshift({ id: false, name: 'Do Not Use Speak' });
+    return dialInOptions;
+  }.property('speakDialInCountries')
 });
