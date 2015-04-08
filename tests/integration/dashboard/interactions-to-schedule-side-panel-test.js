@@ -134,10 +134,10 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Set the interaction type
-  fillIn('.ember-select:first', 'call');
+  fillIn('.ember-select[name=interactionType]', 'call');
 
   // Select speak dial in
-  fillIn('.ember-select:last', 'AU');
+  fillIn('.ember-select[name=clientAccessNumberCountry]', 'AU');
 
   // Fill in advisor phone number
   fillIn('input[name=advisorPhoneNumber]', '123');
