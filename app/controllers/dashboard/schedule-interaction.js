@@ -132,8 +132,6 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     submit: function() {
-      var advisorName = this.get('advisor.name');
-      var clientName = this.get('clientContact.name');
       var model = this.get('model');
 
       model.setProperties({
@@ -144,24 +142,31 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       });
 
       if (this.get('isValid')) {
-        model.save().then(function() {
-          new Messenger().post({
-            message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
-            type: 'success',
-            showCloseButton: true
-          });
-        }, (error) => {
-          if (error.errors != null) {
-            this.set('errors', error.errors);
-          } else {
-            new Messenger().post({
-              message: `There has been an error scheduling the interaction.`,
-              type: 'error',
-              showCloseButton: true
-            });
-          }
-        });
+        model.save().then(this.modelDidSave.bind(this), this.modelDidError.bind(this));
       }
+    }
+  },
+
+  modelDidSave: function() {
+    var advisorName = this.get('advisor.name');
+    var clientName = this.get('clientContact.name');
+
+    new Messenger().post({
+      message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
+      type: 'success',
+      showCloseButton: true
+    });
+  },
+
+  modelDidError: function(error) {
+    if (error.errors != null) {
+      this.set('errors', error.errors);
+    } else {
+      new Messenger().post({
+        message: `There has been an error scheduling the interaction.`,
+        type: 'error',
+        showCloseButton: true
+      });
     }
   },
 
