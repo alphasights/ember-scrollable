@@ -121,7 +121,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('.form-submission button');
 
   andThen(function() {
-    // assert.equal(handler.called, true);
+    assert.equal(handler.called, true);
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
