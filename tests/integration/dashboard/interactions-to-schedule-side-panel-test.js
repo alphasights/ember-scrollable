@@ -101,6 +101,21 @@ QUnit.module("Interactions To Schedule Side Panel", {
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
+  defineFixture('GET', '/interaction_types', { response: {
+    "interaction_types":{
+      "call":"One-on-one Call",
+      "half_hour_call":"Half-Hour Call",
+      "follow_up":"Reduced credit Follow up Call",
+    },
+    "classifications":{
+      "duration_based":[
+        "call",
+        "half_hour_call",
+        "follow_up",
+      ]
+    }
+  }});
+
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
       "actioned": false,
@@ -111,7 +126,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": "call",
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
+      "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false
     }
   }, response: {
@@ -126,7 +141,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Set the interaction type
-  fillIn('.ember-select:first', 'One-on-one Call');
+  fillIn('.ember-select:first', 'call');
 
   // Submit form
   click('.form-submission button');
