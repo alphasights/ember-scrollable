@@ -73,6 +73,7 @@ $form-select-background: linear-gradient(top, transparent, rgba($black, .03)) !d
   font-size: $h5-font-size;
   font-weight: $font-weight-bold;
   line-height: $form-label-height;
+  min-height: $form-label-height;
 }
 
 @mixin form-input() {
