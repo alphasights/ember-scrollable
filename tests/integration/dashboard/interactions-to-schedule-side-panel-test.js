@@ -77,20 +77,18 @@ QUnit.module("Interactions To Schedule Side Panel", {
 
     defineFixture('GET', '/interaction_types', { response: {
       "interaction_types": {
-        "interaction_types": {
-          "call": "One-on-one Call",
-          "hosted_call": 'Hosted Call',
-          "summarised_call": 'Interaction Summary'
-        },
-        "classifications": {
-          "hosted": [
-            "hosted_call",
-            "summarised_call"
-          ],
-          "duration_based": [
-            "call"
-          ]
-        }
+        "call": "One-on-one Call",
+        "hosted_call": 'Hosted Call',
+        "summarised_call": 'Interaction Summary'
+      },
+      "classifications": {
+        "hosted": [
+          "hosted_call",
+          "summarised_call"
+        ],
+        "duration_based": [
+          "call"
+        ]
       }
     }});
 
@@ -109,21 +107,6 @@ QUnit.module("Interactions To Schedule Side Panel", {
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
-  defineFixture('GET', '/interaction_types', { response: {
-    "interaction_types":{
-      "call":"One-on-one Call",
-      "half_hour_call":"Half-Hour Call",
-      "follow_up":"Reduced credit Follow up Call",
-    },
-    "classifications":{
-      "duration_based":[
-        "call",
-        "half_hour_call",
-        "follow_up",
-      ]
-    }
-  }});
-
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
       "actioned": false,
