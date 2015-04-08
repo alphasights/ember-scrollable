@@ -9,7 +9,8 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       unavailabilities: this.store.find('unavailability', {
         interaction_id: params.interaction_id
       }),
-      interactionTypes: request(`${EmberENV.apiBaseUrl}/interaction_types`)
+      interactionTypes: request(`${EmberENV.apiBaseUrl}/interaction_types`),
+      speakDialInCountries: request(`${EmberENV.apiBaseUrl}/dial_ins`)
     });
   },
 
@@ -22,5 +23,6 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
     controller.set(
       'interactionClassifications', model.interactionTypes.classifications
     );
+    controller.set('speakDialInCountries', model.speakDialInCountries.dial_ins);
   }
 });

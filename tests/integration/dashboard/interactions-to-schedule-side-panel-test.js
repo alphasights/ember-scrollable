@@ -93,6 +93,14 @@ QUnit.module("Interactions To Schedule Side Panel", {
         }
       }
     }});
+
+    defineFixture('GET', '/dial_ins', { response: {
+      "dial_ins":{
+        "AU":"Australia",
+        "AT":"Austria",
+        "BE":"Belgium"
+      }
+    }});
   },
 
   afterEach: function() {
@@ -120,9 +128,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
     "interaction": {
       "actioned": false,
       "advisor_id": "1",
-      "client_access_number_country": null,
+      "client_access_number_country": "AU",
       "client_contact_id": "21387",
-      "dial_in_number": null,
+      "additional_contact_details": null,
       "interaction_type": "call",
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
@@ -142,6 +150,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Set the interaction type
   fillIn('.ember-select:first', 'call');
+
+  // Select speak dial in
+  fillIn('.ember-select:last', 'AU');
 
   // Submit form
   click('.form-submission button');

@@ -37,12 +37,9 @@
             optionValuePath="content.id"
             optionGroupPath="classification"
           }}
-          {{as-form/select name="speak" label="Use Speak?" content=yesNo}}
-          {{#if model.speak}}
-            {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-in Number" content=speakDialInCountries}}
-          {{else}}
-            {{as-form/input name="dialInNumber" label="Additional Contact Details"}}
-          {{/if}}
+
+          {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
+          {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
         {{as-form/submission
