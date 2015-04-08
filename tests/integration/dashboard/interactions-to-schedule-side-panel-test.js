@@ -75,6 +75,23 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "unavailabilities": []
     }});
 
+    defineFixture('GET', '/interaction_types', { response: {
+      "interaction_types": {
+        "call": "One-on-one Call",
+        "hosted_call": 'Hosted Call',
+        "summarised_call": 'Interaction Summary'
+      },
+      "classifications": {
+        "hosted": [
+          "hosted_call",
+          "summarised_call"
+        ],
+        "duration_based": [
+          "call"
+        ]
+      }
+    }});
+
     defineFixture('GET', '/dial_ins', { response: {
       "dial_ins":{
         "AU":"Australia",
@@ -113,6 +130,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
   // Select time slot from calendar
   // Monday 7 AM
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
+
+  // Set the interaction type
+  fillIn('.ember-select:first', 'call');
 
   // Select speak dial in
   fillIn('.ember-select:last', 'AU');

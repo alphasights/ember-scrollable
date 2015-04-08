@@ -135,7 +135,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
       this.get('model').setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
-        interactionType: 'call'
+        interactionType: this.get('interactionType')
       }).save().then(function() {
         new Messenger().post({
           message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
@@ -158,11 +158,24 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     }
   },
 
-  interactionTypes: [
-    { id: 'call', name: 'One-on-One Call' },
-    { id: 'half_hour_call', name: 'Half-Hour Call' },
-    { id: 'hosted_call', name: 'Hosted Call' }
-  ],
+  interactionTypesForSelect: function() {
+    var classifications = this.get('interactionClassifications');
+    var interactionTypes = this.get('interactionTypes');
+
+    var types = _.map(classifications, function(typeIds, classification) {
+      return _.map(typeIds, function(typeId) {
+        return {
+          id: typeId,
+          name: interactionTypes[typeId],
+          classification: _.map(classification.split('_'), function(word){
+            return word.capitalize();
+          }).join(' ')
+        };
+      });
+    });
+
+    return _.flatten(types);
+  }.property('interactionTypes', 'interactionClassifications'),
 
   speakDialIns: function() {
     var dialInCountries = this.get('speakDialInCountries');
