@@ -9,7 +9,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       unavailabilities: this.store.find('unavailability', {
         interaction_id: params.interaction_id
       }),
-      speakDialInCountries: request('/swordfish/dial_ins')
+      speakDialInCountries: request(`${EmberENV.apiBaseUrl}/dial_ins`)
     });
   },
 
