@@ -135,7 +135,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
       this.get('model').setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
-        interactionType: 'call'
+        interactionType: this.get('interactionType')
       }).save().then(function() {
         new Messenger().post({
           message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
