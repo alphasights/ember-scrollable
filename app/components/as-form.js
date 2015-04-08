@@ -7,11 +7,10 @@ export default Ember.Component.extend({
   model: null,
   hasSubmitted: false,
 
-  submit: function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    this.set('hasSubmitted', true);
-    this.get('model').validate();
+  actions: {
+    submit: function() {
+      this.set('hasSubmitted', true);
+      this.get('model').validate();
+    }
   }
 });

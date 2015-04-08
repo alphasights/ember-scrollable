@@ -12,6 +12,8 @@ export default DS.Model.extend({
   scheduledCallTime: DS.attr('date'),
   speak: DS.attr('boolean'),
   interactionType: DS.attr('string'),
+  advisorPhoneCountryCode: DS.attr('string'),
+  advisorPhoneNumber: DS.attr('string'),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;

@@ -1,4 +1,10 @@
-<label {{bind-attr for=name}}>{{label}}</label>
+<label {{bind-attr for=name}}>
+  {{#if label}}
+    {{label}}
+  {{else}}
+    &nbsp;
+  {{/if}}
+</label>
 
 <div class="content">
   {{yield}}

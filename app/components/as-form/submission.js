@@ -15,6 +15,7 @@ export default Ember.Component.extend({
 
   actions: {
     submit: function() {
+      this.get('parentView').send('submit');
       this.sendAction('submit');
     },
 
