@@ -23,5 +23,27 @@ export default DS.Model.extend({
 
   schedulingUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  }.property('id', 'project.id')
+  }.property('id', 'project.id'),
+
+  dialInCountry: function(key, value) {
+    if (arguments.length > 1) {
+      if (value) {
+        this.setProperties({
+          speak: false,
+          clientAccessNumberCountry: value
+        });
+      } else {
+        this.setProperties({
+          speak: false,
+          clientAccessNumberCountry: null
+        });
+      }
+    }
+
+    if (this.get('speak')) {
+      return this.get('clientAccessNumberCountry');
+    } else {
+      return false;
+    }
+  }.property('clientAccessNumberCountry', 'speak')
 });
