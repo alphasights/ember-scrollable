@@ -71,13 +71,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "users": []
     }});
 
-    defineFixture('GET', '/delivery_performances/me', { response: {
-      "delivery_performance":{
-        "id": 1,
-        "user_id": 1,
-        "current_month_credit_count": 0,
-        "monthly_target": 0
-      }
+    defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
+      "unavailabilities": []
     }});
 
     defineFixture('GET', '/interaction_types', { response: {
@@ -116,9 +111,11 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": "call",
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": "2015-03-30T07:00:00.000Z",
+      "scheduled_call_time": moment().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false
     }
+  }, response: {
+    "interactions": []
   }});
 
   visit('/dashboard');

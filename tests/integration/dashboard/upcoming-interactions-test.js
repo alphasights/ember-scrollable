@@ -25,15 +25,6 @@ QUnit.module("Upcoming interactions", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
-    defineFixture('GET', '/delivery_performances/me', { response: {
-      "delivery_performance":{
-        "id": 1,
-        "user_id": 1,
-        "current_month_credit_count": 0,
-        "monthly_target": 0
-      }
-    }});
-
     defineFixture('GET', '/interactions', { response: {
      "advisors": [
         {

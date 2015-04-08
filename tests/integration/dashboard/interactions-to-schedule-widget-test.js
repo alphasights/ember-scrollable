@@ -132,15 +132,6 @@ QUnit.module("Interactions To Schedule Widget", {
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": []
     }});
-
-    defineFixture('GET', '/delivery_performances/me', { response: {
-      "delivery_performance":{
-        "id": 1,
-        "user_id": 1,
-        "current_month_credit_count": 0,
-        "monthly_target": 0
-      }
-    }});
   },
 
   afterEach: function() {
