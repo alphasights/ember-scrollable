@@ -40,6 +40,10 @@ export default {
     this.app.fixtures.define('GET', '/interactions', { response: {
       "interactions": []
     }});
+
+    this.app.fixtures.define('GET', '/dial_ins', { response: {
+      "dial_ins": []
+    }});
   },
 
   afterEach: function() {

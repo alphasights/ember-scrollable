@@ -9,16 +9,13 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       unavailabilities: this.store.find('unavailability', {
         interaction_id: params.interaction_id
       }),
-      speakDialInCountries: request(`${EmberENV.brazilUrl}/swordfish/dial_ins`, {
-        }).then(response => {
-          return response.dial_ins;
-      })
+      speakDialInCountries: request('/swordfish/dial_ins')
     });
   },
 
   setupController: function(controller, model) {
     controller.set('model', model.interaction);
     controller.set('unavailabilities', model.unavailabilities);
-    controller.set('speakDialInCountries', model.speakDialInCountries);
+    controller.set('speakDialInCountries', model.speakDialInCountries.dial_ins);
   }
 });

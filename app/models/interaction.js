@@ -29,7 +29,7 @@ export default DS.Model.extend({
     if (arguments.length > 1) {
       if (value) {
         this.setProperties({
-          speak: false,
+          speak: true,
           clientAccessNumberCountry: value
         });
       } else {

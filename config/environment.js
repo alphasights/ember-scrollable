@@ -15,7 +15,6 @@ module.exports = function(environment) {
 
       apiBaseUrl: '/swordfish',
       blankAvatarUrl: '/images/default_avatar.png',
-      brazilUrl: 'http://localhost:3001',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       intercomAppId: '4rw4fi3l',
       pistachioUrl: 'http://localhost:3000',

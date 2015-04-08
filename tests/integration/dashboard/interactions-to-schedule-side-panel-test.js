@@ -88,11 +88,11 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "advisor_id": "1",
       "client_access_number_country": null,
       "client_contact_id": "21387",
-      "dial_in_number": null,
+      "additional_contact_details": null,
       "interaction_type": "call",
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
+      "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false
     }
   }, response: {
