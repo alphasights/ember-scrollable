@@ -119,8 +119,8 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "requested_at": "2015-02-18T10:00:00.000Z",
       "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false,
-      "advisor_phone_number": null,
-      "advisor_phone_country_code": 1
+      "advisor_phone_number": '123',
+      "advisor_phone_country_code": '1'
     }
   }, response: {
     "interactions": []
@@ -138,6 +138,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Select speak dial in
   fillIn('.ember-select:last', 'AU');
+
+  // Fill in advisor phone number
+  fillIn('input[name=advisorPhoneNumber]', '123')
 
   // Submit form
   click('.form-submission button');
