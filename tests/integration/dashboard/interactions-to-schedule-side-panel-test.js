@@ -140,7 +140,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   fillIn('.ember-select:last', 'AU');
 
   // Fill in advisor phone number
-  fillIn('input[name=advisorPhoneNumber]', '123')
+  fillIn('input[name=advisorPhoneNumber]', '123');
 
   // Submit form
   click('.form-submission button');
