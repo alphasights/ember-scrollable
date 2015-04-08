@@ -30,9 +30,9 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com",
+      'script-src': "'self' 'unsafe-inline' *.segment.io *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com",
       'font-src': "'self' *.gstatic.com",
-      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io",
+      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000",
       'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io",
       'style-src': "'self' 'unsafe-inline' *.mxpnl.com *.googleapis.com",
       'media-src': "'self'"

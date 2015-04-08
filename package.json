@@ -41,11 +41,13 @@
     "ember-cli-tooltipster": "0.0.6",
     "ember-cli-uglify": "1.0.1",
     "ember-cli-velocity": "0.1.2",
+    "ember-component-inbound-actions": "0.0.2",
     "ember-data": "1.0.0-beta.16",
     "ember-export-application-global": "1.0.2",
     "ember-localstorage-adapter": "0.5.2",
     "ember-moment": "1.1.1",
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
+    "ember-validations": "^2.0.0-alpha.3",
     "liquid-fire": "0.17.1"
   }
 }

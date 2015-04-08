@@ -54,7 +54,26 @@ export default Ember.Component.extend({
   timeZoneOptions: [],
   timeZone: null,
   selection: null,
-  startingDate: startOfCurrentWeek,
+  startingDate: null,
+  didScrollToSelection: false,
+
+  scrollToSelection: function(selection) {
+    if (!this.get('didScrollToSelection')) {
+      var container = this.$('> div');
+      container.scrollTop(selection.$().offset().top - container.offset().top);
+      this.set('didScrollToSelection', true);
+    }
+  },
+
+  initializeStartingDate: function() {
+    var selectionTime = this.get('selection.time');
+
+    if (selectionTime != null) {
+      this.set('startingDate', moment(selectionTime).startOf('week'));
+    } else {
+      this.set('startingDate', startOfCurrentWeek);
+    }
+  }.on('init'),
 
   isShowingCurrentWeek: function() {
     return moment(this.get('startingDate')).startOf('week').isSame(startOfCurrentWeek);

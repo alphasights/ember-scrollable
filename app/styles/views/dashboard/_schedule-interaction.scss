@@ -12,11 +12,41 @@
 
     padding: $column-gutter / 2 $column-gutter !important;
 
+    .calendar {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
     .calendar-occurrence {
       &.alpha-call {
         background-color: $alert-color;
         border-color: darken($alert-color, 5%);
         opacity: .5;
+      }
+    }
+  }
+
+  .form {
+    form {
+      @include form();
+
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      #{$form-field-selector} {
+        @include form-item-small();
+      }
+
+      .confirm-cancel {
+        &:before,
+        &:after {
+          content: '\00a0';
+        }
+
+        .progress-indicator {
+          display: inline-block;
+        }
       }
     }
   }

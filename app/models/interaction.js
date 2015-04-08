@@ -1,13 +1,19 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  actioned: DS.attr('boolean'),
   advisor: DS.belongsTo('advisor'),
   checklistItems: DS.hasMany('checklistItem'),
+  clientAccessNumberCountry: DS.attr('string'),
   clientContact: DS.belongsTo('clientContact'),
+  additionalContactDetails: DS.attr('string'),
   project: DS.belongsTo('project'),
-  scheduledCallTime: DS.attr('date'),
   requestedAt: DS.attr('date'),
-  actioned: DS.attr('boolean'),
+  scheduledCallTime: DS.attr('date'),
+  speak: DS.attr('boolean'),
+  interactionType: DS.attr('string'),
+  advisorPhoneCountryCode: DS.attr('string'),
+  advisorPhoneNumber: DS.attr('string'),
 
   pistachioUrl: function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;

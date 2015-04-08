@@ -14,26 +14,17 @@ $projects-header-height: rem-calc(40);
     width: auto;
 
     .sort-by-label {
-      @extend %grid-column-small-4;
-      @extend %grid-column-medium-2;
-      @extend %grid-column-large-1;
-
+      float: left;
+      padding: 0 $column-gutter;
       text-align: center;
 
       label {
-        line-height: $projects-header-height;
+        @include form-label();
       }
     }
 
     .sort-by-select {
-      @extend %grid-column-small-8;
-      @extend %grid-column-medium-3;
-      @extend %grid-column-large-2;
-    }
-
-    select {
-      margin-bottom: 0;
-      padding-right: rem-calc(30);
+      @include form-select($inner-wrapper: null, $inline: true);
     }
   }
 }

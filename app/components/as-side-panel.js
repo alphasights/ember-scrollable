@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import KeyEventsMixin from 'phoenix/mixins/key-events';
+import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 
-export default Ember.Component.extend(KeyEventsMixin, {
+export default Ember.Component.extend(KeyEventsMixin, InboundActions, {
   classNameBindings: [':side-panel', 'isActive:active'],
   tagName: 'article',
 
