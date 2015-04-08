@@ -49,3 +49,21 @@ test("schedulingUrl returns the correct url for the interaction", function(asser
     'http://localhost:3000/projects/101/proposal#scheduling_99'
   );
 });
+
+test("dialInCountry sets the corresponding properties correctly", function(assert) {
+  Ember.run(() => {
+    var project = this.store().createRecord('project', { id: 101 });
+
+    this.model.set('dialInCountry', false);
+  });
+
+  assert.equal(this.model.get('speak'), false);
+  assert.equal(this.model.get('clientAccessNumberCountry'), null);
+
+  Ember.run(() => {
+    this.model.set('dialInCountry', 'AU');
+  });
+
+  assert.equal(this.model.get('speak'), true);
+  assert.equal(this.model.get('clientAccessNumberCountry'), 'AU');
+});
