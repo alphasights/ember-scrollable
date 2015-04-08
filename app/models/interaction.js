@@ -25,25 +25,5 @@ export default DS.Model.extend({
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
   }.property('id', 'project.id'),
 
-  dialInCountry: function(key, value) {
-    if (arguments.length > 1) {
-      if (value) {
-        this.setProperties({
-          speak: true,
-          clientAccessNumberCountry: value
-        });
-      } else {
-        this.setProperties({
-          speak: false,
-          clientAccessNumberCountry: null
-        });
-      }
-    }
-
-    if (this.get('speak')) {
-      return this.get('clientAccessNumberCountry');
-    } else {
-      return null;
-    }
-  }.property('clientAccessNumberCountry', 'speak')
+  dialInCountry: Ember.computed.alias('clientAccessNumberCountry')
 });
