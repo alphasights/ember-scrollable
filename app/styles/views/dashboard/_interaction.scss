@@ -1,3 +1,5 @@
+$side-panel-actions-height: side-panel-settings(actions-bar, height);
+
 $interaction-header-title-height: rem-calc(120);
 $interaction-checklist-header-height: $column-gutter + $h5-font-size;
 $interaction-checklist-dot-size: 8px;
@@ -15,7 +17,7 @@ $interaction-header-height:
     width: 100%;
 
     .date-time {
-      @extend %grid-column-small-4;
+      @extend %grid-column-small-12;
       @extend %grid-column-medium-3;
       @extend %grid-column-large-2;
 
@@ -41,7 +43,7 @@ $interaction-header-height:
     }
 
     > .content {
-      @extend %grid-column-small-8;
+      @extend %grid-column-small-12;
       @extend %grid-column-medium-9;
       @extend %grid-column-large-10;
 
