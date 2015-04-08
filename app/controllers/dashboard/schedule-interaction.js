@@ -158,7 +158,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     }
   },
 
-  interactionTypesContent: function() {
+  interactionTypesForSelect: function() {
     var classifications = this.get('interactionClassifications');
     var interactionTypes = this.get('interactionTypes');
 

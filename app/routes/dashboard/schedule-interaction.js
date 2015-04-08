@@ -9,10 +9,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       unavailabilities: this.store.find('unavailability', {
         interaction_id: params.interaction_id
       }),
-      interactionTypesResponse: request(`${EmberENV.apiBaseUrl}/interaction_types`, {
-        }).then(response => {
-          return response.interaction_types;
-      })
+      interactionTypes: request(`${EmberENV.apiBaseUrl}/interaction_types`)
     });
   },
 
@@ -20,10 +17,10 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
     controller.set('model', model.interaction);
     controller.set('unavailabilities', model.unavailabilities);
     controller.set(
-      'interactionTypes', model.interactionTypesResponse.interaction_types
+      'interactionTypes', model.interactionTypes.interaction_types
     );
     controller.set(
-      'interactionClassifications', model.interactionTypesResponse.classifications
+      'interactionClassifications', model.interactionTypes.classifications
     );
   }
 });
