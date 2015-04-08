@@ -151,7 +151,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
             showCloseButton: true
           });
         }, (error) => {
-          if (Ember.isPresent(error.errors)) {
+          if (error.errors != null) {
             this.set('errors', error.errors);
           } else {
             new Messenger().post({
