@@ -5,6 +5,7 @@ import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
+import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -56,6 +57,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
+  phoneCountryCodes: phoneCountryCodes,
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {
@@ -130,30 +132,52 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     },
 
     submit: function() {
-      var advisorName = this.get('advisor.name');
-      var clientName = this.get('clientContact.name');
+      var model = this.get('model');
 
-      this.get('model').setProperties({
+      model.setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
-        interactionType: this.get('interactionType')
-      }).save().then(function() {
-        new Messenger().post({
-          message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
-          type: 'success',
-          showCloseButton: true
-        });
-      }, function() {
-        new Messenger().post({
-          message: `There has been an error scheduling the interaction.`,
-          type: 'error',
-          showCloseButton: true
-        });
+        interactionType: this.get('interactionType'),
+        advisorPhoneNumber: this.get('advisorPhoneNumber'),
+        advisorPhoneCountryCode: this.get('advisorPhoneCountryCode')
+      });
+
+      if (this.get('isValid')) {
+        model.save().then(
+          this.modelDidSave.bind(this),
+          this.modelDidError.bind(this)
+        );
+      }
+    }
+  },
+
+  modelDidSave: function() {
+    var advisorName = this.get('advisor.name');
+    var clientName = this.get('clientContact.name');
+
+    new Messenger().post({
+      message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
+      type: 'success',
+      showCloseButton: true
+    });
+  },
+
+  modelDidError: function(error) {
+    if (error.errors != null) {
+      this.set('errors', error.errors);
+    } else {
+      new Messenger().post({
+        message: `There has been an error scheduling the interaction.`,
+        type: 'error',
+        showCloseButton: true
       });
     }
   },
 
   validations: {
     interactionType: {
+      presence: true
+    },
+    advisorPhoneNumber: {
       presence: true
     }
   },

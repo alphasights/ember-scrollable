@@ -118,7 +118,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
       "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
-      "speak": false
+      "speak": false,
+      "advisor_phone_number": '123',
+      "advisor_phone_country_code": '1'
     }
   }, response: {
     "interactions": []
@@ -132,10 +134,13 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Set the interaction type
-  fillIn('.ember-select:first', 'call');
+  fillIn('.ember-select[name=interactionType]', 'call');
 
   // Select speak dial in
-  fillIn('.ember-select:last', 'AU');
+  fillIn('.ember-select[name=clientAccessNumberCountry]', 'AU');
+
+  // Fill in advisor phone number
+  fillIn('input[name=advisorPhoneNumber]', '123');
 
   // Submit form
   click('.form-submission button');
