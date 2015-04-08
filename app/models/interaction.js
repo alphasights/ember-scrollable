@@ -24,7 +24,5 @@ export default DS.Model.extend({
 
   schedulingUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  }.property('id', 'project.id'),
-
-  dialInCountry: Ember.computed.alias('clientAccessNumberCountry')
+  }.property('id', 'project.id')
 });
