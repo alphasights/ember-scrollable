@@ -171,7 +171,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       return { id: countryCode, name: country };
     });
 
-    dialInOptions.unshift({ id: false, name: 'Do Not Use Speak' });
+    dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
   }.property('speakDialInCountries')
 });

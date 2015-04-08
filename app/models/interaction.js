@@ -43,7 +43,7 @@ export default DS.Model.extend({
     if (this.get('speak')) {
       return this.get('clientAccessNumberCountry');
     } else {
-      return false;
+      return null;
     }
   }.property('clientAccessNumberCountry', 'speak')
 });
