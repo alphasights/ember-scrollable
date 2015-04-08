@@ -74,6 +74,14 @@ QUnit.module("Interactions To Schedule Side Panel", {
     defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
       "unavailabilities": []
     }});
+
+    defineFixture('GET', '/dial_ins', { response: {
+      "dial_ins":{
+        "AU":"Australia",
+        "AT":"Austria",
+        "BE":"Belgium"
+      }
+    }});
   },
 
   afterEach: function() {
@@ -86,13 +94,13 @@ test("Schedule interaction makes an API request and displays a notification", fu
     "interaction": {
       "actioned": false,
       "advisor_id": "1",
-      "client_access_number_country": null,
+      "client_access_number_country": "AU",
       "client_contact_id": "21387",
-      "dial_in_number": null,
+      "additional_contact_details": null,
       "interaction_type": "call",
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
+      "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false
     }
   }, response: {
@@ -105,6 +113,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
   // Select time slot from calendar
   // Monday 7 AM
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
+
+  // Select speak dial in
+  fillIn('.ember-select:last', 'AU');
 
   // Submit form
   click('.form-submission button');

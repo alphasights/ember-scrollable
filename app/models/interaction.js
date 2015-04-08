@@ -6,7 +6,7 @@ export default DS.Model.extend({
   checklistItems: DS.hasMany('checklistItem'),
   clientAccessNumberCountry: DS.attr('string'),
   clientContact: DS.belongsTo('clientContact'),
-  dialInNumber: DS.attr('string'),
+  additionalContactDetails: DS.attr('string'),
   project: DS.belongsTo('project'),
   requestedAt: DS.attr('date'),
   scheduledCallTime: DS.attr('date'),
