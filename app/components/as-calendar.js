@@ -58,8 +58,8 @@ export default Ember.Component.extend({
 
   scrollToSelection: function() {
     Ember.run.scheduleOnce('afterRender', () => {
-      var selection = $(this.$('.calendar-occurrence').toArray().find((occurrence) => {
-        return Ember.View.views[$(occurrence).prop('id')].get('occurrence') ===
+      var selection = Ember.$(this.$('.calendar-occurrence').toArray().find((occurrence) => {
+        return Ember.View.views[Ember.$(occurrence).prop('id')].get('occurrence') ===
                this.get('selection');
       }));
 
