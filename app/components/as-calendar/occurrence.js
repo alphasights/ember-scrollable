@@ -10,14 +10,6 @@ export default Ember.Component.extend({
   timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
   timeSlotDuration: Ember.computed.oneWay('calendar.timeSlotDuration'),
 
-  scrollIntoView: function() {
-    var calendar = this.get('calendar');
-
-    if (this.get('occurrence') === calendar.get('selection')) {
-      calendar.scrollToSelection(this);
-    }
-  }.on('didInsertElement'),
-
   occupiedTimeSlots: function() {
     return this.get('occurrence.duration').as('milliseconds') /
            this.get('timeSlotDuration').as('milliseconds');

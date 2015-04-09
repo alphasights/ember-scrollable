@@ -55,15 +55,18 @@ export default Ember.Component.extend({
   timeZone: null,
   selection: null,
   startingDate: null,
-  didScrollToSelection: false,
 
-  scrollToSelection: function(selection) {
-    if (!this.get('didScrollToSelection')) {
+  scrollToSelection: function() {
+    Ember.run.scheduleOnce('afterRender', () => {
+      var selection = $(this.$('.calendar-occurrence').toArray().find((occurrence) => {
+        return Ember.View.views[$(occurrence).prop('id')].get('occurrence') ===
+               this.get('selection');
+      }));
+
       var container = this.$('> div');
-      container.scrollTop(selection.$().offset().top - container.offset().top);
-      this.set('didScrollToSelection', true);
-    }
-  },
+      container.scrollTop(selection.offset().top - container.offset().top);
+    });
+  }.on('didInsertElement'),
 
   initializeStartingDate: function() {
     var selectionTime = this.get('selection.time');
