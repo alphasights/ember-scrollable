@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
-import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
+import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
@@ -58,6 +58,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
   phoneCountryCodes: phoneCountryCodes,
+  sidePanel: null,
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {

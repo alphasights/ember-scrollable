@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
+import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
