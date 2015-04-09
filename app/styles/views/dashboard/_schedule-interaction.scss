@@ -38,14 +38,14 @@
         @include form-item-small();
       }
 
+      .progress-indicator {
+        display: inline-block;
+      }
+
       .confirm-cancel {
         &:before,
         &:after {
           content: '\00a0';
-        }
-
-        .progress-indicator {
-          display: inline-block;
         }
       }
     }

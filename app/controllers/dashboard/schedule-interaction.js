@@ -142,10 +142,12 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       });
 
       if (this.get('isValid')) {
-        model.save().then(
-          this.modelDidSave.bind(this),
-          this.modelDidError.bind(this)
-        );
+        this.set('requestPromise', PromiseController.create({
+          promise: model.save().then(
+            this.modelDidSave.bind(this),
+            this.modelDidError.bind(this)
+          )
+        }));
       }
     }
   },
