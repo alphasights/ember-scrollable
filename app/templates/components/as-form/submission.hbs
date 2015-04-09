@@ -11,6 +11,6 @@
   <button type="submit" {{action "submit"}}>{{label}}</button>
 
   {{#if showCancel}}
-    <a {{action "toggleCancelling"}}>{{cancelLabel}}</a>
+    <a class="cancel" {{action "toggleCancelling"}}>{{cancelLabel}}</a>
   {{/if}}
 {{/if}}
