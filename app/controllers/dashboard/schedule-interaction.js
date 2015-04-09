@@ -58,7 +58,6 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
   phoneCountryCodes: phoneCountryCodes,
-  sidePanel: null,
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {
