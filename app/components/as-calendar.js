@@ -63,8 +63,10 @@ export default Ember.Component.extend({
                this.get('selection');
       }));
 
-      var container = this.$('> div');
-      container.scrollTop(selection.offset().top - container.offset().top);
+      if (selection != null) {
+        var container = this.$('> div');
+        container.scrollTop(selection.offset().top - container.offset().top);
+      }
     });
   }.on('didInsertElement'),
 
