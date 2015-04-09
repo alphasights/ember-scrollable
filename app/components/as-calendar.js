@@ -58,14 +58,14 @@ export default Ember.Component.extend({
 
   scrollToSelection: function() {
     Ember.run.scheduleOnce('afterRender', () => {
-      var selection = Ember.$(this.$('.calendar-occurrence').toArray().find((occurrence) => {
+      var selection = this.$('.calendar-occurrence').toArray().find((occurrence) => {
         return Ember.View.views[Ember.$(occurrence).prop('id')].get('occurrence') ===
                this.get('selection');
-      }));
+      });
 
       if (selection != null) {
         var container = this.$('> div');
-        container.scrollTop(selection.offset().top - container.offset().top);
+        container.scrollTop($(selection).offset().top - container.offset().top);
       }
     });
   }.on('didInsertElement'),
