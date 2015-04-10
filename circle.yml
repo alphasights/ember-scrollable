@@ -11,7 +11,6 @@ test:
 dependencies:
   override:
     - ./bin/setup
-    - npm install -g phantomjs
   cache_directories:
     - "bower_components"
     - "~/.rvm/gems/"
