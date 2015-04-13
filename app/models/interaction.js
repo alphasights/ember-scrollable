@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 
 export default DS.Model.extend({
   actioned: DS.attr('boolean'),
@@ -26,11 +25,5 @@ export default DS.Model.extend({
 
   schedulingUrl: function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  }.property('id', 'project.id'),
-
-  initializeInteractionType: function() {
-    if (Ember.isBlank(this.get('interactionType'))) {
-      this.set('interactionType', 'call');
-    }
-  }.on('didLoad')
+  }.property('id', 'project.id')
 });
