@@ -40,6 +40,17 @@
         display: inline-block;
       }
 
+      .cancel {
+        @extend %button-primary;
+
+        border-color: $alert-color;
+        color: $alert-color;
+
+        &:hover {
+          background-color: $alert-color;
+        }
+      }
+
       .confirm-cancel {
         &:before,
         &:after {
