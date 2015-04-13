@@ -6,7 +6,7 @@ var timeZoneAbbreviation = function(date, timeZone = null) {
   } else {
     return date.toString().split(' ').slice(-1)[0].slice(1, -1);
   }
-}
+};
 
 Ember.Handlebars.makeBoundHelper(timeZoneAbbreviation);
 
