@@ -13,6 +13,4 @@ var localMoment = function(time, timeZone, format) {
   return `${timeToFormat.format(format)} ${timeZoneAbbreviation(time, timeZone)}`;
 };
 
-Ember.Handlebars.makeBoundHelper(localMoment);
-
 export default localMoment;

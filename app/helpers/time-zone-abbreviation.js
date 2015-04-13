@@ -8,6 +8,4 @@ var timeZoneAbbreviation = function(date, timeZone = null) {
   }
 };
 
-Ember.Handlebars.makeBoundHelper(timeZoneAbbreviation);
-
 export default timeZoneAbbreviation;
