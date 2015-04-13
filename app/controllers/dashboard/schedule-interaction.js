@@ -10,8 +10,8 @@ import localMoment from 'phoenix/helpers/local-moment';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
-  duration: moment.duration(60, 'minute'),
   scheduledCallTime: Ember.computed.alias('interaction.scheduledCallTime'),
+  interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
   time: function(key, value) {
@@ -30,7 +30,15 @@ var InteractionOccurrence = Occurrence.extend({
     } else {
       return null;
     }
-  }.property('scheduledCallTime')
+  }.property('scheduledCallTime'),
+
+  duration: function() {
+    if (this.get('interactionType') === 'half_hour_call') {
+      return moment.duration(30, 'minute');
+    } else {
+      return moment.duration(60, 'minute');
+    }
+  }.property('interactionType')
 });
 
 var UnavailabilityOccurrence = Occurrence.extend({
