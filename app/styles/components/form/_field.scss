@@ -1,5 +1,0 @@
-$form-field-selector: '.form-field' !default;
-
-#{$form-field-selector} {
-  @include form-field();
-}
