@@ -29,6 +29,16 @@
     <section class="form">
       {{#as-form model=this}}
         {{#as-form/fieldset}}
+          {{as-form/input
+            name="formattedScheduledCallTime"
+            errorProperty="scheduledCallTime"
+            label="Scheduled Call Time"
+            disabled=true
+            errorMessage="can't be blank, please select it from the calendar"}}
+
+          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+          {{as-form/input name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
+
           {{as-form/select
             name="interactionType"
             label="Interaction Type"
@@ -38,8 +48,6 @@
             optionGroupPath="classification"
           }}
 
-          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
-          {{as-form/input name="advisorPhoneNumber"}}
           {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}

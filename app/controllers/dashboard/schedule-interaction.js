@@ -6,6 +6,7 @@ import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
+import systemTimezone from 'phoenix/helpers/system-timezone';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -58,6 +59,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
   phoneCountryCodes: phoneCountryCodes,
+
+  formattedScheduledCallTime: function() {
+    if (this.get('scheduledCallTime') != null) {
+      return `${moment(this.get('scheduledCallTime')).format('D MMM, h:mm A')} ${systemTimezone()}`
+    } else {
+      return 'Please select a call time from the calendar.';
+    }
+  }.property('scheduledCallTime'),
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {
@@ -156,6 +165,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     var advisorName = this.get('advisor.name');
     var clientName = this.get('clientContact.name');
 
+    this.get('dashboard').propertyDidChange('interactionsToSchedule');
+    this.get('dashboard').propertyDidChange('upcomingInteractions');
+
     new Messenger().post({
       message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
       type: 'success',
@@ -180,6 +192,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       presence: true
     },
     advisorPhoneNumber: {
+      presence: true
+    },
+    scheduledCallTime: {
       presence: true
     }
   },

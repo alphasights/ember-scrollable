@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
+import systemTimezone from 'phoenix/helpers/system-timezone';
 
 var Time = Ember.Object.extend({
   calendar: null,
@@ -89,7 +90,7 @@ export default Ember.Component.extend({
   }.property('timeZone', 'allTimeZoneOptions.@each.value'),
 
   systemTimeZoneAbbreviation: function() {
-    return new Date().toString().split(' ').slice(-1)[0].slice(1, -1);
+    return systemTimezone();
   }.property(),
 
   allTimeZoneOptions: function() {
@@ -137,15 +138,15 @@ export default Ember.Component.extend({
   }.property('timeSlots.[]'),
 
   timeSlotsHeaderStyle: function() {
-    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`;
+    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`.htmlSafe();
   }.property('timeSlotHeight'),
 
   dayStyle: function() {
-    return `width: ${100 / this.get('days.length')}%;`;
+    return `width: ${100 / this.get('days.length')}%;`.htmlSafe();
   }.property('days.length'),
 
   headerTimeSlotStyle: function() {
-    return `height: ${2 * this.get('timeSlotHeight')}px;`;
+    return `height: ${2 * this.get('timeSlotHeight')}px;`.htmlSafe();
   }.property('timeSlotHeight'),
 
   actions: {
