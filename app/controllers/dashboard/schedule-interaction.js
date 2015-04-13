@@ -124,6 +124,8 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
         }).then(response => {
           this.store.pushPayload(response);
 
+          this.get('dashboard').propertyDidChange('interactionsToSchedule');
+
           new Messenger().post({
             message: "The interaction has been cancelled.",
             type: 'success',
