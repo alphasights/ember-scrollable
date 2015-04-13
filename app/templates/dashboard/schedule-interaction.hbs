@@ -24,13 +24,15 @@
     {{as-calendar
       selection=occurrence
       timeZoneOptions=timeZoneOptions
-      occurrences=unavailabilityOccurrences}}
+      occurrences=unavailabilityOccurrences
+      timeZone=selectedTimeZone}}
 
     <section class="form">
       {{#as-form model=this}}
         {{#as-form/fieldset}}
           {{as-form/input
             name="formattedScheduledCallTime"
+            placeholder="Please select a call time from the calendar."
             errorProperty="scheduledCallTime"
             label="Scheduled Call Time"
             disabled=true}}

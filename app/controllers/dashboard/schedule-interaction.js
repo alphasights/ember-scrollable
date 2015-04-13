@@ -6,7 +6,7 @@ import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
-import systemTimezone from 'phoenix/helpers/system-timezone';
+import localMoment from 'phoenix/helpers/local-moment';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -59,14 +59,17 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
   phoneCountryCodes: phoneCountryCodes,
+  selectedTimeZone: null,
 
   formattedScheduledCallTime: function() {
-    if (this.get('scheduledCallTime') != null) {
-      return `${moment(this.get('scheduledCallTime')).format('D MMM, h:mm A')} ${systemTimezone()}`;
+    var scheduledCallTime = this.get('scheduledCallTime');
+
+    if (scheduledCallTime != null) {
+      return localMoment(scheduledCallTime, this.get('selectedTimeZone'), 'D MMM, h:mm A');
     } else {
-      return 'Please select a call time from the calendar.';
+      return null;
     }
-  }.property('scheduledCallTime'),
+  }.property('scheduledCallTime', 'selectedTimeZone'),
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {

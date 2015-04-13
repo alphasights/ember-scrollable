@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
-import systemTimezone from 'phoenix/helpers/system-timezone';
+import timeZoneAbbreviation from 'phoenix/helpers/time-zone-abbreviation';
 
 var Time = Ember.Object.extend({
   calendar: null,
@@ -89,18 +89,12 @@ export default Ember.Component.extend({
     return this.get('allTimeZoneOptions').findBy('value', this.get('timeZone'));
   }.property('timeZone', 'allTimeZoneOptions.@each.value'),
 
-  systemTimeZoneAbbreviation: function() {
-    return systemTimezone();
-  }.property(),
-
   allTimeZoneOptions: function() {
-    var systemTimeZoneAbbreviation = this.get('systemTimeZoneAbbreviation');
-
     return [TimeZoneOption.create({
       title: 'System Time Zone',
-      abbreviation: systemTimeZoneAbbreviation
+      abbreviation: timeZoneAbbreviation(new Date())
     })].concat(this.get('timeZoneOptions'));
-  }.property('timeZoneOptions.[]', 'systemTimeZoneAbbreviation'),
+  }.property('timeZoneOptions.[]'),
 
   days: function() {
     return _.range(this.get('numberOfDays')).map((offset) => {

@@ -1,5 +1,18 @@
 import Ember from 'ember';
+import timeZoneAbbreviation from './time-zone-abbreviation';
 
-export default Ember.Handlebars.makeBoundHelper(function(time, timeZone, format) {
-  return moment.tz(time, timeZone).format(format);
-});
+var localMoment = function(time, timeZone, format) {
+  var timeToFormat;
+
+  if (timeZone != null) {
+    timeToFormat = moment.tz(time, timeZone);
+  } else {
+    timeToFormat = moment(time);
+  }
+
+  return `${timeToFormat.format(format)} ${timeZoneAbbreviation(time, timeZone)}`;
+};
+
+Ember.Handlebars.makeBoundHelper(localMoment);
+
+export default localMoment;
