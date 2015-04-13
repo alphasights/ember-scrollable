@@ -30,6 +30,13 @@ export default Ember.Mixin.create({
   }.property('error', 'hasSubmitted'),
 
   error: function() {
-    return this.get('errorMessage') || this.get('errors.firstObject');
+    var error = this.get('errors.firstObject');
+    var errorMessage = this.get('errorMessage') || this.get('errors.firstObject');
+
+    if (error != null) {
+      return errorMessage;
+    } else {
+      return null;
+    }
   }.property('errorMessage', 'errors.firstObject')
 });
