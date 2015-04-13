@@ -45,6 +45,7 @@
 
         border-color: $alert-color;
         color: $alert-color;
+        margin-bottom: 0 !important;
 
         &:hover {
           background-color: $alert-color;
@@ -55,6 +56,10 @@
         &:before,
         &:after {
           content: '\00a0';
+        }
+
+        > div {
+          display: inline-block;
         }
       }
     }
