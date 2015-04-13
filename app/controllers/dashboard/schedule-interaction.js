@@ -62,7 +62,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
   formattedScheduledCallTime: function() {
     if (this.get('scheduledCallTime') != null) {
-      return `${moment(this.get('scheduledCallTime')).format('D MMM, h:mm A')} ${systemTimezone()}`
+      return `${moment(this.get('scheduledCallTime')).format('D MMM, h:mm A')} ${systemTimezone()}`;
     } else {
       return 'Please select a call time from the calendar.';
     }
