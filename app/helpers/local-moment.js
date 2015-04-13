@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import timeZoneAbbreviation from './time-zone-abbreviation';
 
 var localMoment = function(time, timeZone, format) {
