@@ -10,7 +10,7 @@ const interactionToSchedule = {
   checklistItemCompletionStatus: true
 };
 
-QUnit.module("Interactions To Schedule", {
+QUnit.module("Interactions To Schedule Widget", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -131,15 +131,6 @@ QUnit.module("Interactions To Schedule", {
 
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": []
-    }});
-
-    defineFixture('GET', '/delivery_performances/me', { response: {
-      "delivery_performance":{
-        "id": 1,
-        "user_id": 1,
-        "current_month_credit_count": 0,
-        "monthly_target": 0
-      }
     }});
   },
 

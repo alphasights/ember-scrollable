@@ -2,17 +2,7 @@ $team-project-progress-bar-height: rem-calc(4);
 $team-project-header-title-height: rem-calc(120);
 $team-project-header-stats-height: $team-project-header-title-height / 2;
 
-$team-project-header-height:
-  $team-project-progress-bar-height +
-  $team-project-header-title-height +
-  $team-project-header-stats-height +
-  $side-panel-actions-height;
-
 .side-panel.project {
-  > div {
-    overflow-y: visible;
-  }
-
   .progress-bar {
     height: $team-project-progress-bar-height;
   }
@@ -164,12 +154,7 @@ $team-project-header-height:
   }
 
   .angles {
-    bottom: 0;
-    left: 0;
-    overflow-y: auto;
-    position: absolute;
-    right: 0;
-    top: $team-project-header-height;
+    @extend %grid-row;
 
     > ul {
       padding: 0;

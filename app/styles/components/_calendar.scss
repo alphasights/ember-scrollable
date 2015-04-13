@@ -1,0 +1,137 @@
+.calendar {
+  border: 1px solid $global-section-border-color;
+  border-radius: $global-radius;
+
+  ul {
+    line-height: $base-line-height;
+  }
+
+  header,
+  .time-slots {
+    color: $small-font-color;
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+
+  header .days > ul > li,
+  > div .days > li {
+    float: left;
+  }
+
+  header,
+  > div {
+    > * {
+      padding: 0 !important;
+    }
+  }
+
+  header {
+    @extend %grid-row;
+
+    background-color: $info-color;
+    border-bottom: 1px solid $global-section-border-color;
+    padding: 0 !important;
+
+    .time-zone > div,
+    .days > ul > li,
+    .navigation > div {
+      padding: $column-gutter / 4;
+    }
+
+    .time-zone {
+      @extend %grid-column-1;
+
+      .dropdown {
+        display: inline-block;
+      }
+    }
+
+    .days {
+      @extend %grid-column-10;
+
+      > ul {
+        @extend %grid-row;
+      }
+    }
+
+    .navigation {
+      @extend %grid-column-1;
+
+      a {
+        color: $small-font-color;
+        display: inline-block;
+        vertical-align: middle;
+        width: rem-calc(20);
+      }
+
+      .previous-week {
+        @include icon('caret-left');
+      }
+
+      .current-week {
+        background-color: $small-font-color;
+        border-radius: $global-rounded;
+        height: rem-calc(10);
+        transition: opacity .25s ease-in-out;
+        width: rem-calc(10);
+
+        &.selected {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+
+      .next-week {
+        @include icon('caret-right');
+      }
+
+      a:before {
+        font-size: $h3-font-size;
+      }
+    }
+  }
+
+  > div {
+    @extend %grid-row;
+
+    max-height: 400px;
+    overflow: auto;
+
+    .time-slots {
+      @extend %grid-column-1;
+
+      > li {
+        &:first-child {
+          color: transparent;
+        }
+      }
+    }
+
+    .days {
+      @extend %grid-column-10;
+
+      .times > li {
+        &:first-child .calendar-time {
+          border-top-width: 0;
+        }
+
+        &:nth-child(even) .calendar-time {
+          border-top-color: lighten($global-section-border-color, 3%);
+        }
+      }
+
+      .calendar-time {
+        border: 1px solid $global-section-border-color;
+        border-bottom-width: 0;
+        border-right-width: 0;
+        border-top-color: darken($global-section-border-color, 2%);
+      }
+
+      > li:last-child {
+        .calendar-time {
+          border-right-width: 1px;
+        }
+      }
+    }
+  }
+}

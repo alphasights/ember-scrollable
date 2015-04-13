@@ -6,17 +6,19 @@
 
   <div {{bind-attr class=":team-select showTeamSelect:open"}}>
     {{#if showTeamSelect}}
-      {{view "select"
-        content=model
-        value=selectedTeam
-        change=onTeamSelectChange
-        optionLabelPath="content.name"}}
+      <div class="select">
+        {{view "select"
+          content=model
+          value=selectedTeam
+          change=onTeamSelectChange
+          optionLabelPath="content.name"}}
+      </div>
     {{else}}
       <h1>{{selectedTeam.name}}</h1>
     {{/if}}
 
     {{#if multipleTeamsAvailable}}
-      <button class="toggle" {{action "toggleTeamSelect"}}>Change Team</button>
+      <label><button class="toggle" {{action "toggleTeamSelect"}}>Change Team</button></label>
     {{/if}}
   </div>
 </header>

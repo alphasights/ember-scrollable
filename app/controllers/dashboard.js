@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
     return this.get('interactions')
       .filterBy('scheduledCallTime')
       .sortBy('scheduledCallTime');
-  }.property('interactions.@each.scheduledCallTime'),
+  }.property('interactions.[]'),
 
   interactionsToSchedule: function() {
     return this.get('interactions').filter(function(interaction) {
@@ -15,5 +15,5 @@ export default Ember.ObjectController.extend({
     }).sort(function(a, b) {
       return -Ember.compare(a.get('requestedAt'), b.get('requestedAt'));
     });
-  }.property('interactions.@each.{scheduledCallTime,requestedAt}')
+  }.property('interactions.[]')
 });

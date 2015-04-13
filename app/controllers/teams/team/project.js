@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ProjectProgressMixin from 'phoenix/mixins/project-progress';
-import ModelsNavigationMixin from 'phoenix/mixins/models-navigation';
+import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigationMixin, {
   needs: ['teams/team'],

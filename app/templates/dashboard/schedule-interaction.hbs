@@ -1,4 +1,4 @@
-{{#as-side-panel class="interaction schedule-interaction" close="hideSidePanel" previous="previous" next="next"}}
+{{#as-side-panel class="interaction schedule-interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
   <header>
     <div class="content">
       <h1>
@@ -20,17 +20,47 @@
     </ul>
   </section>
 
-  <section class="checklist-items">
-    <header>
-      {{as-checklist-status items=checklistItems}}
+  <section class="scheduling">
+    {{as-calendar
+      selection=occurrence
+      timeZoneOptions=timeZoneOptions
+      occurrences=unavailabilityOccurrences
+      timeZone=selectedTimeZone}}
 
-      <a target="_blank" {{bind-attr href=schedulingUrl}}>Schedule</a>
-    </header>
+    <section class="form">
+      {{#as-form model=this}}
+        {{#as-form/fieldset}}
+          {{as-form/input
+            name="formattedScheduledCallTime"
+            placeholder="Please select a call time from the calendar."
+            errorProperty="scheduledCallTime"
+            label="Scheduled Call Time"
+            disabled=true}}
 
-    <ul>
-      {{#each checklistItem in checklistItems}}
-        <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
-      {{/each}}
-    </ul>
+          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+          {{as-form/input name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
+
+          {{as-form/select
+            name="interactionType"
+            label="Interaction Type"
+            contentBinding="interactionTypesForSelect"
+            optionLabelPath="content.title"
+            optionValuePath="content.id"
+            optionGroupPath="classification"
+          }}
+
+          {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
+          {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
+        {{/as-form/fieldset}}
+
+        {{as-form/submission
+          label="Schedule Interaction"
+          cancelLabel="Cancel Interaction"
+          cancel="cancel"
+          submit="submit"
+          cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"
+          requestPromise=requestPromise}}
+      {{/as-form}}
+    </section>
   </section>
 {{/as-side-panel}}

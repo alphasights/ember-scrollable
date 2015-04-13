@@ -1,0 +1,24 @@
+{{#if isCancelling}}
+  <span>{{cancelConfirmationMessage}}</span>
+  <a {{action "toggleCancelling"}}>Back</a>
+
+  <button type="submit" {{action "cancel"}} {{bind-attr class="cancelConfirmationClass" disabled=requestPromise.isLoading}}>
+    {{#liquid-if requestPromise.isLoading}}
+      Cancelling...
+    {{else}}
+      {{cancelConfirmationLabel}}
+    {{/liquid-if}}
+  </button>
+{{else}}
+  <button type="submit" {{action "submit"}} {{bind-attr disabled=requestPromise.isLoading}}>
+    {{#liquid-if requestPromise.isLoading}}
+      Saving...
+    {{else}}
+      {{label}}
+    {{/liquid-if}}
+  </button>
+
+  {{#if showCancel}}
+    <a class="cancel" {{action "toggleCancelling"}}>{{cancelLabel}}</a>
+  {{/if}}
+{{/if}}

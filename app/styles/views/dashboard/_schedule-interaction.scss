@@ -1,5 +1,67 @@
 .side-panel.interaction.schedule-interaction {
   header > .content {
     @extend %grid-column-medium-12;
+
+    h1 {
+      line-height: $header-line-height;
+    }
+  }
+
+  .scheduling {
+    @extend %grid-column-12;
+
+    padding: $column-gutter / 2 $column-gutter !important;
+
+    .calendar {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .calendar-occurrence {
+      &.alpha-call {
+        background-color: $alert-color;
+        border-color: darken($alert-color, 5%);
+        opacity: .5;
+      }
+    }
+  }
+
+  .form {
+    form {
+      border-top: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      #{$form-field-selector} {
+        @include form-item-small();
+      }
+
+      .progress-indicator {
+        display: inline-block;
+      }
+
+      .cancel {
+        @extend %button-primary;
+
+        border-color: $alert-color;
+        color: $alert-color;
+        margin-bottom: 0 !important;
+
+        &:hover {
+          background-color: $alert-color;
+        }
+      }
+
+      .confirm-cancel {
+        &:before,
+        &:after {
+          content: '\00a0';
+        }
+
+        > div {
+          display: inline-block;
+        }
+      }
+    }
   }
 }

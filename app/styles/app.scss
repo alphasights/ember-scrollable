@@ -5,6 +5,10 @@
 @import 'default';
 
 @import 'components/avatar';
+@import 'components/calendar';
+@import 'components/calendar/occurrence';
+@import 'components/calendar/time';
+@import 'components/calendar/time-zone-option';
 @import 'components/checklist-status';
 @import 'components/page-placeholder';
 @import 'components/priority-select';
