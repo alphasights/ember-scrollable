@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   dialInsRouter.get('/', function(req, res) {
     res.send({
-      "dial-ins": {
+      "dial_ins": {
         "AU": "Australia",
         "AT": "Austria",
         "BE": "Belgium",
