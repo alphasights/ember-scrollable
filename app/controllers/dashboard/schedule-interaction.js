@@ -6,11 +6,12 @@ import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
+import localMoment from 'phoenix/helpers/local-moment';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
-  duration: moment.duration(60, 'minute'),
   scheduledCallTime: Ember.computed.alias('interaction.scheduledCallTime'),
+  interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
   time: function(key, value) {
@@ -29,7 +30,15 @@ var InteractionOccurrence = Occurrence.extend({
     } else {
       return null;
     }
-  }.property('scheduledCallTime')
+  }.property('scheduledCallTime'),
+
+  duration: function() {
+    if (this.get('interactionType') === 'half_hour_call') {
+      return moment.duration(30, 'minute');
+    } else {
+      return moment.duration(60, 'minute');
+    }
+  }.property('interactionType')
 });
 
 var UnavailabilityOccurrence = Occurrence.extend({
@@ -58,6 +67,17 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
   phoneCountryCodes: phoneCountryCodes,
+  selectedTimeZone: null,
+
+  formattedScheduledCallTime: function() {
+    var scheduledCallTime = this.get('scheduledCallTime');
+
+    if (scheduledCallTime != null) {
+      return localMoment(scheduledCallTime, this.get('selectedTimeZone'), 'D MMM, h:mm A');
+    } else {
+      return null;
+    }
+  }.property('scheduledCallTime', 'selectedTimeZone'),
 
   visibleUnavailabilities: function() {
     return this.get('unavailabilities').filter((unavailability) => {
@@ -112,6 +132,8 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
         }).then(response => {
           this.store.pushPayload(response);
 
+          this.get('dashboard').propertyDidChange('interactionsToSchedule');
+
           new Messenger().post({
             message: "The interaction has been cancelled.",
             type: 'success',
@@ -156,6 +178,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     var advisorName = this.get('advisor.name');
     var clientName = this.get('clientContact.name');
 
+    this.get('dashboard').propertyDidChange('interactionsToSchedule');
+    this.get('dashboard').propertyDidChange('upcomingInteractions');
+
     new Messenger().post({
       message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
       type: 'success',
@@ -180,6 +205,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       presence: true
     },
     advisorPhoneNumber: {
+      presence: true
+    },
+    scheduledCallTime: {
       presence: true
     }
   },

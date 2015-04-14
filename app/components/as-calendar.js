@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
+import timeZoneAbbreviation from 'phoenix/helpers/time-zone-abbreviation';
 
 var Time = Ember.Object.extend({
   calendar: null,
@@ -88,18 +89,12 @@ export default Ember.Component.extend({
     return this.get('allTimeZoneOptions').findBy('value', this.get('timeZone'));
   }.property('timeZone', 'allTimeZoneOptions.@each.value'),
 
-  systemTimeZoneAbbreviation: function() {
-    return new Date().toString().split(' ').slice(-1)[0].slice(1, -1);
-  }.property(),
-
   allTimeZoneOptions: function() {
-    var systemTimeZoneAbbreviation = this.get('systemTimeZoneAbbreviation');
-
     return [TimeZoneOption.create({
-      title: 'System Time Zone',
-      abbreviation: systemTimeZoneAbbreviation
+      title: 'Your Time Zone',
+      abbreviation: timeZoneAbbreviation(new Date())
     })].concat(this.get('timeZoneOptions'));
-  }.property('timeZoneOptions.[]', 'systemTimeZoneAbbreviation'),
+  }.property('timeZoneOptions.[]'),
 
   days: function() {
     return _.range(this.get('numberOfDays')).map((offset) => {
@@ -137,15 +132,15 @@ export default Ember.Component.extend({
   }.property('timeSlots.[]'),
 
   timeSlotsHeaderStyle: function() {
-    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`;
+    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`.htmlSafe();
   }.property('timeSlotHeight'),
 
   dayStyle: function() {
-    return `width: ${100 / this.get('days.length')}%;`;
+    return `width: ${100 / this.get('days.length')}%;`.htmlSafe();
   }.property('days.length'),
 
   headerTimeSlotStyle: function() {
-    return `height: ${2 * this.get('timeSlotHeight')}px;`;
+    return `height: ${2 * this.get('timeSlotHeight')}px;`.htmlSafe();
   }.property('timeSlotHeight'),
 
   actions: {

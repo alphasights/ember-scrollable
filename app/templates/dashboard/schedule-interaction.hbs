@@ -24,11 +24,22 @@
     {{as-calendar
       selection=occurrence
       timeZoneOptions=timeZoneOptions
-      occurrences=unavailabilityOccurrences}}
+      occurrences=unavailabilityOccurrences
+      timeZone=selectedTimeZone}}
 
     <section class="form">
       {{#as-form model=this}}
         {{#as-form/fieldset}}
+          {{as-form/input
+            name="formattedScheduledCallTime"
+            placeholder="Please select a call time from the calendar."
+            errorProperty="scheduledCallTime"
+            label="Call Time"
+            disabled=true}}
+
+          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+          {{as-form/input name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
+
           {{as-form/select
             name="interactionType"
             label="Interaction Type"
@@ -38,8 +49,6 @@
             optionGroupPath="classification"
           }}
 
-          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
-          {{as-form/input name="advisorPhoneNumber"}}
           {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}

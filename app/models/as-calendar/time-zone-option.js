@@ -1,11 +1,12 @@
 import Ember from 'ember';
+import timeZoneAbbreviation from 'phoenix/helpers/time-zone-abbreviation';
 
 export default Ember.Object.extend({
   title: null,
   value: null,
-  
+
   abbreviation: function() {
-    return moment().tz(this.get('value')).format('z');
+    return timeZoneAbbreviation(new Date(), this.get('value'));
   }.property('value'),
 
   description: function() {
