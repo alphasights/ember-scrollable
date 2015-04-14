@@ -8,19 +8,19 @@ export default Ember.Component.extend({
   isComplete: Ember.computed.empty('incompleteItems'),
   showTooltip: false,
 
-  title: function() {
+  title: Ember.computed('showTooltip', 'status', function() {
     if (this.get('showTooltip')) {
       return `Checklist ${this.get('status')}`;
     } else {
       return null;
     }
-  }.property('showTooltip', 'status'),
+  }),
 
-  status: function() {
+  status: Ember.computed('isComplete', function() {
     if (this.get('isComplete')) {
       return 'Complete';
     } else {
       return 'Incomplete';
     }
-  }.property('isComplete'),
+  }),
 });

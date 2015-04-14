@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import InteractionsController from './interactions';
 
 export default InteractionsController.extend({
@@ -19,7 +20,7 @@ export default InteractionsController.extend({
     }
   ],
 
-  arrangedContent: function() {
+  arrangedContent: Ember.computed('filter', 'model', function() {
     var filter = this.get('filter');
 
     return this.get('model').filter((interaction) => {
@@ -28,11 +29,11 @@ export default InteractionsController.extend({
       return (!filter.startDate || scheduledCallTime >= filter.startDate) &&
              (!filter.endDate || scheduledCallTime <= filter.endDate);
     });
-  }.property('filter', 'model'),
+  }),
 
-  initializeFilter: function() {
+  initializeFilter: Ember.on('init', function() {
     this.set('filter', this.get('availableFilters.firstObject'));
-  }.on('init'),
+  }),
 
   actions: {
     setFilter: function(filter) {

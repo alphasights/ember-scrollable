@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
   preferences: null,
 
-  modelDidChange: function() {
+  modelDidChange: Ember.observer('model', function() {
     analytics.identify(
       this.get('initials'),
       _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
     );
-  }.observes('model'),
+  }),
 
   setupIntercom: function() {
     /* jshint newcap: false */

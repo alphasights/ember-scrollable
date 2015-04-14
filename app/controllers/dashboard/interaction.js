@@ -8,7 +8,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
-  profiles: function() {
+  profiles: Ember.computed('advisor', 'clientContact', function() {
     return [{
       person: this.get('advisor'),
       class: 'advisor',
@@ -18,7 +18,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, {
       class: 'client',
       title: 'Client'
     }];
-  }.property('advisor', 'clientContact'),
+  }),
 
   checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
   checklistItemsSorting: ['completed', 'createdAt'],

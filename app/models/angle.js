@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -9,19 +10,19 @@ export default DS.Model.extend({
   membersUpdatedAt: null,
   membershipsUpdatedAt: null,
 
-  memberships: function() {
+  memberships: Ember.computed('angleTeamMemberships.[]', function() {
     return this.get('angleTeamMemberships');
-  }.property('angleTeamMemberships.[]'),
+  }),
 
-  members: function() {
+  members: Ember.computed('memberships.[]', function() {
     return this.get('memberships').mapBy('user');
-  }.property('memberships.[]'),
+  }),
 
-  membershipsDidChange: function() {
+  membershipsDidChange: Ember.observer('memberships.[]', function() {
     this.set('membershipsUpdatedAt', new Date());
-  }.observes('memberships.[]'),
+  }),
 
-  membersDidChange: function() {
+  membersDidChange: Ember.observer('members.[]', function() {
     this.set('membersUpdatedAt', new Date());
-  }.observes('members.[]')
+  })
 });

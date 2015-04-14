@@ -18,24 +18,24 @@ export default Ember.Component.extend({
     }
   },
 
-  style: function() {
+  style: Ember.computed('timeSlotHeight', function() {
     return `height: ${this.get('timeSlotHeight')}px;`;
-  }.property('timeSlotHeight'),
+  }),
 
-  time: function() {
+  time: Ember.computed('day.value', 'timeSlot.offset', function() {
     return moment(this.get('day.value')).add(this.get('timeSlot.offset'));
-  }.property('day.value', 'timeSlot.offset'),
+  }),
 
-  endingTime: function() {
+  endingTime: Ember.computed('day.value', 'timeSlot.endingOffset', function() {
     return moment(this.get('day.value')).add(this.get('timeSlot.endingOffset'));
-  }.property('day.value', 'timeSlot.endingOffset'),
+  }),
 
-  lastTimeSlotEndingTime: function() {
+  lastTimeSlotEndingTime: Ember.computed('day.value', 'timeSlots.lastObject.endingOffset', function() {
     return moment(this.get('day.value'))
              .add(this.get('timeSlots.lastObject.endingOffset'));
-  }.property('day.value', 'timeSlots.lastObject.endingOffset'),
+  }),
 
-  allOccurrences: function() {
+  allOccurrences: Ember.computed('calendar.occurrences.[]', 'selection.time', function() {
     var calendarOccurrences = this.get('calendar.occurrences');
     var selection = this.get('selection');
     var selectionTime = selection.get('time');
@@ -45,9 +45,9 @@ export default Ember.Component.extend({
     } else {
       return calendarOccurrences;
     }
-  }.property('calendar.occurrences.[]', 'selection.time'),
+  }),
 
-  occurrences: function() {
+  occurrences: Ember.computed('time', 'endingTime', 'allOccurrences.@each.time', function() {
     var time = this.get('time').toDate();
     var endingTime = this.get('endingTime').toDate();
 
@@ -55,27 +55,32 @@ export default Ember.Component.extend({
       var occurrenceTime = occurrence.get('time').toDate();
       return occurrenceTime >= time && occurrenceTime < endingTime;
     });
-  }.property('time', 'endingTime', 'allOccurrences.@each.time'),
+  }),
 
-  isBlockedByAnyOccurrence: function() {
-    var time = this.get('time').toDate();
-    var endingTime = this.get('endingTime').toDate();
+  isBlockedByAnyOccurrence: Ember.computed(
+    'time',
+    'endingTime',
+    'calendar.occurrences.@each.{time,duration}',
+    function() {
+      var time = this.get('time').toDate();
+      var endingTime = this.get('endingTime').toDate();
 
-    return this.get('calendar.occurrences').any(function(occurrence) {
-      var occurrenceTime = occurrence.get('time').toDate();
-      var occurrenceEndingTime = occurrence.get('endingTime').toDate();
+      return this.get('calendar.occurrences').any(function(occurrence) {
+        var occurrenceTime = occurrence.get('time').toDate();
+        var occurrenceEndingTime = occurrence.get('endingTime').toDate();
 
-      return (endingTime >= occurrenceTime && endingTime < occurrenceEndingTime) ||
-             (time >= occurrenceTime && time < occurrenceEndingTime);
-    });
-  }.property('time', 'endingTime', 'calendar.occurrences.@each.{time,duration}'),
+        return (endingTime >= occurrenceTime && endingTime < occurrenceEndingTime) ||
+               (time >= occurrenceTime && time < occurrenceEndingTime);
+      });
+    }
+  ),
 
-  isInsideCalendar: function() {
+  isInsideCalendar: Ember.computed('endingTime', 'lastTimeSlotEndingTime', function() {
     return this.get('endingTime').toDate() <
            this.get('lastTimeSlotEndingTime').toDate();
-  }.property('endingTime', 'lastTimeSlotEndingTime'),
+  }),
 
-  canBeSelected: function() {
+  canBeSelected: Ember.computed('isInsideCalendar', 'isBlockedByAnyOccurrence', function() {
     return this.get('isInsideCalendar') && !this.get('isBlockedByAnyOccurrence');
-  }.property('isInsideCalendar', 'isBlockedByAnyOccurrence')
+  })
 });

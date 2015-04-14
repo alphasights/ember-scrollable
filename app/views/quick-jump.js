@@ -8,12 +8,12 @@ export default Ember.View.extend(KeyEventsMixin, {
   isLoading: Ember.computed.oneWay('controller.requestPromise.isLoading'),
   placeholder: null,
 
-  clickEventName: function() {
+  clickEventName: Ember.computed('elementId', function() {
     return `click.${this.get('elementId')}`;
-  }.property('elementId'),
+  }),
 
   didInsertElement: function() {
-    Ember.$(document).on(this.get('clickEventName'), (event) => {
+    Ember.on(this.get('clickEventName'), (event) => {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = this.$('.bar, .results');
 
@@ -22,18 +22,18 @@ export default Ember.View.extend(KeyEventsMixin, {
       }
 
       return true;
-    });
+    }, Ember.$(document));
   },
 
   willDestroyElement: function() {
     Ember.$(document).off(this.get('clickEventName'));
   },
 
-  onIsActiveDidChange: function() {
+  onIsActiveDidChange: Ember.observer('isActive', function() {
     if (!this.get('isActive')) {
       this.$('input').blur();
     }
-  }.observes('isActive'),
+  }),
 
   actions: {
     onBarFocusIn: function() {

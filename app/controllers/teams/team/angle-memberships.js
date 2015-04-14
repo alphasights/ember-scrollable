@@ -9,25 +9,25 @@ export default Ember.ObjectController.extend({
   query: null,
   results: [],
 
-  memberships: function() {
+  memberships: Ember.computed('model.memberships.[]', function() {
     // TODO: Remove the filterBy when https://github.com/emberjs/data/issues/2666 is fixed
     return this.get('model.memberships').sortBy('createdAt').filterBy('isDeleted', false);
-  }.property('model.memberships.[]'),
+  }),
 
-  teamMembers: function() {
+  teamMembers: Ember.computed('requestPromise', 'team.members', 'results', function() {
     if (this.get('requestPromise')) {
       return this.get('results');
     } else {
       return this.get('team.members');
     }
-  }.property('requestPromise', 'team.members', 'results'),
+  }),
 
-  unusedTeamMembers: function() {
+  unusedTeamMembers: Ember.computed('teamMembers.[]', 'model.members.[]', function() {
     return _(this.get('teamMembers').toArray())
       .difference(this.get('model.members'));
-  }.property('teamMembers.[]', 'model.members.[]'),
+  }),
 
-  queryDidChange: function() {
+  queryDidChange: Ember.observer('query', function() {
     var query = this.get('query');
 
     if (query && query.length > 1) {
@@ -36,7 +36,7 @@ export default Ember.ObjectController.extend({
       this.set('requestPromise', null);
       this.set('results', []);
     }
-  }.observes('query'),
+  }),
 
   _queryDidChange: function() {
     var requestPromise = PromiseController.create({

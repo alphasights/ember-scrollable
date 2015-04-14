@@ -7,21 +7,21 @@ export default Ember.Component.extend({
   id: Ember.computed.oneWay('result.id'),
   path: Ember.computed.oneWay('resultProperties.path'),
 
-  url: function() {
+  url: Ember.computed('id', 'path', function() {
     return `${EmberENV.pistachioUrl}/${this.get('id')}/${this.get('path')}`;
-  }.property('id', 'path'),
+  }),
 
-  title: function() {
+  title: Ember.computed('result', 'resultProperties', function() {
     return this.get(`result.${this.get('resultProperties.titlePath')}`);
-  }.property('result', 'resultProperties'),
+  }),
 
-  details: function() {
+  details: Ember.computed('result', 'resultProperties', function() {
     return this.get(`result.${this.get('resultProperties.detailsPath')}`);
-  }.property('result', 'resultProperties'),
+  }),
 
-  resultProperties: function() {
+  resultProperties: Ember.computed('type', function() {
     return this.typeProperties[this.get('type')];
-  }.property('type'),
+  }),
 
   typeProperties: {
     account: {

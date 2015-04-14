@@ -48,6 +48,7 @@
     "ember-moment": "1.1.1",
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
     "ember-validations": "^2.0.0-alpha.3",
+    "ember-watson": "^0.3.1",
     "liquid-fire": "0.19.0"
   }
 }
