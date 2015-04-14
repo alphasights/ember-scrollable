@@ -91,7 +91,7 @@ export default Ember.Component.extend({
 
   allTimeZoneOptions: function() {
     return [TimeZoneOption.create({
-      title: 'System Time Zone',
+      title: 'Your Time Zone',
       abbreviation: timeZoneAbbreviation(new Date())
     })].concat(this.get('timeZoneOptions'));
   }.property('timeZoneOptions.[]'),
