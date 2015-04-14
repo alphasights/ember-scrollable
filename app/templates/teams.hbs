@@ -1,10 +1,10 @@
 <header>
   <div class="beta-alert">
     You're trying out the new Whiteboard.
-    You can <a {{bind-attr href=pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
+    You can <a href={{pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
   </div>
 
-  <div {{bind-attr class=":team-select showTeamSelect:open"}}>
+  <div class="team-select {{if showTeamSelect 'open'}}">
     {{#if showTeamSelect}}
       <div class="select">
         {{view "select"
