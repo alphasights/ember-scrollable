@@ -25,7 +25,7 @@
       {{#each day in days}}
         <li {{bind-attr style=dayStyle}}>
           {{#liquid-with day.localValue as localValue use="toDown"}}
-            {{moment localValue "ddd D/M"}}
+            {{moment localValue "ddd D MMM"}}
           {{/liquid-with}}
         </li>
       {{/each}}
