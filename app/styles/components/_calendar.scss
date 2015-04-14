@@ -44,6 +44,10 @@
       .dropdown {
         display: inline-block;
       }
+
+      i {
+        @include icon(caret-down);
+      }
     }
 
     .days {
