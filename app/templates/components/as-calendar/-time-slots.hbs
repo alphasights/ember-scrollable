@@ -1,6 +1,6 @@
-<ul class="time-slots" {{bind-attr style=timeSlotsHeaderStyle}}>
+<ul class="time-slots" style={{timeSlotsHeaderStyle}}>
   {{#each timeSlot in headerTimeSlots}}
-    <li {{bind-attr style=headerTimeSlotStyle}}>
+    <li style={{headerTimeSlotStyle}}>
       {{#liquid-with timeSlot.localValue as localValue use="toDown"}}
         {{moment localValue "h A"}}
       {{/liquid-with}}
