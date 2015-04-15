@@ -7,6 +7,7 @@ import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
+import notify from 'phoenix/helpers/notify';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -137,22 +138,11 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           type: 'DELETE'
         }).then(response => {
           this.store.pushPayload(response);
-
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-
-          new Messenger().post({
-            message: "The interaction has been cancelled.",
-            type: 'success',
-            showCloseButton: true
-          });
-
+          notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
         }, () => {
-          new Messenger().post({
-            message: "The interaction could not be cancelled.",
-            type: 'error',
-            showCloseButton: true
-          });
+          notify('The interaction could not be cancelled.', 'error');
         })
       });
 
@@ -186,23 +176,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
     this.get('dashboard').propertyDidChange('upcomingInteractions');
-
-    new Messenger().post({
-      message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
-      type: 'success',
-      showCloseButton: true
-    });
+    notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 
   modelDidError: function(error) {
     if (error.errors != null) {
       this.set('errors', error.errors);
     } else {
-      new Messenger().post({
-        message: `There has been an error scheduling the interaction.`,
-        type: 'error',
-        showCloseButton: true
-      });
+      notify(`There has been an error scheduling the interaction.`, 'error');
     }
   },
 

@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import logError from '../log-error';
+import notify from 'phoenix/helpers/notify';
 
 export default {
   name: 'errors',
@@ -21,11 +22,7 @@ export default {
       }
 
       if (status >= 500) {
-        new Messenger().post({
-          message: "Something went wrong with that request, please try again.",
-          type: 'error',
-          showCloseButton: true
-        });
+        notify('Something went wrong with that request, please try again.', 'error');
       }
 
       logError(error);
