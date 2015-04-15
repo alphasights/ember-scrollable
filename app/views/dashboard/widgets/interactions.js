@@ -10,11 +10,11 @@ export default WidgetView.extend({
   isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
   paginationInfo: Ember.computed.oneWay('controller.paginationInfo'),
   
-  title: function() {
+  title: Ember.computed('name', 'hasMoreItems', 'paginationInfo', function() {
     if (this.get('hasMoreItems')) {
       return `${this.get('name')} (${this.get('paginationInfo')})`;
     } else {
       return this.get('name');
     }
-  }.property('name', 'hasMoreItems', 'paginationInfo')
+  })
 });

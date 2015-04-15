@@ -5,7 +5,7 @@ export default Ember.Object.extend({
   time: null,
   endingTime: null,
 
-  duration: function() {
+  duration: Ember.computed('time', 'endingTime', function() {
     return moment.duration(moment(this.get('endingTime')).diff(this.get('time')));
-  }.property('time', 'endingTime')
+  })
 });

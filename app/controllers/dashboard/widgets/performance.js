@@ -1,31 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  maxCreditCount: function() {
+  maxCreditCount: Ember.computed('monthlyTarget', function() {
     return this.get('monthlyTarget') * 2;
-  }.property('monthlyTarget'),
+  }),
 
-  progress: function() {
+  progress: Ember.computed('maxCreditCount', 'currentMonthCreditCount', function() {
     return this.get('currentMonthCreditCount') / this.get('maxCreditCount');
-  }.property('maxCreditCount', 'currentMonthCreditCount'),
+  }),
 
-  targetRatio: function() {
+  targetRatio: Ember.computed('monthlyTarget', 'maxCreditCount', function() {
     return this.get('monthlyTarget') / this.get('maxCreditCount');
-  }.property('monthlyTarget', 'maxCreditCount'),
+  }),
 
-  paceRatio: function() {
+  paceRatio: Ember.computed('onPaceCreditTarget', 'maxCreditCount', function() {
     return this.get('onPaceCreditTarget') / this.get('maxCreditCount');
-  }.property('onPaceCreditTarget', 'maxCreditCount'),
+  }),
 
-  monthlyTargetTitle: function() {
+  monthlyTargetTitle: Ember.computed('monthlyTarget', function() {
     return `Target: ${this.get('monthlyTarget')}`;
-  }.property('monthlyTarget'),
+  }),
 
-  onPaceCreditTargetTitle: function() {
+  onPaceCreditTargetTitle: Ember.computed('onPaceCreditTarget', function() {
     return `On Pace: ${this.get('onPaceCreditTarget')}`;
-  }.property('onPaceCreditTarget'),
+  }),
 
-  currentMonthCreditCountTitle: function() {
+  currentMonthCreditCountTitle: Ember.computed('currentMonthCreditCount', function() {
     return `Credits: ${this.get('currentMonthCreditCount')}`;
-  }.property('currentMonthCreditCount')
+  })
 });

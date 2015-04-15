@@ -6,7 +6,7 @@ export default Ember.View.extend({
   isOnTarget: Ember.computed.oneWay('controller.isOnTarget'),
   isOnPace: Ember.computed.oneWay('controller.isOnPace'),
 
-  statusClass: function() {
+  statusClass: Ember.computed('isOnTarget', 'isOnPace', function() {
     if (this.get('isOnTarget')) {
       return 'on-target';
     } else if (this.get('isOnPace')) {
@@ -14,9 +14,9 @@ export default Ember.View.extend({
     } else {
       return null;
     }
-  }.property('isOnTarget', 'isOnPace'),
+  }),
 
-  setupTooltipster: function() {
+  setupTooltipster: Ember.on('didInsertElement', function() {
     Ember.run.schedule('afterRender', () => {
       this.$().hover(() => {
         this.$('.tooltipstered').tooltipster('show');
@@ -24,5 +24,5 @@ export default Ember.View.extend({
         this.$('.tooltipstered').tooltipster('hide');
       });
     });
-  }.on('didInsertElement')
+  })
 });

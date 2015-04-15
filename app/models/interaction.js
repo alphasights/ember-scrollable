@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -15,15 +16,15 @@ export default DS.Model.extend({
   advisorPhoneCountryCode: DS.attr('string'),
   advisorPhoneNumber: DS.attr('string'),
 
-  pistachioUrl: function() {
+  pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
-  }.property('id'),
+  }),
 
-  checklistUrl: function() {
+  checklistUrl: Ember.computed('id', 'project.id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#checklist_${this.get('id')}`;
-  }.property('id', 'project.id'),
+  }),
 
-  schedulingUrl: function() {
+  schedulingUrl: Ember.computed('id', 'project.id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  }.property('id', 'project.id')
+  })
 });
