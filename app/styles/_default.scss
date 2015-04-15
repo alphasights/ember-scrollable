@@ -11,3 +11,8 @@ input,
 select {
   font-weight: $font-weight-bold;
 }
+
+.notification {
+  right: 15px !important;
+  top: 15px !important;
+}

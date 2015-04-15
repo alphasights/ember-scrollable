@@ -12,7 +12,7 @@ export default DS.Model.extend({
 
   currentPosition: Ember.computed.alias('clientAccount.name'),
 
-  pistachioUrl: function() {
+  pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/client/contacts/${this.get('id')}`;
-  }.property('id')
+  })
 });

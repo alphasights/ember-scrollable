@@ -21,15 +21,15 @@ export default Ember.Controller.extend({
     'target': 'Targets'
   },
 
-  allSections: function() {
+  allSections: Ember.computed('sortedResultSections', 'topHitSection', 'results', function() {
     if (Ember.isPresent(this.get('results'))) {
       return [this.get('topHitSection')].concat(this.get('sortedResultSections'));
     } else {
       return [];
     }
-  }.property('sortedResultSections', 'topHitSection', 'results'),
+  }),
 
-  normalizedResults: function() {
+  normalizedResults: Ember.computed('results', function() {
     var results = this.get('results');
 
     if (results != null) {
@@ -48,33 +48,33 @@ export default Ember.Controller.extend({
     } else {
       return [];
     }
-  }.property('results'),
+  }),
 
-  topHit: function() {
+  topHit: Ember.computed('normalizedResults', function() {
     return _(this.get('normalizedResults')).max(function(result) {
       return result.score;
     });
-  }.property('normalizedResults'),
+  }),
 
-  topHitSection: function() {
+  topHitSection: Ember.computed('topHit', function() {
     var topHit = this.get('topHit');
 
     return {
       title: `Top Hit - ${topHit.type.capitalize()}`,
       results: [topHit]
     };
-  }.property('topHit'),
+  }),
 
-  sortedResultSections: function() {
+  sortedResultSections: Ember.computed('resultSections', function() {
     var resultSectionsOrder = this.get('resultSectionsOrder');
 
     return this.get('resultSections').sort(function(a, b) {
       return resultSectionsOrder.indexOf(a.type) -
              resultSectionsOrder.indexOf(b.type);
     });
-  }.property('resultSections'),
+  }),
 
-  resultSections: function() {
+  resultSections: Ember.computed('normalizedResults', function() {
     var resultSectionTitlesMapping = this.get('resultSectionTitlesMapping');
 
     return _(this.get('normalizedResults'))
@@ -87,11 +87,11 @@ export default Ember.Controller.extend({
           type: type
         };
       }).value();
-  }.property('normalizedResults'),
+  }),
 
-  queryDidChange: function() {
+  queryDidChange: Ember.observer('query', function() {
     Ember.run.debounce(this, '_queryDidChange', 100);
-  }.observes('query'),
+  }),
 
   _queryDidChange: function() {
     var query = this.get('query');

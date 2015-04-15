@@ -23,7 +23,7 @@
   <div class="days">
     <ul>
       {{#each day in days}}
-        <li {{bind-attr style=dayStyle}}>
+        <li style={{dayStyle}}>
           {{#liquid-with day.localValue as localValue use="toDown"}}
             {{moment localValue "ddd D MMM"}}
           {{/liquid-with}}
@@ -45,8 +45,7 @@
         title="Current Week"
         position="bottom"
         tagName="span"}}
-        <a {{action "goToCurrentWeek"}}
-           {{bind-attr class=":current-week isShowingCurrentWeek:selected"}}></a>
+        <a {{action "goToCurrentWeek"}} class="current-week {{if isShowingCurrentWeek 'selected'}}"></a>
       {{/tool-tipster}}
 
       {{#tool-tipster
@@ -64,7 +63,7 @@
 
   <ul class="days">
     {{#each day in days}}
-      <li {{bind-attr style=dayStyle}}>
+      <li style={{dayStyle}}>
         <ul class="times">
           {{#each timeSlot in timeSlots}}
             <li>

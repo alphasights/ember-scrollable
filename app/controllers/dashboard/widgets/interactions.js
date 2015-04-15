@@ -4,7 +4,7 @@ export default Ember.ArrayController.extend({
   isCollapsed: true,
   collapsedMaxVisibleItems: 4,
 
-  visibleContent: function() {
+  visibleContent: Ember.computed('arrangedContent.[]', 'isCollapsed', function() {
     var arrangedContent = this.get('arrangedContent');
 
     if (this.get('isCollapsed')) {
@@ -12,23 +12,23 @@ export default Ember.ArrayController.extend({
     } else {
       return arrangedContent;
     }
-  }.property('arrangedContent.[]', 'isCollapsed'),
+  }),
 
-  hasMoreItems: function() {
+  hasMoreItems: Ember.computed('collapsedMaxVisibleItems', 'arrangedContent.length', function() {
     return this.get('arrangedContent.length') > this.get('collapsedMaxVisibleItems');
-  }.property('collapsedMaxVisibleItems', 'arrangedContent.length'),
+  }),
 
-  collapseTitle: function() {
+  collapseTitle: Ember.computed('isCollapsed', function() {
     if (this.get('isCollapsed')) {
       return 'Show More';
     } else {
       return 'Collapse';
     }
-  }.property('isCollapsed'),
+  }),
 
-  paginationInfo: function() {
+  paginationInfo: Ember.computed('visibleContent.length', 'length', function() {
     return `${this.get('visibleContent.length')} of ${this.get('length')}`;
-  }.property('visibleContent.length', 'length'),
+  }),
 
   actions: {
     toggleCollapse: function() {

@@ -10,13 +10,13 @@
         <span>{{advisor.name}}</span>
 
         <small>
-          <a target="_blank" {{bind-attr href=project.pistachioUrl}}>
+          <a target="_blank" href={{project.pistachioUrl}}>
             {{project.name}}
           </a>
         </small>
       </h1>
 
-      <a target="_blank" {{bind-attr href=pistachioUrl}}>View interaction page</a>
+      <a target="_blank" href={{pistachioUrl}}>View interaction page</a>
     </div>
   </header>
 
@@ -46,12 +46,12 @@
     <header>
       {{as-checklist-status items=checklistItems}}
 
-      <a target="_blank" {{bind-attr href=checklistUrl}}>Show checklist</a>
+      <a target="_blank" href={{checklistUrl}}>Show checklist</a>
     </header>
 
     <ul>
       {{#each checklistItem in checklistItems}}
-        <li {{bind-attr class="checklistItem.completed"}}>{{checklistItem.title}}</li>
+        <li class={{checklistItem.completed}}>{{checklistItem.title}}</li>
       {{/each}}
     </ul>
   </section>

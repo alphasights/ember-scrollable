@@ -10,7 +10,7 @@ export default DS.Model.extend({
   user: Ember.computed.alias('teamMember'),
   deliveryTarget: Ember.computed.alias('targetValue'),
 
-  deliveryTargetDidChange: function() {
+  deliveryTargetDidChange: Ember.observer('deliveryTarget', function() {
     this.set('deliveryTarget', Math.max(0, this.get('deliveryTarget')));
-  }.observes('deliveryTarget')
+  })
 });

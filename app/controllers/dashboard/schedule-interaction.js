@@ -7,6 +7,7 @@ import PromiseController from 'phoenix/controllers/promise';
 import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
+import notify from 'phoenix/helpers/notify';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -14,7 +15,7 @@ var InteractionOccurrence = Occurrence.extend({
   interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
-  time: function(key, value) {
+  time: Ember.computed('scheduledCallTime', function(key, value) {
     if (arguments.length > 1) {
       if (value != null) {
         this.set('scheduledCallTime', value.toDate());
@@ -30,15 +31,15 @@ var InteractionOccurrence = Occurrence.extend({
     } else {
       return null;
     }
-  }.property('scheduledCallTime'),
+  }),
 
-  duration: function() {
+  duration: Ember.computed('interactionType', function() {
     if (this.get('interactionType') === 'half_hour_call') {
       return moment.duration(30, 'minute');
     } else {
       return moment.duration(60, 'minute');
     }
-  }.property('interactionType')
+  })
 });
 
 var UnavailabilityOccurrence = Occurrence.extend({
@@ -46,17 +47,17 @@ var UnavailabilityOccurrence = Occurrence.extend({
   title: 'AlphaCall',
   type: 'alpha-call',
 
-  time: function() {
+  time: Ember.computed('unavailability.startsAt', function() {
     return moment(this.get('unavailability.startsAt'));
-  }.property('unavailability.startsAt'),
+  }),
 
-  endingTime: function() {
+  endingTime: Ember.computed('unavailability.endsAt', function() {
     return moment(this.get('unavailability.endsAt'));
-  }.property('unavailability.endsAt'),
+  }),
 
-  duration: function() {
+  duration: Ember.computed('unavailability.startsAt', 'unavailability.endsAt', function() {
     return moment.duration(this.get('unavailability.endingTime').diff(this.get('unavailability.time')));
-  }.property('unavailability.startsAt', 'unavailability.endsAt')
+  })
 });
 
 export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
@@ -69,7 +70,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   phoneCountryCodes: phoneCountryCodes,
   selectedTimeZone: null,
 
-  formattedScheduledCallTime: function() {
+  formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'selectedTimeZone', function() {
     var scheduledCallTime = this.get('scheduledCallTime');
 
     if (scheduledCallTime != null) {
@@ -77,27 +78,33 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     } else {
       return null;
     }
-  }.property('scheduledCallTime', 'selectedTimeZone'),
+  }),
 
-  visibleUnavailabilities: function() {
-    return this.get('unavailabilities').filter((unavailability) => {
-      return unavailability.get('advisorId') === this.get('advisorId') &&
-             unavailability.get('projectId') === this.get('projectId') &&
-             unavailability.get('startsAt') === this.get('scheduledCallTime');
-    });
-  }.property('unavailabilities.@each.{advisorId,projectId,startsAt}', 'advisorId', 'projectId', 'scheduledCallTime'),
+  visibleUnavailabilities: Ember.computed(
+    'unavailabilities.@each.{advisorId,projectId,startsAt}',
+    'advisorId',
+    'projectId',
+    'scheduledCallTime',
+    function() {
+      return this.get('unavailabilities').filter((unavailability) => {
+        return unavailability.get('advisorId') === this.get('advisorId') &&
+               unavailability.get('projectId') === this.get('projectId') &&
+               unavailability.get('startsAt') === this.get('scheduledCallTime');
+      });
+    }
+  ),
 
-  unavailabilityOccurrences: function() {
+  unavailabilityOccurrences: Ember.computed('visibleUnavailabilities.[]', function() {
     return this.get('visibleUnavailabilities').map(function(unavailability) {
       return UnavailabilityOccurrence.create({ unavailability: unavailability });
     });
-  }.property('visibleUnavailabilities.[]'),
+  }),
 
-  occurrence: function() {
+  occurrence: Ember.computed(function() {
     return InteractionOccurrence.create({ interaction: this });
-  }.property(),
+  }),
 
-  timeZoneOptions: function() {
+  timeZoneOptions: Ember.computed('advisor.timeZone', 'clientContact.timeZone', function() {
     var timeZoneOptions = [];
     var advisorTimeZone = this.get('advisor.timeZone');
     var clientTimeZone = this.get('clientContact.timeZone');
@@ -117,7 +124,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     }
 
     return timeZoneOptions;
-  }.property('advisor.timeZone', 'clientContact.timeZone'),
+  }),
 
   actions: {
     hideSidePanel: function() {
@@ -131,22 +138,11 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           type: 'DELETE'
         }).then(response => {
           this.store.pushPayload(response);
-
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-
-          new Messenger().post({
-            message: "The interaction has been cancelled.",
-            type: 'success',
-            showCloseButton: true
-          });
-
+          notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
         }, () => {
-          new Messenger().post({
-            message: "The interaction could not be cancelled.",
-            type: 'error',
-            showCloseButton: true
-          });
+          notify('The interaction could not be cancelled.', 'error');
         })
       });
 
@@ -180,23 +176,14 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
     this.get('dashboard').propertyDidChange('upcomingInteractions');
-
-    new Messenger().post({
-      message: `An interaction between ${advisorName} and ${clientName} has been scheduled.`,
-      type: 'success',
-      showCloseButton: true
-    });
+    notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 
   modelDidError: function(error) {
     if (error.errors != null) {
       this.set('errors', error.errors);
     } else {
-      new Messenger().post({
-        message: `There has been an error scheduling the interaction.`,
-        type: 'error',
-        showCloseButton: true
-      });
+      notify('There has been an error scheduling the interaction.', 'error');
     }
   },
 
@@ -212,7 +199,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     }
   },
 
-  interactionTypesForSelect: function() {
+  interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
     var classifications = this.get('interactionClassifications');
     var interactionTypes = this.get('interactionTypes');
 
@@ -229,9 +216,9 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     });
 
     return _.flatten(types);
-  }.property('interactionTypes', 'interactionClassifications'),
+  }),
 
-  speakDialIns: function() {
+  speakDialIns: Ember.computed('speakDialInCountries', function() {
     var dialInCountries = this.get('speakDialInCountries');
 
     var dialInOptions = _.map(dialInCountries, function(country, countryCode) {
@@ -240,5 +227,5 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
     dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
-  }.property('speakDialInCountries')
+  })
 });

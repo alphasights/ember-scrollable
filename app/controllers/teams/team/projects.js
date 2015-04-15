@@ -17,20 +17,20 @@ export default Ember.ArrayController.extend({
     order: 'desc'
   }],
 
-  sortProperties: function() {
+  sortProperties: Ember.computed('sortProperty', function() {
     return [
       'priorityIndex:desc',
       `${this.get('sortProperty').property}:${this.get('sortProperty').order}`
     ];
-  }.property('sortProperty'),
+  }),
 
-  sortAscending: function() {
+  sortAscending: Ember.computed('sortProperty', function() {
     return this.get('sortProperty').ascending;
-  }.property('sortProperty'),
+  }),
 
-  sortProperty: function() {
+  sortProperty: Ember.computed('sortPropertyId', function() {
     return this
       .get('availableSortProperties')
       .findBy('id', this.get('sortPropertyId'));
-  }.property('sortPropertyId')
+  })
 });

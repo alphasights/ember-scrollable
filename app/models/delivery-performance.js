@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -5,11 +6,11 @@ export default DS.Model.extend({
   monthlyTarget: DS.attr('number'),
   user: DS.belongsTo('user'),
 
-  onPaceCreditTarget: function() {
+  onPaceCreditTarget: Ember.computed('monthlyTarget', function() {
     return Math.round(
       (this.get('monthlyTarget') * this.monthCompletionProgress()
     ) * 10) / 10;
-  }.property('monthlyTarget'),
+  }),
 
   weekdayHoursSinceBeginningOfMonth: function() {
     var yesterdaysDate = moment().date() - 1;
@@ -46,11 +47,11 @@ export default DS.Model.extend({
     return Math.round(timeSinceTodaysStart.asHours());
   },
 
-  isOnTarget: function() {
+  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
     return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
-  }.property('currentMonthCreditCount', 'monthlyTarget'),
+  }),
 
-  isOnPace: function() {
+  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
     return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
-  }.property('currentMonthCreditCount', 'onPaceCreditTarget')
+  })
 });

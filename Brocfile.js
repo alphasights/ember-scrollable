@@ -37,8 +37,7 @@ app.import('bower_components/honeybadger.js/honeybadger.js');
 app.import('bower_components/moment-timezone/builds/moment-timezone-with-data.js');
 app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/messenger/build/js/messenger.js');
-app.import('bower_components/messenger/build/js/messenger-theme-flat.js');
 app.import('bower_components/messenger/build/css/messenger.css');
-app.import('bower_components/messenger/build/css/messenger-theme-flat.css');
+app.import('bower_components/messenger/build/css/messenger-theme-block.css');
 
 module.exports = app.toTree();
