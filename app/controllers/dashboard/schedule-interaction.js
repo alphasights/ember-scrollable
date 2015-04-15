@@ -183,7 +183,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     if (error.errors != null) {
       this.set('errors', error.errors);
     } else {
-      notify(`There has been an error scheduling the interaction.`, 'error');
+      notify('There has been an error scheduling the interaction.', 'error');
     }
   },
 
