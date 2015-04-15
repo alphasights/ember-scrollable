@@ -10,12 +10,12 @@ export default Ember.Component.extend({
   timeSlotHeight: Ember.computed.oneWay('calendar.timeSlotHeight'),
   timeSlotDuration: Ember.computed.oneWay('calendar.timeSlotDuration'),
 
-  occupiedTimeSlots: function() {
+  occupiedTimeSlots: Ember.computed('occurrence.duration', function() {
     return this.get('occurrence.duration').as('milliseconds') /
            this.get('timeSlotDuration').as('milliseconds');
-  }.property('occurrence.duration'),
+  }),
 
-  style: function() {
+  style: Ember.computed('timeSlotHeight', 'occupiedTimeSlots', function() {
     return `height: ${this.get('occupiedTimeSlots') * this.get('timeSlotHeight')}px;`;
-  }.property('timeSlotHeight', 'occupiedTimeSlots')
+  })
 });

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -10,7 +11,7 @@ export default DS.Model.extend({
   phoneNumbers: DS.attr(),
   timeZone: DS.attr('string'),
 
-  currentPosition: function() {
+  currentPosition: Ember.computed('jobTitle', 'companyName', function() {
     var jobTitle = this.get('jobTitle');
     var companyName = this.get('companyName');
 
@@ -23,9 +24,9 @@ export default DS.Model.extend({
     } else {
       return '';
     }
-  }.property('jobTitle', 'companyName'),
+  }),
 
-  pistachioUrl: function() {
+  pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/advisors/${this.get('id')}`;
-  }.property('id')
+  })
 });

@@ -14,22 +14,22 @@ export default Ember.Mixin.create({
   errorMessage: null,
   disabled: false,
 
-  nameOrErrorDidChange: function() {
+  nameOrErrorDidChange: Ember.on('init', Ember.observer('name', 'errorProperty', function() {
     var name = this.get('name');
 
     if (name != null) {
       Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
       Ember.defineProperty(this, 'errors', Ember.computed.alias('model.errors.' + this.get('errorProperty')));
     }
-  }.observes('name', 'errorProperty').on('init'),
+  })),
 
-  showError: function() {
+  showError: Ember.computed('error', 'hasSubmitted', function() {
     if (this.get('hasSubmitted')) {
       return this.get('error') != null;
     }
-  }.property('error', 'hasSubmitted'),
+  }),
 
-  error: function() {
+  error: Ember.computed('errorMessage', 'errors.firstObject', function() {
     var error = this.get('errors.firstObject');
     var errorMessage = this.get('errorMessage') || this.get('errors.firstObject');
 
@@ -38,5 +38,5 @@ export default Ember.Mixin.create({
     } else {
       return null;
     }
-  }.property('errorMessage', 'errors.firstObject')
+  })
 });

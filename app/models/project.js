@@ -22,33 +22,33 @@ export default DS.Model.extend({
   priority: Ember.computed.alias('status'),
   scheduledInteractionsCount: Ember.computed.alias('upcomingInteractionsCount'),
 
-  memberships: function() {
+  memberships: Ember.computed('angles.@each.membershipsUpdatedAt', function() {
     return _(this.get('angles').map(function(angle) {
       return angle.get('memberships').toArray();
     })).flatten();
-  }.property('angles.@each.membershipsUpdatedAt'),
+  }),
 
-  members: function() {
+  members: Ember.computed('angles.@each.membersUpdatedAt', function() {
     return _(this.get('angles').mapBy('members'))
       .chain()
       .flatten()
       .uniq()
       .value();
-  }.property('angles.@each.membersUpdatedAt'),
+  }),
 
-  priorityIndex: function() {
+  priorityIndex: Ember.computed('priority', function() {
     return PRIORITIES.indexOf(this.get('priority'));
-  }.property('priority'),
+  }),
 
-  deliveryTarget: function() {
+  deliveryTarget: Ember.computed('memberships.@each.deliveryTarget', function() {
     return this.get('memberships')
       .mapBy('deliveryTarget')
       .reduce(function(previous, current) {
         return previous + current;
       }, 0);
-  }.property('memberships.@each.deliveryTarget'),
+  }),
 
-  pistachioUrl: function() {
+  pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
-  }.property('id'),
+  }),
 });

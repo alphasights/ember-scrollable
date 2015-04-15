@@ -5,11 +5,11 @@ export default Ember.Object.extend({
   title: null,
   value: null,
 
-  abbreviation: function() {
+  abbreviation: Ember.computed('value', function() {
     return timeZoneAbbreviation(new Date(), this.get('value'));
-  }.property('value'),
+  }),
 
-  description: function() {
+  description: Ember.computed('title', 'abbreviation', function() {
     return `${this.get('title')} (${this.get('abbreviation')})`;
-  }.property('title', 'abbreviation')
+  })
 });

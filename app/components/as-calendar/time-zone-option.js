@@ -9,9 +9,9 @@ export default Ember.Component.extend({
   selectedTimeZoneOption: Ember.computed.oneWay('calendar.selectedTimeZoneOption'),
   timeZone: Ember.computed.alias('calendar.timeZone'),
 
-  isSelected: function() {
+  isSelected: Ember.computed('timeZoneOption', 'selectedTimeZoneOption', function() {
     return this.get('timeZoneOption') === this.get('selectedTimeZoneOption');
-  }.property('timeZoneOption', 'selectedTimeZoneOption'),
+  }),
 
   click: function() {
     this.set('timeZone', this.get('timeZoneOption.value'));

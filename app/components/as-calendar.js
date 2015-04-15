@@ -7,7 +7,7 @@ var Time = Ember.Object.extend({
   value: null,
   timeZone: Ember.computed.oneWay('calendar.timeZone'),
 
-  localValue: function() {
+  localValue: Ember.computed('value', 'timeZone', function() {
     var timeZone = this.get('timeZone');
     var value = this.get('value');
 
@@ -16,29 +16,29 @@ var Time = Ember.Object.extend({
     } else {
       return value;
     }
-  }.property('value', 'timeZone')
+  })
 });
 
 var TimeSlot = Time.extend({
   offset: moment.duration(),
   duration: Ember.computed.oneWay('calendar.timeSlotDuration'),
 
-  endingOffset: function() {
+  endingOffset: Ember.computed('offset', 'duration', function() {
     return moment.duration(this.get('offset')).add(this.get('duration'));
-  }.property('offset', 'duration'),
+  }),
 
-  value: function() {
+  value: Ember.computed('offset', function() {
     return moment().startOf('day').add(this.get('offset'));
-  }.property('offset')
+  })
 });
 
 var Day = Time.extend({
   offset: 0,
   startingDate: Ember.computed.oneWay('calendar.startingDate'),
 
-  value: function() {
+  value: Ember.computed('startingDate', 'offset', function() {
     return moment(this.get('startingDate')).add(this.get('offset'), 'day');
-  }.property('startingDate', 'offset')
+  })
 });
 
 var startOfCurrentWeek = moment().startOf('week');
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
   selection: null,
   startingDate: null,
 
-  scrollToSelection: function() {
+  scrollToSelection: Ember.on('didInsertElement', function() {
     Ember.run.scheduleOnce('afterRender', () => {
       var selection = this.$('.calendar-occurrence').toArray().find((occurrence) => {
         return Ember.View.views[Ember.$(occurrence).prop('id')].get('occurrence') ===
@@ -69,9 +69,9 @@ export default Ember.Component.extend({
         container.scrollTop(Ember.$(selection).offset().top - container.offset().top);
       }
     });
-  }.on('didInsertElement'),
+  }),
 
-  initializeStartingDate: function() {
+  initializeStartingDate: Ember.on('init', function() {
     var selectionTime = this.get('selection.time');
 
     if (selectionTime != null) {
@@ -79,33 +79,33 @@ export default Ember.Component.extend({
     } else {
       this.set('startingDate', startOfCurrentWeek);
     }
-  }.on('init'),
+  }),
 
-  isShowingCurrentWeek: function() {
+  isShowingCurrentWeek: Ember.computed('startingDate', function() {
     return moment(this.get('startingDate')).startOf('week').isSame(startOfCurrentWeek);
-  }.property('startingDate'),
+  }),
 
-  selectedTimeZoneOption: function() {
+  selectedTimeZoneOption: Ember.computed('timeZone', 'allTimeZoneOptions.@each.value', function() {
     return this.get('allTimeZoneOptions').findBy('value', this.get('timeZone'));
-  }.property('timeZone', 'allTimeZoneOptions.@each.value'),
+  }),
 
-  allTimeZoneOptions: function() {
+  allTimeZoneOptions: Ember.computed('timeZoneOptions.[]', function() {
     return [TimeZoneOption.create({
       title: 'Your Time Zone',
       abbreviation: timeZoneAbbreviation(new Date())
     })].concat(this.get('timeZoneOptions'));
-  }.property('timeZoneOptions.[]'),
+  }),
 
-  days: function() {
+  days: Ember.computed('numberOfDays', function() {
     return _.range(this.get('numberOfDays')).map((offset) => {
       return Day.create({
         offset: offset,
         calendar: this
       });
     });
-  }.property('numberOfDays'),
+  }),
 
-  timeSlots: function() {
+  timeSlots: Ember.computed('timeSlotsRange.[]', function() {
     var timeSlotsRange = this.get('timeSlotsRange');
     var currentOffset = timeSlotsRange[0];
     var timeSlots = [];
@@ -121,27 +121,27 @@ export default Ember.Component.extend({
     }
 
     return timeSlots;
-  }.property('timeSlotsRange.[]'),
+  }),
 
-  headerTimeSlots: function() {
+  headerTimeSlots: Ember.computed('timeSlots.[]', function() {
     var timeSlots = this.get('timeSlots');
 
     return _(timeSlots).filter(function(timeSlot) {
       return (timeSlots.indexOf(timeSlot) % 2) === 0;
     });
-  }.property('timeSlots.[]'),
+  }),
 
-  timeSlotsHeaderStyle: function() {
+  timeSlotsHeaderStyle: Ember.computed('timeSlotHeight', function() {
     return `margin-top: -${this.get('timeSlotHeight') / 2}px;`.htmlSafe();
-  }.property('timeSlotHeight'),
+  }),
 
-  dayStyle: function() {
+  dayStyle: Ember.computed('days.length', function() {
     return `width: ${100 / this.get('days.length')}%;`.htmlSafe();
-  }.property('days.length'),
+  }),
 
-  headerTimeSlotStyle: function() {
+  headerTimeSlotStyle: Ember.computed('timeSlotHeight', function() {
     return `height: ${2 * this.get('timeSlotHeight')}px;`.htmlSafe();
-  }.property('timeSlotHeight'),
+  }),
 
   actions: {
     navigateWeek: function(index) {

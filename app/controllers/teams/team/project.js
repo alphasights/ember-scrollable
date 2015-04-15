@@ -8,9 +8,9 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigat
 
   navigableModels: Ember.computed.oneWay('team.projects.arrangedContent'),
 
-  modelRouteParams: function () {
+  modelRouteParams: Ember.computed('team.id', function () {
     return ['teams.team.project', this.get('team.id')];
-  }.property('team.id'),
+  }),
 
   anglesSorting: ['createdAt:desc'],
   angles: Ember.computed.sort('model.angles', 'anglesSorting'),

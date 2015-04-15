@@ -5,11 +5,11 @@ export default Ember.Component.extend({
 
   previousWidth: '0%',
 
-  width: function() {
+  width: Ember.computed('ratio', function() {
     return `${Math.min(1, this.get('ratio')) * 100}%`;
-  }.property('ratio'),
+  }),
 
-  updateWidth: function() {
+  updateWidth: Ember.on('didInsertElement', function() {
     this.$('> div').velocity({
       width: [this.get('width'), this.get('previousWidth')]
     }, {
@@ -17,5 +17,5 @@ export default Ember.Component.extend({
     });
 
     this.set('previousWidth', this.get('width'));
-  }.on('didInsertElement').observes('width')
+  }).observes('width')
 });

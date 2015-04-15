@@ -242,9 +242,9 @@ Don't use `Ember.computed` for array/collection functions (like `sort`, `filter`
 **Do this:**
 
 ```javascript
-remainingChores: function() {
+remainingChores: Ember.computed('chores.@each.done', function() {
   return this.get('chores').filterBy('done', false);
-}.property('chores.@each.done')
+})
 ```
 
 **Don't do this:**
@@ -286,9 +286,9 @@ When you have to bind an event to the document in `didInsertElement`, namespace 
 **Do this:**
 
 ```javascript
-clickEventName: function() {
+clickEventName: Ember.computed('elementId', function() {
   return `click.${this.get('elementId')}`;
-}.property('elementId'),
+}),
 
 didInsertElement: function() {
   Ember.$(document).on(this.get('clickEventName'), (event) => {
