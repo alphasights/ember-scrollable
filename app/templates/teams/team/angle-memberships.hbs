@@ -16,7 +16,7 @@
   {{/rl-dropdown-toggle}}
 
   {{#rl-dropdown tagName="ul" class="team-members" closeOnChildClick=true}}
-    <li class="search">
+    <li class="input">
       {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
         <i></i>
       {{/as-progress-indicator}}
@@ -24,7 +24,7 @@
       {{input type="text" value=query click=view.onSearchClick}}
     </li>
 
-    <li>
+    <li class="results">
       <ul>
         {{#each member in unusedTeamMembers}}
           <li {{action "add" member}}>
