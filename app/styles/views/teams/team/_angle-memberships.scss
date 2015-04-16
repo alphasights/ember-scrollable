@@ -113,7 +113,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
       @extend %dropdown-over;
       @include dropdown-with-search;
 
-      li {
+      .input {
         .progress-indicator {
           width: $angle-add-member-search-icon-size;
           height: $angle-add-member-search-icon-size;
@@ -125,7 +125,7 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
         }
 
         input {
-          height: $angle-add-member-button-size !important;
+          height: $angle-add-member-button-size;
           margin: $angle-member-inner-padding * 2 0;
           padding-left: $angle-add-member-avatar-size * 1.5;
         }
