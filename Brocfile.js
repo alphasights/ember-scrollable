@@ -3,7 +3,6 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = process.env.EMBER_ENV;
-var config = require('./config/environment')(env);
 
 var app = new EmberApp({
   inlineContent: {
