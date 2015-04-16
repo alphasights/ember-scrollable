@@ -111,80 +111,44 @@ $angle-add-member-search-icon-color: $angle-add-member-button-color;
 
     &.dropdown {
       @extend %dropdown-over;
+      @include dropdown-with-search;
 
-      ul {
-        margin: 0;
-        padding: 0;
-
-        li {
-          line-height: $angle-add-member-avatar-size;
-          white-space: nowrap;
-
-          article {
-            cursor: pointer;
-            padding: $angle-add-member-dropdown-padding $column-gutter / 4;
-
-            &:hover {
-              background-color: $global-section-border-color;
-            }
-          }
-        }
-      }
-
-      img {
-        @include detached-border($color: $global-section-border-color);
-
-        display: inline;
-        height: $angle-add-member-avatar-size;
-        margin-right: $column-gutter / 4;
-        width: $angle-add-member-avatar-size;
-      }
-
-      .team-members {
-        li > ul {
-          max-height: 15em;
-          overflow-x: hidden;
-          overflow-y: scroll;
-        }
-
-        .name {
-          display: inline;
-          margin-right: $angle-add-member-avatar-size;
-        }
-      }
-
-      .search {
-        cursor: auto;
-        padding: $angle-member-inner-padding $angle-member-inner-padding * 2;
-        position: relative;
-
-        &:hover {
-          background-color: transparent;
-        }
-
+      li {
         .progress-indicator {
-          height: $angle-add-member-search-icon-size;
-          left: $angle-member-inner-padding;
-          margin: $angle-member-inner-padding * 2 0;
-          overflow: hidden;
-          position: absolute;
-          text-align: center;
-          top: $angle-member-inner-padding;
           width: $angle-add-member-search-icon-size;
-        }
+          height: $angle-add-member-search-icon-size;
 
-        i {
-          @include icon(search);
-
-          color: $angle-add-member-search-icon-color;
-          line-height: $angle-add-member-button-size;
+          i {
+            color: $angle-add-member-search-icon-color;
+            line-height: $angle-add-member-button-size;
+          }
         }
 
         input {
-          border-radius: $global-radius / 2;
-          height: $angle-add-member-button-size;
+          height: $angle-add-member-button-size !important;
           margin: $angle-member-inner-padding * 2 0;
           padding-left: $angle-add-member-avatar-size * 1.5;
+        }
+      }
+
+      .team-members {
+        ul > li {
+          line-height: $angle-add-member-avatar-size;
+          white-space: nowrap;
+
+          img {
+            @include detached-border($color: $global-section-border-color);
+
+            display: inline;
+            height: $angle-add-member-avatar-size;
+            margin-right: $column-gutter / 4;
+            width: $angle-add-member-avatar-size;
+          }
+
+          .name {
+            display: inline;
+            margin-right: $angle-add-member-avatar-size;
+          }
         }
       }
     }
