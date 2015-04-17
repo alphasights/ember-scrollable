@@ -44,7 +44,7 @@ var InteractionOccurrence = Occurrence.extend({
 
 var UnavailabilityOccurrence = Occurrence.extend({
   unavailability: null,
-  title: 'AlphaCall',
+  title: 'Alpha Call',
   type: 'alpha-call',
 
   time: Ember.computed('unavailability.startsAt', function() {
@@ -55,8 +55,8 @@ var UnavailabilityOccurrence = Occurrence.extend({
     return moment(this.get('unavailability.endsAt'));
   }),
 
-  duration: Ember.computed('unavailability.startsAt', 'unavailability.endsAt', function() {
-    return moment.duration(this.get('unavailability.endingTime').diff(this.get('unavailability.time')));
+  duration: Ember.computed('endingTime', 'time', function() {
+    return moment.duration(this.get('endingTime').diff(this.get('time')));
   })
 });
 
@@ -81,15 +81,11 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   }),
 
   visibleUnavailabilities: Ember.computed(
-    'unavailabilities.@each.{advisorId,projectId,startsAt}',
-    'advisorId',
-    'projectId',
-    'scheduledCallTime',
+    'unavailabilities.@each.{interactionId}',
+    'id',
     function() {
       return this.get('unavailabilities').filter((unavailability) => {
-        return unavailability.get('advisorId') === this.get('advisorId') &&
-               unavailability.get('projectId') === this.get('projectId') &&
-               unavailability.get('startsAt') === this.get('scheduledCallTime');
+        return parseInt(unavailability.get('interactionId')) === parseInt(this.get('id'));
       });
     }
   ),
