@@ -1,5 +1,7 @@
 # Phoenix
 
+[![Code Climate](https://codeclimate.com/repos/552fc2cfe30ba03cc5000d2c/badges/c927a3e95c8d88e0c940/gpa.svg)](https://codeclimate.com/repos/552fc2cfe30ba03cc5000d2c/feed)
+
 Phoenix is the next CST delivery system.
 
 ## Prerequisites
