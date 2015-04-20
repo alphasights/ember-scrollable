@@ -72,7 +72,15 @@ QUnit.module("Interactions To Schedule Side Panel", {
     }});
 
     defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
-      "unavailabilities": []
+      "unavailabilities": [
+        {
+          "id": 123,
+          "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
+          "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
+          "interaction_id": interaction.id,
+          "type": 'alpha_call'
+        }
+      ]
     }});
 
     defineFixture('GET', '/interaction_types', { response: {
@@ -104,6 +112,17 @@ QUnit.module("Interactions To Schedule Side Panel", {
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
   }
+});
+
+test("Display other Alpha Calls in calendar", function(assert) {
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+
+  andThen(function() {
+    var nineAmCallSlot = find('.times:first li:nth-child(5) li:first article');
+
+    assert.equal(nineAmCallSlot.text().trim(), 'Alpha Call');
+  });
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
