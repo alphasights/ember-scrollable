@@ -85,7 +85,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     'id',
     function() {
       return this.get('unavailabilities').filter((unavailability) => {
-        return parseInt(unavailability.get('interactionId')) === parseInt(this.get('id'));
+        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('id'), 10);
       });
     }
   ),
