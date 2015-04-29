@@ -78,7 +78,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
           "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
           "interaction_id": interaction.id,
-          "type": 'alpha_call'
+          "type": 'alpha_call',
+          "title": 'AlphaCall'
         }
       ]
     }});
@@ -121,7 +122,7 @@ test("Display other Alpha Calls in calendar", function(assert) {
   andThen(function() {
     var nineAmCallSlot = find('.times:first li:nth-child(5) li:first article');
 
-    assert.equal(nineAmCallSlot.text().trim(), 'Alpha Call');
+    assert.equal(nineAmCallSlot.text().trim(), 'AlphaCall');
   });
 });
 
