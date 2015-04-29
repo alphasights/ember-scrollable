@@ -13,7 +13,7 @@ export default Ember.View.extend(KeyEventsMixin, {
   }),
 
   didInsertElement: function() {
-    Ember.on(this.get('clickEventName'), (event) => {
+    Ember.$(document).on(this.get('clickEventName'), (event) => {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = this.$('.bar, .results');
 
