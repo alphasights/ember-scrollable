@@ -22,7 +22,7 @@ export default Ember.View.extend(KeyEventsMixin, {
       }
 
       return true;
-    }, Ember.$(document));
+    });
   },
 
   willDestroyElement: function() {
