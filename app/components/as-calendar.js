@@ -50,7 +50,7 @@ export default Ember.Component.extend({
   numberOfDays: 7,
   timeSlotsRange: [moment.duration('7:00'), moment.duration('21:30')],
   timeSlotDuration: moment.duration(30, 'minute'),
-  timeSlotHeight: 30,
+  timeSlotHeight: 20,
   occurrences: [],
   timeZoneOptions: [],
   timeZone: null,
@@ -132,7 +132,9 @@ export default Ember.Component.extend({
   }),
 
   timeSlotsHeaderStyle: Ember.computed('timeSlotHeight', function() {
-    return `margin-top: -${this.get('timeSlotHeight') / 2}px;`.htmlSafe();
+    var height = this.get('timeSlotHeight');
+
+    return (`margin-top: -${height}px; line-height: ${height * 2}px`).htmlSafe();
   }),
 
   dayStyle: Ember.computed('days.length', function() {
