@@ -3,18 +3,21 @@ import logError from '../log-error';
 
 export default Ember.Route.extend({
   model: function() {
-    return Ember.RSVP.hash({
-      currentUser: this.store.find('user', 'me'),
+    return this.store.find('user', 'me').then((currentUser) => {
+      return Ember.RSVP.hash({
+        currentUser: currentUser,
+        teams: this.store.find('team'),
 
-      preferences: this.store.find('preferences').then((preferences) => {
-        if (Ember.isEmpty(preferences)) {
-          var newPreferences = this.store.createRecord('preferences');
-          newPreferences.save();
-          return newPreferences;
-        } else {
-          return preferences.get('firstObject');
-        }
-      })
+        preferences: this.store.find('preferences').then((preferences) => {
+          if (Ember.isEmpty(preferences)) {
+            var newPreferences = this.store.createRecord('preferences');
+            newPreferences.save();
+            return newPreferences;
+          } else {
+            return preferences.get('firstObject');
+          }
+        })
+      });
     });
   },
 
