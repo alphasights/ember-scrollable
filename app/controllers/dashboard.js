@@ -1,14 +1,14 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
-  upcomingInteractions: Ember.computed('interactions.[]', function() {
-    return this.get('interactions')
+export default Ember.Controller.extend({
+  upcomingInteractions: Ember.computed('model.interactions.[]', function() {
+    return this.get('model.interactions')
       .filterBy('scheduledCallTime')
       .sortBy('scheduledCallTime');
   }),
 
-  interactionsToSchedule: Ember.computed('interactions.[]', function() {
-    return this.get('interactions').filter(function(interaction) {
+  interactionsToSchedule: Ember.computed('model.interactions.[]', function() {
+    return this.get('model.interactions').filter(function(interaction) {
       return interaction.get('requestedAt') != null &&
         interaction.get('scheduledCallTime') == null &&
         !interaction.get('actioned');

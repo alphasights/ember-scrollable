@@ -5,7 +5,7 @@ export default Ember.ObjectController.extend({
 
   modelDidChange: Ember.observer('model', function() {
     analytics.identify(
-      this.get('initials'),
+      this.get('model.initials'),
       _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
     );
   }),
