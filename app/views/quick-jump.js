@@ -13,6 +13,8 @@ export default Ember.View.extend(KeyEventsMixin, {
   }),
 
   didInsertElement: function() {
+    this._super.apply(this, arguments);
+
     Ember.$(document).on(this.get('clickEventName'), (event) => {
       var $target = Ember.$(event.target);
       var $nonBlurringElements = this.$('.bar, .results');
@@ -26,6 +28,8 @@ export default Ember.View.extend(KeyEventsMixin, {
   },
 
   willDestroyElement: function() {
+    this._super.apply(this, arguments);
+    
     Ember.$(document).off(this.get('clickEventName'));
   },
 
