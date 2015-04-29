@@ -179,7 +179,7 @@ test("Read project list", function(assert) {
       highPriority: true,
       mediumPriority: false,
       lowPriority: false,
-      memberAvatarUrl: undefined,
+      memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
       targetCount: 2,
