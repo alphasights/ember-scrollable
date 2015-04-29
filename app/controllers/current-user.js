@@ -14,11 +14,11 @@ export default Ember.ObjectController.extend({
     /* jshint newcap: false */
     Intercom('boot', {
       app_id: EmberENV.intercomAppId,
-      email: this.get('email'),
-      created_at: this.get('createdAt'),
-      name: this.get('name'),
-      user_id: this.get('id'),
-      user_hash: this.get('intercomUserHash'),
+      email: this.get('model.email'),
+      created_at: this.get('model.createdAt'),
+      name: this.get('model.name'),
+      user_id: this.get('model.id'),
+      user_hash: this.get('model.intercomUserHash'),
       visited_phoenix: true
     });
     /* jshint newcap: true */
