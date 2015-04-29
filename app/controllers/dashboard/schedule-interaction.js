@@ -44,8 +44,11 @@ var InteractionOccurrence = Occurrence.extend({
 
 var UnavailabilityOccurrence = Occurrence.extend({
   unavailability: null,
-  title: 'Alpha Call',
-  type: 'alpha-call',
+  title: Ember.computed.oneWay('unavailability.title'),
+
+  type: Ember.computed('unavailability.type', function() {
+    return this.get('unavailability.type').dasherize();
+  }),
 
   time: Ember.computed('unavailability.startsAt', function() {
     return moment(this.get('unavailability.startsAt'));

@@ -18,7 +18,7 @@
     }
 
     .calendar-occurrence {
-      &.alpha-call {
+      &.alpha-call, &.client-busy {
         background-color: $alert-color;
         border-color: darken($alert-color, 5%);
         opacity: .5;
