@@ -3,20 +3,41 @@ import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
-const projectName = 'Project Name',
-      advisorName = 'Johnny Advisor',
-      advisorJobTitle = 'Vice President',
-      advisorCompanyName = 'Apple',
-      advisorEmail = 'advisor@email.com',
-      advisorPhoneNumber = '+1 555-123-4567',
-      advisorTimeZone = 'Europe/Moscow',
-      clientContactName = 'Bob Client',
-      clientAccountName = 'McKinsey & Company San Francisco',
-      clientEmail = 'client@email.com',
-      clientPhoneNumber = '+1 555-321-9000',
-      clientTimeZone = 'Australia/Sydney',
-      checklistStatus = 'Checklist Complete',
-      scheduledCallTime = '2015-02-20T10:00:00.000+00:00';
+const project = {
+  id: 32523,
+  name: 'Project Name'
+};
+
+const personalAdvisor = {
+  id: 256512,
+  name: 'Johnny Personal Advisor',
+  jobTitle: 'Vice President',
+  companyName: 'Apple',
+  email: 'personaladvisor@email.com',
+  phoneNumber: '+1 555-123-4567',
+  scheduledCallTime: '2015-02-20T10:00:00.000+00:00'
+};
+
+const clientContact = {
+  id: 21388,
+  name: 'Bob Client',
+  email: 'client@email.com',
+  phoneNumber: '+1 555-321-9000'
+};
+
+const clientAccount = {
+  id: 484,
+  name: 'McKinsey & Company San Francisco'
+};
+
+const team = {
+  id: 136,
+  name: 'NYSC18 - The McKountry Klub'
+};
+
+const primaryContact = {
+  id: 6565426
+};
 
 QUnit.module("Upcoming interactions", {
   beforeEach: function() {
@@ -28,43 +49,43 @@ QUnit.module("Upcoming interactions", {
     defineFixture('GET', '/interactions', { params: { team_id: '' }, response: {
      "advisors": [
         {
-          "id": 256512,
+          "id": personalAdvisor.id,
           "avatar_url": null,
-          "emails": [advisorEmail],
-          "name": advisorName,
-          "phone_numbers": [advisorPhoneNumber],
-          "job_title": advisorJobTitle,
-          "company_name": advisorCompanyName,
-          "time_zone": advisorTimeZone
+          "emails": [personalAdvisor.email],
+          "name": personalAdvisor.name,
+          "phone_numbers": [personalAdvisor.phoneNumber],
+          "job_title": personalAdvisor.jobTitle,
+          "company_name": personalAdvisor.companyName,
+          "time_zone": 'Europe/Moscow'
         }
      ],
      "client_contacts": [
         {
-          "id": 21387,
+          "id": clientContact.id,
           "avatar_url": null,
-          "emails": [clientEmail],
-          "name": clientContactName,
-          "phone_numbers": [clientPhoneNumber],
-          "client_account_id": 485,
-          "time_zone": clientTimeZone
+          "emails": [clientContact.email],
+          "name": clientContact.name,
+          "phone_numbers": [clientContact.phoneNumber],
+          "client_account_id": clientAccount.id,
+          "time_zone": 'Australia/Sydney'
         }
      ],
      "client_accounts": [
         {
-           "id": 485,
-           "name": clientAccountName
+           "id": clientAccount.id,
+           "name": clientAccount.name
         }
      ],
      "projects": [
         {
-           "id": 32522,
+           "id": project.id,
            "status": "high",
-           "name": projectName,
+           "name": project.name,
            "client_code": "MCKU",
-           "details_url": "/projects/32522",
+           "details_url": "/projects/project.id",
            "index": 3,
            "created_at": "2015-01-23T21:01:33.615+00:00",
-           "angle_ids": [40380],
+           "angle_ids": [],
            "analyst_1_id": 6565389
         }
      ],
@@ -74,31 +95,31 @@ QUnit.module("Upcoming interactions", {
      "interactions": [
         {
           "id": 1,
-          "scheduled_call_time": scheduledCallTime,
-          "advisor_id": 256512,
-          "client_contact_id": 21387,
-          "project_id": 32522,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
           "actioned": false,
-          "primary_contact_id":6565427
+          "primary_contact_id":primaryContact.id
         }
       ]
     }});
 
     defineFixture('GET', '/users/me', { response: {
       "user": {
-        "id": 6565427,
+        "id": primaryContact.id,
         "name": "Sarah Saltz",
         "time_zone": "America/New_York",
         "initials": "SSa",
-        "team_id": 136
+        "team_id": team.id
       }
     }});
 
     defineFixture('GET', '/teams', { response: {
       "teams": [
         {
-          "name" : "NYSC18 - The McKountry Klub",
-          "id": 136,
+          "name" : team.name,
+          "id": team.id,
           "office": "New York"
         }
       ]
@@ -135,16 +156,16 @@ test("Show interaction details", function(assert) {
     };
 
     assert.deepEqual(interactionDetails, {
-      titleProjectName: projectName,
-      titleAdvisorName: advisorName,
-      advisorName: advisorName,
-      currentPosition: `${advisorJobTitle} at ${advisorCompanyName}`,
-      advisorEmail: advisorEmail,
-      advisorPhoneNumber: advisorPhoneNumber,
-      clientContactName: clientContactName,
-      clientAccountName: clientAccountName,
-      clientEmail: clientEmail,
-      clientPhoneNumber: clientPhoneNumber,
+      titleProjectName: project.name,
+      titleAdvisorName: personalAdvisor.name,
+      advisorName: personalAdvisor.name,
+      currentPosition: `${personalAdvisor.jobTitle} at ${personalAdvisor.companyName}`,
+      advisorEmail: personalAdvisor.email,
+      advisorPhoneNumber: personalAdvisor.phoneNumber,
+      clientContactName: clientContact.name,
+      clientAccountName: clientAccount.name,
+      clientEmail: clientContact.email,
+      clientPhoneNumber: clientContact.phoneNumber,
       callDate: '20 February',
       callTime: '10:00 AM',
       advisorCallTime: '1:00 PM MSK',
@@ -168,8 +189,8 @@ test("Show upcoming interactions list", function(assert) {
     };
 
     assert.deepEqual(interactionListItem, {
-      advisorName: advisorName,
-      projectName: projectName,
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
       isChecklistComplete: true,
       localCallTime: '20 Feb, 10:00 AM',
       relativeCallTime: 'in 30 minutes'
