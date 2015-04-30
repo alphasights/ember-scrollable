@@ -9,7 +9,7 @@ import {
 
 setResolver(resolver);
 
-QUnit.urlParams.nocontainer = true;
+QUnit.urlParams.nocontainer = false;
 
 export default {
   beforeEach: function() {

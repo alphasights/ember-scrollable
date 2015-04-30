@@ -197,3 +197,110 @@ test("Show upcoming interactions list", function(assert) {
     });
   });
 });
+
+test("Team switchers displays all upcoming interactions for the team", function(assert) {
+
+  const teamAdvisor = {
+    id: 123,
+    name: 'Ricky Team Advisor',
+    scheduledCallTime: '2015-02-20T10:00:00.000+00:00'
+  };
+
+  // Team-level interactions
+  defineFixture('GET', '/interactions', { params: { team_id: team.id }, response: {
+   "advisors": [
+      {
+        "id": personalAdvisor.id,
+        "avatar_url": null,
+        "emails": ['teamadvisor@email.com'],
+        "name": personalAdvisor.name,
+        "phone_numbers": ['+1 555-212-4567'],
+        "job_title": 'President',
+        "company_name": 'Samsung',
+        "time_zone": 'Europe/Moscow'
+      },
+      {
+        "id": teamAdvisor.id,
+        "avatar_url": null,
+        "emails": [teamAdvisor.email],
+        "name": teamAdvisor.name,
+        "phone_numbers": [teamAdvisor.phoneNumber],
+        "job_title": teamAdvisor.jobTitle,
+        "company_name": teamAdvisor.companyName,
+        "time_zone": 'Europe/Moscow'
+      }
+   ],
+   "client_contacts": [
+      {
+        "id": clientContact.id,
+        "avatar_url": null,
+        "emails": [clientContact.email],
+        "name": clientContact.name,
+        "phone_numbers": [clientContact.phoneNumber],
+        "client_account_id": clientAccount.id,
+        "time_zone": 'Australia/Sydney'
+      }
+   ],
+   "client_accounts": [
+      {
+         "id": clientAccount.id,
+         "name": clientAccount.name
+      }
+   ],
+   "projects": [
+      {
+         "id": project.id,
+         "status": "high",
+         "name": project.name,
+         "client_code": "MCKU",
+         "details_url": "/projects/project.id",
+         "index": 3,
+         "created_at": "2015-01-23T21:01:33.615+00:00",
+         "angle_ids": [],
+         "analyst_1_id": 6565389
+      }
+   ],
+   "angles": [],
+   "angle_team_memberships": [],
+   "users": [],
+   "interactions": [
+      {
+        "id": 1,
+        "scheduled_call_time": personalAdvisor.scheduledCallTime,
+        "advisor_id": personalAdvisor.id,
+        "client_contact_id": clientContact.id,
+        "project_id": project.id,
+        "actioned": false,
+        "primary_contact_id":primaryContact.id
+      },
+      {
+        "id": 2,
+        "scheduled_call_time": teamAdvisor.scheduledCallTime,
+        "advisor_id": teamAdvisor.id,
+        "client_contact_id": clientContact.id,
+        "project_id": project.id,
+        "actioned": false,
+        "primary_contact_id":primaryContact.id
+      }
+    ]
+  }});
+
+  visit('/dashboard');
+  fillIn('.select select', team.name);
+
+  andThen(function() {
+    var interactions = find('.upcoming-interactions article').toArray().map(function(interaction) {
+      var $interaction = $(interaction);
+
+      return {
+        advisorName: $interaction.find('.title span').text().trim()
+      };
+    });
+
+    assert.deepEqual(interactions, [{
+      advisorName: personalAdvisor.name
+    }, {
+      advisorName: teamAdvisor.name
+    }]);
+  });
+});
