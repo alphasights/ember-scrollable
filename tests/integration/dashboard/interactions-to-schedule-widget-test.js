@@ -17,7 +17,7 @@ QUnit.module("Interactions To Schedule Widget", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-18T10:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { team_id: '' }, response: {
       "advisors": [
         {
           "id": 1,
@@ -129,8 +129,26 @@ QUnit.module("Interactions To Schedule Widget", {
       ]
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
+    defineFixture('GET', '/users/me', { response: {
+      "user": {
+        "id": 6565427,
+        "avatar_url": "",
+        "name": "Sarah Saltz",
+        "time_zone": "America/New_York",
+        "initials": "SSa",
+        "team_id": 136,
+        "developer": false
+      }
+    }});
+
+    defineFixture('GET', '/teams', { response: {
+      "teams": [
+        {
+          "name" : "NYSC18 - The McKountry Klub",
+          "id": 136,
+          "office": "New York"
+        }
+      ]
     }});
   },
 

@@ -11,7 +11,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { team_id: '' }, response: {
       "advisors": [
         {
           "id": 1,
@@ -67,8 +67,26 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "checklist_items": []
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
+    defineFixture('GET', '/users/me', { response: {
+      "user": {
+        "id": 6565427,
+        "avatar_url": "",
+        "name": "Sarah Saltz",
+        "time_zone": "America/New_York",
+        "initials": "SSa",
+        "team_id": 136,
+        "developer": false
+      }
+    }});
+
+    defineFixture('GET', '/teams', { response: {
+      "teams": [
+        {
+          "name" : "NYSC18 - The McKountry Klub",
+          "id": 136,
+          "office": "New York"
+        }
+      ]
     }});
 
     defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {

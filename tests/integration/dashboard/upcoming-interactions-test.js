@@ -25,7 +25,7 @@ QUnit.module("Upcoming interactions", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { team_id: '' }, response: {
      "advisors": [
         {
           "id": 256512,
@@ -78,13 +78,32 @@ QUnit.module("Upcoming interactions", {
           "advisor_id": 256512,
           "client_contact_id": 21387,
           "project_id": 32522,
-          "actioned": false
+          "actioned": false,
+          "primary_contact_id":6565427
         }
       ]
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
+    defineFixture('GET', '/users/me', { response: {
+      "user": {
+        "id": 6565427,
+        "avatar_url": "",
+        "name": "Sarah Saltz",
+        "time_zone": "America/New_York",
+        "initials": "SSa",
+        "team_id": 136,
+        "developer": false
+      }
+    }});
+
+    defineFixture('GET', '/teams', { response: {
+      "teams": [
+        {
+          "name" : "NYSC18 - The McKountry Klub",
+          "id": 136,
+          "office": "New York"
+        }
+      ]
     }});
   },
 
