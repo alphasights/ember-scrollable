@@ -15,12 +15,10 @@ QUnit.module('Preferences', {
     defineFixture('GET', '/users/me', { response: {
       "user": {
         "id": 6565427,
-        "avatar_url": "",
         "name": "Sarah Saltz",
         "time_zone": "America/New_York",
         "initials": "SSa",
-        "team_id": 136,
-        "developer": false
+        "team_id": 136
       }
     }});
 
