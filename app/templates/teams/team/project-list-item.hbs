@@ -10,7 +10,7 @@
 <div class="members">
   {{as-avatar person=model.lead class="lead"}}
 
-  {{#each member in model.members}}
+  {{#each member in nonLeadMembers}}
     {{as-avatar person=member}}
   {{/each}}
 </div>

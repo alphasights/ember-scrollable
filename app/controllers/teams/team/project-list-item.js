@@ -7,7 +7,7 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, {
   team: Ember.computed.oneWay('controllers.teams/team'),
   hasDeliveryTarget: Ember.computed.gt('model.deliveryTarget', 0),
 
-  members: Ember.computed('model.members.[]', function() {
+  nonLeadMembers: Ember.computed('model.members.[]', function() {
     return _(this.get('model.members')).without(this.get('model.lead'));
   }),
 
