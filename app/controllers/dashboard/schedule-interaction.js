@@ -51,12 +51,20 @@ var UnavailabilityOccurrence = Occurrence.extend({
     return this.get('unavailability.type').dasherize();
   }),
 
-  time: Ember.computed('unavailability.startsAt', function() {
-    return moment(this.get('unavailability.startsAt'));
+  time: Ember.computed('unavailability.startsAt', 'day', function() {
+    if (Ember.isBlank(this.get('day'))) {
+      return moment(this.get('unavailability.startsAt'));
+    } else {
+      return moment(this.get('day')).hour(7);
+    }
   }),
 
   endingTime: Ember.computed('unavailability.endsAt', function() {
-    return moment(this.get('unavailability.endsAt'));
+    if (Ember.isBlank(this.get('day'))) {
+      return moment(this.get('unavailability.endsAt'));
+    } else {
+      return moment(this.get('day')).hour(22);
+    }
   }),
 
   duration: Ember.computed('endingTime', 'time', function() {
@@ -97,18 +105,6 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   unavailabilityOccurrences: Ember.computed('visibleUnavailabilities.[]', function() {
     return this.get('visibleUnavailabilities').map(function(unavailability) {
       return UnavailabilityOccurrence.create({ unavailability: unavailability });
-    });
-  }),
-
-  unavailabilityOccurrenceSlots: Ember.computed('unavailabilityOccurrences.[]', function() {
-    return this.get('unavailabilityOccurrences').filter((occurence) => {
-      return occurence.get('day') === null;
-    });
-  }),
-
-  allDayUnavailabilityOccurrences: Ember.computed('unavailabilityOccurrences.[]', function() {
-    return this.get('unavailabilityOccurrences').filter((occurence) => {
-      return occurence.get('day') != null;
     });
   }),
 
