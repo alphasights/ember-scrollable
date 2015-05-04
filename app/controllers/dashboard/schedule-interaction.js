@@ -45,6 +45,7 @@ var InteractionOccurrence = Occurrence.extend({
 var UnavailabilityOccurrence = Occurrence.extend({
   unavailability: null,
   title: Ember.computed.oneWay('unavailability.title'),
+  day: Ember.computed.oneWay('unavailability.day'),
 
   type: Ember.computed('unavailability.type', function() {
     return this.get('unavailability.type').dasherize();
@@ -96,6 +97,18 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   unavailabilityOccurrences: Ember.computed('visibleUnavailabilities.[]', function() {
     return this.get('visibleUnavailabilities').map(function(unavailability) {
       return UnavailabilityOccurrence.create({ unavailability: unavailability });
+    });
+  }),
+
+  unavailabilityOccurrenceSlots: Ember.computed('unavailabilityOccurrences.[]', function() {
+    return this.get('unavailabilityOccurrences').filter((occurence) => {
+      return occurence.get('day') === null;
+    });
+  }),
+
+  allDayUnavailabilityOccurrences: Ember.computed('unavailabilityOccurrences.[]', function() {
+    return this.get('unavailabilityOccurrences').filter((occurence) => {
+      return occurence.get('day') != null;
     });
   }),
 
