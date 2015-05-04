@@ -8,6 +8,7 @@ export default DS.Model.extend({
   clientAccessNumberCountry: DS.attr('string'),
   clientContact: DS.belongsTo('clientContact'),
   additionalContactDetails: DS.attr('string'),
+  primaryContact: DS.belongsTo('user'),
   project: DS.belongsTo('project'),
   requestedAt: DS.attr('date'),
   scheduledCallTime: DS.attr('date'),
