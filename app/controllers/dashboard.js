@@ -5,6 +5,10 @@ export default Ember.ObjectController.extend({
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
   teamId: null,
 
+  isTeamView: Ember.computed('teamId', function() {
+    return this.get('teamId') !== null;
+  }),
+
   selectedTeam: Ember.computed('teamId', 'teams.@each.id', function(key, value) {
     if (arguments.length > 1) {
       if (value != null) {

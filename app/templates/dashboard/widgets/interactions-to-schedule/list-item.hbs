@@ -5,6 +5,9 @@
   </div>
 
   <div class="time">
+    {{#if isTeamView}}
+      {{as-avatar person=interaction.primaryContact}}
+    {{/if}}
     <span>Requested {{ago interaction.requestedAt}}</span>
   </div>
 

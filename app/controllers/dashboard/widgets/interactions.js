@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
+  needs: 'dashboard',
+  dashboard: Ember.computed.alias('controllers.dashboard'),
+  isTeamView: Ember.computed.alias('dashboard.isTeamView'),
   isCollapsed: true,
   collapsedMaxVisibleItems: 4,
 
