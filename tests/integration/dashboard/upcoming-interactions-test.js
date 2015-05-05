@@ -46,7 +46,7 @@ QUnit.module("Upcoming interactions", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { params: { team_id: '' }, response: {
+    defineFixture('GET', '/interactions', { response: {
      "advisors": [
         {
           "id": personalAdvisor.id,
@@ -101,26 +101,6 @@ QUnit.module("Upcoming interactions", {
           "project_id": project.id,
           "actioned": false,
           "primary_contact_id":primaryContact.id
-        }
-      ]
-    }});
-
-    defineFixture('GET', '/users/me', { response: {
-      "user": {
-        "id": primaryContact.id,
-        "name": "Sarah Saltz",
-        "time_zone": "America/New_York",
-        "initials": "SSa",
-        "team_id": team.id
-      }
-    }});
-
-    defineFixture('GET', '/teams', { response: {
-      "teams": [
-        {
-          "name" : team.name,
-          "id": team.id,
-          "office": "New York"
         }
       ]
     }});
@@ -199,15 +179,33 @@ test("Show upcoming interactions list", function(assert) {
 });
 
 test("Team switchers displays all upcoming interactions for the team", function(assert) {
-
   const teamAdvisor = {
     id: 123,
     name: 'Ricky Team Advisor',
     scheduledCallTime: '2015-02-20T10:00:00.000+00:00'
   };
 
-  // Team-level interactions
-  defineFixture('GET', '/interactions', { params: { team_id: team.id }, response: {
+  defineFixture('GET', '/users/me', { response: {
+    "user": {
+      "id": 6565427,
+      "name": "Sarah Saltz",
+      "time_zone": "America/New_York",
+      "initials": "SSa",
+      "team_id": 136
+    }
+  }});
+
+  defineFixture('GET', '/teams', { response: {
+    "teams": [
+      {
+        "name" : "NYSC18 - The McKountry Klub",
+        "id": 136,
+        "office": "New York"
+      }
+    ]
+  }});
+
+  defineFixture('GET', '/interactions', { params: { team_id: `${team.id}` }, response: {
    "advisors": [
       {
         "id": personalAdvisor.id,
@@ -286,7 +284,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
   }});
 
   visit('/dashboard');
-  fillIn('.select select', team.name);
+  select('.dashboard > header .select select option:last');
 
   andThen(function() {
     var interactions = find('.upcoming-interactions article').toArray().map(function(interaction) {

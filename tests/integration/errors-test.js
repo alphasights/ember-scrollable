@@ -7,25 +7,6 @@ QUnit.module("Errors", testHelper);
 
 test("Request error message", function(assert) {
   defineFixture('GET', '/quick_jumps', { params: { q: 'example' }, status: 500 });
-  defineFixture('GET', '/users/me', { response: {
-    "user": {
-      "id": 6565427,
-      "name": "Sarah Saltz",
-      "time_zone": "America/New_York",
-      "initials": "SSa",
-      "team_id": 136
-    }
-  }});
-
-  defineFixture('GET', '/teams', { response: {
-    "teams": [
-      {
-        "name" : "NYSC18 - The McKountry Klub",
-        "id": 136,
-        "office": "New York"
-      }
-    ]
-  }});
 
   visit('/');
   click('.quick-jump .bar input');
