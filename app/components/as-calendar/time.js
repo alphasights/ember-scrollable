@@ -47,7 +47,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  timeSlotOccurrences: Ember.computed('time', 'endingTime', 'allOccurrences.@each.time', function() {
+  occurrences: Ember.computed('time', 'endingTime', 'allOccurrences.@each.time', function() {
     var time = this.get('time').toDate();
     var endingTime = this.get('endingTime').toDate();
 
