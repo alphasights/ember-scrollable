@@ -51,20 +51,12 @@ var UnavailabilityOccurrence = Occurrence.extend({
     return this.get('unavailability.type').dasherize();
   }),
 
-  time: Ember.computed('unavailability.startsAt', 'day', function() {
-    if (Ember.isBlank(this.get('day'))) {
-      return moment(this.get('unavailability.startsAt'));
-    } else {
-      return moment(this.get('day')).hour(7);
-    }
+  time: Ember.computed('unavailability.startsAt', function() {
+    return moment(this.get('unavailability.startsAt'));
   }),
 
   endingTime: Ember.computed('unavailability.endsAt', function() {
-    if (Ember.isBlank(this.get('day'))) {
-      return moment(this.get('unavailability.endsAt'));
-    } else {
-      return moment(this.get('day')).hour(22);
-    }
+    return moment(this.get('unavailability.endsAt'));
   }),
 
   duration: Ember.computed('endingTime', 'time', function() {

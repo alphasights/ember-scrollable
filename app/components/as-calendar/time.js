@@ -47,13 +47,13 @@ export default Ember.Component.extend({
     }
   }),
 
-  occurrences: Ember.computed('time', 'endingTime', 'allOccurrences.@each.time', function() {
+  timeSlotOccurrences: Ember.computed('time', 'endingTime', 'allOccurrences.@each.time', function() {
     var time = this.get('time').toDate();
     var endingTime = this.get('endingTime').toDate();
 
     return this.get('allOccurrences').filter((occurrence) => {
       var occurrenceTime = occurrence.get('time').toDate();
-      return occurrenceTime >= time && occurrenceTime < endingTime;
+      return occurrence.get('day') === null && occurrenceTime >= time && occurrenceTime < endingTime;
     });
   }),
 
