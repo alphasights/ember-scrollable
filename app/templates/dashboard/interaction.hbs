@@ -1,22 +1,22 @@
 {{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
   <header>
     <div class="date-time">
-      <span class="date">{{moment scheduledCallTime "D MMMM"}}</span>
-      <span class="time">{{moment scheduledCallTime "h:mm A"}}</span>
+      <span class="date">{{moment model.scheduledCallTime "D MMMM"}}</span>
+      <span class="time">{{moment model.scheduledCallTime "h:mm A"}}</span>
     </div>
 
     <div class="content">
       <h1>
-        <span>{{advisor.name}}</span>
+        <span>{{model.advisor.name}}</span>
 
         <small>
-          <a target="_blank" href={{project.pistachioUrl}}>
-            {{project.name}}
+          <a target="_blank" href={{model.project.pistachioUrl}}>
+            {{model.project.name}}
           </a>
         </small>
       </h1>
 
-      <a target="_blank" href={{pistachioUrl}}>View interaction page</a>
+      <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
     </div>
   </header>
 
@@ -32,7 +32,7 @@
               <div class="call-time">
                 {{#tool-tipster title="Local Call Time"}}
                   <i></i>
-                  <span>{{local-moment scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                  <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
                 {{/tool-tipster}}
               </div>
             {{/if}}
@@ -46,7 +46,7 @@
     <header>
       {{as-checklist-status items=checklistItems}}
 
-      <a target="_blank" href={{checklistUrl}}>Show checklist</a>
+      <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
     </header>
 
     <ul>

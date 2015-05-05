@@ -3,14 +3,14 @@
 </div>
 
 <div class="details">
-  <span>{{name}}</span>
-  <small>{{clientCode}}</small>
+  <span>{{model.name}}</span>
+  <small>{{model.clientCode}}</small>
 </div>
 
 <div class="members">
-  {{as-avatar person=lead class="lead"}}
+  {{as-avatar person=model.lead class="lead"}}
 
-  {{#each member in members}}
+  {{#each member in nonLeadMembers}}
     {{as-avatar person=member}}
   {{/each}}
 </div>
@@ -21,7 +21,7 @@
   <div class="details">
     <div class="delivered">
       <span class="count">
-        {{deliveredAdvisorsCount}}
+        {{model.deliveredAdvisorsCount}}
       </span>
 
       <span class="label">delivered</span>
@@ -29,7 +29,7 @@
 
     <div class="target">
       <span class="count">
-        {{deliveryTarget}}
+        {{model.deliveryTarget}}
       </span>
 
       <span class="label">target</span>
