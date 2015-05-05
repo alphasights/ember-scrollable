@@ -14,9 +14,9 @@ Router.map(function() {
   this.resource('performance');
   this.resource('projects');
 
-  this.resource('teams', function() {
-    this.resource('teams.team', { path: '/:team_id/projects' }, function() {
-      this.resource('teams.team.project', { path: '/:project_id' });
+  this.resource('whiteboards', function() {
+    this.resource('whiteboards.whiteboard', { path: '/:team_id/projects' }, function() {
+      this.resource('whiteboards.whiteboard.project', { path: '/:project_id' });
     });
   });
 

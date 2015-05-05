@@ -2,9 +2,9 @@ import Ember from 'ember';
 import PromiseController from '../../promise';
 
 export default Ember.ObjectController.extend({
-  needs: ['teams/team'],
+  needs: ['whiteboards/whiteboard'],
 
-  team: Ember.computed.oneWay('controllers.teams/team'),
+  team: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
   requestPromise: null,
   query: null,
   results: [],

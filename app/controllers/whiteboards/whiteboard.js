@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ProjectsController from './team/projects';
+import ProjectsController from './whiteboard/projects';
 
 export default Ember.ObjectController.extend({
   queryParams: {

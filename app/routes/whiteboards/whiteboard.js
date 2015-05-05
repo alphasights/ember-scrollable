@@ -21,6 +21,6 @@ export default Ember.Route.extend({
     controller.set('model', models.team);
     controller.set('projects.model', models.projects);
     controller.set('members', models.members);
-    this.controllerFor('teams').set('selectedTeam', models.team);
+    this.controllerFor('whiteboards').set('selectedTeam', models.team);
   }
 });

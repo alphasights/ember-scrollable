@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNameBindings: [':teams'],
-  tagName: 'section'
+  classNameBindings: [':whiteboard'],
+  tagName: 'article'
 });

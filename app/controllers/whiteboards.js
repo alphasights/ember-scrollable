@@ -18,7 +18,7 @@ export default Ember.ObjectController.extend({
     if (this.get('teamSelectChanged')) {
       this.set('teamSelectChanged', false);
       this.set('showTeamSelect', false);
-      this.transitionToRoute('teams.team', this.get('selectedTeam.id'));
+      this.transitionToRoute('whiteboards.whiteboard', this.get('selectedTeam.id'));
     }
   }),
 

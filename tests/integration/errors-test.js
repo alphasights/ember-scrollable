@@ -33,7 +33,7 @@ test("Transition error message", function(assert) {
   defineFixture('GET', '/teams', { status: 500 });
 
   visit('/');
-  visit('/team');
+  visit('/whiteboards');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
@@ -48,7 +48,7 @@ test("404 error message", function(assert) {
     "users": []
   }});
 
-  visit('/teams/1/projects');
+  visit('/whiteboards/1/projects');
 
   andThen(function() {
     var message = $('.error h1').text().trim();

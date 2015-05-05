@@ -2,9 +2,9 @@ import Ember from 'ember';
 import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
 export default Ember.ObjectController.extend(ProjectProgressMixin, {
-  needs: ['teams/team'],
+  needs: ['whiteboards/whiteboard'],
 
-  team: Ember.computed.oneWay('controllers.teams/team'),
+  team: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
   hasDeliveryTarget: Ember.computed.gt('model.deliveryTarget', 0),
 
   nonLeadMembers: Ember.computed('model.members.[]', function() {
@@ -13,7 +13,7 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, {
 
   actions: {
     show: function() {
-      this.transitionToRoute('teams.team.project', this.get('team.id'), this.get('id'));
+      this.transitionToRoute('whiteboards.whiteboard.project', this.get('team.id'), this.get('id'));
     }
   }
 });
