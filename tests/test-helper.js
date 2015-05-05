@@ -53,6 +53,8 @@ export default {
         "office": "Example Office"
       }]
     }});
+
+    Messenger().hideAll();
   },
 
   afterEach: function() {
