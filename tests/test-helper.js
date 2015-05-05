@@ -54,7 +54,9 @@ export default {
       }]
     }});
 
+    /* jshint newcap: false */
     Messenger().hideAll();
+    /* jshint newcap: true */
   },
 
   afterEach: function() {

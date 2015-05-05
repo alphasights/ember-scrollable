@@ -31,7 +31,8 @@
     "select",
     "moment",
     "Timecop",
-    "lookup"
+    "lookup",
+    "Messenger"
   ],
   "node": false,
   "browser": false,
