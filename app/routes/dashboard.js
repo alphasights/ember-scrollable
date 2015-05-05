@@ -17,9 +17,12 @@ export default Ember.Route.extend({
     }
 
     return Ember.RSVP.hash({
-      teams: this.modelFor('application').teams,
       interactions: interactions,
-      deliveryPerformance: this.store.find('deliveryPerformance', 'me')
+
+      deliveryPerformance: this.store.find('deliveryPerformance', 'me').then((value) => {
+        this.store.recordForId('deliveryPerformance', 'me').unloadRecord();
+        return value;
+      })
     });
   }
 });
