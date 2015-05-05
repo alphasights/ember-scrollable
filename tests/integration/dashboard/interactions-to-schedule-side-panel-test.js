@@ -67,10 +67,6 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "checklist_items": []
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
-    }});
-
     defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
       "unavailabilities": [
         {
