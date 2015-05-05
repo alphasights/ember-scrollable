@@ -53,13 +53,13 @@ export default {
         "office": "Example Office"
       }]
     }});
-
-    /* jshint newcap: false */
-    Messenger().hideAll();
-    /* jshint newcap: true */
   },
 
   afterEach: function() {
+    /* jshint newcap: false */
+    Messenger().hideAll();
+    /* jshint newcap: true */
+    
     this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);
   }
