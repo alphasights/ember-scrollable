@@ -7,14 +7,6 @@ QUnit.module("Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/teams', { response: {
-      "teams": [{
-        "name": "Example Team",
-        "id": 1,
-        "office": "Example Office"
-      }]
-    }});
-
     defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "projects": [{
         "id": 1,
