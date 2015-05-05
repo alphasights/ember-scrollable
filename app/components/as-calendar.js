@@ -20,12 +20,6 @@ export default Ember.Component.extend({
   selection: null,
   startingDate: null,
 
-  allDayOccurrences: Ember.computed('occurrences.[]', function() {
-    return this.get('occurrences').filter((occurrence) => {
-      return occurrence.get('day') != null;
-    });
-  }),
-
   scrollToSelection: Ember.on('didInsertElement', function() {
     Ember.run.scheduleOnce('afterRender', () => {
       var selection = this.$('.calendar-occurrence').toArray().find((occurrence) => {
