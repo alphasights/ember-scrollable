@@ -26,6 +26,7 @@ export default Ember.Route.extend({
 
     currentUser.set('model', models.currentUser);
     currentUser.set('preferences', models.preferences);
+    currentUser.set('teams', models.teams);
     currentUser.send('boot');
   },
 
