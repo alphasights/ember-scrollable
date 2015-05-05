@@ -23,7 +23,7 @@
   <div class="days">
     <ul>
       {{#each day in days}}
-        <li style={{dayStyle}}>
+        <li style={{dayStyle}} class="{{if day.isSelected "is-selected"}}">
           {{#liquid-with day.localValue as localValue use="toDown"}}
             {{moment localValue "ddd D MMM"}}
           {{/liquid-with}}
@@ -63,7 +63,7 @@
 
   <ul class="days">
     {{#each day in days}}
-      <li style={{dayStyle}}>
+      <li style={{dayStyle}} class="{{if day.isSelected "is-selected"}}">
         <ul class="times">
           {{#each timeSlot in timeSlots}}
             <li>
