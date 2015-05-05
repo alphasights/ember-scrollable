@@ -196,7 +196,7 @@ test("Sort project list", function(assert) {
     });
   };
 
-  select('.team .sort-by-select option[value="client"]');
+  select('.whiteboard .sort-by-select option[value="client"]');
 
   andThen(function() {
     assert.deepEqual(
@@ -205,7 +205,7 @@ test("Sort project list", function(assert) {
     );
   });
 
-  select('.team .sort-by-select option[value="creation-date"]');
+  select('.whiteboard .sort-by-select option[value="creation-date"]');
 
   andThen(function() {
     assert.deepEqual(
