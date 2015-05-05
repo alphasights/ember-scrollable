@@ -61,6 +61,7 @@ module.exports = function(environment) {
     ENV.EmberENV.segmentWriteKey = null;
     ENV.EmberENV.intercomAppId = null;
     ENV.EmberENV.honeybadgerApiKey = null;
+    // ENV.EmberENV.logErrors = false;
   }
 
   return ENV;

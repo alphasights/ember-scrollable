@@ -1,3 +1,13 @@
+<header>
+  <div class="select">
+    {{view "select"
+      content=model.teams
+      optionLabelPath="content.name"
+      prompt=currentUser.name
+      selection=selectedTeam}}
+  </div>
+</header>
+
 <ul class="widgets">
   <li class="performance">
     {{render "dashboard.widgets.performance"

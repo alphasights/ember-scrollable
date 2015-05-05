@@ -9,18 +9,6 @@ QUnit.module("Team", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/teams', { response: {
-      "teams": [{
-        "name": "Example Team",
-        "id": 1,
-        "office": "Example Office"
-      }, {
-        "name": "Example Team 2",
-        "id": 2,
-        "office": "Example Office"
-      }]
-    }});
-
     defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU2",
