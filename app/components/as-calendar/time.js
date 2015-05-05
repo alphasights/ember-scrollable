@@ -53,7 +53,7 @@ export default Ember.Component.extend({
 
     return this.get('allOccurrences').filter((occurrence) => {
       var occurrenceTime = occurrence.get('time').toDate();
-      return occurrence.get('day') === null && occurrenceTime >= time && occurrenceTime < endingTime;
+      return occurrenceTime >= time && occurrenceTime < endingTime;
     });
   }),
 

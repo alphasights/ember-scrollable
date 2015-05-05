@@ -1,45 +1,8 @@
 import Ember from 'ember';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import timeZoneAbbreviation from 'phoenix/helpers/time-zone-abbreviation';
-
-var Time = Ember.Object.extend({
-  calendar: null,
-  value: null,
-  timeZone: Ember.computed.oneWay('calendar.timeZone'),
-
-  localValue: Ember.computed('value', 'timeZone', function() {
-    var timeZone = this.get('timeZone');
-    var value = this.get('value');
-
-    if (timeZone != null) {
-      return moment(value).tz(timeZone);
-    } else {
-      return value;
-    }
-  })
-});
-
-var TimeSlot = Time.extend({
-  offset: moment.duration(),
-  duration: Ember.computed.oneWay('calendar.timeSlotDuration'),
-
-  endingOffset: Ember.computed('offset', 'duration', function() {
-    return moment.duration(this.get('offset')).add(this.get('duration'));
-  }),
-
-  value: Ember.computed('offset', function() {
-    return moment().startOf('day').add(this.get('offset'));
-  })
-});
-
-var Day = Time.extend({
-  offset: 0,
-  startingDate: Ember.computed.oneWay('calendar.startingDate'),
-
-  value: Ember.computed('startingDate', 'offset', function() {
-    return moment(this.get('startingDate')).add(this.get('offset'), 'day');
-  })
-});
+import Day from 'phoenix/models/as-calendar/day';
+import TimeSlot from 'phoenix/models/as-calendar/time-slot';
 
 var startOfCurrentWeek = moment().startOf('week');
 

@@ -18,6 +18,16 @@
     float: left;
   }
 
+  .days > li.is-selected {
+    background-color: $iron;
+    opacity: .2;
+
+    &,
+    * {
+      pointer-events: none;
+    }
+  }
+
   header,
   > div {
     > * {
