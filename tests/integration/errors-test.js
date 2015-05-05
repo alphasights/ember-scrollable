@@ -60,14 +60,17 @@ test("Transition error message", function(assert) {
   });
 });
 
-// test("404 error message", function(assert) {
-//   defineFixture('GET', '/teams', { status: 404 });
-//   defineFixture('GET', '/users', { params: { team_id: 1 } });
-//
-//   visit('/teams/9999/projects');
-//
-//   andThen(function() {
-//     var message = $('.error h1').text().trim();
-//     assert.equal(message, "Sorry, the page you were looking for could not be found.");
-//   });
-// });
+test("404 error message", function(assert) {
+  defineFixture('GET', '/projects', { params: { team_id: '1' }, status: 404 });
+
+  defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
+    "users": []
+  }});
+
+  visit('/teams/1/projects');
+
+  andThen(function() {
+    var message = $('.error h1').text().trim();
+    assert.equal(message, "Sorry, the page you were looking for could not be found.");
+  });
+});

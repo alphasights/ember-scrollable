@@ -8,9 +8,17 @@ export default Ember.Route.extend({
   },
 
   model: function(params) {
+    var interactions;
+
+    if (params.teamId != null) {
+      interactions = this.store.find('interaction', { team_id: params.teamId });
+    } else {
+      interactions = this.store.find('interaction');
+    }
+
     return Ember.RSVP.hash({
       teams: this.modelFor('application').teams,
-      interactions: this.store.find('interaction', { team_id: params.teamId }),
+      interactions: interactions,
       deliveryPerformance: this.store.find('deliveryPerformance', 'me')
     });
   }
