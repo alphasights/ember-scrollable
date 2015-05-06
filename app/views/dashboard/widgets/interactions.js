@@ -7,6 +7,7 @@ export default WidgetView.extend({
 
   isTeamView: Ember.computed.oneWay('controller.isTeamView'),
   listItemTemplateName: null,
+  headerTemplateName: 'dashboard/widgets/interaction/header',
   hasMoreItems: Ember.computed.oneWay('controller.hasMoreItems'),
   isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
   paginationInfo: Ember.computed.oneWay('controller.paginationInfo'),

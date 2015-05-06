@@ -1,4 +1,19 @@
 .dashboard .widget.interactions {
+  .filters .dropdown {
+    button {
+      background-color: transparent;
+      border-color: transparent;
+      color: $white;
+      margin: 0;
+
+      i {
+        @include icon('chevron-down');
+
+        margin-left: $column-gutter / 4;
+      }
+    }
+  }
+
   > ul {
     margin-left: 0;
 
