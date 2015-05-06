@@ -1,5 +1,21 @@
 .dashboard .widget.interactions {
   .filters .dropdown {
+    &.team-members ul {
+      width: 200px;
+
+      li, li a {
+        line-height: 40px;
+        margin: 0;
+      }
+
+      .avatar {
+        height: 30px;
+        margin: 0;
+        margin-right: 5px;
+        width: 30px;
+      }
+    }
+
     button {
       background-color: transparent;
       border-color: transparent;

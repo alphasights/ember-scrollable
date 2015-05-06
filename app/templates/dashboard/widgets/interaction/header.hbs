@@ -1,19 +1,23 @@
 <section class="filters">
   {{#if isTeamView}}
-    {{#rl-dropdown-container class="dropdown"}}
+    {{#rl-dropdown-container class="dropdown team-members"}}
       {{#rl-dropdown-toggle}}
         {{#if selectedTeamMember}}
           <span>{{selectedTeamMember.initials}}</span>
         {{else}}
-          <span>All</span>
+          <span>Team Members</span>
         {{/if}}
         <i></i>
       {{/rl-dropdown-toggle}}
 
       {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
-        <li><a {{action "setTeamMember" null}}>All</a></li>
+        <li><a {{action "setTeamMember" null}}>All Team Members</a></li>
         {{#each teamMember in teamMembers}}
-          <li><a {{action "setTeamMember" teamMember}}>{{teamMember.name}} ({{teamMember.initials}})</a></li>
+          <li>
+            <a {{action "setTeamMember" teamMember}}>
+              {{as-avatar person=teamMember}} {{teamMember.name}} ({{teamMember.initials}})
+            </a>
+          </li>
         {{/each}}
       {{/rl-dropdown}}
     {{/rl-dropdown-container}}
