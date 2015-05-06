@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  setupController: function() {}
+  model: function() {
+    return this.store.find('whiteboard');
+  }
 });

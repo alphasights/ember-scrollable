@@ -1,5 +1,5 @@
 <ul>
-  {{#each membership in model.memberships itemController="teams.team.angle-membership"}}
+  {{#each membership in model.memberships itemController="whiteboards.whiteboard.angle-membership"}}
     <li>
       <article>
         {{as-avatar person=membership.user}}
@@ -15,7 +15,7 @@
       <i></i>
   {{/rl-dropdown-toggle}}
 
-  {{#rl-dropdown tagName="ul" class="team-members" closeOnChildClick=true}}
+  {{#rl-dropdown tagName="ul" class="members" closeOnChildClick=true}}
     <li class="input">
       {{#as-progress-indicator promise=requestPromise spinnerColor="#f88838"}}
         <i></i>
@@ -26,7 +26,7 @@
 
     <li class="results">
       <ul>
-        {{#each member in unusedTeamMembers}}
+        {{#each member in unusedMembers}}
           <li {{action "add" member}}>
             <article>
               {{as-avatar person=member}}

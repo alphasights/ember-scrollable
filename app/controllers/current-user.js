@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
   preferences: null,
+  teams: null,
 
   modelDidChange: Ember.observer('model', function() {
     analytics.identify(

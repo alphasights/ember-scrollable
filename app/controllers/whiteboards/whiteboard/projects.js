@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  team: null,
-  sortPropertyId: Ember.computed.oneWay('team.sortPropertyId'),
+  whiteboard: null,
+  sortPropertyId: Ember.computed.oneWay('whiteboard.sortPropertyId'),
   arrangedContent: Ember.computed.sort('content', 'sortProperties'),
 
   availableSortProperties: [{

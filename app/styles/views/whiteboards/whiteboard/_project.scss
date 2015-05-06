@@ -1,10 +1,10 @@
-$team-project-progress-bar-height: rem-calc(4);
-$team-project-header-title-height: rem-calc(120);
-$team-project-header-stats-height: $team-project-header-title-height / 2;
+$whiteboard-project-progress-bar-height: rem-calc(4);
+$whiteboard-project-header-title-height: rem-calc(120);
+$whiteboard-project-header-stats-height: $whiteboard-project-header-title-height / 2;
 
 .side-panel.project {
   .progress-bar {
-    height: $team-project-progress-bar-height;
+    height: $whiteboard-project-progress-bar-height;
   }
 
   header {
@@ -17,7 +17,7 @@ $team-project-header-stats-height: $team-project-header-title-height / 2;
     > .content {
       @extend %grid-column-12;
 
-      line-height: $team-project-header-title-height;
+      line-height: $whiteboard-project-header-title-height;
       padding: 0 $column-gutter;
 
       .info {
@@ -110,7 +110,7 @@ $team-project-header-stats-height: $team-project-header-title-height / 2;
         li {
           @extend %grid-column-3;
 
-          line-height: $team-project-header-stats-height;
+          line-height: $whiteboard-project-header-stats-height;
           padding: 0;
           white-space: nowrap;
 

@@ -14,7 +14,7 @@
 </header>
 
 <ul>
-  {{#each project in projects itemController="teams.team.project-list-item"}}
-    <li>{{render "teams.team.project-list-item" project.model tagName="article"}}</li>
+  {{#each project in projects itemController="whiteboards.whiteboard.project-list-item"}}
+    <li>{{render "whiteboards.whiteboard.project-list-item" project.model tagName="article"}}</li>
   {{/each}}
 </ul>
