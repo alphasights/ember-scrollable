@@ -124,19 +124,23 @@ test("Display other Alpha Calls in calendar", function(assert) {
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
+  var callType = 'call';
+  var accessCountry = 'AU';
+  var advisorPhoneNumber = '5553214567';
+
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
       "actioned": false,
       "advisor_id": "1",
-      "client_access_number_country": "AU",
+      "client_access_number_country": accessCountry,
       "client_contact_id": "21387",
       "additional_contact_details": null,
-      "interaction_type": "call",
+      "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
       "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false,
-      "advisor_phone_number": '123',
+      "advisor_phone_number": advisorPhoneNumber,
       "advisor_phone_country_code": '1'
     }
   }, response: {
@@ -151,13 +155,13 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Set the interaction type
-  fillIn('.ember-select[name=interactionType]', 'call');
+  fillIn('.ember-select[name=interactionType]', callType);
 
   // Select speak dial in
-  fillIn('.ember-select[name=clientAccessNumberCountry]', 'AU');
+  fillIn('.ember-select[name=clientAccessNumberCountry]', accessCountry);
 
   // Fill in advisor phone number
-  fillIn('input[name=advisorPhoneNumber]', '123');
+  fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
 
   // Submit form
   click('.form-submission button');
