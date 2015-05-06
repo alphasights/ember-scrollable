@@ -109,6 +109,27 @@ QUnit.module("Whiteboard", {
       "angle_team_memberships": []
     }});
 
+    defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, response: {
+      "users": [],
+
+      "projects": [{
+        "id": 5,
+        "status": "high",
+        "name": "Example Project 5",
+        "client_code": "EP",
+        "details_url": "/projects/5",
+        "created_at": "2009-07-14T17:05:32.909+01:00",
+        "angle_ids": [],
+        "analyst_1_id": 1,
+        "proposed_advisors_count": 0,
+        "left_to_schedule_advisors_count": 0,
+        "upcoming_interactions_count": 0
+      }],
+
+      "angles": [],
+      "angle_team_memberships": []
+    }});
+
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
@@ -119,6 +140,10 @@ QUnit.module("Whiteboard", {
     }});
 
     defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
+      "users": []
+    }});
+
+    defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
       "users": []
     }});
 
@@ -436,5 +461,25 @@ test("Change selected team", function(assert) {
 
   andThen(function() {
     assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
+  });
+});
+
+test("Change selected whiteboard", function(assert) {
+  defineFixture('GET', '/whiteboards', { response: {
+    "whiteboards": [
+      {
+        "id": 1,
+        "name": "Cool whiteboard"
+      }
+    ]
+  }});
+
+  visit('/whiteboards');
+
+  click('.whiteboard-select button');
+  select('.whiteboard-select option:last');
+
+  andThen(function() {
+    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 5');
   });
 });
