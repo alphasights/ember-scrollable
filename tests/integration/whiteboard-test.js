@@ -9,7 +9,7 @@ QUnit.module("Team", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
+    defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, response: {
       "users": [{
         "initials": "EU2",
         "id": 2,
@@ -88,7 +88,7 @@ QUnit.module("Team", {
       }]
     }});
 
-    defineFixture('GET', '/projects', { params: { team_id: '2' }, response: {
+    defineFixture('GET', '/projects', { params: { whiteboard_id: '2' }, response: {
       "users": [],
 
       "projects": [{
@@ -109,7 +109,7 @@ QUnit.module("Team", {
       "angle_team_memberships": []
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
+    defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
         "id": 3,
@@ -118,7 +118,7 @@ QUnit.module("Team", {
       }]
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
+    defineFixture('GET', '/users', { params: { whiteboard_id: '2' }, response: {
       "users": []
     }});
   },

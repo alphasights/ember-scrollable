@@ -15,7 +15,7 @@ Router.map(function() {
   this.resource('projects');
 
   this.resource('whiteboards', function() {
-    this.resource('whiteboards.whiteboard', { path: '/:team_id/projects' }, function() {
+    this.resource('whiteboards.whiteboard', { path: '/:whiteboard_id/projects' }, function() {
       this.resource('whiteboards.whiteboard.project', { path: '/:project_id' });
     });
   });

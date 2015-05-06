@@ -2,23 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function(params) {
-    var teamId = params.team_id;
+    var whiteboardId = params.whiteboard_id;
 
     return Ember.RSVP.hash({
-      team: this.store.find('team', teamId),
+      whiteboard: this.store.find('whiteboard', whiteboardId),
 
       members: this.store.find('user', {
-        team_id: teamId
+        whiteboard_id: whiteboardId
       }),
 
       projects: this.store.find('project', {
-        team_id: teamId
+        whiteboard_id: whiteboardId
       })
     });
   },
 
   setupController: function(controller, models) {
-    controller.set('model', models.team);
+    controller.set('model', models.whiteboard);
     controller.set('projects.model', models.projects);
     controller.set('members', models.members);
     this.controllerFor('whiteboards').set('selectedTeam', models.team);

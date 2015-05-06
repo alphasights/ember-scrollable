@@ -42,9 +42,9 @@ test("Transition error message", function(assert) {
 });
 
 test("404 error message", function(assert) {
-  defineFixture('GET', '/projects', { params: { team_id: '1' }, status: 404 });
+  defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, status: 404 });
 
-  defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
+  defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
     "users": []
   }});
 
