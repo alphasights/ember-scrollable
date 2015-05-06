@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
   needs: ['currentUser'],
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
   teamId: null,
+  teams: Ember.computed.alias('currentUser.teams'),
 
   selectedTeam: Ember.computed('teamId', 'teams.@each.id', function(key, value) {
     if (arguments.length > 1) {
@@ -17,7 +18,7 @@ export default Ember.Controller.extend({
     var teamId = this.get('teamId');
 
     if (teamId != null) {
-      return this.get('teams').findBy('id', this.get('teamId'));
+      return this.get('teams').findBy('id', teamId);
     } else {
       return null;
     }
