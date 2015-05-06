@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['currentUser'],
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
   teamId: null,
+  teams: Ember.computed.alias('currentUser.teams'),
 
   isTeamView: Ember.computed('teamId', function() {
     return this.get('teamId') !== null;
@@ -21,7 +22,7 @@ export default Ember.ObjectController.extend({
     var teamId = this.get('teamId');
 
     if (teamId != null) {
-      return this.get('teams').findBy('id', this.get('teamId'));
+      return this.get('teams').findBy('id', teamId);
     } else {
       return null;
     }
@@ -31,14 +32,14 @@ export default Ember.ObjectController.extend({
     teamId: 'team_id'
   },
 
-  upcomingInteractions: Ember.computed('interactions.[]', function() {
-    return this.get('interactions')
+  upcomingInteractions: Ember.computed('model.interactions.[]', function() {
+    return this.get('model.interactions')
       .filterBy('scheduledCallTime')
       .sortBy('scheduledCallTime');
   }),
 
-  interactionsToSchedule: Ember.computed('interactions.[]', function() {
-    return this.get('interactions').filter(function(interaction) {
+  interactionsToSchedule: Ember.computed('model.interactions.[]', function() {
+    return this.get('model.interactions').filter(function(interaction) {
       return interaction.get('requestedAt') != null &&
         interaction.get('scheduledCallTime') == null &&
         !interaction.get('actioned');

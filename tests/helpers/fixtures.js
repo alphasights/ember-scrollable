@@ -82,6 +82,9 @@ var Fixtures = Ember.Object.extend({
         JSON.stringify(requestHandler.fixture.response)
       ];
 
+      Ember.Logger.log(`Stubbing request to ${url}:`);
+      Ember.Logger.log(requestHandler.fixture);
+
       requestHandler.called = true;
     }
 

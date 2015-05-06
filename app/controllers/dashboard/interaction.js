@@ -1,20 +1,20 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
-export default Ember.ObjectController.extend(ModelsNavigationMixin, {
+export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
   navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
-  profiles: Ember.computed('advisor', 'clientContact', function() {
+  profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
     return [{
-      person: this.get('advisor'),
+      person: this.get('model.advisor'),
       class: 'advisor',
       title: 'Advisor'
     }, {
-      person: this.get('clientContact'),
+      person: this.get('model.clientContact'),
       class: 'client',
       title: 'Client'
     }];

@@ -67,18 +67,16 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "checklist_items": []
     }});
 
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
-    }});
-
     defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
       "unavailabilities": [
         {
           "id": 123,
           "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
           "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
+          "day": null,
           "interaction_id": interaction.id,
-          "type": 'alpha_call'
+          "type": 'alpha_call',
+          "title": 'AlphaCall'
         }
       ]
     }});
@@ -121,7 +119,7 @@ test("Display other Alpha Calls in calendar", function(assert) {
   andThen(function() {
     var nineAmCallSlot = find('.times:first li:nth-child(5) li:first article');
 
-    assert.equal(nineAmCallSlot.text().trim(), 'Alpha Call');
+    assert.equal(nineAmCallSlot.text().trim(), 'AlphaCall');
   });
 });
 

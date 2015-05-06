@@ -52,12 +52,12 @@ export default Ember.ObjectController.extend({
 
   actions: {
     add: function(user) {
-      if (this.get('members').contains(user)) { return; }
+      if (this.get('model.members').contains(user)) { return; }
 
       var membership = this.store.createRecord('angleTeamMembership', {
         user: user,
         angle: this.get('model'),
-        project: this.get('project')
+        project: this.get('model.project')
       });
 
       membership.save();

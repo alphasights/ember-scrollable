@@ -1,10 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  needs: ['currentUser'],
+  currentUser: Ember.computed.oneWay('controllers.currentUser'),
   showTeamSelect: false,
   selectedTeam: null,
   teamSelectChanged: false,
-  multipleTeamsAvailable: Ember.computed.gt('length', 1),
+  multipleTeamsAvailable: Ember.computed.gt('model.length', 1),
+  model: Ember.computed.alias('currentUser.teams'),
 
   pistachioUrl: Ember.computed(function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;

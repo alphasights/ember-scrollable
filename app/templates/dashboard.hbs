@@ -1,7 +1,7 @@
 <header>
   <div class="select">
     {{view "select"
-      content=model.teams
+      content=teams
       optionLabelPath="content.name"
       prompt=currentUser.name
       selection=selectedTeam}}
@@ -11,7 +11,7 @@
 <ul class="widgets">
   <li class="performance">
     {{render "dashboard.widgets.performance"
-      deliveryPerformance
+      model.deliveryPerformance
       tagName="section"}}
   </li>
 

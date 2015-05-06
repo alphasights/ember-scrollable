@@ -4,6 +4,8 @@ import logError from '../log-error';
 export default Ember.Route.extend({
   model: function() {
     return this.store.find('user', 'me').then((currentUser) => {
+      this.store.recordForId('user', 'me').unloadRecord();
+
       return Ember.RSVP.hash({
         currentUser: currentUser,
         teams: this.store.find('team'),
@@ -26,6 +28,7 @@ export default Ember.Route.extend({
 
     currentUser.set('model', models.currentUser);
     currentUser.set('preferences', models.preferences);
+    currentUser.set('teams', models.teams);
     currentUser.send('boot');
   },
 

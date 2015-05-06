@@ -7,39 +7,39 @@
         {{as-priority-select project=model}}
 
         <h1>
-          <span>{{name}}</span>
-          <small>{{clientCode}}</small>
+          <span>{{model.name}}</span>
+          <small>{{model.clientCode}}</small>
 
-          <a class="pistachio-link" href={{pistachioUrl}} target="_blank">
+          <a class="pistachio-link" href={{model.pistachioUrl}} target="_blank">
             <i></i>
           </a>
         </h1>
       </div>
 
       <div class="lead">
-        {{as-avatar person=lead}}
+        {{as-avatar person=model.lead}}
       </div>
     </div>
 
     <div class="stats">
       <ul>
         <li>
-          <span class="count">{{deliveredAdvisorsCount}}</span>
+          <span class="count">{{model.deliveredAdvisorsCount}}</span>
           <span class="name">Delivered</span>
         </li>
 
         <li>
-          <span class="count">{{scheduledInteractionsCount}}</span>
+          <span class="count">{{model.scheduledInteractionsCount}}</span>
           <span class="name">Upcoming</span>
         </li>
 
         <li>
-          <span class="count">{{notScheduledInteractionsCount}}</span>
+          <span class="count">{{model.notScheduledInteractionsCount}}</span>
           <span class="name">To Schedule</span>
         </li>
 
         <li>
-          <span class="count">{{deliveryTarget}}</span>
+          <span class="count">{{model.deliveryTarget}}</span>
           <span class="name">Target</span>
         </li>
       </ul>

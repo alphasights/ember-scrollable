@@ -128,10 +128,6 @@ QUnit.module("Interactions To Schedule Widget", {
         }
       ]
     }});
-
-    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
-      "users": []
-    }});
   },
 
   afterEach: function() {
