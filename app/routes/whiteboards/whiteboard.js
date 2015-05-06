@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     var whiteboardId = params.whiteboard_id;
     var whiteboard, queryParams;
 
-    if (params.whiteboard_id.startsWith('team-')) {
+    if (params.whiteboard_id.lastIndexOf('team-', 0) === 0) {
       var teamId = whiteboardId.replace('team-', '');
 
       whiteboard = this.store.find('team', teamId).then(function(value) {
