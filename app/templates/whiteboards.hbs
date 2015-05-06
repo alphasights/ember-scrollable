@@ -1,0 +1,27 @@
+<header>
+  <div class="beta-alert">
+    You're trying out the new Whiteboard.
+    You can <a href={{pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
+  </div>
+
+  <div class="whiteboard-select {{if showWhiteboardSelect 'open'}}">
+    {{#if showWhiteboardSelect}}
+      <div class="select">
+        {{view "select"
+          content=whiteboards
+          value=selectedWhiteboard
+          change=onWhiteboardSelectChange
+          optionLabelPath="content.name"
+          optionGroupPath="type"}}
+      </div>
+    {{else}}
+      <h1>{{selectedWhiteboard.name}}</h1>
+    {{/if}}
+
+    {{#if multipleWhiteboardsAvailable}}
+      <label><button class="toggle" {{action "toggleWhiteboardSelect"}}>Change Whiteboard</button></label>
+    {{/if}}
+  </div>
+</header>
+
+{{outlet}}

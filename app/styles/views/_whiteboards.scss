@@ -1,4 +1,4 @@
-.teams {
+.whiteboards {
   .beta-alert {
     @include alert($bg: $info-color);
 
@@ -8,7 +8,7 @@
     margin-top: $column-gutter / 2;
   }
 
-  .team-select {
+  .whiteboard-select {
     h1,
     select,
     .toggle {

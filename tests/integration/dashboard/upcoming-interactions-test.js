@@ -72,21 +72,21 @@ QUnit.module("Upcoming interactions", {
      ],
      "client_accounts": [
         {
-           "id": clientAccount.id,
-           "name": clientAccount.name
+          "id": clientAccount.id,
+          "name": clientAccount.name
         }
      ],
      "projects": [
         {
-           "id": project.id,
-           "status": "high",
-           "name": project.name,
-           "client_code": "MCKU",
-           "details_url": "/projects/project.id",
-           "index": 3,
-           "created_at": "2015-01-23T21:01:33.615+00:00",
-           "angle_ids": [],
-           "analyst_1_id": 6565389
+          "id": project.id,
+          "status": "high",
+          "name": project.name,
+          "client_code": "MCKU",
+          "details_url": "/projects/project.id",
+          "index": 3,
+          "created_at": "2015-01-23T21:01:33.615+00:00",
+          "angle_ids": [],
+          "analyst_1_id": 6565389
         }
      ],
      "angles": [],
@@ -205,7 +205,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
     ]
   }});
 
-  defineFixture('GET', '/interactions', { params: { team_id: `${team.id}` }, response: {
+  defineFixture('GET', '/interactions', { params: { team_id: team.id.toString() }, response: {
    "advisors": [
       {
         "id": personalAdvisor.id,

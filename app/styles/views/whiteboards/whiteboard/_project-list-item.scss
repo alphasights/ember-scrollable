@@ -1,4 +1,4 @@
-.team .project-list-item {
+.whiteboard .project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
   @include single-transition(background-color, 100ms, linear);

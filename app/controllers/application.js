@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   }, {
     id: 'projects', name: 'Projects', routeName: 'projects'
   }, {
-    id: 'team', name: 'Teams', routeName: 'teams'
+    id: 'whiteboards', name: 'Whiteboards', routeName: 'whiteboards'
   }, {
     id: 'performance', name: 'Performance', routeName: 'performance'
   }],

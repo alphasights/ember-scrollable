@@ -5,7 +5,7 @@ import '../helpers/select';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
-QUnit.module("Team", {
+QUnit.module("Whiteboard", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -109,6 +109,27 @@ QUnit.module("Team", {
       "angle_team_memberships": []
     }});
 
+    defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, response: {
+      "users": [],
+
+      "projects": [{
+        "id": 5,
+        "status": "high",
+        "name": "Example Project 5",
+        "client_code": "EP",
+        "details_url": "/projects/5",
+        "created_at": "2009-07-14T17:05:32.909+01:00",
+        "angle_ids": [],
+        "analyst_1_id": 1,
+        "proposed_advisors_count": 0,
+        "left_to_schedule_advisors_count": 0,
+        "upcoming_interactions_count": 0
+      }],
+
+      "angles": [],
+      "angle_team_memberships": []
+    }});
+
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
@@ -121,6 +142,14 @@ QUnit.module("Team", {
     defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
       "users": []
     }});
+
+    defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
+      "users": []
+    }});
+
+    defineFixture('GET', '/whiteboards', { response: {
+      "whiteboards": []
+    }});
   },
 
   afterEach: function() {
@@ -129,7 +158,7 @@ QUnit.module("Team", {
 });
 
 test("Read project list", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   wait();
 
   andThen(function() {
@@ -188,7 +217,7 @@ test("Read project list", function(assert) {
 });
 
 test("Sort project list", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
 
   var projectTitles = function() {
     return find('.project-list-item').toArray().map(function(project) {
@@ -196,7 +225,7 @@ test("Sort project list", function(assert) {
     });
   };
 
-  select('.team .sort-by-select option[value="client"]');
+  select('.whiteboard .sort-by-select option[value="client"]');
 
   andThen(function() {
     assert.deepEqual(
@@ -205,7 +234,7 @@ test("Sort project list", function(assert) {
     );
   });
 
-  select('.team .sort-by-select option[value="creation-date"]');
+  select('.whiteboard .sort-by-select option[value="creation-date"]');
 
   andThen(function() {
     assert.deepEqual(
@@ -229,7 +258,7 @@ test("Change project priority", function(assert) {
     }
   }});
 
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first .priority-select .dropdown');
   click('.project-list-item:first .priority-select ul > .low');
 
@@ -240,7 +269,7 @@ test("Change project priority", function(assert) {
 });
 
 test("Show project details", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
 
   andThen(function(){
@@ -289,7 +318,7 @@ test("Show project details", function(assert) {
 });
 
 test("Navigate to next project with navigation buttons", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   click('.project .next');
 
@@ -299,7 +328,7 @@ test("Navigate to next project with navigation buttons", function(assert) {
 });
 
 test("Navigate to next project with arrow keys", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   keyEvent(document, 'keyup', 39);
 
@@ -309,7 +338,7 @@ test("Navigate to next project with arrow keys", function(assert) {
 });
 
 test("Navigate to previous project with navigation buttons", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:last');
   click('.project .previous');
 
@@ -319,7 +348,7 @@ test("Navigate to previous project with navigation buttons", function(assert) {
 });
 
 test("Navigate to previous project with arrow keys", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:last');
   keyEvent(document, 'keyup', 37);
 
@@ -329,7 +358,7 @@ test("Navigate to previous project with arrow keys", function(assert) {
 });
 
 test("Move back to the last project from the first", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   click('.project .previous');
 
@@ -339,7 +368,7 @@ test("Move back to the last project from the first", function(assert) {
 });
 
 test("Move back to the first project from the last", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:last');
   click('.project .next');
 
@@ -362,7 +391,7 @@ test("Change project priority from the details", function(assert) {
     }
   }});
 
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   click('.project .priority-select .dropdown');
   click('.project .priority-select ul > .low');
@@ -382,7 +411,7 @@ test("Change delivery target for an angle membership", function(assert) {
     }
   }});
 
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
@@ -400,10 +429,10 @@ test("Add a member to an angle", function(assert) {
     }
   }});
 
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   click('.angle-memberships .add > button');
-  click('.angle-memberships .add .team-members li');
+  click('.angle-memberships .add .members li');
 
   andThen(function() {
     assert.equal(handler.called, true);
@@ -414,7 +443,7 @@ test("Add a member to an angle", function(assert) {
 test("Remove a member from an angle", function(assert) {
   var handler = defineFixture('DELETE', '/angle_team_memberships/1');
 
-  visit('/teams');
+  visit('/whiteboards');
   click('.project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
@@ -425,12 +454,32 @@ test("Remove a member from an angle", function(assert) {
 });
 
 test("Change selected team", function(assert) {
-  visit('/teams');
+  visit('/whiteboards');
 
-  click('.team-select button');
-  select('.team-select option:last');
+  click('.whiteboard-select button');
+  select('.whiteboard-select option:last');
 
   andThen(function() {
     assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
+  });
+});
+
+test("Change selected whiteboard", function(assert) {
+  defineFixture('GET', '/whiteboards', { response: {
+    "whiteboards": [
+      {
+        "id": 1,
+        "name": "Cool whiteboard"
+      }
+    ]
+  }});
+
+  visit('/whiteboards');
+
+  click('.whiteboard-select button');
+  select('.whiteboard-select option:last');
+
+  andThen(function() {
+    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 5');
   });
 });

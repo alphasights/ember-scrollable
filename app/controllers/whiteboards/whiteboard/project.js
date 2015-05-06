@@ -3,13 +3,13 @@ import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
 export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigationMixin, {
-  needs: ['teams/team'],
-  team: Ember.computed.oneWay('controllers.teams/team'),
+  needs: ['whiteboards/whiteboard'],
+  whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
 
-  navigableModels: Ember.computed.oneWay('team.projects.arrangedContent'),
+  navigableModels: Ember.computed.oneWay('whiteboard.projects.arrangedContent'),
 
-  modelRouteParams: Ember.computed('team.id', function () {
-    return ['teams.team.project', this.get('team.id')];
+  modelRouteParams: Ember.computed('whiteboard.id', function () {
+    return ['whiteboards.whiteboard.project', this.get('whiteboard.id')];
   }),
 
   anglesSorting: ['createdAt:desc'],
@@ -17,7 +17,7 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigat
 
   actions: {
     hideSidePanel: function() {
-      this.transitionToRoute('teams.team', this.get('team.id'));
+      this.transitionToRoute('whiteboards.whiteboard', this.get('whiteboard.id'));
     }
   }
 });

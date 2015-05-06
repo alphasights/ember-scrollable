@@ -30,10 +30,10 @@ test("First load error message", function(assert) {
 });
 
 test("Transition error message", function(assert) {
-  defineFixture('GET', '/teams', { status: 500 });
+  defineFixture('GET', '/whiteboards', { status: 500 });
 
   visit('/');
-  visit('/team');
+  visit('/whiteboards');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
@@ -42,13 +42,17 @@ test("Transition error message", function(assert) {
 });
 
 test("404 error message", function(assert) {
+  defineFixture('GET', '/whiteboards', { response: {
+    "whiteboards": []
+  }});
+
   defineFixture('GET', '/projects', { params: { team_id: '1' }, status: 404 });
 
   defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
     "users": []
   }});
 
-  visit('/teams/1/projects');
+  visit('/whiteboards/team-1/projects');
 
   andThen(function() {
     var message = $('.error h1').text().trim();
