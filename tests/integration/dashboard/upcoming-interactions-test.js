@@ -205,7 +205,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
     ]
   }});
 
-  defineFixture('GET', '/interactions', { params: { whiteboard_id: team.id.toString() }, response: {
+  defineFixture('GET', '/interactions', { params: { team_id: team.id.toString() }, response: {
    "advisors": [
       {
         "id": personalAdvisor.id,

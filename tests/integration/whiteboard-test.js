@@ -5,11 +5,11 @@ import '../helpers/select';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
-QUnit.module("Team", {
+QUnit.module("Whiteboard", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, response: {
+    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU2",
         "id": 2,
@@ -88,7 +88,7 @@ QUnit.module("Team", {
       }]
     }});
 
-    defineFixture('GET', '/projects', { params: { whiteboard_id: '2' }, response: {
+    defineFixture('GET', '/projects', { params: { team_id: '2' }, response: {
       "users": [],
 
       "projects": [{
@@ -109,7 +109,7 @@ QUnit.module("Team", {
       "angle_team_memberships": []
     }});
 
-    defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": [{
         "initials": "EU3",
         "id": 3,
@@ -118,8 +118,12 @@ QUnit.module("Team", {
       }]
     }});
 
-    defineFixture('GET', '/users', { params: { whiteboard_id: '2' }, response: {
+    defineFixture('GET', '/users', { params: { team_id: '2' }, response: {
       "users": []
+    }});
+
+    defineFixture('GET', '/whiteboards', { response: {
+      "whiteboards": []
     }});
   },
 
@@ -403,7 +407,7 @@ test("Add a member to an angle", function(assert) {
   visit('/whiteboards');
   click('.project-list-item:first');
   click('.angle-memberships .add > button');
-  click('.angle-memberships .add .team-members li');
+  click('.angle-memberships .add .members li');
 
   andThen(function() {
     assert.equal(handler.called, true);

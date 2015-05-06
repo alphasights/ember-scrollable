@@ -7,7 +7,7 @@ QUnit.module("Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/projects', { params: { whiteboard_id: '1' }, response: {
+    defineFixture('GET', '/projects', { params: { team_id: '1' }, response: {
       "projects": [{
         "id": 1,
         "status": "high",
@@ -23,8 +23,12 @@ QUnit.module("Side Panel", {
       }]
     }});
 
-    defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
+    defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": []
+    }});
+
+    defineFixture('GET', '/whiteboards', { response: {
+      "whiteboards": []
     }});
   },
 

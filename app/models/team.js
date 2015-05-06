@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 var TeamWhiteboard = Ember.Object.extend({
   team: null,
