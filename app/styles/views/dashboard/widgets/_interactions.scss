@@ -39,16 +39,25 @@
       }
     }
 
+    .avatar-container {
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-2;
+
+      img {
+        max-width: none;
+      }
+    }
+
     .time {
-      @extend %grid-column-small-4;
-      @extend %grid-column-medium-4;
+      @extend %grid-column-small-3;
+      @extend %grid-column-medium-3;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-small-6;
-      @extend %grid-column-medium-7;
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-6;
     }
 
     .checklist-status {
