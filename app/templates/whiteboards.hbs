@@ -4,21 +4,22 @@
     You can <a href={{pistachioUrl}}>go back to the old one</a> or <a {{action "submitFeedback"}}>submit feedback</a>.
   </div>
 
-  <div class="team-select {{if showTeamSelect 'open'}}">
-    {{#if showTeamSelect}}
+  <div class="whiteboard-select {{if showWhiteboardSelect 'open'}}">
+    {{#if showWhiteboardSelect}}
       <div class="select">
         {{view "select"
-          content=model
-          value=selectedTeam
-          change=onTeamSelectChange
-          optionLabelPath="content.name"}}
+          content=whiteboards
+          value=selectedWhiteboard
+          change=onWhiteboardSelectChange
+          optionLabelPath="content.name"
+          optionGroupPath="type"}}
       </div>
     {{else}}
-      <h1>{{selectedTeam.name}}</h1>
+      <h1>{{selectedWhiteboard.name}}</h1>
     {{/if}}
 
-    {{#if multipleTeamsAvailable}}
-      <label><button class="toggle" {{action "toggleTeamSelect"}}>Change Team</button></label>
+    {{#if multipleWhiteboardsAvailable}}
+      <label><button class="toggle" {{action "toggleWhiteboardSelect"}}>Change Whiteboard</button></label>
     {{/if}}
   </div>
 </header>

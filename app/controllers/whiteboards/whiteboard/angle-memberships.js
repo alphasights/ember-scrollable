@@ -4,7 +4,7 @@ import PromiseController from '../../promise';
 export default Ember.ObjectController.extend({
   needs: ['whiteboards/whiteboard'],
 
-  team: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
+  whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
   requestPromise: null,
   query: null,
   results: [],
@@ -14,17 +14,16 @@ export default Ember.ObjectController.extend({
     return this.get('model.memberships').sortBy('createdAt').filterBy('isDeleted', false);
   }),
 
-  teamMembers: Ember.computed('requestPromise', 'team.members', 'results', function() {
+  members: Ember.computed('requestPromise', 'whiteboard.members', 'results', function() {
     if (this.get('requestPromise')) {
       return this.get('results');
     } else {
-      return this.get('team.members');
+      return this.get('whiteboard.members');
     }
   }),
 
-  unusedTeamMembers: Ember.computed('teamMembers.[]', 'model.members.[]', function() {
-    return _(this.get('teamMembers').toArray())
-      .difference(this.get('model.members'));
+  unusedMembers: Ember.computed('members.[]', 'model.members.[]', function() {
+    return _(this.get('members').toArray()).difference(this.get('model.members'));
   }),
 
   queryDidChange: Ember.observer('query', function() {

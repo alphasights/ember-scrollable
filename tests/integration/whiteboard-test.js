@@ -427,8 +427,8 @@ test("Remove a member from an angle", function(assert) {
 test("Change selected team", function(assert) {
   visit('/whiteboards');
 
-  click('.team-select button');
-  select('.team-select option:last');
+  click('.whiteboard-select button');
+  select('.whiteboard-select option:last');
 
   andThen(function() {
     assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
