@@ -187,12 +187,24 @@ test("Team switchers displays all upcoming interactions for the team", function(
 
   defineFixture('GET', '/users/me', { response: {
     "user": {
-      "id": 6565427,
+      "id": primaryContact.id,
       "name": "Sarah Saltz",
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": 136
     }
+  }});
+
+  defineFixture('GET', '/users', { params: { team_id: team.id.toString() }, response: {
+    "users": [
+      {
+        "id": primaryContact.id,
+        "name": "Sarah Saltz",
+        "time_zone": "America/New_York",
+        "initials": "SSa",
+        "team_id": 136
+      }
+    ]
   }});
 
   defineFixture('GET', '/teams', { response: {
