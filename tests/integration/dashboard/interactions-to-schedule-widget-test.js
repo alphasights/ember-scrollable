@@ -179,3 +179,173 @@ test("Collapse interactions to schedule list", function(assert) {
     assert.equal(find('.interactions-to-schedule article').length, 4);
   });
 });
+
+test("Filter interactions to schedule by Team Member", function(assert) {
+  const team = {
+    id: 82
+  };
+
+  const andrewRath = {
+    id: 1,
+    name: "Andrew Rath",
+    initials: "ARR"
+  };
+
+  const andrewRathInteraction = {
+    advisorId: 1,
+    advisorName: "Rath's Friend"
+  };
+
+  const taylorBrown = {
+    id: 2,
+    name: "Taylor Brown",
+    initials: "TBB"
+  };
+
+  const taylorBrownInteraction = {
+    id: 2,
+    advisorName: "Taylor's Pal"
+  };
+
+  defineFixture('GET', '/users/me', { response: {
+    "user": {
+      "id": andrewRath.id,
+      "name": andrewRath.name,
+      "time_zone": "America/New_York",
+      "initials": "SSa",
+      "team_id": team.id
+    }
+  }});
+
+  defineFixture('GET', '/teams', { params: { team_id: team.id.toString()}, response: {
+    "teams": [
+      {
+        "name": "NYSC13 - McKin' It Rain ",
+        "id": team.id,
+        "office": "New York"
+      }
+    ]
+  }});
+
+  defineFixture('GET', '/users', { params: { team_id: team.id.toString()}, response: {
+    "users": [
+      {
+        "id": andrewRath.id,
+        "avatar_url": "https://s3.amazonaws.com/assets_development.alphasights.com/avatars/6565139/thumb.jpeg?1381437797",
+        "name": "Andrew Rath",
+        "time_zone": "America/New_York",
+        "initials": andrewRath.initials,
+        "team_id": team.id,
+        "developer": false
+      },
+      {
+        "id": taylorBrown.id,
+        "avatar_url": "https://s3.amazonaws.com/assets_development.alphasights.com/avatars/6565296/thumb.jpg?1390906879",
+        "name": taylorBrown.name,
+        "time_zone": "America/New_York",
+        "initials": taylorBrown.initials,
+        "team_id": team.id,
+        "developer":false
+      }
+    ]
+  }});
+
+  defineFixture('GET', '/interactions', { params: { team_id: team.id.toString()}, response: {
+    "advisors": [
+      {
+        "id": andrewRathInteraction.advisorId,
+        "avatar_url": null,
+        "emails": ['advisor@email.com'],
+        "name": andrewRathInteraction.advisorName,
+        "phone_numbers": ['+1 555-123-4567'],
+        "job_title": 'Vice President',
+        "company_name": 'Apple'
+      },
+      {
+        "id": taylorBrownInteraction.advisorId,
+        "avatar_url": null,
+        "emails": ['advisor@email.com'],
+        "name": taylorBrownInteraction.advisorName,
+        "phone_numbers": ['+1 555-123-4567'],
+        "job_title": 'Vice President',
+        "company_name": 'Apple'
+      }
+    ],
+    "client_contacts": [
+      {
+        "id": 21387,
+        "avatar_url": null,
+        "emails": ['client@email.com'],
+        "name": 'Bob Client',
+        "phone_numbers": ['+1 555-321-9000'],
+        "client_account_id": 485
+      }
+    ],
+    "client_accounts": [
+      {
+         "id": 485,
+         "name": 'McKinsey & Company San Francisco'
+      }
+    ],
+    "projects": [
+      {
+         "id": 32522,
+         "status": "high",
+         "name": 'Project Name',
+         "client_code": "MCKU",
+         "details_url": "/projects/32522",
+         "index": 3,
+         "created_at": "2015-01-23T21:01:33.615+00:00",
+         "angle_ids": [40380],
+         "analyst_1_id": 6565389
+      }
+    ],
+    "interactions": [
+      {
+        "id": 1,
+        "scheduled_call_time": null,
+        "advisor_id": andrewRathInteraction.advisorId,
+        "client_contact_id": 21387,
+        "project_id": 32522,
+        "checklist_item_ids": [],
+        "requested_at": interactionToSchedule.requestedAt,
+        "primary_contact_id": taylorBrown.id,
+        "actioned": false
+      },
+      {
+        "id": 2,
+        "scheduled_call_time": null,
+        "advisor_id": taylorBrownInteraction.advisorId,
+        "client_contact_id": 21387,
+        "project_id": 32522,
+        "checklist_item_ids": [],
+        "requested_at": interactionToSchedule.requestedAt,
+        "primary_contact_id": taylorBrown.id,
+        "actioned": false
+      }
+    ],
+    "checklist_items": []
+  }});
+
+  visit('/dashboard');
+  select('.dashboard > header .select select option:last');
+
+  andThen(function() {
+    var interactions = find('.interactions-to-schedule article').toArray().map(function(interaction) {
+      var $interaction = $(interaction);
+
+      return {
+        advisorName: $interaction.find('.title span').text().trim()
+      };
+    });
+
+    assert.deepEqual(interactions, [{
+      advisorName: andrewRathInteraction.advisorName
+    }, {
+      advisorName: taylorBrownInteraction.advisorName
+    }]);
+  });
+
+  // Click Filter, Switch to Taylor
+  // Check that only Taylor Brown interactions are in the DOM
+});

@@ -59,7 +59,7 @@ export default {
     /* jshint newcap: false */
     Messenger().hideAll();
     /* jshint newcap: true */
-    
+
     this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);
   }
