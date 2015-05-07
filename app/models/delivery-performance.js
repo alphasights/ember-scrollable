@@ -5,6 +5,7 @@ export default DS.Model.extend({
   currentMonthCreditCount: DS.attr('number'),
   monthlyTarget: DS.attr('number'),
   user: DS.belongsTo('user'),
+  team: DS.belongsTo('team'),
 
   onPaceCreditTarget: Ember.computed('monthlyTarget', function() {
     return Math.round(
