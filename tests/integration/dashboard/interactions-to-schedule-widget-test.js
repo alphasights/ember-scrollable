@@ -182,7 +182,7 @@ test("Collapse interactions to schedule list", function(assert) {
 
 test("Filter interactions to schedule by Team Member", function(assert) {
   const team = {
-    id: 82
+    id: 1
   };
 
   const andrewRath = {
@@ -203,7 +203,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
   };
 
   const taylorBrownInteraction = {
-    id: 2,
+    advisorId: 2,
     advisorName: "Taylor's Pal"
   };
 
@@ -212,12 +212,12 @@ test("Filter interactions to schedule by Team Member", function(assert) {
       "id": andrewRath.id,
       "name": andrewRath.name,
       "time_zone": "America/New_York",
-      "initials": "SSa",
+      "initials": andrewRath.initials,
       "team_id": team.id
     }
   }});
 
-  defineFixture('GET', '/teams', { params: { team_id: team.id.toString()}, response: {
+  defineFixture('GET', '/teams', { response: {
     "teams": [
       {
         "name": "NYSC13 - McKin' It Rain ",
@@ -297,7 +297,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
          "index": 3,
          "created_at": "2015-01-23T21:01:33.615+00:00",
          "angle_ids": [40380],
-         "analyst_1_id": 6565389
+         "analyst_1_id": andrewRath.id
       }
     ],
     "interactions": [
@@ -309,7 +309,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
         "project_id": 32522,
         "checklist_item_ids": [],
         "requested_at": interactionToSchedule.requestedAt,
-        "primary_contact_id": taylorBrown.id,
+        "primary_contact_id": andrewRath.id,
         "actioned": false
       },
       {
@@ -327,8 +327,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
     "checklist_items": []
   }});
 
-  visit('/dashboard');
-  select('.dashboard > header .select select option:last');
+  visit(`/dashboard?team_id=${team.id}`);
 
   andThen(function() {
     var interactions = find('.interactions-to-schedule article').toArray().map(function(interaction) {
@@ -347,5 +346,21 @@ test("Filter interactions to schedule by Team Member", function(assert) {
   });
 
   // Click Filter, Switch to Taylor
+  click('.interactions-to-schedule .filters .team-members button');
+  click(`.interactions-to-schedule a:contains(${taylorBrown.name})`);
+
   // Check that only Taylor Brown interactions are in the DOM
+  andThen(function() {
+    var interactions = find('.interactions-to-schedule article').toArray().map(function(interaction) {
+      var $interaction = $(interaction);
+
+      return {
+        advisorName: $interaction.find('.title span').text().trim()
+      };
+    });
+
+    assert.deepEqual(interactions, [{
+      advisorName: taylorBrownInteraction.advisorName
+    }]);
+  });
 });
