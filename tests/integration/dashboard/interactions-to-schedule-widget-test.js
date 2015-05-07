@@ -17,7 +17,7 @@ QUnit.module("Interactions To Schedule Widget", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-18T10:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
       "advisors": [
         {
           "id": 1,

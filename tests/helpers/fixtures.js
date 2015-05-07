@@ -87,8 +87,8 @@ var Fixtures = Ember.Object.extend({
 
       requestHandler.called = true;
     } else {
-      Ember.logger.log("Request made did not match any defined request fixtures. The body of the request was:");
-      Ember.Logger.log(JSON.parse(request.requestBody));
+      Ember.Logger.log("Request made did not match any defined request fixtures. The issued request was:");
+      Ember.Logger.log(request);
     }
 
     return response;

@@ -36,7 +36,7 @@ const team = {
 };
 
 const primaryContact = {
-  id: 6565426
+  id: 1
 };
 
 QUnit.module("Upcoming interactions", {
@@ -46,7 +46,7 @@ QUnit.module("Upcoming interactions", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
      "advisors": [
         {
           "id": personalAdvisor.id,
