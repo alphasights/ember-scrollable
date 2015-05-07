@@ -9,13 +9,17 @@ export default Ember.Route.extend({
 
   model: function(params) {
     var interactions, teamMembers;
+    var currentUser = this.controllerFor('currentUser');
     var teamId = params.teamId;
 
     if (teamId != null) {
       interactions = this.store.find('interaction', { team_id: teamId });
       teamMembers = this.store.find('user', { team_id: params.teamId });
     } else {
-      interactions = this.store.find('interaction');
+      interactions = this.store.find(
+        'interaction', { primary_contact_id: currentUser.get('id') }
+      );
+
       teamMembers = null;
     }
 
