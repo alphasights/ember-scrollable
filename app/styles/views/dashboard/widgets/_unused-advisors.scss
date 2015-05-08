@@ -40,8 +40,8 @@
     }
 
     .time {
-      @extend %grid-column-small-6;
-      @extend %grid-column-medium-5;
+      @extend %grid-column-small-4;
+      @extend %grid-column-medium-4;
 
       text-align: right;
     }
@@ -49,6 +49,17 @@
     .title {
       @extend %grid-column-small-6;
       @extend %grid-column-medium-7;
+    }
+
+    .actions {
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-1;
+
+      padding-left: 0 !important;
+    }
+
+    .actions > div {
+      @include icon(times-circle);
     }
   }
 
