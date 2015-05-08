@@ -4,6 +4,12 @@
     <small>{{interaction.project.name}}</small>
   </div>
 
+  <div class="avatar-container">
+    {{#if isTeamView}}
+      {{as-avatar person=interaction.primaryContact}}
+    {{/if}}
+  </div>
+
   <div class="time">
     <span>Requested {{ago interaction.requestedAt}}</span>
   </div>
