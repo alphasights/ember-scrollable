@@ -22,7 +22,9 @@ export default Ember.Route.extend({
       deliveryPerformance: this.store.find('deliveryPerformance', 'me').then((value) => {
         this.store.recordForId('deliveryPerformance', 'me').unloadRecord();
         return value;
-      })
+      }),
+
+      unusedAdvisors: this.store.find('unusedAdvisor')
     });
   }
 });

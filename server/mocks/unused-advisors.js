@@ -11,6 +11,7 @@ module.exports = function(app) {
         'id': 1,
         'project_id': 1,
         'name': 'Example Advisor 1',
+        'avatar_url': '/images/default_avatar.png',
         'terms_sent_at': now.toISOString()
       }],
 

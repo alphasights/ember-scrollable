@@ -1,0 +1,10 @@
+{{#link-to "" advisor.id tagName="article"}}
+  <div class="title">
+    <span>{{advisor.name}}</span>
+    <small>{{advisor.project.name}}</small>
+  </div>
+
+  <div class="time">
+    <span>Terms sent {{ago advisor.termsSentAt}}</span>
+  </div>
+{{/link-to}}

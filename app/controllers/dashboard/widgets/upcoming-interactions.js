@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import InteractionsController from './interactions';
+import ListController from './list';
 
-export default InteractionsController.extend({
+export default ListController.extend({
   availableFilters: [
     {
       name: 'All',
