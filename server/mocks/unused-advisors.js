@@ -13,6 +13,42 @@ module.exports = function(app) {
         'name': 'Example Advisor 1',
         'avatar_url': '/images/default_avatar.png',
         'terms_sent_at': now.toISOString()
+      }, {
+        'id': 2,
+        'project_id': 1,
+        'name': 'Example Advisor 2',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
+      }, {
+        'id': 3,
+        'project_id': 1,
+        'name': 'Example Advisor 3',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
+      }, {
+        'id': 4,
+        'project_id': 1,
+        'name': 'Example Advisor 4',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
+      }, {
+        'id': 5,
+        'project_id': 1,
+        'name': 'Example Advisor 5',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
+      }, {
+        'id': 6,
+        'project_id': 1,
+        'name': 'Example Advisor 6',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
+      }, {
+        'id': 7,
+        'project_id': 1,
+        'name': 'Example Advisor 7',
+        'avatar_url': '/images/default_avatar.png',
+        'terms_sent_at': now.toISOString()
       }],
 
       'projects': [{
