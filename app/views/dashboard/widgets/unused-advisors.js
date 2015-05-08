@@ -1,4 +1,4 @@
-import ListWidgetView from '../list-widget';
+import ListWidgetView from './list';
 import Ember from 'ember';
 
 export default ListWidgetView.extend({

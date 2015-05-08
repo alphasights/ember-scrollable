@@ -1,8 +1,8 @@
-import WidgetView from './widget';
+import WidgetView from '../widget';
 import Ember from 'ember';
 
 export default WidgetView.extend({
-  classNameBindings: ['isCollapsed:collapsed'],
+  classNameBindings: [':list', 'isCollapsed:collapsed'],
 
   hasMoreItems: Ember.computed.oneWay('controller.hasMoreItems'),
   isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),

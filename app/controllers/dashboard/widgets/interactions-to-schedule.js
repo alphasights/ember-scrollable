@@ -1,3 +1,3 @@
-import ListController from './list';
+import ListWidgetController from './list';
 
-export default ListController.extend();
+export default ListWidgetController.extend();
