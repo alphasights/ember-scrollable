@@ -6,7 +6,8 @@ import Ember from 'ember';
 
 moduleForModel('advisor', 'Advisor', {
   needs: [
-    'model:interaction', 'model:client-contact', 'model:project', 'model:checklist-item'
+    'model:interaction', 'model:client-contact', 'model:project',
+    'model:checklist-item', 'model:user'
   ],
 
   beforeEach: function() {

@@ -7,7 +7,7 @@ import Ember from 'ember';
 moduleForModel('client-contact', 'ClientContact', {
   needs: [
     'model:client-contact', 'model:client-account', 'model:interaction',
-    'model:advisor', 'model:project', 'model:checklist-item'
+    'model:advisor', 'model:project', 'model:checklist-item', 'model:user'
   ],
 
   beforeEach: function() {

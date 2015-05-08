@@ -1,4 +1,36 @@
 .dashboard .widget.interactions {
+  .filters .dropdown {
+    &.team-members ul {
+      width: 200px;
+
+      li,
+      li a {
+        line-height: 40px;
+        margin: 0;
+      }
+
+      .avatar {
+        height: 30px;
+        margin: 0;
+        margin-right: 5px;
+        width: 30px;
+      }
+    }
+
+    button {
+      background-color: transparent;
+      border-color: transparent;
+      color: $white;
+      margin: 0;
+
+      i {
+        @include icon('chevron-down');
+
+        margin-left: $column-gutter / 4;
+      }
+    }
+  }
+
   > ul {
     margin-left: 0;
 
@@ -39,16 +71,25 @@
       }
     }
 
+    .avatar-container {
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-2;
+
+      img {
+        max-width: none;
+      }
+    }
+
     .time {
-      @extend %grid-column-small-4;
-      @extend %grid-column-medium-4;
+      @extend %grid-column-small-3;
+      @extend %grid-column-medium-3;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-small-6;
-      @extend %grid-column-medium-7;
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-6;
     }
 
     .checklist-status {

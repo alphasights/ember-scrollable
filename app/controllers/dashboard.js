@@ -4,7 +4,12 @@ export default Ember.Controller.extend({
   needs: ['currentUser'],
   currentUser: Ember.computed.oneWay('controllers.currentUser'),
   teamId: null,
-  teams: Ember.computed.alias('currentUser.teams'),
+  teams: Ember.computed.oneWay('currentUser.teams'),
+  teamMembers: Ember.computed.oneWay('model.teamMembers'),
+
+  isTeamView: Ember.computed('teamId', function() {
+    return this.get('teamId') !== null;
+  }),
 
   selectedTeam: Ember.computed('teamId', 'teams.@each.id', function(key, value) {
     if (arguments.length > 1) {

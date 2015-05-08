@@ -14168,9 +14168,9 @@
       }
     },
     "ember-cli-pretender": {
-      "version": "0.3.1",
-      "from": "ember-cli-pretender@0.3.1",
-      "resolved": "https://registry.npmjs.org/ember-cli-pretender/-/ember-cli-pretender-0.3.1.tgz"
+      "version": "0.3.2",
+      "from": "ember-cli-pretender@0.3.2",
+      "resolved": "https://registry.npmjs.org/ember-cli-pretender/-/ember-cli-pretender-0.3.2.tgz"
     },
     "ember-cli-qunit": {
       "version": "0.3.9",

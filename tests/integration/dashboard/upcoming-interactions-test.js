@@ -36,7 +36,7 @@ const team = {
 };
 
 const primaryContact = {
-  id: 6565426
+  id: 1
 };
 
 QUnit.module("Upcoming interactions", {
@@ -46,7 +46,7 @@ QUnit.module("Upcoming interactions", {
     Timecop.install();
     Timecop.freeze(moment('2015-02-20T09:30:00.000+00:00'));
 
-    defineFixture('GET', '/interactions', { response: {
+    defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
      "advisors": [
         {
           "id": personalAdvisor.id,
@@ -187,12 +187,24 @@ test("Team switchers displays all upcoming interactions for the team", function(
 
   defineFixture('GET', '/users/me', { response: {
     "user": {
-      "id": 6565427,
+      "id": primaryContact.id,
       "name": "Sarah Saltz",
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": 136
     }
+  }});
+
+  defineFixture('GET', '/users', { params: { team_id: team.id.toString() }, response: {
+    "users": [
+      {
+        "id": primaryContact.id,
+        "name": "Sarah Saltz",
+        "time_zone": "America/New_York",
+        "initials": "SSa",
+        "team_id": 136
+      }
+    ]
   }});
 
   defineFixture('GET', '/teams', { response: {
