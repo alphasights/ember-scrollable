@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import TeamDeliveryPerformance from 'phoenix/models/team-delivery-performance';
 
 export default Ember.Route.extend({
   queryParams: {
@@ -16,7 +17,7 @@ export default Ember.Route.extend({
       interactions = this.store.find('interaction', { team_id: teamId });
       teamMembers = this.store.find('user', { team_id: teamId });
       deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
-        return deliveryPerformances.get('firstObject');
+        return TeamDeliveryPerformance.create({ userPerformances: deliveryPerformances.toArray() });
       });
     } else {
       interactions = this.store.find(
