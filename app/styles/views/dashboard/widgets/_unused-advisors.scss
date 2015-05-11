@@ -1,15 +1,15 @@
 .dashboard .widget.unused-advisors {
   article {
     .time {
-      @extend %grid-column-small-4;
-      @extend %grid-column-medium-4;
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-5;
 
       text-align: right;
     }
 
     .title {
-      @extend %grid-column-small-6;
-      @extend %grid-column-medium-7;
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-6;
     }
 
     .actions {
