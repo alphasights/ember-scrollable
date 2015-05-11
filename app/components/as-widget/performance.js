@@ -7,6 +7,9 @@ export default Ember.Component.extend({
   performance: null,
   isOnTarget: Ember.computed.oneWay('performance.isOnTarget'),
   isOnPace: Ember.computed.oneWay('performance.isOnPace'),
+  currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
+  monthlyTarget: Ember.computed.oneWay('performance.monthlyTarget'),
+  onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
 
   statusClass: Ember.computed('isOnTarget', 'isOnPace', function() {
     if (this.get('isOnTarget')) {
@@ -18,7 +21,31 @@ export default Ember.Component.extend({
     }
   }),
 
-  setupTooltipster: Ember.on('didInsertElement', function() {
+  progress: Ember.computed('_maxCreditCount', 'currentMonthCreditCount', function() {
+    return this.get('currentMonthCreditCount') / this.get('_maxCreditCount');
+  }),
+
+  targetRatio: Ember.computed('monthlyTarget', '_maxCreditCount', function() {
+    return this.get('monthlyTarget') / this.get('_maxCreditCount');
+  }),
+
+  paceRatio: Ember.computed('onPaceCreditTarget', '_maxCreditCount', function() {
+    return this.get('onPaceCreditTarget') / this.get('_maxCreditCount');
+  }),
+
+  monthlyTargetTitle: Ember.computed('monthlyTarget', function() {
+    return `Target: ${this.get('monthlyTarget')}`;
+  }),
+
+  onPaceCreditTargetTitle: Ember.computed('onPaceCreditTarget', function() {
+    return `On Pace: ${this.get('onPaceCreditTarget')}`;
+  }),
+
+  currentMonthCreditCountTitle: Ember.computed('currentMonthCreditCount', function() {
+    return `Credits: ${this.get('currentMonthCreditCount')}`;
+  }),
+
+  _setupTooltipster: Ember.on('didInsertElement', function() {
     Ember.run.schedule('afterRender', () => {
       this.$().hover(() => {
         this.$('.tooltipstered').tooltipster('show');
@@ -28,31 +55,7 @@ export default Ember.Component.extend({
     });
   }),
 
-  maxCreditCount: Ember.computed('performance.monthlyTarget', function() {
-    return this.get('performance.monthlyTarget') * 2;
-  }),
-
-  progress: Ember.computed('maxCreditCount', 'performance.currentMonthCreditCount', function() {
-    return this.get('performance.currentMonthCreditCount') / this.get('maxCreditCount');
-  }),
-
-  targetRatio: Ember.computed('performance.monthlyTarget', 'maxCreditCount', function() {
-    return this.get('performance.monthlyTarget') / this.get('maxCreditCount');
-  }),
-
-  paceRatio: Ember.computed('performance.onPaceCreditTarget', 'maxCreditCount', function() {
-    return this.get('performance.onPaceCreditTarget') / this.get('maxCreditCount');
-  }),
-
-  monthlyTargetTitle: Ember.computed('performance.monthlyTarget', function() {
-    return `Target: ${this.get('performance.monthlyTarget')}`;
-  }),
-
-  onPaceCreditTargetTitle: Ember.computed('performance.onPaceCreditTarget', function() {
-    return `On Pace: ${this.get('performance.onPaceCreditTarget')}`;
-  }),
-
-  currentMonthCreditCountTitle: Ember.computed('performance.currentMonthCreditCount', function() {
-    return `Credits: ${this.get('performance.currentMonthCreditCount')}`;
+  _maxCreditCount: Ember.computed('monthlyTarget', function() {
+    return this.get('monthlyTarget') * 2;
   })
 });
