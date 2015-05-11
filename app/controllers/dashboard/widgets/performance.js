@@ -5,16 +5,17 @@ export default Ember.Controller.extend({
     return this.get('model.monthlyTarget') * 2;
   }),
 
-  progress: Ember.computed('model.maxCreditCount', 'model.currentMonthCreditCount', function() {
-    return this.get('model.currentMonthCreditCount') / this.get('model.maxCreditCount');
+  progress: Ember.computed('maxCreditCount', 'model.currentMonthCreditCount', function() {
+    return this.get('model.currentMonthCreditCount') / this.get('maxCreditCount');
   }),
 
-  targetRatio: Ember.computed('model.monthlyTarget', 'model.maxCreditCount', function() {
-    return this.get('model.monthlyTarget') / this.get('model.maxCreditCount');
+  targetRatio: Ember.computed('model.monthlyTarget', 'maxCreditCount', function() {
+    debugger
+    return this.get('model.monthlyTarget') / this.get('maxCreditCount');
   }),
 
-  paceRatio: Ember.computed('model.onPaceCreditTarget', 'model.maxCreditCount', function() {
-    return this.get('model.onPaceCreditTarget') / this.get('model.maxCreditCount');
+  paceRatio: Ember.computed('model.onPaceCreditTarget', 'maxCreditCount', function() {
+    return this.get('model.onPaceCreditTarget') / this.get('maxCreditCount');
   }),
 
   monthlyTargetTitle: Ember.computed('model.monthlyTarget', function() {

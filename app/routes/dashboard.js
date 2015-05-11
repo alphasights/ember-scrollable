@@ -15,7 +15,9 @@ export default Ember.Route.extend({
     if (teamId != null) {
       interactions = this.store.find('interaction', { team_id: teamId });
       teamMembers = this.store.find('user', { team_id: teamId });
-      deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId });
+      deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
+        return deliveryPerformances.get('firstObject');
+      });
     } else {
       interactions = this.store.find(
         'interaction', { primary_contact_id: currentUser.get('id') }
