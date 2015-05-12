@@ -1,8 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
-import MonthProgressMixin from 'phoenix/mixins/month-progress';
 
-export default DS.Model.extend(MonthProgressMixin, {
+export default DS.Model.extend({
   currentMonthCreditCount: DS.attr('number'),
   monthlyTarget: DS.attr('number'),
   user: DS.belongsTo('user'),
@@ -19,5 +18,40 @@ export default DS.Model.extend(MonthProgressMixin, {
 
   isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
     return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
-  })
+  }),
+
+  monthCompletionProgress: function() {
+    return this._weekdayHoursSinceBeginningOfMonth() /
+      this._totalWeekdayHoursInCurrentMonth();
+  },
+
+  _weekdayHoursSinceBeginningOfMonth: function() {
+    var yesterdaysDate = moment().date() - 1;
+
+    return this._numberOfWeekdayHoursUntil(yesterdaysDate) +
+      this._hoursSinceTodaysStart();
+  },
+
+  _totalWeekdayHoursInCurrentMonth: function() {
+    return this._numberOfWeekdayHoursUntil(moment().endOf('month').date());
+  },
+
+  _numberOfWeekdayHoursUntil: function(endDate) {
+    return _.range(1, endDate)
+      .map(function(day) { return moment().date(day); })
+      .reduce(function(memo, date) {
+        if (date.day() === 6 || date.day() === 0) {
+          return memo;
+        } else {
+          return memo += 24;
+        }
+      }, 0);
+  },
+
+  _hoursSinceTodaysStart: function() {
+    var todaysStart = moment().startOf('day');
+    var timeSinceTodaysStart = moment.duration(moment().diff(todaysStart));
+
+    return Math.round(timeSinceTodaysStart.asHours());
+  }
 });
