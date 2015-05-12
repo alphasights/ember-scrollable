@@ -20,10 +20,15 @@
   </div>
 </header>
 
-<ul>
-  {{#each project in projects itemController="whiteboards.whiteboard.project-list-item"}}
-    <li>{{render "whiteboards.whiteboard.project-list-item" project.model tagName="article"}}</li>
-  {{else}}
-    <div class="empty-message">There are no {{filterPriority}} priority projects.</div>
-  {{/each}}
-</ul>
+{{#if projects}}
+  {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
+    {{#each projects as |project|}}
+      {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
+        {{render "whiteboards.whiteboard.project-list-item" project tagName="article"}}
+        <span class="handle">&varr;</span>
+      {{/sortable-item}}
+    {{/each}}
+  {{/sortable-group}}
+{{else}}
+  <div class="empty-message">There are no {{filterPriority}} priority projects.</div>
+{{/if}}

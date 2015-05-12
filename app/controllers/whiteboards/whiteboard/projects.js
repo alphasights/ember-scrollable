@@ -4,7 +4,11 @@ export default Ember.ArrayController.extend({
   whiteboard: null,
   filterPriority: Ember.computed.oneWay('whiteboard.filterPriority'),
 
-  arrangedContent: Ember.computed('content.@each.priority', 'filterPriority', function() {
-    return this.get('content').filterBy('priority', this.get('filterPriority'));
+  sortedContent: Ember.computed('content', function() {
+    return this.get('content').sortBy('index', 'createdAt');
+  }),
+
+  arrangedContent: Ember.computed('sortedContent.@each.priority', 'filterPriority', function() {
+    return this.get('sortedContent').filterBy('priority', this.get('filterPriority'));
   })
 });
