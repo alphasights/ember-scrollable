@@ -1,16 +1,18 @@
-{{#link-to "" unusedAdvisor.id tagName="article"}}
+{{#link-to "" model.id tagName="article"}}
   <div class="title">
-    <span>{{unusedAdvisor.name}}</span>
-    <small>{{unusedAdvisor.project.name}}</small>
+    <span>{{model.name}}</span>
+    <small>{{model.project.name}}</small>
   </div>
 
   <div class="time">
-    <span>Terms sent {{ago unusedAdvisor.termsSentAt}}</span>
+    <span>Terms sent {{ago model.termsSentAt}}</span>
   </div>
 
   <div class="actions">
     {{#tool-tipster position="left" title="Remove Unused Advisor"}}
-      <div class="remove" {{action "removeUnusedAdvisor" unusedAdvisor.id}}></div>
+      <a class="remove" {{action "removeUnusedAdvisor" model.id}}>
+        <i></i>
+      </a>
     {{/tool-tipster}}
   </div>
 {{/link-to}}

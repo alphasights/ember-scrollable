@@ -3,6 +3,7 @@ import Ember from 'ember';
 
 export default WidgetView.extend({
   classNameBindings: [':list', 'isCollapsed:collapsed'],
+  templateName: 'dashboard/widgets/list',
 
   hasMoreItems: Ember.computed.oneWay('controller.hasMoreItems'),
   isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
