@@ -12,23 +12,31 @@ export default DS.Model.extend({
     ) * 10) / 10;
   }),
 
-  weekdayHoursSinceBeginningOfMonth: function() {
-    var yesterdaysDate = moment().date() - 1;
+  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
+  }),
 
-    return this.numberOfWeekdayHoursUntil(yesterdaysDate) +
-      this.hoursSinceTodaysStart();
-  },
-
-  totalWeekdayHoursInCurrentMonth: function() {
-    return this.numberOfWeekdayHoursUntil(moment().endOf('month').date());
-  },
+  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
+  }),
 
   monthCompletionProgress: function() {
-    return this.weekdayHoursSinceBeginningOfMonth() /
-      this.totalWeekdayHoursInCurrentMonth();
+    return this._weekdayHoursSinceBeginningOfMonth() /
+      this._totalWeekdayHoursInCurrentMonth();
   },
 
-  numberOfWeekdayHoursUntil: function(endDate) {
+  _weekdayHoursSinceBeginningOfMonth: function() {
+    var yesterdaysDate = moment().date() - 1;
+
+    return this._numberOfWeekdayHoursUntil(yesterdaysDate) +
+      this._hoursSinceTodaysStart();
+  },
+
+  _totalWeekdayHoursInCurrentMonth: function() {
+    return this._numberOfWeekdayHoursUntil(moment().endOf('month').date());
+  },
+
+  _numberOfWeekdayHoursUntil: function(endDate) {
     return _.range(1, endDate)
       .map(function(day) { return moment().date(day); })
       .reduce(function(memo, date) {
@@ -40,18 +48,10 @@ export default DS.Model.extend({
       }, 0);
   },
 
-  hoursSinceTodaysStart: function() {
+  _hoursSinceTodaysStart: function() {
     var todaysStart = moment().startOf('day');
     var timeSinceTodaysStart = moment.duration(moment().diff(todaysStart));
 
     return Math.round(timeSinceTodaysStart.asHours());
-  },
-
-  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
-  }),
-
-  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
-  })
+  }
 });
