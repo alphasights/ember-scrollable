@@ -30,21 +30,21 @@
       @include single-transition(opacity, 100ms, linear);
 
       opacity: 0;
-    }
 
-    .remove i {
-      @include icon('times');
+      i {
+        @include icon('times');
 
-      background-color: $alert-color;
-      border-radius: $global-rounded;
-      color: $white;
-      display: inline-block;
-      font-size: $small-font-size;
-      height: $checklist-status-label-width;
-      line-height: $checklist-status-label-width;
-      margin: 0 $column-gutter / 4;
-      text-align: center;
-      width: $checklist-status-label-width;
+        background-color: $alert-color;
+        border-radius: $global-rounded;
+        color: $white;
+        display: inline-block;
+        font-size: $small-font-size;
+        height: $checklist-status-label-width;
+        line-height: $checklist-status-label-width;
+        margin: 0 $column-gutter / 4;
+        text-align: center;
+        width: $checklist-status-label-width;
+      }
     }
   }
 }

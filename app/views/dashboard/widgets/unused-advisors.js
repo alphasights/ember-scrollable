@@ -1,5 +1,4 @@
 import ListWidgetView from './list';
-import Ember from 'ember';
 
 export default ListWidgetView.extend({
   classNameBindings: [':unused-advisors'],
