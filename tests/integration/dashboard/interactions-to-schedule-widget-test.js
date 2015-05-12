@@ -327,6 +327,10 @@ test("Filter interactions to schedule by Team Member", function(assert) {
     "checklist_items": []
   }});
 
+  defineFixture('GET', '/delivery_performances', { params: { team_id: team.id.toString()}, response: {
+    "delivery_performances": []
+  }});
+
   visit(`/dashboard?team_id=${team.id}`);
 
   andThen(function() {

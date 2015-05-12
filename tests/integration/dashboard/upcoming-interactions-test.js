@@ -191,7 +191,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
       "name": "Sarah Saltz",
       "time_zone": "America/New_York",
       "initials": "SSa",
-      "team_id": 136
+      "team_id": team.id
     }
   }});
 
@@ -202,7 +202,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
         "name": "Sarah Saltz",
         "time_zone": "America/New_York",
         "initials": "SSa",
-        "team_id": 136
+        "team_id": team.id
       }
     ]
   }});
@@ -211,7 +211,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
     "teams": [
       {
         "name" : "NYSC18 - The McKountry Klub",
-        "id": 136,
+        "id": team.id,
         "office": "New York"
       }
     ]
@@ -293,6 +293,10 @@ test("Team switchers displays all upcoming interactions for the team", function(
         "primary_contact_id":primaryContact.id
       }
     ]
+  }});
+
+  defineFixture('GET', '/delivery_performances', { params: { team_id: team.id.toString()}, response: {
+    "delivery_performances": []
   }});
 
   visit('/dashboard');
