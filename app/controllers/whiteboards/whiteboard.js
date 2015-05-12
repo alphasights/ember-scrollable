@@ -3,10 +3,10 @@ import ProjectsController from './whiteboard/projects';
 
 export default Ember.ObjectController.extend({
   queryParams: {
-    sortPropertyId: 'sort_by'
+    filterPriority: 'priority'
   },
 
-  sortPropertyId: 'creation-date',
+  filterPriority: 'high',
 
   init: function() {
     this._super.apply(this, arguments);
