@@ -1,3 +1,3 @@
-import InteractionsController from './interactions';
+import ListWidgetController from './list';
 
-export default InteractionsController.extend();
+export default ListWidgetController.extend();

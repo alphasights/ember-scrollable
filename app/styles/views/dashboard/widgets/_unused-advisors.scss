@@ -1,0 +1,50 @@
+.dashboard .widget.unused-advisors {
+  article {
+    &:hover {
+      .remove {
+        opacity: 1;
+      }
+    }
+
+    .time {
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-5;
+
+      text-align: right;
+    }
+
+    .title {
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-6;
+    }
+
+    .actions {
+      @extend %grid-column-small-2;
+      @extend %grid-column-medium-1;
+
+      padding-left: 0 !important;
+      text-align: center;
+    }
+
+    .remove {
+      @include single-transition(opacity, 100ms, linear);
+
+      opacity: 0;
+
+      i {
+        @include icon('times');
+
+        background-color: $alert-color;
+        border-radius: $global-rounded;
+        color: $white;
+        display: inline-block;
+        font-size: $small-font-size;
+        height: $checklist-status-label-width;
+        line-height: $checklist-status-label-width;
+        margin: 0 $column-gutter / 4;
+        text-align: center;
+        width: $checklist-status-label-width;
+      }
+    }
+  }
+}

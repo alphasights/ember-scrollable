@@ -1,22 +1,10 @@
-import WidgetView from '../widget';
+import ListWidgetView from './list';
 import Ember from 'ember';
 
-export default WidgetView.extend({
-  templateName: 'dashboard/widgets/interactions',
-  classNameBindings: [':interactions', 'isCollapsed:collapsed'],
+export default ListWidgetView.extend({
+  classNameBindings: [':interactions'],
 
   isTeamView: Ember.computed.oneWay('controller.isTeamView'),
   listItemTemplateName: null,
-  headerTemplateName: 'dashboard/widgets/interaction/header',
-  hasMoreItems: Ember.computed.oneWay('controller.hasMoreItems'),
-  isCollapsed: Ember.computed.oneWay('controller.isCollapsed'),
-  paginationInfo: Ember.computed.oneWay('controller.paginationInfo'),
-
-  title: Ember.computed('name', 'hasMoreItems', 'paginationInfo', function() {
-    if (this.get('hasMoreItems')) {
-      return `${this.get('name')} (${this.get('paginationInfo')})`;
-    } else {
-      return this.get('name');
-    }
-  })
+  headerTemplateName: 'dashboard/widgets/interaction/header'
 });
