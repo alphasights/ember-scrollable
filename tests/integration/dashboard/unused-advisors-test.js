@@ -9,7 +9,7 @@ const unusedAdvisor = {
   termsSentAt: '2015-02-18T10:00:00.000+00:00'
 };
 
-QUnit.module("Interactions To Schedule Widget", {
+QUnit.module("Unused Advisors Widget", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
