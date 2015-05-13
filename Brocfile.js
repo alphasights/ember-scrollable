@@ -38,5 +38,8 @@ app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/css/messenger.css');
 app.import('bower_components/messenger/build/css/messenger-theme-block.css');
+app.import('bower_components/jquery-simulate-ext/libs/jquery.simulate.js');
+app.import('bower_components/jquery-simulate-ext/src/jquery.simulate.ext.js');
+app.import('bower_components/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js');
 
 module.exports = app.toTree();

@@ -29,6 +29,7 @@
     "EmberENV",
     "__env",
     "select",
+    "dragAndDrop",
     "moment",
     "Timecop",
     "lookup",

@@ -2,8 +2,15 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import '../helpers/select';
+import '../helpers/drag-and-drop';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
+
+var projectTitles = function() {
+  return find('.project-list-item').toArray().map(function(project) {
+    return $(project).find('> .details span').text().trim();
+  });
+};
 
 QUnit.module("Whiteboard", {
   beforeEach: function() {
@@ -159,7 +166,6 @@ QUnit.module("Whiteboard", {
 
 test("Read project list", function(assert) {
   visit('/whiteboards');
-  wait();
 
   andThen(function() {
     var projects = find('.project-list-item').toArray().map(function(project) {
@@ -201,45 +207,25 @@ test("Read project list", function(assert) {
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
-    }, {
-      title: 'Example Project 3',
-      clientCode: '03EP',
-      highPriority: false,
-      mediumPriority: true,
-      lowPriority: false,
-      memberAvatarUrl: undefined,
-      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
-      deliveredCount: 0,
-      targetCount: 0,
-      progressBarWidth: '0px',
     }]);
   });
 });
 
 test("Sort project list", function(assert) {
+  var handler = defineFixture('PUT', '/projects/indexes', { request: {
+    "projects": [
+      { "id": "2", "index": 0 },
+      { "id": "1", "index": 1 }
+    ]
+  }});
+
   visit('/whiteboards');
-
-  var projectTitles = function() {
-    return find('.project-list-item').toArray().map(function(project) {
-      return $(project).find('> .details span').text().trim();
-    });
-  };
-
-  select('.whiteboard .sort-by-select option[value="client"]');
+  dragAndDrop('.whiteboard > ul > li:first .handle', '.whiteboard > ul > li:last');
 
   andThen(function() {
     assert.deepEqual(
       projectTitles(),
-      ['Example Project 2', 'Example Project', 'Example Project 3']
-    );
-  });
-
-  select('.whiteboard .sort-by-select option[value="creation-date"]');
-
-  andThen(function() {
-    assert.deepEqual(
-      projectTitles(),
-      ['Example Project', 'Example Project 2', 'Example Project 3']
+      ['Example Project 2', 'Example Project']
     );
   });
 });
@@ -264,7 +250,13 @@ test("Change project priority", function(assert) {
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+
+    andThen(function() {
+      assert.deepEqual(
+        projectTitles(),
+        ['Example Project 2']
+      );
+    });
   });
 });
 
