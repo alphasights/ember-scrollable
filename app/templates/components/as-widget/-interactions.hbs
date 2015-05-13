@@ -1,8 +1,8 @@
-{{#if this}}
+{{#if model}}
   <ul>
     {{#each interaction in visibleContent}}
       <li>
-        {{partial view.listItemTemplateName}}
+        {{partial listItemTemplateName}}
       </li>
     {{/each}}
   </ul>
@@ -11,5 +11,5 @@
     <div class="toggle-collapse" title={{collapseTitle}} {{action "toggleCollapse"}}></div>
   {{/if}}
 {{else}}
-  <div class="empty-message">{{view.emptyMessage}}</div>
+  <div class="empty-message">{{emptyMessage}}</div>
 {{/if}}
