@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import InteractionComponent from 'phoenix/components/as-widget/interaction';
 
 export default InteractionComponent.extend({
