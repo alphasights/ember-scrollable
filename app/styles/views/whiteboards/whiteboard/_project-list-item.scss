@@ -1,9 +1,7 @@
 .whiteboard .project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
-  @include single-transition(background-color, 100ms, linear);
 
-  border-bottom: 1px solid $global-section-border-color;
   cursor: pointer;
   padding: $column-gutter / 4 0;
 
@@ -93,9 +91,5 @@
     @media #{$small-only} {
       display: none;
     }
-  }
-
-  &:hover {
-    background-color: lighten($global-section-border-color, 6%);
   }
 }

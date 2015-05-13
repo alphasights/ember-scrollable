@@ -16,9 +16,13 @@ export default Ember.ObjectController.extend({
 
   actions: {
     reorderProjects: function(projects) {
-      this.get('projects.sortedContent').setObjects(projects);
-
       analytics.track('Reordered Projects');
+
+      projects.forEach(function(project, index) {
+        project.set('index', index);
+      });
+
+      this.get('projects.content').setObjects(projects);
 
       request(`${EmberENV.apiBaseUrl}/projects/indexes`, {
         type: 'PUT',
