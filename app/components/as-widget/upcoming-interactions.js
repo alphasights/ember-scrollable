@@ -1,7 +1,7 @@
-import InteractionComponent from 'phoenix/components/as-widget/interaction';
+import ListComponent from 'phoenix/components/as-widget/list';
 
-export default InteractionComponent.extend({
-  classNameBindings: [':upcoming-interactions'],
+export default ListComponent.extend({
+  classNameBindings: [':interactions', ':upcoming-interactions'],
 
   name: 'Upcoming Interactions',
 

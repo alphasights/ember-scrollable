@@ -16,6 +16,7 @@ export default Ember.Route.extend({
     if (teamId != null) {
       interactions = this.store.find('interaction', { team_id: teamId });
       teamMembers = this.store.find('user', { team_id: teamId });
+
       deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
         return TeamDeliveryPerformance.create({ userPerformances: deliveryPerformances.toArray() });
       });
@@ -35,8 +36,8 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       interactions: interactions,
       teamMembers: teamMembers,
-
-      deliveryPerformance: deliveryPerformance
+      deliveryPerformance: deliveryPerformance,
+      unusedAdvisors: this.store.find('unusedAdvisor')
     });
   }
 });

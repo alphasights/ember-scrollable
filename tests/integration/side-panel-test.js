@@ -70,6 +70,7 @@ test("Hides when pressing the esc key", function(assert) {
   visit('/whiteboards');
   click('.project-list-item');
   keyEvent(document, 'keyup', 27);
+  wait();
 
   andThen(function() {
     assert.equal(find('.side-panel').length, 0);

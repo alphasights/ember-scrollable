@@ -1,19 +1,19 @@
-{{#link-to "dashboard.schedule-interaction" interaction.id tagName="article"}}
+{{#link-to "dashboard.schedule-interaction" model.id tagName="article"}}
   <div class="title">
-    <span>{{interaction.advisor.name}}</span>
-    <small>{{interaction.project.name}}</small>
+    <span>{{model.advisor.name}}</span>
+    <small>{{model.project.name}}</small>
   </div>
 
   <div class="avatar-container">
 
     {{#if isTeamView}}
-      {{as-avatar person=interaction.primaryContact}}
+      {{as-avatar person=model.primaryContact}}
     {{/if}}
   </div>
 
   <div class="time">
-    <span>Requested {{ago interaction.requestedAt}}</span>
+    <span>Requested {{ago model.requestedAt}}</span>
   </div>
 
-  {{as-checklist-status items=interaction.checklistItems showTooltip=true}}
+  {{as-checklist-status items=model.checklistItems showTooltip=true}}
 {{/link-to}}

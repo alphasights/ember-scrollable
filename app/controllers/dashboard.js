@@ -47,5 +47,9 @@ export default Ember.Controller.extend({
     }).sort(function(a, b) {
       return -Ember.compare(a.get('requestedAt'), b.get('requestedAt'));
     });
+  }),
+
+  unusedAdvisors: Ember.computed('model.unusedAdvisors.[]', function() {
+    return this.get('model.unusedAdvisors').sortBy('termsSentAt');
   })
 });

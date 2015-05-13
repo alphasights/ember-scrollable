@@ -2,9 +2,9 @@ import Ember from 'ember';
 import WidgetComponent from 'phoenix/components/as-widget/widget';
 
 export default WidgetComponent.extend({
-  classNameBindings: [':interactions', 'isCollapsed:collapsed'],
+  classNameBindings: [':list', 'isCollapsed:collapsed'],
 
-  interactions: null,
+  model: null,
   teamMembers: null,
   isTeamView: null,
 
@@ -44,18 +44,18 @@ export default WidgetComponent.extend({
     }
   }),
 
-  arrangedContent: Ember.computed('interactions', 'selectedTeamMember', function() {
+  arrangedContent: Ember.computed('model', 'selectedTeamMember', function() {
     var selectedTeamMember = this.get('selectedTeamMember');
 
     if (selectedTeamMember) {
-      return this.get('interactions').filterBy('primaryContact', selectedTeamMember);
+      return this.get('model').filterBy('primaryContact', selectedTeamMember);
     } else {
-      return this.get('interactions');
+      return this.get('model');
     }
   }),
 
-  _paginationInfo: Ember.computed('visibleContent.length', 'interactions.length', function() {
-    return `${this.get('visibleContent.length')} of ${this.get('interactions.length')}`;
+  _paginationInfo: Ember.computed('visibleContent.length', 'model.length', function() {
+    return `${this.get('visibleContent.length')} of ${this.get('model.length')}`;
   }),
 
   actions: {
