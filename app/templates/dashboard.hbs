@@ -14,10 +14,16 @@
   </li>
 
   <li class="upcoming-interactions">
-    {{as-widget/upcoming-interactions model=upcomingInteractions}}
+    {{as-widget/upcoming-interactions
+      interactions=upcomingInteractions
+      isTeamView=isTeamView
+      teamMembers=teamMembers}}
   </li>
 
   <li class="interactions-to-schedule">
-    {{as-widget/interactions-to-schedule model=interactionsToSchedule}}
+    {{as-widget/interactions-to-schedule
+      interactions=interactionsToSchedule
+      isTeamView=isTeamView
+      teamMembers=teamMembers}}
   </li>
 </ul>

@@ -2,17 +2,16 @@ import Ember from 'ember';
 import WidgetComponent from 'phoenix/components/as-widget/widget';
 
 export default WidgetComponent.extend({
-  headerTemplateName: 'components/as-widget/interaction-header',
-  model: null,
-
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
-
   classNameBindings: [':interactions', 'isCollapsed:collapsed'],
-  isTeamView: Ember.computed.oneWay('dashboard.isTeamView'),
+
+  interactions: null,
+  teamMembers: null,
+  isTeamView: null,
+
+  headerTemplateName: 'components/as-widget/interaction-header',
   listItemTemplateName: null,
   isCollapsed: true,
   collapsedMaxVisibleItems: 4,
-  teamMembers: Ember.computed.oneWay('dashboard.teamMembers'),
   selectedTeamMember: null,
 
   title: Ember.computed('name', 'hasMoreItems', '_paginationInfo', function() {
@@ -45,18 +44,18 @@ export default WidgetComponent.extend({
     }
   }),
 
-  arrangedContent: Ember.computed('model', 'selectedTeamMember', function() {
+  arrangedContent: Ember.computed('interactions', 'selectedTeamMember', function() {
     var selectedTeamMember = this.get('selectedTeamMember');
 
     if (selectedTeamMember) {
-      return this.get('model').filterBy('primaryContact', selectedTeamMember);
+      return this.get('interactions').filterBy('primaryContact', selectedTeamMember);
     } else {
-      return this.get('model');
+      return this.get('interactions');
     }
   }),
 
-  _paginationInfo: Ember.computed('visibleContent.length', 'model.length', function() {
-    return `${this.get('visibleContent.length')} of ${this.get('model.length')}`;
+  _paginationInfo: Ember.computed('visibleContent.length', 'interactions.length', function() {
+    return `${this.get('visibleContent.length')} of ${this.get('interactions.length')}`;
   }),
 
   actions: {
