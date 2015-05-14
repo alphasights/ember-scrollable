@@ -47,8 +47,14 @@
     }
   }
 
-  .contact {
+  .main-contact,
+  .contacts {
     > ul > li {
+
+      &.primary {
+        font-weight: $font-weight-extrabold;
+      }
+
       i {
         @extend %grid-column-large-2;
         @extend %grid-column-small-3;
@@ -74,6 +80,22 @@
 
     .phone-number i {
       @include icon(phone);
+
+      &.mobile {
+        @include icon(mobile);
+      }
+
+      &.office {
+        @include icon(building-o);
+      }
+
+      &.home {
+        @include icon(home);
+      }
+
+      &.switchboard {
+        @include icon(random);
+      }
     }
   }
 
@@ -86,7 +108,7 @@
       background-color: lighten($global-section-border-color, 5%);
     }
 
-    .contact > ul > li {
+    .contacts > ul > li {
       float: left;
       width: 100%;
 

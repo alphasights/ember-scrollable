@@ -25,11 +25,11 @@
       </section>
     </section>
 
-    <section class="contact">
+    <section class="main-contact">
       <ul>
         <li class="phone-number">
-          <i></i>
-          <span>{{mainPhoneNumber}}</span>
+          <i class="{{primaryPhone.type}}"></i>
+          <span>{{primaryPhone.number}}</span>
         </li>
       </ul>
     </section>
@@ -46,7 +46,7 @@
   </header>
 
   <div class="content">
-    <section class="contact">
+    <section class="contacts">
       <ul>
         {{#each email in person.emails}}
           <li class="email">
@@ -55,10 +55,10 @@
           </li>
         {{/each}}
 
-        {{#each phoneNumber in person.phoneNumbers}}
-          <li class="phone-number">
-            <i></i>
-            <span>{{phoneNumber}}</span>
+        {{#each phone in person._phoneNumbers}}
+          <li class="phone-number {{if phone.primary 'primary'}}">
+            <i class="{{phone.type}}"></i>
+            <span>{{phone.number}}</span>
           </li>
         {{/each}}
       </ul>
