@@ -22,7 +22,7 @@ export default Ember.Route.extend({
       });
     } else {
       interactions = this.store.find(
-        'interaction', { primary_contact_id: currentUser.get('id') }
+        'interaction', { primary_contact_id: currentUser.get('model.id') }
       );
 
       deliveryPerformance = this.store.find('deliveryPerformance', 'me').then((value) => {

@@ -20,12 +20,12 @@
   </div>
 </header>
 
-{{#if projects}}
+{{#if projects.arrangedContent}}
   {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
-    {{#each projects as |project|}}
+    {{#each projects.arrangedContent as |project|}}
       {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
         <div class="handle"></div>
-        
+
         <div class="content">
           {{render "whiteboards.whiteboard.project-list-item" project tagName="article"}}
         </div>

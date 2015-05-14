@@ -127,6 +127,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   var callType = 'call';
   var accessCountry = 'AU';
   var advisorPhoneNumber = '5553214567';
+  var additionalContactDetails = 'Super keen';
 
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
@@ -134,7 +135,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "advisor_id": "1",
       "client_access_number_country": accessCountry,
       "client_contact_id": "21387",
-      "additional_contact_details": null,
+      "additional_contact_details": additionalContactDetails,
       "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
@@ -162,6 +163,9 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Fill in advisor phone number
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
+
+  // Select speak dial in
+  fillIn('input[name=additionalContactDetails]', additionalContactDetails);
 
   // Submit form
   click('.form-submission button');

@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   },
 
   style: Ember.computed('timeSlotHeight', function() {
-    return `height: ${this.get('timeSlotHeight')}px;`;
+    return `height: ${this.get('timeSlotHeight')}px;`.htmlSafe();
   }),
 
   time: Ember.computed('day.value', 'timeSlot.offset', function() {

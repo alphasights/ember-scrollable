@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
-export default Ember.ObjectController.extend(ProjectProgressMixin, {
+export default Ember.Controller.extend(ProjectProgressMixin, {
   needs: ['whiteboards/whiteboard'],
 
   whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
@@ -13,7 +13,7 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, {
 
   actions: {
     show: function() {
-      this.transitionToRoute('whiteboards.whiteboard.project', this.get('whiteboard.id'), this.get('id'));
+      this.transitionToRoute('whiteboards.whiteboard.project', this.get('whiteboard.model.id'), this.get('model.id'));
     }
   }
 });
