@@ -64,7 +64,7 @@ var UnavailabilityOccurrence = Occurrence.extend({
   })
 });
 
-export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
+export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
 
@@ -86,10 +86,10 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
 
   visibleUnavailabilities: Ember.computed(
     'unavailabilities.@each.{interactionId}',
-    'id',
+    'model.id',
     function() {
       return this.get('unavailabilities').filter((unavailability) => {
-        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('id'), 10);
+        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10);
       });
     }
   ),
@@ -104,10 +104,10 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
     return InteractionOccurrence.create({ interaction: this });
   }),
 
-  timeZoneOptions: Ember.computed('advisor.timeZone', 'clientContact.timeZone', function() {
+  timeZoneOptions: Ember.computed('model.advisor.timeZone', 'model.clientContact.timeZone', function() {
     var timeZoneOptions = [];
-    var advisorTimeZone = this.get('advisor.timeZone');
-    var clientTimeZone = this.get('clientContact.timeZone');
+    var advisorTimeZone = this.get('model.advisor.timeZone');
+    var clientTimeZone = this.get('model.clientContact.timeZone');
 
     if (advisorTimeZone != null) {
       timeZoneOptions.push(TimeZoneOption.create({
@@ -171,8 +171,8 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
   },
 
   modelDidSave: function() {
-    var advisorName = this.get('advisor.name');
-    var clientName = this.get('clientContact.name');
+    var advisorName = this.get('model.advisor.name');
+    var clientName = this.get('model.clientContact.name');
 
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
     this.get('dashboard').propertyDidChange('upcomingInteractions');
