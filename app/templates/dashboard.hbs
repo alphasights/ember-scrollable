@@ -14,20 +14,23 @@
   </li>
 
   <li class="upcoming-interactions">
-    {{render "dashboard.widgets.upcoming-interactions"
-      upcomingInteractions
-      tagName="section"}}
+    {{as-widget/upcoming-interactions
+      model=upcomingInteractions
+      isTeamView=isTeamView
+      teamMembers=teamMembers}}
   </li>
 
   <li class="interactions-to-schedule">
-    {{render "dashboard.widgets.interactions-to-schedule"
-      interactionsToSchedule
-      tagName="section"}}
+    {{as-widget/interactions-to-schedule
+      model=interactionsToSchedule
+      isTeamView=isTeamView
+      teamMembers=teamMembers}}
   </li>
 
   <li class="unused-advisors">
-    {{render "dashboard.widgets.unused-advisors"
-      unusedAdvisors
-      tagName="section"}}
+    {{as-widget/unusedAdvisors
+      model=unusedAdvisors
+      isTeamView=isTeamView
+      teamMembers=teamMembers}}
   </li>
 </ul>
