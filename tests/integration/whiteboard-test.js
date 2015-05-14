@@ -2,8 +2,15 @@ import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
 import '../helpers/select';
+import '../helpers/drag-and-drop';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
+
+var projectTitles = function() {
+  return find('.project-list-item').toArray().map(function(project) {
+    return $(project).find('> .details span').text().trim();
+  });
+};
 
 QUnit.module("Whiteboard", {
   beforeEach: function() {
@@ -159,7 +166,6 @@ QUnit.module("Whiteboard", {
 
 test("Read project list", function(assert) {
   visit('/whiteboards');
-  wait();
 
   andThen(function() {
     var projects = find('.project-list-item').toArray().map(function(project) {
@@ -201,46 +207,47 @@ test("Read project list", function(assert) {
       deliveredCount: 1,
       targetCount: 2,
       progressBarWidth: '50%'
-    }, {
-      title: 'Example Project 3',
-      clientCode: '03EP',
-      highPriority: false,
-      mediumPriority: true,
-      lowPriority: false,
-      memberAvatarUrl: undefined,
-      leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
-      deliveredCount: 0,
-      targetCount: 0,
-      progressBarWidth: '0px',
     }]);
   });
 });
 
 test("Sort project list", function(assert) {
+  var handler = defineFixture('PUT', '/projects/indexes', { request: {
+    "projects": [
+      { "id": "2", "index": 0 },
+      { "id": "1", "index": 1 }
+    ]
+  }});
+
   visit('/whiteboards');
-
-  var projectTitles = function() {
-    return find('.project-list-item').toArray().map(function(project) {
-      return $(project).find('> .details span').text().trim();
-    });
-  };
-
-  select('.whiteboard .sort-by-select option[value="client"]');
+  dragAndDrop('.whiteboard > ul > li:first .handle', '.whiteboard > ul > li:last');
 
   andThen(function() {
     assert.deepEqual(
       projectTitles(),
-      ['Example Project 2', 'Example Project', 'Example Project 3']
+      ['Example Project 2', 'Example Project']
     );
   });
+});
 
-  select('.whiteboard .sort-by-select option[value="creation-date"]');
+test("Filter project list by medium priority", function(assert) {
+  visit('/whiteboards');
+  click('.whiteboard > header .priority-select .medium');
 
   andThen(function() {
     assert.deepEqual(
       projectTitles(),
-      ['Example Project', 'Example Project 2', 'Example Project 3']
+      ['Example Project 3']
     );
+  });
+});
+
+test("Filter project list by low priority", function(assert) {
+  visit('/whiteboards');
+  click('.whiteboard > header .priority-select .low');
+
+  andThen(function() {
+    assert.equal(find('.whiteboard .empty-message').text().trim(), 'There are no low priority projects.');
   });
 });
 
@@ -253,6 +260,7 @@ test("Change project priority", function(assert) {
       "name": "Example Project",
       "proposed_advisors_count": 1,
       "status": "low",
+      "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
@@ -264,7 +272,7 @@ test("Change project priority", function(assert) {
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
@@ -343,7 +351,7 @@ test("Navigate to previous project with navigation buttons", function(assert) {
   click('.project .previous');
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
@@ -353,7 +361,7 @@ test("Navigate to previous project with arrow keys", function(assert) {
   keyEvent(document, 'keyup', 37);
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
@@ -363,7 +371,7 @@ test("Move back to the last project from the first", function(assert) {
   click('.project .previous');
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 3');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -386,6 +394,7 @@ test("Change project priority from the details", function(assert) {
       "name": "Example Project",
       "proposed_advisors_count": 1,
       "status": "low",
+      "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
@@ -398,7 +407,7 @@ test("Change project priority from the details", function(assert) {
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
