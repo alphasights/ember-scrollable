@@ -74,6 +74,14 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
   phoneCountryCodes: phoneCountryCodes,
   selectedTimeZone: null,
 
+  // form fields
+  scheduledCallTime: Ember.computed.oneWay('model.scheduledCallTime'),
+  interactionType: Ember.computed.oneWay('model.interactionType'),
+  advisorPhoneNumber: Ember.computed.oneWay('model.advisorPhoneNumber'),
+  advisorPhoneCountryCode: Ember.computed.oneWay('model.advisorPhoneCountryCode'),
+  clientAccessNumberCountry: Ember.computed.oneWay('model.clientAccessNumberCountry'),
+  additionalContactDetails: Ember.computed.oneWay('model.additionalContactDetails'),
+
   formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'selectedTimeZone', function() {
     var scheduledCallTime = this.get('scheduledCallTime');
 
