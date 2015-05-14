@@ -1,7 +1,7 @@
-import ListComponent from 'phoenix/components/as-widget/list';
+import ListWidgetComponent from 'phoenix/components/as-widget/list';
 import notify from 'phoenix/helpers/notify';
 
-export default ListComponent.extend({
+export default ListWidgetComponent.extend({
   classNameBindings: [':unused-advisors'],
 
   name: 'Unused Advisors',

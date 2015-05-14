@@ -1,6 +1,6 @@
-import ListComponent from 'phoenix/components/as-widget/list';
+import ListWidgetComponent from 'phoenix/components/as-widget/list';
 
-export default ListComponent.extend({
+export default ListWidgetComponent.extend({
   classNameBindings: [':interactions', ':interactions-to-schedule'],
 
   name: 'Interactions To Schedule',
