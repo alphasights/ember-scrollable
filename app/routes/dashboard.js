@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 
   model: function(params) {
     var interactions, teamMembers, deliveryPerformance;
-    var currentUser = this.controllerFor('currentUser').get('model');
+    var currentUser = this.controllerFor('currentUser');
     var teamId = params.teamId;
 
     if (teamId != null) {
