@@ -156,7 +156,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
         scheduledCallTime: this.get('scheduledCallTime'),
         interactionType: this.get('interactionType'),
         advisorPhoneNumber: this.get('advisorPhoneNumber'),
-        advisorPhoneCountryCode: this.get('advisorPhoneCountryCode')
+        advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
+        clientAccessNumberCountry: this.get('clientAccessNumberCountry'),
+        additionalContactDetails: this.get('additionalContactDetails')
       });
 
       if (this.get('isValid')) {
