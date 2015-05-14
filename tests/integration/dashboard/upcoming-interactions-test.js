@@ -54,6 +54,13 @@ QUnit.module("Upcoming interactions", {
           "emails": [personalAdvisor.email],
           "name": personalAdvisor.name,
           "phone_numbers": [personalAdvisor.phoneNumber],
+          "phones": [
+            {
+              "number": personalAdvisor.phoneNumber,
+              "type": 'mobile',
+              "primary": true
+            }
+          ],
           "job_title": personalAdvisor.jobTitle,
           "company_name": personalAdvisor.companyName,
           "time_zone": 'Europe/Moscow'
@@ -66,6 +73,13 @@ QUnit.module("Upcoming interactions", {
           "emails": [clientContact.email],
           "name": clientContact.name,
           "phone_numbers": [clientContact.phoneNumber],
+          "phones": [
+            {
+              "number": clientContact.phoneNumber,
+              "type": 'mobile',
+              "primary": true
+            }
+          ],
           "client_account_id": clientAccount.id,
           "time_zone": 'Australia/Sydney'
         }
@@ -124,11 +138,11 @@ test("Show interaction details", function(assert) {
       advisorName: $interaction.find('.advisor .name').text().trim(),
       currentPosition: $interaction.find('.advisor .current-position').text().trim(),
       advisorEmail: $interaction.find('.advisor .email span').text().trim(),
-      advisorPhoneNumber: $interaction.find('.advisor .phone-number span').text().trim(),
+      advisorPhoneNumber: $interaction.find('.advisor .phone-number:first span').text().trim(),
       clientContactName: $interaction.find('.client .name').text().trim(),
       clientAccountName: $interaction.find('.client .current-position').text().trim(),
       clientEmail: $interaction.find('.client .email span').text().trim(),
-      clientPhoneNumber: $interaction.find('.client .phone-number span').text().trim(),
+      clientPhoneNumber: $interaction.find('.client .phone-number:first span').text().trim(),
       callDate: $interaction.find('.date-time .date').text().trim(),
       callTime: $interaction.find('.date-time .time').text().trim(),
       advisorCallTime: $interaction.find('.profiles .advisor .call-time span').text().trim(),

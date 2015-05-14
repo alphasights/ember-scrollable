@@ -19,6 +19,13 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "emails": ['advisor@email.com'],
           "name": 'Johnny Advisor',
           "phone_numbers": ['+1 555-123-4567'],
+          "phones": [
+            {
+              "number": '+1 555-123-4567',
+              "type": 'mobile',
+              "primary": true
+            }
+          ],
           "job_title": 'Vice President',
           "company_name": 'Apple'
         }
@@ -30,6 +37,13 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "emails": ['client@email.com'],
           "name": 'Bob Client',
           "phone_numbers": ['+1 555-321-9000'],
+          "phones": [
+            {
+              "number": '+1 555-321-9000',
+              "type": 'mobile',
+              "primary": true
+            }
+          ],
           "client_account_id": 485
         }
       ],
