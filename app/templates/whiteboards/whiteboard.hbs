@@ -20,7 +20,7 @@
   </div>
 </header>
 
-{{#if projects}}
+{{#if projects.arrangedContent}}
   {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
     {{#each projects.arrangedContent as |project|}}
       {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
