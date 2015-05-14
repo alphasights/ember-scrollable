@@ -9,7 +9,7 @@ export default DS.Model.extend({
   jobTitle: DS.attr('string'),
   name: DS.attr('string'),
   phoneNumbers: DS.attr(),
-  _phoneNumbers: DS.attr(),
+  phones: DS.attr(),
   timeZone: DS.attr('string'),
 
   currentPosition: Ember.computed('jobTitle', 'companyName', function() {

@@ -55,7 +55,7 @@
           </li>
         {{/each}}
 
-        {{#each phone in person._phoneNumbers}}
+        {{#each phone in person.phones}}
           <li class="phone-number {{if phone.primary 'primary'}}">
             <i class="{{phone.type}}"></i>
             <span>{{phone.number}}</span>

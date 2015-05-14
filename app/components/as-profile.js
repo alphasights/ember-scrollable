@@ -7,17 +7,15 @@ export default Ember.Component.extend({
   person: null,
   title: null,
 
-  primaryPhone: function() {
-    var phone = this.get('person._phoneNumbers').filter((phone) => {
+  primaryPhone: Ember.computed('person.phones.[]', function() {
+    return this.get('person.phones').filter((phone) => {
       return phone.primary === true;
-    });
+    }).get('firstObject');
+  }),
 
-    return phone.get('firstObject');
-  }.property('person._phoneNumbers'),
-
-  isFlipped: function() {
+  isFlipped: Ember.computed('flipped', function() {
     return this.get('flipped');
-  }.property('flipped'),
+  }),
 
   actions: {
      flip: function() {
