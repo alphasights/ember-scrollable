@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   whiteboard: null,
   filterPriority: Ember.computed.oneWay('whiteboard.filterPriority'),
   contentSorting: ['index', 'createdAt:desc'],

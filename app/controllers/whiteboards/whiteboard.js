@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ProjectsController from './whiteboard/projects';
 import { request } from 'ic-ajax';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   queryParams: {
     filterPriority: 'priority'
   },

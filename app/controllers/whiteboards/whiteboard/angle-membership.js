@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   deliveryTarget: Ember.computed('model.deliveryTarget', function(_, value) {
     if (arguments.length > 1) {
       this.set('model.deliveryTarget', value);
