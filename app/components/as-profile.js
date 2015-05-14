@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   }.property('person._phoneNumbers'),
 
   isFlipped: function() {
-      return this.get('flipped');
+    return this.get('flipped');
   }.property('flipped'),
 
   actions: {
