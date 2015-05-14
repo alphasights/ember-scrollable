@@ -8,7 +8,7 @@ export default WidgetComponent.extend({
   teamMembers: null,
   isTeamView: null,
 
-  headerTemplateName: 'components/as-widget/interaction-header',
+  headerTemplateName: 'components/as-widget/list-header',
   listItemTemplateName: null,
   isCollapsed: true,
   collapsedMaxVisibleItems: 4,

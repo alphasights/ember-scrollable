@@ -145,16 +145,20 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
           notify('The interaction could not be cancelled.', 'error');
         })
       });
+
       this.set('requestPromise', requestPromise);
     },
+
     submit: function() {
       var model = this.get('model');
+
       model.setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
         interactionType: this.get('interactionType'),
         advisorPhoneNumber: this.get('advisorPhoneNumber'),
         advisorPhoneCountryCode: this.get('advisorPhoneCountryCode')
       });
+
       if (this.get('isValid')) {
         this.set('requestPromise', PromiseController.create({
           promise: model.save().then(
@@ -165,13 +169,16 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       }
     }
   },
+
   modelDidSave: function() {
     var advisorName = this.get('advisor.name');
     var clientName = this.get('clientContact.name');
+
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
     this.get('dashboard').propertyDidChange('upcomingInteractions');
     notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
+
   modelDidError: function(error) {
     if (error.errors != null) {
       this.set('errors', error.errors);
@@ -179,6 +186,7 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       notify('There has been an error scheduling the interaction.', 'error');
     }
   },
+
   validations: {
     interactionType: {
       presence: true
@@ -190,9 +198,11 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
       presence: true
     }
   },
+
   interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
     var classifications = this.get('interactionClassifications');
     var interactionTypes = this.get('interactionTypes');
+
     var types = _.map(classifications, function(typeIds, classification) {
       return _.map(typeIds, function(typeId) {
         return {
@@ -204,13 +214,17 @@ export default Ember.ObjectController.extend(ModelsNavigationMixin, EmberValidat
         };
       });
     });
+
     return _.flatten(types);
   }),
+
   speakDialIns: Ember.computed('speakDialInCountries', function() {
     var dialInCountries = this.get('speakDialInCountries');
+
     var dialInOptions = _.map(dialInCountries, function(country, countryCode) {
       return { id: countryCode, name: country };
     });
+
     dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
   })
