@@ -230,6 +230,27 @@ test("Sort project list", function(assert) {
   });
 });
 
+test("Filter project list by medium priority", function(assert) {
+  visit('/whiteboards');
+  click('.whiteboard > header .priority-select .medium');
+
+  andThen(function() {
+    assert.deepEqual(
+      projectTitles(),
+      ['Example Project 3']
+    );
+  });
+});
+
+test("Filter project list by low priority", function(assert) {
+  visit('/whiteboards');
+  click('.whiteboard > header .priority-select .low');
+
+  andThen(function() {
+    assert.equal(find('.whiteboard .empty-message').text().trim(), 'There are no low priority projects.');
+  });
+});
+
 test("Change project priority", function(assert) {
   var handler = defineFixture('PUT', '/projects/1', { request: {
     "project": {
@@ -239,6 +260,7 @@ test("Change project priority", function(assert) {
       "name": "Example Project",
       "proposed_advisors_count": 1,
       "status": "low",
+      "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
@@ -250,13 +272,7 @@ test("Change project priority", function(assert) {
 
   andThen(function() {
     assert.equal(handler.called, true);
-
-    andThen(function() {
-      assert.deepEqual(
-        projectTitles(),
-        ['Example Project 2']
-      );
-    });
+    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
@@ -335,7 +351,7 @@ test("Navigate to previous project with navigation buttons", function(assert) {
   click('.project .previous');
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
@@ -345,7 +361,7 @@ test("Navigate to previous project with arrow keys", function(assert) {
   keyEvent(document, 'keyup', 37);
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project');
   });
 });
 
@@ -355,7 +371,7 @@ test("Move back to the last project from the first", function(assert) {
   click('.project .previous');
 
   andThen(function(){
-    assert.equal(find('.project h1 span').text().trim(), 'Example Project 3');
+    assert.equal(find('.project h1 span').text().trim(), 'Example Project 2');
   });
 });
 
@@ -378,6 +394,7 @@ test("Change project priority from the details", function(assert) {
       "name": "Example Project",
       "proposed_advisors_count": 1,
       "status": "low",
+      "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1"
     }
@@ -390,7 +407,7 @@ test("Change project priority from the details", function(assert) {
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item:last .priority-select .dropdown > .low').length, 1);
+    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
