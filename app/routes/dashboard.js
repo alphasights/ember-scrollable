@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 
   model: function(params) {
     var interactions, teamMembers, deliveryPerformance;
-    var currentUser = this.controllerFor('currentUser');
+    var currentUser = this.controllerFor('currentUser').get('model');
     var teamId = params.teamId;
 
     if (teamId != null) {
@@ -22,7 +22,7 @@ export default Ember.Route.extend({
       });
     } else {
       interactions = this.store.find(
-        'interaction', { primary_contact_id: currentUser.get('id') }
+        'interaction', { primary_contact_id: currentUser.get('model.id') }
       );
 
       deliveryPerformance = this.store.find('deliveryPerformance', 'me').then((value) => {
