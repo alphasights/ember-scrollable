@@ -22,8 +22,6 @@ export default Ember.ObjectController.extend({
         project.set('index', index);
       });
 
-      this.get('projects.content').setObjects(projects);
-
       request(`${EmberENV.apiBaseUrl}/projects/indexes`, {
         type: 'PUT',
         dataType: 'json',
