@@ -1,42 +1,67 @@
-<header>
-  <h1>{{title}}</h1>
+<div class="front">
+  <header>
+    <h1>{{title}}</h1>
 
-  {{yield}}
-</header>
+    {{yield}}
+  </header>
 
-<div class="content">
-  <div class="avatar-container">
-    {{as-avatar person=person showTooltip=false alt=person.name}}
+  <div class="content">
+    <section class="description">
+      <div class="avatar-container">
+        {{as-avatar person=person showTooltip=false alt=person.name}}
+      </div>
+
+      <section class="details">
+        <a target="_blank" class="name" href={{person.pistachioUrl}}>{{person.name}}</a>
+
+        {{#tool-tipster
+          title=person.currentPosition
+          position="bottom-left"
+          tagName="span"
+          class="current-position"
+          maxWidth=400}}
+          {{person.currentPosition}}
+        {{/tool-tipster}}
+      </section>
+    </section>
+
+    <section class="main-contact">
+      <ul>
+        <li class="phone-number">
+          <i class="{{primaryPhone.type}}"></i>
+          <span>{{primaryPhone.number}}</span>
+        </li>
+      </ul>
+    </section>
   </div>
 
-  <section class="details">
-    <a target="_blank" class="name" href={{person.pistachioUrl}}>{{person.name}}</a>
-
-    {{#tool-tipster
-      title=person.currentPosition
-      position="bottom-left"
-      tagName="span"
-      class="current-position"
-      maxWidth=400}}
-      {{person.currentPosition}}
-    {{/tool-tipster}}
-  </section>
+  <footer>
+    <span><a {{action "flip"}}>More Information</a></span>
+  </footer>
 </div>
 
-<section class="contact">
-  <ul>
-    {{#each email in person.emails}}
-      <li class="email">
-        <i></i>
-        <span>{{email}}</span>
-      </li>
-    {{/each}}
+<div class="back">
+  <header>
+    <h1><a {{action "flip"}}><i class="back-icon"></i> {{person.name}}</a></h1>
+  </header>
 
-    {{#each phoneNumber in person.phoneNumbers}}
-      <li class="phone-number">
-        <i></i>
-        <span>{{phoneNumber}}</span>
-      </li>
-    {{/each}}
-  </ul>
-</section>
+  <div class="content">
+    <section class="contacts">
+      <ul>
+        {{#each email in person.emails}}
+          <li class="email">
+            <i></i>
+            <span>{{email}}</span>
+          </li>
+        {{/each}}
+
+        {{#each phone in person.phones}}
+          <li class="phone-number {{if phone.primary 'primary'}}">
+            <i class="{{phone.type}}"></i>
+            <span>{{phone.number}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+</div>
