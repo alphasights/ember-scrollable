@@ -1,0 +1,19 @@
+{{#link-to "dashboard.interaction" model.id tagName="article"}}
+  <div class="title">
+    <span>{{model.advisor.name}}</span>
+    <small>{{model.project.name}}</small>
+  </div>
+
+  <div class="avatar-container">
+    {{#if isTeamView}}
+      {{as-avatar person=model.primaryContact}}
+    {{/if}}
+  </div>
+
+  <div class="time">
+    <span>{{moment model.scheduledCallTime "D MMM, h:mm A"}}</span>
+    <small>{{ago model.scheduledCallTime}}</small>
+  </div>
+
+  {{as-checklist-status items=model.checklistItems showTooltip=true}}
+{{/link-to}}

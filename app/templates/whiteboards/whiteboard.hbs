@@ -1,20 +1,37 @@
 <header>
-  <div class="sort-by-label">
-    <label for="sort-by">Sort by:</label>
+  <div class="priority-select-label">
+    <span>Filter by:</span>
   </div>
 
-  <div class="sort-by-select">
-    {{view "select"
-      id="sort-by"
-      content=projects.availableSortProperties
-      optionValuePath="content.id"
-      optionLabelPath="content.name"
-      value=sortPropertyId}}
+  <div class="priority-select">
+    <ul>
+      {{#link-to (query-params filterPriority="high") tagName="li" class="high"}}
+        <button></button>
+      {{/link-to}}
+
+      {{#link-to (query-params filterPriority="medium") tagName="li" class="medium"}}
+        <button></button>
+      {{/link-to}}
+
+      {{#link-to (query-params filterPriority="low") tagName="li" class="low"}}
+        <button></button>
+      {{/link-to}}
+    </ul>
   </div>
 </header>
 
-<ul>
-  {{#each project in projects itemController="whiteboards.whiteboard.project-list-item"}}
-    <li>{{render "whiteboards.whiteboard.project-list-item" project.model tagName="article"}}</li>
-  {{/each}}
-</ul>
+{{#if projects.arrangedContent}}
+  {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
+    {{#each projects.arrangedContent as |project|}}
+      {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
+        <div class="handle"></div>
+
+        <div class="content">
+          {{render "whiteboards.whiteboard.project-list-item" project tagName="article"}}
+        </div>
+      {{/sortable-item}}
+    {{/each}}
+  {{/sortable-group}}
+{{else}}
+  <div class="empty-message">There are no {{filterPriority}} priority projects.</div>
+{{/if}}

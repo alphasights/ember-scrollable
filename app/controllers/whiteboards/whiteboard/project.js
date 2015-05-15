@@ -2,14 +2,14 @@ import Ember from 'ember';
 import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
-export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigationMixin, {
+export default Ember.Controller.extend(ProjectProgressMixin, ModelsNavigationMixin, {
   needs: ['whiteboards/whiteboard'],
   whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
 
   navigableModels: Ember.computed.oneWay('whiteboard.projects.arrangedContent'),
 
-  modelRouteParams: Ember.computed('whiteboard.id', function () {
-    return ['whiteboards.whiteboard.project', this.get('whiteboard.id')];
+  modelRouteParams: Ember.computed('whiteboard.model.id', function () {
+    return ['whiteboards.whiteboard.project', this.get('whiteboard.model.id')];
   }),
 
   anglesSorting: ['createdAt:desc'],
@@ -17,7 +17,7 @@ export default Ember.ObjectController.extend(ProjectProgressMixin, ModelsNavigat
 
   actions: {
     hideSidePanel: function() {
-      this.transitionToRoute('whiteboards.whiteboard', this.get('whiteboard.id'));
+      this.transitionToRoute('whiteboards.whiteboard', this.get('whiteboard.model.id'));
     }
   }
 });

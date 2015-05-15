@@ -53,6 +53,10 @@ export default {
         "office": "Example Office"
       }]
     }});
+
+    this.app.fixtures.define('GET', '/unused_advisors', { response: {
+      "unused_advisors": []
+    }});
   },
 
   afterEach: function() {

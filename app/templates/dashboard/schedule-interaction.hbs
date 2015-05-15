@@ -2,11 +2,11 @@
   <header>
     <div class="content">
       <h1>
-        <span>{{advisor.name}}</span>
+        <span>{{model.advisor.name}}</span>
 
         <small>
-          <a target="_blank" href={{project.pistachioUrl}}>
-            {{project.name}}
+          <a target="_blank" href={{model.project.pistachioUrl}}>
+            {{model.project.name}}
           </a>
         </small>
       </h1>
@@ -15,8 +15,8 @@
 
   <section class="profiles">
     <ul>
-      <li>{{as-profile person=advisor title="Advisor" class="advisor"}}</li>
-      <li>{{as-profile person=clientContact title="Client" class="client"}}</li>
+      <li>{{as-profile person=model.advisor title="Advisor" class="advisor"}}</li>
+      <li>{{as-profile person=model.clientContact title="Client" class="client"}}</li>
     </ul>
   </section>
 
@@ -43,7 +43,7 @@
           {{as-form/select
             name="interactionType"
             label="Interaction Type"
-            contentBinding="interactionTypesForSelect"
+            content=interactionTypesForSelect
             optionLabelPath="content.title"
             optionValuePath="content.id"
             optionGroupPath="classification"

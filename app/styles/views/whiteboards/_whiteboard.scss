@@ -13,18 +13,91 @@ $projects-header-height: rem-calc(40);
     padding: $column-gutter / 2 0;
     width: auto;
 
-    .sort-by-label {
+    .priority-select-label {
       float: left;
+      line-height: $projects-header-height;
       padding: 0 $column-gutter;
       text-align: center;
 
-      label {
+      span {
         @include form-label();
       }
     }
 
-    .sort-by-select {
-      @include form-select($inner-wrapper: null, $inline: true);
+    .priority-select {
+      margin-left: $column-gutter / 2;
+
+      ul {
+        @include clearfix;
+
+        display: table;
+
+        li {
+          @include single-transition(background-color, 100ms, linear);
+
+          background-color: $white;
+          border: 1px solid darken($global-section-border-color, 5%);
+          border-left-width: 0;
+          cursor: pointer;
+          display: table-cell;
+          height: $projects-header-height;
+          padding: 0 $column-gutter / 2;
+          vertical-align: middle;
+
+          &:hover,
+          &.active {
+            background-color: darken($global-section-border-color, 5%);
+          }
+
+          &:first-child {
+            border-left-width: 1px;
+          }
+        }
+
+        button {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .empty-message {
+    color: $small-font-color;
+    font-size: $h4-font-size;
+    margin: $column-gutter;
+    text-align: center;
+  }
+
+  > ul li {
+    @include single-transition(background-color, 100ms, linear);
+    @extend %grid-row;
+
+    background-color: $white;
+    border-bottom: 1px solid $global-section-border-color;
+    display: table;
+    position: relative;
+
+    &.is-dragging {
+      z-index: 100;
+    }
+
+    &:hover {
+      background-color: lighten($global-section-border-color, 6%);
+    }
+
+    .content {
+      display: table-cell;
+    }
+
+    .handle {
+      @include icon('ellipsis-v');
+
+      color: darken($info-color, 10%);
+      cursor: move;
+      display: table-cell;
+      font-size: $h2-font-size;
+      padding: 0 $column-gutter / 2;
+      vertical-align: middle;
     }
   }
 }

@@ -6,7 +6,9 @@ QUnit.module('ProjectProgressMixin');
 
 test('#progress returns 0 when the deliveryTarget is 0', function(assert) {
   var ProjectProgressObject = Ember.Object.extend(ProjectProgressMixin, {
-    deliveryTarget: 0
+    model: {
+      deliveryTarget: 0
+    }
   });
 
   var subject = ProjectProgressObject.create();
@@ -15,8 +17,10 @@ test('#progress returns 0 when the deliveryTarget is 0', function(assert) {
 
 test('#progress returns the correct value when the deliveryTarget is not 0', function(assert) {
   var ProjectProgressObject = Ember.Object.extend(ProjectProgressMixin, {
-    deliveredAdvisorsCount: 1,
-    deliveryTarget: 4,
+    model: {
+      deliveredAdvisorsCount: 1,
+      deliveryTarget: 4,
+    }
   });
 
   var subject = ProjectProgressObject.create();

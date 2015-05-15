@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import PromiseController from '../../promise';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: ['whiteboards/whiteboard'],
 
   whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),

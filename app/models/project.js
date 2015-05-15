@@ -15,6 +15,7 @@ export default DS.Model.extend({
   proposedAdvisorsCount: DS.attr('number'),
   status: DS.attr('string'),
   upcomingInteractionsCount: DS.attr('number'),
+  index: DS.attr('number'),
 
   deliveredAdvisorsCount: Ember.computed.alias('proposedAdvisorsCount'),
   lead: Ember.computed.alias('analyst_1'),
