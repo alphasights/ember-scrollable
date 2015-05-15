@@ -50,11 +50,6 @@
   .main-contact,
   .contacts {
     > ul > li {
-
-      &.primary {
-        font-weight: $font-weight-extrabold;
-      }
-
       i {
         @extend %grid-column-large-2;
         @extend %grid-column-small-3;
