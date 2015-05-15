@@ -8,9 +8,7 @@ export default Ember.Component.extend({
   title: null,
 
   primaryPhone: Ember.computed('person.phones.[]', function() {
-    return this.get('person.phones').filter((phone) => {
-      return phone.primary === true;
-    }).get('firstObject');
+    return this.get('person.phones').findBy('primary', true);
   }),
 
   isFlipped: Ember.computed('flipped', function() {
@@ -18,8 +16,8 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-     flip: function() {
-        this.toggleProperty('flipped');
-     }
+    flip: function() {
+      this.toggleProperty('flipped');
+    }
   }
 });
