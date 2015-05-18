@@ -17,13 +17,14 @@ dependencies:
     - "~/.rvm/gems/"
 
 deployment:
-  staging:
+  production:
     branch: master
     commands:
-      - "ember divshot push staging --token $DIVSHOT_TOKEN --org AlphaSights"
-
-  fallback:
-    branch: feature/mde-fallback
-    commands:
+      - "ember divshot push production --token $DIVSHOT_TOKEN --org AlphaSights"
       - "ember deploy --environment production"
       - 'ember deploy:activate --revision `ember deploy:list --environment production | grep phoenix: | sed -e "s/.*phoenix/phoenix/g" | head -n 1` --environment production'
+
+  staging:
+    branch: develop
+    commands:
+      - "ember divshot push staging --token $DIVSHOT_TOKEN --org AlphaSights"
