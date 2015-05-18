@@ -3,6 +3,7 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = process.env.EMBER_ENV;
+
 var options = {
   inlineContent: {
     'analytics': {
