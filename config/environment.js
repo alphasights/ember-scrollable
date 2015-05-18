@@ -13,8 +13,8 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
 
-      apiBaseUrl: 'http://localhost:3000/swordfish',
-      blankAvatarUrl: 'http://localhost:3000/images/default_avatar.png',
+      apiBaseUrl: '/swordfish',
+      blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
       intercomAppId: '4rw4fi3l',
       pistachioUrl: 'http://localhost:3000',
