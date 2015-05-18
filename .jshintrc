@@ -10,7 +10,6 @@
     "-Promise",
     "_",
     "EmberENV",
-    "__env",
     "moment"
   ],
   "browser" : true,

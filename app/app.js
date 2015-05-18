@@ -16,10 +16,6 @@ var App = Ember.Application.extend({
   Resolver: Resolver
 });
 
-if (typeof __env !== 'undefined' && __env != null) {
-  _(EmberENV).extend(__env);
-}
-
 loadInitializers(App, config.modulePrefix);
 
 export default App;
