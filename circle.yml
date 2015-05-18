@@ -21,9 +21,9 @@ deployment:
     branch: master
     commands:
       - "ember divshot push staging --token $DIVSHOT_TOKEN --org AlphaSights"
-      - "ember deploy --environment production"
 
   fallback:
     branch: feature/mde-fallback
     commands:
+      - "ember deploy --environment production"
       - 'ember deploy:activate --revision `ember deploy:list --environment production | grep phoenix: | sed -e "s/.*phoenix/phoenix/g" | head -n 1` --environment production'
