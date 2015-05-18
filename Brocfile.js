@@ -19,18 +19,9 @@ var options = {
   }
 }
 
-if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined' && env !== 'test') {
-  var cloudfrontHost;
-
-  if (env === 'production') {
-    cloudfrontHost = 'https://dqnspx0v9vwle.cloudfront.net/';
-  } else {
-    cloudfrontHost = 'https://d2m6x67yezr43a.cloudfront.net/';
-  }
-
+if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined' && env === 'production') {
   options['fingerprint'] = {
-    enabled: true,
-    prepend: cloudfrontHost
+    prepend: 'https://dqnspx0v9vwle.cloudfront.net/'
   };
 }
 
