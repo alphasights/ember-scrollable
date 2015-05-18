@@ -20,6 +20,7 @@ var options = {
 
 if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined') {
   options['fingerprint'] = {
+    enabled: true,
     prepend: 'https://d2m6x67yezr43a.cloudfront.net/'
   }
 }
