@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     setPriority: function(value) {
       var project = this.get('project');
 
+      project.set('index', null);
       project.set('priority', value);
       project.save();
     }
