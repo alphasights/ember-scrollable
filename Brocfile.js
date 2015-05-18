@@ -3,8 +3,7 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var env = process.env.EMBER_ENV;
-
-var app = new EmberApp({
+var options = {
   inlineContent: {
     'analytics': {
       file: './inline-content/analytics.html'
@@ -17,7 +16,15 @@ var app = new EmberApp({
       enabled: env === 'development'
     }
   }
-});
+}
+
+if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined') {
+  options['fingerprint'] = {
+    prepend: 'https://d2m6x67yezr43a.cloudfront.net/'
+  }
+}
+
+var app = new EmberApp(options);
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
