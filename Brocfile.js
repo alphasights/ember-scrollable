@@ -18,19 +18,19 @@ var options = {
   }
 }
 
-if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined') {
+if (typeof process.env.AWS_ACCESS_KEY_ID !== 'undefined' && env !== 'test') {
   var cloudfrontHost;
 
   if (env === 'production') {
-    cloudfrontHost = 'https://dqnspx0v9vwle.cloudfront.net/'
+    cloudfrontHost = 'https://dqnspx0v9vwle.cloudfront.net/';
   } else {
-    cloudfrontHost = 'https://d2m6x67yezr43a.cloudfront.net/'
+    cloudfrontHost = 'https://d2m6x67yezr43a.cloudfront.net/';
   }
 
   options['fingerprint'] = {
     enabled: true,
     prepend: cloudfrontHost
-  }
+  };
 }
 
 var app = new EmberApp(options);
