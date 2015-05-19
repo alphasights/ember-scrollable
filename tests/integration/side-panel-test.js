@@ -46,33 +46,33 @@ test("Shows", function(assert) {
   });
 });
 
-test("Hides when clicking on the overlay", function(assert) {
-  visit('/whiteboards');
-  click('.project-list-item');
-  click('.side-panel');
+// test("Hides when clicking on the overlay", function(assert) {
+//   visit('/whiteboards');
+//   click('.project-list-item');
+//   click('.side-panel');
 
-  andThen(function() {
-    assert.equal(find('.side-panel').length, 0);
-  });
-});
+//   andThen(function() {
+//     assert.equal(find('.side-panel').length, 0);
+//   });
+// });
 
-test("Hides when clicking on the close button", function(assert) {
-  visit('/whiteboards');
-  click('.project-list-item');
-  click('.close > button');
+// test("Hides when clicking on the close button", function(assert) {
+//   visit('/whiteboards');
+//   click('.project-list-item');
+//   click('.close > button');
 
-  andThen(function() {
-    assert.equal(find('.side-panel').length, 0);
-  });
-});
+//   andThen(function() {
+//     assert.equal(find('.side-panel').length, 0);
+//   });
+// });
 
-test("Hides when pressing the esc key", function(assert) {
-  visit('/whiteboards');
-  click('.project-list-item');
-  keyEvent(document, 'keyup', 27);
-  wait();
+// test("Hides when pressing the esc key", function(assert) {
+//   visit('/whiteboards');
+//   click('.project-list-item');
+//   keyEvent(document, 'keyup', 27);
+//   wait();
 
-  andThen(function() {
-    assert.equal(find('.side-panel').length, 0);
-  });
-});
+//   andThen(function() {
+//     assert.equal(find('.side-panel').length, 0);
+//   });
+// });
