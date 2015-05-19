@@ -24,6 +24,7 @@ $widget-min-height: $widget-header-line-height * 2;
     h1 {
       display: inline-block;
       font-size: $base-font-size;
+      letter-spacing: 0;
       margin: 0;
     }
 
