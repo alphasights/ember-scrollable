@@ -27,7 +27,6 @@
     "defineFixture",
     "_",
     "EmberENV",
-    "__env",
     "select",
     "dragAndDrop",
     "moment",

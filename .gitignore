@@ -18,3 +18,4 @@ testem.log
 .DS_Store
 *.swp
 .divshot-cache
+.env

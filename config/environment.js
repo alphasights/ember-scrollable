@@ -64,5 +64,13 @@ module.exports = function(environment) {
     // ENV.EmberENV.logErrors = false;
   }
 
+  if (environment === 'production') {
+    ENV.EmberENV.pistachioUrl = 'https://secure.alphasights.com';
+    ENV.EmberENV.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
+    ENV.EmberENV.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
+    ENV.EmberENV.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
+    ENV.EmberENV.brazilUrl = 'https://brazil-production.herokuapp.com';
+  }
+
   return ENV;
 };
