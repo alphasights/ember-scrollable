@@ -1,6 +1,7 @@
 $projects-header-height: rem-calc(40);
 
-.whiteboards .whiteboard {
+.whiteboards .whiteboard,
+section.projects {
   padding: 0 $column-gutter;
 
   header {

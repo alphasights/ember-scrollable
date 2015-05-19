@@ -1,4 +1,5 @@
-.whiteboard .project-list-item {
+.whiteboard .project-list-item,
+section.projects .project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
 
