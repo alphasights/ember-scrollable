@@ -8,22 +8,7 @@ export default ListWidgetComponent.extend({
   name: 'Unused Advisors',
   emptyMessage: 'There are no unused advisors to contact.',
   hasTeamMemberFilter: false,
-
-  model: Ember.computed('unusedAdvisors', 'teamMembers', function() {
-    if (this.get('isTeamView')) {
-      return this.get('teamMembers').sortBy('deliveryPerformance.unusedAdvisorsCount').reverse();
-    } else {
-      return this.get('unusedAdvisors');
-    }
-  }),
-
-  listItemTemplateName: Ember.computed('isTeamView', function(){
-    if (this.get('isTeamView')) {
-      return 'components/as-widget/unused-advisors/team-list-item';
-    } else {
-      return 'components/as-widget/unused-advisors/list-item';
-    }
-  }),
+  listItemTemplateName: 'components/as-widget/unused-advisors/list-item',
 
   actions: {
     removeUnusedAdvisor: function(unusedAdvisorId) {
