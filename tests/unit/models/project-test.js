@@ -8,7 +8,7 @@ moduleForModel('project', 'Project', {
   needs: [
     'model:project', 'model:angle-team-membership', 'model:angle', 'model:user',
     'model:interaction', 'model:advisor', 'model:checklist-item',
-    'model:client-contact'
+    'model:client-contact', 'model:delivery-performance'
   ],
 
   beforeEach: function() {
