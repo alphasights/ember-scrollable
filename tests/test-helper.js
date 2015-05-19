@@ -10,7 +10,6 @@ import {
 setResolver(resolver);
 
 QUnit.urlParams.nocontainer = true;
-Ember.$.Velocity.Promise = Ember.RSVP.Promise;
 
 export default {
   beforeEach: function() {
