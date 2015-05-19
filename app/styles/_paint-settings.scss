@@ -17,3 +17,17 @@ $layout-sidebar-footer-avatar-selector: '.picture';
 $layout-sidebar-footer-actions-selector: '.toggle-actions';
 
 $info-color: #ededed;
+
+$phoenix-font-family: "pragmatica-web", "Helvetica Neue", Helvetica, sans-serif;
+$body-font-family: $phoenix-font-family;
+$header-font-family: $phoenix-font-family;
+
+$font-weight-normal: 300;
+$font-weight-bold: 400;
+$font-weight-extrabold: 700;
+
+$typography: (
+  condensed-tags: (
+    h1: -1px
+  )
+);
