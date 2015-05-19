@@ -19,9 +19,9 @@ var options = {
   }
 }
 
-if (typeof process.env.PREPEND_CLOUDFRONT === true && env === 'production') {
+if (typeof process.env.ASSET_HOST !== 'undefined' && env === 'production') {
   options['fingerprint'] = {
-    prepend: 'https://dqnspx0v9vwle.cloudfront.net/'
+    prepend: process.env.ASSET_HOST
   };
 }
 
