@@ -1,0 +1,18 @@
+.dashboard .widget.unused-advisor-stats {
+  article {
+    pointer-events: none;
+
+    .analyst {
+      @extend %grid-column-small-7;
+      @extend %grid-column-medium-7;
+    }
+
+    .stats {
+      @extend %grid-column-small-5;
+      @extend %grid-column-medium-5;
+
+      padding-left: 0 !important;
+      text-align: center;
+    }
+  }
+}

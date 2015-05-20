@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import ListWidgetComponent from 'phoenix/components/as-widget/list';
 import notify from 'phoenix/helpers/notify';
 
