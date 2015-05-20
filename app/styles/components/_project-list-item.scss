@@ -1,9 +1,20 @@
-article.projects .project-list-item {
+article.project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
 
   cursor: pointer;
   padding: $column-gutter / 4 0;
+
+  &.read-only {
+    > .priority {
+      display: none;
+    }
+
+    > .details {
+      @extend %grid-column-small-9;
+      @extend %grid-column-medium-5;
+    }
+  }
 
   > .priority {
     @extend %grid-column-medium-1;

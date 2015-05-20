@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNameBindings: [':projects'],
   tagName: 'article',
 
+  readOnly: false,
   contentSorting: ['index', 'createdAt:desc'],
   sortedContent: Ember.computed.sort('projects', 'contentSorting'),
 
@@ -14,6 +15,10 @@ export default Ember.Component.extend({
   actions: {
     reorderProjects: function(projects) {
       this.sendAction('reorderProjects', projects);
+    },
+
+    showProject: function(project) {
+      this.sendAction('showProject', project);
     }
   }
 });

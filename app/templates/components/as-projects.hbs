@@ -24,10 +24,12 @@
   {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
     {{#each arrangedContent as |project|}}
       {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
-        <div class="handle"></div>
+        {{#unless readOnly}}
+          <div class="handle"></div>
+        {{/unless}}
 
         <div class="content">
-          {{render "whiteboards.whiteboard.project-list-item" project tagName="article"}}
+          {{as-project-list-item project=project readOnly=readOnly showProject="showProject"}}
         </div>
       {{/sortable-item}}
     {{/each}}
