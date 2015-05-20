@@ -12,6 +12,14 @@ export default Ember.Component.extend({
     return this.get('sortedContent').filterBy('priority', this.get('filterPriority'));
   }),
 
+  _onArrangedContentChange: Ember.observer('arrangedContent.[]', function() {
+    Ember.run.debounce(this, 'sendArrangedContent', 0);
+  }).on('init'),
+
+  sendArrangedContent: function() {
+    this.sendAction('onArrangedContentChange', this.get('arrangedContent'));
+  },
+
   actions: {
     reorderProjects: function(projects) {
       this.sendAction('reorderProjects', projects);

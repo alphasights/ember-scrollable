@@ -7,6 +7,7 @@ export default Ember.Controller.extend({
   },
 
   filterPriority: 'high',
+  arrangedProjects: null,
 
   actions: {
     reorderProjects: function(projects) {
@@ -34,6 +35,10 @@ export default Ember.Controller.extend({
 
     showProject: function(project) {
       this.transitionToRoute('whiteboards.whiteboard.project', this.get('model.id'), project.get('id'));
+    },
+
+    onProjectsChange: function(projects) {
+      this.set('arrangedProjects', projects);
     }
   }
 });
