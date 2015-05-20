@@ -29,7 +29,7 @@
 
   <li class="unused-advisors">
     {{#if isTeamView}}
-      {{as-widget/unusedAdvisorStats teamMembers=teamMembers}}
+      {{as-widget/teamUnusedAdvisors teamMembers=teamMembers}}
     {{else}}
       {{as-widget/unusedAdvisors model=unusedAdvisors}}
     {{/if}}

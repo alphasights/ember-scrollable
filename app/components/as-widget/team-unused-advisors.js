@@ -2,11 +2,11 @@ import Ember from 'ember';
 import ListWidgetComponent from 'phoenix/components/as-widget/list';
 
 export default ListWidgetComponent.extend({
-  classNameBindings: [':unused-advisor-stats'],
+  classNameBindings: [':team-unused-advisors'],
 
   name: 'Unused Advisors',
   emptyMessage: 'There are no unused advisors to contact.',
-  listItemTemplateName: 'components/as-widget/unused-advisor-stats/list-item',
+  listItemTemplateName: 'components/as-widget/team-unused-advisors/list-item',
   hasTeamMemberFilter: false,
   teamMembers: null,
 
