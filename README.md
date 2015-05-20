@@ -39,9 +39,20 @@ Make use of the many generators for code, try `ember help generate` for more det
 * `ember build` (development)
 * `ember build --environment production` (production)
 
+### Contributing
+
+* Install and init git flow with default values
+* Start a new feature branch
+* Open a PR with `develop` as the base branch
+* PRs merged in `develop` get shipped to production every release cycle reset
+
 ### Deploying
 
-`dumbot divshot promote as-phoenix` will promote the staging environment, updated after CI runs, to production
+The CI automatically deploys the `develop` branch to staging and the `master` branch to production.
+
+## Switching to fallback
+
+In order to switch to fallback go on Cloudflare and swap the DNS records for `phoenix.alphasights.com` and `phoenix-fallback.alphasights.com`
 
 ## Structure
 
