@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 
-export default Ember.Controller.extend(ProjectProgressMixin, {
+export default Ember.Controller.extend({
   needs: ['whiteboards/whiteboard'],
 
   whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),

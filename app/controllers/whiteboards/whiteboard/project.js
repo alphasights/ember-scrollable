@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import ProjectProgressMixin from 'phoenix/mixins/project-progress';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
-export default Ember.Controller.extend(ProjectProgressMixin, ModelsNavigationMixin, {
+export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['whiteboards/whiteboard'],
   whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
 
