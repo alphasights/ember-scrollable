@@ -1,18 +1,25 @@
 .dashboard .widget.team-unused-advisors {
   article {
-    pointer-events: none;
+    cursor: default;
+
+    &:hover {
+      background-color: $white;
+    }
 
     .analyst {
       @extend %grid-column-small-7;
       @extend %grid-column-medium-7;
+
+      .avatar {
+        margin-right: $column-gutter / 2;
+      }
     }
 
     .stats {
       @extend %grid-column-small-5;
       @extend %grid-column-medium-5;
 
-      padding-left: 0 !important;
-      text-align: center;
+      text-align: right;
     }
   }
 }
