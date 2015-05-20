@@ -1,62 +1,70 @@
 {{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
-  <header>
-    <div class="date-time">
-      <span class="date">{{moment model.scheduledCallTime "D MMMM"}}</span>
-      <span class="time">{{moment model.scheduledCallTime "h:mm A"}}</span>
-    </div>
-
-    <div class="content">
-      <h1>
-        <span>{{model.advisor.name}}</span>
-
-        <small>
-          <a target="_blank" href={{model.project.pistachioUrl}}>
-            {{model.project.name}}
-          </a>
-        </small>
-
-        <span class="primary-contact">
-          {{as-avatar person=model.primaryContact}}
-        </span>
-      </h1>
-
-      <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
-    </div>
-  </header>
-
-  <section class="profiles">
-    <ul>
-      {{#each profile in profiles}}
-        <li>
-          {{#as-profile
-            person=profile.person
-            title=profile.title
-            class=profile.class}}
-            {{#if profile.person.timeZone}}
-              <div class="call-time">
-                {{#tool-tipster title="Local Call Time"}}
-                  <i></i>
-                  <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
-                {{/tool-tipster}}
-              </div>
-            {{/if}}
-          {{/as-profile}}
-        </li>
-      {{/each}}
-    </ul>
-  </section>
-
-  <section class="checklist-items">
+  <div>
     <header>
-      {{as-checklist-status items=checklistItems}}
+      <div class="date-time">
+        <span class="date">{{moment model.scheduledCallTime "D MMMM"}}</span>
+        <span class="time">{{moment model.scheduledCallTime "h:mm A"}}</span>
+      </div>
 
-      <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
+      <div class="content">
+        <h1>
+          <span>{{model.advisor.name}}</span>
+
+          <small>
+            <a target="_blank" href={{model.project.pistachioUrl}}>
+              {{model.project.name}}
+            </a>
+          </small>
+
+          <span class="primary-contact">
+            {{as-avatar person=model.primaryContact}}
+          </span>
+        </h1>
+
+        <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
+      </div>
     </header>
 
-    <ul>
-      {{#each checklistItem in checklistItems}}
-        <li class={{checklistItem.completed}}>{{checklistItem.title}}</li>
-      {{/each}}
-    </ul>
+    <section class="profiles">
+      <ul>
+        {{#each profile in profiles}}
+          <li>
+            {{#as-profile
+              person=profile.person
+              title=profile.title
+              class=profile.class}}
+              {{#if profile.person.timeZone}}
+                <div class="call-time">
+                  {{#tool-tipster title="Local Call Time"}}
+                    <i></i>
+                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                  {{/tool-tipster}}
+                </div>
+              {{/if}}
+            {{/as-profile}}
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <section class="checklist-items">
+      <header>
+        {{as-checklist-status items=checklistItems}}
+
+        <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
+      </header>
+
+      <ul>
+        {{#each checklistItem in checklistItems}}
+          <li class={{checklistItem.completed}}>{{checklistItem.title}}</li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+
+  <section class="actions">
+    {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
+      Reschedule Interaction
+    {{/link-to}}
   </section>
 {{/as-side-panel}}
