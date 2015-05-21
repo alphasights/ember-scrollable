@@ -182,7 +182,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   fillIn('input[name=additionalContactDetails]', additionalContactDetails);
 
   // Submit form
-  click('.form-submission button');
+  click("button:contains('Schedule Interaction')");
 
   andThen(function() {
     assert.equal(handler.called, true);
@@ -222,8 +222,8 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click('.form-submission a');
-  click('button.confirm-cancel');
+  click("a:contains('Cancel Interaction')");
+  click("button:contains('Confirm')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -250,8 +250,8 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.interactions-to-schedule article:first');
-  click('.form-submission a');
-  click('button.confirm-cancel');
+  click("a:contains('Cancel Interaction')");
+  click("button:contains('Confirm')");
 
   andThen(function() {
     assert.equal(find('.interactions-to-schedule article').length, 1,
