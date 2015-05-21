@@ -172,11 +172,11 @@ test("Read project list", function(assert) {
       var $project = $(project);
 
       return {
-        title: $project.find('> .details span').text().trim(),
-        clientCode: $project.find('> .details small').text().trim(),
-        highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
-        mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
-        lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
+        title: $project.find('.details span').text().trim(),
+        clientCode: $project.find('.details small').text().trim(),
+        highPriority: $project.find('.priority-select .dropdown div.high').length === 1,
+        mediumPriority: $project.find('.priority-select .dropdown div.medium').length === 1,
+        lowPriority: $project.find('.priority-select .dropdown div.low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -268,7 +268,7 @@ test("Change project priority", function(assert) {
 
   visit('/whiteboards');
   click('.project-list-item:first .priority-select .dropdown');
-  click('.project-list-item:first .priority-select ul > .low');
+  click('.project-list-item:first .priority-select ul .low');
 
   andThen(function() {
     assert.equal(handler.called, true);
@@ -291,7 +291,7 @@ test("Show project details", function(assert) {
       lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
 
       angle: {
-        title: $angle.find('> .title').text().trim(),
+        title: $angle.find('.title').text().trim(),
 
         memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
           var $membership = $(membership);
@@ -403,7 +403,7 @@ test("Change project priority from the details", function(assert) {
   visit('/whiteboards');
   click('.project-list-item:first');
   click('.project .priority-select .dropdown');
-  click('.project .priority-select ul > .low');
+  click('.project .priority-select ul .low');
 
   andThen(function() {
     assert.equal(handler.called, true);
@@ -440,7 +440,7 @@ test("Add a member to an angle", function(assert) {
 
   visit('/whiteboards');
   click('.project-list-item:first');
-  click('.angle-memberships .add > button');
+  click('.angle-memberships .add button');
   click('.angle-memberships .add .members li');
 
   andThen(function() {
@@ -469,7 +469,7 @@ test("Change selected team", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
+    assert.equal(find('.project-list-item .details span').text().trim(), 'Example Project 4');
   });
 });
 
@@ -489,6 +489,6 @@ test("Change selected whiteboard", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 5');
+    assert.equal(find('.project-list-item .details span').text().trim(), 'Example Project 5');
   });
 });
