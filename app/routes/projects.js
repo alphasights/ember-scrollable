@@ -12,7 +12,7 @@ export default Ember.Route.extend({
     var scope = params.scope;
     var projects;
 
-    if (scope != null) {
+    if (scope === 'team') {
       projects = this.store.find('project');
     } else {
       projects = this.store.find('project', { user_id: currentUser.get('model.id') });

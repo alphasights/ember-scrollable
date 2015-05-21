@@ -13,8 +13,8 @@ export default Ember.Controller.extend({
   scope: null,
 
   projectScopes: [Ember.Object.create({
-    name: 'Company',
-    value: 'company'
+    name: 'Team',
+    value: 'team'
   })],
 
   projectScopeSelection: Ember.computed('scope', 'projectScopes', {
