@@ -12,12 +12,12 @@ export default Ember.Controller.extend({
   filterPriority: 'high',
   scope: null,
 
-  projectScopes: [{
+  projectScopes: [Ember.Object.create({
     name: 'Company',
     value: 'company'
-  }],
+  })],
 
-  projectScopeSelection: Ember.computed('scope', 'projectScopes.@each.value', {
+  projectScopeSelection: Ember.computed('scope', 'projectScopes', {
     get: function() {
       var scope = this.get('scope');
 
@@ -28,12 +28,14 @@ export default Ember.Controller.extend({
       }
     },
 
-    set: function(key, scope) {
+    set: function(_, scope) {
       if (scope != null) {
-        this.set('scope', scope.value);
+        this.set('scope', scope.get('value'));
       } else {
         this.set('scope', null);
       }
+
+      return scope;
     }
   }),
 

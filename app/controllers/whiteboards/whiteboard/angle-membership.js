@@ -1,13 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  deliveryTarget: Ember.computed('model.deliveryTarget', function(_, value) {
-    if (arguments.length > 1) {
+  deliveryTarget: Ember.computed('model.deliveryTarget', {
+    get: function() {
+      return this.get('model.deliveryTarget');
+    },
+
+    set: function(_, value) {
       this.set('model.deliveryTarget', value);
       Ember.run.debounce(this, 'save', 500);
-    }
 
-    return this.get('model.deliveryTarget');
+      return value;
+    }
   }),
 
   save: function() {
