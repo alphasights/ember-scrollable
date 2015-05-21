@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import ListWidgetComponent from 'phoenix/components/as-widget/list';
 
 export default ListWidgetComponent.extend({
@@ -5,6 +6,7 @@ export default ListWidgetComponent.extend({
 
   name: 'Upcoming Interactions',
 
+  hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
   listItemTemplateName: 'components/as-widget/upcoming-interactions/list-item',
   emptyMessage: 'You have no upcoming interactions.'
 });

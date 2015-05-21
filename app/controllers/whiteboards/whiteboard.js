@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ProjectsController from './whiteboard/projects';
 import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend({
@@ -8,11 +7,7 @@ export default Ember.Controller.extend({
   },
 
   filterPriority: 'high',
-
-  init: function() {
-    this._super.apply(this, arguments);
-    this.set('projects', ProjectsController.create({ whiteboard: this }));
-  },
+  arrangedProjects: null,
 
   actions: {
     reorderProjects: function(projects) {
@@ -36,6 +31,14 @@ export default Ember.Controller.extend({
           })
         })
       });
+    },
+
+    showProject: function(project) {
+      this.transitionToRoute('whiteboards.whiteboard.project', this.get('model.id'), project.get('id'));
+    },
+
+    onProjectsChange: function(projects) {
+      this.set('arrangedProjects', projects);
     }
   }
 });

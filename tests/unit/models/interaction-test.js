@@ -8,7 +8,7 @@ moduleForModel('interaction', 'Interaction', {
   needs: [
     'model:interaction', 'model:advisor', 'model:project', 'model:angle',
     'model:angleTeamMembership', 'model:checklist-item', 'model:client-contact', 'model:client-account',
-    'model:user'
+    'model:user', 'model:delivery-performance'
   ],
 
   beforeEach: function() {
