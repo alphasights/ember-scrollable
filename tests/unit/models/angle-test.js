@@ -7,7 +7,7 @@ import Ember from 'ember';
 moduleForModel('angle', 'Angle', {
   needs: [
     'model:angle', 'model:angleTeamMembership', 'model:project', 'model:user',
-    'model:interaction'
+    'model:interaction', 'model:delivery-performance'
   ],
 
   beforeEach: function() {

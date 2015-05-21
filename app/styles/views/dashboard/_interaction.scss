@@ -58,6 +58,10 @@ $interaction-header-height:
         small a {
           color: $small-font-color;
         }
+
+        .primary-contact {
+          float: right;
+        }
       }
 
       a {
@@ -152,6 +156,25 @@ $interaction-header-height:
       display: inline-block;
       font-weight: $font-weight-bold;
       line-height: $interaction-checklist-header-height;
+    }
+  }
+
+  > div > .content {
+    $actions-height: rem-calc(90);
+
+    > div {
+      height: 100%;
+      margin-bottom: - $actions-height;
+    }
+
+    .actions {
+      float: left;
+      height: $actions-height;
+      line-height: $actions-height;
+
+      .reschedule {
+        @extend %button-primary;
+      }
     }
   }
 }

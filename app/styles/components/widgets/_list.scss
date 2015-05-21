@@ -74,7 +74,7 @@
 
   .empty-message {
     color: $small-font-color;
-    line-height: $widget-min-height - $widget-header-line-height;
+    line-height: panel-settings(header-height);
     text-align: center;
   }
 
