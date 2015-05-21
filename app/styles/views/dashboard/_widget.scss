@@ -11,8 +11,8 @@ $widget-min-height: panel-settings(header-height) * 2;
     }
 
     .other {
-      -webkit-font-smoothing: $header-font-smoothing;
       float: right;
+      -webkit-font-smoothing: $header-font-smoothing;
       font-weight: $font-weight-bold;
       line-height: panel-settings(header-height);
     }
