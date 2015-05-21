@@ -6,10 +6,6 @@ article.project-list-item {
   padding: $column-gutter / 4 0;
 
   &.read-only {
-    > .priority {
-      display: none;
-    }
-
     > .details {
       @extend %grid-column-small-9;
       @extend %grid-column-medium-5;

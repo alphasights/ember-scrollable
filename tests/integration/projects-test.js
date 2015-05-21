@@ -103,9 +103,6 @@ test("Read project list", function(assert) {
       return {
         title: $project.find('> .details span').text().trim(),
         clientCode: $project.find('> .details small').text().trim(),
-        highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
-        mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
-        lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -117,9 +114,6 @@ test("Read project list", function(assert) {
     assert.deepEqual(projects, [{
       title: 'Example Project',
       clientCode: 'EP',
-      highPriority: true,
-      mediumPriority: false,
-      lowPriority: false,
       memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
@@ -128,9 +122,6 @@ test("Read project list", function(assert) {
     }, {
       title: 'Example Project 2',
       clientCode: '2EP',
-      highPriority: true,
-      mediumPriority: false,
-      lowPriority: false,
       memberAvatarUrl: undefined,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: 1,
