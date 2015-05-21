@@ -113,3 +113,21 @@ test("#pistachioUrl returns the project's url in pistachio", function(assert) {
     this.model.get('pistachioUrl'), 'http://localhost:3000/projects/99'
   );
 });
+
+test('#progress returns 0 when the deliveryTarget is 0', function(assert) {
+  Ember.run(() => {
+    this.model.set('deliveryTarget', 0);
+  });
+
+  assert.equal(this.model.get('progress'), 0);
+});
+
+test('#progress returns the correct value when the deliveryTarget is not 0', function(assert) {
+  Ember.run(() => {
+    this.model.set('deliveredAdvisorsCount', 1);
+    this.model.set('deliveryTarget', 4);
+  });
+
+  assert.equal(this.model.get('progress'), 0.25);
+});
+

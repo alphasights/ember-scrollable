@@ -52,4 +52,14 @@ export default DS.Model.extend({
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('id')}`;
   }),
+
+  progress: Ember.computed('deliveredAdvisorsCount', 'deliveryTarget', function() {
+    var deliveryTarget = this.get('deliveryTarget');
+
+    if (deliveryTarget === 0) {
+      return 0;
+    } else {
+      return this.get('deliveredAdvisorsCount') / deliveryTarget;
+    }
+  })
 });
