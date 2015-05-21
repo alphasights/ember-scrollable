@@ -5,5 +5,11 @@ export default Ember.Controller.extend({
     filterPriority: 'priority'
   },
 
-  filterPriority: 'high'
+  filterPriority: 'high',
+
+  actions: {
+    showProject: function(project) {
+      window.open(project.get('pistachioUrl'), '_blank');
+    },
+  }
 });

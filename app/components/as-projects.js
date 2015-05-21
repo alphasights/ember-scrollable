@@ -21,8 +21,8 @@ export default Ember.Component.extend({
       this.sendAction('reorderProjects', projects);
     },
 
-    showProject: function(project) {
-      this.sendAction('showProject', project);
+    clickOnProject: function(project) {
+      this.sendAction('clickOnProject', project);
     }
   }
 });
