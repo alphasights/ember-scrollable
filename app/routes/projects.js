@@ -1,11 +1,25 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function() {
+  queryParams: {
+    scope: {
+      refreshModel: true
+    }
+  },
+
+  model: function(params) {
     var currentUser = this.controllerFor('currentUser');
+    var scope = params.scope;
+    var projects;
+
+    if (scope != null) {
+      projects = this.store.find('project');
+    } else {
+      projects = this.store.find('project', { user_id: currentUser.get('model.id') });
+    }
 
     return Ember.RSVP.hash({
-      projects: this.store.find('project', { user_id: currentUser.get('model.id') })
+      projects: projects
     });
   },
 

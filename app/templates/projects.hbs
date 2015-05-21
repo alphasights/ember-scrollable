@@ -1,3 +1,13 @@
+<header>
+  <div class="select">
+    {{view "select"
+      content=projectScopes
+      optionLabelPath="content.name"
+      prompt=currentUser.model.name
+      selection=projectScopeSelection}}
+  </div>
+</header>
+
 {{as-projects
   projects=model
   filterPriority=filterPriority
