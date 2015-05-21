@@ -1,36 +1,20 @@
-$widget-header-line-height: 4rem;
-$widget-min-height: $widget-header-line-height * 2;
+$widget-min-height: panel-settings(header-height) * 2;
 
 .dashboard .widget {
-  @extend %grid-row;
+  @extend %panel-widget;
 
-  border: 1px solid $global-section-border-color;
-  border-radius: $global-radius / 2;
   min-height: $widget-min-height;
 
   header {
-    background-color: $anchor-font-color;
-    border-radius: $global-radius / 2 $global-radius / 2 0 0;
-    line-height: $widget-header-line-height;
-    padding: 0 $column-gutter / 2;
-
-    h1,
-    .other {
-      color: $white;
-      font-weight: $font-weight-bold;
-      line-height: $widget-header-line-height;
-    }
-
     h1 {
       display: inline-block;
-      font-size: $base-font-size;
-      letter-spacing: 0;
-      margin: 0;
     }
 
     .other {
       float: right;
       -webkit-font-smoothing: $header-font-smoothing;
+      font-weight: $font-weight-bold;
+      line-height: panel-settings(header-height);
     }
   }
 }
