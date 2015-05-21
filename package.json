@@ -2,6 +2,7 @@
   "name": "phoenix",
   "description": "The system, reinvented",
   "private": true,
+  "version": "0.0.1",
   "directories": {
     "doc": "doc",
     "test": "tests"
