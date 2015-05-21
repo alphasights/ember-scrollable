@@ -1,0 +1,20 @@
+$widget-min-height: panel-settings(header-height) * 2;
+
+.dashboard .widget {
+  @extend %panel-widget;
+
+  min-height: $widget-min-height;
+
+  header {
+    h1 {
+      display: inline-block;
+    }
+
+    .other {
+      float: right;
+      -webkit-font-smoothing: $header-font-smoothing;
+      font-weight: $font-weight-bold;
+      line-height: panel-settings(header-height);
+    }
+  }
+}

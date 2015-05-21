@@ -28,9 +28,10 @@
   </li>
 
   <li class="unused-advisors">
-    {{as-widget/unusedAdvisors
-      model=unusedAdvisors
-      isTeamView=isTeamView
-      teamMembers=teamMembers}}
+    {{#if isTeamView}}
+      {{as-widget/teamUnusedAdvisors teamMembers=teamMembers}}
+    {{else}}
+      {{as-widget/unusedAdvisors model=unusedAdvisors}}
+    {{/if}}
   </li>
 </ul>

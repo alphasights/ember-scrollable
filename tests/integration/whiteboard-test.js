@@ -220,7 +220,7 @@ test("Sort project list", function(assert) {
   }});
 
   visit('/whiteboards');
-  dragAndDrop('.whiteboard > ul > li:first .handle', '.whiteboard > ul > li:last');
+  dragAndDrop('.projects > ul > li:first .handle', '.projects > ul > li:last');
 
   andThen(function() {
     assert.deepEqual(
@@ -232,7 +232,7 @@ test("Sort project list", function(assert) {
 
 test("Filter project list by medium priority", function(assert) {
   visit('/whiteboards');
-  click('.whiteboard > header .priority-select .medium');
+  click('.projects > header .priority-select .medium');
 
   andThen(function() {
     assert.deepEqual(
@@ -244,7 +244,7 @@ test("Filter project list by medium priority", function(assert) {
 
 test("Filter project list by low priority", function(assert) {
   visit('/whiteboards');
-  click('.whiteboard > header .priority-select .low');
+  click('.projects > header .priority-select .low');
 
   andThen(function() {
     assert.equal(find('.whiteboard .empty-message').text().trim(), 'There are no low priority projects.');

@@ -4,6 +4,10 @@
 
     h1 {
       line-height: $header-line-height;
+
+      .primary-contact {
+        float: right;
+      }
     }
   }
 
