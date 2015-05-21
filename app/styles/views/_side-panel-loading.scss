@@ -1,0 +1,15 @@
+.side-panel-loading {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: quick-jump-settings(bar, height);
+  z-index: 100;
+
+  .overlay {
+    background-color: $white;
+    height: 100%;
+    opacity: .8;
+    width: 100%;
+  }
+}
