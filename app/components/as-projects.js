@@ -13,12 +13,8 @@ export default Ember.Component.extend({
   }),
 
   _onArrangedContentChange: Ember.observer('arrangedContent.[]', function() {
-    Ember.run.debounce(this, 'sendArrangedContent', 0);
-  }).on('init'),
-
-  sendArrangedContent: function() {
     this.sendAction('onArrangedContentChange', this.get('arrangedContent'));
-  },
+  }).on('init'),
 
   actions: {
     reorderProjects: function(projects) {
