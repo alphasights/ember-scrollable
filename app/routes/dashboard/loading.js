@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   renderTemplate: function() {
     this._super.apply(this, arguments);
 
-    this.render(this.routeName, {
+    this.render('side-panel-loading', {
       into: 'application',
       outlet: 'side-panel'
     });
