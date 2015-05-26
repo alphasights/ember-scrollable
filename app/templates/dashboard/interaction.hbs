@@ -28,8 +28,8 @@
 
           {{#each profile in profiles}}
             {{#if profile.person.timeZone}}
-              <span>
-                {{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}
+              <span class={{profile.class}}>
+                <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
                 <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
               </span>
             {{/if}}
