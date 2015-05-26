@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
   monthlyTarget: Ember.computed.oneWay('performance.monthlyTarget'),
   onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
+  hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
 
   statusClass: Ember.computed('isOnTarget', 'isOnPace', function() {
     if (this.get('isOnTarget')) {
