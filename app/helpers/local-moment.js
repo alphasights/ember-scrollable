@@ -1,5 +1,3 @@
-import timeZoneAbbreviation from './time-zone-abbreviation';
-
 var localMoment = function(time, timeZone, format) {
   var timeToFormat;
 
