@@ -9,7 +9,7 @@ var localMoment = function(time, timeZone, format) {
     timeToFormat = moment(time);
   }
 
-  return `${timeToFormat.format(format)} ${timeZoneAbbreviation(time, timeZone)}`;
+  return timeToFormat.format(format);
 };
 
 export default localMoment;
