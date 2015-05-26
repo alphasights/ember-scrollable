@@ -66,8 +66,8 @@ $profile-avatar-container-size: $avatar-size;
 
         &:before {
           background-color: $white;
-          border-radius: $global-rounded;
           border: 1px solid $global-section-border-color;
+          border-radius: $global-rounded;
           display: inline-block;
           line-height: $button-icon-size;
           width: $button-icon-size;
