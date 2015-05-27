@@ -46,13 +46,15 @@ article.project-list-item {
   > .stats {
     @extend %grid-column-medium-4;
 
-    .requested, .upcoming, .delivered {
+    .requested,
+    .upcoming,
+    .delivered {
       @extend %grid-column-medium-4;
 
-      font-size: $small-font-size;
-      text-transform: uppercase;
       color: $small-font-color;
+      font-size: $small-font-size;
       text-align: right;
+      text-transform: uppercase;
     }
 
     .active {
