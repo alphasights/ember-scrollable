@@ -56,7 +56,7 @@ article.project-list-item {
 
     padding: 0 $column-gutter;
 
-    .details {
+    .stats {
       @extend %grid-row;
 
       font-size: $h5-font-size;
