@@ -6,5 +6,9 @@ export default Ember.Component.extend({
 
   nonLeadMembers: Ember.computed('project.members.[]', function() {
     return _(this.get('project.members')).without(this.get('project.lead'));
-  })
+  }),
+
+  click: function() {
+    this.sendAction('clickOnProject', this.get('project'));
+  }
 });
