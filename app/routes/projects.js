@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     var currentUser = this.controllerFor('currentUser');
 
     return Ember.RSVP.hash({
-      projects: this.store.find('project', { user_id: currentUser.get('model.id') })
+      projects: this.store.find('project', { user_id: currentUser.get('model.id'), all_time: true })
     });
   },
 
