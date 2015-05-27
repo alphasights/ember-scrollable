@@ -220,7 +220,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
   defineFixture('GET', '/teams', { response: {
     "teams": [
       {
-        "name": "NYSC13 - McKin' It Rain ",
+        "name": "NYSC13 - McKin' It Rain",
         "id": team.id,
         "office": "New York"
       }

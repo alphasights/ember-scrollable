@@ -1,12 +1,16 @@
 {{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
   <div>
     <header>
-      <div class="date-time">
-        <span class="date">{{moment model.scheduledCallTime "D MMMM"}}</span>
-        <span class="time">{{moment model.scheduledCallTime "h:mm A"}}</span>
+      <div class="date">
+        <span class="month">{{moment model.scheduledCallTime "MMMM"}}</span>
+        <span class="day">{{moment model.scheduledCallTime "D"}}</span>
       </div>
 
       <div class="content">
+        <span class="primary-contact">
+          {{as-avatar person=model.primaryContact}}
+        </span>
+
         <h1>
           <span>{{model.advisor.name}}</span>
 
@@ -15,11 +19,22 @@
               {{model.project.name}}
             </a>
           </small>
-
-          <span class="primary-contact">
-            {{as-avatar person=model.primaryContact}}
-          </span>
         </h1>
+
+        <span class="call-times">
+          <span class="local-time">
+            {{moment model.scheduledCallTime "h:mm A"}}
+          </span>
+
+          {{#each profile in profiles}}
+            {{#if profile.person.timeZone}}
+              <span class={{profile.class}}>
+                <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
+              </span>
+            {{/if}}
+          {{/each}}
+        </span>
 
         <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
       </div>
@@ -35,9 +50,9 @@
               class=profile.class}}
               {{#if profile.person.timeZone}}
                 <div class="call-time">
-                  {{#tool-tipster title="Local Call Time"}}
+                  {{#tool-tipster title=(local-moment model.scheduledCallTime profile.person.timeZone "h:mm A z")}}
                     <i></i>
-                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
                   {{/tool-tipster}}
                 </div>
               {{/if}}
@@ -56,7 +71,7 @@
 
       <ul>
         {{#each checklistItem in checklistItems}}
-          <li class={{checklistItem.completed}}>{{checklistItem.title}}</li>
+          <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
         {{/each}}
       </ul>
     </section>
