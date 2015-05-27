@@ -1,5 +1,6 @@
 <div class="details">
-  <span>{{project.codename}}</span>
+  <span class="name">{{project.name}}</span> -
+  <span class="codename">{{project.codename}}</span>
   <small>{{project.clientCode}}</small>
 </div>
 
@@ -9,4 +10,18 @@
   {{#each member in nonLeadMembers}}
     {{as-avatar person=member}}
   {{/each}}
+</div>
+
+<div class="stats">
+  <div class="requested {{if project.notScheduledInteractionsCount 'active'}}">
+    {{project.notScheduledInteractionsCount}} Requested
+  </div>
+
+  <div class="upcoming {{if project.scheduledInteractionsCount 'active'}}">
+    {{project.scheduledInteractionsCount}} Upcoming
+  </div>
+
+  <div class="delivered {{if project.deliveredAdvisorsCount 'active'}}">
+    {{project.deliveredAdvisorsCount}} Delivered
+  </div>
 </div>

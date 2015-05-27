@@ -18,12 +18,19 @@ article.whiteboard-project-list-item {
     @extend %grid-column-medium-4;
 
     font-size: $h4-font-size;
-    font-weight: $font-weight-bold;
 
     small {
       color: $small-font-color;
       display: block;
       line-height: 150%;
+    }
+
+    .name {
+      font-weight: $font-weight-bold;
+    }
+
+    .codename {
+      color: $small-font-color;
     }
   }
 

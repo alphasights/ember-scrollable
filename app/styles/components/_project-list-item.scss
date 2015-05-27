@@ -6,20 +6,29 @@ article.project-list-item {
   padding: $column-gutter / 4 0;
 
   > .details {
-    @extend %grid-column-medium-6;
+    @extend %grid-column-small-8;
+    @extend %grid-column-medium-4;
 
     font-size: $h4-font-size;
-    font-weight: $font-weight-bold;
 
     small {
       color: $small-font-color;
       display: block;
       line-height: 150%;
     }
+
+    .name {
+      font-weight: $font-weight-bold;
+    }
+
+    .codename {
+      color: $small-font-color;
+    }
   }
 
   > .members {
-    @extend %grid-column-medium-6;
+    @extend %grid-column-small-4;
+    @extend %grid-column-medium-4;
 
     .avatar {
       &.lead {
@@ -31,6 +40,27 @@ article.project-list-item {
       .avatar:not(&.lead) {
         display: none;
       }
+    }
+  }
+
+  > .stats {
+    @extend %grid-column-medium-4;
+
+    .requested, .upcoming, .delivered {
+      @extend %grid-column-medium-4;
+
+      font-size: $small-font-size;
+      text-transform: uppercase;
+      color: $small-font-color;
+      text-align: right;
+    }
+
+    .active {
+      font-weight: $font-weight-extrabold;
+    }
+
+    @media #{$small-only} {
+      display: none;
     }
   }
 }
