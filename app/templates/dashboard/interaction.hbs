@@ -77,9 +77,6 @@
     </section>
   </div>
 
-  <section class="actions">
-    {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
-      Reschedule Interaction
-    {{/link-to}}
-  </section>
+  {{as-side-panel/footer model=model}}
+
 {{/as-side-panel}}

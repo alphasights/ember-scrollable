@@ -1,0 +1,42 @@
+$actions-height: rem-calc(90);
+
+.footer.actions {
+
+  a {
+    @extend %button-primary;
+  }
+
+  &.with-confirm {
+    background-color: #1082e4;
+    color: $white;
+    text-align: right;
+
+    > span {
+      float: left;
+    }
+  }
+
+  height: 100%;
+  margin-bottom: - $actions-height;
+  float: left;
+  height: $actions-height;
+  line-height: $actions-height;
+
+  .primary {
+    text-align: right;
+  }
+
+  .primary,
+  .additional {
+    @extend %grid-column-small-5;
+    @extend %grid-column-medium-6;
+  }
+
+  // .primary a {
+  //   @extend %button-primary;
+  // }
+  //
+  // .additional a {
+  //   @extend %button-primary;
+  // }
+}

@@ -181,23 +181,4 @@ $interaction-header-height:
       line-height: $interaction-checklist-header-height;
     }
   }
-
-  > div > .content {
-    $actions-height: rem-calc(90);
-
-    > div {
-      height: 100%;
-      margin-bottom: - $actions-height;
-    }
-
-    .actions {
-      float: left;
-      height: $actions-height;
-      line-height: $actions-height;
-
-      .reschedule {
-        @extend %button-primary;
-      }
-    }
-  }
 }
