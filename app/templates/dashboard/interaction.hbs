@@ -71,7 +71,7 @@
 
       <ul>
         {{#each checklistItem in checklistItems}}
-          <li class={{checklistItem.completed}}>{{checklistItem.title}}</li>
+          <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
         {{/each}}
       </ul>
     </section>
