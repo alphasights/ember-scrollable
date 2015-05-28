@@ -1,3 +1,5 @@
+$priority-dot-size: 8px;
+
 article.project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
@@ -5,37 +7,54 @@ article.project-list-item {
   cursor: pointer;
   padding: $column-gutter / 4 0;
 
-  &.read-only {
-    > .details {
-      @extend %grid-column-small-9;
-      @extend %grid-column-medium-5;
-    }
-  }
-
-  > .priority {
-    @extend %grid-column-medium-1;
-
-    .dropdown > button {
-      margin: 0 auto;
-    }
-  }
-
   > .details {
     @extend %grid-column-small-8;
     @extend %grid-column-medium-4;
 
     font-size: $h4-font-size;
-    font-weight: $font-weight-bold;
 
     small {
       color: $small-font-color;
       display: block;
       line-height: 150%;
     }
+
+    .name {
+      font-weight: $font-weight-bold;
+    }
+
+    .codename {
+      color: $small-font-color;
+    }
+
+    .priority {
+      float: left;
+      min-height: $base-font-size * $base-line-height;
+
+      i {
+        border-radius: $global-rounded;
+        display: inline-block;
+        height: $priority-dot-size;
+        margin-right: $column-gutter / 2;
+        width: $priority-dot-size;
+      }
+
+      .high {
+        background-color: $alert-color;
+      }
+
+      .medium {
+        background-color: $warning-color;
+      }
+
+      .low {
+        background-color: $info-color;
+      }
+    }
   }
 
   > .members {
-    @extend %grid-column-small-3;
+    @extend %grid-column-small-4;
     @extend %grid-column-medium-4;
 
     .avatar {
@@ -51,48 +70,23 @@ article.project-list-item {
     }
   }
 
-  > .progress {
-    @extend %grid-column-medium-3;
+  > .stats {
+    @extend %grid-column-medium-4;
 
-    padding: 0 $column-gutter;
+    .requested,
+    .upcoming,
+    .delivered {
+      @extend %grid-column-medium-4;
 
-    .stats {
-      @extend %grid-row;
-
-      font-size: $h5-font-size;
-      margin-top: $column-gutter / 4;
-
-      .delivered,
-      .target {
-        @extend %grid-column-6;
-
-        color: darken($info-color, 25%);
-        font-size: $small-font-size;
-        padding: 0 !important;
-      }
-
-      .delivered {
-        text-align: left;
-      }
-
-      .target {
-        text-align: right;
-      }
-
-      .count {
-        font-weight: $font-weight-bold;
-        margin-right: $column-gutter / 4;
-      }
-
-      .label {
-        text-transform: uppercase;
-      }
+      color: $small-font-color;
+      font-size: $small-font-size;
+      text-align: right;
+      text-transform: uppercase;
     }
 
-    &.no-target {
-      .target {
-        color: $info-color;
-      }
+    .count {
+      font-size: $h2-font-size;
+      margin-right: $column-gutter / 4;
     }
 
     @media #{$small-only} {
