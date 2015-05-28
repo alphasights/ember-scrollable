@@ -84,6 +84,16 @@
       cancelStateClass="warning"
       requestPromise=requestPromise}}
 
+{{!--    idea of a sub-component format
+    {{#as-form/submission}}
+      {{as-form/submission/action
+        label="Reschedule Interaction"
+        type="button"
+        withConfirmation=true
+        confirmationStateClass="warning"
+        confirmationMessage="Are you sure you want to reschedule?"
+        requestPromise=reschedulePromise}}
+
 {{!--     {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
       Reschedule Interaction
     {{/link-to}}

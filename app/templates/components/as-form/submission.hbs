@@ -1,16 +1,5 @@
-{{#if isCancelling}}
-  <span>{{cancelConfirmationMessage}}</span>
-  <a {{action "toggleCancelling"}}>Back</a>
-
-  <button type="submit" {{action "cancel"}} class={{cancelConfirmationClass}} disabled={{requestPromise.isLoading}}>
-    {{#liquid-if requestPromise.isLoading}}
-      Cancelling...
-    {{else}}
-      {{cancelConfirmationLabel}}
-    {{/liquid-if}}
-  </button>
-{{else}}
-  <button type="submit" {{action "submit"}} disabled={{requestPromise.isLoading}}>
+<div class="action {{if isCancelling 'active'}}">
+  <button type="submit" {{action "toggleCancelling"}} disabled={{requestPromise.isLoading}}>
     {{#liquid-if requestPromise.isLoading}}
       Saving...
     {{else}}
@@ -18,7 +7,16 @@
     {{/liquid-if}}
   </button>
 
-  {{#if showCancel}}
-    <a class="cancel" {{action "toggleCancelling"}}>{{cancelLabel}}</a>
-  {{/if}}
-{{/if}}
+  <div class="confirmation info">
+    <span>{{cancelConfirmationMessage}}</span>
+    <a {{action "toggleCancelling"}}>Back</a>
+
+    <button type="submit" {{action "submit"}} class={{cancelConfirmationClass}} disabled={{requestPromise.isLoading}}>
+      {{#liquid-if requestPromise.isLoading}}
+        Cancelling...
+      {{else}}
+        {{cancelConfirmationLabel}}
+      {{/liquid-if}}
+    </button>
+  </div>
+</div>
