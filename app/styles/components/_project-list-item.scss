@@ -1,3 +1,5 @@
+$priority-dot-size: 8px;
+
 article.project-list-item {
   @extend %grid-row;
   @extend %vertical-align;
@@ -23,6 +25,31 @@ article.project-list-item {
 
     .codename {
       color: $small-font-color;
+    }
+
+    .priority {
+      min-height: $base-font-size * $base-line-height;
+      float: left;
+
+      i {
+        border-radius: $global-rounded;
+        display: inline-block;
+        height: $priority-dot-size;
+        margin-right: $column-gutter / 2;
+        width: $priority-dot-size;
+      }
+
+      .high {
+        background-color: $alert-color;
+      }
+
+      .medium {
+        background-color: $warning-color;
+      }
+
+      .low {
+        background-color: $info-color;
+      }
     }
   }
 
