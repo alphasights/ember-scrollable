@@ -59,7 +59,8 @@ QUnit.module("Projects", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 4,
-        "upcoming_interactions_count": 2
+        "upcoming_interactions_count": 2,
+        "codename": "Chocolate 1"
       }, {
         "id": 2,
         "status": "high",
@@ -71,7 +72,8 @@ QUnit.module("Projects", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 7,
-        "upcoming_interactions_count": 4
+        "upcoming_interactions_count": 4,
+        "codename": "Chocolate 2"
       }, {
         "id": 3,
         "status": "medium",
@@ -83,7 +85,8 @@ QUnit.module("Projects", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 3"
       }]
     }});
   },
@@ -101,7 +104,8 @@ test("Read project list", function(assert) {
       var $project = $(project);
 
       return {
-        title: $project.find('> .details span').text().trim(),
+        title: $project.find('> .details .name').text().trim(),
+        codename: $project.find('> .details .codename').text().trim(),
         clientCode: $project.find('> .details small').text().trim(),
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
@@ -113,6 +117,7 @@ test("Read project list", function(assert) {
 
     assert.deepEqual(projects, [{
       title: 'Example Project',
+      codename: 'Chocolate 1',
       clientCode: 'EP',
       memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
@@ -121,6 +126,7 @@ test("Read project list", function(assert) {
       requestedCount: '4 Requested'
     }, {
       title: 'Example Project 2',
+      codename: 'Chocolate 2',
       clientCode: '2EP',
       memberAvatarUrl: undefined,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,

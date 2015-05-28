@@ -8,7 +8,7 @@ import testHelper from '../test-helper';
 
 var projectTitles = function() {
   return find('.whiteboard-project-list-item').toArray().map(function(project) {
-    return $(project).find('> .details span').text().trim();
+    return $(project).find('> .details .name').text().trim();
   });
 };
 
@@ -67,7 +67,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 1"
       }, {
         "id": 2,
         "status": "high",
@@ -79,7 +80,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 2"
       }, {
         "id": 3,
         "status": "medium",
@@ -91,7 +93,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 3"
       }]
     }});
 
@@ -109,7 +112,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 4"
       }],
 
       "angles": [],
@@ -130,7 +134,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 5"
       }],
 
       "angles": [],
@@ -172,7 +177,8 @@ test("Read project list", function(assert) {
       var $project = $(project);
 
       return {
-        title: $project.find('.details span').text().trim(),
+        title: $project.find('.details .name').text().trim(),
+        codename: $project.find('.details .codename').text().trim(),
         clientCode: $project.find('.details small').text().trim(),
         highPriority: $project.find('.priority-select .dropdown div.high').length === 1,
         mediumPriority: $project.find('.priority-select .dropdown div.medium').length === 1,
@@ -187,6 +193,7 @@ test("Read project list", function(assert) {
 
     assert.deepEqual(projects, [{
       title: 'Example Project',
+      codename: 'Chocolate 1',
       clientCode: 'EP',
       highPriority: true,
       mediumPriority: false,
@@ -198,6 +205,7 @@ test("Read project list", function(assert) {
       progressBarWidth: '25%'
     }, {
       title: 'Example Project 2',
+      codename: 'Chocolate 2',
       clientCode: '2EP',
       highPriority: true,
       mediumPriority: false,
@@ -262,7 +270,8 @@ test("Change project priority", function(assert) {
       "status": "low",
       "index": null,
       "upcoming_interactions_count": 0,
-      "analyst_1_id": "1"
+      "analyst_1_id": "1",
+      "codename": "Chocolate 1"
     }
   }});
 
@@ -396,7 +405,8 @@ test("Change project priority from the details", function(assert) {
       "status": "low",
       "index": null,
       "upcoming_interactions_count": 0,
-      "analyst_1_id": "1"
+      "analyst_1_id": "1",
+      "codename": "Chocolate 1"
     }
   }});
 
@@ -469,7 +479,7 @@ test("Change selected team", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.whiteboard-project-list-item .details span').text().trim(), 'Example Project 4');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 4');
   });
 });
 
@@ -489,6 +499,6 @@ test("Change selected whiteboard", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.whiteboard-project-list-item .details span').text().trim(), 'Example Project 5');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 5');
   });
 });
