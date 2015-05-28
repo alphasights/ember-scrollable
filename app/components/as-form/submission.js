@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: [':form-submission', 'cancelStateClass', 'isCancelling:with-confirm'],
+  classNameBindings: [':form-submission', 'isCancelling:with-confirm'],
 
   model: null,
   label: 'Save',
