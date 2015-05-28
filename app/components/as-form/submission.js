@@ -1,13 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: [':form-submission', 'isCancelling:with-confirm'],
+  classNameBindings: [':form-submission', 'cancelStateClass', 'isCancelling:with-confirm'],
 
   model: null,
   label: 'Save',
   showCancel: true,
   cancelLabel: 'Cancel',
   cancelConfirmationClass: 'confirm-cancel',
+  cancelStateClass: null,
   cancelConfirmationLabel: 'Confirm',
   cancelConfirmationMessage: 'Are you sure?',
   requestPromise: null,

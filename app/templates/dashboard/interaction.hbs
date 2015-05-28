@@ -78,8 +78,15 @@
   </div>
 
   <section class="actions">
-    {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
+    {{as-form/submission
+      label="Reschedule Interaction"
+      cancelConfirmationMessage="Are you sure you want to reschedule?"
+      cancelStateClass="warning"
+      requestPromise=requestPromise}}
+
+{{!--     {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
       Reschedule Interaction
     {{/link-to}}
+ --}}
   </section>
 {{/as-side-panel}}
