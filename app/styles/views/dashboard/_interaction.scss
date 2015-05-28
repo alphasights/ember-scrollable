@@ -193,18 +193,16 @@ $interaction-header-height:
     .actions {
       float: left;
       width: 100%;
-      line-height: $actions-height;
       height: $actions-height;
       padding: 0 !important;
 
       .form-submission {
-        @include form-submission($standalone: true);
+        @include form-submission($standalone: true, $height: $actions-height);
 
         padding: 0 $column-gutter !important;
 
-        span {
-          line-height: $actions-height !important;
-          padding: 0 !important;
+        .action .confirmation {
+          padding: 0 $column-gutter !important;
         }
       }
     }
