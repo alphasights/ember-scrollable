@@ -6,25 +6,21 @@ export default Ember.Mixin.create({
   teamId: null,
   teams: Ember.computed.oneWay('currentUser.teams'),
 
-  selectedTeam: Ember.computed('teamId', 'teams.@each.id', {
-    get: function() {
-      var teamId = this.get('teamId');
-
-      if (teamId != null) {
-        return this.get('teams').findBy('id', teamId);
-      } else {
-        return null;
-      }
-    },
-
-    set: function(_, value) {
+  selectedTeam: Ember.computed('teamId', 'teams.@each.id', function(_, value) {
+    if (arguments.length > 1) {
       if (value != null) {
         this.set('teamId', value.get('id'));
       } else {
         this.set('teamId', null);
       }
+    }
 
-      return value;
+    var teamId = this.get('teamId');
+
+    if (teamId != null) {
+      return this.get('teams').findBy('id', teamId);
+    } else {
+      return null;
     }
   }),
 
