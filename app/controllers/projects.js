@@ -1,43 +1,12 @@
 import Ember from 'ember';
+import TeamSwitcheableControllerMixin from 'phoenix/mixins/team-switcheable-controller';
 
-export default Ember.Controller.extend({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
-
+export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
   queryParams: {
-    filterPriority: 'priority',
-    scope: 'scope'
+    filterPriority: 'priority'
   },
 
   filterPriority: 'high',
-  scope: null,
-
-  projectScopes: [Ember.Object.create({
-    name: 'Team',
-    value: 'team'
-  })],
-
-  projectScopeSelection: Ember.computed('scope', 'projectScopes', {
-    get: function() {
-      var scope = this.get('scope');
-
-      if (scope != null) {
-        return this.get('projectScopes').findBy('value', scope);
-      } else {
-        return null;
-      }
-    },
-
-    set: function(_, scope) {
-      if (scope != null) {
-        this.set('scope', scope.get('value'));
-      } else {
-        this.set('scope', null);
-      }
-
-      return scope;
-    }
-  }),
 
   actions: {
     showProject: function(project) {

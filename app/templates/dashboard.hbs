@@ -1,11 +1,5 @@
 <header>
-  <div class="select">
-    {{view "select"
-      content=teams
-      optionLabelPath="content.name"
-      prompt=currentUser.model.name
-      selection=selectedTeam}}
-  </div>
+  {{partial "team-switcher"}}
 </header>
 
 <ul class="widgets">

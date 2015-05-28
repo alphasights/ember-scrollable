@@ -1,19 +1,14 @@
 import Ember from 'ember';
+import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
-export default Ember.Route.extend({
-  queryParams: {
-    scope: {
-      refreshModel: true
-    }
-  },
-
+export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   model: function(params) {
     var currentUser = this.controllerFor('currentUser');
-    var scope = params.scope;
+    var teamId = params.teamId;
     var projects;
 
-    if (scope === 'team') {
-      projects = this.store.find('project', { all_time: true });
+    if (teamId != null) {
+      projects = this.store.find('project', { team_id: teamId, all_time: true });
     } else {
       projects = this.store.find('project', { user_id: currentUser.get('model.id'), all_time: true });
     }

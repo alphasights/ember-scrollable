@@ -1,11 +1,5 @@
 <header>
-  <div class="select">
-    {{view "select"
-      content=projectScopes
-      optionLabelPath="content.name"
-      prompt=currentUser.model.name
-      selection=projectScopeSelection}}
-  </div>
+  {{partial "team-switcher"}}
 </header>
 
 {{as-projects
