@@ -1,4 +1,4 @@
-{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
+{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
   <div>
     <header>
       <div class="date">
@@ -77,6 +77,6 @@
     </section>
   </div>
 
-  {{as-side-panel/footer model=model}}
+  {{as-side-panel/footer model=model cancel="cancel"}}
 
 {{/as-side-panel}}

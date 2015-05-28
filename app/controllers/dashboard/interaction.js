@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
+import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  interactionCancellation: Ember.inject.service(),
 
   navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
@@ -26,6 +28,18 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
+    },
+
+    cancel: function() {
+      var requestPromise =
+        this.get('interactionCancellation').cancel(this.get('model'), response => {
+          this.store.pushPayload(response);
+          this.get('dashboard').propertyDidChange('upcomingInteractions');
+          notify('The interaction has been cancelled.');
+          this.get('sidePanel').send('close');
+        });
+
+      this.set('requestPromise', requestPromise);
     }
   }
 });

@@ -67,6 +67,7 @@ var UnavailabilityOccurrence = Occurrence.extend({
 export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  interactionCancellation: Ember.inject.service(),
 
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
@@ -140,19 +141,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     },
 
     cancel: function() {
-      var requestPromise = PromiseController.create({
-        promise: request({
-          url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
-          type: 'DELETE'
-        }).then(response => {
+      var requestPromise =
+        this.get('interactionCancellation').cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
           notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
-        }, () => {
-          notify('The interaction could not be cancelled.', 'error');
-        })
-      });
+        });
 
       this.set('requestPromise', requestPromise);
     },
