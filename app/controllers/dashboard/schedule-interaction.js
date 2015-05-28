@@ -4,7 +4,6 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
-import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
 import notify from 'phoenix/helpers/notify';

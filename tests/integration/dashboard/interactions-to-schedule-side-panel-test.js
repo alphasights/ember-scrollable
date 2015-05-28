@@ -193,7 +193,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
 });
 
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
-  defineFixture('DELETE', '/interests/1', { response: {
+  defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
       {
         "id": 1,
