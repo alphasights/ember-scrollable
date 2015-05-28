@@ -1,6 +1,10 @@
 $actions-height: rem-calc(90);
 
 .footer.actions {
+  float: left;
+  height: $actions-height;
+  line-height: $actions-height;
+  margin-bottom: - $actions-height;
 
   a {
     @extend %button-primary;
@@ -15,12 +19,6 @@ $actions-height: rem-calc(90);
       float: left;
     }
   }
-
-  height: 100%;
-  margin-bottom: - $actions-height;
-  float: left;
-  height: $actions-height;
-  line-height: $actions-height;
 
   .primary {
     text-align: right;
