@@ -88,6 +88,10 @@ article.project-list-item {
       font-weight: $font-weight-extrabold;
     }
 
+    .count {
+      margin-right: $column-gutter / 4;
+    }
+
     @media #{$small-only} {
       display: none;
     }

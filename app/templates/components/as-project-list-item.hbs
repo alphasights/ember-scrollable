@@ -18,14 +18,14 @@
 
 <div class="stats">
   <div class="requested {{if project.notScheduledInteractionsCount 'active'}}">
-    {{project.notScheduledInteractionsCount}} Requested
+    <span class="count">{{project.notScheduledInteractionsCount}}</span> Requested
   </div>
 
   <div class="upcoming {{if project.scheduledInteractionsCount 'active'}}">
-    {{project.scheduledInteractionsCount}} Upcoming
+    <span class="count">{{project.scheduledInteractionsCount}}</span> Upcoming
   </div>
 
   <div class="delivered {{if project.deliveredAdvisorsCount 'active'}}">
-    {{project.deliveredAdvisorsCount}} Delivered
+    <span class="count">{{project.deliveredAdvisorsCount}}</span> Delivered
   </div>
 </div>
