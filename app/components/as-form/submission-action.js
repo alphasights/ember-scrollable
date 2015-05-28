@@ -13,7 +13,7 @@ export default Ember.Component.extend({
       if (confirmationComponent) {
         this.get('parentView').send('toggleConfirmation', confirmationComponent);
       } else {
-        this.sendAction();
+        this.sendAction(this.get('action'));
       }
     }
   }

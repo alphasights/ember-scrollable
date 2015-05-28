@@ -57,13 +57,16 @@
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
-        {{as-form/submission
-          label="Schedule Interaction"
-          confirmationLabel="Cancel Interaction"
-          cancel="cancel"
-          submit="submit"
-          confirmationMessage="Are you sure you want to cancel the scheduling?"
-          requestPromise=requestPromise}}
+        {{#as-form/submission-group}}
+          {{as-form/submission-action
+            label="Schedule Interaction"
+            action="submit"}}
+
+          {{as-form/submission-action
+            label="Cancel Interaction"
+            confirmationComponent="as-form/confirmation/cancel-to-schedule-interaction"}}
+        {{/as-form/submission-group}}
+
       {{/as-form}}
     </section>
   </section>
