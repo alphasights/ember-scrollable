@@ -28,8 +28,8 @@ article.project-list-item {
     }
 
     .priority {
-      min-height: $base-font-size * $base-line-height;
       float: left;
+      min-height: $base-font-size * $base-line-height;
 
       i {
         border-radius: $global-rounded;
@@ -84,11 +84,8 @@ article.project-list-item {
       text-transform: uppercase;
     }
 
-    .active {
-      font-weight: $font-weight-extrabold;
-    }
-
     .count {
+      font-size: 30px;
       margin-right: $column-gutter / 4;
     }
 

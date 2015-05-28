@@ -9,6 +9,6 @@ export default Ember.Component.extend({
   }),
 
   click: function() {
-    this.sendAction('clickOnProject', this.get('project'));
+    this.sendAction('onProjectClick', this.get('project'));
   }
 });

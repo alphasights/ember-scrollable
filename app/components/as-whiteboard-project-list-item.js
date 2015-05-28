@@ -14,7 +14,7 @@ export default Ember.Component.extend({
     // Prevent conflict with Foundation dropdown events
 
     if (this.$('.dropdown').has(Ember.$(event.target)).length === 0) {
-      this.sendAction('clickOnProject', this.get('project'));
+      this.sendAction('onProjectClick', this.get('project'));
     }
   }
 });
