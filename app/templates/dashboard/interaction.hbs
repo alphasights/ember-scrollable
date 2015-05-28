@@ -77,6 +77,9 @@
     </section>
   </div>
 
-  {{as-side-panel/footer model=model cancel="cancel"}}
-
+  {{#as-form/submission-group}}
+    {{as-form/submission-action
+      label="Cancel Interaction"
+      confirmationComponent="as-form/confirmation/cancel-interaction"}}
+  {{/as-form/submission-group}}
 {{/as-side-panel}}

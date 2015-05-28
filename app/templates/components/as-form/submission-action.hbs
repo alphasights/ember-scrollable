@@ -1,0 +1,7 @@
+<button type="submit" {{action "click"}} disabled={{requestPromise.isLoading}}>
+  {{#liquid-if requestPromise.isLoading}}
+    Saving...
+  {{else}}
+    {{label}}
+  {{/liquid-if}}
+</button>

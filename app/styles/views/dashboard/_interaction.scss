@@ -181,4 +181,30 @@ $interaction-header-height:
       line-height: $interaction-checklist-header-height;
     }
   }
+
+  > div > .content {
+    $actions-height: rem-calc(90);
+
+    > div {
+      height: 100%;
+      margin-bottom: - $actions-height;
+    }
+
+    .actions {
+      float: left;
+      width: 100%;
+      height: $actions-height;
+      padding: 0 !important;
+
+      .form-submission {
+        @include form-submission($standalone: true, $height: $actions-height);
+
+        padding: 0 $column-gutter !important;
+
+        .action .confirmation {
+          padding: 0 $column-gutter !important;
+        }
+      }
+    }
+  }
 }
