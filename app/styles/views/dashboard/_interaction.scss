@@ -192,9 +192,9 @@ $interaction-header-height:
 
     .actions {
       float: left;
-      width: 100%;
       height: $actions-height;
       padding: 0 !important;
+      width: 100%;
 
       .form-submission {
         @include form-submission($standalone: true, $height: $actions-height);
