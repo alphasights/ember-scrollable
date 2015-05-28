@@ -31,12 +31,4 @@ $actions-height: rem-calc(90);
     @extend %grid-column-small-5;
     @extend %grid-column-medium-6;
   }
-
-  // .primary a {
-  //   @extend %button-primary;
-  // }
-  //
-  // .additional a {
-  //   @extend %button-primary;
-  // }
 }

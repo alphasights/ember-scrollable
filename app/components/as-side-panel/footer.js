@@ -12,12 +12,8 @@ export default Ember.Component.extend({
       this.toggleProperty('isDisplayingConfirmationOptions');
     },
 
-    withdrawAndCancel: function() {
-      console.log('Withdrawing from client compliance and cancelling');
-    },
-
-    cancel: function() {
-      this.sendAction('cancel');
+    cancel: function(withdrawFromCompliance) {
+      this.sendAction('cancel', withdrawFromCompliance);
     },
 
     submit: function() {

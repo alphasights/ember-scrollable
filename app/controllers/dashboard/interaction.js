@@ -30,14 +30,14 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    cancel: function() {
+    cancel: function(withdrawFromCompliance) {
       var requestPromise =
         this.get('interactionCancellation').cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('upcomingInteractions');
           notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
-        });
+        }, withdrawFromCompliance);
 
       this.set('requestPromise', requestPromise);
     }

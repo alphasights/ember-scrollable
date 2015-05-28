@@ -1,6 +1,6 @@
 {{#unless isDisplayingConfirmationOptions}}
   <div class="additional">
-    <a {{action "toggleConfirmationDisplay"}}>WIP: Cancel Interaction</a>
+    <a {{action "toggleConfirmationDisplay"}}>Cancel Interaction</a>
 
     {{#link-to "dashboard.schedule-interaction" model.id}}
       Reschedule Interaction
@@ -13,6 +13,6 @@
 
 {{else}}
   <span>{{confirmationMessage}}</span>
-  <a {{action "withdrawAndCancel"}}>Yes, withdraw the interaction</a>
-  <a {{action "cancel"}}>No, thanks</a>
+  <a {{action "cancel" true}}>Yes, withdraw the interaction</a>
+  <a {{action "cancel" false}}>No, thanks</a>
 {{/unless}}
