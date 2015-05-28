@@ -1,11 +1,10 @@
-{{#unless readOnly}}
-  <div class="priority">
-    {{as-priority-select project=project}}
-  </div>
-{{/unless}}
-
 <div class="details">
-  <span>{{project.name}}</span>
+  <div class="priority">
+    <i class="{{project.status}}"></i>
+  </div>
+
+  <span class="name">{{project.name}}</span> -
+  <span class="codename">{{project.codename}}</span>
   <small>{{project.clientCode}}</small>
 </div>
 
@@ -17,24 +16,16 @@
   {{/each}}
 </div>
 
-<div class="progress {{unless hasDeliveryTarget 'no-target'}}">
-  {{as-progress-bar ratio=project.progress}}
+<div class="stats">
+  <div class="requested">
+    <span class="count">{{project.notScheduledInteractionsCount}}</span> Requested
+  </div>
 
-  <div class="details">
-    <div class="delivered">
-      <span class="count">
-        {{project.deliveredAdvisorsCount}}
-      </span>
+  <div class="upcoming">
+    <span class="count">{{project.scheduledInteractionsCount}}</span> Upcoming
+  </div>
 
-      <span class="label">delivered</span>
-    </div>
-
-    <div class="target">
-      <span class="count">
-        {{project.deliveryTarget}}
-      </span>
-
-      <span class="label">target</span>
-    </div>
+  <div class="delivered">
+    <span class="count">{{project.deliveredAdvisorsCount}}</span> Delivered
   </div>
 </div>

@@ -1,6 +1,6 @@
 <header>
   <div class="priority-select-label">
-    <span>Filter by:</span>
+    <span>Filter by priority:</span>
   </div>
 
   <div class="priority-select">
@@ -24,13 +24,15 @@
   {{#sortable-group tagName="ul" onChange="reorderProjects" as |group|}}
     {{#each arrangedContent as |project|}}
       {{#sortable-item tagName="li" model=project group=group handle=".handle"}}
-        {{#unless readOnly}}
+        {{#if draggable}}
           <div class="handle"></div>
-        {{/unless}}
 
-        <div class="content">
-          {{as-project-list-item project=project readOnly=readOnly clickOnProject="clickOnProject"}}
-        </div>
+          <div class="content">
+            {{component listItemComponent project=project onProjectClick="onProjectClick"}}
+          </div>
+        {{else}}
+          {{component listItemComponent project=project onProjectClick="onProjectClick"}}
+        {{/if}}
       {{/sortable-item}}
     {{/each}}
   {{/sortable-group}}

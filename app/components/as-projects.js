@@ -4,9 +4,10 @@ export default Ember.Component.extend({
   classNameBindings: [':projects'],
   tagName: 'article',
 
-  readOnly: false,
   contentSorting: ['index', 'createdAt:desc'],
   sortedContent: Ember.computed.sort('projects', 'contentSorting'),
+  listItemComponent: null,
+  draggable: false,
 
   arrangedContent: Ember.computed('sortedContent.@each.priority', 'filterPriority', function() {
     return this.get('sortedContent').filterBy('priority', this.get('filterPriority'));
@@ -21,8 +22,8 @@ export default Ember.Component.extend({
       this.sendAction('reorderProjects', projects);
     },
 
-    clickOnProject: function(project) {
-      this.sendAction('clickOnProject', project);
+    onProjectClick: function(project) {
+      this.sendAction('onProjectClick', project);
     }
   }
 });

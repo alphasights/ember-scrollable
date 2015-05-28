@@ -13,9 +13,9 @@ export default Ember.Route.extend({
     var projects;
 
     if (scope === 'team') {
-      projects = this.store.find('project');
+      projects = this.store.find('project', { all_time: true });
     } else {
-      projects = this.store.find('project', { user_id: currentUser.get('model.id') });
+      projects = this.store.find('project', { user_id: currentUser.get('model.id'), all_time: true });
     }
 
     return Ember.RSVP.hash({

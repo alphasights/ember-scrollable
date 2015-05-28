@@ -7,8 +7,8 @@ import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
 var projectTitles = function() {
-  return find('.project-list-item').toArray().map(function(project) {
-    return $(project).find('> .details span').text().trim();
+  return find('.whiteboard-project-list-item').toArray().map(function(project) {
+    return $(project).find('> .details .name').text().trim();
   });
 };
 
@@ -67,7 +67,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 1"
       }, {
         "id": 2,
         "status": "high",
@@ -79,7 +80,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 1,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 2"
       }, {
         "id": 3,
         "status": "medium",
@@ -91,7 +93,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 3"
       }]
     }});
 
@@ -109,7 +112,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 4"
       }],
 
       "angles": [],
@@ -130,7 +134,8 @@ QUnit.module("Whiteboard", {
         "analyst_1_id": 1,
         "proposed_advisors_count": 0,
         "left_to_schedule_advisors_count": 0,
-        "upcoming_interactions_count": 0
+        "upcoming_interactions_count": 0,
+        "codename": "Chocolate 5"
       }],
 
       "angles": [],
@@ -168,15 +173,16 @@ test("Read project list", function(assert) {
   visit('/whiteboards');
 
   andThen(function() {
-    var projects = find('.project-list-item').toArray().map(function(project) {
+    var projects = find('.whiteboard-project-list-item').toArray().map(function(project) {
       var $project = $(project);
 
       return {
-        title: $project.find('> .details span').text().trim(),
-        clientCode: $project.find('> .details small').text().trim(),
-        highPriority: $project.find('.priority-select .dropdown > .high').length === 1,
-        mediumPriority: $project.find('.priority-select .dropdown > .medium').length === 1,
-        lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
+        title: $project.find('.details .name').text().trim(),
+        codename: $project.find('.details .codename').text().trim(),
+        clientCode: $project.find('.details small').text().trim(),
+        highPriority: $project.find('.priority-select .dropdown div.high').length === 1,
+        mediumPriority: $project.find('.priority-select .dropdown div.medium').length === 1,
+        lowPriority: $project.find('.priority-select .dropdown div.low').length === 1,
         memberAvatarUrl: $project.find('.members .avatar:not(.lead)').prop('src'),
         leadAvatarUrl: $project.find('.members .avatar.lead').prop('src'),
         deliveredCount: parseInt($project.find('.progress .delivered .count').text().trim(), 10),
@@ -187,6 +193,7 @@ test("Read project list", function(assert) {
 
     assert.deepEqual(projects, [{
       title: 'Example Project',
+      codename: 'Chocolate 1',
       clientCode: 'EP',
       highPriority: true,
       mediumPriority: false,
@@ -198,6 +205,7 @@ test("Read project list", function(assert) {
       progressBarWidth: '25%'
     }, {
       title: 'Example Project 2',
+      codename: 'Chocolate 2',
       clientCode: '2EP',
       highPriority: true,
       mediumPriority: false,
@@ -262,23 +270,24 @@ test("Change project priority", function(assert) {
       "status": "low",
       "index": null,
       "upcoming_interactions_count": 0,
-      "analyst_1_id": "1"
+      "analyst_1_id": "1",
+      "codename": "Chocolate 1"
     }
   }});
 
   visit('/whiteboards');
-  click('.project-list-item:first .priority-select .dropdown');
-  click('.project-list-item:first .priority-select ul > .low');
+  click('.whiteboard-project-list-item:first .priority-select .dropdown');
+  click('.whiteboard-project-list-item:first .priority-select ul .low');
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
+    assert.equal(find('.whiteboard-project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
 test("Show project details", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
 
   andThen(function(){
     var $project = find('.project');
@@ -291,7 +300,7 @@ test("Show project details", function(assert) {
       lowPriority: $project.find('.priority-select .dropdown > .low').length === 1,
 
       angle: {
-        title: $angle.find('> .title').text().trim(),
+        title: $angle.find('.title').text().trim(),
 
         memberships: $angle.find('.angle-memberships > ul article').toArray().map(function(membership) {
           var $membership = $(membership);
@@ -327,7 +336,7 @@ test("Show project details", function(assert) {
 
 test("Navigate to next project with navigation buttons", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   click('.project .next');
 
   andThen(function(){
@@ -337,7 +346,7 @@ test("Navigate to next project with navigation buttons", function(assert) {
 
 test("Navigate to next project with arrow keys", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   keyEvent(document, 'keyup', 39);
 
   andThen(function(){
@@ -347,7 +356,7 @@ test("Navigate to next project with arrow keys", function(assert) {
 
 test("Navigate to previous project with navigation buttons", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:last');
+  click('.whiteboard-project-list-item:last');
   click('.project .previous');
 
   andThen(function(){
@@ -357,7 +366,7 @@ test("Navigate to previous project with navigation buttons", function(assert) {
 
 test("Navigate to previous project with arrow keys", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:last');
+  click('.whiteboard-project-list-item:last');
   keyEvent(document, 'keyup', 37);
 
   andThen(function(){
@@ -367,7 +376,7 @@ test("Navigate to previous project with arrow keys", function(assert) {
 
 test("Move back to the last project from the first", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   click('.project .previous');
 
   andThen(function(){
@@ -377,7 +386,7 @@ test("Move back to the last project from the first", function(assert) {
 
 test("Move back to the first project from the last", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item:last');
+  click('.whiteboard-project-list-item:last');
   click('.project .next');
 
   andThen(function(){
@@ -396,18 +405,19 @@ test("Change project priority from the details", function(assert) {
       "status": "low",
       "index": null,
       "upcoming_interactions_count": 0,
-      "analyst_1_id": "1"
+      "analyst_1_id": "1",
+      "codename": "Chocolate 1"
     }
   }});
 
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   click('.project .priority-select .dropdown');
-  click('.project .priority-select ul > .low');
+  click('.project .priority-select ul .low');
 
   andThen(function() {
     assert.equal(handler.called, true);
-    assert.equal(find('.project-list-item .priority-select .dropdown > .high').length, 1);
+    assert.equal(find('.whiteboard-project-list-item .priority-select .dropdown > .high').length, 1);
   });
 });
 
@@ -421,7 +431,7 @@ test("Change delivery target for an angle membership", function(assert) {
   }});
 
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   fillIn('.angle-memberships > ul article:first .delivery-target input', '6');
 
   andThen(function() {
@@ -439,8 +449,8 @@ test("Add a member to an angle", function(assert) {
   }});
 
   visit('/whiteboards');
-  click('.project-list-item:first');
-  click('.angle-memberships .add > button');
+  click('.whiteboard-project-list-item:first');
+  click('.angle-memberships .add button');
   click('.angle-memberships .add .members li');
 
   andThen(function() {
@@ -453,7 +463,7 @@ test("Remove a member from an angle", function(assert) {
   var handler = defineFixture('DELETE', '/angle_team_memberships/1');
 
   visit('/whiteboards');
-  click('.project-list-item:first');
+  click('.whiteboard-project-list-item:first');
   click('.angle-memberships > ul article:first .remove');
 
   andThen(function() {
@@ -469,7 +479,7 @@ test("Change selected team", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 4');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 4');
   });
 });
 
@@ -489,6 +499,6 @@ test("Change selected whiteboard", function(assert) {
   select('.whiteboard-select option:last');
 
   andThen(function() {
-    assert.equal(find('.project-list-item > .details span').text().trim(), 'Example Project 5');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 5');
   });
 });
