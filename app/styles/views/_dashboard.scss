@@ -9,7 +9,11 @@
 }
 
 .dashboard {
-  @extend %team-switcher;
+  > header {
+    @include clearfix;
+
+    padding: $column-gutter !important;
+  }
 
   .widgets {
     @extend %grid-column-12;

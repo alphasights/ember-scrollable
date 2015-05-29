@@ -1,5 +1,9 @@
 <header>
-  {{partial "team-switcher"}}
+  {{as-team-switcher
+    teams=teams
+    prompt=currentUser.model.name
+    selectTeam="selectTeam"
+    teamId=teamId}}
 </header>
 
 {{as-projects

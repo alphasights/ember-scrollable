@@ -1,3 +1,7 @@
 section.projects {
-  @extend %team-switcher;
+  > header {
+    @include clearfix;
+
+    padding: $column-gutter !important;
+  }
 }
