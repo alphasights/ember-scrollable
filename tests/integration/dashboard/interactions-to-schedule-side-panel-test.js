@@ -155,12 +155,15 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "requested_at": "2015-02-18T10:00:00.000Z",
       "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
       "speak": false,
+      "speak_phone_number": null,
+      "speak_code": null,
       "advisor_phone_number": advisorPhoneNumber,
       "advisor_phone_country_code": '1'
     }
   }, response: {
     "interactions": []
   }});
+
 
   visit('/dashboard');
   click('.interactions-to-schedule article:first');

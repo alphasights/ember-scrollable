@@ -88,6 +88,29 @@ $interaction-header-height:
           }
         }
       }
+
+      .speak-details {
+        display: block;
+        font-size: $h6-font-size;
+        margin-top: $column-gutter / 2;
+
+        > li {
+          display: inline;
+
+          .speak-title {
+            color: $secondary-color;
+            text-transform: uppercase;
+          }
+
+          .speak-detail {
+            color: $small-font-color;
+          }
+
+          &:last-child {
+            margin-left: $column-gutter / 2;
+          }
+        }
+      }
     }
   }
 

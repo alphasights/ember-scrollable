@@ -29,12 +29,26 @@
           {{#each profile in profiles}}
             {{#if profile.person.timeZone}}
               <span class={{profile.class}}>
-                <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
                 <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
+                <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
               </span>
             {{/if}}
           {{/each}}
         </span>
+
+        {{#if model.speak}}
+          <ul class="speak-details">
+            <li>
+              <span class="speak-title">Speak No.</span>
+              <span class="speak-detail">{{model.speakPhoneNumber}}</span>
+            </li>
+
+            <li>
+              <span class="speak-title">Code</span>
+              <span class="speak-detail">{{model.speakCode}}</span>
+            </li>
+          </ul>
+        {{/if}}
 
         <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
       </div>
