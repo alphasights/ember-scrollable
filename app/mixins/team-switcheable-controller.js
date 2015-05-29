@@ -6,6 +6,10 @@ export default Ember.Mixin.create({
   teamId: null,
   teams: Ember.computed.oneWay('currentUser.teams'),
 
+  isTeamView: Ember.computed('teamId', function() {
+    return this.get('teamId') !== null;
+  }),
+
   queryParams: {
     teamId: 'team_id'
   },

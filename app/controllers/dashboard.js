@@ -4,10 +4,6 @@ import TeamSwitcheableControllerMixin from 'phoenix/mixins/team-switcheable-cont
 export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
   teamMembers: Ember.computed.oneWay('model.teamMembers'),
 
-  isTeamView: Ember.computed('teamId', function() {
-    return this.get('teamId') !== null;
-  }),
-
   upcomingInteractions: Ember.computed('model.interactions.[]', function() {
     return this.get('model.interactions')
       .filterBy('scheduledCallTime')
