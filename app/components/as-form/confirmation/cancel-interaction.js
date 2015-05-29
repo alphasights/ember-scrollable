@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   confirmationMessage: 'Would you like to withdraw the interaction from client compliance?',
   model: null,
   cancel: 'cancel',
-  confirmationStateClass: null,
+  confirmationStateClass: 'info',
   confirmationClass: 'confirm-cancel',
   requestPromise: null,
 
@@ -13,8 +13,8 @@ export default Ember.Component.extend({
       this.sendAction('cancel', withdrawFromCompliance);
     },
 
-    toggleConfirmation: function() {
-      this.get('parentView').send('toggleConfirmation');
+    back: function() {
+      this.get('parentView').send('back');
     }
   }
 });

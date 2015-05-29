@@ -44,28 +44,28 @@
         display: inline-block;
       }
 
-      .cancel {
-        @extend %button-primary;
+      // .cancel {
+      //   @extend %button-primary;
 
-        border-color: $alert-color;
-        color: $alert-color;
-        margin-bottom: 0 !important;
+      //   border-color: $alert-color;
+      //   color: $alert-color;
+      //   margin-bottom: 0 !important;
 
-        &:hover {
-          background-color: $alert-color;
-        }
-      }
+      //   &:hover {
+      //     background-color: $alert-color;
+      //   }
+      // }
 
-      .confirm-cancel {
-        &:before,
-        &:after {
-          content: '\00a0';
-        }
+      // .confirm-cancel {
+      //   &:before,
+      //   &:after {
+      //     content: '\00a0';
+      //   }
 
-        > div {
-          display: inline-block;
-        }
-      }
+      //   > div {
+      //     display: inline-block;
+      //   }
+      // }
     }
   }
 }

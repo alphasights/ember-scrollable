@@ -14,8 +14,8 @@ export default Ember.Component.extend({
       this.sendAction('cancel');
     },
 
-    toggleConfirmation: function() {
-      this.get('parentView').send('toggleConfirmation');
+    back: function() {
+      this.get('parentView').send('back');
     }
   }
 });

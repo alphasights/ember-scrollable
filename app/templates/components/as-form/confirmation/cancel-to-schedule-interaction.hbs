@@ -1,6 +1,6 @@
 <div class="confirmation {{confirmationStateClass}}">
   <span>{{confirmationMessage}}</span>
-  <a {{action "toggleConfirmation"}}>Back</a>
+  <a {{action "back"}}>Back</a>
 
   <button type="submit" {{action "cancel" false}} class={{confirmationClass}} disabled={{requestPromise.isLoading}}>
     {{#liquid-if requestPromise.isLoading}}
