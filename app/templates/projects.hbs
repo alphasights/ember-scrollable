@@ -1,3 +1,11 @@
+<header>
+  {{as-team-switcher
+    teams=teams
+    prompt=currentUser.model.name
+    selectTeam="selectTeam"
+    teamId=teamId}}
+</header>
+
 {{as-projects
   projects=model
   filterPriority=filterPriority

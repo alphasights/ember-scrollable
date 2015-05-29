@@ -13,18 +13,6 @@
     @include clearfix;
 
     padding: $column-gutter !important;
-
-    label {
-      @include form-label();
-
-      display: inline-block;
-    }
-  }
-
-  .select {
-    @include form-select($inner-wrapper: null, $inline: true);
-
-    margin-right: $column-gutter / 2;
   }
 
   .widgets {
