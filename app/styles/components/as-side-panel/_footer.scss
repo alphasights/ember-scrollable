@@ -10,16 +10,6 @@ $actions-height: rem-calc(90);
     @extend %button-primary;
   }
 
-  &.with-confirm {
-    background-color: #1082e4;
-    color: $white;
-    text-align: right;
-
-    > span {
-      float: left;
-    }
-  }
-
   .primary {
     text-align: right;
   }
