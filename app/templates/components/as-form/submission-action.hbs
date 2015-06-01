@@ -11,11 +11,11 @@
     <span>{{confirmationMessage}}</span>
     <a {{action "back"}}>Back</a>
 
-    <button type="submit" {{action "confirmAction"}} class={{confirmationClass}} disabled={{requestPromise.isLoading}}>
+    <button type="submit" {{action "confirmAction"}} class={{confirmationButtonClass}} disabled={{requestPromise.isLoading}}>
       {{#liquid-if requestPromise.isLoading}}
         Cancelling...
       {{else}}
-        {{confirmationLabel}}
+        {{confirmationButtonLabel}}
       {{/liquid-if}}
     </button>
   </div>

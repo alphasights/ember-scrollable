@@ -2,11 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':action', 'isConfirming:active'],
-  requestPromise: null,
-  isConfirming: false,
-  showConfirmation: false,
+  buttonState: null,
   confirmationMessage: 'Are you sure?',
-  confirmationLabel: 'Yes',
+  confirmationButtonLabel: 'Yes',
+  confirmationStateClass: null,
+  confirmationButtonClass: null,
+  isConfirming: false,
+  requestPromise: null,
+  showConfirmation: false,
 
   actions: {
     click: function() {
