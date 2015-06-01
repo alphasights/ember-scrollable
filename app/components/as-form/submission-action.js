@@ -7,7 +7,6 @@ export default Ember.Component.extend({
   showConfirmation: false,
   confirmationMessage: "Are you sure?",
   confirmationLabel: 'Yes',
-  group: null,
 
   actions: {
     click: function() {

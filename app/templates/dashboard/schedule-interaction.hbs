@@ -57,15 +57,13 @@
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
-        {{#as-form/submission-group as |group|}}
+        {{#as-form/submission-group}}
           {{#as-form/submission-action
-            group=group
             action="submit"}}
             Schedule Interaction
           {{/as-form/submission-action}}
 
           {{#as-form/submission-action
-            group=group
             action="cancel"
             buttonState="error"
             showConfirmation=true

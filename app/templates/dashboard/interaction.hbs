@@ -77,10 +77,9 @@
     </section>
   </div>
 
-  {{#as-form/submission-group as |group|}}
+  {{#as-form/submission-group}}
     {{#as-form/submission-action
       showConfirmation=true
-      group=group
       action="cancel"
       confirmationLabel="Yes, Cancel Interaction"
       confirmationMessage="Are you sure you want to cancel the interaction?"}}
@@ -88,7 +87,6 @@
     {{/as-form/submission-action}}
     {{#as-form/submission-action
       showConfirmation=true
-      group=group
       action="withdrawAndCancel"
       confirmationLabel="Yes, Cancel and Withdraw"
       confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"}}
