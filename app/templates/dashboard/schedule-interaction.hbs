@@ -57,15 +57,22 @@
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
-        {{#as-form/submission-group}}
-          {{as-form/submission-action
-            label="Schedule Interaction"
+        {{#as-form/submission-group as |group|}}
+          {{#as-form/submission-action
+            group=group
             action="submit"}}
+            Schedule Interaction
+          {{/as-form/submission-action}}
 
-          {{as-form/submission-action
-            label="Cancel Interaction"
+          {{#as-form/submission-action
+            group=group
+            action="cancel"
             buttonState="error"
-            confirmationComponent="as-form/confirmation/cancel-to-schedule-interaction"}}
+            showConfirmation=true
+            confirmationLabel="Yes, Cancel Interaction"
+            confirmationMessage="Are you sure you want to cancel the interaction?"}}
+            Cancel Interaction
+          {{/as-form/submission-action}}
         {{/as-form/submission-group}}
       {{/as-form}}
     </section>
