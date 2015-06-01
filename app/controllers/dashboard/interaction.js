@@ -25,21 +25,29 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
   checklistItemsSorting: ['completed', 'createdAt'],
 
+  _cancel: function(withdrawFromCompliance = false) {
+    var requestPromise =
+      this.get('interactionCancellation').cancel(this.get('model'), response => {
+        this.store.pushPayload(response);
+        this.get('dashboard').propertyDidChange('upcomingInteractions');
+        notify('The interaction has been cancelled.');
+        this.get('sidePanel').send('close');
+      }, withdrawFromCompliance);
+
+    this.set('requestPromise', requestPromise);
+  },
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
     },
 
-    cancel: function(withdrawFromCompliance) {
-      var requestPromise =
-        this.get('interactionCancellation').cancel(this.get('model'), response => {
-          this.store.pushPayload(response);
-          this.get('dashboard').propertyDidChange('upcomingInteractions');
-          notify('The interaction has been cancelled.');
-          this.get('sidePanel').send('close');
-        }, withdrawFromCompliance);
+    cancel: function() {
+      this._cancel(false);
+    },
 
-      this.set('requestPromise', requestPromise);
+    withdrawAndCancel: function() {
+      this._cancel(withdrawFromCompliance = true);
     }
   }
 });

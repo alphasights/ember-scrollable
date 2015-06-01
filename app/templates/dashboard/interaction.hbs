@@ -77,9 +77,12 @@
     </section>
   </div>
 
-  {{#as-form/submission-group}}
+  {{#as-form/submission-group controller=this}}
     {{as-form/submission-action
       label="Cancel Interaction"
+      controller=controller
+      primaryConfirmAction="withdrawAndCancel"
+      secondaryConfirmAction="cancel"
       confirmationComponent="as-form/confirmation/cancel-interaction"}}
   {{/as-form/submission-group}}
 {{/as-side-panel}}
