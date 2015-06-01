@@ -47,6 +47,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     withdrawAndCancel: function() {
       this._cancel(true);
+    },
+
+    reschedule: function() {
+      this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
     }
   }
 });

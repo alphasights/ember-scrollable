@@ -78,6 +78,9 @@
   </div>
 
   {{#as-form/submission-group}}
+    {{#as-form/submission-action action="reschedule"}}
+      Reschedule Interaction
+    {{/as-form/submission-action}}
     {{#as-form/submission-action
       showConfirmation=true
       action="cancel"
