@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':action', 'isConfirming:active'],
+  buttonState: null,
   confirmationComponent: null,
   label: 'Save',
   requestPromise: null,
