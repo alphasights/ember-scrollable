@@ -7,6 +7,7 @@ import PromiseController from 'phoenix/controllers/promise';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
 import notify from 'phoenix/helpers/notify';
+import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -66,8 +67,6 @@ var UnavailabilityOccurrence = Occurrence.extend({
 export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-  interactionCancellation: Ember.inject.service(),
-
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
@@ -141,7 +140,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
 
     cancel: function() {
       var requestPromise =
-        this.get('interactionCancellation').cancel(this.get('model'), response => {
+        InteractionCancellation.create().cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
           notify('The interaction has been cancelled.');

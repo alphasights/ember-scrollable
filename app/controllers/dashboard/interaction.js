@@ -1,12 +1,11 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import notify from 'phoenix/helpers/notify';
+import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-  interactionCancellation: Ember.inject.service(),
-
   navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
@@ -27,7 +26,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
-      this.get('interactionCancellation').cancel(this.get('model'), response => {
+      InteractionCancellation.create().cancel(this.get('model'), response => {
         this.store.pushPayload(response);
         this.get('dashboard').propertyDidChange('upcomingInteractions');
         notify('The interaction has been cancelled.');
