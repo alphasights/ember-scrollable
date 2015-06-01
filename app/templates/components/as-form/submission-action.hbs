@@ -2,10 +2,21 @@
   {{#liquid-if requestPromise.isLoading}}
     Saving...
   {{else}}
-    {{label}}
+    {{yield}}
   {{/liquid-if}}
 </button>
 
-{{#if confirmationComponent}}
-  {{component confirmationComponent}}
+{{#if showConfirmation}}
+  <div class="confirmation {{confirmationStateClass}}">
+    <span>{{confirmationMessage}}</span>
+    <a {{action "back"}}>Back</a>
+
+    <button type="submit" {{action "confirmAction"}} class={{confirmationClass}} disabled={{requestPromise.isLoading}}>
+      {{#liquid-if requestPromise.isLoading}}
+        Cancelling...
+      {{else}}
+        {{confirmationLabel}}
+      {{/liquid-if}}
+    </button>
+  </div>
 {{/if}}

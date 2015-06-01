@@ -2,21 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':action', 'isConfirming:active'],
-  buttonState: null,
-  confirmationComponent: null,
-  controller: null,
-  label: 'Save',
   requestPromise: null,
   isConfirming: false,
+  showConfirmation: false,
+  group: null,
 
   actions: {
     click: function() {
-      var confirmationComponent = this.get('confirmationComponent');
-
-      if (confirmationComponent) {
+      if (this.get('showConfirmation')) {
         this.toggleProperty('isConfirming');
       } else {
-        this.get('controller').send(this.get('primaryAction'));
+        this.sendAction();
       }
     },
 
@@ -24,12 +20,8 @@ export default Ember.Component.extend({
       this.toggleProperty('isConfirming');
     },
 
-    primaryConfirmAction: function() {
-      this.get('controller').send(this.get('primaryConfirmAction'));
-    },
-
-    secondaryConfirmAction: function() {
-      this.get('controller').send(this.get('secondaryConfirmAction'));
+    confirmAction: function() {
+      this.sendAction();
     }
   }
 });

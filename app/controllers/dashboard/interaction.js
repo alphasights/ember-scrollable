@@ -47,7 +47,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     withdrawAndCancel: function() {
-      this._cancel(withdrawFromCompliance = true);
+      this._cancel(true);
     }
   }
 });
