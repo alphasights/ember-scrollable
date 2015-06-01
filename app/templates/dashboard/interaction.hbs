@@ -83,7 +83,8 @@
       action="cancel"
       confirmationStateClass="info"
       confirmationButtonLabel="Yes, Cancel Interaction"
-      confirmationMessage="Are you sure you want to cancel the interaction?"}}
+      confirmationMessage="Are you sure you want to cancel the interaction?"
+      requestPromise=requestPromise}}
       Cancel Interaction
     {{/as-form/submission-action}}
     {{#as-form/submission-action
@@ -91,7 +92,8 @@
       action="withdrawAndCancel"
       confirmationStateClass="info"
       confirmationButtonLabel="Yes, Cancel and Withdraw"
-      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"}}
+      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
+      requestPromise=requestPromise}}
       Cancel and Withdraw Interaction
     {{/as-form/submission-action}}
   {{/as-form/submission-group}}

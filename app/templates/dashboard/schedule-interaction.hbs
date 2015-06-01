@@ -58,8 +58,7 @@
         {{/as-form/fieldset}}
 
         {{#as-form/submission-group}}
-          {{#as-form/submission-action
-            action="submit"}}
+          {{#as-form/submission-action action="submit" requestPromise=requestPromise}}
             Schedule Interaction
           {{/as-form/submission-action}}
 
@@ -68,7 +67,8 @@
             buttonState="error"
             showConfirmation=true
             confirmationButtonLabel="Yes, Cancel Interaction"
-            confirmationMessage="Are you sure you want to cancel the interaction?"}}
+            confirmationMessage="Are you sure you want to cancel the interaction?"
+            requestPromise=requestPromise}}
             Cancel Interaction
           {{/as-form/submission-action}}
         {{/as-form/submission-group}}
