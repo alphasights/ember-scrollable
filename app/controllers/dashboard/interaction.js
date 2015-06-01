@@ -8,6 +8,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
+  showForm: false,
+
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
     return [{
       person: this.get('model.advisor'),
@@ -26,6 +28,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
+    },
+
+    toggleForm: function() {
+      this.toggleProperty('showForm');
     }
   }
 });

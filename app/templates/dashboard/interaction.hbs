@@ -92,8 +92,36 @@
   </div>
 
   <section class="actions">
-    {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
-      Reschedule Interaction
-    {{/link-to}}
+    <div class="action {{if showForm 'active'}}">
+      <button class="success" {{action "toggleForm"}}>Complete Interaction</button>
+      <div class="content">
+        <div class="form">
+          {{#as-form model=completion}}
+            {{#as-form/fieldset}}
+              {{as-form/input
+                name="callLength"
+                errorProperty="callLength"
+                label="Call Length"}}
+
+              {{as-form/select
+                name="callQuality"
+                label="Call Quality"
+                content=qualityOptions}}
+            {{/as-form/fieldset}}
+
+            {{as-form/submission
+              label="Charge Client"
+              submit="submit"
+              requestPromise=requestPromise}}
+          {{/as-form}}
+        </div>
+      </div>
+    </div>
+
+    <div class="action reschedule">
+      {{#link-to "dashboard.schedule-interaction" model.id tagName="button"}}
+        Reschedule Interaction
+      {{/link-to}}
+    </div>
   </section>
 {{/as-side-panel}}

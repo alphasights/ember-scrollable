@@ -15,6 +15,14 @@ export default Ember.Controller.extend({
     id: 'performance', name: 'Performance', routeName: 'performance'
   }],
 
+  actionItems: [{
+    name: 'feedback',
+    label: 'Feedback'
+  }, {
+    name: 'logout',
+    label: 'Logout'
+  }],
+
   actions: {
     savePreferences: function() {
       this.get('preferences').save();
@@ -22,6 +30,12 @@ export default Ember.Controller.extend({
 
     logout: function() {
       window.location.replace(`${EmberENV.pistachioUrl}/logout`);
+    },
+
+    feedback: function() {
+      /* jshint newcap: false */
+      Intercom('show');
+      /* jshint newcap: true */
     }
   }
 });
