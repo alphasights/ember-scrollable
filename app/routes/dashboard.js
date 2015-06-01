@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import TeamDeliveryPerformance from 'phoenix/models/team-delivery-performance';
+import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   queryParams: {
     teamId: {
       refreshModel: true

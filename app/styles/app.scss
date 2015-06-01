@@ -16,8 +16,10 @@
 @import 'components/progress-bar';
 @import 'components/projects';
 @import 'components/project-list-item';
+@import 'components/whiteboard-project-list-item';
 @import 'components/quick-jump-result';
 @import 'components/super-number';
+@import 'components/team-switcher';
 @import 'components/tooltipster';
 @import 'components/widget';
 @import 'components/widgets/list';
@@ -30,6 +32,7 @@
 @import 'views/dashboard';
 @import 'views/dashboard/interaction';
 @import 'views/dashboard/schedule-interaction';
+@import 'views/projects';
 @import 'views/side-panel-loading';
 @import 'views/whiteboards';
 @import 'views/whiteboards/whiteboard/angle-memberships';

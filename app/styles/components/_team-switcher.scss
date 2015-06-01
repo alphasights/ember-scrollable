@@ -1,0 +1,7 @@
+.team-switcher {
+  .select {
+    @include form-select($inner-wrapper: null, $inline: true);
+
+    margin-right: $column-gutter / 2;
+  }
+}

@@ -1,6 +1,6 @@
 $side-panel-actions-height: side-panel-settings(actions-bar, height);
 
-$interaction-header-title-height: rem-calc(120);
+$interaction-header-title-height: rem-calc(80);
 $interaction-checklist-header-height: $column-gutter + $h5-font-size;
 $interaction-checklist-dot-size: 8px;
 
@@ -16,29 +16,33 @@ $interaction-header-height:
     padding: $column-gutter $column-gutter / 2;
     width: 100%;
 
-    .date-time {
+    .date {
       @extend %grid-column-small-12;
       @extend %grid-column-medium-3;
       @extend %grid-column-large-2;
 
       span {
-        background-color: $primary-color;
-        color: $white;
         display: block;
         line-height: $interaction-header-title-height / 2;
         text-align: center;
       }
 
-      .date {
-        @include side-radius(top, $global-radius / 2);
+      .month {
+        @include side-radius(top, $global-radius);
 
-        background-color: lighten($primary-color, 10%);
+        background-color: $primary-color;
+        color: $white;
+        letter-spacing: 1px;
+        text-transform: uppercase;
       }
 
-      .time {
-        @include side-radius(bottom, $global-radius / 2);
+      .day {
+        @include side-radius(bottom, $global-radius);
 
-        margin-top: 1px;
+        border: 1px solid $primary-color;
+        font-size: $h1-font-size;
+        line-height: auto;
+        padding: $column-gutter / 2;
       }
     }
 
@@ -48,7 +52,6 @@ $interaction-header-height:
       @extend %grid-column-large-10;
 
       h1 {
-        border-bottom: solid 1px $global-section-border-color;
         line-height: $interaction-header-title-height / 2;
         margin: 0;
         overflow: hidden;
@@ -58,14 +61,55 @@ $interaction-header-height:
         small a {
           color: $small-font-color;
         }
-
-        .primary-contact {
-          float: right;
-        }
       }
 
       a {
         line-height: $interaction-header-title-height / 2;
+      }
+
+      .primary-contact {
+        float: right;
+      }
+
+      .call-times {
+        display: block;
+
+        > span {
+          color: $small-font-color;
+          margin-right: $column-gutter / 2;
+
+          &.local-time {
+            color: $body-font-color;
+            font-weight: $font-weight-bold;
+          }
+
+          .highlight {
+            color: $anchor-font-color;
+          }
+        }
+      }
+
+      .speak-details {
+        display: block;
+        font-size: $h6-font-size;
+        margin-top: $column-gutter / 2;
+
+        > li {
+          display: inline;
+
+          .speak-title {
+            color: $secondary-color;
+            text-transform: uppercase;
+          }
+
+          .speak-detail {
+            color: $small-font-color;
+          }
+
+          &:last-child {
+            margin-left: $column-gutter / 2;
+          }
+        }
       }
     }
   }
@@ -79,7 +123,7 @@ $interaction-header-height:
     }
 
     .call-time {
-      color: $primary-color;
+      color: $small-font-color;
       font-size: $h5-font-size;
       text-align: right;
 
@@ -88,7 +132,9 @@ $interaction-header-height:
       }
 
       i {
-        @include icon('clock-o');
+        @include icon('globe');
+
+        color: lighten($small-font-color, 20%);
       }
     }
   }

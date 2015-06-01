@@ -2,7 +2,7 @@
   "name": "phoenix",
   "description": "The system, reinvented",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -53,7 +53,7 @@
     "ember-localstorage-adapter": "0.5.2",
     "ember-moment": "1.1.1",
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
-    "ember-sortable": "1.0.0-beta.3",
+    "ember-sortable": "1.1.0",
     "ember-validations": "^2.0.0-alpha.3",
     "ember-watson": "^0.3.1",
     "express": "4.12.3",

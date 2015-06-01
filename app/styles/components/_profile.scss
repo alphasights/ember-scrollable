@@ -1,3 +1,5 @@
+$profile-avatar-container-size: $avatar-size;
+
 .profile {
   @include flip-panel;
 
@@ -22,15 +24,13 @@
 
   .description {
     .avatar-container {
-      @extend %grid-column-large-2;
-      @extend %grid-column-small-3;
-
-      text-align: right;
+      float: left;
+      margin-right: $column-gutter / 2;
+      width: $profile-avatar-container-size;
     }
 
     .details {
-      @extend %grid-column-large-10;
-      @extend %grid-column-small-9;
+      overflow: hidden;
 
       span {
         display: block;
@@ -40,32 +40,42 @@
       }
 
       .name {
-        display: inline-block;
+        display: block;
         font-weight: $font-weight-extrabold;
-        padding: $column-gutter / 4 0;
+        padding-top: $column-gutter / 4;
       }
     }
   }
 
   .main-contact,
   .contacts {
+    background-color: lighten($global-section-border-color, 5%);
+
     > ul > li {
-      i {
-        @extend %grid-column-large-2;
-        @extend %grid-column-small-3;
-
-        color: $small-font-color;
-        text-align: right;
-      }
-
-      span {
-        @extend %grid-column-large-10;
-        @extend %grid-column-small-9;
-      }
-
       i,
       span {
         line-height: $base-line-height * 1.5 !important;
+      }
+
+      i {
+        color: $small-font-color;
+        float: left;
+        margin-right: $column-gutter / 2;
+        text-align: center;
+        width: $profile-avatar-container-size;
+
+        &:before {
+          background-color: $white;
+          border: 1px solid $global-section-border-color;
+          border-radius: $global-rounded;
+          display: inline-block;
+          line-height: $button-icon-size;
+          width: $button-icon-size;
+        }
+      }
+
+      span {
+        white-space: nowrap;
       }
     }
 
@@ -109,16 +119,6 @@
 
       &:not(:last-child) {
         border-bottom: solid 1px $global-section-border-color;
-      }
-
-      i {
-        @extend %grid-column-large-1;
-        @extend %grid-column-small-2;
-      }
-
-      span {
-        @extend %grid-column-large-11;
-        @extend %grid-column-small-10;
       }
     }
   }

@@ -16,6 +16,8 @@ export default DS.Model.extend({
   interactionType: DS.attr('string'),
   advisorPhoneCountryCode: DS.attr('string'),
   advisorPhoneNumber: DS.attr('string'),
+  speakPhoneNumber: DS.attr('string'),
+  speakCode: DS.attr('string'),
 
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;

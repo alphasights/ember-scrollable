@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import TeamSwitcheableControllerMixin from 'phoenix/mixins/team-switcheable-controller';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
   queryParams: {
     filterPriority: 'priority'
   },
