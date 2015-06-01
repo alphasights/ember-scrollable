@@ -1,10 +1,7 @@
 import Ember from 'ember';
+import TeamSwitcheableControllerMixin from 'phoenix/mixins/team-switcheable-controller';
 
-export default Ember.Controller.extend({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
-  teamId: null,
-  teams: Ember.computed.oneWay('currentUser.teams'),
+export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
   teamMembers: Ember.computed.oneWay('model.teamMembers'),
 
   isTeamView: Ember.computed('teamId', function() {

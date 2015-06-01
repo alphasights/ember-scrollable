@@ -146,8 +146,8 @@ test("Show interaction details", function(assert) {
       callDate: $interaction.find('.date .day').text().trim() + " " +
                 $interaction.find('.date .month').text().trim(),
       callTime: $interaction.find('.call-times .local-time').text().trim(),
-      advisorCallTime: $interaction.find('.call-times .advisor span:first').text().trim(),
-      clientCallTime: $interaction.find('.call-times .client span:first').text().trim(),
+      advisorCallTime: $interaction.find('.call-times .advisor span:last').text().trim(),
+      clientCallTime: $interaction.find('.call-times .client span:last').text().trim(),
       advisorCallTimezone: $interaction.find('.profiles .advisor .call-time span').text().trim(),
       clientCallTimezone: $interaction.find('.profiles .client .call-time span').text().trim()
     };

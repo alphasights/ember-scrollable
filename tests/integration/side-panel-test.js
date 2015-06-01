@@ -39,7 +39,7 @@ QUnit.module("Side Panel", {
 
 test("Shows", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item');
+  click('.whiteboard-project-list-item');
 
   andThen(function() {
     assert.equal(find('.side-panel.active h1 span').text().trim(), 'Example Project');
@@ -48,7 +48,7 @@ test("Shows", function(assert) {
 
 test("Hides when clicking on the overlay", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item');
+  click('.whiteboard-project-list-item');
   click('.side-panel');
 
   andThen(function() {
@@ -58,7 +58,7 @@ test("Hides when clicking on the overlay", function(assert) {
 
 test("Hides when clicking on the close button", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item');
+  click('.whiteboard-project-list-item');
   click('.close > button');
 
   andThen(function() {
@@ -68,7 +68,7 @@ test("Hides when clicking on the close button", function(assert) {
 
 test("Hides when pressing the esc key", function(assert) {
   visit('/whiteboards');
-  click('.project-list-item');
+  click('.whiteboard-project-list-item');
   keyEvent(document, 'keyup', 27);
 
   andThen(function() {

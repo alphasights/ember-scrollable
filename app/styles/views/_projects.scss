@@ -1,0 +1,7 @@
+section.projects {
+  > header {
+    @include clearfix;
+
+    padding: $column-gutter !important;
+  }
+}
