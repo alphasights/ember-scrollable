@@ -4,7 +4,21 @@ import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
 const interaction = {
-  id: 1
+  id: 1,
+  actioned: false,
+  clientAccessNumberCountry: 'US',
+  additionalContactDetails: '',
+  requested_at: '2015-02-18T10:00:00.000+00:00',
+  scheduled_call_time: '2015-02-19T10:00:00.000+00:00',
+  speak: true,
+  interaction_type: 'call',
+  advisorPhoneCountryCode: '54',
+  advisorPhoneNumber: '91151016387',
+  speakPhoneNumber: '+1 212-231-2222',
+  speakCode: '777502',
+  advisorId: 11,
+  clientContactId: 299,
+  projectId: 14
 };
 
 QUnit.module("Scheduled Interactions Side Panel", {
@@ -14,7 +28,7 @@ QUnit.module("Scheduled Interactions Side Panel", {
     defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
       "advisors": [
         {
-          "id": 1,
+          "id": interaction.advisorId,
           "avatar_url": null,
           "emails": ['advisor@email.com'],
           "name": 'Johnny Advisor',
@@ -32,7 +46,7 @@ QUnit.module("Scheduled Interactions Side Panel", {
       ],
       "client_contacts": [
         {
-          "id": 21387,
+          "id": interaction.clientContactId,
           "avatar_url": null,
           "emails": ['client@email.com'],
           "name": 'Bob Client',
@@ -55,11 +69,11 @@ QUnit.module("Scheduled Interactions Side Panel", {
       ],
       "projects": [
         {
-           "id": 32522,
+           "id": interaction.projectId,
            "status": "high",
            "name": 'Project Name',
            "client_code": "MCKU",
-           "details_url": "/projects/32522",
+           "details_url": `/projects/${interaction.projectId}`,
            "index": 3,
            "created_at": "2015-01-23T21:01:33.615+00:00",
            "angle_ids": [40380],
@@ -69,13 +83,21 @@ QUnit.module("Scheduled Interactions Side Panel", {
       "interactions": [
         {
           "id": interaction.id,
-          "scheduled_call_time": '2015-02-18T10:00:00.000+00:00',
-          "advisor_id": 1,
-          "client_contact_id": 21387,
-          "project_id": 32522,
+          "scheduled_call_time": interaction.scheduled_call_time,
+          "advisor_id": interaction.advisorId,
+          "client_contact_id": interaction.clientContactId,
+          "project_id": interaction.projectId,
           "checklist_item_ids": [],
-          "requested_at": '2015-02-18T10:00:00.000+00:00',
-          "actioned": false
+          "requested_at": interaction.requested_at,
+          "client_access_number_country": interaction.clientAccessNumberCountry,
+          "actioned": interaction.actioned,
+          "additional_contact_details": interaction.additionalContactDetails,
+          "speak": interaction.speak,
+          "interaction_type": 'call',
+          "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+          "advisor_phone_number": interaction.advisorPhoneNumber,
+          "speak_phone_number": interaction.speakPhoneNumber,
+          "speak_code": interaction.speakCode
         }
       ],
       "checklist_items": []
@@ -104,7 +126,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
         "dial_in_number": "1234567",
         "primary_contact_id": 1,
         "speak": true,
-        "client_access_number_country": "US",
+        "client_access_number_country": interaction.clientAccessNumberCountry,
       }
     ]
   }});
@@ -203,6 +225,54 @@ test("Cancel Interaction Failure", function(assert) {
     var message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "The interaction could not be cancelled.",
       'displays a message that it could not be cancelled'
+    );
+  });
+});
+
+test("Reschedule Interaction unschedules the call and transitions to the to schedule side panel", function(assert) {
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
+    "interaction": {
+      "actioned": interaction.actioned,
+      "client_access_number_country": interaction.clientAccessNumberCountry,
+      "additional_contact_details": interaction.additionalContactDetails,
+      "requested_at": interaction.requested_at,
+      "scheduled_call_time": null,
+      "speak": interaction.speak,
+      "interaction_type": interaction.interaction_type,
+      "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+      "advisor_phone_number": interaction.advisorPhoneNumber,
+      "speak_phone_number": interaction.speakPhoneNumber,
+      "speak_code": interaction.speakCode,
+      "advisor_id": interaction.advisorId,
+      "client_contact_id": interaction.clientContactId,
+      "project_id": interaction.projectId
+    }
+  }});
+
+  visit('/dashboard');
+
+  andThen(function() {
+    assert.equal(find('.scheduled-interactions article').length, 1,
+    'shows the original scheduled interaction in the widget');
+
+    assert.equal(find('.upcoming-interactions article').length, 0,
+    'does not shows the scheduled interaction in the upcoming widget');
+  });
+
+  click('.scheduled-interactions article:first');
+  click("a:contains('Reschedule Interaction')");
+
+  andThen(function() {
+    assert.equal(find('.scheduled-interactions article').length, 0,
+      'remove the interaction from the scheduled interaction widget'
+    );
+
+    assert.equal(find('.scheduled-interactions article').length, 0,
+      'adds the interaction to the interactions to schedule widget'
+    );
+
+    assert.equal(currentPath, `/dashboard/interactions/${interaction.id}/schedule`,
+      'transitions to the scheduling side panel'
     );
   });
 });

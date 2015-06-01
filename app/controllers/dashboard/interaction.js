@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import PromiseController from 'phoenix/controllers/promise';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
@@ -50,7 +51,17 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     reschedule: function() {
-      this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
+      var model = this.get('model');
+
+      model.setProperties({scheduledCallTime: null});
+
+      this.set('requestPromise', PromiseController.create({
+        promise: model.save().then(
+          this.get('dashboard').propertyDidChange('scheduledInteractions'),
+          this.get('dashboard').propertyDidChange('interactionsToSchedule'),
+          this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'))
+        )
+      }));
     }
   }
 });
