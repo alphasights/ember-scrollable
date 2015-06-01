@@ -1,4 +1,12 @@
-# Phoenix
+# Phoenix Changelog
+
+### Release 0.0.2 (June 21, 2015)
+
+- [#297](https://github.com/alphasights/phoenix/pull/297) Add Speak numbers to interaction details
+- [#294](https://github.com/alphasights/phoenix/pull/294) Added stats to the projects on the Projects page
+- [BUGFIX #293](https://github.com/alphasights/phoenix/pull/293) Fix checklist item status not displaying the right color
+- [#291](https://github.com/alphasights/phoenix/pull/291) Improved interaction details design
+- [#286](https://github.com/alphasights/phoenix/pull/286) Add team switcher to the Projects page
 
 ### Release 0.0.1 (May 21, 2015)
 
