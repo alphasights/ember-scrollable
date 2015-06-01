@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
     teamId: 'team_id'
   },
 
-  upcomingInteractions: Ember.computed('model.interactions.[]', function() {
+  scheduledInteractions: Ember.computed('model.interactions.[]', function() {
     return this.get('model.interactions')
       .filterBy('scheduledCallTime')
       .sortBy('scheduledCallTime');

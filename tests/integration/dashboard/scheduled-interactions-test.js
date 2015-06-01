@@ -39,7 +39,7 @@ const primaryContact = {
   id: 1
 };
 
-QUnit.module("Upcoming interactions", {
+QUnit.module("Scheduled interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -177,7 +177,7 @@ test("Show upcoming interactions list", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
-    var $interaction = find('.upcoming-interactions article:first');
+    var $interaction = find('.scheduled-interactions article:first');
 
     var interactionListItem = {
       advisorName: $interaction.find('.title span').text().trim(),
@@ -322,7 +322,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
   select('.dashboard > header .select select option:last');
 
   andThen(function() {
-    var interactions = find('.upcoming-interactions article').toArray().map(function(interaction) {
+    var interactions = find('.scheduled-interactions article').toArray().map(function(interaction) {
       var $interaction = $(interaction);
 
       return {

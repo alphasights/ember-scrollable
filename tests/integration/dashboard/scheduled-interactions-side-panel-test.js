@@ -7,7 +7,7 @@ const interaction = {
   id: 1
 };
 
-QUnit.module("Upcoming Interactions Side Panel", {
+QUnit.module("Scheduled Interactions Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
@@ -112,11 +112,11 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   visit('/dashboard');
 
   andThen(function() {
-    assert.equal(find('.upcoming-interactions article').length, 1,
+    assert.equal(find('.scheduled-interactions article').length, 1,
     'shows the upcoming interaction in the widget');
   });
 
-  click('.upcoming-interactions article:first');
+  click('.scheduled-interactions article:first');
   click("a:contains('Cancel Interaction')");
   click("button:contains('Yes, Cancel Interaction')");
 
@@ -125,7 +125,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
       'returns the user to dashboard after cancelling'
     );
 
-    assert.equal(find('.upcoming-interactions article').length, 0,
+    assert.equal(find('.scheduled-interactions article').length, 0,
       'removes the interaction from the widget'
     );
 
@@ -159,11 +159,11 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
   visit('/dashboard');
 
   andThen(function() {
-    assert.equal(find('.upcoming-interactions article').length, 1,
+    assert.equal(find('.scheduled-interactions article').length, 1,
     'shows the upcoming interaction in the widget');
   });
 
-  click('.upcoming-interactions article:first');
+  click('.scheduled-interactions article:first');
   click("a:contains('Cancel and Withdraw Interaction')");
   click("button:contains('Yes, Cancel and Withd')");
 
@@ -172,7 +172,7 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
       'returns the user to dashboard after cancelling'
     );
 
-    assert.equal(find('.upcoming-interactions article').length, 0,
+    assert.equal(find('.scheduled-interactions article').length, 0,
       'removes the interaction from the widget'
     );
 
@@ -187,16 +187,16 @@ test("Cancel Interaction Failure", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
-    assert.equal(find('.upcoming-interactions article').length, 1,
+    assert.equal(find('.scheduled-interactions article').length, 1,
     'shows the original scheduled interaction in the widget');
   });
 
-  click('.upcoming-interactions article:first');
+  click('.scheduled-interactions article:first');
   click("a:contains('Cancel Interaction')");
   click("button:contains('Yes, Cancel Interaction')");
 
   andThen(function() {
-    assert.equal(find('.upcoming-interactions article').length, 1,
+    assert.equal(find('.scheduled-interactions article').length, 1,
       'does not remove the interaction from the widget'
     );
 

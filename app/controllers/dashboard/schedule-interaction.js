@@ -178,7 +178,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     var clientName = this.get('model.clientContact.name');
 
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
-    this.get('dashboard').propertyDidChange('upcomingInteractions');
+    this.get('dashboard').propertyDidChange('scheduledInteractions');
     notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 

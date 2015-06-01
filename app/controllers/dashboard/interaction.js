@@ -6,7 +6,7 @@ import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
+  navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
@@ -28,7 +28,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
         this.store.pushPayload(response);
-        this.get('dashboard').propertyDidChange('upcomingInteractions');
+        this.get('dashboard').propertyDidChange('scheduledInteractions');
         notify('The interaction has been cancelled.');
         this.get('sidePanel').send('close');
       }, withdrawFromCompliance);
