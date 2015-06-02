@@ -1,0 +1,48 @@
+.unused-advisor {
+  header {
+    @extend %grid-row;
+
+    padding: $column-gutter $column-gutter / 2;
+
+    h2 {
+      color: $anchor-font-color;
+      font-size: $h6-font-size;
+      text-transform: uppercase;
+
+      .terms-sent-at {
+        color: $small-font-color;
+      }
+    }
+
+    > .content {
+      @extend %grid-column-medium-12;
+    }
+  }
+
+  .profile {
+    @extend %grid-column-12;
+  }
+
+  > div > .content {
+    $actions-height: rem-calc(90);
+
+    > div {
+      height: 100%;
+      margin-bottom: - $actions-height;
+    }
+
+    .actions {
+      float: left;
+      height: $actions-height;
+      line-height: $actions-height;
+
+      .follow-up {
+        @extend %button-primary;
+      }
+
+      .remove {
+        @extend %button-primary;
+      }
+    }
+  }
+}
