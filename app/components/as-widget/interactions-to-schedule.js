@@ -8,5 +8,5 @@ export default ListWidgetComponent.extend({
 
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
   listItemTemplateName: 'components/as-widget/interactions-to-schedule/list-item',
-  emptyMessage: 'You have no interactions to schedule.'
+  emptyMessage: 'no interactions to schedule.'
 });
