@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     },
 
     back: function() {
-      this.toggleProperty('isConfirming');
+      this.set('isConfirming', false);
     },
 
     confirmAction: function() {

@@ -28,9 +28,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
+        notify('The interaction has been cancelled.');
         this.store.pushPayload(response);
         this.get('dashboard').propertyDidChange('scheduledInteractions');
-        notify('The interaction has been cancelled.');
         this.get('sidePanel').send('close');
       }, withdrawFromCompliance);
 
@@ -53,7 +53,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     reschedule: function() {
       var model = this.get('model');
 
-      model.setProperties({scheduledCallTime: null});
+      model.set('scheduledCallTime', null);
 
       this.set('requestPromise', PromiseController.create({
         promise: model.save().then(
