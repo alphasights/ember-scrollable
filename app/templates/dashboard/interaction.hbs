@@ -92,13 +92,13 @@
   </div>
 
   {{#as-form/submission-group}}
-    {{#as-form/submission-action action="reschedule" buttonState="warning"}}
+    {{#as-form/submission-action action="reschedule" buttonClass="warning"}}
       Reschedule Interaction
     {{/as-form/submission-action}}
     {{#as-form/submission-action
       showConfirmation=true
       action="cancel"
-      buttonState="error"
+      buttonClass="error"
       confirmationButtonLabel="Yes, Cancel Interaction"
       confirmationMessage="Are you sure you want to cancel the interaction?"
       requestPromise=requestPromise}}
@@ -107,7 +107,7 @@
     {{#as-form/submission-action
       showConfirmation=true
       action="withdrawAndCancel"
-      buttonState="error"
+      buttonClass="error"
       confirmationButtonLabel="Yes, Cancel and Withdraw"
       confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
       requestPromise=requestPromise}}

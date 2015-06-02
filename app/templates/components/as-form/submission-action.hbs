@@ -1,4 +1,4 @@
-<button type="submit" {{action "click"}} disabled={{requestPromise.isLoading}} class="{{buttonState}}">
+<button type="submit" {{action "click"}} disabled={{requestPromise.isLoading}} class="{{buttonClass}}">
   {{#liquid-if requestPromise.isLoading}}
     Saving...
   {{else}}

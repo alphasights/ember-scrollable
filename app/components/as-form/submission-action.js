@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':form-submission-action', ':action', 'isConfirming:active'],
-  buttonState: null,
+  buttonClass: null,
   confirmationMessage: 'Are you sure?',
   confirmationButtonLabel: 'Yes',
   confirmationStateClass: 'info',
