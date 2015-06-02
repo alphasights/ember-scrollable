@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   buttonState: null,
   confirmationMessage: 'Are you sure?',
   confirmationButtonLabel: 'Yes',
-  confirmationStateClass: null,
+  confirmationStateClass: 'info',
   confirmationButtonClass: null,
   isConfirming: false,
   requestPromise: null,
