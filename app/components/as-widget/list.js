@@ -14,6 +14,19 @@ export default WidgetComponent.extend({
   isCollapsed: true,
   collapsedMaxVisibleItems: 4,
   selectedTeamMember: null,
+  emptyMessageBase: 'There are ',
+
+  fullEmptyMessage: Ember.computed('emptyMessageBase', 'emptyMessage', 'selectedTeamMember', function() {
+    var emptyMessageBase;
+
+    if (this.get('selectedTeamMember') != null) {
+      emptyMessageBase = `${this.get('selectedTeamMember.name')} has `;
+    } else {
+      emptyMessageBase = this.get('emptyMessageBase');
+    }
+
+    return `${emptyMessageBase}${this.get('emptyMessage')}`;
+  }),
 
   title: Ember.computed('name', 'hasMoreItems', '_paginationInfo', function() {
     if (this.get('hasMoreItems')) {

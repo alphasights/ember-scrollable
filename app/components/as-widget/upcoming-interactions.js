@@ -8,5 +8,5 @@ export default ListWidgetComponent.extend({
 
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
   listItemTemplateName: 'components/as-widget/upcoming-interactions/list-item',
-  emptyMessage: 'You have no upcoming interactions.'
+  emptyMessage: 'no upcoming interactions.'
 });
