@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: [':form-submission', ':actions']
+  classNameBindings: [':form-submission-group', ':form-submission', ':actions']
 });
