@@ -1,20 +1,18 @@
 {{#link-to "dashboard.unused-advisor" model.id tagName="article"}}
-  <article>
-    <div class="title">
-      <span>{{model.advisor.name}}</span>
-      <small>{{model.project.name}}</small>
-    </div>
+  <div class="title">
+    <span>{{model.advisor.name}}</span>
+    <small>{{model.project.name}}</small>
+  </div>
 
-    <div class="time">
-      <span>Terms sent {{ago model.termsSentAt}}</span>
-    </div>
+  <div class="time">
+    <span>Terms sent {{ago model.termsSentAt}}</span>
+  </div>
 
-    <div class="actions">
-      {{#tool-tipster position="left" title="Remove Unused Advisor"}}
-        <a class="remove" {{action "removeUnusedAdvisor" model.id}}>
-          <i></i>
-        </a>
-      {{/tool-tipster}}
-    </div>
-  </article>
+  <div class="actions">
+    {{#tool-tipster position="left" title="Remove Unused Advisor"}}
+      <a class="remove" {{action "removeUnusedAdvisor" model.id}}>
+        <i></i>
+      </a>
+    {{/tool-tipster}}
+  </div>
 {{/link-to}}
