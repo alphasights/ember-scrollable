@@ -55,8 +55,8 @@ export default WidgetComponent.extend({
     }
   }),
 
-  _paginationInfo: Ember.computed('visibleContent.length', 'model.length', function() {
-    return `${this.get('visibleContent.length')} of ${this.get('model.length')}`;
+  _paginationInfo: Ember.computed('visibleContent.length', 'arrangedContent.length', function() {
+    return `${this.get('visibleContent.length')} of ${this.get('arrangedContent.length')}`;
   }),
 
   actions: {
