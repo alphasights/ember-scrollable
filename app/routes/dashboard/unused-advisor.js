@@ -7,5 +7,10 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       unusedAdvisor: this.store.find('unusedAdvisor', params.unused_advisor_id),
       emails: this.store.find('email')
     });
+  },
+
+  setupController: function(controller, models) {
+    controller.set('model', models.unusedAdvisor);
+    controller.set('emails', models.emails);
   }
 });

@@ -1,0 +1,41 @@
+$list-item-padding: rem-calc(10);
+
+.email-correspondence {
+  .header {
+    border-bottom: 1px solid $global-section-border-color;
+    padding: $list-item-padding 0;
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    margin-top: $list-item-padding;
+  }
+
+  li {
+    @extend %grid-row;
+
+    padding: $list-item-padding 0;
+
+    .subject,
+    .sender,
+    .sent-at {
+      @extend %grid-column-4;
+    }
+
+    .subject {
+      padding-left: 0;
+    }
+
+    .sender {
+      text-align: center;
+    }
+
+    .sent-at {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+}

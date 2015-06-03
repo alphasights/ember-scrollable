@@ -9,14 +9,29 @@ module.exports = function(app) {
           'id': 1,
           'subject': 'This is an email subject',
           'body': 'Emails are fun!',
-          'sender': 'sender@email.com',
+          'sender': 'analyst@email.com',
           'recipients': [
-            'recipient@email.com'
+            'advisor@email.com'
           ],
-          'cced_emails': [
+          'cc': [
             'cc@email.com'
           ],
-          'sent_at': '2015-06-02T10:30:00.000+00:00'
+          'sent_at': '2015-06-02T10:30:00.000+00:00',
+          'outgoing': true
+        },
+        {
+          'id': 2,
+          'subject': 'This is another email subject',
+          'body': 'Emails are boring!',
+          'sender': 'advisor@email.com',
+          'recipients': [
+            'analyst@email.com'
+          ],
+          'cc': [
+            'cc@email.com'
+          ],
+          'sent_at': '2015-06-02T11:30:00.000+00:00',
+          'outgoing': false
         }
       ]
     });

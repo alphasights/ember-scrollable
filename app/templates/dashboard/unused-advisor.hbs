@@ -3,23 +3,25 @@
     <header>
       <div class="content">
         <h1>
-          <span>{{model.unusedAdvisor.project.name}}</span>
-          <small>{{model.unusedAdvisor.project.codename}}</small>
+          <span>{{model.project.name}}</span>
+          <small>{{model.project.codename}}</small>
         </h1>
 
         <span>
           Contacted
-          <span class="terms-sent-at">{{ago model.unusedAdvisor.termsSentAt}}</span>
+          <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
         </span>
       </div>
     </header>
 
     <section class="profile">
       {{as-profile
-        person=model.unusedAdvisor.advisor
+        person=model.advisor
         title="Unused Advisor"
         class="advisor"}}
     </section>
+
+    {{as-email-correspondence emails=emails}}
   </div>
 
   <section class="actions">

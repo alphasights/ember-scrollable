@@ -8,7 +8,7 @@
     width: 100%;
 
     > .content {
-      @extend %grid-column-small-12;
+      @extend %grid-column-12;
 
       h1 {
         line-height: $interaction-header-title-height / 2;
@@ -33,17 +33,23 @@
   }
 
   .profile {
-    @extend %grid-column-12;
+    padding: 0 $column-gutter / 2;
 
     .front {
       @extend %panel-widget;
     }
   }
 
+  .email-correspondence {
+    padding: $column-gutter $column-gutter;
+  }
+
   > div > .content {
     $actions-height: rem-calc(90);
 
     > div {
+      @extend %clearfix;
+
       height: 100%;
       margin-bottom: - $actions-height;
     }

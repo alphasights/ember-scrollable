@@ -1,0 +1,15 @@
+<div class="header">
+  <span {{action "toggleDisplay"}}>Correspondence History</span>
+</div>
+
+{{#liquid-if displayList}}
+  <ul>
+    {{#each emails as |email|}}
+      <li>
+        <span class="subject">{{email.subject}}</span>
+        <span class="sender">{{email.sender}}</span>
+        <span class="sent-at">{{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})</span>
+      </li>
+    {{/each}}
+  </ul>
+{{/liquid-if}}
