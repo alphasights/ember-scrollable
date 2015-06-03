@@ -1,25 +1,52 @@
 {{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
   <div>
-    <header>
-      <div class="content">
-        <h1>
-          <span>{{model.project.name}}</span>
-          <small>{{model.project.codename}}</small>
-        </h1>
+    {{#liquid-if showFollowUp use="crossFade"}}
+      <dl class="details">
+        <dt>Template</dt>
+        <dd>Unused Advisor Follow Up</dd>
+        <dt>To</dt>
+        <dd>{{model.advisor.name}}</dd>
+        <dt>From</dt>
+        <dd>{{currentUser.name}}</dd>
+        <dt>CC</dt>
+        <dd>Tor Erik Linnerud</dd>
+      </dl>
 
-        <span>
-          <span>Contacted</span>
-          <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
-        </span>
-      </div>
-    </header>
+      {{#as-form model=email}}
+        {{#as-form/fieldset}}
+          {{as-form/input
+            name="subject"
+            errorProperty="subject"
+            label="Subject"}}
 
-    <section class="profile">
-      {{as-profile
-        person=model.advisor
-        title="Unused Advisor"
-        class="advisor"}}
-    </section>
+          {{as-form/textarea
+            name="body"
+            errorProperty="body"
+            label="Body"}}
+        {{/as-form/fieldset}}
+      {{/as-form}}
+    {{else}}
+      <header>
+        <div class="content">
+          <h1>
+            <span>{{model.project.name}}</span>
+            <small>{{model.project.codename}}</small>
+          </h1>
+
+          <span>
+            <span>Contacted</span>
+            <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
+          </span>
+        </div>
+      </header>
+
+      <section class="profile">
+        {{as-profile
+          person=model.advisor
+          title="Unused Advisor"
+          class="advisor"}}
+      </section>
+    {{/liquid-if}}
   </div>
 
   <section class="actions">
@@ -28,7 +55,7 @@
     </button>
 
     {{#if features.advisorFollowUp}}
-      <button class="follow-up" {{action "followUp"}}>
+      <button class="follow-up" {{action "toggleFollowUp"}}>
         Follow Up
       </button>
     {{/if}}
