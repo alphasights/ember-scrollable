@@ -1,11 +1,13 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
+import notify from 'phoenix/helpers/notify';
+import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import PromiseController from 'phoenix/controllers/promise';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-
-  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
+  navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
@@ -23,9 +25,43 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
   checklistItemsSorting: ['completed', 'createdAt'],
 
+  _cancel: function(withdrawFromCompliance = false) {
+    var requestPromise =
+      InteractionCancellation.create().cancel(this.get('model'), response => {
+        notify('The interaction has been cancelled.');
+        this.store.pushPayload(response);
+        this.get('dashboard').propertyDidChange('scheduledInteractions');
+        this.get('sidePanel').send('close');
+      }, withdrawFromCompliance);
+
+    this.set('requestPromise', requestPromise);
+  },
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
+    },
+
+    cancel: function() {
+      this._cancel(false);
+    },
+
+    withdrawAndCancel: function() {
+      this._cancel(true);
+    },
+
+    reschedule: function() {
+      var model = this.get('model');
+
+      model.set('scheduledCallTime', null);
+
+      this.set('requestPromise', PromiseController.create({
+        promise: model.save().then(
+          this.get('dashboard').propertyDidChange('scheduledInteractions'),
+          this.get('dashboard').propertyDidChange('interactionsToSchedule'),
+          this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'))
+        )
+      }));
     }
   }
 });
