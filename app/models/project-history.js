@@ -15,7 +15,7 @@ const STATUSES = {
   'not_on_CID': 'Not on CID',
   'some_companies_on_CID': 'Some companies on CID',
   'all_companies_on_CID': 'All companies on CID'
-}
+};
 
 export default DS.Model.extend({
   termsAcceptedAt: DS.attr('date'),
