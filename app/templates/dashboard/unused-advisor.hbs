@@ -1,0 +1,36 @@
+{{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
+  <div>
+    <header>
+      <div class="content">
+        <h1>
+          <span>{{model.project.name}}</span>
+          <small>{{model.project.codename}}</small>
+        </h1>
+
+        <span>
+          <span>Contacted</span>
+          <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
+        </span>
+      </div>
+    </header>
+
+    <section class="profile">
+      {{as-profile
+        person=model.advisor
+        title="Unused Advisor"
+        class="advisor"}}
+    </section>
+  </div>
+
+  <section class="actions">
+    <button class="remove" {{action "remove"}}>
+      Remove Advisor
+    </button>
+
+    {{#if features.advisorFollowUp}}
+      <button class="follow-up" {{action "followUp"}}>
+        Follow Up
+      </button>
+    {{/if}}
+  </section>
+{{/as-side-panel}}
