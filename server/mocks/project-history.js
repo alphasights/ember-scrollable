@@ -7,13 +7,15 @@ module.exports = function(app) {
       'project-history': [{
         'id': 1,
         'project_id': 1,
-        'terms_accepted_at': '2015-06-02T11:30:00.000+00:00',
-        'outreach_status': 'found'
+        'used_at': '2015-06-02T11:30:00.000+00:00',
+        'outreach_status': 'found',
+        'primary_contact_id': 1
       }, {
         'id': 2,
         'project_id': 2,
-        'terms_accepted_at': '2015-06-02T12:30:00.000+00:00',
-        'outreach_status': 'used_by_client'
+        'used_at': '2015-06-02T12:30:00.000+00:00',
+        'outreach_status': 'used_by_client',
+        'primary_contact_id': 2
       }],
 
       'projects': [{
@@ -24,6 +26,18 @@ module.exports = function(app) {
         'id': 2,
         'name': 'External name 2',
         'codename': 'Internal name 2',
+      }],
+
+      'users': [{
+        'id': 1,
+        'name': 'Matteo Depalo',
+        'initials': 'MDe',
+        'avatar_url': null
+      }, {
+        'id': 2,
+        'name': 'Constance Emerson',
+        'initials': 'CE',
+        'avatar_url': null
       }]
     });
   });

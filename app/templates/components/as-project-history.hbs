@@ -6,10 +6,13 @@
   <ul>
     {{#each projectHistory as |projectHistory|}}
       <li>
-        <div class="project-name">{{projectHistory.project.name}} - {{projectHistory.project.name}}</div>
+        <div class="project">
+          <span>{{projectHistory.project.name}}</span> -
+          <span class="codename">{{projectHistory.project.codename}}</span>
+        </div>
 
-        <div class="terms-accepted-at">
-          {{moment projectHistory.termsAcceptedAt "D MMM YYYY"}} ({{ago projectHistory.termsAcceptedAt}})
+        <div class="used-at">
+          {{moment projectHistory.usedAt "D MMM YYYY"}} ({{ago projectHistory.usedAt}})
         </div>
 
         <div class="outreach-status">
@@ -18,7 +21,7 @@
           {{/tool-tipster}}
         </div>
 
-        <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact}}</div>
+        <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</div>
       </li>
     {{/each}}
   </ul>

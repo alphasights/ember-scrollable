@@ -18,9 +18,10 @@ const STATUSES = {
 };
 
 export default DS.Model.extend({
-  termsAcceptedAt: DS.attr('date'),
+  usedAt: DS.attr('date'),
   outreachStatus: DS.attr('string'),
   project: DS.belongsTo('project'),
+  primaryContact: DS.belongsTo('user'),
 
   humanizedOutreachStatus: Ember.computed('outreachStatus', function(){
     return STATUSES[this.get('outreachStatus')];

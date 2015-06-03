@@ -28,14 +28,18 @@ $project-history-baby-blue: #54acb0;
 
     padding: $list-item-padding 0;
 
-    .project-name {
-      @extend %grid-column-6;
+    .project {
+      @extend %grid-column-5;
 
       padding-left: 0;
+
+      .codename {
+        color: $small-font-color;
+      }
     }
 
-    .terms-accepted-at {
-      @extend %grid-column-3;
+    .used-at {
+      @extend %grid-column-4;
     }
 
     .outreach-status {
@@ -101,8 +105,8 @@ $project-history-baby-blue: #54acb0;
       text-align: right;
     }
 
-    .project-name,
-    .terms-accepted-at,
+    .project,
+    .used-at,
     .outreach-status {
       line-height: $avatar-size;
       vertical-align: middle;
