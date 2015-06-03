@@ -13,9 +13,6 @@
       h1 {
         line-height: $interaction-header-title-height / 2;
         margin: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
 
         small {
           a {
