@@ -6,7 +6,7 @@ module.exports = function(app) {
     res.send({
       'emails': [
         {
-          'id' 1,
+          'id': 1,
           'subject': 'This is an email subject',
           'body': 'Emails are fun!',
           'sender': 'sender@email.com',
