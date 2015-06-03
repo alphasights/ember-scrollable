@@ -5,24 +5,42 @@
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
-
-    h2 {
-      color: $anchor-font-color;
-      font-size: $h6-font-size;
-      text-transform: uppercase;
-
-      .terms-sent-at {
-        color: $small-font-color;
-      }
-    }
+    width: 100%;
 
     > .content {
-      @extend %grid-column-medium-12;
+      @extend %grid-column-small-12;
+
+      h1 {
+        line-height: $interaction-header-title-height / 2;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        small {
+          a {
+            color: $small-font-color;
+          }
+        }
+      }
+
+      > span {
+        display: block;
+        line-height: $interaction-header-title-height / 2;
+
+        > span {
+          color: $secondary-color;
+        }
+      }
     }
   }
 
   .profile {
     @extend %grid-column-12;
+
+    .front {
+      @extend %panel-widget;
+    }
   }
 
   > div > .content {
