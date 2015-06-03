@@ -2,12 +2,12 @@ $list-item-padding: rem-calc(10);
 $project-history-red: #e08989;
 $project-history-amber: #f4d95d;
 $project-history-green: #8ab67d;
-$project-history-dark_green: #609489;
+$project-history-dark-green: #609489;
 $project-history-orange: #e79a77;
 $project-history-blue: #8ba6da;
 $project-history-grey: #999999;
 $project-history-brown: #c9a877;
-$project-history-baby_blue: #54acb0;
+$project-history-baby-blue: #54acb0;
 
 .project-history {
   .header {
@@ -46,7 +46,8 @@ $project-history-baby_blue: #54acb0;
       i {
         @include icon('circle');
 
-        &.outreach-cleared, &.found {
+        &.outreach-cleared,
+        &.found {
           color: $project-history-red;
         }
 
@@ -74,11 +75,12 @@ $project-history-baby_blue: #54acb0;
           color: $project-history-orange;
         }
 
-        &.outreach-forbidden, &.do-not-call {
+        &.outreach-forbidden,
+        &.do-not-call {
           color: $project-history-grey;
         }
 
-        &.not-on-CID {
+        &.not-on-cid {
           color: $project-history-brown;
         }
 
