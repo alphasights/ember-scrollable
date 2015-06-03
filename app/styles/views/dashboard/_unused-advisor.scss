@@ -48,8 +48,6 @@
     $actions-height: rem-calc(90);
 
     > div {
-      @extend %clearfix;
-
       height: 100%;
       margin-bottom: - $actions-height;
     }
