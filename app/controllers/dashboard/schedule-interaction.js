@@ -4,10 +4,10 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
 import PromiseController from 'phoenix/controllers/promise';
-import { request } from 'ic-ajax';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
 import notify from 'phoenix/helpers/notify';
+import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
 var InteractionOccurrence = Occurrence.extend({
   interaction: null,
@@ -67,7 +67,6 @@ var UnavailabilityOccurrence = Occurrence.extend({
 export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.Mixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
@@ -140,19 +139,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     },
 
     cancel: function() {
-      var requestPromise = PromiseController.create({
-        promise: request({
-          url: `${EmberENV.apiBaseUrl}/interests/${this.get('model.id')}`,
-          type: 'DELETE'
-        }).then(response => {
+      var requestPromise =
+        InteractionCancellation.create().cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
           notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
-        }, () => {
-          notify('The interaction could not be cancelled.', 'error');
-        })
-      });
+        });
 
       this.set('requestPromise', requestPromise);
     },
@@ -185,7 +178,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     var clientName = this.get('model.clientContact.name');
 
     this.get('dashboard').propertyDidChange('interactionsToSchedule');
-    this.get('dashboard').propertyDidChange('upcomingInteractions');
+    this.get('dashboard').propertyDidChange('scheduledInteractions');
     notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 

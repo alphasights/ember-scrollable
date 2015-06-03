@@ -1,0 +1,22 @@
+<button type="submit" {{action "click"}} disabled={{requestPromise.isLoading}} class="{{buttonClass}}">
+  {{#liquid-if requestPromise.isLoading}}
+    Saving...
+  {{else}}
+    {{yield}}
+  {{/liquid-if}}
+</button>
+
+{{#if showConfirmation}}
+  <div class="confirmation {{confirmationStateClass}}">
+    <span>{{confirmationMessage}}</span>
+    <a {{action "back"}}>Back</a>
+
+    <button type="submit" {{action "confirmAction"}} class={{confirmationButtonClass}} disabled={{requestPromise.isLoading}}>
+      {{#liquid-if requestPromise.isLoading}}
+        Cancelling...
+      {{else}}
+        {{confirmationButtonLabel}}
+      {{/liquid-if}}
+    </button>
+  </div>
+{{/if}}

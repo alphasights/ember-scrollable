@@ -29,7 +29,7 @@
         @include dashboard-large-widget-size();
       }
 
-      &.upcoming-interactions,
+      &.scheduled-interactions,
       &.interactions-to-schedule,
       &.unused-advisors {
         @include dashboard-default-widget-size();
