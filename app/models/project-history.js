@@ -27,6 +27,6 @@ export default DS.Model.extend({
   }),
 
   outreachStatusClass: Ember.computed('outreachStatus', function(){
-    return this.get('outreachStatus').dasherize();
+    return this.get('outreachStatus').underscore().dasherize();
   }),
 });
