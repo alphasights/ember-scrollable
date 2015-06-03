@@ -1,4 +1,6 @@
-.unused-advisor {
+.side-panel.unused-advisor {
+  @include side-panel($scaled: true);
+
   header {
     @extend %grid-row;
 
