@@ -21,7 +21,9 @@
         class="advisor"}}
     </section>
 
-    {{as-email-correspondence emails=emails}}
+    {{#if features.advisorFollowUp}}
+      {{as-email-correspondence emails=emails}}
+    {{/if}}
   </div>
 
   <section class="actions">
