@@ -1,14 +1,13 @@
 $list-item-padding: rem-calc(10);
-$recruiting_red: #e08989;
-$recruiting_amber: #f4d95d;
-$recruiting_green: #8ab67d;
-$recruiting_dark_green: #609489;
-$recruiting_orange: #e79a77;
-$recruiting_blue: #8ba6da;
-$recruiting_grey: #999999;
-$recruiting_brown: #c9a877;
-$recruiting_baby_blue: #54ACB0;
-$checklist-status-label-width: 16px;
+$project-history-red: #e08989;
+$project-history-amber: #f4d95d;
+$project-history-green: #8ab67d;
+$project-history-dark_green: #609489;
+$project-history-orange: #e79a77;
+$project-history-blue: #8ba6da;
+$project-history-grey: #999999;
+$project-history-brown: #c9a877;
+$project-history-baby_blue: #54acb0;
 
 .project-history {
   .header {
@@ -47,48 +46,48 @@ $checklist-status-label-width: 16px;
       i {
         @include icon('circle');
 
-        &.outreach_cleared, &.found {
-          color: $recruiting_red;
+        &.outreach-cleared, &.found {
+          color: $project-history-red;
         }
 
         &.contacted {
-          color: $recruiting_amber;
+          color: $project-history-amber;
         }
 
-        &.sent_terms {
-          color: $recruiting_blue;
+        &.sent-terms {
+          color: $project-history-blue;
         }
 
-        &.available_to_client {
-          color: $recruiting_green;
+        &.available-to-client {
+          color: $project-history-green;
         }
 
-        &.used_by_client {
-          color: $recruiting_dark_green;
+        &.used-by-client {
+          color: $project-history-dark-green;
         }
 
-        &.not_right {
-          color: $recruiting_grey;
+        &.not-right {
+          color: $project-history-grey;
         }
 
-        &.partial_terms {
-          color: $recruiting_orange;
+        &.partial-terms {
+          color: $project-history-orange;
         }
 
-        &.outreach_forbidden, &.do_not_call {
-          color: $recruiting_grey;
+        &.outreach-forbidden, &.do-not-call {
+          color: $project-history-grey;
         }
 
-        &.not_on_CID {
-          color: $recruiting_brown;
+        &.not-on-CID {
+          color: $project-history-brown;
         }
 
-        &.some_companies_on_CID {
-          color: $recruiting_brown;
+        &.some-companies-on-CID {
+          color: $project-history-brown;
         }
 
-        &.all_companies_on_CID {
-          color: $recruiting_baby_blue;
+        &.all-companies-on-CID {
+          color: $project-history-baby-blue;
         }
       }
     }
