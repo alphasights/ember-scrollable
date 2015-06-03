@@ -8,7 +8,7 @@
         </h1>
 
         <span>
-          Contacted
+          <span>Contacted</span>
           <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
         </span>
       </div>
@@ -29,8 +29,10 @@
       Remove Advisor
     </button>
 
-    <button class="follow-up" {{action "followUp"}}>
-      Follow Up
-    </button>
+    {{#if features.advisorFollowUp}}
+      <button class="follow-up" {{action "followUp"}}>
+        Follow Up
+      </button>
+    {{/if}}
   </section>
 {{/as-side-panel}}

@@ -5,7 +5,7 @@ export default ListWidgetComponent.extend({
   classNameBindings: [':unused-advisors'],
 
   name: 'Unused Advisors',
-  emptyMessage: 'There are no unused advisors to contact.',
+  emptyMessage: 'no unused advisors to contact.',
   hasTeamMemberFilter: false,
   listItemTemplateName: 'components/as-widget/unused-advisors/list-item',
 

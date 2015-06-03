@@ -1,4 +1,4 @@
-{{#if model}}
+{{#if visibleContent}}
   <ul>
     {{#each model in visibleContent}}
       <li>
@@ -11,5 +11,5 @@
     <div class="toggle-collapse" title={{collapseTitle}} {{action "toggleCollapse"}}></div>
   {{/if}}
 {{else}}
-  <div class="empty-message">{{emptyMessage}}</div>
+  <div class="empty-message">{{fullEmptyMessage}}</div>
 {{/if}}
