@@ -94,27 +94,28 @@
   <section class="actions">
     <div class="action {{if showForm 'active'}}">
       <button class="success" {{action "toggleForm"}}>Complete Interaction</button>
+
       <div class="content">
-        <div class="form">
+        <section class="form">
           {{#as-form model=completion}}
             {{#as-form/fieldset}}
               {{as-form/input
-                name="callLength"
-                errorProperty="callLength"
-                label="Call Length"}}
+                name="duration"
+                errorProperty="duration"
+                label="Call Duration (minutes)"}}
 
               {{as-form/select
-                name="callQuality"
+                name="quality"
                 label="Call Quality"
                 content=qualityOptions}}
             {{/as-form/fieldset}}
 
             {{as-form/submission
               label="Charge Client"
-              submit="submit"
+              submit="chargeClient"
               requestPromise=requestPromise}}
           {{/as-form}}
-        </div>
+        </section>
       </div>
     </div>
 

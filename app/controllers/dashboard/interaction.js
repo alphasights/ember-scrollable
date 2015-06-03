@@ -1,5 +1,11 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
+import InteractionCompletion from 'phoenix/models/interaction-completion';
+
+var qualityOptionsMapping = {
+  'good': 'Good',
+  'bad': 'Bad'
+};
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
@@ -9,6 +15,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   modelRouteParams: ['dashboard.interaction'],
 
   showForm: false,
+  requestPromise: null,
 
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
     return [{
@@ -25,7 +32,20 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
   checklistItemsSorting: ['completed', 'createdAt'],
 
+  qualityOptions: Ember.computed(function() {
+    return InteractionCompletion.qualityOptions.map(function(option) {
+      return Ember.Object.create({
+        id: option,
+        name: qualityOptionsMapping[option]
+      });
+    });
+  }),
+
   actions: {
+    chargeClient: function() {
+      this.set('requestPromise', this.get('completion').save());
+    },
+
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
     },
