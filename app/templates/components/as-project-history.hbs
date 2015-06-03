@@ -1,0 +1,25 @@
+<div class="header">
+  <span {{action "toggleDisplay"}}>Project History</span>
+</div>
+
+{{#liquid-if displayList}}
+  <ul>
+    {{#each projectHistory as |projectHistory|}}
+      <li>
+        <div class="project-name">{{projectHistory.project.name}} - {{projectHistory.project.name}}</div>
+
+        <div class="terms-accepted-at">
+          {{moment projectHistory.termsAcceptedAt "D MMM YYYY"}} ({{ago projectHistory.termsAcceptedAt}})
+        </div>
+
+        <div class="outreach-status">
+          {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
+            <i class="{{projectHistory.outreachStatus}}"></i>
+          {{/tool-tipster}}
+        </div>
+
+        <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact}}</div>
+      </li>
+    {{/each}}
+  </ul>
+{{/liquid-if}}

@@ -1,0 +1,114 @@
+$list-item-padding: rem-calc(10);
+$recruiting_red: #e08989;
+$recruiting_amber: #f4d95d;
+$recruiting_green: #8ab67d;
+$recruiting_dark_green: #609489;
+$recruiting_orange: #e79a77;
+$recruiting_blue: #8ba6da;
+$recruiting_grey: #999999;
+$recruiting_brown: #c9a877;
+$recruiting_baby_blue: #54ACB0;
+$checklist-status-label-width: 16px;
+
+.project-history {
+  .header {
+    border-bottom: 1px solid $global-section-border-color;
+    padding: $list-item-padding 0;
+
+    span {
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    margin-top: $list-item-padding;
+  }
+
+  li {
+    @extend %grid-row;
+
+    padding: $list-item-padding 0;
+
+    .project-name {
+      @extend %grid-column-6;
+
+      padding-left: 0;
+    }
+
+    .terms-accepted-at {
+      @extend %grid-column-3;
+    }
+
+    .outreach-status {
+      @extend %grid-column-1;
+
+      text-align: center;
+
+      i {
+        @include icon('circle');
+
+        &.outreach_cleared, &.found {
+          color: $recruiting_red;
+        }
+
+        &.contacted {
+          color: $recruiting_amber;
+        }
+
+        &.sent_terms {
+          color: $recruiting_blue;
+        }
+
+        &.available_to_client {
+          color: $recruiting_green;
+        }
+
+        &.used_by_client {
+          color: $recruiting_dark_green;
+        }
+
+        &.not_right {
+          color: $recruiting_grey;
+        }
+
+        &.partial_terms {
+          color: $recruiting_orange;
+        }
+
+        &.outreach_forbidden, &.do_not_call {
+          color: $recruiting_grey;
+        }
+
+        &.not_on_CID {
+          color: $recruiting_brown;
+        }
+
+        &.some_companies_on_CID {
+          color: $recruiting_brown;
+        }
+
+        &.all_companies_on_CID {
+          color: $recruiting_baby_blue;
+        }
+      }
+    }
+
+    .primary-contact {
+      @extend %grid-column-2;
+
+      padding-right: 0;
+      text-align: right;
+    }
+
+    .project-name,
+    .terms-accepted-at,
+    .outreach-status {
+      line-height: $avatar-size;
+      vertical-align: middle;
+    }
+
+    .avatar {
+      margin: 0;
+    }
+  }
+}
