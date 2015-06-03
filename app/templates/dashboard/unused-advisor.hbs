@@ -27,8 +27,10 @@
       Remove Advisor
     </button>
 
-    <button class="follow-up" {{action "followUp"}}>
-      Follow Up
-    </button>
+    {{#if features.advisorFollowUp}}
+      <button class="follow-up" {{action "followUp"}}>
+        Follow Up
+      </button>
+    {{/if}}
   </section>
 {{/as-side-panel}}
