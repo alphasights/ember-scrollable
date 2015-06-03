@@ -2,7 +2,7 @@
   <span {{action "toggleDisplay"}}>Project History</span>
 </div>
 
-{{#liquid-if displayList}}
+{{#liquid-if displayList use="crossFade"}}
   <ul>
     {{#each projectHistory as |projectHistory|}}
       <li>
