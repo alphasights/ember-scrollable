@@ -3,8 +3,7 @@ import TeamDeliveryPerformance from 'phoenix/models/team-delivery-performance';
 import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
 export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
-  warden: Ember.inject.service(),
-  currentUser: Ember.computed.oneWay('warden.currentUser'),
+  currentUser: Ember.inject.service(),
 
   queryParams: {
     teamId: {

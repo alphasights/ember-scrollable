@@ -3,6 +3,8 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   model: null,
 
+  sidebarCollapsed: Ember.computed.alias('model.sidebarCollapsed'),
+
   fetch: function() {
     return this.store.find('preferences').then((preferences) => {
       if (Ember.isEmpty(preferences)) {

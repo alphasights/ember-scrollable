@@ -1,15 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  currentUser: null,
+  model: null,
+  teams: null,
 
-  authenticateUser: function() {
-    return this.fetchUser();
-  },
+  id: Ember.computed.oneWay('model.id'),
+  name: Ember.computed.oneWay('model.name'),
+  teamId: Ember.computed.oneWay('model.teamId'),
 
-  fetchUser: function() {
+  authenticate: function() {
     return this.store.find('user', 'me').then((user) => {
-      this.set('currentUser', user);
+      this.set('model', user);
       return user;
     }, () => {
       this.redirectToLogin();
@@ -24,10 +25,10 @@ export default Ember.Service.extend({
     window.location.replace(`${EmberENV.pistachioUrl}/logout`);
   },
 
-  currentUserDidChange: Ember.observer('currentUser', function() {
+  modelDidChange: Ember.observer('model', function() {
     analytics.identify(
-      this.get('currentUser.initials'),
-      _(this.get('currentUser').toJSON()).pick('initials', 'name', 'developer')
+      this.get('model.initials'),
+      _(this.get('model').toJSON()).pick('initials', 'name', 'developer')
     );
   }),
 
@@ -35,14 +36,13 @@ export default Ember.Service.extend({
     /* jshint newcap: false */
     Intercom('boot', {
       app_id: EmberENV.intercomAppId,
-      email: this.get('currentUser.email'),
-      created_at: this.get('currentUser.createdAt'),
-      name: this.get('currentUser.name'),
-      user_id: this.get('currentUser.id'),
-      user_hash: this.get('currentUser.intercomUserHash'),
+      email: this.get('model.email'),
+      created_at: this.get('model.createdAt'),
+      name: this.get('model.name'),
+      user_id: this.get('model.id'),
+      user_hash: this.get('model.intercomUserHash'),
       visited_phoenix: true
     });
     /* jshint newcap: true */
   }
 });
-

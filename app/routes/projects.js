@@ -2,8 +2,7 @@ import Ember from 'ember';
 import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
 export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
-  warden: Ember.inject.service(),
-  currentUser: Ember.computed.oneWay('warden.currentUser'),
+  currentUser: Ember.inject.service(),
 
   model: function(params) {
     var teamId = params.teamId;

@@ -1,9 +1,9 @@
 {{as-sidebar
   applicationName="Phoenix"
-  currentUser=currentUser
+  currentUser=currentUser.model
   navigationItems=navigationItems
-  isCollapsed=userPreferences.sidebarCollapsed
-  toggleCollapse="saveUserPreferences"
+  isCollapsed=preferences.sidebarCollapsed
+  toggleCollapse="savePreferences"
   logout="logout"}}
 
 <main>
