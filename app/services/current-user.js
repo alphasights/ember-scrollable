@@ -11,6 +11,9 @@ export default Ember.Service.extend({
   authenticate: function() {
     return this.store.find('user', 'me').then((user) => {
       this.set('model', user);
+      Ember.$.ajaxPrefilter(function(options) {
+        options.headers = { 'Authorization': user.get('jsonWebToken') };
+      });
       return user;
     });
   },
