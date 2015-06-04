@@ -1,7 +1,7 @@
 import DS from 'ember-data';
-import Advisor from './advisor';
 
-export default Advisor.extend({
+export default DS.Model.extend({
   project: DS.belongsTo('project'),
-  termsSentAt: DS.attr('date')
+  termsSentAt: DS.attr('date'),
+  advisor: DS.belongsTo('advisor')
 });

@@ -214,53 +214,18 @@ $interaction-header-height:
     }
 
     .actions {
-      @include form-submission($standalone: true, $height: $actions-height);
+      float: left;
+      height: $actions-height;
+      padding: 0 !important;
+      width: 100%;
 
-      padding: 0 $column-gutter !important;
+      &.form-submission {
+        @include form-submission($standalone: true, $height: $actions-height);
 
-      > .action {
-        &.active > .content {
-          transform: rotateX(0deg);
-        }
+        padding: 0 $column-gutter !important;
 
-        &.reschedule {
-          float: right;
-
-          button {
-            @extend %button-primary;
-          }
-        }
-
-        > .content {
-          backface-visibility: hidden;
-          background-color: $global-section-border-color;
-          bottom: 0;
-          color: $body-font-color;
-          left: 0;
-          padding: 0 !important;
-          position: absolute;
-          right: 0;
-          transform: rotateX(180deg) rotateY(0deg);
-          transform-style: preserve-3d;
-          transition: transform .250s ease-in-out;
-          width: 100%;
-          z-index: 300;
-
-          .form form {
-            @include form($with-border: false);
-
-            #{$form-field-selector} {
-              @include form-item-small();
-            }
-
-            #{$form-select-selector} > .content {
-              min-height: 0;
-            }
-
-            .form-submission {
-              padding: 0 $column-gutter !important;
-            }
-          }
+        .action .confirmation {
+          padding: 0 $column-gutter !important;
         }
       }
     }

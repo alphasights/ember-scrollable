@@ -15,7 +15,7 @@
         {{#each teamMember in teamMembers}}
           <li>
             <a {{action "setTeamMember" teamMember}}>
-              {{as-avatar person=teamMember}} {{teamMember.name}} ({{teamMember.initials}})
+              {{as-avatar person=teamMember}} <span>{{teamMember.name}} ({{teamMember.initials}})</span>
             </a>
           </li>
         {{/each}}

@@ -40,6 +40,10 @@ module.exports = function(environment) {
       'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io p.typekit.net;",
       'style-src': "'self' 'unsafe-inline' *.mxpnl.com *.googleapis.com use.typekit.net",
       'media-src': "'self'"
+    },
+
+    featureFlags: {
+      'advisor-follow-up': false
     }
   };
 
@@ -49,6 +53,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.featureFlags['advisor-follow-up'] = true;
   }
 
   if (environment === 'test') {

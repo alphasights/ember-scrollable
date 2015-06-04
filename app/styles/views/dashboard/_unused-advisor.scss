@@ -1,0 +1,65 @@
+.side-panel.unused-advisor {
+  @include side-panel($scaled: true);
+
+  header {
+    @extend %grid-row;
+
+    padding: $column-gutter $column-gutter / 2;
+    width: 100%;
+
+    > .content {
+      @extend %grid-column-small-12;
+
+      h1 {
+        line-height: $interaction-header-title-height / 2;
+        margin: 0;
+
+        small {
+          a {
+            color: $small-font-color;
+          }
+        }
+      }
+
+      > span {
+        display: block;
+        line-height: $interaction-header-title-height / 2;
+
+        > span {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+
+  .profile {
+    @extend %grid-column-12;
+
+    .front {
+      @extend %panel-widget;
+    }
+  }
+
+  > div > .content {
+    $actions-height: rem-calc(90);
+
+    > div {
+      height: 100%;
+      margin-bottom: - $actions-height;
+    }
+
+    .actions {
+      float: left;
+      height: $actions-height;
+      line-height: $actions-height;
+
+      .follow-up {
+        @extend %button-primary;
+      }
+
+      .remove {
+        @extend %button-primary;
+      }
+    }
+  }
+}

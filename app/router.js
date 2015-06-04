@@ -9,6 +9,7 @@ Router.map(function() {
   this.resource('dashboard', function() {
     this.resource('dashboard.interaction', { path: '/interactions/:interaction_id' });
     this.resource('dashboard.schedule-interaction', { path: '/interactions/:interaction_id/schedule' });
+    this.resource('dashboard.unused-advisor', { path: '/unused_advisors/:unused_advisor_id' });
   });
 
   this.resource('performance');

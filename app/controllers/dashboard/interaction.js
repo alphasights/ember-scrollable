@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import InteractionCompletion from 'phoenix/models/interaction-completion';
+import PromiseController from 'phoenix/controllers/promise';
+import notify from 'phoenix/helpers/notify';
+import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
 var qualityOptionsMapping = {
   'good': 'Good',
@@ -10,8 +13,7 @@ var qualityOptionsMapping = {
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-
-  navigableModels: Ember.computed.oneWay('dashboard.upcomingInteractions'),
+  navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
   showForm: false,
@@ -41,6 +43,18 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     });
   }),
 
+  _cancel: function(withdrawFromCompliance = false) {
+    var requestPromise =
+      InteractionCancellation.create().cancel(this.get('model'), response => {
+        notify('The interaction has been cancelled.');
+        this.store.pushPayload(response);
+        this.get('dashboard').propertyDidChange('scheduledInteractions');
+        this.get('sidePanel').send('close');
+      }, withdrawFromCompliance);
+
+    this.set('requestPromise', requestPromise);
+  },
+
   actions: {
     chargeClient: function() {
       this.set('requestPromise', this.get('completion').save());
@@ -52,6 +66,28 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     toggleForm: function() {
       this.toggleProperty('showForm');
+    },
+
+    cancel: function() {
+      this._cancel(false);
+    },
+
+    withdrawAndCancel: function() {
+      this._cancel(true);
+    },
+
+    reschedule: function() {
+      var model = this.get('model');
+
+      model.set('scheduledCallTime', null);
+
+      this.set('requestPromise', PromiseController.create({
+        promise: model.save().then(
+          this.get('dashboard').propertyDidChange('scheduledInteractions'),
+          this.get('dashboard').propertyDidChange('interactionsToSchedule'),
+          this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'))
+        )
+      }));
     }
   }
 });
