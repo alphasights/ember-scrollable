@@ -12,8 +12,6 @@ export default Ember.Service.extend({
     return this.store.find('user', 'me').then((user) => {
       this.set('model', user);
       return user;
-    }, () => {
-      this.redirectToLogin();
     });
   },
 
