@@ -2,40 +2,28 @@ import Ember from 'ember';
 import logError from '../log-error';
 
 export default Ember.Route.extend({
+  warden: Ember.inject.service(),
+  preferences: Ember.inject.service(),
+
+  currentUser: Ember.computed.oneWay('warden.currentUser'),
+
   model: function() {
-    return this.store.find('user', 'me').then((currentUser) => {
-      this.store.recordForId('user', 'me').unloadRecord();
-
-      return Ember.RSVP.hash({
-        currentUser: currentUser,
-        teams: this.store.find('team'),
-
-        preferences: this.store.find('preferences').then((preferences) => {
-          if (Ember.isEmpty(preferences)) {
-            var newPreferences = this.store.createRecord('preferences');
-            newPreferences.save();
-            return newPreferences;
-          } else {
-            return preferences.get('firstObject');
-          }
-        })
-      });
+    return Ember.RSVP.hash({
+      currentUser: this.get('warden').authenticateUser(),
+      teams: this.store.find('team'),
+      preferences: this.get('preferences').fetch()
     });
   },
 
   afterModel: function(models) {
-    var currentUser = this.controllerFor('currentUser');
-
-    currentUser.set('model', models.currentUser);
-    currentUser.set('preferences', models.preferences);
-    currentUser.set('teams', models.teams);
-    currentUser.send('boot');
+    this.set('currentUser.teams', models.teams);
+    this.get('warden').setupIntercom();
   },
 
   actions: {
     error: function(error) {
       if (error.status === 401) {
-        window.location.replace(`${EmberENV.pistachioUrl}/system`);
+        this.get('warden').redirectToLogin();
       } else if (error.status === 404) {
         logError(error);
         this.render('not_found', { into: 'application' });

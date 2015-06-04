@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
-  preferences: Ember.computed.oneWay('currentUser.preferences'),
+  warden: Ember.inject.service(),
+  preferences: Ember.inject.service(),
+
+  currentUser: Ember.computed.oneWay('warden.currentUser'),
+  userPreferences: Ember.computed.oneWay('preferences.model'),
 
   navigationItems: [{
     id: 'dashboard', name: 'Dashboard', routeName: 'dashboard'
@@ -16,8 +18,8 @@ export default Ember.Controller.extend({
   }],
 
   actions: {
-    savePreferences: function() {
-      this.get('preferences').save();
+    saveUserPreferences: function() {
+      this.get('userPreferences').save();
     },
 
     logout: function() {
