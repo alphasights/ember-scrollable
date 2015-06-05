@@ -10,6 +10,8 @@ export default {
       Ember.RSVP.off('error', Ember.RSVP.onerrorDefault);
 
       Ember.RSVP.on('error', function(error) {
+        // TODO: Remove this when https://github.com/emberjs/ember.js/issues/5566 is fixed
+        if (error && error.message === 'TransitionAborted') { return; }
         Ember.onerror(error);
       });
 
