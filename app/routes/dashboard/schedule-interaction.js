@@ -15,6 +15,12 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   },
 
   setupController: function(controller, model) {
+    var interactionType = model.interaction.get('interactionType');
+
+    if (Ember.isBlank(interactionType)) {
+      interactionType = model.interaction.get('project.defaultInteractionType');
+    }
+
     controller.setProperties({
       model: model.interaction,
       unavailabilities: model.unavailabilities,
@@ -24,7 +30,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
       // reset form fields
       scheduledCallTime: model.interaction.get('scheduledCallTime'),
-      interactionType: model.interaction.get('interactionType'),
+      interactionType: interactionType,
       advisorPhoneNumber: model.interaction.get('advisorPhoneNumber'),
       advisorPhoneCountryCode: model.interaction.get('advisorPhoneCountryCode'),
       clientAccessNumberCountry: model.interaction.get('clientAccessNumberCountry'),
