@@ -10,6 +10,7 @@ export default Ember.Service.extend({
 
   authenticate: function() {
     return this.store.find('user', 'me').then((user) => {
+      this.store.recordForId('user', 'me').unloadRecord();
       this.set('model', user);
       return user;
     });
