@@ -6,10 +6,12 @@ export default Ember.Route.extend({
   preferences: Ember.inject.service(),
 
   model: function() {
-    return Ember.RSVP.hash({
-      currentUser: this.get('currentUser').authenticate(),
-      preferences: this.get('preferences').fetch(),
-      teams: this.store.find('team')
+    return this.get('currentUser').authenticate().then((currentUser) => {
+      return Ember.RSVP.hash({
+        currentUser: currentUser,
+        teams: this.store.find('team'),
+        preferences: this.get('preferences').fetch()
+      });
     });
   },
 

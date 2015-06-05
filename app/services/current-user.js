@@ -12,6 +12,9 @@ export default Ember.Service.extend({
     return this.store.find('user', 'me').then((user) => {
       this.store.recordForId('user', 'me').unloadRecord();
       this.set('model', user);
+      Ember.$.ajaxPrefilter(function(options) {
+        options.headers = { 'Authorization': user.get('jsonWebToken') };
+      });
       return user;
     });
   },
