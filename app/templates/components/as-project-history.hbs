@@ -6,22 +6,24 @@
   <ul>
     {{#each projectHistory as |projectHistory|}}
       <li>
-        <div class="project">
-          <span>{{projectHistory.project.name}}</span> -
-          <span class="codename">{{projectHistory.project.codename}}</span>
-        </div>
+        <a href={{projectHistory.project.pistachioUrl}} target="_blank">
+          <div class="project">
+            <span>{{projectHistory.project.name}}</span> -
+            <span class="codename">{{projectHistory.project.codename}}</span>
+          </div>
 
-        <div class="used-at">
-          {{moment projectHistory.usedAt "D MMM YYYY"}} ({{ago projectHistory.usedAt}})
-        </div>
+          <div class="used-at">
+            {{moment projectHistory.consumedAt "D MMM YYYY"}} ({{ago projectHistory.consumedAt}})
+          </div>
 
-        <div class="outreach-status">
-          {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
-            <i class="{{projectHistory.outreachStatusClass}}"></i>
-          {{/tool-tipster}}
-        </div>
+          <div class="outreach-status">
+            {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
+              <i class="{{projectHistory.outreachStatusClass}}"></i>
+            {{/tool-tipster}}
+          </div>
 
-        <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</div>
+          <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</div>
+        </a>
       </li>
     {{/each}}
   </ul>

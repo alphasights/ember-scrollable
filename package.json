@@ -57,10 +57,10 @@
     "ember-sortable": "1.1.0",
     "ember-validations": "^2.0.0-alpha.3",
     "ember-watson": "^0.3.1",
-    "express": "^4.12.4",
+    "express": "4.12.4",
     "github": "^0.2.3",
-    "glob": "^4.5.3",
+    "glob": "4.5.3",
     "liquid-fire": "0.19.0",
-    "morgan": "^1.5.3"
+    "morgan": "1.5.3"
   }
 }

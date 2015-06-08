@@ -7,13 +7,13 @@ module.exports = function(app) {
       'project-history': [{
         'id': 1,
         'project_id': 1,
-        'used_at': '2015-06-02T11:30:00.000+00:00',
+        'consumed_at': '2015-06-02T11:30:00.000+00:00',
         'outreach_status': 'found',
         'primary_contact_id': 1
       }, {
         'id': 2,
         'project_id': 2,
-        'used_at': '2015-06-02T12:30:00.000+00:00',
+        'consumed_at': '2015-06-02T12:30:00.000+00:00',
         'outreach_status': 'used_by_client',
         'primary_contact_id': 2
       }],

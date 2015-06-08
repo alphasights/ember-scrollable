@@ -18,7 +18,7 @@ const STATUSES = {
 };
 
 export default DS.Model.extend({
-  usedAt: DS.attr('date'),
+  consumedAt: DS.attr('date'),
   outreachStatus: DS.attr('string'),
   project: DS.belongsTo('project'),
   primaryContact: DS.belongsTo('user'),
