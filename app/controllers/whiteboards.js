@@ -1,8 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
+  currentUser: Ember.inject.service(),
   showWhiteboardSelect: false,
   selectedWhiteboard: null,
   whiteboardSelectChanged: false,
