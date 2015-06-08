@@ -15,6 +15,8 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   },
 
   setupController: function(controller, model) {
+    model.interaction.initialize();
+
     controller.setProperties({
       model: model.interaction,
       unavailabilities: model.unavailabilities,

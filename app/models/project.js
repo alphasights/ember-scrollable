@@ -17,6 +17,7 @@ export default DS.Model.extend({
   upcomingInteractionsCount: DS.attr('number'),
   index: DS.attr('number'),
   codename: DS.attr('string'),
+  defaultInteractionType: DS.attr('string'),
 
   deliveredAdvisorsCount: Ember.computed.alias('proposedAdvisorsCount'),
   lead: Ember.computed.alias('analyst_1'),
