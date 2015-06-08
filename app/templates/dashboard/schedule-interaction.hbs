@@ -32,7 +32,7 @@
       timeZone=selectedTimeZone}}
 
     <section class="form">
-      {{#as-form model=this}}
+      {{#as-form model=this as |form|}}
         {{#as-form/fieldset}}
           {{as-form/input
             name="formattedScheduledCallTime"
@@ -58,7 +58,7 @@
         {{/as-form/fieldset}}
 
         {{#as-form/submission-group}}
-          {{#as-form/submission-action action="submit" requestPromise=requestPromise}}
+          {{#as-form/submission-action action="submit" form=form requestPromise=requestPromise}}
             Schedule Interaction
           {{/as-form/submission-action}}
 

@@ -1,8 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
+  currentUser: Ember.inject.service(),
   teamId: null,
   teams: Ember.computed.oneWay('currentUser.teams'),
 

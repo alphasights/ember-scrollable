@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   path: Ember.computed.oneWay('resultProperties.path'),
 
   url: Ember.computed('id', 'path', function() {
-    return `${EmberENV.pistachioUrl}/${this.get('id')}/${this.get('path')}`;
+    return `${EmberENV.pistachioUrl}/${this.get('path')}/${this.get('id')}`;
   }),
 
   title: Ember.computed('result', 'resultProperties', function() {
