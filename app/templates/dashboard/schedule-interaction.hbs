@@ -35,16 +35,18 @@
       {{#as-form model=this as |form|}}
         {{#as-form/fieldset}}
           {{as-form/input
+            form=form
             name="formattedScheduledCallTime"
             placeholder="Please select a call time from the calendar."
             errorProperty="scheduledCallTime"
             label="Call Time"
             disabled=true}}
 
-          {{as-form/select name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
-          {{as-form/input name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
+          {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+          {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
 
           {{as-form/select
+            form=form
             name="interactionType"
             label="Interaction Type"
             content=interactionTypesForSelect
@@ -53,8 +55,8 @@
             optionGroupPath="classification"
           }}
 
-          {{as-form/select name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
-          {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
+          {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
+          {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
         {{#as-form/submission-group}}
