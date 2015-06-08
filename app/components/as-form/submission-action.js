@@ -11,12 +11,19 @@ export default Ember.Component.extend({
   requestPromise: null,
   showConfirmation: false,
 
+  submit: function() {
+    this.sendAction();
+    if (this.get('form')) {
+      this.get('form').send('submit');
+    }
+  },
+
   actions: {
     click: function() {
       if (this.get('showConfirmation')) {
         this.toggleProperty('isConfirming');
       } else {
-        this.sendAction();
+        this.submit();
       }
     },
 
@@ -25,7 +32,7 @@ export default Ember.Component.extend({
     },
 
     confirmAction: function() {
-      this.sendAction();
+      this.submit();
     }
   }
 });
