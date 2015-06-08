@@ -144,14 +144,16 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
 
     submit: function() {
       var model = this.get('model');
+      var speakCountryCode = this.get('clientAccessNumberCountry');
 
       model.setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
         interactionType: this.get('interactionType'),
         advisorPhoneNumber: this.get('advisorPhoneNumber'),
         advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
-        clientAccessNumberCountry: this.get('clientAccessNumberCountry'),
-        additionalContactDetails: this.get('additionalContactDetails')
+        clientAccessNumberCountry: speakCountryCode,
+        additionalContactDetails: this.get('additionalContactDetails'),
+        speak: speakCountryCode ? true : false
       });
 
       if (this.get('isValid')) {
