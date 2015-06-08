@@ -37,5 +37,5 @@ module.exports = function(app) {
     });
   });
 
-  app.use('/swordfish/emails', emailsRouter);
+  app.use('/api/v1/emails', emailsRouter);
 };
