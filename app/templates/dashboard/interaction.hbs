@@ -91,56 +91,53 @@
     </section>
   </div>
 
-  <section class="actions">
-    <div class="action {{if showForm 'active'}}">
-      <button class="success" {{action "toggleForm"}}>Complete Interaction</button>
+  <section class="form">
+    {{#if showForm}}
+      {{#as-form model=completion as |form|}}
+        {{#as-form/fieldset}}
+          {{as-form/input
+            name="duration"
+            errorProperty="duration"
+            label="Call Duration (minutes)"}}
 
-      <div class="content">
-        <section class="form">
-          {{#as-form model=completion}}
-            {{#as-form/fieldset}}
-              {{as-form/input
-                name="duration"
-                errorProperty="duration"
-                label="Call Duration (minutes)"}}
+          {{as-form/select
+            name="quality"
+            label="Call Quality"
+            content=qualityOptions}}
+        {{/as-form/fieldset}}
 
-              {{as-form/select
-                name="quality"
-                label="Call Quality"
-                content=qualityOptions}}
-            {{/as-form/fieldset}}
-
-            {{as-form/submission
-              label="Charge Client"
-              submit="chargeClient"
-              requestPromise=requestPromise}}
-          {{/as-form}}
-        </section>
-      </div>
-    </div>
-
-    {{#as-form/submission-group}}
-      {{#as-form/submission-action action="reschedule" buttonClass="warning"}}
-        Reschedule Interaction
-      {{/as-form/submission-action}}
-      {{#as-form/submission-action
-        showConfirmation=true
-        action="cancel"
-        buttonClass="error"
-        confirmationButtonLabel="Yes, Cancel Interaction"
-        confirmationMessage="Are you sure you want to cancel the interaction?"
-        requestPromise=requestPromise}}
-        Cancel Interaction
-      {{/as-form/submission-action}}
-      {{#as-form/submission-action
-        showConfirmation=true
-        action="withdrawAndCancel"
-        buttonClass="error"
-        confirmationButtonLabel="Yes, Cancel and Withdraw"
-        confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
-        requestPromise=requestPromise}}
-        Cancel and Withdraw Interaction
-      {{/as-form/submission-action}}
-    {{/as-form/submission-group}}
+        {{#as-form/submission-action action="chargeClient" form=form}}
+          Charge Client
+        {{/as-form/submission-action}}
+      {{/as-form}}
+    {{/if}}
   </section>
+
+  {{#as-form/submission-group}}
+    {{#as-form/submission-action action="toggleForm"}}
+      Complete Interaction
+    {{/as-form/submission-action}}
+
+    {{#as-form/submission-action action="reschedule" buttonClass="warning"}}
+      Reschedule Interaction
+    {{/as-form/submission-action}}
+    {{#as-form/submission-action
+      showConfirmation=true
+      action="cancel"
+      buttonClass="error"
+      confirmationButtonLabel="Yes, Cancel Interaction"
+      confirmationMessage="Are you sure you want to cancel the interaction?"
+      requestPromise=requestPromise}}
+      Cancel Interaction
+    {{/as-form/submission-action}}
+    {{#as-form/submission-action
+      showConfirmation=true
+      action="withdrawAndCancel"
+      buttonClass="error"
+      confirmationButtonLabel="Yes, Cancel and Withdraw"
+      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
+      requestPromise=requestPromise}}
+      Cancel and Withdraw Interaction
+    {{/as-form/submission-action}}
+  {{/as-form/submission-group}}
 {{/as-side-panel}}

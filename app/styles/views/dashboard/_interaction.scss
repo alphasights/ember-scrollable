@@ -213,6 +213,17 @@ $interaction-header-height:
       margin-bottom: - $actions-height;
     }
 
+    .form {
+      padding: $column-gutter;
+      margin-bottom: $column-gutter;
+
+      .action button {
+        @extend %button-primary;
+
+        margin: $column-gutter / 2;
+      }
+    }
+
     .actions {
       float: left;
       height: $actions-height;
