@@ -13,6 +13,7 @@ export default Ember.Component.extend({
 
   submit: function() {
     this.sendAction();
+
     if (this.get('form')) {
       this.get('form').send('submit');
     }
