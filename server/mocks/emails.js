@@ -9,9 +9,9 @@ module.exports = function(app) {
           'id': 1,
           'subject': 'This is an email subject',
           'body': 'Emails are fun!',
-          'sender': 'analyst@email.com',
+          'sender': 'Johnny Analyst <analyst@email.com>',
           'recipients': [
-            'advisor@email.com'
+            'Billy Advisor <advisor@email.com>'
           ],
           'cc': [
             'cc@email.com'
@@ -23,9 +23,9 @@ module.exports = function(app) {
           'id': 2,
           'subject': 'This is another email subject',
           'body': 'Emails are boring!',
-          'sender': 'advisor@email.com',
+          'sender': 'Billy Advisor <advisor@email.com>',
           'recipients': [
-            'analyst@email.com'
+            'Johnny Analyst <analyst@email.com>'
           ],
           'cc': [
             'cc@email.com'

@@ -7,7 +7,7 @@
     {{#each emails as |email|}}
       <li>
         <span class="subject">{{email.subject}}</span>
-        <span class="sender">{{email.sender}}</span>
+        <span class="sender">{{extract-name-from-email email.sender}}</span>
         <span class="sent-at">{{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})</span>
       </li>
     {{/each}}
