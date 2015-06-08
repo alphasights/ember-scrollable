@@ -14,14 +14,14 @@ export default Ember.Mixin.create({
   errorMessage: null,
   disabled: false,
 
-  nameOrErrorDidChange: Ember.on('init', Ember.observer('name', 'errorProperty', function() {
+  nameOrErrorDidChange: Ember.observer('name', 'errorProperty', function() {
     var name = this.get('name');
 
     if (name != null) {
       Ember.defineProperty(this, 'value', Ember.computed.alias('model.' + name));
       Ember.defineProperty(this, 'errors', Ember.computed.alias('model.errors.' + this.get('errorProperty')));
     }
-  })),
+  }).on('init'),
 
   showError: Ember.computed('error', 'hasSubmitted', function() {
     if (this.get('hasSubmitted')) {
