@@ -32,7 +32,7 @@
       timeZone=selectedTimeZone}}
 
     <section class="form">
-      {{#as-form model=this}}
+      {{#as-form model=this as |form|}}
         {{#as-form/fieldset}}
           {{as-form/input
             name="formattedScheduledCallTime"
@@ -57,13 +57,22 @@
           {{as-form/input name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
-        {{as-form/submission
-          label="Schedule Interaction"
-          cancelLabel="Cancel Interaction"
-          cancel="cancel"
-          submit="submit"
-          cancelConfirmationMessage="Are you sure you want to cancel the scheduling?"
-          requestPromise=requestPromise}}
+        {{#as-form/submission-group}}
+          {{#as-form/submission-action action="submit" form=form requestPromise=requestPromise}}
+            Schedule Interaction
+          {{/as-form/submission-action}}
+
+          {{#as-form/submission-action
+            action="cancel"
+            buttonClass="error"
+            showConfirmation=true
+            confirmationStateClass="alert"
+            confirmationButtonLabel="Yes, Cancel Interaction"
+            confirmationMessage="Are you sure you want to cancel the interaction?"
+            requestPromise=requestPromise}}
+            Cancel Interaction
+          {{/as-form/submission-action}}
+        {{/as-form/submission-group}}
       {{/as-form}}
     </section>
   </section>

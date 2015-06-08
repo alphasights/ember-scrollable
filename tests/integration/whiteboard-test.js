@@ -271,7 +271,8 @@ test("Change project priority", function(assert) {
       "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1",
-      "codename": "Chocolate 1"
+      "codename": "Chocolate 1",
+      "default_interaction_type": null
     }
   }});
 
@@ -406,7 +407,8 @@ test("Change project priority from the details", function(assert) {
       "index": null,
       "upcoming_interactions_count": 0,
       "analyst_1_id": "1",
-      "codename": "Chocolate 1"
+      "codename": "Chocolate 1",
+      "default_interaction_type": null
     }
   }});
 

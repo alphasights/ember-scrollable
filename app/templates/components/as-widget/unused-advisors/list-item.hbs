@@ -1,6 +1,6 @@
-<article>
+{{#link-to "dashboard.unused-advisor" model.id tagName="article"}}
   <div class="title">
-    <span>{{model.name}}</span>
+    <span>{{model.advisor.name}}</span>
     <small>{{model.project.name}}</small>
   </div>
 
@@ -15,4 +15,4 @@
       </a>
     {{/tool-tipster}}
   </div>
-</article>
+{{/link-to}}

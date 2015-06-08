@@ -1,4 +1,4 @@
-{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next"}}
+{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
   <div>
     <header>
       <div class="date">
@@ -91,9 +91,27 @@
     </section>
   </div>
 
-  <section class="actions">
-    {{#link-to "dashboard.schedule-interaction" model.id class="reschedule"}}
+  {{#as-form/submission-group}}
+    {{#as-form/submission-action action="reschedule"}}
       Reschedule Interaction
-    {{/link-to}}
-  </section>
+    {{/as-form/submission-action}}
+    {{#as-form/submission-action
+      showConfirmation=true
+      action="cancel"
+      buttonClass="error"
+      confirmationButtonLabel="Yes, Cancel Interaction"
+      confirmationMessage="Are you sure you want to cancel the interaction?"
+      requestPromise=requestPromise}}
+      Cancel Interaction
+    {{/as-form/submission-action}}
+    {{#as-form/submission-action
+      showConfirmation=true
+      action="withdrawAndCancel"
+      buttonClass="error"
+      confirmationButtonLabel="Yes, Cancel and Withdraw"
+      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
+      requestPromise=requestPromise}}
+      Cancel and Withdraw Interaction
+    {{/as-form/submission-action}}
+  {{/as-form/submission-group}}
 {{/as-side-panel}}

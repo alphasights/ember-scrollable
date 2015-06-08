@@ -63,7 +63,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
            "index": 3,
            "created_at": "2015-01-23T21:01:33.615+00:00",
            "angle_ids": [40380],
-           "analyst_1_id": 6565389
+           "analyst_1_id": 6565389,
+           "default_interaction_type": "summarised_call"
         }
       ],
       "interactions": [
@@ -168,6 +169,10 @@ test("Schedule interaction makes an API request and displays a notification", fu
   visit('/dashboard');
   click('.interactions-to-schedule article:first');
 
+  andThen(function() {
+    assert.equal($('.ember-select[name=interactionType]').val(), 'summarised_call');
+  });
+
   // Select time slot from calendar
   // Monday 7 AM
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
@@ -196,7 +201,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
 });
 
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
-  defineFixture('DELETE', '/interests/1', { response: {
+  defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
       {
         "id": 1,

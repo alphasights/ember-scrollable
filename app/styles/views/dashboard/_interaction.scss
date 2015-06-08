@@ -216,10 +216,17 @@ $interaction-header-height:
     .actions {
       float: left;
       height: $actions-height;
-      line-height: $actions-height;
+      padding: 0 !important;
+      width: 100%;
 
-      .reschedule {
-        @extend %button-primary;
+      &.form-submission {
+        @include form-submission($standalone: true, $height: $actions-height);
+
+        padding: 0 $column-gutter !important;
+
+        .action .confirmation {
+          padding: 0 $column-gutter !important;
+        }
       }
     }
   }

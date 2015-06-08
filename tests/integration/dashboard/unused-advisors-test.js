@@ -21,22 +21,31 @@ QUnit.module("Unused Advisors Widget", {
         {
           "id": 1,
           "name": unusedAdvisor.advisorName,
+          "terms_sent_at": unusedAdvisor.termsSentAt,
           "project_id": 32522,
-          "terms_sent_at": unusedAdvisor.termsSentAt
+          "advisor_id": 10
         }
       ],
 
       "projects": [
         {
           "id": 32522,
-          "status": "high",
           "name": unusedAdvisor.projectName,
-          "client_code": "MCKU",
-          "details_url": "/projects/32522",
-          "index": 3,
-          "created_at": "2015-01-23T21:01:33.615+00:00",
-          "angle_ids": [40380],
-          "analyst_1_id": 6565389
+          "codename": "Internal Project title"
+        }
+      ],
+
+      "advisors": [
+        {
+          "id": 10,
+          "avatar_url": 'http://avatar-url.com',
+          "name": unusedAdvisor.advisorName,
+          "time_zone": null,
+          "emails": [],
+          "job_title": 'Boss',
+          "company_name": 'Life, Inc.',
+          "phone_numbers": [],
+          "phones": []
         }
       ]
     }});
