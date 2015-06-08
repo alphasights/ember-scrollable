@@ -32,7 +32,7 @@
       timeZone=selectedTimeZone}}
 
     <section class="form">
-      {{#as-form model=this as |form|}}
+      {{#as-form model=this action="submit" as |form|}}
         {{#as-form/fieldset}}
           {{as-form/input
             form=form
@@ -59,12 +59,14 @@
           {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
         {{/as-form/fieldset}}
 
-        {{#as-form/submission-group}}
-          {{#as-form/submission-action action="submit" form=form requestPromise=requestPromise}}
+        {{#as-action-group}}
+          {{#as-form/submission-action
+            form=form
+            requestPromise=requestPromise}}
             Schedule Interaction
           {{/as-form/submission-action}}
 
-          {{#as-form/submission-action
+          {{#as-action
             action="cancel"
             buttonClass="error"
             showConfirmation=true
@@ -73,8 +75,8 @@
             confirmationMessage="Are you sure you want to cancel the interaction?"
             requestPromise=requestPromise}}
             Cancel Interaction
-          {{/as-form/submission-action}}
-        {{/as-form/submission-group}}
+          {{/as-action}}
+        {{/as-action-group}}
       {{/as-form}}
     </section>
   </section>

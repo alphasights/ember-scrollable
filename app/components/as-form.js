@@ -11,6 +11,7 @@ export default Ember.Component.extend({
     submit: function() {
       this.set('hasSubmitted', true);
       this.get('model').validate();
+      this.sendAction();
     }
   }
 });
