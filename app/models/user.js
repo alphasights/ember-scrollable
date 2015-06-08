@@ -7,6 +7,7 @@ export default DS.Model.extend({
   deliveryPerformance: DS.belongsTo('deliveryPerformance', { key: 'user_id' }),
   developer: DS.attr('boolean'),
   initials: DS.attr('string'),
+  jsonWebToken: DS.attr('string'),
   name: DS.attr('string'),
   teamId: DS.attr('string'),
   intercomUserHash: DS.attr('string'),

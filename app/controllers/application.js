@@ -1,9 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['currentUser'],
-  currentUser: Ember.computed.oneWay('controllers.currentUser'),
-  preferences: Ember.computed.oneWay('currentUser.preferences'),
+  currentUser: Ember.inject.service(),
+  preferences: Ember.inject.service(),
 
   navigationItems: [{
     id: 'dashboard', name: 'Dashboard', routeName: 'dashboard'
@@ -17,11 +16,11 @@ export default Ember.Controller.extend({
 
   actions: {
     savePreferences: function() {
-      this.get('preferences').save();
+      this.get('preferences.model').save();
     },
 
     logout: function() {
-      window.location.replace(`${EmberENV.pistachioUrl}/logout`);
+      this.get('currentUser').logout();
     }
   }
 });
