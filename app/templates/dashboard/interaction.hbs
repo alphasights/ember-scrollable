@@ -92,20 +92,22 @@
 
     {{#if showForm}}
       <section class="form">
-        {{#as-form model=completion as |form|}}
+        {{#as-form model=completion action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
             {{as-form/input
               name="duration"
+              form=form
               errorProperty="duration"
               label="Call Duration (minutes)"}}
 
             {{as-form/select
               name="quality"
+              form=form
               label="Call Quality"
               content=qualityOptions}}
           {{/as-form/fieldset}}
 
-          {{#as-form/submission-action action="chargeClient" form=form}}
+          {{#as-form/submission-action form=form}}
             Charge Client
           {{/as-form/submission-action}}
         {{/as-form}}
@@ -114,9 +116,9 @@
   </div>
 
   {{#as-action-group}}
-    {{#as-form/submission-action action="toggleForm"}}
+    {{#as-action action="toggleForm"}}
       Complete Interaction
-    {{/as-form/submission-action}}
+    {{/as-action}}
 
     {{#as-action action="reschedule"}}
       Reschedule Interaction
@@ -131,7 +133,7 @@
       requestPromise=requestPromise}}
       Cancel Interaction
     {{/as-action}}
-    
+
     {{#as-action
       showConfirmation=true
       action="withdrawAndCancel"
