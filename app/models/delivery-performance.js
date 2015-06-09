@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import PerformableMixin from 'phoenix/mixins/performable';
 
-export default DS.Model.extend({
+export default DS.Model.extend(PerformableMixin, {
   currentMonthCreditCount: DS.attr('number'),
   monthlyTarget: DS.attr('number'),
   unusedAdvisorsCount: DS.attr('number'),
@@ -11,14 +12,6 @@ export default DS.Model.extend({
     return Math.round(
       (this.get('monthlyTarget') * this.monthCompletionProgress()
     ) * 10) / 10;
-  }),
-
-  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
-  }),
-
-  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
 
   monthCompletionProgress: function() {

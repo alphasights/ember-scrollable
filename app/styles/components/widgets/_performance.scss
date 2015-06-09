@@ -11,7 +11,16 @@ $performance-default-color: #00b0ff;
   padding: $performance-bar-margin;
   position: relative;
 
-  &.on-target .current > div {
+  &.amazing .current > div {
+    background: linear-gradient(
+      to bottom,
+      #fae791,
+      #FFFF73,
+      #fa8f17
+    );
+  }
+
+  &.more-than-on-pace .current > div {
     background: linear-gradient(
       to bottom,
       $performance-on-target-end-color,

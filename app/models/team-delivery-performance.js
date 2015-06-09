@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import PerformableMixin from 'phoenix/mixins/performable';
 
-export default Ember.Object.extend({
+export default Ember.Object.extend(PerformableMixin, {
   userPerformances: null,
 
   monthlyTarget: Ember.computed('userPerformances.[]', function() {
@@ -14,14 +15,6 @@ export default Ember.Object.extend({
   onPaceCreditTarget: Ember.computed('userPerformances.[]', function() {
     var totalTarget = this._totalize('onPaceCreditTarget');
     return Math.round(totalTarget * 10) / 10;
-  }),
-
-  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
-  }),
-
-  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
 
   _totalize: function(attribute) {
