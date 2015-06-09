@@ -18,7 +18,8 @@ const interaction = {
   speakCode: '777502',
   advisorId: 11,
   clientContactId: 299,
-  projectId: 14
+  projectId: 14,
+  used: false
 };
 
 QUnit.module("Scheduled Interactions Side Panel", {
@@ -97,7 +98,8 @@ QUnit.module("Scheduled Interactions Side Panel", {
           "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
           "advisor_phone_number": interaction.advisorPhoneNumber,
           "speak_phone_number": interaction.speakPhoneNumber,
-          "speak_code": interaction.speakCode
+          "speak_code": interaction.speakCode,
+          "used": false
         }
       ],
       "checklist_items": []
@@ -126,7 +128,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
         "dial_in_number": "1234567",
         "primary_contact_id": 1,
         "speak": true,
-        "client_access_number_country": interaction.clientAccessNumberCountry,
+        "client_access_number_country": interaction.clientAccessNumberCountry
       }
     ]
   }});
@@ -139,8 +141,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.scheduled-interactions article:first');
-  click("a:contains('Cancel Interaction')");
-  click("button:contains('Yes, Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -186,8 +187,8 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
   });
 
   click('.scheduled-interactions article:first');
-  click("a:contains('Cancel and Withdraw Interaction')");
-  click("button:contains('Yes, Cancel and Withd')");
+  click("button:contains('Cancel and Withdraw Interaction')");
+  click("button:contains('Yes, Cancel and Withdraw')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -214,7 +215,7 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.scheduled-interactions article:first');
-  click("a:contains('Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
   click("button:contains('Yes, Cancel Interaction')");
 
   andThen(function() {
@@ -245,7 +246,8 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
       "speak_code": interaction.speakCode,
       "advisor_id": interaction.advisorId,
       "client_contact_id": interaction.clientContactId,
-      "project_id": interaction.projectId
+      "project_id": interaction.projectId,
+      "used": interaction.used
     }
   }});
 
@@ -260,19 +262,59 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
   });
 
   click('.scheduled-interactions article:first');
-  click("a:contains('Reschedule Interaction')");
+  click("button:contains('Reschedule Interaction')");
 
   andThen(function() {
     assert.equal(find('.scheduled-interactions article').length, 0,
       'remove the interaction from the scheduled interaction widget'
     );
 
-    assert.equal(find('.scheduled-interactions article').length, 0,
+    assert.equal(find('.upcoming-interactions article').length, 1,
       'adds the interaction to the interactions to schedule widget'
     );
 
     assert.equal(currentPath, `/dashboard/interactions/${interaction.id}/schedule`,
       'transitions to the scheduling side panel'
     );
+  });
+});
+
+test("Complete Interaction completes the call and closes the side panel", function(assert) {
+  const interactionCompletion = {
+    duration: 20,
+    quality: 'bad',
+    interactionType: 'call'
+  };
+
+  const successMessage = 'The interaction has been completed.';
+
+  var handler = defineFixture('POST', `/interaction_completions/${interaction.id}`, {
+    request: {
+      "interaction_completion": {
+        "duration": interactionCompletion.duration,
+        "quality": interactionCompletion.quality,
+        "interaction_type": interactionCompletion.interactionType
+      }
+    },
+
+    response: {
+      "interactions": [{
+      }]
+    }
+  });
+
+  visit('/dashboard');
+
+  click('.scheduled-interactions article:first');
+  click('button:contains("Complete Interaction")');
+  fillIn('input[name=duration]', '20');
+  select('select[name=quality] option[value=bad]');
+  click('button:contains("Charge Client")');
+
+  andThen(function() {
+    assert.equal(handler.called, true);
+    assert.equal($('.messenger-message-inner:first').text().trim(), successMessage);
+    assert.equal(find('.scheduled-interactions article').length, 0);
+    assert.equal(currentPath, '/dashboard');
   });
 });

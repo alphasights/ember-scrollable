@@ -159,7 +159,8 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "speak_phone_number": null,
       "speak_code": null,
       "advisor_phone_number": advisorPhoneNumber,
-      "advisor_phone_country_code": '1'
+      "advisor_phone_country_code": '1',
+      "used": false
     }
   }, response: {
     "interactions": []
@@ -242,7 +243,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click("a:contains('Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -270,7 +271,7 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.interactions-to-schedule article:first');
-  click("a:contains('Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
   click("button:contains('Confirm')");
 
   andThen(function() {
