@@ -23,32 +23,25 @@ $project-history-baby-blue: #54acb0;
     color: $header-font-color;
   }
 
-  ul {
+  table {
     margin-top: $list-item-padding;
+    width: 100%;
   }
 
-  li {
-    @extend %grid-row;
-
-    padding: $list-item-padding 0;
-
-    .project {
-      @extend %grid-column-5;
-
-      padding-left: 0;
-
-      .codename {
-        color: $small-font-color;
-      }
+  tr {
+    td {
+      padding: $list-item-padding 0;
     }
 
-    .used-at {
-      @extend %grid-column-4;
+    .codename {
+      color: $small-font-color;
+    }
+
+    .primary-contact {
+      text-align: right;
     }
 
     .outreach-status {
-      @extend %grid-column-1;
-
       text-align: center;
 
       i {
@@ -100,20 +93,6 @@ $project-history-baby-blue: #54acb0;
           color: $project-history-baby-blue;
         }
       }
-    }
-
-    .primary-contact {
-      @extend %grid-column-2;
-
-      padding-right: 0;
-      text-align: right;
-    }
-
-    .project,
-    .used-at,
-    .outreach-status {
-      line-height: $avatar-size;
-      vertical-align: middle;
     }
 
     .avatar {

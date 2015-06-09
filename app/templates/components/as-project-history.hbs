@@ -3,28 +3,32 @@
 </div>
 
 {{#liquid-if displayList use="crossFade"}}
-  <ul>
+  <table>
     {{#each projectHistory as |projectHistory|}}
-      <li>
-        <a href={{projectHistory.project.pistachioUrl}} target="_blank">
-          <div class="project">
+      <tr>
+        <td class="project">
+          <a href={{projectHistory.project.pistachioUrl}} target="_blank">
             <span>{{projectHistory.project.name}}</span> -
             <span class="codename">{{projectHistory.project.codename}}</span>
-          </div>
+          </a>
+        </td>
 
-          <div class="used-at">
-            {{moment projectHistory.consumedAt "D MMM YYYY"}} ({{ago projectHistory.consumedAt}})
-          </div>
+        <td class="occurred-at">
+          {{#if projectHistory.occurredAt}}
+            {{moment projectHistory.occurredAt "D MMM YYYY"}} ({{ago projectHistory.occurredAt}})
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </td>
 
-          <div class="outreach-status">
-            {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
-              <i class="{{projectHistory.outreachStatusClass}}"></i>
-            {{/tool-tipster}}
-          </div>
+        <td class="outreach-status">
+          {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
+            <i class="{{projectHistory.outreachStatusClass}}"></i>
+          {{/tool-tipster}}
+        </td>
 
-          <div class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</div>
-        </a>
-      </li>
+        <td class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</td>
+      </tr>
     {{/each}}
-  </ul>
+  </table>
 {{/liquid-if}}
