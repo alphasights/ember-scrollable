@@ -8,7 +8,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
         unusedAdvisor: unusedAdvisor,
         projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
       });
-    })
+    });
   },
 
   setupController: function(controller, models) {
