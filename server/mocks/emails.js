@@ -33,7 +33,13 @@ module.exports = function(app) {
           'sent_at': '2015-06-02T11:30:00.000+00:00',
           'outgoing': false
         }
-      ]
+      ],
+      'meta': {
+        'page': 1,
+        'per_page': 10,
+        'total_count': 2,
+        'total_pages': 1
+      }
     });
   });
 

@@ -37,7 +37,7 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' *.segment.io *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com use.typekit.net",
       'font-src': "'self' *.gstatic.com data: use.typekit.net",
-      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000",
+      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000 https://almond-production.herokuapp.com",
       'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io p.typekit.net;",
       'style-src': "'self' 'unsafe-inline' *.mxpnl.com *.googleapis.com use.typekit.net",
       'media-src': "'self'"
@@ -79,7 +79,7 @@ module.exports = function(environment) {
     ENV.EmberENV.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
     ENV.EmberENV.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
     ENV.EmberENV.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
-    ENV.EmberENV.brazilUrl = 'https://brazil-production.herokuapp.com';
+    ENV.EmberENV.almondApiBaseUrl = 'https://almond-production.herokuapp.com/api/v1';
   }
 
   return ENV;
