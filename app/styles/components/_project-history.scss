@@ -17,6 +17,12 @@ $project-history-baby-blue: #54acb0;
     span {
       cursor: pointer;
     }
+
+    i {
+      @include icon(plus-circle);
+
+      margin-right: 2px;
+    }
   }
 
   a {
