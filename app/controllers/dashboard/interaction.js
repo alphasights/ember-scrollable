@@ -54,6 +54,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       var model = this.get('model');
 
       model.set('scheduledCallTime', null);
+      model.set('actioned', false);
 
       this.set('requestPromise', PromiseController.create({
         promise: model.save().then(
