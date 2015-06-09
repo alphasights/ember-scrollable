@@ -200,6 +200,18 @@ test("Schedule interaction makes an API request and displays a notification", fu
   });
 });
 
+test("Schedule interaction shows errors if validation fails", function(assert) {
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+  click("button:contains('Schedule Interaction')");
+
+  andThen(function() {
+    var label = $('label[for=formattedScheduledCallTime]');
+    var message = label.siblings('.error').text().trim();
+    assert.equal(message, "can't be blank");
+  });
+});
+
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [

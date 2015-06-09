@@ -91,11 +91,11 @@
     </section>
   </div>
 
-  {{#as-form/submission-group}}
-    {{#as-form/submission-action action="reschedule"}}
+  {{#as-action-group}}
+    {{#as-action action="reschedule"}}
       Reschedule Interaction
-    {{/as-form/submission-action}}
-    {{#as-form/submission-action
+    {{/as-action}}
+    {{#as-action
       showConfirmation=true
       action="cancel"
       buttonClass="error"
@@ -103,8 +103,8 @@
       confirmationMessage="Are you sure you want to cancel the interaction?"
       requestPromise=requestPromise}}
       Cancel Interaction
-    {{/as-form/submission-action}}
-    {{#as-form/submission-action
+    {{/as-action}}
+    {{#as-action
       showConfirmation=true
       action="withdrawAndCancel"
       buttonClass="error"
@@ -112,6 +112,6 @@
       confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
       requestPromise=requestPromise}}
       Cancel and Withdraw Interaction
-    {{/as-form/submission-action}}
-  {{/as-form/submission-group}}
+    {{/as-action}}
+  {{/as-action-group}}
 {{/as-side-panel}}

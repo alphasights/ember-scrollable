@@ -10,7 +10,9 @@ export default Ember.Component.extend({
   actions: {
     submit: function() {
       this.set('hasSubmitted', true);
-      this.get('model').validate();
+      if (this.get('model').validate()) {
+        this.sendAction();
+      }
     }
   }
 });
