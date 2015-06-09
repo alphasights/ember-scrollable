@@ -30,9 +30,10 @@ export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
     teamId: 'team_id'
   },
 
-  scheduledInteractions: Ember.computed('model.interactions.[]', function() {
+  scheduledInteractions: Ember.computed('model.interactions.@each.used', function() {
     return this.get('model.interactions')
       .filterBy('scheduledCallTime')
+      .filterBy('used', false)
       .sortBy('scheduledCallTime');
   }),
 

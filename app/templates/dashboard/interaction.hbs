@@ -89,29 +89,29 @@
         {{/each}}
       </ul>
     </section>
-  </div>
 
-  <section class="form">
     {{#if showForm}}
-      {{#as-form model=completion as |form|}}
-        {{#as-form/fieldset}}
-          {{as-form/input
-            name="duration"
-            errorProperty="duration"
-            label="Call Duration (minutes)"}}
+      <section class="form">
+        {{#as-form model=completion as |form|}}
+          {{#as-form/fieldset}}
+            {{as-form/input
+              name="duration"
+              errorProperty="duration"
+              label="Call Duration (minutes)"}}
 
-          {{as-form/select
-            name="quality"
-            label="Call Quality"
-            content=qualityOptions}}
-        {{/as-form/fieldset}}
+            {{as-form/select
+              name="quality"
+              label="Call Quality"
+              content=qualityOptions}}
+          {{/as-form/fieldset}}
 
-        {{#as-form/submission-action action="chargeClient" form=form}}
-          Charge Client
-        {{/as-form/submission-action}}
-      {{/as-form}}
+          {{#as-form/submission-action action="chargeClient" form=form}}
+            Charge Client
+          {{/as-form/submission-action}}
+        {{/as-form}}
+      </section>
     {{/if}}
-  </section>
+  </div>
 
   {{#as-form/submission-group}}
     {{#as-form/submission-action action="toggleForm"}}
