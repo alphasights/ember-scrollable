@@ -57,7 +57,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   actions: {
     chargeClient: function() {
-      this.set('requestPromise', this.get('completion').save());
+      this.set('requestPromise', this.get('completion').save().then(() => {
+        notify('The interaction has been completed.');
+        this.get('sidePanel').send('close');
+      }).catch(function() {
+        notify('There has been an error completing the interaction.', 'error');
+      }));
     },
 
     hideSidePanel: function() {
