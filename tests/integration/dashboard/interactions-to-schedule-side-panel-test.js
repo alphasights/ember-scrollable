@@ -261,7 +261,10 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
 });
 
 test("Cancel Interaction Failure", function(assert) {
-  defineFixture('DELETE', '/interests/1', { status: 500 });
+  defineFixture('DELETE', '/interests/1', {
+    params: { withdraw_from_compliance: 'false' },
+    status: 500
+  });
 
   visit('/dashboard');
 

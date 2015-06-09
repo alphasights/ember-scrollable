@@ -4,21 +4,21 @@ import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
 const interaction = {
-  id: 1,
+  id: '1',
   actioned: false,
   clientAccessNumberCountry: 'US',
   additionalContactDetails: '',
-  requested_at: '2015-02-18T10:00:00.000+00:00',
-  scheduled_call_time: '2015-02-19T10:00:00.000+00:00',
+  requestedAt: '2015-02-18T10:00:00.000Z',
+  scheduledCallTime: '2015-02-19T10:00:00.000Z',
   speak: true,
-  interaction_type: 'call',
+  interactionType: 'call',
   advisorPhoneCountryCode: '54',
   advisorPhoneNumber: '91151016387',
   speakPhoneNumber: '+1 212-231-2222',
   speakCode: '777502',
-  advisorId: 11,
-  clientContactId: 299,
-  projectId: 14,
+  advisorId: '11',
+  clientContactId: '299',
+  projectId: '14',
   used: false
 };
 
@@ -76,7 +76,7 @@ QUnit.module("Scheduled Interactions Side Panel", {
            "client_code": "MCKU",
            "details_url": `/projects/${interaction.projectId}`,
            "index": 3,
-           "created_at": "2015-01-23T21:01:33.615+00:00",
+           "created_at": "2015-01-23T21:01:33.615Z",
            "angle_ids": [40380],
            "analyst_1_id": 6565389
         }
@@ -84,22 +84,21 @@ QUnit.module("Scheduled Interactions Side Panel", {
       "interactions": [
         {
           "id": interaction.id,
-          "scheduled_call_time": interaction.scheduled_call_time,
+          "scheduled_call_time": interaction.scheduledCallTime,
           "advisor_id": interaction.advisorId,
           "client_contact_id": interaction.clientContactId,
           "project_id": interaction.projectId,
           "checklist_item_ids": [],
-          "requested_at": interaction.requested_at,
+          "requested_at": interaction.requestedAt,
           "client_access_number_country": interaction.clientAccessNumberCountry,
           "actioned": interaction.actioned,
           "additional_contact_details": interaction.additionalContactDetails,
           "speak": interaction.speak,
-          "interaction_type": 'call',
+          "interaction_type": interaction.interactionType,
           "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
           "advisor_phone_number": interaction.advisorPhoneNumber,
           "speak_phone_number": interaction.speakPhoneNumber,
-          "speak_code": interaction.speakCode,
-          "used": false
+          "speak_code": interaction.speakCode
         }
       ],
       "checklist_items": []
@@ -128,20 +127,15 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
         "dial_in_number": "1234567",
         "primary_contact_id": 1,
         "speak": true,
-        "client_access_number_country": interaction.clientAccessNumberCountry
+        "client_access_number_country": "US"
       }
     ]
   }});
 
   visit('/dashboard');
-
-  andThen(function() {
-    assert.equal(find('.scheduled-interactions article').length, 1,
-    'shows the upcoming interaction in the widget');
-  });
-
   click('.scheduled-interactions article:first');
-  click("button:contains('Cancel Interaction')");
+  click("button.cancel:contains('Cancel Interaction')");
+  click("button:contains('Yes, Cancel Interaction')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -180,12 +174,6 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
   }});
 
   visit('/dashboard');
-
-  andThen(function() {
-    assert.equal(find('.scheduled-interactions article').length, 1,
-    'shows the upcoming interaction in the widget');
-  });
-
   click('.scheduled-interactions article:first');
   click("button:contains('Cancel and Withdraw Interaction')");
   click("button:contains('Yes, Cancel and Withdraw')");
@@ -205,7 +193,10 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
 });
 
 test("Cancel Interaction Failure", function(assert) {
-  defineFixture('DELETE', '/interests/1', { status: 500 });
+  defineFixture('DELETE', '/interests/1', {
+    params: { withdraw_from_compliance: 'false' },
+    status: 500
+  });
 
   visit('/dashboard');
 
@@ -231,15 +222,54 @@ test("Cancel Interaction Failure", function(assert) {
 });
 
 test("Reschedule Interaction unschedules the call and transitions to the to schedule side panel", function(assert) {
+  defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
+    "unavailabilities": [
+      {
+        "id": 123,
+        "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
+        "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
+        "day": null,
+        "interaction_id": interaction.id,
+        "type": 'alpha_call',
+        "title": 'AlphaCall'
+      }
+    ]
+  }});
+
+  defineFixture('GET', '/interaction_types', { response: {
+    "interaction_types": {
+      "call": "One-on-one Call",
+      "hosted_call": 'Hosted Call',
+      "summarised_call": 'Interaction Summary'
+    },
+    "classifications": {
+      "hosted": [
+        "hosted_call",
+        "summarised_call"
+      ],
+      "duration_based": [
+        "call"
+      ]
+    }
+  }});
+
+  defineFixture('GET', '/dial_ins', { response: {
+    "dial_ins":{
+      "AU":"Australia",
+      "AT":"Austria",
+      "BE":"Belgium"
+    }
+  }});
+
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
       "actioned": interaction.actioned,
       "client_access_number_country": interaction.clientAccessNumberCountry,
       "additional_contact_details": interaction.additionalContactDetails,
-      "requested_at": interaction.requested_at,
+      "requested_at": interaction.requestedAt,
       "scheduled_call_time": null,
       "speak": interaction.speak,
-      "interaction_type": interaction.interaction_type,
+      "interaction_type": interaction.interactionType,
       "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
       "advisor_phone_number": interaction.advisorPhoneNumber,
       "speak_phone_number": interaction.speakPhoneNumber,
@@ -257,8 +287,8 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
     assert.equal(find('.scheduled-interactions article').length, 1,
     'shows the original scheduled interaction in the widget');
 
-    assert.equal(find('.upcoming-interactions article').length, 0,
-    'does not shows the scheduled interaction in the upcoming widget');
+    assert.equal(find('.interactions-to-schedule article').length, 0,
+    'does not shows the scheduled interaction in the interactions to schedule widget');
   });
 
   click('.scheduled-interactions article:first');
@@ -269,11 +299,7 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
       'remove the interaction from the scheduled interaction widget'
     );
 
-    assert.equal(find('.upcoming-interactions article').length, 1,
-      'adds the interaction to the interactions to schedule widget'
-    );
-
-    assert.equal(currentPath, `/dashboard/interactions/${interaction.id}/schedule`,
+    assert.equal(currentURL(), `/dashboard/interactions/${interaction.id}/schedule`,
       'transitions to the scheduling side panel'
     );
   });
@@ -283,22 +309,40 @@ test("Complete Interaction completes the call and closes the side panel", functi
   const interactionCompletion = {
     duration: 20,
     quality: 'bad',
-    interactionType: 'call'
+    interactionType: 'call',
+    interactionId: '1'
   };
 
   const successMessage = 'The interaction has been completed.';
 
-  var handler = defineFixture('POST', `/interaction_completions/${interaction.id}`, {
+  var handler = defineFixture('POST', `/interaction_completions`, {
     request: {
       "interaction_completion": {
         "duration": interactionCompletion.duration,
         "quality": interactionCompletion.quality,
-        "interaction_type": interactionCompletion.interactionType
+        "interaction_type": interactionCompletion.interactionType,
+        "interaction_id": interactionCompletion.interactionId
       }
     },
 
     response: {
       "interactions": [{
+        "id": interaction.id,
+        "actioned": interaction.actioned,
+        "client_access_number_country": interaction.clientAccessNumberCountry,
+        "additional_contact_details": interaction.additionalContactDetails,
+        "requested_at": interaction.requestedAt,
+        "scheduled_call_time": null,
+        "speak": interaction.speak,
+        "interaction_type": interaction.interactionType,
+        "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+        "advisor_phone_number": interaction.advisorPhoneNumber,
+        "speak_phone_number": interaction.speakPhoneNumber,
+        "speak_code": interaction.speakCode,
+        "advisor_id": interaction.advisorId,
+        "client_contact_id": interaction.clientContactId,
+        "project_id": interaction.projectId,
+        "used": true
       }]
     }
   });
@@ -315,6 +359,6 @@ test("Complete Interaction completes the call and closes the side panel", functi
     assert.equal(handler.called, true);
     assert.equal($('.messenger-message-inner:first').text().trim(), successMessage);
     assert.equal(find('.scheduled-interactions article').length, 0);
-    assert.equal(currentPath, '/dashboard');
+    assert.equal(currentURL(), '/dashboard');
   });
 });
