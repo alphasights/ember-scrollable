@@ -5,10 +5,16 @@ export default Ember.Component.extend({
 
   emails: null,
   displayList: false,
+  isViewingEmail: false,
+  selectedEmail: null,
 
   actions: {
     toggleDisplay: function() {
       this.toggleProperty('displayList');
+    },
+
+    selectEmail: function(email) {
+      this.setProperties({isViewingEmail: true, selectedEmail: email});
     }
   }
 });

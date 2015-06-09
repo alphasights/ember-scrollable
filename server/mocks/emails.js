@@ -8,7 +8,7 @@ module.exports = function(app) {
         {
           'id': 1,
           'subject': 'This is an email subject',
-          'body': 'Emails are fun!',
+          'body': 'Emails are <b>fun!</b>',
           'sender': 'Johnny Analyst <analyst@email.com>',
           'recipients': [
             'Billy Advisor <advisor@email.com>'
@@ -22,7 +22,7 @@ module.exports = function(app) {
         {
           'id': 2,
           'subject': 'This is another email subject',
-          'body': 'Emails are boring!',
+          'body': 'Emails are <b>boring!</b>',
           'sender': 'Billy Advisor <advisor@email.com>',
           'recipients': [
             'Johnny Analyst <analyst@email.com>'

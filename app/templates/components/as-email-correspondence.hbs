@@ -6,10 +6,16 @@
   <ul>
     {{#each emails as |email|}}
       <li>
-        <span class="subject">{{email.subject}}</span>
-        <span class="sender">{{extract-name-from-email email.sender}}</span>
-        <span class="sent-at">{{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})</span>
+        <a {{action "selectEmail" email}}>
+          <span class="subject">{{email.subject}}</span>
+          <span class="sender">{{extract-name-from-email email.sender}}</span>
+          <span class="sent-at">{{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})</span>
+        </a>
       </li>
     {{/each}}
   </ul>
 {{/liquid-if}}
+
+{{#if isViewingEmail}}
+  {{as-email-viewer email=selectedEmail}}
+{{/if}}
