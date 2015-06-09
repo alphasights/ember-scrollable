@@ -9,7 +9,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
         completion: this.store.createRecord('interactionCompletion', {
           interaction: interaction,
-          interactionType: 'call'
+          interactionType: interaction.get('interactionType')
         })
       });
     });
