@@ -214,8 +214,8 @@ $interaction-header-height:
     }
 
     .form {
-      padding: $column-gutter;
       margin-bottom: $column-gutter;
+      padding: $column-gutter;
 
       .action button {
         @extend %button-primary;
