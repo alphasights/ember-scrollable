@@ -26,15 +26,20 @@
     {{/if}}
   </div>
 
-  <section class="actions">
-    <button class="remove" {{action "remove"}}>
+  {{#as-action-group}}
+    {{#as-action
+      action="remove"
+      showConfirmation=true
+      confirmationStateClass="alert"
+      confirmationButtonLabel="Yes, Remove Advisor"
+      requestPromise=requestPromise}}
       Remove Advisor
-    </button>
+    {{/as-action}}
 
     {{#if features.advisorFollowUp}}
-      <button class="follow-up" {{action "followUp"}}>
+      {{#as-action action="followUp" requestPromise=requestPromise}}
         Follow Up
-      </button>
+      {{/as-action}}
     {{/if}}
-  </section>
+  {{/as-action-group}}
 {{/as-side-panel}}
