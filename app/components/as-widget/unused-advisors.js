@@ -8,13 +8,12 @@ export default ListWidgetComponent.extend({
   emptyMessage: 'no unused advisors to contact.',
   hasTeamMemberFilter: false,
   listItemTemplateName: 'components/as-widget/unused-advisors/list-item',
+  store: null,
 
   actions: {
     removeUnusedAdvisor: function(unusedAdvisorId) {
       if (window.confirm('Are you sure you want to remove the advisor from the list?')) {
-        let store = this.get('targetObject.store');
-
-        store.find('unusedAdvisor', unusedAdvisorId).then(function(unusedAdvisor) {
+        this.get('store').find('unusedAdvisor', unusedAdvisorId).then(function(unusedAdvisor) {
           unusedAdvisor.destroyRecord().then(function() {
             notify(`The advisor ${unusedAdvisor.get('name')} was removed from the list`);
           });
