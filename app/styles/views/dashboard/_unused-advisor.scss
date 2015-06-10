@@ -52,14 +52,6 @@
       float: left;
       height: $actions-height;
       line-height: $actions-height;
-
-      .follow-up {
-        @extend %button-primary;
-      }
-
-      .remove {
-        @extend %button-primary;
-      }
     }
   }
 }
