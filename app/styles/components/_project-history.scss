@@ -74,23 +74,17 @@ $project-history-baby-blue: #54acb0;
           color: $project-history-dark-green;
         }
 
-        &.not-right {
-          color: $project-history-grey;
-        }
-
         &.partial-terms {
           color: $project-history-orange;
         }
 
         &.outreach-forbidden,
-        &.do-not-call {
+        &.do-not-call,
+        &.not-right {
           color: $project-history-grey;
         }
 
-        &.not-on-cid {
-          color: $project-history-brown;
-        }
-
+        &.not-on-cid,
         &.some-companies-on-cid {
           color: $project-history-brown;
         }
