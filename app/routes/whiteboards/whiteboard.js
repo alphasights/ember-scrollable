@@ -1,6 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  titleToken: function(model) {
+    let whiteboardName = model.whiteboard.get('name');
+
+    return `Whiteboard: ${whiteboardName}`;
+  },
+
   model: function(params) {
     var whiteboardId = params.whiteboard_id;
     var whiteboard, queryParams;
