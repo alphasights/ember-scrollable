@@ -1,30 +1,7 @@
 {{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
   <div>
-    {{#liquid-if showFollowUp use="crossFade"}}
-      <dl class="details">
-        <dt>Template</dt>
-        <dd>Unused Advisor Follow Up</dd>
-        <dt>To</dt>
-        <dd>{{model.advisor.name}}</dd>
-        <dt>From</dt>
-        <dd>{{currentUser.name}}</dd>
-        <dt>CC</dt>
-        <dd>Tor Erik Linnerud</dd>
-      </dl>
-
-      {{#as-form model=email}}
-        {{#as-form/fieldset}}
-          {{as-form/input
-            name="subject"
-            errorProperty="subject"
-            label="Subject"}}
-
-          {{as-form/textarea
-            name="body"
-            errorProperty="body"
-            label="Body"}}
-        {{/as-form/fieldset}}
-      {{/as-form}}
+    {{#liquid-if showFollowUp use="toLeft"}}
+      {{as-email-composer model=email templates=emailTemplates}}
     {{else}}
       <header>
         <div class="content">
@@ -49,15 +26,15 @@
     {{/liquid-if}}
   </div>
 
-  <section class="actions">
-    <button class="remove" {{action "remove"}}>
+  {{#as-action-group}}
+    {{#as-action buttonClass="remove" action="remove"}}
       Remove Advisor
-    </button>
+    {{/as-action}}
 
     {{#if features.advisorFollowUp}}
-      <button class="follow-up" {{action "toggleFollowUp"}}>
+      {{#as-action buttonClass="remove" action="toggleFollowUp"}}
         Follow Up
-      </button>
+      {{/as-action}}
     {{/if}}
-  </section>
+  {{/as-action-group}}
 {{/as-side-panel}}

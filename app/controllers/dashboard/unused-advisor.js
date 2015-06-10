@@ -3,9 +3,8 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard', 'currentUser'],
+  needs: ['dashboard'],
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
-  currentUser: Ember.computed.oneWay('controllers.currentUser.model'),
 
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
@@ -13,15 +12,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   model: null,
   showFollowUp: false,
   email: null,
-  emailTemplate: Ember.computed.oneWay('emailTemplates.firstObject'),
-
-  emailTemplateDidChange: Ember.observer('emailTemplate.body', function() {
-    var email = this.get('email');
-
-    if (email != null) {
-      email.set('body', this.get('emailTemplate.body'));
-    }
-  }).on('init'),
+  emailTemplates: null,
 
   actions: {
     hideSidePanel: function() {

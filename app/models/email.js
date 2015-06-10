@@ -5,5 +5,7 @@ export default DS.Model.extend({
   body: DS.attr('string'),
   recipients: DS.attr('string'),
   from: DS.attr('string'),
+  cc: DS.attr('string'),
+  bcc: DS.attr('string'),
   concerningId: DS.attr('number')
 });
