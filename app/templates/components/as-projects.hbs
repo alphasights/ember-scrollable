@@ -1,5 +1,5 @@
 <header>
-  <div class="priority-select-label">
+  <div class="label">
     <span>Filter by priority:</span>
   </div>
 
@@ -18,6 +18,16 @@
       {{/link-to}}
     </ul>
   </div>
+
+  {{#if teamMembers}}
+    <div class="label">
+      <span>Filter by team member:</span>
+    </div>
+
+    <div class="team-member">
+      {{view "select" content=teamMembers optionLabelPath="content.name" value=selectedTeamMember prompt="Select team member"}}
+    </div>
+  {{/if}}
 </header>
 
 {{#if arrangedContent}}
