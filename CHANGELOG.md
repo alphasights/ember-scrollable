@@ -9,6 +9,7 @@
 - [#301 BUGFIX](https://github.com/alphasights/phoenix/pull/301) Fix widget header and empty view copy bugs
 - [#300 BUGFIX](https://github.com/alphasights/phoenix/pull/300) Fix Team Members filter width
 - [#299](https://github.com/alphasights/phoenix/pull/299) Add basic version of Unused Advisors sidepanel
+- [#296](https://github.com/alphasights/phoenix/pull/296) Cancel Interaction from side panel
 
 ### Release 0.0.2 (June 1, 2015)
 
