@@ -18,6 +18,7 @@ export default DS.Model.extend({
   advisorPhoneNumber: DS.attr('string'),
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
+  used: DS.attr('boolean', { defaultValue: false }),
 
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
