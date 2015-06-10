@@ -48,10 +48,23 @@
       margin-bottom: - $actions-height;
     }
 
-    .actions {
+    .form-submission {
       float: left;
       height: $actions-height;
       line-height: $actions-height;
+      padding: 0 $column-gutter !important;
+
+      .action .confirmation {
+        padding: 0 $column-gutter !important;
+
+        > span {
+          line-height: inherit;
+        }
+
+        a {
+          padding: 0 $column-gutter !important;
+        }
+      }
     }
   }
 }
