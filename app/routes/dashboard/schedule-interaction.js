@@ -3,6 +3,8 @@ import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 import { request } from 'ic-ajax';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
+  titleToken: 'Scheduling',
+
   model: function(params) {
     return Ember.RSVP.hash({
       interaction: this.store.find('interaction', params.interaction_id),

@@ -3,6 +3,7 @@ import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
 export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   currentUser: Ember.inject.service(),
+  titleToken: 'Projects',
 
   model: function(params) {
     var teamId = params.teamId;
