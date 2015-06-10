@@ -315,7 +315,7 @@ test("Complete Interaction completes the call and closes the side panel", functi
 
   const successMessage = 'The interaction has been completed.';
 
-  var handler = defineFixture('POST', `/interaction_completions`, {
+  var handler = defineFixture('POST', '/interaction_completions', {
     request: {
       "interaction_completion": {
         "duration": interactionCompletion.duration,
@@ -360,5 +360,22 @@ test("Complete Interaction completes the call and closes the side panel", functi
     assert.equal($('.messenger-message-inner:first').text().trim(), successMessage);
     assert.equal(find('.scheduled-interactions article').length, 0);
     assert.equal(currentURL(), '/dashboard');
+  });
+});
+
+test("Complete Interaction shows error message in case of failure", function(assert) {
+  var handler = defineFixture('POST', '/interaction_completions', { status: 500 });
+
+  visit('/dashboard');
+
+  click('.scheduled-interactions article:first');
+  click('button:contains("Complete Interaction")');
+  fillIn('input[name=duration]', '20');
+  select('select[name=quality] option[value=bad]');
+  click('button:contains("Charge Client")');
+
+  andThen(function() {
+    const message = 'There has been an error completing the interaction.';
+    assert.equal(message, $('.messenger .messenger-message-inner').first().text().trim());
   });
 });
