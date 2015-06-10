@@ -16,7 +16,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     remove: function() {
       this.get('model').destroyRecord().then(() => {
-        notify(`The advisor ${this.get('model.advisor.name')} was removed from the list`);
+        notify(`The advisor ${this.get('model.advisor.name')} was removed from the list.`);
         this.get('sidePanel').send('close');
       });
     },

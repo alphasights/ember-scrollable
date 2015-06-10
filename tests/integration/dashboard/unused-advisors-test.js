@@ -80,6 +80,28 @@ test("Show unused advisors list", function(assert) {
   });
 });
 
+test("Remove unused advisor from list", function(assert) {
+  visit('/dashboard');
+
+  andThen(function() {
+    assert.equal(find('.unused-advisors article').length, 1);
+  });
+
+  let oldConfirm = window.confirm;
+  window.confirm = function() { return true; };
+  defineFixture('DELETE', '/unused_advisors/1');
+  click('.unused-advisors article:first .remove');
+
+  andThen(function() {
+    assert.equal(find('.unused-advisors article').length, 0);
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, `The advisor ${unusedAdvisor.advisorName} was removed from the list.`);
+
+    window.confirm = oldConfirm;
+  });
+});
+
 test("Unused advisors widget team view", function(assert) {
   const team = {
     id: 1
