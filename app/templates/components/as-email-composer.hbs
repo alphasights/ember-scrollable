@@ -1,5 +1,5 @@
 <div class="form">
-  {{#as-form model=model as |form|}}
+  {{#as-form model=model action="send" as |form|}}
     <a {{action "toggleIsEditingHeader"}}>Edit</a>
     {{#liquid-if isEditingHeader}}
       {{#as-form/fieldset}}
@@ -47,6 +47,10 @@
         name="body"
         errorProperty="body"
         label="Body"}}
+
+      {{#as-action-group}}
+        {{#as-form/submit form=form}}Send{{/as-form/submit}}
+      {{/as-action-group}}
     {{/as-form/fieldset}}
   {{/as-form}}
 </div>

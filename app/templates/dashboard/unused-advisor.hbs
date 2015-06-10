@@ -1,40 +1,46 @@
 {{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
-  <div>
-    {{#liquid-if showFollowUp use="toLeft"}}
-      {{as-email-composer model=email templates=emailTemplates}}
-    {{else}}
-      <header>
-        <div class="content">
-          <h1>
-            <span>{{model.project.name}}</span>
-            <small>{{model.project.codename}}</small>
-          </h1>
+  {{as-side-panel/header}}
 
-          <span>
-            <span>Contacted</span>
-            <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
-          </span>
-        </div>
-      </header>
+  {{#as-side-panel/content}}
+    <div>
+      {{#liquid-if showFollowUp use="toLeft"}}
+        {{as-email-composer model=email templates=emailTemplates}}
+      {{else}}
+        <header>
+          <div class="content">
+            <h1>
+              <span>{{model.project.name}}</span>
+              <small>{{model.project.codename}}</small>
+            </h1>
 
-      <section class="profile">
-        {{as-profile
-          person=model.advisor
-          title="Unused Advisor"
-          class="advisor"}}
-      </section>
-    {{/liquid-if}}
-  </div>
+            <span>
+              <span>Contacted</span>
+              <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
+            </span>
+          </div>
+        </header>
 
-  {{#as-action-group}}
-    {{#as-action buttonClass="remove" action="remove"}}
-      Remove Advisor
-    {{/as-action}}
+        <section class="profile">
+          {{as-profile
+            person=model.advisor
+            title="Unused Advisor"
+            class="advisor"}}
+        </section>
+      {{/liquid-if}}
+    </div>
+  {{/as-side-panel/content}}
 
-    {{#if features.advisorFollowUp}}
-      {{#as-action buttonClass="remove" action="toggleFollowUp"}}
-        Follow Up
+  {{#as-side-panel/footer}}
+    {{#as-action-group}}
+      {{#as-action buttonClass="remove" action="remove"}}
+        Remove Advisor
       {{/as-action}}
-    {{/if}}
-  {{/as-action-group}}
+
+      {{#if features.advisorFollowUp}}
+        {{#as-action buttonClass="remove" action="toggleFollowUp"}}
+          Follow Up
+        {{/as-action}}
+      {{/if}}
+    {{/as-action-group}}
+  {{/as-side-panel/footer}}
 {{/as-side-panel}}

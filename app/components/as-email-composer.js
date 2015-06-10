@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import notify from 'phoenix/helpers/notify';
 
 export default Ember.Component.extend({
   classNameBindings: [':email-composer'],
@@ -17,6 +18,14 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    send: function() {
+      this.get('model').save().then(() => {
+        notify(`Your email to ${this.get('model.from')} has been delivered.`);
+      }).catch(function() {
+        notify('There has been an error delivering your email.', 'error');
+      });
+    },
+
     toggleIsEditingHeader: function() {
       this.toggleProperty('isEditingHeader');
     }
