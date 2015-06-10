@@ -1,31 +1,10 @@
-import Ember from 'ember';
+import ActionComponent from 'phoenix/components/as-action';
 
-export default Ember.Component.extend({
-  classNameBindings: [':form-submission-action', ':action', 'isConfirming:active'],
-  buttonClass: null,
-  confirmationMessage: 'Are you sure?',
-  confirmationButtonLabel: 'Yes',
-  confirmationStateClass: 'info',
-  confirmationButtonClass: null,
-  isConfirming: false,
-  requestPromise: null,
-  showConfirmation: false,
+export default ActionComponent.extend({
+  classNameBindings: [':form-submission-action'],
+  form: null,
 
-  actions: {
-    click: function() {
-      if (this.get('showConfirmation')) {
-        this.toggleProperty('isConfirming');
-      } else {
-        this.sendAction();
-      }
-    },
-
-    back: function() {
-      this.set('isConfirming', false);
-    },
-
-    confirmAction: function() {
-      this.sendAction();
-    }
+  perform: function() {
+    this.get('form').send('submit');
   }
 });

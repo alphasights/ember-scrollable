@@ -18,6 +18,7 @@ export default DS.Model.extend({
   advisorPhoneNumber: DS.attr('string'),
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
+  used: DS.attr('boolean', { defaultValue: false }),
 
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
@@ -29,5 +30,11 @@ export default DS.Model.extend({
 
   schedulingUrl: Ember.computed('id', 'project.id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  })
+  }),
+
+  initialize: function() {
+    if (Ember.isBlank(this.get('interactionType'))) {
+      this.set('interactionType', this.get('project.defaultInteractionType'));
+    }
+  }
 });

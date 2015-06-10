@@ -73,14 +73,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
   phoneCountryCodes: phoneCountryCodes,
   selectedTimeZone: null,
 
-  // form fields
-  scheduledCallTime: Ember.computed.oneWay('model.scheduledCallTime'),
-  interactionType: Ember.computed.oneWay('model.interactionType'),
-  advisorPhoneNumber: Ember.computed.oneWay('model.advisorPhoneNumber'),
-  advisorPhoneCountryCode: Ember.computed.oneWay('model.advisorPhoneCountryCode'),
-  clientAccessNumberCountry: Ember.computed.oneWay('model.clientAccessNumberCountry'),
-  additionalContactDetails: Ember.computed.oneWay('model.additionalContactDetails'),
-
   formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'selectedTimeZone', function() {
     var scheduledCallTime = this.get('scheduledCallTime');
 
@@ -152,14 +144,16 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
 
     submit: function() {
       var model = this.get('model');
+      var speakCountryCode = this.get('clientAccessNumberCountry');
 
       model.setProperties({
         scheduledCallTime: this.get('scheduledCallTime'),
         interactionType: this.get('interactionType'),
         advisorPhoneNumber: this.get('advisorPhoneNumber'),
         advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
-        clientAccessNumberCountry: this.get('clientAccessNumberCountry'),
-        additionalContactDetails: this.get('additionalContactDetails')
+        clientAccessNumberCountry: speakCountryCode,
+        additionalContactDetails: this.get('additionalContactDetails'),
+        speak: speakCountryCode ? true : false
       });
 
       if (this.get('isValid')) {

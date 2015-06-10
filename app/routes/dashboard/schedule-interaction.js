@@ -3,6 +3,8 @@ import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 import { request } from 'ic-ajax';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
+  titleToken: 'Scheduling',
+
   model: function(params) {
     return Ember.RSVP.hash({
       interaction: this.store.find('interaction', params.interaction_id),
@@ -15,14 +17,22 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   },
 
   setupController: function(controller, model) {
-    controller.set('model', model.interaction);
-    controller.set('unavailabilities', model.unavailabilities);
-    controller.set(
-      'interactionTypes', model.interactionTypes.interaction_types
-    );
-    controller.set(
-      'interactionClassifications', model.interactionTypes.classifications
-    );
-    controller.set('speakDialInCountries', model.speakDialInCountries.dial_ins);
+    model.interaction.initialize();
+
+    controller.setProperties({
+      model: model.interaction,
+      unavailabilities: model.unavailabilities,
+      interactionTypes: model.interactionTypes.interaction_types,
+      interactionClassifications: model.interactionTypes.classifications,
+      speakDialInCountries: model.speakDialInCountries.dial_ins,
+
+      // reset form fields
+      scheduledCallTime: model.interaction.get('scheduledCallTime'),
+      interactionType: model.interaction.get('interactionType'),
+      advisorPhoneNumber: model.interaction.get('advisorPhoneNumber'),
+      advisorPhoneCountryCode: model.interaction.get('advisorPhoneCountryCode'),
+      clientAccessNumberCountry: model.interaction.get('clientAccessNumberCountry'),
+      additionalContactDetails: model.interaction.get('additionalContactDetails'),
+    });
   }
 });

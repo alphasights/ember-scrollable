@@ -8,6 +8,7 @@ export default ListWidgetComponent.extend({
   emptyMessage: 'no unused advisors to contact.',
   hasTeamMemberFilter: false,
   listItemTemplateName: 'components/as-widget/unused-advisors/list-item',
+  store: null,
 
   actions: {
     removeUnusedAdvisor: function(unusedAdvisorId) {
