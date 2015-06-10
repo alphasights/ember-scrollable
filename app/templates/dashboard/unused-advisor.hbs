@@ -20,6 +20,10 @@
         title="Unused Advisor"
         class="advisor"}}
     </section>
+
+    {{#if features.advisorFollowUp}}
+      {{as-project-history projectHistory=projectHistory}}
+    {{/if}}
   </div>
 
   <section class="actions">
