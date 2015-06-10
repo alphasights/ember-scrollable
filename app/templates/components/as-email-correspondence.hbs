@@ -2,18 +2,24 @@
   <span {{action "toggleDisplay"}}>Correspondence History</span>
 </div>
 
-{{#liquid-if displayList}}
-  <ul>
+{{#liquid-if displayList use="crossFade"}}
+  <table>
     {{#each emails as |email|}}
-      <li>
+      <tr>
         <a {{action "selectEmail" email}}>
-          <span class="subject">{{email.subject}}</span>
-          <span class="sender">{{extract-name-from-email email.sender}}</span>
-          <span class="sent-at">{{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})</span>
+          <td class="subject">
+            {{email.subject}}
+          </td>
+          <td class="sender">
+            {{extract-name-from-email email.sender}}
+          </td>
+          <td class="sent-at">
+            {{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})
+          </td>
         </a>
-      </li>
+      </tr>
     {{/each}}
-  </ul>
+  </table>
 {{/liquid-if}}
 
 {{#if isViewingEmail}}

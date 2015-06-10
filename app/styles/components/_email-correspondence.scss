@@ -10,11 +10,11 @@ $list-item-padding: rem-calc(10);
     }
   }
 
-  ul {
+  table {
     margin-top: $list-item-padding;
   }
 
-  li {
+  tr {
     @extend %grid-row;
 
     display: inline-block;
