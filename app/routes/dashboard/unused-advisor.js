@@ -4,10 +4,19 @@ import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 export default Ember.Route.extend(SidePanelRouteMixin, {
   currentUser: Ember.inject.service(),
 
+  titleToken: function(model) {
+    let advisorName = model.get('advisor.name');
+
+    return `Unused Advisor: ${advisorName}`;
+  },
+
   model: function(params) {
-    return Ember.RSVP.hash({
-      unusedAdvisor: this.store.find('unusedAdvisor', params.unused_advisor_id),
-      emailTemplates: this.store.find('emailTemplate')
+    return this.store.find('unusedAdvisor', params.unused_advisor_id).then((unusedAdvisor) => {
+      return Ember.RSVP.hash({
+        unusedAdvisor: unusedAdvisor,
+        emailTemplates: this.store.find('emailTemplate'),
+        projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
+      });
     });
   },
 
@@ -19,5 +28,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
     controller.set('model', models.unusedAdvisor);
     controller.set('emailTemplates', models.emailTemplates);
+    controller.set('model', models.unusedAdvisor);
+    controller.set('projectHistory', models.projectHistory);
   }
 });

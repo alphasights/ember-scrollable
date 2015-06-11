@@ -26,18 +26,27 @@
             title="Unused Advisor"
             class="advisor"}}
         </section>
+
+        {{#if features.advisorFollowUp}}
+          {{as-project-history projectHistory=projectHistory}}
+        {{/if}}
       {{/liquid-if}}
     </div>
   {{/as-side-panel/content}}
 
   {{#as-side-panel/footer}}
     {{#as-action-group}}
-      {{#as-action buttonClass="remove" action="remove"}}
+      {{#as-action
+        action="remove"
+        showConfirmation=true
+        confirmationStateClass="alert"
+        confirmationButtonLabel="Yes, Remove Advisor"
+        requestPromise=requestPromise}}
         Remove Advisor
       {{/as-action}}
 
       {{#if features.advisorFollowUp}}
-        {{#as-action buttonClass="remove" action="toggleFollowUp"}}
+        {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
           Follow Up
         {{/as-action}}
       {{/if}}

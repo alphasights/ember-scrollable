@@ -30,20 +30,23 @@ export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
     teamId: 'team_id'
   },
 
-  scheduledInteractions: Ember.computed('model.interactions.[]', function() {
+  scheduledInteractions: Ember.computed('model.interactions.@each.used', function() {
     return this.get('model.interactions')
       .filterBy('scheduledCallTime')
+      .filterBy('used', false)
       .sortBy('scheduledCallTime');
   }),
 
-  interactionsToSchedule: Ember.computed('model.interactions.[]', function() {
-    return this.get('model.interactions').filter(function(interaction) {
-      return interaction.get('requestedAt') != null &&
-        interaction.get('scheduledCallTime') == null &&
-        !interaction.get('actioned');
-    }).sort(function(a, b) {
-      return -Ember.compare(a.get('requestedAt'), b.get('requestedAt'));
-    });
+  interactionsToSchedule: Ember.computed('model.interactions.@each.used', function() {
+    return this.get('model.interactions')
+      .filterBy('used', false)
+      .filter(function(interaction) {
+        return interaction.get('requestedAt') != null &&
+          interaction.get('scheduledCallTime') == null &&
+          !interaction.get('actioned');
+      }).sort(function(a, b) {
+        return -Ember.compare(a.get('requestedAt'), b.get('requestedAt'));
+      });
   }),
 
   unusedAdvisors: Ember.computed('model.unusedAdvisors.[]', function() {

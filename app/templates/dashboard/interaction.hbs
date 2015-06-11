@@ -92,11 +92,39 @@
           {{/each}}
         </ul>
       </section>
+
+      {{#if showForm}}
+        <section class="form">
+          {{#as-form model=completion action="chargeClient" as |form|}}
+            {{#as-form/fieldset}}
+              {{as-form/input
+                name="duration"
+                form=form
+                errorProperty="duration"
+                label="Call Duration (minutes)"}}
+
+              {{as-form/select
+                name="quality"
+                form=form
+                label="Call Quality"
+                content=qualityOptions}}
+            {{/as-form/fieldset}}
+
+            {{#as-form/submission-action form=form}}
+              Charge Client
+            {{/as-form/submission-action}}
+          {{/as-form}}
+        </section>
+      {{/if}}
     </div>
   {{/as-side-panel/content}}
 
   {{#as-side-panel/footer}}
     {{#as-action-group}}
+      {{#as-action action="toggleForm"}}
+        Complete Interaction
+      {{/as-action}}
+
       {{#as-action action="reschedule"}}
         Reschedule Interaction
       {{/as-action}}
@@ -104,7 +132,7 @@
       {{#as-action
         showConfirmation=true
         action="cancel"
-        buttonClass="error"
+        buttonClass="error cancel"
         confirmationButtonLabel="Yes, Cancel Interaction"
         confirmationMessage="Are you sure you want to cancel the interaction?"
         requestPromise=requestPromise}}

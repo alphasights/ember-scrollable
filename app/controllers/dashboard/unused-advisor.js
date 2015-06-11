@@ -20,12 +20,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     remove: function() {
-      if (window.confirm('Are you sure you want to remove the advisor from the list?')) {
-        this.get('model').destroyRecord().then(() => {
-          notify(`The advisor ${this.get('model.advisor.name')} was removed from the list`);
-          this.get('sidePanel').send('close');
-        });
-      }
+      this.get('model').destroyRecord().then(() => {
+        notify(`The advisor ${this.get('model.advisor.name')} was removed from the list.`);
+        this.get('sidePanel').send('close');
+      });
     },
 
     toggleFollowUp: function() {

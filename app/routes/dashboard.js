@@ -11,6 +11,16 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
     }
   },
 
+  titleToken: function(model) {
+    let teamMembers = model.teamMembers;
+
+    if (teamMembers) {
+      return 'Team Dashboard';
+    } else {
+      return 'Dashboard';
+    }
+  },
+
   model: function(params) {
     var interactions, teamMembers, deliveryPerformance;
     var teamId = params.teamId;
