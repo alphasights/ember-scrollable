@@ -1,13 +1,7 @@
 import Ember from 'ember';
 
 export function extractNameFromEmail(rawEmailAddress) {
-  var emailAddress = rawEmailAddress.toString();
-
-  if (emailAddress.includes('<') && emailAddress.includes('>')) {
-    return emailAddress.replace(/<\S*>/, '').trim();
-  } else {
-    return emailAddress;
-  }
+  return rawEmailAddress.toString().replace(/<\S*>/, '').trim();
 }
 
 export default Ember.HTMLBars.makeBoundHelper(extractNameFromEmail);
