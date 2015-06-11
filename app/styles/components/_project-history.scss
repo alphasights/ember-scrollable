@@ -10,21 +10,6 @@ $project-history-brown: #c9a877;
 $project-history-baby-blue: #54acb0;
 
 .project-history {
-  .header {
-    border-bottom: 1px solid $global-section-border-color;
-    padding: $list-item-padding 0;
-
-    span {
-      cursor: pointer;
-    }
-
-    i {
-      @include icon(plus-circle);
-
-      margin-right: 2px;
-    }
-  }
-
   a {
     color: $header-font-color;
   }

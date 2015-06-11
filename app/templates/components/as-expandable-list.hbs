@@ -1,0 +1,8 @@
+<div class="header">
+  <i></i>
+  <span {{action "toggleDisplay"}}>{{title}}</span>
+</div>
+
+{{#liquid-if displayList use="crossFade"}}
+  {{yield}}
+{{/liquid-if}}
