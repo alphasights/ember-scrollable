@@ -1,9 +1,12 @@
 import Ember from 'ember';
 import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
+import PaginatedRouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
-export default Ember.Route.extend(SidePanelRouteMixin, {
+export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
+  perPage: 2,
+
   titleToken: function(model) {
-    let advisorName = model.get('advisor.name');
+    let advisorName = model.unusedAdvisor.get('advisor.name');
 
     return `Unused Advisor: ${advisorName}`;
   },
@@ -13,7 +16,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       let advisorEmails = unusedAdvisor.get('advisor.emails').join(',');
 
       return Ember.RSVP.hash({
-        emails: this.store.find('email', { emails: advisorEmails}),
+        emails: this.findPaged('email', { emails: advisorEmails}),
         projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') }),
         unusedAdvisor: unusedAdvisor
       });

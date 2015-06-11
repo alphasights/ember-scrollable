@@ -9,6 +9,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
 
+  queryParams: ["page", "perPage"],
+  pageBinding: "emails.page",
+  perPageBinding: "emails.perPage",
+  totalPagesBinding: "emails.totalPages",
+  page: 1,
+  perPage: 2,
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
