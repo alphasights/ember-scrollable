@@ -1,6 +1,6 @@
-{{#each emails as |email|}}
-  <tr>
-    <a {{action "selectEmail" email}}>
+<table>
+  {{#each emails as |email|}}
+    <tr {{action "selectEmail" email}}>
       <td class="subject">
         {{email.subject}}
       </td>
@@ -10,9 +10,9 @@
       <td class="sent-at">
         {{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})
       </td>
-    </a>
-  </tr>
-{{/each}}
+    </tr>
+  {{/each}}
+</table>
 
 {{#if isViewingEmail}}
   {{as-email-viewer email=selectedEmail}}

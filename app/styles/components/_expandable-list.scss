@@ -15,4 +15,25 @@ $list-item-padding: rem-calc(10);
       margin-right: 2px;
     }
   }
+
+  table {
+    margin-top: $list-item-padding;
+    width: 100%;
+  }
+
+  tr {
+    &:hover {
+      background-color: lighten($global-section-border-color, 6%);
+      cursor: pointer;
+    }
+
+    td {
+      color: $small-font-color;
+      padding: $list-item-padding 0;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
 }

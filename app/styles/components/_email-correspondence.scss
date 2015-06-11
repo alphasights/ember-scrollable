@@ -1,45 +1,5 @@
-$list-item-padding: rem-calc(10);
-
 .email-correspondence {
-  table {
-    margin-top: $list-item-padding;
-  }
-
-  tr {
-    @extend %grid-row;
-
-    display: inline-block;
-
-    &:hover {
-      background-color: lighten($global-section-border-color, 6%);
-    }
-
-    > a {
-      color: $small-font-color;
-      display: block;
-      height: 100%;
-      margin: 0;
-      padding: $list-item-padding 0;
-      width: 100%;
-    }
-
-    .subject,
-    .sender,
-    .sent-at {
-      @extend %grid-column-4;
-    }
-
-    .subject {
-      padding-left: 0;
-    }
-
-    .sender {
-      text-align: center;
-    }
-
-    .sent-at {
-      padding-right: 0;
-      text-align: right;
-    }
+  .sender {
+    text-align: center;
   }
 }

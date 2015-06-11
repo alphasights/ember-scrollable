@@ -14,22 +14,9 @@ $project-history-baby-blue: #54acb0;
     color: $header-font-color;
   }
 
-  table {
-    margin-top: $list-item-padding;
-    width: 100%;
-  }
-
   tr {
-    td {
-      padding: $list-item-padding 0;
-    }
-
     .codename {
       color: $small-font-color;
-    }
-
-    .primary-contact {
-      text-align: right;
     }
 
     .outreach-status {

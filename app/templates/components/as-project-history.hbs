@@ -1,18 +1,14 @@
 <table>
   {{#each projectHistory as |projectHistory|}}
-    <tr>
+    <tr {{action "openProject" projectHistory.project}}>
       <td class="project">
-        <a href={{projectHistory.project.pistachioUrl}} target="_blank">
-          <span>{{projectHistory.project.name}}</span> -
-          <span class="codename">{{projectHistory.project.codename}}</span>
-        </a>
+        <span>{{projectHistory.project.name}}</span> -
+        <span class="codename">{{projectHistory.project.codename}}</span>
       </td>
 
       <td class="occurred-at">
         {{#if projectHistory.occurredAt}}
           {{moment projectHistory.occurredAt "D MMM YYYY"}} ({{ago projectHistory.occurredAt}})
-        {{else}}
-          &nbsp;
         {{/if}}
       </td>
 
