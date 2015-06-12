@@ -14,7 +14,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   perPageBinding: "emails.perPage",
   totalPagesBinding: "emails.totalPages",
   page: 1,
-  perPage: 2,
+  perPage: 10,
 
   actions: {
     hideSidePanel: function() {

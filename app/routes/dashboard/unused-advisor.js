@@ -3,7 +3,7 @@ import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 import PaginatedRouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
 export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
-  perPage: 2,
+  perPage: 10,
 
   titleToken: function(model) {
     let advisorName = model.unusedAdvisor.get('advisor.name');
