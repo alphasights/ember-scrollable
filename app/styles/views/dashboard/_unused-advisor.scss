@@ -1,10 +1,6 @@
 .side-panel.unused-advisor {
   @include side-panel($scaled: true);
 
-  > div > header {
-    padding: 0 $column-gutter;
-  }
-
   .side-panel-content header {
     @extend %grid-row;
 
