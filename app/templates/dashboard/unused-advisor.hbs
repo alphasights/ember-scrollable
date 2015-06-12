@@ -4,7 +4,7 @@
   {{#as-side-panel/content}}
     <div>
       {{#liquid-if showFollowUp use="toLeft"}}
-        {{as-email-composer model=email templates=emailTemplates}}
+        {{as-email-composer model=email templates=emailTemplates sidePanel=sidePanel}}
       {{else}}
         <header>
           <div class="content">

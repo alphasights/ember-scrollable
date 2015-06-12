@@ -20,7 +20,8 @@ export default Ember.Component.extend({
   actions: {
     send: function() {
       this.get('model').save().then(() => {
-        notify(`Your email to ${this.get('model.from')} has been delivered.`);
+        notify(`Your email to ${this.get('model.recipients')} has been delivered.`);
+        this.get('sidePanel').send('close');
       }).catch(function() {
         notify('There has been an error delivering your email.', 'error');
       });
