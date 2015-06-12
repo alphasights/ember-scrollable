@@ -22,6 +22,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   setupController: function(controller, models) {
     controller.set('email', this.store.createRecord('email', {
+      concerningId: models.unusedAdvisor.get('id'),
       recipients: models.unusedAdvisor.get('defaultEmail'),
       from: this.get('currentUser.email')
     }));
