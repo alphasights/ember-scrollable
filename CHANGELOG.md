@@ -1,5 +1,13 @@
 # Phoenix Changelog
 
+### Release 0.0.4 (June 15, 2015)
+
+- [#341](https://github.com/alphasights/phoenix/pull/341) Add team member filter to projects page
+- [#338](https://github.com/alphasights/phoenix/pull/338) Improve remove advisor confirmation flow
+- [#355 BUGFIX](https://github.com/alphasights/phoenix/pull/335) Don't trigger double confirmation for removing advisor from widget
+- [#306](https://github.com/alphasights/phoenix/pull/306) Add call completion form to interaction side panel
+- [#314](https://github.com/alphasights/phoenix/pull/314) Interactions now use the default project interaction type if present
+
 ### Release 0.0.3 (June 8, 2015)
 
 - [#315 BUGFIX](https://github.com/alphasights/phoenix/pull/315) Fix form submission errors not showing up correctly
