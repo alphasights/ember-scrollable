@@ -1,6 +1,7 @@
 <div class="header">
-  <i></i>
-  <span {{action "toggleDisplay"}}>{{title}}</span>
+  <span {{action "toggleDisplay"}}>
+    <i class="{{if displayList 'expanded'}}"></i>{{title}}
+  </span>
 </div>
 
 {{#liquid-if displayList use="crossFade"}}

@@ -13,6 +13,10 @@ $list-item-padding: rem-calc(10);
       @include icon(plus-circle);
 
       margin-right: 2px;
+
+      &.expanded {
+        @include icon(minus-circle);
+      }
     }
   }
 
