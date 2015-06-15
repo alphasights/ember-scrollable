@@ -16,7 +16,7 @@ export default Ember.Component.extend({
 
     if (selectedTeamMember != null) {
       return projects.filter((project) => {
-        return project.get('lead') === selectedTeamMember || project.get('members').indexOf(selectedTeamMember) > 0;
+        return project.get('lead') === selectedTeamMember || project.get('members').indexOf(selectedTeamMember) > -1;
       });
     } else {
       return projects;
