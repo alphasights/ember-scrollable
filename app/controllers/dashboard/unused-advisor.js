@@ -27,7 +27,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     toggleFollowUp: function() {
-      this.toggleProperty('showFollowUp');
+      this.get('sidePanel').send('toggleDrawer');
     }
   }
 });

@@ -3,34 +3,30 @@
     {{as-side-panel/header}}
 
     {{#as-side-panel/content}}
-      {{#liquid-if showFollowUp use="toLeft"}}
-        {{as-email-composer model=email templates=emailTemplates sidePanel=sidePanel}}
-      {{else}}
-        <header>
-          <div class="content">
-            <h1>
-              <span>{{model.project.name}}</span>
-              <small>{{model.project.codename}}</small>
-            </h1>
+      <header>
+        <div class="content">
+          <h1>
+            <span>{{model.project.name}}</span>
+            <small>{{model.project.codename}}</small>
+          </h1>
 
-            <span>
-              <span>Contacted</span>
-              <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
-            </span>
-          </div>
-        </header>
+          <span>
+            <span>Contacted</span>
+            <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
+          </span>
+        </div>
+      </header>
 
-        <section class="profile">
-          {{as-profile
-            person=model.advisor
-            title="Unused Advisor"
-            class="advisor"}}
-        </section>
+      <section class="profile">
+        {{as-profile
+          person=model.advisor
+          title="Unused Advisor"
+          class="advisor"}}
+      </section>
 
-        {{#if features.advisorFollowUp}}
-          {{as-project-history projectHistory=projectHistory}}
-        {{/if}}
-      {{/liquid-if}}
+      {{#if features.advisorFollowUp}}
+        {{as-project-history projectHistory=projectHistory}}
+      {{/if}}
     {{/as-side-panel/content}}
 
     {{#as-side-panel/footer}}
@@ -52,4 +48,10 @@
       {{/as-action-group}}
     {{/as-side-panel/footer}}
   {{/as-side-panel/main}}
+
+  {{#as-side-panel/drawer}}
+    {{#as-side-panel/content}}
+      {{as-email-composer model=email templates=emailTemplates sidePanel=sidePanel}}
+    {{/as-side-panel/content}}
+  {{/as-side-panel/drawer}}
 {{/as-side-panel}}
