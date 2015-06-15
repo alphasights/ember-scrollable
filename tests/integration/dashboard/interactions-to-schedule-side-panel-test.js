@@ -159,7 +159,8 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "speak_phone_number": null,
       "speak_code": null,
       "advisor_phone_number": advisorPhoneNumber,
-      "advisor_phone_country_code": '1'
+      "advisor_phone_country_code": '1',
+      "used": false
     }
   }, response: {
     "interactions": []
@@ -200,6 +201,18 @@ test("Schedule interaction makes an API request and displays a notification", fu
   });
 });
 
+test("Schedule interaction shows errors if validation fails", function(assert) {
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+  click("button:contains('Schedule Interaction')");
+
+  andThen(function() {
+    var label = $('label[for=formattedScheduledCallTime]');
+    var message = label.siblings('.error').text().trim();
+    assert.equal(message, "can't be blank");
+  });
+});
+
 test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
@@ -230,7 +243,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click("a:contains('Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -248,7 +261,10 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
 });
 
 test("Cancel Interaction Failure", function(assert) {
-  defineFixture('DELETE', '/interests/1', { status: 500 });
+  defineFixture('DELETE', '/interests/1', {
+    params: { withdraw_from_compliance: 'false' },
+    status: 500
+  });
 
   visit('/dashboard');
 
@@ -258,7 +274,7 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.interactions-to-schedule article:first');
-  click("a:contains('Cancel Interaction')");
+  click("button:contains('Cancel Interaction')");
   click("button:contains('Confirm')");
 
   andThen(function() {

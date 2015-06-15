@@ -7,6 +7,28 @@ article.project-list-item {
   cursor: pointer;
   padding: $column-gutter / 4 0;
 
+  .priority {
+    i {
+      border-radius: $global-rounded;
+      display: inline-block;
+      height: $priority-dot-size;
+      margin-right: $column-gutter / 2;
+      width: $priority-dot-size;
+    }
+
+    .high {
+      background-color: $alert-color;
+    }
+
+    .medium {
+      background-color: $warning-color;
+    }
+
+    .low {
+      background-color: $info-color;
+    }
+  }
+
   > .details {
     @extend %grid-column-small-8;
     @extend %grid-column-medium-4;
@@ -25,31 +47,6 @@ article.project-list-item {
 
     .codename {
       color: $small-font-color;
-    }
-
-    .priority {
-      float: left;
-      min-height: $base-font-size * $base-line-height;
-
-      i {
-        border-radius: $global-rounded;
-        display: inline-block;
-        height: $priority-dot-size;
-        margin-right: $column-gutter / 2;
-        width: $priority-dot-size;
-      }
-
-      .high {
-        background-color: $alert-color;
-      }
-
-      .medium {
-        background-color: $warning-color;
-      }
-
-      .low {
-        background-color: $info-color;
-      }
     }
   }
 

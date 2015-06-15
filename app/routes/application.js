@@ -5,6 +5,14 @@ export default Ember.Route.extend({
   currentUser: Ember.inject.service(),
   preferences: Ember.inject.service(),
 
+  title: function(tokens) {
+    if (tokens.length > 0) {
+      return tokens.join(' - ');
+    } else {
+      return 'Phoenix';
+    }
+  },
+
   model: function() {
     return this.get('currentUser').authenticate().then((currentUser) => {
       return Ember.RSVP.hash({

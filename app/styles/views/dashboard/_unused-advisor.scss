@@ -8,7 +8,7 @@
     width: 100%;
 
     > .content {
-      @extend %grid-column-small-12;
+      @extend %grid-column-12;
 
       h1 {
         line-height: $interaction-header-title-height / 2;
@@ -33,11 +33,15 @@
   }
 
   .profile {
-    @extend %grid-column-12;
+    padding: 0 $column-gutter / 2;
 
     .front {
       @extend %panel-widget;
     }
+  }
+
+  .project-history {
+    padding: $column-gutter;
   }
 
   > div > .content {
@@ -48,17 +52,22 @@
       margin-bottom: - $actions-height;
     }
 
-    .actions {
+    .form-submission {
       float: left;
       height: $actions-height;
       line-height: $actions-height;
+      padding: 0 $column-gutter !important;
 
-      .follow-up {
-        @extend %button-primary;
-      }
+      .action .confirmation {
+        padding: 0 $column-gutter !important;
 
-      .remove {
-        @extend %button-primary;
+        > span {
+          line-height: inherit;
+        }
+
+        a {
+          padding: 0 $column-gutter !important;
+        }
       }
     }
   }

@@ -6,16 +6,14 @@ article.whiteboard-project-list-item {
   padding: $column-gutter / 4 0;
 
   > .priority {
-    @extend %grid-column-medium-1;
-
     .dropdown > button {
       margin: 0 auto;
     }
   }
 
   > .details {
-    @extend %grid-column-small-8;
-    @extend %grid-column-medium-4;
+    @extend %grid-column-small-9;
+    @extend %grid-column-medium-5;
 
     font-size: $h4-font-size;
 

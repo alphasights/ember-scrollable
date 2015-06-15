@@ -89,22 +89,52 @@
         {{/each}}
       </ul>
     </section>
+
+    {{#if showForm}}
+      <section class="form">
+        {{#as-form model=completion action="chargeClient" as |form|}}
+          {{#as-form/fieldset}}
+            {{as-form/input
+              name="duration"
+              form=form
+              errorProperty="duration"
+              label="Call Duration (minutes)"}}
+
+            {{as-form/select
+              name="quality"
+              form=form
+              label="Call Quality"
+              content=qualityOptions}}
+          {{/as-form/fieldset}}
+
+          {{#as-form/submission-action form=form}}
+            Charge Client
+          {{/as-form/submission-action}}
+        {{/as-form}}
+      </section>
+    {{/if}}
   </div>
 
-  {{#as-form/submission-group}}
-    {{#as-form/submission-action action="reschedule"}}
+  {{#as-action-group}}
+    {{#as-action action="toggleForm"}}
+      Complete Interaction
+    {{/as-action}}
+
+    {{#as-action action="reschedule"}}
       Reschedule Interaction
-    {{/as-form/submission-action}}
-    {{#as-form/submission-action
+    {{/as-action}}
+
+    {{#as-action
       showConfirmation=true
       action="cancel"
-      buttonClass="error"
+      buttonClass="error cancel"
       confirmationButtonLabel="Yes, Cancel Interaction"
       confirmationMessage="Are you sure you want to cancel the interaction?"
       requestPromise=requestPromise}}
       Cancel Interaction
-    {{/as-form/submission-action}}
-    {{#as-form/submission-action
+    {{/as-action}}
+
+    {{#as-action
       showConfirmation=true
       action="withdrawAndCancel"
       buttonClass="error"
@@ -112,6 +142,6 @@
       confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
       requestPromise=requestPromise}}
       Cancel and Withdraw Interaction
-    {{/as-form/submission-action}}
-  {{/as-form/submission-group}}
+    {{/as-action}}
+  {{/as-action-group}}
 {{/as-side-panel}}

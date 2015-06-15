@@ -4,11 +4,9 @@ export default Ember.Mixin.create({
   classNameBindings: [':form-field', 'showError:with-errors', 'disabled:disabled'],
   layoutName: 'components/as-form/field',
 
-  fieldsetView: Ember.computed.oneWay('parentView'),
-  formView: Ember.computed.oneWay('fieldsetView.parentView'),
-  model: Ember.computed.oneWay('formView.model'),
+  model: Ember.computed.oneWay('form.model'),
   errorProperty: Ember.computed.oneWay('name'),
-  hasSubmitted: Ember.computed.oneWay('formView.hasSubmitted'),
+  hasSubmitted: Ember.computed.oneWay('form.hasSubmitted'),
   name: null,
   label: null,
   errorMessage: null,

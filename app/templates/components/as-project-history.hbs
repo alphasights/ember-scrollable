@@ -1,0 +1,35 @@
+<div class="header">
+  <i></i>
+  <span {{action "toggleDisplay"}}>Project History</span>
+</div>
+
+{{#liquid-if displayList use="crossFade"}}
+  <table>
+    {{#each projectHistory as |projectHistory|}}
+      <tr>
+        <td class="project">
+          <a href={{projectHistory.project.pistachioUrl}} target="_blank">
+            <span>{{projectHistory.project.name}}</span> -
+            <span class="codename">{{projectHistory.project.codename}}</span>
+          </a>
+        </td>
+
+        <td class="occurred-at">
+          {{#if projectHistory.occurredAt}}
+            {{moment projectHistory.occurredAt "D MMM YYYY"}} ({{ago projectHistory.occurredAt}})
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </td>
+
+        <td class="outreach-status">
+          {{#tool-tipster title=projectHistory.humanizedOutreachStatus}}
+            <i class="{{projectHistory.outreachStatusClass}}"></i>
+          {{/tool-tipster}}
+        </td>
+
+        <td class="primary-contact">{{as-avatar person=projectHistory.primaryContact position="left"}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/liquid-if}}
