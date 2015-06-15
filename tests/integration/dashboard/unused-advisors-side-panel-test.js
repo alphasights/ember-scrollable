@@ -48,6 +48,10 @@ QUnit.module("Unused Advisors Side Panel", {
         }
       ]
     }});
+
+    defineFixture('GET', '/project_history', { response: {
+      "project_history": []
+    }});
   },
 
   afterEach: function() {
