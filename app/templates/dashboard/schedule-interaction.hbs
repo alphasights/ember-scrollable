@@ -1,87 +1,89 @@
 {{#as-side-panel class="interaction schedule-interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
-  {{as-side-panel/header}}
+  {{#as-side-panel/main}}
+    {{as-side-panel/header}}
 
-  {{#as-side-panel/content}}
-    <header>
-      <div class="content">
-        <h1>
-          <span>{{model.advisor.name}}</span>
+    {{#as-side-panel/content}}
+      <header>
+        <div class="content">
+          <h1>
+            <span>{{model.advisor.name}}</span>
 
-          <small>
-            <a target="_blank" href={{model.project.pistachioUrl}}>
-              {{model.project.name}}
-            </a>
-          </small>
+            <small>
+              <a target="_blank" href={{model.project.pistachioUrl}}>
+                {{model.project.name}}
+              </a>
+            </small>
 
-          <span class="primary-contact">
-            {{as-avatar person=model.primaryContact}}
-          </span>
-        </h1>
-      </div>
-    </header>
+            <span class="primary-contact">
+              {{as-avatar person=model.primaryContact}}
+            </span>
+          </h1>
+        </div>
+      </header>
 
-    <section class="profiles">
-      <ul>
-        <li>{{as-profile person=model.advisor title="Advisor" class="advisor"}}</li>
-        <li>{{as-profile person=model.clientContact title="Client" class="client"}}</li>
-      </ul>
-    </section>
-
-    <section class="scheduling">
-      {{as-calendar
-        selection=occurrence
-        timeZoneOptions=timeZoneOptions
-        occurrences=unavailabilityOccurrences
-        timeZone=selectedTimeZone}}
-
-      <section class="form">
-        {{#as-form model=this action="submit" as |form|}}
-          {{#as-form/fieldset}}
-            {{as-form/input
-              form=form
-              name="formattedScheduledCallTime"
-              placeholder="Please select a call time from the calendar."
-              errorProperty="scheduledCallTime"
-              label="Call Time"
-              disabled=true}}
-
-            {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
-            {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
-
-            {{as-form/select
-              form=form
-              name="interactionType"
-              label="Interaction Type"
-              content=interactionTypesForSelect
-              optionLabelPath="content.title"
-              optionValuePath="content.id"
-              optionGroupPath="classification"
-            }}
-
-            {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
-            {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
-          {{/as-form/fieldset}}
-
-          {{#as-action-group}}
-            {{#as-form/submit
-              form=form
-              requestPromise=requestPromise}}
-              Schedule Interaction
-            {{/as-form/submit}}
-
-            {{#as-action
-              action="cancel"
-              buttonClass="error"
-              showConfirmation=true
-              confirmationStateClass="alert"
-              confirmationButtonLabel="Yes, Cancel Interaction"
-              confirmationMessage="Are you sure you want to cancel the interaction?"
-              requestPromise=requestPromise}}
-              Cancel Interaction
-            {{/as-action}}
-          {{/as-action-group}}
-        {{/as-form}}
+      <section class="profiles">
+        <ul>
+          <li>{{as-profile person=model.advisor title="Advisor" class="advisor"}}</li>
+          <li>{{as-profile person=model.clientContact title="Client" class="client"}}</li>
+        </ul>
       </section>
-    </section>
-  {{/as-side-panel/content}}
+
+      <section class="scheduling">
+        {{as-calendar
+          selection=occurrence
+          timeZoneOptions=timeZoneOptions
+          occurrences=unavailabilityOccurrences
+          timeZone=selectedTimeZone}}
+
+        <section class="form">
+          {{#as-form model=this action="submit" as |form|}}
+            {{#as-form/fieldset}}
+              {{as-form/input
+                form=form
+                name="formattedScheduledCallTime"
+                placeholder="Please select a call time from the calendar."
+                errorProperty="scheduledCallTime"
+                label="Call Time"
+                disabled=true}}
+
+              {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+              {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
+
+              {{as-form/select
+                form=form
+                name="interactionType"
+                label="Interaction Type"
+                content=interactionTypesForSelect
+                optionLabelPath="content.title"
+                optionValuePath="content.id"
+                optionGroupPath="classification"
+              }}
+
+              {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
+              {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
+            {{/as-form/fieldset}}
+
+            {{#as-action-group}}
+              {{#as-form/submit
+                form=form
+                requestPromise=requestPromise}}
+                Schedule Interaction
+              {{/as-form/submit}}
+
+              {{#as-action
+                action="cancel"
+                buttonClass="error"
+                showConfirmation=true
+                confirmationStateClass="alert"
+                confirmationButtonLabel="Yes, Cancel Interaction"
+                confirmationMessage="Are you sure you want to cancel the interaction?"
+                requestPromise=requestPromise}}
+                Cancel Interaction
+              {{/as-action}}
+            {{/as-action-group}}
+          {{/as-form}}
+        </section>
+      </section>
+    {{/as-side-panel/content}}
+  {{/as-side-panel/main}}
 {{/as-side-panel}}

@@ -1,8 +1,8 @@
 {{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
-  {{as-side-panel/header}}
+  {{#as-side-panel/main}}
+    {{as-side-panel/header}}
 
-  {{#as-side-panel/content}}
-    <div>
+    {{#as-side-panel/content}}
       {{#liquid-if showFollowUp use="toLeft"}}
         {{as-email-composer model=email templates=emailTemplates sidePanel=sidePanel}}
       {{else}}
@@ -31,25 +31,25 @@
           {{as-project-history projectHistory=projectHistory}}
         {{/if}}
       {{/liquid-if}}
-    </div>
-  {{/as-side-panel/content}}
+    {{/as-side-panel/content}}
 
-  {{#as-side-panel/footer}}
-    {{#as-action-group}}
-      {{#as-action
-        action="remove"
-        showConfirmation=true
-        confirmationStateClass="alert"
-        confirmationButtonLabel="Yes, Remove Advisor"
-        requestPromise=requestPromise}}
-        Remove Advisor
-      {{/as-action}}
-
-      {{#if features.advisorFollowUp}}
-        {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
-          Follow Up
+    {{#as-side-panel/footer}}
+      {{#as-action-group}}
+        {{#as-action
+          action="remove"
+          showConfirmation=true
+          confirmationStateClass="alert"
+          confirmationButtonLabel="Yes, Remove Advisor"
+          requestPromise=requestPromise}}
+          Remove Advisor
         {{/as-action}}
-      {{/if}}
-    {{/as-action-group}}
-  {{/as-side-panel/footer}}
+
+        {{#if features.advisorFollowUp}}
+          {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
+            Follow Up
+          {{/as-action}}
+        {{/if}}
+      {{/as-action-group}}
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/main}}
 {{/as-side-panel}}
