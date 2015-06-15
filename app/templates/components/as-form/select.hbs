@@ -1,11 +1,18 @@
-{{#as-form/field}}
+{{#as-form/field
+  form=form
+  name=name
+  errorProperty=errorProperty
+  errorMessage=errorMessage
+  disabled=disabled
+  label=label
+  class="form-select" as |value|}}
   {{view "select"
     name=name
     content=content
-    optionValuePath="content.id"
-    optionLabelPath="content.name"
-    prompt=prompt
+    optionLabelPath=optionLabelPath
+    optionValuePath=optionValuePath
     optionGroupPath=optionGroupPath
+    prompt=prompt
     value=value
     disabled=disabled}}
 {{/as-form/field}}

@@ -1,6 +1,7 @@
-import FormFieldMixin from 'phoenix/mixins/form-field';
 import Ember from 'ember';
 
-export default Ember.Component.extend(FormFieldMixin, {
-  classNameBindings: [':form-select']
+export default Ember.Component.extend({
+  errorProperty: Ember.computed.oneWay('name'),
+  optionLabelPath: 'content.name',
+  optionValuePath: 'content.id'
 });
