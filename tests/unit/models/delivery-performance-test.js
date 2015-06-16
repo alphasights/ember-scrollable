@@ -18,6 +18,14 @@ moduleForModel('delivery-performance', 'DeliveryPerformance', {
   }
 });
 
+test('#roundedCurrentMonthCreditCount', function(assert) {
+  Ember.run(() => {
+    this.model.set('currentMonthCreditCount', 1.999);
+  });
+
+  assert.equal(this.model.get('roundedCurrentMonthCreditCount'), 1);
+});
+
 test('#onPaceCreditTarget calculates the on pace credit target, rounded to the nearest tenth', function(assert) {
   // Five weekdays prior to February 8 of a possible total of 20 weekdays.
   // Therefore 25% of the month has been completed.

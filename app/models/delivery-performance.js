@@ -7,18 +7,22 @@ export default DS.Model.extend({
   unusedAdvisorsCount: DS.attr('number'),
   user: DS.belongsTo('user'),
 
+  roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
+    return Math.floor(this.get('currentMonthCreditCount'));
+  }),
+
   onPaceCreditTarget: Ember.computed('monthlyTarget', function() {
     return Math.round(
       (this.get('monthlyTarget') * this.monthCompletionProgress()
     ) * 10) / 10;
   }),
 
-  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
+  isOnTarget: Ember.computed('roundedCurrentMonthCreditCount', 'monthlyTarget', function() {
+    return this.get('roundedCurrentMonthCreditCount') >= this.get('monthlyTarget');
   }),
 
-  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
+  isOnPace: Ember.computed('roundedCurrentMonthCreditCount', 'onPaceCreditTarget', function() {
+    return this.get('roundedCurrentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
 
   monthCompletionProgress: function() {

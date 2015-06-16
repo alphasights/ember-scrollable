@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   performance: null,
   isOnTarget: Ember.computed.oneWay('performance.isOnTarget'),
   isOnPace: Ember.computed.oneWay('performance.isOnPace'),
-  currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
+  currentMonthCreditCount: Ember.computed.oneWay('performance.roundedCurrentMonthCreditCount'),
   monthlyTarget: Ember.computed.oneWay('performance.monthlyTarget'),
   onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
