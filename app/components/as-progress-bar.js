@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   }),
 
   updateWidth: Ember.on('didInsertElement', function() {
-    this.$('> div').velocity({
+    Ember.$.Velocity(this.$('> div')[0], {
       width: [this.get('width'), this.get('previousWidth')]
     }, {
       duration: 350
