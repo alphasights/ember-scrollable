@@ -59,6 +59,15 @@
       padding: $column-gutter / 2 $column-gutter;
     }
 
+    textarea {
+      min-height: rem-calc(500) !important;
+      resize: none;
+    }
+
+    pre {
+      font-family: inherit;
+    }
+
     .header {
       background-color: lighten($panel-bg, 2%);
       border-bottom: 1px solid darken($global-section-border-color, 10%);

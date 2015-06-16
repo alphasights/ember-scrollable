@@ -2,10 +2,6 @@ import Ember from 'ember';
 import notify from 'phoenix/helpers/notify';
 import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 
-_.templateSettings = {
-  interpolate: /\{\{(.+?)\}\}/g
-};
-
 export default Ember.Component.extend(InboundActions, {
   classNameBindings: [':email-composer'],
   model: null,
@@ -21,6 +17,7 @@ export default Ember.Component.extend(InboundActions, {
 
   onSelectedTemplateDidChange: Ember.observer('selectedTemplate', function() {
     this.set('model.body', this.get('selectedTemplate.body'));
+    this.set('model.subject', this.get('selectedTemplate.subject'));
   }),
 
   variablesMapping: Ember.computed('variables', function() {
@@ -32,9 +29,11 @@ export default Ember.Component.extend(InboundActions, {
 
   preview: Ember.computed('model.body', 'variablesMapping', function() {
     if (Ember.isPresent(this.get('model.body'))) {
-      var result = _.template(this.get('model.body'))(this.get('variablesMapping'));
-      result = result.replace(/(\r\n|\n|\r)/gm, '<br>');
-      return new Ember.Handlebars.SafeString(result);
+      return _.template(this.get('model.body'), {
+        interpolate: /\{\{(.+?)\}\}/g
+      })(this.get('variablesMapping'));
+    } else {
+      return null;
     }
   }),
 
