@@ -25,7 +25,13 @@
     </div>
 
     <div class="team-member">
-      {{view "select" content=teamMembers optionLabelPath="content.name" value=selectedTeamMember prompt="All"}}
+      {{#x-select value=selectedTeamMember}}
+        <option>All</option>
+
+        {{#each teamMember in teamMembers}}
+          {{#x-option value=teamMember}}{{teamMember.name}}{{/x-option}}
+        {{/each}}
+      {{/x-select}}
     </div>
   {{/if}}
 </header>
