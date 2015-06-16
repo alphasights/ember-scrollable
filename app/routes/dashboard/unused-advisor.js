@@ -17,7 +17,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
         emailTemplates: this.store.find('emailTemplate', { purpose: "Unused Advisor" }),
         emailVariables: this.store.find('emailVariable', {
           concerning_type: "email/unused_advisorship_email",
-          concerning_id: unusedAdvisor.get('advisor.id')
+          concerning_id: unusedAdvisor.get('id')
         }),
         projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
       });
@@ -27,7 +27,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   setupController: function(controller, models) {
     controller.set('email', this.store.createRecord('email', {
       concerningType: "email/unused_advisorship_email",
-      concerningId: models.unusedAdvisor.get('advisor.id'),
+      concerningId: models.unusedAdvisor.get('id'),
       recipients: models.unusedAdvisor.get('defaultEmail'),
       from: this.get('currentUser.email')
     }));
