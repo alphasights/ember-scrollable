@@ -8,5 +8,6 @@ export default DS.Model.extend(EmberValidations.Mixin, {
   from: DS.attr('string'),
   cc: DS.attr('string'),
   bcc: DS.attr('string'),
-  concerningId: DS.attr('number')
+  concerningId: DS.attr('number'),
+  concerningType: DS.attr('string'),
 });

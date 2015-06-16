@@ -14,8 +14,11 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
     return this.store.find('unusedAdvisor', params.unused_advisor_id).then((unusedAdvisor) => {
       return Ember.RSVP.hash({
         unusedAdvisor: unusedAdvisor,
-        emailTemplates: this.store.find('emailTemplate'),
-        emailVariables: this.store.find('emailVariable', { concerning_id: unusedAdvisor.get('id') }),
+        emailTemplates: this.store.find('emailTemplate', { purpose: "Unused Advisor" }),
+        emailVariables: this.store.find('emailVariable', {
+          concerning_type: "email/unused_advisorship_email",
+          concerning_id: unusedAdvisor.get('advisor.id')
+        }),
         projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
       });
     });
@@ -23,7 +26,8 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   setupController: function(controller, models) {
     controller.set('email', this.store.createRecord('email', {
-      concerningId: models.unusedAdvisor.get('id'),
+      concerningType: "email/unused_advisorship_email",
+      concerningId: models.unusedAdvisor.get('advisor.id'),
       recipients: models.unusedAdvisor.get('defaultEmail'),
       from: this.get('currentUser.email')
     }));
