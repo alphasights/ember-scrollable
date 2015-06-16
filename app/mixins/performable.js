@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  isAmazing: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return (this.get('currentMonthCreditCount') / this.get('onPaceCreditTarget')) >= 2;
+  paceIsExceptional: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
+    return (this.get('currentMonthCreditCount') / this.get('onPaceCreditTarget')) >= 2.5;
   }),
 
   isMoreThanOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
@@ -12,4 +12,4 @@ export default Ember.Mixin.create({
   isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
     return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
-})
+});

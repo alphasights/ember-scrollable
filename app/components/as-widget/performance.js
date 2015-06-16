@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNameBindings: [':widget', ':performance', 'statusClass'],
 
   performance: null,
-  isAmazing: Ember.computed.oneWay('performance.isAmazing'),
+  paceIsExceptional: Ember.computed.oneWay('performance.paceIsExceptional'),
   isMoreThanOnPace: Ember.computed.oneWay('performance.isMoreThanOnPace'),
   isOnPace: Ember.computed.oneWay('performance.isOnPace'),
   currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
@@ -13,9 +13,9 @@ export default Ember.Component.extend({
   onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
 
-  statusClass: Ember.computed('isAmazing', 'isMoreThanOnPace', 'isOnPace', function() {
-    if (this.get('isAmazing')) {
-      return 'amazing';
+  statusClass: Ember.computed('paceIsExceptional', 'isMoreThanOnPace', 'isOnPace', function() {
+    if (this.get('paceIsExceptional')) {
+      return 'exceptional';
     } else if (this.get('isMoreThanOnPace')) {
       return 'more-than-on-pace';
     } else if (this.get('isOnPace')) {
