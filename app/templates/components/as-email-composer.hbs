@@ -1,67 +1,80 @@
 <div class="form">
   {{#as-form model=model as |form|}}
-    <a {{action "toggleIsEditingHeader"}}>Edit</a>
+    <div class="header">
+      {{#liquid-if isEditingHeader}}
+        {{#as-form/fieldset}}
+          {{as-form/select
+            form=form
+            prompt="Choose a template..."
+            label="Template"
+            content=templates
+            value=selectedTemplate
+            optionValuePath="content"}}
 
-    {{#liquid-if isEditingHeader}}
-      {{#as-form/fieldset}}
-        {{as-form/select
-          form=form
-          prompt="Choose a template..."
-          label="Template"
-          content=templates
-          value=selectedTemplate
-          optionValuePath="content"}}
-
-        {{as-form/input form=form name="recipients" label="To"}}
-        {{as-form/input form=form name="from" label="From"}}
-        {{as-form/input form=form name="cc" label="CC"}}
-        {{as-form/input form=form name="bcc" label="BCC"}}
-      {{/as-form/fieldset}}
-    {{else}}
-      <dl class="header">
-        {{#if selectedTemplate}}
-          <dt>Template:</dt>
-          <dd>{{selectedTemplate.name}}</dd>
-        {{/if}}
-
-        {{#if model.recipients}}
-          <dt>To:</dt>
-          <dd>{{model.recipients}}</dd>
-        {{/if}}
-
-        {{#if model.from}}
-          <dt>From:</dt>
-          <dd>{{model.from}}</dd>
-        {{/if}}
-
-        {{#if model.cc}}
-          <dt>CC:</dt>
-          <dd>{{model.cc}}</dd>
-        {{/if}}
-
-        {{#if model.bcc}}
-          <dt>BCC:</dt>
-          <dd>{{model.bcc}}</dd>
-        {{/if}}
-      </dl>
-    {{/liquid-if}}
-
-    {{#as-form/fieldset}}
-      {{#liquid-if showPreview}}
-        <span>{{preview}}</span>
+          {{as-form/input form=form name="recipients" label="To"}}
+          {{as-form/input form=form name="from" label="From"}}
+          {{as-form/input form=form name="cc" label="CC"}}
+          {{as-form/input form=form name="bcc" label="BCC"}}
+        {{/as-form/fieldset}}
       {{else}}
-        {{as-form/input
-          form=form
-          name="subject"
-          errorProperty="subject"
-          label="Subject"}}
+        <dl>
+          {{#if selectedTemplate}}
+            <dt>Template:</dt>
+            <dd>{{selectedTemplate.name}}</dd>
+          {{/if}}
 
-        {{as-form/textarea
-          form=form
-          name="body"
-          errorProperty="body"
-          label="Body"}}
+          {{#if model.recipients}}
+            <dt>To:</dt>
+            <dd>{{model.recipients}}</dd>
+          {{/if}}
+
+          {{#if model.from}}
+            <dt>From:</dt>
+            <dd>{{model.from}}</dd>
+          {{/if}}
+
+          {{#if model.cc}}
+            <dt>CC:</dt>
+            <dd>{{model.cc}}</dd>
+          {{/if}}
+
+          {{#if model.bcc}}
+            <dt>BCC:</dt>
+            <dd>{{model.bcc}}</dd>
+          {{/if}}
+        </dl>
       {{/liquid-if}}
-    {{/as-form/fieldset}}
+
+      <a {{action "toggleIsEditingHeader"}}>
+        {{#if isEditingHeader}}
+          Save Settings
+        {{else}}
+          Change Settings
+        {{/if}}
+      </a>
+    </div>
+
+    {{#liquid-if showPreview use="crossFade"}}
+      <article class="preview">
+        <h1>{{model.subject}}</h1>
+        <span>{{preview}}</span>
+      </article>
+    {{else}}
+      <div class="form">
+        {{#as-form/fieldset}}
+          {{as-form/input
+            form=form
+            name="subject"
+            errorProperty="subject"
+            label="Subject"}}
+
+          {{as-form/textarea
+            form=form
+            name="body"
+            errorProperty="body"
+            label="Body"}}
+        {{/as-form/fieldset}}
+      </div>
+    {{/liquid-if}}
   {{/as-form}}
 </div>

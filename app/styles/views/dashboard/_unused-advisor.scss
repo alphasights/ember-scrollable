@@ -33,16 +33,49 @@
   }
 
   .drawer {
-    .email-composer, .form, form {
+    .preview {
+      padding: $column-gutter / 2 $column-gutter;
+    }
+
+    .form-field {
+      margin-bottom: $column-gutter / 2;
+      min-height: rem-calc(90) !important;
+    }
+
+    .email-composer,
+    .form,
+    form {
       height: 100%;
     }
 
-    .form form {
-      padding: $column-gutter !important;
+    form {
       overflow: auto;
-      
-      .form-fieldset {
+      background-color: $white;
+    }
+
+    fieldset {
+      height: 100%;
+      margin-top: 0;
+      padding: $column-gutter / 2 $column-gutter;
+    }
+
+    .header {
+      background-color: lighten($panel-bg, 2%);
+      border-bottom: 1px solid darken($global-section-border-color, 10%);
+      padding: $column-gutter / 2 $column-gutter;
+
+      fieldset {
         padding: 0;
+      }
+
+      dl {
+        margin-bottom: 0;
+
+        dt {
+          clear: both;
+          float: left;
+          margin-right: 5px;
+        }
       }
     }
   }
