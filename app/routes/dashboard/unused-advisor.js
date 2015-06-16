@@ -4,8 +4,8 @@ import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 export default Ember.Route.extend(SidePanelRouteMixin, {
   currentUser: Ember.inject.service(),
 
-  titleToken: function(model) {
-    let advisorName = model.get('advisor.name');
+  titleToken: function(models) {
+    let advisorName = models.unusedAdvisor.get('advisor.name');
 
     return `Unused Advisor: ${advisorName}`;
   },
