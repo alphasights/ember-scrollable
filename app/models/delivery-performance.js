@@ -17,12 +17,12 @@ export default DS.Model.extend({
     ) * 10) / 10;
   }),
 
-  isOnTarget: Ember.computed('roundedCurrentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('roundedCurrentMonthCreditCount') >= this.get('monthlyTarget');
+  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
   }),
 
-  isOnPace: Ember.computed('roundedCurrentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('roundedCurrentMonthCreditCount') >= this.get('onPaceCreditTarget');
+  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
 
   monthCompletionProgress: function() {

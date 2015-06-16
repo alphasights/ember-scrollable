@@ -7,8 +7,12 @@ export default Ember.Object.extend({
     return this._totalize('monthlyTarget');
   }),
 
-  roundedCurrentMonthCreditCount: Ember.computed('userPerformances.[]', function() {
-    return Math.floor(this._totalize('currentMonthCreditCount'));
+  currentMonthCreditCount: Ember.computed('userPerformances.[]', function() {
+    return this._totalize('currentMonthCreditCount');
+  }),
+
+  roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
+    return Math.floor(this.get('currentMonthCreditCount'));
   }),
 
   onPaceCreditTarget: Ember.computed('userPerformances.[]', function() {
@@ -16,12 +20,12 @@ export default Ember.Object.extend({
     return Math.round(totalTarget * 10) / 10;
   }),
 
-  isOnTarget: Ember.computed('roundedCurrentMonthCreditCount', 'monthlyTarget', function() {
-    return this.get('roundedCurrentMonthCreditCount') >= this.get('monthlyTarget');
+  isOnTarget: Ember.computed('currentMonthCreditCount', 'monthlyTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('monthlyTarget');
   }),
 
-  isOnPace: Ember.computed('roundedCurrentMonthCreditCount', 'onPaceCreditTarget', function() {
-    return this.get('roundedCurrentMonthCreditCount') >= this.get('onPaceCreditTarget');
+  isOnPace: Ember.computed('currentMonthCreditCount', 'onPaceCreditTarget', function() {
+    return this.get('currentMonthCreditCount') >= this.get('onPaceCreditTarget');
   }),
 
   _totalize: function(attribute) {
