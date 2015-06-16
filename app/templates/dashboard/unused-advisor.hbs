@@ -20,17 +20,26 @@
         title="Unused Advisor"
         class="advisor"}}
     </section>
-  </div>
-
-  <section class="actions">
-    <button class="remove" {{action "remove"}}>
-      Remove Advisor
-    </button>
 
     {{#if features.advisorFollowUp}}
-      <button class="follow-up" {{action "followUp"}}>
-        Follow Up
-      </button>
+      {{as-project-history projectHistory=projectHistory}}
     {{/if}}
-  </section>
+  </div>
+
+  {{#as-action-group}}
+    {{#as-action
+      action="remove"
+      showConfirmation=true
+      confirmationStateClass="alert"
+      confirmationButtonLabel="Yes, Remove Advisor"
+      requestPromise=requestPromise}}
+      Remove Advisor
+    {{/as-action}}
+
+    {{#if features.advisorFollowUp}}
+      {{#as-action action="followUp" requestPromise=requestPromise}}
+        Follow Up
+      {{/as-action}}
+    {{/if}}
+  {{/as-action-group}}
 {{/as-side-panel}}

@@ -351,7 +351,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
 
   // Click Filter, Switch to Taylor
   click('.interactions-to-schedule .filters .team-members button');
-  click(`.interactions-to-schedule a:contains(${taylorBrown.name})`);
+  click(`.interactions-to-schedule button:contains(${taylorBrown.name})`);
 
   // Check that only Taylor Brown interactions are in the DOM
   andThen(function() {

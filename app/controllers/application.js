@@ -14,6 +14,14 @@ export default Ember.Controller.extend({
     id: 'performance', name: 'Performance', routeName: 'performance'
   }],
 
+  actionItems: [{
+    name: 'feedback',
+    label: 'Feedback'
+  }, {
+    name: 'logout',
+    label: 'Logout'
+  }],
+
   actions: {
     savePreferences: function() {
       this.get('preferences.model').save();
@@ -21,6 +29,12 @@ export default Ember.Controller.extend({
 
     logout: function() {
       this.get('currentUser').logout();
+    },
+
+    feedback: function() {
+      /* jshint newcap: false */
+      Intercom('show');
+      /* jshint newcap: true */
     }
   }
 });

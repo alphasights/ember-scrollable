@@ -29,7 +29,7 @@
     {{#if isTeamView}}
       {{as-widget/teamUnusedAdvisors teamMembers=teamMembers}}
     {{else}}
-      {{as-widget/unusedAdvisors model=unusedAdvisors}}
+      {{as-widget/unusedAdvisors model=unusedAdvisors store=store}}
     {{/if}}
   </li>
 </ul>
