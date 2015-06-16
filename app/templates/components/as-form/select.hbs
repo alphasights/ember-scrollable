@@ -6,13 +6,9 @@
   disabled=disabled
   label=label
   class="form-select" as |value|}}
-  {{view "select"
-    name=name
-    content=content
-    optionLabelPath=optionLabelPath
-    optionValuePath=optionValuePath
-    optionGroupPath=optionGroupPath
-    prompt=prompt
-    value=value
-    disabled=disabled}}
+  {{#x-select name=name prompt=prompt value=value disabled=disabled}}
+    {{#each item in content}}
+      {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+    {{/each}}
+  {{/x-select}}
 {{/as-form/field}}
