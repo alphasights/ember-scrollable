@@ -6,9 +6,23 @@
   disabled=disabled
   label=label
   class="form-select" as |value|}}
-  {{#x-select name=name prompt=prompt value=value disabled=disabled}}
-    {{#each item in content}}
-      {{#x-option value=item.id}}{{item.name}}{{/x-option}}
-    {{/each}}
+  {{#x-select name=name value=value disabled=disabled}}
+    {{#if prompt}}
+      <option>{{prompt}}</option>
+    {{/if}}
+
+    {{#if optionGroupPath}}
+      {{#each group in groupedContent}}
+        <optgroup label={{group.label}}>
+          {{#each item in group.content}}
+            {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+          {{/each}}
+        </optgroup>
+      {{/each}}
+    {{else}}
+      {{#each item in content}}
+        {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+      {{/each}}
+    {{/if}}
   {{/x-select}}
 {{/as-form/field}}
