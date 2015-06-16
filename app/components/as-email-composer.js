@@ -27,11 +27,15 @@ export default Ember.Component.extend(InboundActions, {
     }, {});
   }),
 
-  preview: Ember.computed('model.body', 'variablesMapping', function() {
+  renderBody: function(body, variablesMapping) {
+    var settings = { interpolate: /\{\{(.+?)\}\}/g };
+    var template = _.template(body, settings);
+    return template(variablesMapping);
+  },
+
+  renderedBody: Ember.computed('model.body', 'variablesMapping', function() {
     if (Ember.isPresent(this.get('model.body'))) {
-      return _.template(this.get('model.body'), {
-        interpolate: /\{\{(.+?)\}\}/g
-      })(this.get('variablesMapping'));
+      return this.renderBody(this.get('model.body'), this.get('variablesMapping'));
     } else {
       return null;
     }

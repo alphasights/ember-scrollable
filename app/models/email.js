@@ -1,7 +1,6 @@
 import DS from 'ember-data';
-import EmberValidations from 'ember-validations';
 
-export default DS.Model.extend(EmberValidations.Mixin, {
+export default DS.Model.extend({
   subject: DS.attr('string'),
   body: DS.attr('string'),
   recipients: DS.attr('string'),
@@ -9,5 +8,5 @@ export default DS.Model.extend(EmberValidations.Mixin, {
   cc: DS.attr('string'),
   bcc: DS.attr('string'),
   concerningId: DS.attr('number'),
-  concerningType: DS.attr('string'),
+  concerningType: DS.attr('string')
 });
