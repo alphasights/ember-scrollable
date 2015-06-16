@@ -36,20 +36,27 @@
     {{/liquid-if}}
 
     {{#as-form/fieldset}}
-      {{as-form/input
-        form=form
-        name="subject"
-        errorProperty="subject"
-        label="Subject"}}
+      {{#liquid-if showPreview}}
+        <p>
+          {{preview}}
+        </p>
+      {{else}}
+        {{as-form/input
+          form=form
+          name="subject"
+          errorProperty="subject"
+          label="Subject"}}
 
-      {{as-form/textarea
-        form=form
-        name="body"
-        errorProperty="body"
-        label="Body"}}
+        {{as-form/textarea
+          form=form
+          name="body"
+          errorProperty="body"
+          label="Body"}}
+      {{/liquid-if}}
 
       {{#as-action-group}}
         {{#as-form/submit form=form}}Send{{/as-form/submit}}
+        {{#as-action action="togglePreview"}}Preview{{/as-action}}
       {{/as-action-group}}
     {{/as-form/fieldset}}
   {{/as-form}}
