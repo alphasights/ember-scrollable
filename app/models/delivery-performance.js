@@ -7,10 +7,6 @@ export default DS.Model.extend({
   unusedAdvisorsCount: DS.attr('number'),
   user: DS.belongsTo('user'),
 
-  roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
-    return Math.floor(this.get('currentMonthCreditCount'));
-  }),
-
   onPaceCreditTarget: Ember.computed('monthlyTarget', function() {
     return Math.round(
       (this.get('monthlyTarget') * this.monthCompletionProgress()

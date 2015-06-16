@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   performance: null,
   isOnTarget: Ember.computed.oneWay('performance.isOnTarget'),
   isOnPace: Ember.computed.oneWay('performance.isOnPace'),
-  currentMonthCreditCount: Ember.computed.oneWay('performance.roundedCurrentMonthCreditCount'),
+  currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
   monthlyTarget: Ember.computed.oneWay('performance.monthlyTarget'),
   onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
@@ -43,7 +43,11 @@ export default Ember.Component.extend({
   }),
 
   currentMonthCreditCountTitle: Ember.computed('currentMonthCreditCount', function() {
-    return `Credits: ${this.get('currentMonthCreditCount')}`;
+    return `Credits: ${this.get('_roundedCurrentMonthCreditCount')}`;
+  }),
+
+  _roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
+    return Math.round(this.get('currentMonthCreditCount') * 10) / 10;
   }),
 
   _setupTooltipster: Ember.on('didInsertElement', function() {

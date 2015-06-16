@@ -11,10 +11,6 @@ export default Ember.Object.extend({
     return this._totalize('currentMonthCreditCount');
   }),
 
-  roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
-    return Math.floor(this.get('currentMonthCreditCount'));
-  }),
-
   onPaceCreditTarget: Ember.computed('userPerformances.[]', function() {
     var totalTarget = this._totalize('onPaceCreditTarget');
     return Math.round(totalTarget * 10) / 10;
