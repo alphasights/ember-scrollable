@@ -352,7 +352,7 @@ test("Complete Interaction completes the call and closes the side panel", functi
   click('.scheduled-interactions article:first');
   click('button:contains("Complete Interaction")');
   fillIn('input[name=duration]', '20');
-  select('select[name=quality] option[value=bad]');
+  select('select[name=quality] ', 'Bad');
   click('button:contains("Charge Client")');
 
   andThen(function() {
@@ -371,7 +371,7 @@ test("Complete Interaction shows error message in case of failure", function(ass
   click('.scheduled-interactions article:first');
   click('button:contains("Complete Interaction")');
   fillIn('input[name=duration]', '20');
-  select('select[name=quality] option[value=bad]');
+  select('select[name=quality] ', 'Bad');
   click('button:contains("Charge Client")');
 
   andThen(function() {

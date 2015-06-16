@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../helpers/define-fixture';
-import '../helpers/select';
 import '../helpers/drag-and-drop';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
@@ -478,7 +477,7 @@ test("Change selected team", function(assert) {
   visit('/whiteboards');
 
   click('.whiteboard-select button');
-  select('.whiteboard-select option:last');
+  select('.whiteboard-select select ', 'Example Team 2');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 4');
@@ -498,7 +497,7 @@ test("Change selected whiteboard", function(assert) {
   visit('/whiteboards');
 
   click('.whiteboard-select button');
-  select('.whiteboard-select option:last');
+  select('.whiteboard-select select ', 'Cool whiteboard');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 5');
