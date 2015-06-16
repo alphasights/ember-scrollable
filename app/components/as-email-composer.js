@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import notify from 'phoenix/helpers/notify';
+import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 
 _.templateSettings = {
   interpolate: /\{\{(.+?)\}\}/g
 };
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(InboundActions, {
   classNameBindings: [':email-composer'],
   model: null,
   selectedTemplate: null,
@@ -38,15 +39,6 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    send: function() {
-      this.get('model').save().then(() => {
-        notify(`Your email to ${this.get('model.recipients')} has been delivered.`);
-        this.get('sidePanel').send('close');
-      }).catch(function() {
-        notify('There has been an error delivering your email.', 'error');
-      });
-    },
-
     toggleIsEditingHeader: function() {
       this.toggleProperty('isEditingHeader');
     },

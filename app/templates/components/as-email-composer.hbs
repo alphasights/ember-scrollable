@@ -1,6 +1,7 @@
 <div class="form">
-  {{#as-form model=model action="send" as |form|}}
+  {{#as-form model=model as |form|}}
     <a {{action "toggleIsEditingHeader"}}>Edit</a>
+
     {{#liquid-if isEditingHeader}}
       {{#as-form/fieldset}}
         {{as-form/select
@@ -18,28 +19,36 @@
       {{/as-form/fieldset}}
     {{else}}
       <dl class="header">
-        <dt>Template</dt>
-        <dd>{{selectedTemplate.name}}</dd>
+        {{#if selectedTemplate}}
+          <dt>Template:</dt>
+          <dd>{{selectedTemplate.name}}</dd>
+        {{/if}}
 
-        <dt>To</dt>
-        <dd>{{model.recipients}}</dd>
+        {{#if model.recipients}}
+          <dt>To:</dt>
+          <dd>{{model.recipients}}</dd>
+        {{/if}}
 
-        <dt>From</dt>
-        <dd>{{model.from}}</dd>
+        {{#if model.from}}
+          <dt>From:</dt>
+          <dd>{{model.from}}</dd>
+        {{/if}}
 
-        <dt>CC</dt>
-        <dd>{{model.cc}}</dd>
+        {{#if model.cc}}
+          <dt>CC:</dt>
+          <dd>{{model.cc}}</dd>
+        {{/if}}
 
-        <dt>BCC</dt>
-        <dd>{{model.bcc}}</dd>
+        {{#if model.bcc}}
+          <dt>BCC:</dt>
+          <dd>{{model.bcc}}</dd>
+        {{/if}}
       </dl>
     {{/liquid-if}}
 
     {{#as-form/fieldset}}
       {{#liquid-if showPreview}}
-        <p>
-          {{preview}}
-        </p>
+        <span>{{preview}}</span>
       {{else}}
         {{as-form/input
           form=form
@@ -53,11 +62,6 @@
           errorProperty="body"
           label="Body"}}
       {{/liquid-if}}
-
-      {{#as-action-group}}
-        {{#as-form/submit form=form}}Send{{/as-form/submit}}
-        {{#as-action action="togglePreview"}}Preview{{/as-action}}
-      {{/as-action-group}}
     {{/as-form/fieldset}}
   {{/as-form}}
 </div>

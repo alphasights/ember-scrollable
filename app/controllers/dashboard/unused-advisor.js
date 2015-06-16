@@ -28,6 +28,21 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     toggleFollowUp: function() {
       this.get('sidePanel').send('toggleDrawer');
-    }
+    },
+
+    preview: function() {
+      this.get('emailComposer').send('togglePreview');
+    },
+
+    send: function() {
+      var email = this.get('email');
+
+      email.save().then(() => {
+        notify(`Your email to ${email.get('recipients')} has been delivered.`);
+        this.get('sidePanel').send('close');
+      }).catch(function() {
+        notify('There has been an error delivering your email.', 'error');
+      });
+    },
   }
 });

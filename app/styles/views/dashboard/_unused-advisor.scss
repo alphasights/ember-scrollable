@@ -1,7 +1,7 @@
 .side-panel.unused-advisor {
   @include side-panel($scaled: true);
 
-  .side-panel-content header {
+  .main > .content > header {
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
@@ -28,6 +28,21 @@
         > span {
           color: $secondary-color;
         }
+      }
+    }
+  }
+
+  .drawer {
+    .email-composer, .form, form {
+      height: 100%;
+    }
+
+    .form form {
+      padding: $column-gutter !important;
+      overflow: auto;
+      
+      .form-fieldset {
+        padding: 0;
       }
     }
   }
