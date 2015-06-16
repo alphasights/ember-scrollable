@@ -43,7 +43,11 @@ export default Ember.Component.extend({
   }),
 
   currentMonthCreditCountTitle: Ember.computed('currentMonthCreditCount', function() {
-    return `Credits: ${this.get('currentMonthCreditCount')}`;
+    return `Credits: ${this.get('_roundedCurrentMonthCreditCount')}`;
+  }),
+
+  _roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
+    return Math.round(this.get('currentMonthCreditCount') * 10) / 10;
   }),
 
   _setupTooltipster: Ember.on('didInsertElement', function() {
