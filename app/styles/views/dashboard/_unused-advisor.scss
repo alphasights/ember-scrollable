@@ -100,4 +100,14 @@
   .project-history {
     padding: $column-gutter;
   }
+
+  .alert {
+    @include alert($bg: $warning-color);
+
+    border: 0;
+    color: $small-font-color;
+    font-size: $base-font-size;
+    margin-bottom: 0;
+    padding: $column-gutter / 4 $column-gutter;
+  }
 }

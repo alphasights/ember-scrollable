@@ -61,6 +61,12 @@
       </article>
     {{else}}
       <div class="form">
+        {{#liquid-if renderedBodyError}}
+          <div class="alert">
+            {{renderedBodyError}}
+          </div>
+        {{/liquid-if}}
+
         {{#as-form/fieldset}}
           {{as-form/input
             form=form

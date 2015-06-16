@@ -28,17 +28,39 @@ export default Ember.Component.extend(InboundActions, {
   }),
 
   renderBody: function(body, variablesMapping) {
-    var settings = { interpolate: /\{\{(.+?)\}\}/g };
-    var template = _.template(body, settings);
-    return template(variablesMapping);
-  },
-
-  renderedBody: Ember.computed('model.body', 'variablesMapping', function() {
-    if (Ember.isPresent(this.get('model.body'))) {
-      return this.renderBody(this.get('model.body'), this.get('variablesMapping'));
+    if (Ember.isPresent(body)) {
+      var settings = { interpolate: /\{\{(.+?)\}\}/g };
+      var template = _.template(body, settings);
+      return template(variablesMapping);
     } else {
       return null;
     }
+  },
+
+  renderedBody: Ember.computed('model.body', 'variablesMapping', 'renderedBodyError', function() {
+    var body = this.get('model.body');
+
+    if (this.get('renderedBodyError') == null) {
+      return this.renderBody(body, this.get('variablesMapping'));
+    } else {
+      return body;
+    }
+  }),
+
+  renderedBodyError: Ember.computed('model.body', 'variablesMapping', function() {
+    try {
+      this.renderBody(this.get('model.body'), this.get('variablesMapping'));
+    } catch (e) {
+      var matches = e.message.match(/^(.+) is not defined$/);
+
+      if (matches != null) {
+        return `{{${matches[1]}}} is not a valid placeholder`;
+      } else {
+        throw e;
+      }
+    }
+
+    return null;
   }),
 
   actions: {
