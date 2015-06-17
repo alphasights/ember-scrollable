@@ -4,7 +4,7 @@ import '../../helpers/define-fixture';
 import testHelper from '../../test-helper';
 
 const interaction = {
-  id: '1',
+  id: 1,
   actioned: false,
   clientAccessNumberCountry: 'US',
   additionalContactDetails: '',
@@ -22,11 +22,18 @@ const interaction = {
   used: false
 };
 
+const interactionCompletion = {
+  duration: 20,
+  quality: 'bad',
+  interactionType: 'call',
+  interactionId: '1'
+};
+
 QUnit.module("Scheduled Interactions Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
+    defineFixture('GET', '/interactions', { params: { primary_contact_id: '1' }, response: {
       "advisors": [
         {
           "id": interaction.advisorId,
@@ -306,13 +313,6 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
 });
 
 test("Complete Interaction completes the call and closes the side panel", function(assert) {
-  const interactionCompletion = {
-    duration: 20,
-    quality: 'bad',
-    interactionType: 'call',
-    interactionId: '1'
-  };
-
   const successMessage = 'The interaction has been completed.';
 
   var handler = defineFixture('POST', '/interaction_completions', {
@@ -364,7 +364,18 @@ test("Complete Interaction completes the call and closes the side panel", functi
 });
 
 test("Complete Interaction shows error message in case of failure", function(assert) {
-  var handler = defineFixture('POST', '/interaction_completions', { status: 500 });
+  var handler = defineFixture('POST', '/interaction_completions', {
+    status: 500,
+
+    request: {
+      "interaction_completion": {
+        "duration": interactionCompletion.duration,
+        "quality": interactionCompletion.quality,
+        "interaction_type": interactionCompletion.interactionType,
+        "interaction_id": interactionCompletion.interactionId
+      }
+    }
+  });
 
   visit('/dashboard');
 

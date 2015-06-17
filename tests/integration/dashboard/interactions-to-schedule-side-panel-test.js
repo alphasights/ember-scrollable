@@ -11,7 +11,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    defineFixture('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
+    defineFixture('GET', '/interactions', { params: { primary_contact_id: '1' }, response: {
       "advisors": [
         {
           "id": 1,

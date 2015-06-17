@@ -178,8 +178,10 @@ test("Send follow up email using a template", function(assert) {
   click("button:contains('Send')");
 
   andThen(function() {
-    assert.equal(handler.called, true);
     var message = $('.messenger .messenger-message-inner').first().text().trim();
+
+    assert.equal(handler.called, true);
+    assert.equal(find('.email-composer .alert').length, 0);
     assert.equal(message, 'Your email has been sent.');
   });
 });
@@ -195,5 +197,14 @@ test("Preview follow up email", function(assert) {
     assert.equal(find('.email-composer textarea:visible').length, 0);
     assert.equal(find('.preview h1').text().trim(), 'Hello IceFrog');
     assert.equal(find('.preview pre').text().trim(), 'Giff Ember buff plox, SingSing');
+  });
+});
+
+test("Follow up email variables validation", function(assert) {
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+  fillIn('.email-composer textarea', 'Giff Ember buff plox, {{motto}}');
+
+  andThen(function() {
+    assert.equal(find('.email-composer .alert').text().trim(), "Sorry, 'motto' is not a valid placeholder.");
   });
 });
