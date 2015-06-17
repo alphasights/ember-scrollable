@@ -12,15 +12,15 @@
     {{/if}}
 
     {{#if optionGroupPath}}
-      {{#each group in groupedContent}}
+      {{#each groupedContent as |group|}}
         <optgroup label={{group.label}}>
-          {{#each item in group.content}}
+          {{#each group.content as |item|}}
             {{#x-option value=item.id}}{{item.name}}{{/x-option}}
           {{/each}}
         </optgroup>
       {{/each}}
     {{else}}
-      {{#each item in content}}
+      {{#each content as |item|}}
         {{#x-option value=item.id}}{{item.name}}{{/x-option}}
       {{/each}}
     {{/if}}

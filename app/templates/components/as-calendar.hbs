@@ -8,7 +8,7 @@
         {{/rl-dropdown-toggle}}
 
         {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
-          {{#each timeZoneOption in allTimeZoneOptions}}
+          {{#each allTimeZoneOptions as |timeZoneOption|}}
             <li>
               {{as-calendar/time-zone-option
                 timeZoneOption=timeZoneOption
@@ -22,7 +22,7 @@
 
   <div class="days">
     <ul>
-      {{#each day in days}}
+      {{#each days as |day|}}
         <li style={{dayStyle}} class="{{if day.isSelected "is-selected"}}">
           {{#liquid-with day.localValue as localValue use="toDown"}}
             {{moment localValue "ddd D MMM"}}
@@ -62,10 +62,10 @@
   {{partial "components/as-calendar/time-slots"}}
 
   <ul class="days">
-    {{#each day in days}}
+    {{#each days as |day|}}
       <li style={{dayStyle}} class="{{if day.isSelected "is-selected"}}">
         <ul class="times">
-          {{#each timeSlot in timeSlots}}
+          {{#each timeSlots as |timeSlot|}}
             <li>
               {{as-calendar/time timeSlot=timeSlot day=day calendar=this}}
             </li>

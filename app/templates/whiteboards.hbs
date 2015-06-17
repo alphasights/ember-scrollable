@@ -8,9 +8,9 @@
     {{#if showWhiteboardSelect}}
       <div class="select">
         {{#x-select value=selectedWhiteboard action="onWhiteboardSelectChange"}}
-          {{#each group in groupedWhiteboards}}
+          {{#each groupedWhiteboards as |group|}}
             <optgroup label={{group.label}}>
-              {{#each whiteboard in group.content}}
+              {{#each group.content as |whiteboard|}}
                 {{#x-option value=whiteboard}}{{whiteboard.name}}{{/x-option}}
               {{/each}}
             </optgroup>

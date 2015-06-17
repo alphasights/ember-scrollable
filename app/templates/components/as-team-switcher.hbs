@@ -2,7 +2,7 @@
   {{#x-select value=selectedTeam}}
     <option>{{prompt}}</option>
 
-    {{#each team in teams}}
+    {{#each teams as |team|}}
       {{#x-option value=team}}{{team.name}}{{/x-option}}
     {{/each}}
   {{/x-select}}
