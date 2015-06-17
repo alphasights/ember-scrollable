@@ -7,7 +7,7 @@
   <div class="whiteboard-select {{if showWhiteboardSelect 'open'}}">
     {{#if showWhiteboardSelect}}
       <div class="select">
-        {{#x-select value=selectedWhiteboard action="onWhiteboardSelectChange"}}
+        {{#x-select value=selectedWhiteboard action="changeSelectedWhiteboard"}}
           {{#each groupedWhiteboards as |group|}}
             <optgroup label={{group.label}}>
               {{#each group.content as |whiteboard|}}

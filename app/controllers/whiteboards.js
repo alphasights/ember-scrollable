@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
       /* jshint newcap: true */
     },
 
-    onWhiteboardSelectChange: function() {
+    changeSelectedWhiteboard: function() {
       this.set('whiteboardSelectChanged', true);
     },
   }
