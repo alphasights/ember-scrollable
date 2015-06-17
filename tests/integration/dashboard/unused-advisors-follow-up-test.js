@@ -205,6 +205,6 @@ test("Follow up email variables validation", function(assert) {
   fillIn('.email-composer textarea', 'Giff Ember buff plox, {{motto}}');
 
   andThen(function() {
-    assert.equal(find('.email-composer .alert').text().trim(), "Sorry, 'motto' is not a valid placeholder.");
+    assert.equal(find('.email-composer .alert').text().trim(), "{{motto}} is not a valid placeholder.");
   });
 });

@@ -28,9 +28,13 @@ export default Ember.Component.extend(InboundActions, {
 
   renderBody: function(body, variablesMapping) {
     if (Ember.isPresent(body)) {
-      var settings = { interpolate: /\{\{(.+?)\}\}/g };
-      var template = _.template(body, settings);
-      return template(variablesMapping);
+      return body.replace(/\{\{(.+?)\}\}/g, function(_, name) {
+        if (variablesMapping.hasOwnProperty(name)) {
+          return variablesMapping[name];
+        } else {
+          throw `{{${name}}} is not a valid placeholder.`;
+        }
+      });
     } else {
       return null;
     }
@@ -49,14 +53,8 @@ export default Ember.Component.extend(InboundActions, {
   renderedBodyError: Ember.computed('model.body', 'variablesMapping', function() {
     try {
       this.renderBody(this.get('model.body'), this.get('variablesMapping'));
-    } catch (e) {
-      var matches = e.message.match(/^(.+) is not defined$/);
-
-      if (matches != null) {
-        return `Sorry, '${matches[1]}' is not a valid placeholder.`;
-      } else {
-        throw e;
-      }
+    } catch (error) {
+      return error;
     }
 
     return null;
