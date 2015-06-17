@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import notify from 'phoenix/helpers/notify';
 import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 
 export default Ember.Component.extend(InboundActions, {
