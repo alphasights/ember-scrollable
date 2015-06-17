@@ -1,6 +1,6 @@
 {{#if visibleContent}}
   <ul>
-    {{#each model in visibleContent}}
+    {{#each visibleContent as |model|}}
       <li>
         {{partial listItemTemplateName}}
       </li>

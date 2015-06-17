@@ -251,7 +251,7 @@ test("Team switchers displays all projects for the team", function(assert) {
   }});
 
   visit('/projects');
-  select('.projects > header .select select option:last');
+  select('.projects > header .select select ', 'NYSC18 - The McKountry Klub');
 
   andThen(function() {
     var projects = find('.project-list-item').toArray().map(function(project) {

@@ -26,7 +26,7 @@
             {{moment model.scheduledCallTime "h:mm A"}}
           </span>
 
-          {{#each profile in profiles}}
+          {{#each profiles as |profile|}}
             {{#if profile.person.timeZone}}
               <span class={{profile.class}}>
                 <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
@@ -56,7 +56,7 @@
 
     <section class="profiles">
       <ul>
-        {{#each profile in profiles}}
+        {{#each profiles as |profile|}}
           <li>
             {{#as-profile
               person=profile.person
@@ -84,7 +84,7 @@
       </header>
 
       <ul>
-        {{#each checklistItem in checklistItems}}
+        {{#each checklistItems as |checklistItem|}}
           <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
         {{/each}}
       </ul>

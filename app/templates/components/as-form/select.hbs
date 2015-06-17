@@ -1,11 +1,28 @@
-{{#as-form/field}}
-  {{view "select"
-    name=name
-    content=content
-    optionValuePath="content.id"
-    optionLabelPath="content.name"
-    prompt=prompt
-    optionGroupPath=optionGroupPath
-    value=value
-    disabled=disabled}}
+{{#as-form/field
+  form=form
+  name=name
+  errorProperty=errorProperty
+  errorMessage=errorMessage
+  disabled=disabled
+  label=label
+  class="form-select" as |value|}}
+  {{#x-select name=name value=value disabled=disabled}}
+    {{#if prompt}}
+      <option>{{prompt}}</option>
+    {{/if}}
+
+    {{#if optionGroupPath}}
+      {{#each groupedContent as |group|}}
+        <optgroup label={{group.label}}>
+          {{#each group.content as |item|}}
+            {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+          {{/each}}
+        </optgroup>
+      {{/each}}
+    {{else}}
+      {{#each content as |item|}}
+        {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+      {{/each}}
+    {{/if}}
+  {{/x-select}}
 {{/as-form/field}}

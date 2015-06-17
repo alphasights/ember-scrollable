@@ -1,5 +1,5 @@
 <ul class="occurrences">
-  {{#each occurrence in occurrences}}
+  {{#each occurrences as |occurrence|}}
     <li>
       {{as-calendar/occurrence occurrence=occurrence calendar=calendar}}
     </li>

@@ -1,5 +1,5 @@
 <ul>
-  {{#each membership in model.memberships itemController="whiteboards.whiteboard.angle-membership"}}
+  {{#each model.memberships itemController="whiteboards.whiteboard.angle-membership" as |membership|}}
     <li>
       <article>
         {{as-avatar person=membership.model.user}}
@@ -26,7 +26,7 @@
 
     <li class="results">
       <ul>
-        {{#each member in unusedMembers}}
+        {{#each unusedMembers as |member|}}
           <li {{action "add" member}}>
             <article>
               {{as-avatar person=member}}

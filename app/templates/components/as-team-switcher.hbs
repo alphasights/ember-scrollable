@@ -1,7 +1,9 @@
 <div class="select">
-  {{view "select"
-    content=teams
-    optionLabelPath="content.name"
-    prompt=prompt
-    selection=selectedTeam}}
+  {{#x-select value=selectedTeam}}
+    <option>{{prompt}}</option>
+
+    {{#each teams as |team|}}
+      {{#x-option value=team}}{{team.name}}{{/x-option}}
+    {{/each}}
+  {{/x-select}}
 </div>

@@ -171,7 +171,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('.interactions-to-schedule article:first');
 
   andThen(function() {
-    assert.equal($('.ember-select[name=interactionType]').val(), 'summarised_call');
+    assert.equal($('select[name=interactionType]').val(), 'summarised_call');
   });
 
   // Select time slot from calendar
@@ -179,10 +179,10 @@ test("Schedule interaction makes an API request and displays a notification", fu
   click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
 
   // Set the interaction type
-  fillIn('.ember-select[name=interactionType]', callType);
+  select('select[name=interactionType] ', 'One-on-one');
 
   // Select speak dial in
-  fillIn('.ember-select[name=clientAccessNumberCountry]', accessCountry);
+  select('select[name=clientAccessNumberCountry] ', 'Australia');
 
   // Fill in advisor phone number
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
