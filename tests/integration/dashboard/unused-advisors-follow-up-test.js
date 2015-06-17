@@ -131,7 +131,7 @@ test("Send follow up email", function(assert) {
 
   click("button:contains('Follow Up')");
   fillIn('input[name=subject]', 'Hello IceFrog');
-  fillIn('textarea', 'Giff Ember buff plox, {{your_first_name}}');
+  fillIn('.email-composer textarea', 'Giff Ember buff plox, {{your_first_name}}');
   click("a:contains('Change Settings')");
   fillIn('input[name=cc]', 'arteezy@secret.com');
   fillIn('input[name=bcc]', 'kuroky@secret.com');
@@ -141,6 +141,59 @@ test("Send follow up email", function(assert) {
   andThen(function() {
     assert.equal(handler.called, true);
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, `Your email to ${unusedAdvisor.advisor.email} has been delivered.`);
+    assert.equal(message, 'Your email has been sent.');
+  });
+});
+
+test("Send follow up email using a template", function(assert) {
+  var handler = defineFixture('POST', '/emails', {
+    request: {
+      "email": {
+        "subject": "Example Subject",
+        "body": "Really good template.",
+        "recipients": "ppd@salty.com",
+        "from": "some@user.com",
+        "cc": "arteezy@secret.com",
+        "bcc": "kuroky@secret.com",
+        "concerning_id": unusedAdvisor.id,
+        "concerning_type": "email/unused_advisorship_email"
+      }
+    },
+
+    response: {}
+  });
+
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+
+  click("button:contains('Follow Up')");
+  fillIn('input[name=subject]', 'Hello IceFrog');
+  fillIn('.email-composer textarea', 'Giff Ember buff plox, {{your_first_name}}');
+  click("a:contains('Change Settings')");
+  fillIn('input[name=recipients]', 'ppd@salty.com');
+  fillIn('input[name=from]', 'some@user.com');
+  fillIn('input[name=cc]', 'arteezy@secret.com');
+  fillIn('input[name=bcc]', 'kuroky@secret.com');
+  select("select[name=template] option:contains('Example Template')");
+  click("a:contains('Save Settings')");
+  click("button:contains('Send')");
+
+  andThen(function() {
+    assert.equal(handler.called, true);
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, 'Your email has been sent.');
+  });
+});
+
+test("Preview follow up email", function(assert) {
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+
+  fillIn('input[name=subject]', 'Hello IceFrog');
+  fillIn('.email-composer textarea', 'Giff Ember buff plox, {{your_first_name}}');
+  click("button:contains('Preview')");
+
+  andThen(function() {
+    assert.equal(find('.email-composer textarea:visible').length, 0);
+    assert.equal(find('.preview h1').text().trim(), 'Hello IceFrog');
+    assert.equal(find('.preview pre').text().trim(), 'Giff Ember buff plox, SingSing');
   });
 });
