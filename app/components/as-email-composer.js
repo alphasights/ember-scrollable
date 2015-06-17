@@ -54,7 +54,7 @@ export default Ember.Component.extend(InboundActions, {
       var matches = e.message.match(/^(.+) is not defined$/);
 
       if (matches != null) {
-        return `{{${matches[1]}}} is not a valid placeholder`;
+        return `Sorry, '${matches[1]}' is not a valid placeholder`;
       } else {
         throw e;
       }

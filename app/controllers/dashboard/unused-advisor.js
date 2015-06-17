@@ -38,10 +38,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       var email = this.get('email');
 
       email.save().then(() => {
-        notify(`Your email to ${email.get('recipients')} has been delivered.`);
+        notify(`Your email has been sent.`);
         this.get('sidePanel').send('close');
       }).catch(function() {
-        notify('There has been an error delivering your email.', 'error');
+        notify('There has been an error sending your email.', 'error');
       });
     },
   }
