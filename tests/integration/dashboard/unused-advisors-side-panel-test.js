@@ -52,6 +52,14 @@ QUnit.module("Unused Advisors Side Panel", {
     defineFixture('GET', '/project_history', { response: {
       "project_history": []
     }});
+
+    defineFixture('GET', '/email_templates', { response: {
+      "email_templates": []
+    }});
+
+    defineFixture('GET', '/email_variables', { response: {
+      "email_variables": []
+    }});
   },
 
   afterEach: function() {
