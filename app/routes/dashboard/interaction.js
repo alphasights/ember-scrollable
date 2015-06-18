@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
+import InteractionCompletionForm from 'phoenix/forms/interaction-completion-form';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
   titleToken: function(models) {
@@ -23,6 +24,12 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   setupController: function(controller, models) {
     controller.set('model', models.interaction);
-    controller.set('completion', models.completion);
+
+    controller.set('completionForm', InteractionCompletionForm.create({
+      content: models.completion,
+      container: this.get('container')
+    }))
+
+    controller.set('showForm', false);
   }
 });

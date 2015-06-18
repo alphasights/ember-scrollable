@@ -221,6 +221,17 @@ $interaction-header-height:
   .form {
     padding: $column-gutter;
 
+    ul.errors {
+      margin-top: $column-gutter;
+      padding: 0 $column-gutter;
+
+      li {
+        @include alert($bg: $alert-color);
+
+        margin-bottom: rem-calc(2px);
+      }
+    }
+
     form {
       #{$form-field-selector} {
         @include form-item-small();

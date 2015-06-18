@@ -110,7 +110,7 @@
 
         {{#if showForm}}
           <section class="form">
-            {{#as-form model=completion action="chargeClient" as |form|}}
+            {{#as-form model=completionForm action="chargeClient" as |form|}}
               {{#as-form/fieldset}}
                 {{as-form/input
                   name="duration"
@@ -121,11 +121,11 @@
                   name="quality"
                   form=form
                   label="Call Quality"
-                  content=qualityOptions}}
+                  content=completionForm.qualityOptions}}
               {{/as-form/fieldset}}
 
               {{#as-action-group}}
-                {{#as-form/submit form=form}}
+                {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
                   Charge Client
                 {{/as-form/submit}}
               {{/as-action-group}}
