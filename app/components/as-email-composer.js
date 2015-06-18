@@ -14,11 +14,6 @@ export default Ember.Component.extend(InboundActions, {
     }
   }),
 
-  onSelectedTemplateDidChange: Ember.observer('selectedTemplate', function() {
-    this.set('model.body', this.get('selectedTemplate.body'));
-    this.set('model.subject', this.get('selectedTemplate.subject'));
-  }),
-
   variablesMapping: Ember.computed('variables', function() {
     return this.get('variables').reduce(function(result, variable) {
       result[variable.get('key')] = variable.get('value');
@@ -67,6 +62,13 @@ export default Ember.Component.extend(InboundActions, {
 
     togglePreview: function() {
       this.toggleProperty('showPreview');
+    },
+
+    changeSelectedTemplate: function() {
+      if (Ember.isPresent(this.get('selectedTemplate'))) {
+        this.set('model.body', this.get('selectedTemplate.body'));
+        this.set('model.subject', this.get('selectedTemplate.subject'));
+      }
     }
   }
 });

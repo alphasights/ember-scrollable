@@ -3,14 +3,14 @@
     <div class="header">
       {{#liquid-if isEditingHeader}}
         {{#as-form/fieldset}}
-          {{as-form/select
-            form=form
-            prompt="Choose a template..."
-            label="Template"
-            name="template"
-            content=templates
-            value=selectedTemplate
-            optionValuePath="content"}}
+          {{#as-form/field name="template" label="Template" classNameBindings=":form-select"}}
+            {{#x-select name="template" value=selectedTemplate action="changeSelectedTemplate"}}
+              <option>Choose a template...</option>
+              {{#each templates as |template|}}
+                {{#x-option value=template}}{{template.name}}{{/x-option}}
+              {{/each}}
+            {{/x-select}}
+          {{/as-form/field}}
 
           {{as-form/input form=form name="recipients" label="To"}}
           {{as-form/input form=form name="from" label="From"}}

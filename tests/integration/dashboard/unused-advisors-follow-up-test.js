@@ -173,7 +173,7 @@ test("Send follow up email using a template", function(assert) {
   fillIn('input[name=from]', 'some@user.com');
   fillIn('input[name=cc]', 'arteezy@secret.com');
   fillIn('input[name=bcc]', 'kuroky@secret.com');
-  select("select[name=template] option:contains('Example Template')");
+  select('select[name=template] ', 'Example Template');
   click("a:contains('Save Settings')");
   click("button:contains('Send')");
 
