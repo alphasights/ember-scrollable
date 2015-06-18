@@ -51,7 +51,7 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
 
       return requestPromise;
     } else {
-      return Promise.reject();
+      return Ember.RSVP.Promise.reject('Completion form validation failed');
     }
   }
 });
