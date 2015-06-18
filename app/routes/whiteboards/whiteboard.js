@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  titleToken: function(model) {
-    let whiteboardName = model.whiteboard.get('name');
+  titleToken: function(models) {
+    let whiteboardName = models.whiteboard.get('name');
 
     return `Whiteboard: ${whiteboardName}`;
   },

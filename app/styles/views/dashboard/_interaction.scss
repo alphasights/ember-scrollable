@@ -10,7 +10,7 @@ $interaction-header-height:
   $side-panel-actions-height;
 
 .side-panel.interaction {
-  header {
+  .side-panel-content header {
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
@@ -215,32 +215,6 @@ $interaction-header-height:
       display: inline-block;
       font-weight: $font-weight-bold;
       line-height: $interaction-checklist-header-height;
-    }
-  }
-
-  > div > .content {
-    $actions-height: rem-calc(90);
-
-    > div {
-      height: 100%;
-      margin-bottom: - $actions-height;
-    }
-
-    .actions {
-      float: left;
-      height: $actions-height;
-      padding: 0 !important;
-      width: 100%;
-
-      &.form-submission {
-        @include form-submission($standalone: true, $height: $actions-height);
-
-        padding: 0 $column-gutter !important;
-
-        .action .confirmation {
-          padding: 0 $column-gutter !important;
-        }
-      }
     }
   }
 }
