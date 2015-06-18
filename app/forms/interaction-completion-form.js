@@ -41,7 +41,7 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
     });
   }),
 
-  save: function(resolve, reject) {
+  save: function() {
     if (this.get('isValid')) {
       var requestPromise = PromiseController.create({
         promise: this.get('content').save()
