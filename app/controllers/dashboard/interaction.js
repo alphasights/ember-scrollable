@@ -43,6 +43,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     });
   }),
 
+  schedulingTabUrl: Ember.computed('model.project', function() {
+    let projectId = this.get('model.project.id');
+    let interactionId = this.get('model.id');
+
+    return `${EmberENV.pistachioUrl}/projects/${projectId}/proposal#advisorship_${interactionId}`;
+  }),
+
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {

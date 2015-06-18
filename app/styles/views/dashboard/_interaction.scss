@@ -71,6 +71,20 @@ $interaction-header-height:
         float: right;
       }
 
+      .pistachio-link {
+        padding-right: $column-gutter / 4;
+
+        > div {
+          display: inherit;
+        }
+
+        i {
+          @include icon(external-link);
+
+          font-size: $h6-font-size;
+        }
+      }
+
       .call-times {
         display: block;
 
@@ -92,7 +106,6 @@ $interaction-header-height:
       .speak-details {
         display: block;
         font-size: $h6-font-size;
-        margin-top: $column-gutter / 2;
 
         > li {
           display: inline;
