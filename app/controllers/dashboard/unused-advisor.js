@@ -15,6 +15,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   totalPagesBinding: "emails.totalPages",
   page: 1,
   perPage: 10,
+  model: null,
+  showFollowUp: false,
+  email: null,
+  emailTemplates: null,
 
   actions: {
     hideSidePanel: function() {
@@ -22,16 +26,29 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     remove: function() {
-      if (window.confirm('Are you sure you want to remove the advisor from the list?')) {
-        this.get('model').destroyRecord().then(() => {
-          notify(`The advisor ${this.get('model.advisor.name')} was removed from the list`);
-          this.get('sidePanel').send('close');
-        });
-      }
+      this.get('model').destroyRecord().then(() => {
+        notify(`The advisor ${this.get('model.advisor.name')} was removed from the list.`);
+        this.get('sidePanel').send('close');
+      });
     },
 
-    followUp: function() {
-      // open the double sidepanel
-    }
+    toggleFollowUp: function() {
+      this.get('sidePanel').send('toggleDrawer');
+    },
+
+    preview: function() {
+      this.get('emailComposer').send('togglePreview');
+    },
+
+    send: function() {
+      var email = this.get('email');
+
+      email.save().then(() => {
+        notify(`Your email has been sent.`);
+        this.get('sidePanel').send('close');
+      }).catch(function() {
+        notify('There has been an error sending your email.', 'error');
+      });
+    },
   }
 });

@@ -1,8 +1,8 @@
 {
   "name": "phoenix",
   "dependencies": {
-    "ember": "1.11.1",
-    "ember-data": "1.0.0-beta.16.1",
+    "ember": "1.13.0",
+    "ember-data": "1.13.0",
     "ember-cli-moment-shim": "0.0.3",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "ember-cli-test-loader#0.1.3",
@@ -16,7 +16,7 @@
     "loader.js": "ember-cli/loader.js#3.2.0",
     "messenger": "1.4.1",
     "moment-timezone": "0.3.0",
-    "paint": "0.7.27",
+    "paint": "0.7.29",
     "pretender": "0.6.0",
     "qunit": "1.17.1",
     "route-recognizer": "0.1.5",

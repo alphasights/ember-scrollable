@@ -4,6 +4,7 @@ article.projects {
   padding: 0 $column-gutter;
 
   header {
+    @include clearfix;
     @extend %grid-row;
 
     background-color: $panel-bg;
@@ -13,7 +14,7 @@ article.projects {
     padding: $column-gutter / 2 0;
     width: auto;
 
-    .priority-select-label {
+    .label {
       float: left;
       line-height: $projects-header-height;
       padding: 0 $column-gutter;
@@ -25,7 +26,7 @@ article.projects {
     }
 
     .priority-select {
-      margin-left: $column-gutter / 2;
+      float: left;
 
       ul {
         @include clearfix;
@@ -59,6 +60,10 @@ article.projects {
         }
       }
     }
+  }
+
+  .team-member {
+    @include form-select($inner-wrapper: null, $inline: true);
   }
 
   .empty-message {

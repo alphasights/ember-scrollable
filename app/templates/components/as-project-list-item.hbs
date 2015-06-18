@@ -1,8 +1,8 @@
-<div class="details">
-  <div class="priority">
-    <i class="{{project.status}}"></i>
-  </div>
+<div class="priority">
+  <i class="{{project.status}}"></i>
+</div>
 
+<div class="details">
   <span class="name">{{project.name}}</span> -
   <span class="codename">{{project.codename}}</span>
   <small>{{project.clientCode}}</small>
@@ -11,7 +11,7 @@
 <div class="members">
   {{as-avatar person=project.lead class="lead"}}
 
-  {{#each member in nonLeadMembers}}
+  {{#each nonLeadMembers as |member|}}
     {{as-avatar person=member}}
   {{/each}}
 </div>

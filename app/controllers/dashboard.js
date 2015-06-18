@@ -8,21 +8,25 @@ export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
     return this.get('teamId') !== null;
   }),
 
-  selectedTeam: Ember.computed('teamId', 'teams.@each.id', function(key, value) {
-    if (arguments.length > 1) {
+  selectedTeam: Ember.computed('teamId', 'teams.@each.id', {
+    set: function(_, value) {
       if (value != null) {
         this.set('teamId', value.get('id'));
       } else {
         this.set('teamId', null);
       }
-    }
 
-    var teamId = this.get('teamId');
+      return value;
+    },
 
-    if (teamId != null) {
-      return this.get('teams').findBy('id', teamId);
-    } else {
-      return null;
+    get: function() {
+      var teamId = this.get('teamId');
+
+      if (teamId != null) {
+        return this.get('teams').findBy('id', teamId);
+      } else {
+        return null;
+      }
     }
   }),
 

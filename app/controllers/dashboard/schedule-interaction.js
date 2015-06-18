@@ -15,21 +15,25 @@ var InteractionOccurrence = Occurrence.extend({
   interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
-  time: Ember.computed('scheduledCallTime', function(key, value) {
-    if (arguments.length > 1) {
+  time: Ember.computed('scheduledCallTime', {
+    set: function(_, value) {
       if (value != null) {
         this.set('scheduledCallTime', value.toDate());
       } else {
         this.set('scheduledCallTime', null);
       }
-    }
 
-    var scheduledCallTime = this.get('scheduledCallTime');
+      return value;
+    },
 
-    if (scheduledCallTime != null) {
-      return moment(this.get('scheduledCallTime'));
-    } else {
-      return null;
+    get: function() {
+      var scheduledCallTime = this.get('scheduledCallTime');
+
+      if (scheduledCallTime != null) {
+        return moment(scheduledCallTime);
+      } else {
+        return null;
+      }
     }
   }),
 

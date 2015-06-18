@@ -2,6 +2,9 @@ import resolver from './helpers/resolver';
 import startApp from './helpers/start-app';
 import Fixtures from './helpers/fixtures';
 import Ember from 'ember';
+import registerSelectHelper from 'emberx-select/helpers/register-select-helper';
+
+registerSelectHelper();
 
 import {
   setResolver
@@ -22,7 +25,8 @@ export default {
           "id": 1,
           "teamId": 1,
           "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
-          "timeZone": "Etc/UTC"
+          "timeZone": "Etc/UTC",
+          "email": 'example@user.com'
         }
       }
     });
