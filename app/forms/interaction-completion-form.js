@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import PromiseController from 'phoenix/controllers/promise';
-import notify from 'phoenix/helpers/notify';
 
 const qualityOptionsMapping = {
   'good': 'Good',
@@ -45,9 +44,7 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
   save: function() {
     if (this.get('isValid')) {
       var requestPromise = PromiseController.create({
-        promise: this.get('content').save().catch(function() {
-          notify('There has been an error completing the interaction.', 'error');
-        })
+        promise: this.get('content').save()
       });
 
       this.set('requestPromise', requestPromise);
