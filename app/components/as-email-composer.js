@@ -21,7 +21,7 @@ export default Ember.Component.extend(InboundActions, {
     }, {});
   }),
 
-  renderBody: function(body, variablesMapping) {
+  _renderBody: function(body, variablesMapping) {
     if (Ember.isPresent(body)) {
       return body.replace(/\{\{(.+?)\}\}/g, function(_, name) {
         if (variablesMapping.hasOwnProperty(name)) {
@@ -39,7 +39,7 @@ export default Ember.Component.extend(InboundActions, {
     var body = this.get('model.body');
 
     if (this.get('renderedBodyError') == null) {
-      return this.renderBody(body, this.get('variablesMapping'));
+      return this._renderBody(body, this.get('variablesMapping'));
     } else {
       return body;
     }
@@ -47,7 +47,7 @@ export default Ember.Component.extend(InboundActions, {
 
   renderedBodyError: Ember.computed('model.body', 'variablesMapping', function() {
     try {
-      this.renderBody(this.get('model.body'), this.get('variablesMapping'));
+      this._renderBody(this.get('model.body'), this.get('variablesMapping'));
     } catch (error) {
       return error;
     }
