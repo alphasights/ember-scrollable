@@ -1,7 +1,7 @@
 .side-panel.unused-advisor {
   @include side-panel($scaled: true);
 
-  header {
+  .main > .content > header {
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
@@ -32,6 +32,66 @@
     }
   }
 
+  .drawer {
+    .preview {
+      padding: $column-gutter / 2 $column-gutter;
+    }
+
+    .form-field {
+      margin-bottom: $column-gutter / 2;
+      min-height: rem-calc(90) !important;
+    }
+
+    .email-composer,
+    .form,
+    form {
+      height: 100%;
+    }
+
+    form {
+      background-color: $white;
+      border-radius: 0;
+      overflow: auto;
+    }
+
+    fieldset {
+      height: 100%;
+      margin-top: 0;
+      padding: $column-gutter / 2 $column-gutter;
+    }
+
+    textarea {
+      min-height: rem-calc(500) !important;
+      resize: none;
+    }
+
+    pre {
+      font-family: inherit;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .header {
+      background-color: lighten($panel-bg, 2%);
+      border-bottom: 1px solid darken($global-section-border-color, 10%);
+      padding: $column-gutter / 2 $column-gutter;
+
+      fieldset {
+        padding: 0;
+      }
+
+      dl {
+        margin-bottom: 0;
+
+        dt {
+          clear: both;
+          float: left;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
   .profile {
     padding: 0 $column-gutter / 2;
 
@@ -44,31 +104,13 @@
     padding: $column-gutter;
   }
 
-  > div > .content {
-    $actions-height: rem-calc(90);
+  .alert {
+    @include alert($bg: $warning-color);
 
-    > div {
-      height: 100%;
-      margin-bottom: - $actions-height;
-    }
-
-    .form-submission {
-      float: left;
-      height: $actions-height;
-      line-height: $actions-height;
-      padding: 0 $column-gutter !important;
-
-      .action .confirmation {
-        padding: 0 $column-gutter !important;
-
-        > span {
-          line-height: inherit;
-        }
-
-        a {
-          padding: 0 $column-gutter !important;
-        }
-      }
-    }
+    border: 0;
+    color: $small-font-color;
+    font-size: $base-font-size;
+    margin-bottom: 0;
+    padding: $column-gutter / 4 $column-gutter;
   }
 }

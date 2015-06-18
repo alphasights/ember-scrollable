@@ -1,147 +1,154 @@
 {{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
-  <div>
-    <header>
-      <div class="date">
-        <span class="month">{{moment model.scheduledCallTime "MMMM"}}</span>
-        <span class="day">{{moment model.scheduledCallTime "D"}}</span>
-      </div>
+  {{#as-side-panel/main}}
+    {{as-side-panel/header}}
 
-      <div class="content">
-        <span class="primary-contact">
-          {{as-avatar person=model.primaryContact}}
-        </span>
+    {{#as-side-panel/content}}
+      <div>
+        <header>
+          <div class="date">
+            <span class="month">{{moment model.scheduledCallTime "MMMM"}}</span>
+            <span class="day">{{moment model.scheduledCallTime "D"}}</span>
+          </div>
 
-        <h1>
-          <span>{{model.advisor.name}}</span>
+          <div class="content">
+            <span class="primary-contact">
+              {{as-avatar person=model.primaryContact}}
+            </span>
 
-          <small>
-            <a target="_blank" href={{model.project.pistachioUrl}}>
-              {{model.project.name}}
-            </a>
-          </small>
-        </h1>
+            <h1>
+              <span>{{model.advisor.name}}</span>
 
-        <span class="call-times">
-          <span class="local-time">
-            {{moment model.scheduledCallTime "h:mm A"}}
-          </span>
+              <small>
+                <a target="_blank" href={{model.project.pistachioUrl}}>
+                  {{model.project.name}}
+                </a>
+              </small>
+            </h1>
 
-          {{#each profiles as |profile|}}
-            {{#if profile.person.timeZone}}
-              <span class={{profile.class}}>
-                <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
-                <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+            <span class="call-times">
+              <span class="local-time">
+                {{moment model.scheduledCallTime "h:mm A"}}
               </span>
+
+              {{#each profiles as |profile|}}
+                {{#if profile.person.timeZone}}
+                  <span class={{profile.class}}>
+                    <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
+                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "h:mm A"}}</span>
+                  </span>
+                {{/if}}
+              {{/each}}
+            </span>
+
+            {{#if model.speak}}
+              <ul class="speak-details">
+                <li>
+                  <span class="speak-title">Speak No.</span>
+                  <span class="speak-detail">{{model.speakPhoneNumber}}</span>
+                </li>
+
+                <li>
+                  <span class="speak-title">Code</span>
+                  <span class="speak-detail">{{model.speakCode}}</span>
+                </li>
+              </ul>
             {{/if}}
-          {{/each}}
-        </span>
 
-        {{#if model.speak}}
-          <ul class="speak-details">
-            <li>
-              <span class="speak-title">Speak No.</span>
-              <span class="speak-detail">{{model.speakPhoneNumber}}</span>
-            </li>
+            <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
+          </div>
+        </header>
 
-            <li>
-              <span class="speak-title">Code</span>
-              <span class="speak-detail">{{model.speakCode}}</span>
-            </li>
+        <section class="profiles">
+          <ul>
+            {{#each profiles as |profile|}}
+              <li>
+                {{#as-profile
+                  person=profile.person
+                  title=profile.title
+                  class=profile.class}}
+                  {{#if profile.person.timeZone}}
+                    <div class="call-time">
+                      {{#tool-tipster title=(local-moment model.scheduledCallTime profile.person.timeZone "h:mm A z")}}
+                        <i></i>
+                        <span>{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
+                      {{/tool-tipster}}
+                    </div>
+                  {{/if}}
+                {{/as-profile}}
+              </li>
+            {{/each}}
           </ul>
+        </section>
+
+        <section class="checklist-items">
+          <header>
+            {{as-checklist-status items=checklistItems}}
+
+            <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
+          </header>
+
+          <ul>
+            {{#each checklistItems as |checklistItem|}}
+              <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
+            {{/each}}
+          </ul>
+        </section>
+
+        {{#if showForm}}
+          <section class="form">
+            {{#as-form model=completion action="chargeClient" as |form|}}
+              {{#as-form/fieldset}}
+                {{as-form/input
+                  name="duration"
+                  form=form
+                  label="Call Duration (minutes)"}}
+
+                {{as-form/select
+                  name="quality"
+                  form=form
+                  label="Call Quality"
+                  content=qualityOptions}}
+              {{/as-form/fieldset}}
+
+              {{#as-form/submit form=form}}
+                Charge Client
+              {{/as-form/submit}}
+            {{/as-form}}
+          </section>
         {{/if}}
-
-        <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
       </div>
-    </header>
+    {{/as-side-panel/content}}
 
-    <section class="profiles">
-      <ul>
-        {{#each profiles as |profile|}}
-          <li>
-            {{#as-profile
-              person=profile.person
-              title=profile.title
-              class=profile.class}}
-              {{#if profile.person.timeZone}}
-                <div class="call-time">
-                  {{#tool-tipster title=(local-moment model.scheduledCallTime profile.person.timeZone "h:mm A z")}}
-                    <i></i>
-                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
-                  {{/tool-tipster}}
-                </div>
-              {{/if}}
-            {{/as-profile}}
-          </li>
-        {{/each}}
-      </ul>
-    </section>
+    {{#as-side-panel/footer}}
+      {{#as-action-group}}
+        {{#as-action action="toggleForm"}}
+          Complete Interaction
+        {{/as-action}}
 
-    <section class="checklist-items">
-      <header>
-        {{as-checklist-status items=checklistItems}}
+        {{#as-action action="reschedule"}}
+          Reschedule Interaction
+        {{/as-action}}
 
-        <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
-      </header>
+        {{#as-action
+          showConfirmation=true
+          action="cancel"
+          buttonClass="error cancel"
+          confirmationButtonLabel="Yes, Cancel Interaction"
+          confirmationMessage="Are you sure you want to cancel the interaction?"
+          requestPromise=requestPromise}}
+          Cancel Interaction
+        {{/as-action}}
 
-      <ul>
-        {{#each checklistItems as |checklistItem|}}
-          <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
-        {{/each}}
-      </ul>
-    </section>
-
-    {{#if showForm}}
-      <section class="form">
-        {{#as-form model=completion action="chargeClient" as |form|}}
-          {{#as-form/fieldset}}
-            {{as-form/input
-              name="duration"
-              form=form
-              errorProperty="duration"
-              label="Call Duration (minutes)"}}
-
-            {{as-form/select
-              name="quality"
-              form=form
-              label="Call Quality"
-              content=qualityOptions}}
-          {{/as-form/fieldset}}
-
-          {{#as-form/submission-action form=form}}
-            Charge Client
-          {{/as-form/submission-action}}
-        {{/as-form}}
-      </section>
-    {{/if}}
-  </div>
-
-  {{#as-action-group}}
-    {{#as-action action="toggleForm"}}
-      Complete Interaction
-    {{/as-action}}
-
-    {{#as-action action="reschedule"}}
-      Reschedule Interaction
-    {{/as-action}}
-
-    {{#as-action
-      showConfirmation=true
-      action="cancel"
-      buttonClass="error cancel"
-      confirmationButtonLabel="Yes, Cancel Interaction"
-      confirmationMessage="Are you sure you want to cancel the interaction?"
-      requestPromise=requestPromise}}
-      Cancel Interaction
-    {{/as-action}}
-
-    {{#as-action
-      showConfirmation=true
-      action="withdrawAndCancel"
-      buttonClass="error"
-      confirmationButtonLabel="Yes, Cancel and Withdraw"
-      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
-      requestPromise=requestPromise}}
-      Cancel and Withdraw Interaction
-    {{/as-action}}
-  {{/as-action-group}}
+        {{#as-action
+          showConfirmation=true
+          action="withdrawAndCancel"
+          buttonClass="error"
+          confirmationButtonLabel="Yes, Cancel and Withdraw"
+          confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
+          requestPromise=requestPromise}}
+          Cancel and Withdraw Interaction
+        {{/as-action}}
+      {{/as-action-group}}
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/main}}
 {{/as-side-panel}}
