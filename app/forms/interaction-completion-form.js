@@ -15,7 +15,7 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
   init: function() {
     this._super.apply(this, arguments);
 
-    this.set('quality', 'good');
+    this.get('content').set('quality', 'good');
   },
 
   validations: {
