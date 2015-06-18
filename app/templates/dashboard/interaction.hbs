@@ -22,6 +22,12 @@
         </h1>
 
         <span class="call-times">
+            <a class="pistachio-link" href={{schedulingTabUrl}} target="_blank">
+              {{#tool-tipster title="View scheduling tab"}}
+                <i></i>
+              {{/tool-tipster}}
+            </a>
+
           <span class="local-time">
             {{moment model.scheduledCallTime "h:mm A"}}
           </span>
@@ -39,6 +45,14 @@
         {{#if model.speak}}
           <ul class="speak-details">
             <li>
+              <a class="pistachio-link" href={{model.pistachioUrl}} target="_blank">
+                {{#tool-tipster title="View interaction page"}}
+                  <i></i>
+                {{/tool-tipster}}
+              </a>
+            </li>
+
+            <li>
               <span class="speak-title">Speak No.</span>
               <span class="speak-detail">{{model.speakPhoneNumber}}</span>
             </li>
@@ -50,7 +64,6 @@
           </ul>
         {{/if}}
 
-        <a target="_blank" href={{model.pistachioUrl}}>View interaction page</a>
       </div>
     </header>
 
