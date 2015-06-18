@@ -4,8 +4,8 @@
       <td class="subject">
         {{email.subject}}
       </td>
-      <td class="sender">
-        {{extract-name-from-email email.sender}}
+      <td class="from">
+        {{extract-name-from-email email.from}}
       </td>
       <td class="sent-at">
         {{moment email.sentAt "D MMM YYYY"}} ({{ago email.sentAt}})

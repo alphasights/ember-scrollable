@@ -42,9 +42,6 @@
       min-height: rem-calc(90) !important;
     }
 
-  .expandable-list {
-    padding: $column-gutter;
-  }
     .email-composer,
     .form,
     form {
@@ -93,6 +90,10 @@
         }
       }
     }
+  }
+
+  .expandable-list {
+    padding: $column-gutter;
   }
 
   .profile {
