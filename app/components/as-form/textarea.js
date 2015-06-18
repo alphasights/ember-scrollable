@@ -1,6 +1,5 @@
-import FormFieldMixin from 'phoenix/mixins/form-field';
 import Ember from 'ember';
 
-export default Ember.Component.extend(FormFieldMixin, {
+export default Ember.Component.extend({
   classNameBindings: [':form-textarea']
 });
