@@ -12,6 +12,12 @@ const qualityOptions = ['good', 'bad'];
 export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
   requestPromise: null,
 
+  init: function() {
+    this._super.apply(this, arguments);
+
+    this.set('quality', 'good');
+  },
+
   validations: {
     duration: {
       numericality: { onlyInteger: true, greaterThanOrEqualTo: 0 }
