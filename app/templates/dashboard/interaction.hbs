@@ -30,7 +30,7 @@
                 {{moment model.scheduledCallTime "h:mm A"}}
               </span>
 
-              {{#each profile in profiles}}
+              {{#each profiles as |profile|}}
                 {{#if profile.person.timeZone}}
                   <span class={{profile.class}}>
                     <span class="highlight">{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
@@ -60,7 +60,7 @@
 
         <section class="profiles">
           <ul>
-            {{#each profile in profiles}}
+            {{#each profiles as |profile|}}
               <li>
                 {{#as-profile
                   person=profile.person
@@ -88,7 +88,7 @@
           </header>
 
           <ul>
-            {{#each checklistItem in checklistItems}}
+            {{#each checklistItems as |checklistItem|}}
               <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
             {{/each}}
           </ul>
@@ -117,6 +117,7 @@
           </section>
         {{/if}}
       </div>
+<<<<<<< HEAD
     {{/as-side-panel/content}}
 
     {{#as-side-panel/footer}}
@@ -151,4 +152,98 @@
       {{/as-action-group}}
     {{/as-side-panel/footer}}
   {{/as-side-panel/main}}
+=======
+    </header>
+
+    <section class="profiles">
+      <ul>
+        {{#each profiles as |profile|}}
+          <li>
+            {{#as-profile
+              person=profile.person
+              title=profile.title
+              class=profile.class}}
+              {{#if profile.person.timeZone}}
+                <div class="call-time">
+                  {{#tool-tipster title=(local-moment model.scheduledCallTime profile.person.timeZone "h:mm A z")}}
+                    <i></i>
+                    <span>{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
+                  {{/tool-tipster}}
+                </div>
+              {{/if}}
+            {{/as-profile}}
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <section class="checklist-items">
+      <header>
+        {{as-checklist-status items=checklistItems}}
+
+        <a target="_blank" href={{model.checklistUrl}}>Show checklist</a>
+      </header>
+
+      <ul>
+        {{#each checklistItems as |checklistItem|}}
+          <li class={{if checklistItem.completed 'completed'}}>{{checklistItem.title}}</li>
+        {{/each}}
+      </ul>
+    </section>
+
+    {{#if showForm}}
+      <section class="form">
+        {{#as-form model=completion action="chargeClient" as |form|}}
+          {{#as-form/fieldset}}
+            {{as-form/input
+              name="duration"
+              form=form
+              errorProperty="duration"
+              label="Call Duration (minutes)"}}
+
+            {{as-form/select
+              name="quality"
+              form=form
+              label="Call Quality"
+              content=qualityOptions}}
+          {{/as-form/fieldset}}
+
+          {{#as-form/submission-action form=form}}
+            Charge Client
+          {{/as-form/submission-action}}
+        {{/as-form}}
+      </section>
+    {{/if}}
+  </div>
+
+  {{#as-action-group}}
+    {{#as-action action="toggleForm"}}
+      Complete Interaction
+    {{/as-action}}
+
+    {{#as-action action="reschedule"}}
+      Reschedule Interaction
+    {{/as-action}}
+
+    {{#as-action
+      showConfirmation=true
+      action="cancel"
+      buttonClass="error cancel"
+      confirmationButtonLabel="Yes, Cancel Interaction"
+      confirmationMessage="Are you sure you want to cancel the interaction?"
+      requestPromise=requestPromise}}
+      Cancel Interaction
+    {{/as-action}}
+
+    {{#as-action
+      showConfirmation=true
+      action="withdrawAndCancel"
+      buttonClass="error"
+      confirmationButtonLabel="Yes, Cancel and Withdraw"
+      confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
+      requestPromise=requestPromise}}
+      Cancel and Withdraw Interaction
+    {{/as-action}}
+  {{/as-action-group}}
+>>>>>>> develop
 {{/as-side-panel}}

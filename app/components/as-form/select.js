@@ -1,7 +1,12 @@
-import FormFieldMixin from 'phoenix/mixins/form-field';
 import Ember from 'ember';
+import groupByForSelect from 'phoenix/helpers/group-by-for-select';
 
-export default Ember.Component.extend(FormFieldMixin, {
-  classNameBindings: [':form-select'],
-  optionValuePath: 'content.id'
+export default Ember.Component.extend({
+  errorProperty: Ember.computed.oneWay('name'),
+
+  groupedContent: Ember.computed('content.[]', 'optionGroupPath', function() {
+    var content = this.get('content') || [];
+
+    return groupByForSelect(content, this.get('optionGroupPath'));
+  })
 });

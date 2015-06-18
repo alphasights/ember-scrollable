@@ -4,5 +4,6 @@
   > div {
     background-color: lighten($success-color, 20%);
     border-radius: $global-radius / 2;
+    transition: width .35s linear;
   }
 }

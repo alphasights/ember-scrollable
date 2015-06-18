@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import groupByForSelect from 'phoenix/helpers/group-by-for-select';
 
 export default Ember.Controller.extend({
   currentUser: Ember.inject.service(),
@@ -11,13 +12,13 @@ export default Ember.Controller.extend({
     return this.get('model').toArray().concat(this.get('currentUser.teams').mapBy('defaultWhiteboard')).sortBy('type');
   }),
 
+  groupedWhiteboards: Ember.computed('whiteboards.[]', function() {
+    return groupByForSelect(this.get('whiteboards'), 'type');
+  }),
+
   pistachioUrl: Ember.computed(function() {
     return `${EmberENV.pistachioUrl}/whiteboard`;
   }),
-
-  onWhiteboardSelectChange: function() {
-    this.get('controller').set('whiteboardSelectChanged', true);
-  },
 
   selectedWhiteboardDidChange: Ember.observer('selectedWhiteboard', function() {
     if (this.get('whiteboardSelectChanged')) {
@@ -36,6 +37,10 @@ export default Ember.Controller.extend({
       /* jshint newcap: false */
       Intercom('showNewMessage');
       /* jshint newcap: true */
-    }
+    },
+
+    changeSelectedWhiteboard: function() {
+      this.set('whiteboardSelectChanged', true);
+    },
   }
 });

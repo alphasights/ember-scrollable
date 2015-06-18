@@ -1,5 +1,5 @@
 <ul class="time-slots" style={{timeSlotsHeaderStyle}}>
-  {{#each timeSlot in headerTimeSlots}}
+  {{#each headerTimeSlots as |timeSlot|}}
     <li style={{headerTimeSlotStyle}}>
       {{#liquid-with timeSlot.localValue as localValue use="toDown"}}
         {{moment localValue "h A"}}

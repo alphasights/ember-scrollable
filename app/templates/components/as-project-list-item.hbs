@@ -11,7 +11,7 @@
 <div class="members">
   {{as-avatar person=project.lead class="lead"}}
 
-  {{#each member in nonLeadMembers}}
+  {{#each nonLeadMembers as |member|}}
     {{as-avatar person=member}}
   {{/each}}
 </div>

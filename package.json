@@ -42,12 +42,12 @@
     "ember-cli-qunit": "0.3.10",
     "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git",
     "ember-cli-timecop": "0.2.0",
-    "ember-cli-tooltipster": "git+https://git@github.com/alphasights/ember-cli-tooltipster.git",
+    "ember-cli-tooltipster": "0.0.9",
     "ember-cli-typekit": "0.0.3",
     "ember-cli-uglify": "1.0.1",
     "ember-cli-velocity": "0.1.2",
-    "ember-component-inbound-actions": "0.0.2",
-    "ember-data": "1.0.0-beta.19.1",
+    "ember-component-inbound-actions": "git+https://github.com/GavinJoyce/ember-component-inbound-actions.git#gj/ember-1-13-beta",
+    "ember-data": "1.13.0",
     "ember-deploy-redis": "0.0.2",
     "ember-deploy-s3": "0.0.3",
     "ember-export-application-global": "1.0.2",
@@ -58,10 +58,11 @@
     "ember-sortable": "1.1.0",
     "ember-validations": "^2.0.0-alpha.3",
     "ember-watson": "^0.3.1",
+    "emberx-select": "git+https://github.com/thefrontside/emberx-select.git",
     "express": "4.12.4",
     "github": "^0.2.3",
     "glob": "4.5.3",
-    "liquid-fire": "0.19.0",
+    "liquid-fire": "0.20.4",
     "morgan": "1.5.3"
   }
 }

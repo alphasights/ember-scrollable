@@ -3,5 +3,11 @@ section.projects {
     @include clearfix;
 
     padding: $column-gutter !important;
+
+    .new-project {
+      @extend %button-primary;
+
+      float: right;
+    }
   }
 }
