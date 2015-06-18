@@ -7,7 +7,7 @@ var InteractionCompletion = DS.Model.extend(EmberValidations.Mixin, {
   interaction: DS.belongsTo('interaction'),
   interactionType: DS.attr('string'),
   duration: DS.attr('number'),
-  quality: DS.attr('string'),
+  quality: DS.attr('string', { defaultValue: 'good' }),
 
   validations: {
     duration: {

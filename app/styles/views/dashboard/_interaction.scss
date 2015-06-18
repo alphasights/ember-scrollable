@@ -217,4 +217,14 @@ $interaction-header-height:
       line-height: $interaction-checklist-header-height;
     }
   }
+
+  .form {
+    padding: $column-gutter;
+
+    form {
+      #{$form-field-selector} {
+        @include form-item-small();
+      }
+    }
+  }
 }

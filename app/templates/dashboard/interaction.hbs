@@ -124,9 +124,11 @@
                   content=qualityOptions}}
               {{/as-form/fieldset}}
 
-              {{#as-form/submit form=form}}
-                Charge Client
-              {{/as-form/submit}}
+              {{#as-action-group}}
+                {{#as-form/submit form=form}}
+                  Charge Client
+                {{/as-form/submit}}
+              {{/as-action-group}}
             {{/as-form}}
           </section>
         {{/if}}
