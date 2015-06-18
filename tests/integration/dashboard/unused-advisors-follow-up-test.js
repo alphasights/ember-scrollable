@@ -101,6 +101,18 @@ QUnit.module("Unused Advisors Follow Up", {
         "project_history": []
       }
     });
+
+    defineFixture('GET', '/emails', {
+      params: {
+        emails: unusedAdvisor.advisor.email,
+        page: '1',
+        per_page: '10'
+      },
+
+      response: {
+        'emails': []
+      }
+    });
   },
 
   afterEach: function() {
@@ -110,9 +122,9 @@ QUnit.module("Unused Advisors Follow Up", {
 });
 
 test("Send follow up email", function(assert) {
-  var handler = defineFixture('POST', '/emails', {
+  var handler = defineFixture('POST', '/email_deliveries', {
     request: {
-      "email": {
+      "email_delivery": {
         "subject": `Hello ${unusedAdvisor.advisor.name}`,
         "body": "Giff Ember buff plox, {{your_first_name}}",
         "recipients": unusedAdvisor.advisor.email,
@@ -146,9 +158,9 @@ test("Send follow up email", function(assert) {
 });
 
 test("Send follow up email using a template", function(assert) {
-  var handler = defineFixture('POST', '/emails', {
+  var handler = defineFixture('POST', '/email_deliveries', {
     request: {
-      "email": {
+      "email_delivery": {
         "subject": "Example Subject",
         "body": "Really good template.",
         "recipients": "ppd@salty.com",

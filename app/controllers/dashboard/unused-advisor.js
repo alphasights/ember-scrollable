@@ -17,8 +17,17 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   perPage: 10,
   model: null,
   showFollowUp: false,
-  email: null,
+  emailDelivery: null,
   emailTemplates: null,
+
+  _paramatizeEmailAddresses: function(emailString) {
+    if (emailString !== undefined) {
+      return emailString.replace(/\s+/g, ',').replace(/,+/, ',');
+
+    } else {
+      return undefined;
+    }
+  },
 
   actions: {
     hideSidePanel: function() {
@@ -41,7 +50,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     send: function() {
-      var email = this.get('email');
+      let email = this.get('emailDelivery');
+
+      email.setProperties({
+        recipients: this._paramatizeEmailAddresses(email.get('recipients')),
+        cc: this._paramatizeEmailAddresses(email.get('cc')),
+        bcc: this._paramatizeEmailAddresses(email.get('bcc'))
+      });
 
       email.save().then(() => {
         notify(`Your email has been sent.`);

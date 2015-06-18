@@ -71,6 +71,7 @@ module.exports = function(environment) {
     ENV.EmberENV.segmentWriteKey = null;
     ENV.EmberENV.intercomAppId = null;
     ENV.EmberENV.honeybadgerApiKey = null;
+    ENV.EmberENV.almondApiBaseUrl = '/swordfish';
     // ENV.EmberENV.logErrors = false;
   }
 

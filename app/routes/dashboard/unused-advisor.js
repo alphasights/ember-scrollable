@@ -30,7 +30,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
   },
 
   setupController: function(controller, models) {
-    controller.set('email', this.store.createRecord('email', {
+    controller.set('emailDelivery', this.store.createRecord('emailDelivery', {
       concerningType: "email/unused_advisorship_email",
       concerningId: models.unusedAdvisor.get('id'),
       recipients: models.unusedAdvisor.get('defaultEmail'),
