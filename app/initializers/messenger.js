@@ -3,8 +3,8 @@ export default {
 
   initialize: function() {
     Messenger.options = {
-      theme: 'block',
-      extraClasses: 'notification messenger-fixed messenger-on-top messenger-on-right'
+      theme: null,
+      extraClasses: 'notifications fixed'
     };
   }
 };

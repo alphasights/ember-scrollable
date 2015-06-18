@@ -1,0 +1,24 @@
+.notifications {
+  &.fixed {
+    top: 0;
+    right: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  @each $type, $notification-color in $notification-colors {
+    .alert-#{$type} {
+      @include notification(
+        $color: $notification-color,
+        $content-selector: '> .messenger-message-inner',
+        $close-selector: '> .close',
+        $is-closing-class: 'messenger-hidden'
+      );
+
+      &.messenger-hidden {
+        display: block !important;
+      }
+    }
+  }
+}
