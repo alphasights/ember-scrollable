@@ -6,6 +6,7 @@ export default Ember.Service.extend({
 
   id: Ember.computed.oneWay('model.id'),
   name: Ember.computed.oneWay('model.name'),
+  email: Ember.computed.oneWay('model.email'),
   teamId: Ember.computed.oneWay('model.teamId'),
 
   authenticate: function() {

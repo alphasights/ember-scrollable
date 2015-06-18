@@ -16,7 +16,7 @@
     "loader.js": "ember-cli/loader.js#3.2.0",
     "messenger": "1.4.1",
     "moment-timezone": "0.3.0",
-    "paint": "0.7.27",
+    "paint": "0.7.29",
     "pretender": "0.6.0",
     "qunit": "1.17.1",
     "route-recognizer": "0.1.5",

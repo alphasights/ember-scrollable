@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNameBindings: [':action', 'isConfirming:active'],
-  templateName: 'components/as-action',
+  layoutName: 'components/as-action',
   buttonClass: null,
   confirmationMessage: 'Are you sure?',
   confirmationButtonLabel: 'Yes',

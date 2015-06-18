@@ -37,7 +37,7 @@ QUnit.module("Unused Advisors Side Panel", {
       "advisors": [
         {
           "id": 10,
-          "avatar_url": 'http://avatar-url.com',
+          "avatar_url": EmberENV.blankAvatarUrl,
           "name": unusedAdvisor.advisorName,
           "time_zone": null,
           "emails": [],
@@ -49,9 +49,34 @@ QUnit.module("Unused Advisors Side Panel", {
       ]
     }});
 
-    defineFixture('GET', '/project_history', { response: {
-      "project_history": []
-    }});
+    defineFixture('GET', '/project_history', {
+      params: {
+        advisor_id: '10'
+      },
+
+      response: {
+        "project_history": []
+      }
+    });
+
+    defineFixture('GET', '/email_templates', {
+      params: { purpose: 'Unused Advisor' },
+
+      response: {
+        "email_templates": []
+      }
+    });
+
+    defineFixture('GET', '/email_variables', {
+      params: {
+        concerning_id: unusedAdvisor.id.toString(),
+        concerning_type: 'email/unused_advisorship_email'
+      },
+
+      response: {
+        "email_variables": []
+      }
+    });
   },
 
   afterEach: function() {
@@ -69,7 +94,7 @@ test("Remove unused advisor from side panel", function(assert) {
 
   defineFixture('DELETE', '/unused_advisors/1');
   click('.unused-advisors article:first');
-  click("button:contains('Remove Advisor')");
+  click("button.remove");
   click("button:contains('Yes, Remove Advisor')");
 
   andThen(function() {

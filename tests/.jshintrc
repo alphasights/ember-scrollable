@@ -25,6 +25,7 @@
     "currentRouteName",
     "Pretender",
     "defineFixture",
+    "withFeature",
     "_",
     "EmberENV",
     "select",

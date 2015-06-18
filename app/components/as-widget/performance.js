@@ -5,16 +5,19 @@ export default Ember.Component.extend({
   classNameBindings: [':widget', ':performance', 'statusClass'],
 
   performance: null,
-  isOnTarget: Ember.computed.oneWay('performance.isOnTarget'),
+  paceIsExceptional: Ember.computed.oneWay('performance.paceIsExceptional'),
+  isMoreThanOnPace: Ember.computed.oneWay('performance.isMoreThanOnPace'),
   isOnPace: Ember.computed.oneWay('performance.isOnPace'),
   currentMonthCreditCount: Ember.computed.oneWay('performance.currentMonthCreditCount'),
   monthlyTarget: Ember.computed.oneWay('performance.monthlyTarget'),
   onPaceCreditTarget: Ember.computed.oneWay('performance.onPaceCreditTarget'),
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
 
-  statusClass: Ember.computed('isOnTarget', 'isOnPace', function() {
-    if (this.get('isOnTarget')) {
-      return 'on-target';
+  statusClass: Ember.computed('paceIsExceptional', 'isMoreThanOnPace', 'isOnPace', function() {
+    if (this.get('paceIsExceptional')) {
+      return 'exceptional';
+    } else if (this.get('isMoreThanOnPace')) {
+      return 'more-than-on-pace';
     } else if (this.get('isOnPace')) {
       return 'on-pace';
     } else {
@@ -43,7 +46,11 @@ export default Ember.Component.extend({
   }),
 
   currentMonthCreditCountTitle: Ember.computed('currentMonthCreditCount', function() {
-    return `Credits: ${this.get('currentMonthCreditCount')}`;
+    return `Credits: ${this.get('_roundedCurrentMonthCreditCount')}`;
+  }),
+
+  _roundedCurrentMonthCreditCount: Ember.computed('currentMonthCreditCount', function() {
+    return Math.round(this.get('currentMonthCreditCount') * 10) / 10;
   }),
 
   _setupTooltipster: Ember.on('didInsertElement', function() {

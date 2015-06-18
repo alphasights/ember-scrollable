@@ -34,7 +34,7 @@ module.exports = function(environment) {
 
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' *.segment.io *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com use.typekit.net",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' *.segment.io *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com use.typekit.net",
       'font-src': "'self' *.gstatic.com data: use.typekit.net",
       'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000",
       'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io p.typekit.net;",
