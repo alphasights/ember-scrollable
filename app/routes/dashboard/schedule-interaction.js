@@ -16,23 +16,23 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
     });
   },
 
-  setupController: function(controller, model) {
-    model.interaction.initialize();
+  setupController: function(controller, models) {
+    models.interaction.initialize();
 
     controller.setProperties({
-      model: model.interaction,
-      unavailabilities: model.unavailabilities,
-      interactionTypes: model.interactionTypes.interaction_types,
-      interactionClassifications: model.interactionTypes.classifications,
-      speakDialInCountries: model.speakDialInCountries.dial_ins,
+      model: models.interaction,
+      unavailabilities: models.unavailabilities,
+      interactionTypes: models.interactionTypes.interaction_types,
+      interactionClassifications: models.interactionTypes.classifications,
+      speakDialInCountries: models.speakDialInCountries.dial_ins,
 
       // reset form fields
-      scheduledCallTime: model.interaction.get('scheduledCallTime'),
-      interactionType: model.interaction.get('interactionType'),
-      advisorPhoneNumber: model.interaction.get('advisorPhoneNumber'),
-      advisorPhoneCountryCode: model.interaction.get('advisorPhoneCountryCode'),
-      clientAccessNumberCountry: model.interaction.get('clientAccessNumberCountry'),
-      additionalContactDetails: model.interaction.get('additionalContactDetails'),
+      scheduledCallTime: models.interaction.get('scheduledCallTime'),
+      interactionType: models.interaction.get('interactionType'),
+      advisorPhoneNumber: models.interaction.get('advisorPhoneNumber'),
+      advisorPhoneCountryCode: models.interaction.get('advisorPhoneCountryCode'),
+      clientAccessNumberCountry: models.interaction.get('clientAccessNumberCountry'),
+      additionalContactDetails: models.interaction.get('additionalContactDetails'),
     });
   }
 });
