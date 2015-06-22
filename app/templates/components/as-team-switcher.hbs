@@ -1,6 +1,6 @@
 <div class="select">
   {{#x-select value=selectedTeam}}
-    <option>{{prompt}}</option>
+    {{#x-option value=null}}{{prompt}}{{/x-option}}
 
     {{#each teams as |team|}}
       {{#x-option value=team}}{{team.name}}{{/x-option}}
