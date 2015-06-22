@@ -8,7 +8,7 @@
   class="form-select" as |value|}}
   {{#x-select name=name value=value disabled=disabled}}
     {{#if prompt}}
-      <option>{{prompt}}</option>
+      {{#x-option value=null}}{{prompt}}{{/x-option}}
     {{/if}}
 
     {{#if optionGroupPath}}
