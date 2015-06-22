@@ -1,5 +1,16 @@
 # Phoenix Changelog
 
+### Release 0.0.5 (June 22, 2015)
+
+- [#336](https://github.com/alphasights/phoenix/pull/336) Add email composer to unused advisor sidepanel (feature flagged)
+- [#368](https://github.com/alphasights/phoenix/pull/368) Fix arrow navigation triggering in form inputs
+- [#364](https://github.com/alphasights/phoenix/pull/364) Display more informative errors on the interaction completion form
+- [#360](https://github.com/alphasights/phoenix/pull/360) Display link to scheduling tab from interaction side panel
+- [#353](https://github.com/alphasights/phoenix/pull/353) Fix team delivery performance rounding errors
+- [#359](https://github.com/alphasights/phoenix/pull/359) Add link to create a new project from projects page
+- [#350](https://github.com/alphasights/phoenix/pull/350) Update Ember to 1.13
+- [#349 BUGFIX](https://github.com/alphasights/phoenix/pull/349) Remove extra padding from scheduling form
+
 ### Release 0.0.4 (June 15, 2015)
 
 - [#341](https://github.com/alphasights/phoenix/pull/341) Add team member filter to projects page
