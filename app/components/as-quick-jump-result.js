@@ -43,7 +43,7 @@ export default Ember.Component.extend({
 
     entity: {
       titlePath: 'name',
-      path: 'entities'
+      path: 'client/entities'
     },
 
     project: {
