@@ -9,6 +9,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
 
+  model: null,
+  showFollowUp: false,
+  email: null,
+  emailTemplates: null,
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
@@ -21,8 +26,23 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       });
     },
 
-    followUp: function() {
-      // open the double sidepanel
-    }
+    toggleFollowUp: function() {
+      this.get('sidePanel').send('toggleDrawer');
+    },
+
+    preview: function() {
+      this.get('emailComposer').send('togglePreview');
+    },
+
+    send: function() {
+      var email = this.get('email');
+
+      email.save().then(() => {
+        notify(`Your email has been sent.`);
+        this.get('sidePanel').send('close');
+      }).catch(function() {
+        notify('There has been an error sending your email.', 'error');
+      });
+    },
   }
 });

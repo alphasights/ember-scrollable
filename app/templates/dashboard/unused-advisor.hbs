@@ -1,45 +1,72 @@
 {{#as-side-panel class="unused-advisor" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
-  <div>
-    <header>
-      <div class="content">
-        <h1>
-          <span>{{model.project.name}}</span>
-          <small>{{model.project.codename}}</small>
-        </h1>
+  {{#as-side-panel/main}}
+    {{as-side-panel/header}}
 
-        <span>
-          <span>Contacted</span>
-          <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
-        </span>
-      </div>
-    </header>
+    {{#as-side-panel/content}}
+      <header>
+        <div class="content">
+          <h1>
+            <span>{{model.project.name}}</span>
+            <small>{{model.project.codename}}</small>
+          </h1>
 
-    <section class="profile">
-      {{as-profile
-        person=model.advisor
-        title="Unused Advisor"
-        class="advisor"}}
-    </section>
+          <span>
+            <span>Contacted</span>
+            <span class="terms-sent-at">{{ago model.termsSentAt}}</span>
+          </span>
+        </div>
+      </header>
 
-    {{#if features.advisorFollowUp}}
-      {{as-project-history projectHistory=projectHistory}}
-    {{/if}}
-  </div>
+      <section class="profile">
+        {{as-profile
+          person=model.advisor
+          title="Unused Advisor"
+          class="advisor"}}
+      </section>
 
-  {{#as-action-group}}
-    {{#as-action
-      action="remove"
-      showConfirmation=true
-      confirmationStateClass="alert"
-      confirmationButtonLabel="Yes, Remove Advisor"
-      requestPromise=requestPromise}}
-      Remove Advisor
-    {{/as-action}}
+      {{#if features.advisorFollowUp}}
+        {{as-project-history projectHistory=projectHistory}}
+      {{/if}}
+    {{/as-side-panel/content}}
 
-    {{#if features.advisorFollowUp}}
-      {{#as-action action="followUp" requestPromise=requestPromise}}
-        Follow Up
-      {{/as-action}}
-    {{/if}}
-  {{/as-action-group}}
+    {{#as-side-panel/footer}}
+      {{#as-action-group}}
+        {{#as-action
+          action="remove"
+          showConfirmation=true
+          buttonClass="remove"
+          confirmationStateClass="alert"
+          confirmationButtonLabel="Yes, Remove Advisor"
+          requestPromise=requestPromise}}
+          Remove Advisor
+        {{/as-action}}
+
+        {{#if features.advisorFollowUp}}
+          {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
+            Follow Up
+          {{/as-action}}
+        {{/if}}
+      {{/as-action-group}}
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/main}}
+
+  {{#as-side-panel/drawer}}
+    {{#as-side-panel/content}}
+      {{as-email-composer
+        model=email
+        templates=emailTemplates
+        variables=emailVariables
+        actionReceiver=emailComposer}}
+    {{/as-side-panel/content}}
+
+    {{#as-side-panel/footer}}
+      {{#as-action-group}}
+        {{#as-action action="send" requestPromise=requestPromise}}
+          Send
+        {{/as-action}}
+
+        {{#as-action action="preview"}}Preview{{/as-action}}
+      {{/as-action-group}}
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/drawer}}
 {{/as-side-panel}}

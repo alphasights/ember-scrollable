@@ -30,9 +30,9 @@ export default Ember.Route.extend({
 
   actions: {
     error: function(error) {
-      if (error.status === 401) {
+      if (error.errors[0].status === '401') {
         this.get('currentUser').redirectToLogin();
-      } else if (error.status === 404) {
+      } else if (error.errors[0].status === '404') {
         logError(error);
         this.render('not_found', { into: 'application' });
       } else {

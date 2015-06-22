@@ -1,14 +1,8 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
-import InteractionCompletion from 'phoenix/models/interaction-completion';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
-
-var qualityOptionsMapping = {
-  'good': 'Good',
-  'bad': 'Bad'
-};
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
@@ -34,13 +28,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   checklistItems: Ember.computed.sort('model.checklistItems', 'checklistItemsSorting'),
   checklistItemsSorting: ['completed', 'createdAt'],
 
-  qualityOptions: Ember.computed(function() {
-    return InteractionCompletion.qualityOptions.map(function(option) {
-      return Ember.Object.create({
-        id: option,
-        name: qualityOptionsMapping[option]
-      });
-    });
+  schedulingTabUrl: Ember.computed('model.project', function() {
+    let projectId = this.get('model.project.id');
+    let interactionId = this.get('model.id');
+
+    return `${EmberENV.pistachioUrl}/projects/${projectId}/proposal#advisorship_${interactionId}`;
   }),
 
   _cancel: function(withdrawFromCompliance = false) {
@@ -57,14 +49,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   actions: {
     chargeClient: function() {
-      this.set('requestPromise', PromiseController.create({
-        promise: this.get('completion').save().then(() => {
-          notify('The interaction has been completed.');
-          this.get('sidePanel').send('close');
-        }).catch(function() {
-          notify('There has been an error completing the interaction.', 'error');
-        })
-      }));
+      this.get('completionForm').save().then(() => {
+        notify('The interaction has been completed.');
+        this.get('sidePanel').send('close');
+      }, function() {
+        notify('There has been an error completing the interaction.', 'error');
+      });
     },
 
     hideSidePanel: function() {

@@ -30,57 +30,6 @@ test('#onPaceCreditTarget calculates the on pace credit target, rounded to the n
   assert.equal(this.model.get('onPaceCreditTarget'), 7.5);
 });
 
-test("isOnTarget returns true when the current credit count exceeds the monthly target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 31, monthlyTarget: 30});
-  });
-
-  assert.equal(this.model.get('isOnTarget'), true);
-});
-
-test("isOnTarget returns true when the current credit count equals the monthly target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 30, monthlyTarget: 30});
-  });
-
-  assert.equal(this.model.get('isOnTarget'), true);
-});
-
-test("isOnTarget returns false when the current credit count is less than the monthly target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 29, monthlyTarget: 30});
-  });
-
-  assert.equal(this.model.get('isOnTarget'), false);
-});
-
-test("isOnPace returns true when the current credit count exceeds the pace target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 30});
-    this.model.reopen({onPaceCreditTarget: 20});
-  });
-
-  assert.equal(this.model.get('isOnPace'), true);
-});
-
-test("isOnPace returns true when the current credit count equals the pace target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 30});
-    this.model.reopen({onPaceCreditTarget: 30});
-  });
-
-  assert.equal(this.model.get('isOnPace'), true);
-});
-
-test("isOnPace returns false when the current credit count is less than the pace target", function(assert) {
-  Ember.run(() => {
-    this.model.setProperties({currentMonthCreditCount: 20});
-    this.model.reopen({onPaceCreditTarget: 30});
-  });
-
-  assert.equal(this.model.get('isOnPace'), false);
-});
-
 test('#_weekdayHoursSinceBeginningOfMonth calculates weekday hours including previous hours of the current day', function(assert) {
   // February 1, 7, 8 were weekend days. leaving five full weekdays.
   // The current day, February 9, was a Monday and 12 hours had passed.

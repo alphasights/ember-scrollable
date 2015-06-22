@@ -14,7 +14,7 @@ export default DS.Model.extend({
   scheduledCallTime: DS.attr('date'),
   speak: DS.attr('boolean'),
   interactionType: DS.attr('string'),
-  advisorPhoneCountryCode: DS.attr('string'),
+  advisorPhoneCountryCode: DS.attr('string', { defaultValue: '1' }),
   advisorPhoneNumber: DS.attr('string'),
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
@@ -35,6 +35,8 @@ export default DS.Model.extend({
   initialize: function() {
     if (Ember.isBlank(this.get('interactionType'))) {
       this.set('interactionType', this.get('project.defaultInteractionType'));
+    } else {
+      this.set('interactionType', 'call');
     }
   }
 });

@@ -1,1 +1,9 @@
+{{#liquid-if model.content.errors.base use="crossFade"}}
+  <ul class="errors">
+    {{#each model.content.errors.base as |error|}}
+      <li>{{error.message}}</li>
+    {{/each}}
+  </ul>
+{{/liquid-if}}
+
 {{yield this}}

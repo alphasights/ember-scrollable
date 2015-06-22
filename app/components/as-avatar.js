@@ -13,7 +13,7 @@ export default TooltipsterComponent.extend({
   person: null,
   title: Ember.computed.oneWay('person.name'),
   alt: Ember.computed.oneWay('person.initials'),
-  src: Ember.computed.any('person.avatarUrl', 'blankAvatarUrl'),
+  src: Ember.computed.or('person.avatarUrl', 'blankAvatarUrl'),
 
   setupTooltipster: Ember.observer('showTooltip', function() {
     Ember.run.schedule('afterRender', () => {

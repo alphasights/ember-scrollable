@@ -15,21 +15,25 @@ var InteractionOccurrence = Occurrence.extend({
   interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
-  time: Ember.computed('scheduledCallTime', function(key, value) {
-    if (arguments.length > 1) {
+  time: Ember.computed('scheduledCallTime', {
+    set: function(_, value) {
       if (value != null) {
         this.set('scheduledCallTime', value.toDate());
       } else {
         this.set('scheduledCallTime', null);
       }
-    }
 
-    var scheduledCallTime = this.get('scheduledCallTime');
+      return value;
+    },
 
-    if (scheduledCallTime != null) {
-      return moment(this.get('scheduledCallTime'));
-    } else {
-      return null;
+    get: function() {
+      var scheduledCallTime = this.get('scheduledCallTime');
+
+      if (scheduledCallTime != null) {
+        return moment(scheduledCallTime);
+      } else {
+        return null;
+      }
     }
   }),
 
@@ -176,9 +180,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 
-  modelDidError: function(error) {
-    if (error.errors != null) {
-      this.set('errors', error.errors);
+  modelDidError: function() {
+    if (this.get('model.errors.length') > 0) {
+      this.set('errors', this.get('model.errors'));
     } else {
       notify('There has been an error scheduling the interaction.', 'error');
     }

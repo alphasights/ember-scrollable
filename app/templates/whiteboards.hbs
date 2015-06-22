@@ -7,12 +7,15 @@
   <div class="whiteboard-select {{if showWhiteboardSelect 'open'}}">
     {{#if showWhiteboardSelect}}
       <div class="select">
-        {{view "select"
-          content=whiteboards
-          value=selectedWhiteboard
-          change=onWhiteboardSelectChange
-          optionLabelPath="content.name"
-          optionGroupPath="type"}}
+        {{#x-select value=selectedWhiteboard action="changeSelectedWhiteboard"}}
+          {{#each groupedWhiteboards as |group|}}
+            <optgroup label={{group.label}}>
+              {{#each group.content as |whiteboard|}}
+                {{#x-option value=whiteboard}}{{whiteboard.name}}{{/x-option}}
+              {{/each}}
+            </optgroup>
+          {{/each}}
+        {{/x-select}}
       </div>
     {{else}}
       <h1>{{selectedWhiteboard.name}}</h1>

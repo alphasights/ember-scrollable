@@ -12,7 +12,7 @@
 
       {{#rl-dropdown tagName="ul" class="bottom" closeOnChildClick=true}}
         <li><a {{action "setTeamMember" null}}>All Team Members</a></li>
-        {{#each teamMember in teamMembers}}
+        {{#each teamMembers as |teamMember|}}
           <li>
             <a {{action "setTeamMember" teamMember}}>
               {{as-avatar person=teamMember}} <span>{{teamMember.name}} ({{teamMember.initials}})</span>

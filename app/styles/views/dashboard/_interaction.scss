@@ -10,7 +10,7 @@ $interaction-header-height:
   $side-panel-actions-height;
 
 .side-panel.interaction {
-  header {
+  .side-panel-content header {
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
@@ -71,6 +71,20 @@ $interaction-header-height:
         float: right;
       }
 
+      .pistachio-link {
+        padding-right: $column-gutter / 4;
+
+        > div {
+          display: inherit;
+        }
+
+        i {
+          @include icon(external-link);
+
+          font-size: $h6-font-size;
+        }
+      }
+
       .call-times {
         display: block;
 
@@ -92,7 +106,6 @@ $interaction-header-height:
       .speak-details {
         display: block;
         font-size: $h6-font-size;
-        margin-top: $column-gutter / 2;
 
         > li {
           display: inline;
@@ -205,28 +218,23 @@ $interaction-header-height:
     }
   }
 
-  > div > .content {
-    $actions-height: rem-calc(90);
+  .form {
+    padding: $column-gutter;
 
-    > div {
-      height: 100%;
-      margin-bottom: - $actions-height;
+    ul.errors {
+      margin-top: $column-gutter;
+      padding: 0 $column-gutter;
+
+      li {
+        @include alert($bg: $alert-color);
+
+        margin-bottom: rem-calc(2px);
+      }
     }
 
-    .actions {
-      float: left;
-      height: $actions-height;
-      padding: 0 !important;
-      width: 100%;
-
-      &.form-submission {
-        @include form-submission($standalone: true, $height: $actions-height);
-
-        padding: 0 $column-gutter !important;
-
-        .action .confirmation {
-          padding: 0 $column-gutter !important;
-        }
+    form {
+      #{$form-field-selector} {
+        @include form-item-small();
       }
     }
   }
