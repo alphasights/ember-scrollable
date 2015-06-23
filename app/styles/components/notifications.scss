@@ -7,10 +7,10 @@
     z-index: 1000;
   }
 
-  @each $type, $notification-color in $notification-colors {
+  @each $type, $palette in $notification-colors {
     .alert-#{$type} {
       @include notification(
-        $color: $notification-color,
+        $type: $palette,
         $content-selector: '> .messenger-message-inner',
         $close-selector: '> .close',
         $is-closing-class: 'messenger-hidden'
