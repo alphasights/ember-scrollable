@@ -2,8 +2,10 @@
   {{#each projectHistory as |projectHistory|}}
     <tr {{action "openProject" projectHistory.project}}>
       <td class="project">
-        <span>{{projectHistory.project.name}}</span> -
-        <span class="codename">{{projectHistory.project.codename}}</span>
+        <a href={{projectHistory.project.pistachioUrl}} target="_blank">
+          <span class="name">{{projectHistory.project.name}}</span> -
+          <span class="codename">{{projectHistory.project.codename}}</span>
+        </a>
       </td>
 
       <td class="occurred-at">

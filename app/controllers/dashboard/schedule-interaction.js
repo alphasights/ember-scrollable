@@ -180,9 +180,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, EmberValidations.M
     notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
   },
 
-  modelDidError: function(error) {
-    if (error.errors != null) {
-      this.set('errors', error.errors);
+  modelDidError: function() {
+    if (this.get('model.errors.length') > 0) {
+      this.set('errors', this.get('model.errors'));
     } else {
       notify('There has been an error scheduling the interaction.', 'error');
     }
