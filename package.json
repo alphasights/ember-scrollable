@@ -59,7 +59,7 @@
     "ember-sortable": "1.1.0",
     "ember-validations": "^2.0.0-alpha.3",
     "ember-watson": "^0.3.1",
-    "emberx-select": "git+https://github.com/thefrontside/emberx-select.git",
+    "emberx-select": "1.1.2",
     "express": "4.12.4",
     "github": "^0.2.3",
     "glob": "4.5.3",
