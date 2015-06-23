@@ -77,6 +77,17 @@ QUnit.module("Unused Advisors Side Panel", {
         "email_variables": []
       }
     });
+
+    defineFixture('GET', '/emails', {
+      params: {
+        page: '1',
+        per_page: '10'
+      },
+
+      response: {
+        'emails': []
+      }
+    });
   },
 
   afterEach: function() {

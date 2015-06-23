@@ -7,8 +7,6 @@ export default DS.Model.extend({
   concerningId: DS.attr('number'),
   concerningType: DS.attr('string'),
   from: DS.attr('string'),
-  outgoing: DS.attr('boolean'),
   recipients: DS.attr('string'),
-  sentAt: DS.attr('date'),
   subject: DS.attr('string')
 });
