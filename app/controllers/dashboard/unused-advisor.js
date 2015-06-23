@@ -17,8 +17,14 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   perPage: 10,
   model: null,
   showFollowUp: false,
+  showSelectedEmail: false,
+  selectedEmail: null,
   emailDelivery: null,
   emailTemplates: null,
+
+  controller: Ember.computed(function() {
+    return this;
+  }),
 
   _paramatizeEmailAddresses: function(emailString) {
     if (emailString !== undefined) {
@@ -42,6 +48,17 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     toggleFollowUp: function() {
+      this.set('showFollowUp', true);
+      this.set('showSelectedEmail', false);
+
+      this.get('sidePanel').send('toggleDrawer');
+    },
+
+    viewEmail: function(email) {
+      this.set('showFollowUp', false);
+      this.set('showSelectedEmail', true);
+      this.set('selectedEmail', email);
+
       this.get('sidePanel').send('toggleDrawer');
     },
 

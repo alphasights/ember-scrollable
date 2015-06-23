@@ -1,6 +1,6 @@
 <table>
   {{#each emails as |email|}}
-    <tr {{action "selectEmail" email}}>
+    <tr {{action "viewEmail" email}}>
       <td class="subject">
         {{email.subject}}
       </td>
@@ -15,7 +15,3 @@
 </table>
 
 {{page-numbers content=emails}}
-
-{{#if isViewingEmail}}
-  {{as-email-viewer email=selectedEmail}}
-{{/if}}
