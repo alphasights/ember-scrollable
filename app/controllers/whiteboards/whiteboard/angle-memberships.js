@@ -59,10 +59,6 @@ export default Ember.Controller.extend({
       });
 
       membership.save();
-    },
-
-    remove: function(membership) {
-      membership.destroyRecord();
     }
   }
 });
