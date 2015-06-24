@@ -44,14 +44,16 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
   save: function() {
     if (this.get('isValid')) {
       var requestPromise = PromiseController.create({
-        promise: this.get('content').save()
+        promise: this.get('content').save().catch(function() {
+          notify('There has been an error completing the interaction.', 'error');
+        })
       });
 
       this.set('requestPromise', requestPromise);
 
       return requestPromise;
     } else {
-      return Ember.RSVP.Promise.reject('Completion form validation failed');
+      return Ember.RSVP.Promise.reject('Form validation failed');
     }
   }
 });

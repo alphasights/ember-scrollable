@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
+import ScheduleInteractionForm from 'phoenix/forms/schedule-interaction-form';
 import { request } from 'ic-ajax';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
@@ -22,17 +23,14 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
     controller.setProperties({
       model: models.interaction,
       unavailabilities: models.unavailabilities,
-      interactionTypes: models.interactionTypes.interaction_types,
-      interactionClassifications: models.interactionTypes.classifications,
-      speakDialInCountries: models.speakDialInCountries.dial_ins,
-
-      // reset form fields
-      scheduledCallTime: models.interaction.get('scheduledCallTime'),
-      interactionType: models.interaction.get('interactionType'),
-      advisorPhoneNumber: models.interaction.get('advisorPhoneNumber'),
-      advisorPhoneCountryCode: models.interaction.get('advisorPhoneCountryCode'),
-      clientAccessNumberCountry: models.interaction.get('clientAccessNumberCountry'),
-      additionalContactDetails: models.interaction.get('additionalContactDetails'),
+      
+      scheduleInteractionForm: ScheduleInteractionForm.create({
+        content: models.interaction,
+        interactionTypes: models.interactionTypes.interaction_types,
+        interactionClassifications: models.interactionTypes.classifications,
+        speakDialInCountries: models.speakDialInCountries.dial_ins,
+        container: this.get('container')
+      })
     });
   }
 });

@@ -23,13 +23,15 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   },
 
   setupController: function(controller, models) {
-    controller.set('model', models.interaction);
+    controller.setProperties({
+      model: models.interaction,
 
-    controller.set('completionForm', InteractionCompletionForm.create({
-      content: models.completion,
-      container: this.get('container')
-    }));
-
-    controller.set('showForm', false);
+      completionForm: InteractionCompletionForm.create({
+        content: models.completion,
+        container: this.get('container')
+      }),
+      
+      showForm: false
+    });
   }
 });

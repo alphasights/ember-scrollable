@@ -52,8 +52,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('completionForm').save().then(() => {
         notify('The interaction has been completed.');
         this.get('sidePanel').send('close');
-      }, function() {
-        notify('There has been an error completing the interaction.', 'error');
       });
     },
 
