@@ -60,7 +60,7 @@
           model=emailDelivery
           templates=emailTemplates
           variables=emailVariables
-          actionReceiver=emailComposer}}
+          showPreview=displayingPreview}}
       {{/if}}
 
       {{#if (eq drawerContent "emailViewer")}}
@@ -74,7 +74,13 @@
               Send
             {{/as-action}}
 
-            {{#as-action action="preview"}}Preview{{/as-action}}
+            {{#as-action action="togglePreview"}}
+              {{#if displayingPreview}}
+                Edit
+              {{else}}
+                Preview
+              {{/if}}
+            {{/as-action}}
           {{/if}}
 
           {{#as-action action="close" class="close"}}Close{{/as-action}}

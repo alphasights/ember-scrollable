@@ -20,6 +20,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   emailDelivery: null,
   emailTemplates: null,
   drawerContent: null,
+  displayingPreview: false,
 
   _paramatizeEmailAddresses: function(emailString) {
     if (emailString != null) {
@@ -52,8 +53,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('sidePanel').send('showDrawer');
     },
 
-    preview: function() {
-      this.get('emailComposer').send('togglePreview');
+    togglePreview: function() {
+      this.toggleProperty('displayingPreview');
     },
 
     send: function() {
