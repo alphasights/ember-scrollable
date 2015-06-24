@@ -1,0 +1,14 @@
+.notifications {
+  @extend %notifications;
+
+  @each $type, $palette in $notification-colors {
+    .alert-#{$type} {
+      @include notification(
+        $type: $palette,
+        $content-selector: '> .messenger-message-inner',
+        $close-selector: '> .close',
+        $is-closing-class: 'messenger-hidden'
+      );
+    }
+  }
+}
