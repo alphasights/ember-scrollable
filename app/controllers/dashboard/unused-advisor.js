@@ -51,7 +51,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.set('showFollowUp', true);
       this.set('showSelectedEmail', false);
 
-      this.get('sidePanel').send('toggleDrawer');
+      this.get('sidePanel').send('showDrawer');
     },
 
     viewEmail: function(email) {
@@ -59,7 +59,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.set('showSelectedEmail', true);
       this.set('selectedEmail', email);
 
-      this.get('sidePanel').send('toggleDrawer');
+      this.get('sidePanel').send('showDrawer');
     },
 
     preview: function() {
@@ -82,5 +82,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         notify('There has been an error sending your email.', 'error');
       });
     },
+
+    close: function() {
+      this.get('sidePanel').send('hideDrawer');
+    }
   }
 });

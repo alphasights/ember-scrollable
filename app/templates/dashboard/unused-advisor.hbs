@@ -71,17 +71,18 @@
         {{as-email-viewer email=selectedEmail}}
       {{/if}}
     {{/as-side-panel/content}}
-
-    {{#if showFollowUp}}
       {{#as-side-panel/footer}}
         {{#as-action-group}}
-          {{#as-action action="send" requestPromise=requestPromise}}
-            Send
-          {{/as-action}}
+          {{#if showFollowUp}}
+            {{#as-action action="send" requestPromise=requestPromise}}
+              Send
+            {{/as-action}}
 
-          {{#as-action action="preview"}}Preview{{/as-action}}
+            {{#as-action action="preview"}}Preview{{/as-action}}
+          {{/if}}
+
+          {{#as-action action="close" class="close"}}Close{{/as-action}}
         {{/as-action-group}}
       {{/as-side-panel/footer}}
-    {{/if}}
   {{/as-side-panel/drawer}}
 {{/as-side-panel}}

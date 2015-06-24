@@ -1,0 +1,12 @@
+.email-viewer {
+  padding: $column-gutter;
+
+  h1 {
+    font-size: $h2-font-size;
+  }
+
+  .info {
+    color: $small-font-color;
+    margin-bottom: rem-calc(25);
+  }
+}

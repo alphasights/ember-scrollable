@@ -12,7 +12,7 @@ $list-item-padding: rem-calc(10);
     i {
       @include icon(plus-circle);
 
-      margin-right: 2px;
+      margin-right: rem-calc(5);
 
       &.expanded {
         @include icon(minus-circle);
@@ -32,7 +32,6 @@ $list-item-padding: rem-calc(10);
     }
 
     td {
-      color: $small-font-color;
       padding: $list-item-padding 0;
 
       &:last-child {
