@@ -21,10 +21,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   emailTemplates: null,
   drawerContent: null,
 
-  controller: Ember.computed(function() {
-    return this;
-  }),
-
   _paramatizeEmailAddresses: function(emailString) {
     if (emailString != null) {
       return emailString.replace(/\s+/g, ',').replace(/,+/, ',');
