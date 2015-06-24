@@ -4,7 +4,7 @@
       <td class="project">
         <a href={{projectHistory.project.pistachioUrl}} target="_blank">
           <span class="name">{{projectHistory.project.name}}</span> -
-          <span class="codename">{{projectHistory.project.codename}}</span>
+          <span class="codename">{{as-text-ellipsis text=projectHistory.project.codename characterLimit=30}}</span>
         </a>
       </td>
 
