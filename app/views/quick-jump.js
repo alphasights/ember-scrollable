@@ -29,7 +29,7 @@ export default Ember.View.extend(KeyEventsMixin, {
 
   willDestroyElement: function() {
     this._super.apply(this, arguments);
-    
+
     Ember.$(document).off(this.get('clickEventName'));
   },
 
@@ -42,6 +42,10 @@ export default Ember.View.extend(KeyEventsMixin, {
   actions: {
     onBarFocusIn: function() {
       this.set('isActive', true);
+    },
+
+    onBarFocusOut: function() {
+      this.get('controller').send('clear');
     }
   },
 

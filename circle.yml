@@ -2,7 +2,7 @@ machine:
   environment:
     PATH: "${HOME}/${CIRCLE_PROJECT_REPONAME}/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin:${PATH}"
   node:
-    version: 0.12.0
+    version: 0.12.4
 
 test:
   override:
@@ -10,7 +10,6 @@ test:
 
 dependencies:
   override:
-    - "cd bin && wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 && tar xjvf phantomjs-2.0.0-ubuntu-12.04.tar.bz2"
     - "./bin/setup"
 
 deployment:

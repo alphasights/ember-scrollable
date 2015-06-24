@@ -1,11 +1,7 @@
 <ul>
-  {{#each model.memberships itemController="whiteboards.whiteboard.angle-membership" as |membership|}}
+  {{#each memberships as |membership|}}
     <li>
-      <article>
-        {{as-avatar person=membership.model.user}}
-        {{super-number value=membership.deliveryTarget class="delivery-target"}}
-        <button class="remove" tabindex="-1" {{action "remove" membership.model bubbles=false}}></button>
-      </article>
+      {{as-angle-membership membership=membership}}
     </li>
   {{/each}}
 </ul>

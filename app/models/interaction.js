@@ -35,6 +35,8 @@ export default DS.Model.extend({
   initialize: function() {
     if (Ember.isBlank(this.get('interactionType'))) {
       this.set('interactionType', this.get('project.defaultInteractionType'));
+    } else {
+      this.set('interactionType', 'call');
     }
   }
 });
