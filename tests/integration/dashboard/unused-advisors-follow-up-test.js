@@ -201,6 +201,7 @@ test("Send follow up email using a template", function(assert) {
 test("Preview follow up email", function(assert) {
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
 
+  click("button:contains('Follow Up')");
   fillIn('input[name=subject]', 'Hello IceFrog');
   fillIn('.email-composer textarea', 'Giff Ember buff plox, {{your_first_name}}');
   click("button:contains('Preview')");
@@ -214,6 +215,8 @@ test("Preview follow up email", function(assert) {
 
 test("Follow up email variables validation", function(assert) {
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+
+  click("button:contains('Follow Up')");
   fillIn('.email-composer textarea', 'Giff Ember buff plox, {{motto}}');
 
   andThen(function() {

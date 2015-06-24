@@ -24,11 +24,9 @@
           class="advisor"}}
       </section>
 
-      {{#if features.advisorFollowUp}}
-        {{#as-expandable-list title="Email Correspondence"}}
-          {{as-email-correspondence emails=emails actionHandler=controller}}
-        {{/as-expandable-list}}
-      {{/if}}
+      {{#as-expandable-list title="Email Correspondence"}}
+        {{as-email-correspondence emails=emails actionHandler=controller}}
+      {{/as-expandable-list}}
 
       {{#as-expandable-list title="Project History"}}
         {{as-project-history projectHistory=projectHistory}}
@@ -48,11 +46,9 @@
           Remove Advisor
         {{/as-action}}
 
-        {{#if features.advisorFollowUp}}
-          {{#as-action action="showFollowUp" requestPromise=requestPromise}}
-            Follow Up
-          {{/as-action}}
-        {{/if}}
+        {{#as-action action="showFollowUp" requestPromise=requestPromise}}
+          Follow Up
+        {{/as-action}}
       {{/as-action-group}}
     {{/as-side-panel/footer}}
   {{/as-side-panel/main}}
