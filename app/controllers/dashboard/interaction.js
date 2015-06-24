@@ -10,7 +10,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
-  showForm: false,
   requestPromise: null,
 
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
@@ -61,8 +60,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    toggleForm: function() {
-      this.toggleProperty('showForm');
+    toggleNestedSidePanel: function() {
+      this.get('sidePanel').send('toggleDrawer');
     },
 
     cancel: function() {
