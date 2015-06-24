@@ -47,14 +47,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     showFollowUp: function() {
       this.set('drawerContent', 'emailComposer');
-
       this.get('sidePanel').send('showDrawer');
     },
 
     viewEmail: function(email) {
       this.set('drawerContent', 'emailViewer');
       this.set('selectedEmail', email);
-
       this.get('sidePanel').send('showDrawer');
     },
 

@@ -96,7 +96,8 @@
     }
   }
 
-  .expandable-list {
+  .expandable-list,
+  .email-viewer {
     padding: $column-gutter;
   }
 
@@ -106,10 +107,6 @@
     .front {
       @extend %panel-widget;
     }
-  }
-
-  .project-history {
-    padding: $column-gutter;
   }
 
   .alert {
