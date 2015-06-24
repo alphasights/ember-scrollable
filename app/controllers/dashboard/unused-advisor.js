@@ -16,22 +16,20 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   page: 1,
   perPage: 10,
   model: null,
-  showFollowUp: false,
-  showSelectedEmail: false,
   selectedEmail: null,
   emailDelivery: null,
   emailTemplates: null,
+  drawerContent: null,
 
   controller: Ember.computed(function() {
     return this;
   }),
 
   _paramatizeEmailAddresses: function(emailString) {
-    if (emailString !== undefined) {
+    if (emailString != null) {
       return emailString.replace(/\s+/g, ',').replace(/,+/, ',');
-
     } else {
-      return undefined;
+      return emailString;
     }
   },
 
@@ -47,16 +45,14 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       });
     },
 
-    toggleFollowUp: function() {
-      this.set('showFollowUp', true);
-      this.set('showSelectedEmail', false);
+    showFollowUp: function() {
+      this.set('drawerContent', 'emailComposer');
 
       this.get('sidePanel').send('showDrawer');
     },
 
     viewEmail: function(email) {
-      this.set('showFollowUp', false);
-      this.set('showSelectedEmail', true);
+      this.set('drawerContent', 'emailViewer');
       this.set('selectedEmail', email);
 
       this.get('sidePanel').send('showDrawer');

@@ -49,7 +49,7 @@
         {{/as-action}}
 
         {{#if features.advisorFollowUp}}
-          {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
+          {{#as-action action="showFollowUp" requestPromise=requestPromise}}
             Follow Up
           {{/as-action}}
         {{/if}}
@@ -59,7 +59,7 @@
 
   {{#as-side-panel/drawer}}
     {{#as-side-panel/content}}
-      {{#if showFollowUp}}
+      {{#if (eq drawerContent "emailComposer")}}
         {{as-email-composer
           model=emailDelivery
           templates=emailTemplates
@@ -67,13 +67,13 @@
           actionReceiver=emailComposer}}
       {{/if}}
 
-      {{#if showSelectedEmail}}
+      {{#if (eq drawerContent "emailViewer")}}
         {{as-email-viewer email=selectedEmail}}
       {{/if}}
     {{/as-side-panel/content}}
       {{#as-side-panel/footer}}
         {{#as-action-group}}
-          {{#if showFollowUp}}
+          {{#if (eq drawerContent "emailComposer")}}
             {{#as-action action="send" requestPromise=requestPromise}}
               Send
             {{/as-action}}
