@@ -4,7 +4,7 @@ export default {
   initialize: function() {
     Messenger.options = {
       theme: null,
-      extraClasses: 'notifications fixed'
+      extraClasses: 'notifications'
     };
   }
 };
