@@ -230,42 +230,7 @@ test("Cancel Interaction Failure", function(assert) {
 
 test("Reschedule Interaction unschedules the call and transitions to the to schedule side panel", function(assert) {
   defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
-    "unavailabilities": [
-      {
-        "id": 123,
-        "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
-        "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
-        "day": null,
-        "interaction_id": interaction.id,
-        "type": 'alpha_call',
-        "title": 'AlphaCall'
-      }
-    ]
-  }});
-
-  defineFixture('GET', '/interaction_types', { response: {
-    "interaction_types": {
-      "call": "One-on-one Call",
-      "hosted_call": 'Hosted Call',
-      "summarised_call": 'Interaction Summary'
-    },
-    "classifications": {
-      "hosted": [
-        "hosted_call",
-        "summarised_call"
-      ],
-      "duration_based": [
-        "call"
-      ]
-    }
-  }});
-
-  defineFixture('GET', '/dial_ins', { response: {
-    "dial_ins":{
-      "AU":"Australia",
-      "AT":"Austria",
-      "BE":"Belgium"
-    }
+    "unavailabilities": []
   }});
 
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
@@ -309,6 +274,51 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
     assert.equal(currentURL(), `/dashboard/interactions/${interaction.id}/schedule`,
       'transitions to the scheduling side panel'
     );
+  });
+});
+
+test("Reschedule Interaction failure shows error message and stays on the interaction side panel", function(assert) {
+  defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
+    "unavailabilities": []
+  }});
+
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, {
+    status: 500,
+    request: {
+      "interaction": {
+        "actioned": interaction.actioned,
+        "client_access_number_country": interaction.clientAccessNumberCountry,
+        "additional_contact_details": interaction.additionalContactDetails,
+        "requested_at": interaction.requestedAt,
+        "scheduled_call_time": null,
+        "speak": interaction.speak,
+        "interaction_type": interaction.interactionType,
+        "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+        "advisor_phone_number": interaction.advisorPhoneNumber,
+        "speak_phone_number": interaction.speakPhoneNumber,
+        "speak_code": interaction.speakCode,
+        "advisor_id": interaction.advisorId,
+        "client_contact_id": interaction.clientContactId,
+        "project_id": interaction.projectId,
+        "used": interaction.used
+      }
+    }
+  });
+
+  visit('/dashboard');
+  click('.scheduled-interactions article:first');
+  click("button:contains('Reschedule Interaction')");
+
+  andThen(function() {
+    const message = 'There has been an error rescheduling the interaction.';
+    assert.equal(message, $('.messenger .messenger-message-inner').first().text().trim());
+
+    assert.equal(currentURL(), `/dashboard/interactions/${interaction.id}`,
+      'transitions back to the interaction side panel'
+    );
+
+    assert.equal($('.date .month').text().trim(), 'February');
+    assert.equal($('.date .day').text().trim(), '19');
   });
 });
 
