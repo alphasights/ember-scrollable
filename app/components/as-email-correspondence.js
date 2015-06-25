@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   classNameBindings: [':email-correspondence'],
 
   emails: null,
-  isViewingEmail: false,
   actionHandler: null,
 
   actions: {

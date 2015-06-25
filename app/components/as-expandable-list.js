@@ -1,18 +1,18 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: [':expandable-list', 'cssClass'],
+  classNameBindings: [':expandable-list', 'titleClass'],
 
-  displayList: false,
+  showContent: false,
   title: null,
 
-  cssClass: Ember.computed('title', function() {
+  titleClass: Ember.computed('title', function() {
     return this.get('title').toLowerCase().dasherize();
   }),
 
   actions: {
-    toggleDisplay: function() {
-      this.toggleProperty('displayList');
+    toggleContent: function() {
+      this.toggleProperty('showContent');
     }
   }
 });
