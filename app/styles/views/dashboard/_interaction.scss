@@ -232,6 +232,12 @@ $interaction-header-height:
       }
     }
 
+    .pay-advisor {
+      @extend %button-primary;
+
+      float: right;
+    }
+
     form {
       #{$form-field-selector} {
         @include form-item-small();

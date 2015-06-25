@@ -34,6 +34,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/projects/${projectId}/proposal#advisorship_${interactionId}`;
   }),
 
+  invoiceUrl: Ember.computed('model.advisor', function() {
+    let advisorId = this.get('model.advisor.id');
+
+    return `${EmberENV.pistachioUrl}/invoices/new?advisor_id=${advisorId}`;
+  }),
+
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
