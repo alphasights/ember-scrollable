@@ -84,7 +84,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         promise: model.save().then(() => {
           this.get('dashboard').propertyDidChange('scheduledInteractions');
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-        }, function() {
+        }, () => {
           notify('There has been an error rescheduling the interaction', 'error');
           this.transitionToRoute('dashboard.interaction', this.get('model.id'));
         })
