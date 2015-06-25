@@ -76,6 +76,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     reschedule: function() {
       var model = this.get('model');
 
+      this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
       model.set('scheduledCallTime', null);
       model.set('actioned', false);
 
@@ -83,7 +84,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         promise: model.save().then(() => {
           this.get('dashboard').propertyDidChange('scheduledInteractions');
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-          this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
+        }, function() {
+          notify('There has been an error rescheduling the interaction', 'error');
+          this.transitionToRoute('dashboard.interaction', this.get('model.id'));
         })
       }));
     }
