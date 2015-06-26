@@ -16,11 +16,11 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
       this.setPersistedValues();
 
       var requestPromise = PromiseController.create({
-        promise: this.get('model').save().catch(function() {
+        promise: this.get('model').save().catch(() => {
           if (this.get('model.errors.length') > 0) {
             this.set('errors', this.get('model.errors'));
           } else {
-            notify('There has been an error scheduling the interaction.', 'error');
+            notify(this.get('genericErrorMessage'), 'error');
           }
 
           return Ember.RSVP.Promise.reject();

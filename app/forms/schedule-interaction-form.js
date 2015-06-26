@@ -4,6 +4,7 @@ import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
 
 export default Form.extend({
+  genericErrorMessage: 'There has been an error scheduling the interaction.',
   interactionTypes: null,
   interactionClassifications: null,
   speakDialInCountries: null,

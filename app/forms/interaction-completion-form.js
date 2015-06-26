@@ -9,6 +9,8 @@ const qualityOptionsMapping = {
 const qualityOptions = ['good', 'bad'];
 
 export default Form.extend({
+  genericErrorMessage: 'There has been an error completing the interaction.',
+
   setDefaultValues: function() {
     this.set('quality', 'good');
     this.set('interactionType', this.get('model.interaction.interactionType'));
