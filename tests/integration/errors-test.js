@@ -25,7 +25,7 @@ test("First load error message", function(assert) {
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    assert.equal(message, "Sorry, something went wrong. Try refreshing the page.");
+    assert.equal(message, "Sorry, something went wrong. Please try refreshing the page.");
   });
 });
 
@@ -37,7 +37,7 @@ test("Transition error message", function(assert) {
 
   andThen(function() {
     var message = $('.error h1').text().trim();
-    assert.equal(message, "Sorry, something went wrong. Try refreshing the page.");
+    assert.equal(message, "Sorry, something went wrong. Please try refreshing the page.");
   });
 });
 
