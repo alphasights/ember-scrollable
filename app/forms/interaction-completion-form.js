@@ -10,13 +10,14 @@ const qualityOptionsMapping = {
 
 const qualityOptions = ['good', 'bad'];
 
-export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
+export default Ember.Controller.extend(EmberValidations.Mixin, {
   requestPromise: null,
 
   init: function() {
     this._super.apply(this, arguments);
 
-    this.get('content').set('quality', 'good');
+    this.set('quality', 'good');
+    this.set('interactionType', this.get('model.interactionType'));
   },
 
   validations: {
@@ -44,9 +45,23 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
 
   save: function() {
     if (this.get('isValid')) {
+      var model = this.get('model');
+
+      model.setProperties({
+        duration: this.get('duration'),
+        quality: this.get('quality'),
+        interactionType: this.get('interactionType')
+      });
+
       var requestPromise = PromiseController.create({
-        promise: this.get('content').save().catch(function() {
-          notify('There has been an error completing the interaction.', 'error');
+        promise: this.get('model').save().catch(function() {
+          if (this.get('model.errors.length') > 0) {
+            this.set('errors', this.get('model.errors'));
+          } else {
+            notify('There has been an error scheduling the interaction.', 'error');
+          }
+
+          return Ember.RSVP.Promise.reject();
         })
       });
 

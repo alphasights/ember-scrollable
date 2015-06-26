@@ -15,8 +15,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
         interaction: interaction,
 
         completion: this.store.createRecord('interactionCompletion', {
-          interaction: interaction,
-          interactionType: interaction.get('interactionType')
+          interaction: interaction
         })
       });
     });
@@ -27,10 +26,10 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
       model: models.interaction,
 
       completionForm: InteractionCompletionForm.create({
-        content: models.completion,
+        model: models.completion,
         container: this.get('container')
       }),
-      
+
       showForm: false
     });
   }
