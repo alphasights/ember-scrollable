@@ -5,9 +5,11 @@ export default Ember.Component.extend({
 
   emails: null,
   actionHandler: null,
+  selectedEmail: null,
 
   actions: {
     viewEmail: function(email) {
+      this.set('selectedEmail', email);
       this.get('actionHandler').send('viewEmail', email);
     }
   }
