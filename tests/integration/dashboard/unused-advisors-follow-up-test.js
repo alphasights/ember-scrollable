@@ -25,7 +25,6 @@ QUnit.module("Unused Advisors Follow Up", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    withFeature('advisor-follow-up');
     Timecop.install();
     Timecop.freeze(moment(unusedAdvisor.termsSentAt));
 
@@ -101,6 +100,18 @@ QUnit.module("Unused Advisors Follow Up", {
         "project_history": []
       }
     });
+
+    defineFixture('GET', '/emails', {
+      params: {
+        emails: unusedAdvisor.advisor.email,
+        page: '1',
+        per_page: '10'
+      },
+
+      response: {
+        'emails': []
+      }
+    });
   },
 
   afterEach: function() {
@@ -110,9 +121,9 @@ QUnit.module("Unused Advisors Follow Up", {
 });
 
 test("Send follow up email", function(assert) {
-  var handler = defineFixture('POST', '/emails', {
+  var handler = defineFixture('POST', '/email_deliveries', {
     request: {
-      "email": {
+      "email_delivery": {
         "subject": `Hello ${unusedAdvisor.advisor.name}`,
         "body": "Giff Ember buff plox, {{your_first_name}}",
         "recipients": unusedAdvisor.advisor.email,
@@ -146,9 +157,9 @@ test("Send follow up email", function(assert) {
 });
 
 test("Send follow up email using a template", function(assert) {
-  var handler = defineFixture('POST', '/emails', {
+  var handler = defineFixture('POST', '/email_deliveries', {
     request: {
-      "email": {
+      "email_delivery": {
         "subject": "Example Subject",
         "body": "Really good template.",
         "recipients": "ppd@salty.com",
@@ -189,6 +200,7 @@ test("Send follow up email using a template", function(assert) {
 test("Preview follow up email", function(assert) {
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
 
+  click("button:contains('Follow Up')");
   fillIn('input[name=subject]', 'Hello IceFrog');
   fillIn('.email-composer textarea', 'Giff Ember buff plox, {{your_first_name}}');
   click("button:contains('Preview')");
@@ -202,6 +214,8 @@ test("Preview follow up email", function(assert) {
 
 test("Follow up email variables validation", function(assert) {
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+
+  click("button:contains('Follow Up')");
   fillIn('.email-composer textarea', 'Giff Ember buff plox, {{motto}}');
 
   andThen(function() {

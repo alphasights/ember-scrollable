@@ -1,0 +1,22 @@
+.pagination {
+  line-height: rem-calc(35);
+  text-align: right;
+
+  li {
+    border: 1px solid color(border);
+    display: inline-block;
+    margin-right: -5px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.active {
+      background-color: $smoke;
+    }
+
+    a {
+      padding: 5px 10px;
+    }
+  }
+}

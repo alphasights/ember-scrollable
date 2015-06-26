@@ -1,8 +1,8 @@
 import resolver from './helpers/resolver';
+import registerSelectHelper from 'emberx-select/helpers/register-select-helper';
 import startApp from './helpers/start-app';
 import Fixtures from './helpers/fixtures';
 import Ember from 'ember';
-import registerSelectHelper from 'emberx-select/helpers/register-select-helper';
 
 registerSelectHelper();
 
@@ -58,6 +58,31 @@ export default {
 
     this.app.fixtures.define('GET', '/unused_advisors', { response: {
       "unused_advisors": []
+    }});
+
+    this.app.fixtures.define('GET', '/interaction_types', { response: {
+      "interaction_types": {
+        "call": "One-on-one Call",
+        "hosted_call": 'Hosted Call',
+        "summarised_call": 'Interaction Summary'
+      },
+      "classifications": {
+        "hosted": [
+          "hosted_call",
+          "summarised_call"
+        ],
+        "duration_based": [
+          "call"
+        ]
+      }
+    }});
+
+    this.app.fixtures.define('GET', '/dial_ins', { response: {
+      "dial_ins":{
+        "AU":"Australia",
+        "AT":"Austria",
+        "BE":"Belgium"
+      }
     }});
   },
 
