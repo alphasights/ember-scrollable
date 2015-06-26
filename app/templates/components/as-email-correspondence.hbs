@@ -1,6 +1,6 @@
 <table>
   {{#each emails as |email|}}
-    <tr {{action "viewEmail" email}} class={{email.cssClass}}>
+    <tr {{action "viewEmail" email}} class={{if (eq selectedEmail.id email.id) "selected"}}>
       <td class="subject">
         {{as-text-ellipsis text=email.subject characterLimit=40}}
       </td>
