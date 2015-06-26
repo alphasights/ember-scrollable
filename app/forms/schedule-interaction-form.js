@@ -1,18 +1,14 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
-import PromiseController from 'phoenix/controllers/promise';
+import Form from 'phoenix/forms/form';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
-import notify from 'phoenix/helpers/notify';
 
-export default Ember.Controller.extend(EmberValidations.Mixin, {
+export default Form.extend({
   interactionTypes: null,
   interactionClassifications: null,
   speakDialInCountries: null,
   selectedTimeZone: null,
   phoneCountryCodes: phoneCountryCodes,
-
-  requestPromise: null,
 
   validations: {
     interactionType: {
@@ -28,9 +24,7 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
     }
   },
 
-  init: function() {
-    this._super.apply(this, arguments);
-
+  setDefaultValues: function() {
     var model = this.get('model');
 
     if (Ember.isBlank(model.get('interactionType'))) {
@@ -54,6 +48,21 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
     this.set('advisorPhoneNumber', model.get('advisorPhoneNumber'));
     this.set('clientAccessNumberCountry', model.get('clientAccessNumberCountry'));
     this.set('additionalContactDetails', model.get('additionalContactDetails'));
+  },
+
+  setPersistedValues: function() {
+    var model = this.get('model');
+    var speakCountryCode = this.get('clientAccessNumberCountry');
+
+    model.setProperties({
+      scheduledCallTime: this.get('scheduledCallTime'),
+      interactionType: this.get('interactionType'),
+      advisorPhoneNumber: this.get('advisorPhoneNumber'),
+      advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
+      clientAccessNumberCountry: speakCountryCode,
+      additionalContactDetails: this.get('additionalContactDetails'),
+      speak: speakCountryCode ? true : false
+    });
   },
 
   interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
@@ -94,40 +103,5 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
     dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
-  }),
-
-  save: function() {
-    if (this.get('isValid')) {
-      var model = this.get('model');
-      var speakCountryCode = this.get('clientAccessNumberCountry');
-
-      model.setProperties({
-        scheduledCallTime: this.get('scheduledCallTime'),
-        interactionType: this.get('interactionType'),
-        advisorPhoneNumber: this.get('advisorPhoneNumber'),
-        advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
-        clientAccessNumberCountry: speakCountryCode,
-        additionalContactDetails: this.get('additionalContactDetails'),
-        speak: speakCountryCode ? true : false
-      });
-
-      var requestPromise = PromiseController.create({
-        promise: this.get('model').save().catch(() => {
-          if (this.get('model.errors.length') > 0) {
-            this.set('errors', this.get('model.errors'));
-          } else {
-            notify('There has been an error scheduling the interaction.', 'error');
-          }
-
-          return Ember.RSVP.Promise.reject();
-        })
-      });
-
-      this.set('requestPromise', requestPromise);
-
-      return requestPromise;
-    } else {
-      return Ember.RSVP.Promise.reject('Form validation failed');
-    }
-  }
+  })
 });
