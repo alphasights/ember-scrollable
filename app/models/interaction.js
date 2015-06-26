@@ -14,7 +14,7 @@ export default DS.Model.extend({
   scheduledCallTime: DS.attr('date'),
   speak: DS.attr('boolean'),
   interactionType: DS.attr('string'),
-  advisorPhoneCountryCode: DS.attr('string', { defaultValue: '1' }),
+  advisorPhoneCountryCode: DS.attr('string'),
   advisorPhoneNumber: DS.attr('string'),
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
@@ -33,10 +33,14 @@ export default DS.Model.extend({
   }),
 
   initialize: function() {
-    if (Ember.isBlank(this.get('interactionType'))) {
+    if (Ember.isBlank(this.get('interactionType')) && Ember.isPresent(this.get('project.defaultInteractionType'))) {
       this.set('interactionType', this.get('project.defaultInteractionType'));
     } else {
       this.set('interactionType', 'call');
+    }
+
+    if (Ember.isBlank(this.get('advisorPhoneCountryCode'))) {
+      this.set('advisorPhoneCountryCode', '1');
     }
   }
 });
