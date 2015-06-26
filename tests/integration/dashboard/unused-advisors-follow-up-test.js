@@ -25,7 +25,6 @@ QUnit.module("Unused Advisors Follow Up", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
 
-    withFeature('advisor-follow-up');
     Timecop.install();
     Timecop.freeze(moment(unusedAdvisor.termsSentAt));
 
