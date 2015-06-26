@@ -18,14 +18,12 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
   },
 
   setupController: function(controller, models) {
-    models.interaction.initialize();
-
     controller.setProperties({
       model: models.interaction,
       unavailabilities: models.unavailabilities,
-      
+
       scheduleInteractionForm: ScheduleInteractionForm.create({
-        content: models.interaction,
+        model: models.interaction,
         interactionTypes: models.interactionTypes.interaction_types,
         interactionClassifications: models.interactionTypes.classifications,
         speakDialInCountries: models.speakDialInCountries.dial_ins,

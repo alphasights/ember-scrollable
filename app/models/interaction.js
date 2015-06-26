@@ -30,17 +30,5 @@ export default DS.Model.extend({
 
   schedulingUrl: Ember.computed('id', 'project.id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  }),
-
-  initialize: function() {
-    if (Ember.isBlank(this.get('interactionType')) && Ember.isPresent(this.get('project.defaultInteractionType'))) {
-      this.set('interactionType', this.get('project.defaultInteractionType'));
-    } else {
-      this.set('interactionType', 'call');
-    }
-
-    if (Ember.isBlank(this.get('advisorPhoneCountryCode'))) {
-      this.set('advisorPhoneCountryCode', '1');
-    }
-  }
+  })
 });

@@ -1,9 +1,7 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
 import Occurrence from 'phoenix/models/as-calendar/occurrence';
-import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import EmberValidations from 'ember-validations';
 import PromiseController from 'phoenix/controllers/promise';
+import notify from 'phoenix/helpers/notify';
 
 const qualityOptionsMapping = {
   'good': 'Good',

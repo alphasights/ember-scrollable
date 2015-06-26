@@ -5,7 +5,7 @@ import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
 import notify from 'phoenix/helpers/notify';
 
-export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
+export default Ember.Controller.extend(EmberValidations.Mixin, {
   interactionTypes: null,
   interactionClassifications: null,
   speakDialInCountries: null,
@@ -26,6 +26,34 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
     scheduledCallTime: {
       presence: true
     }
+  },
+
+  init: function() {
+    this._super.apply(this, arguments);
+
+    var model = this.get('model');
+
+    if (Ember.isBlank(model.get('interactionType'))) {
+      if (Ember.isPresent(model.get('project.defaultInteractionType'))) {
+        this.set('interactionType', model.get('project.defaultInteractionType'));
+      } else {
+        this.set('interactionType', 'call');
+      }
+    } else {
+      this.set('interactionType', model.get('interactionType'));
+    }
+
+    if (Ember.isBlank(model.get('advisorPhoneCountryCode'))) {
+      this.set('advisorPhoneCountryCode', '1');
+    } else {
+      this.set('advisorPhoneCountryCode', model.get('advisorPhoneCountryCode'));
+    }
+
+    this.set('scheduledCallTime', model.get('scheduledCallTime'));
+    this.set('interactionType', model.get('interactionType'));
+    this.set('advisorPhoneNumber', model.get('advisorPhoneNumber'));
+    this.set('clientAccessNumberCountry', model.get('clientAccessNumberCountry'));
+    this.set('additionalContactDetails', model.get('additionalContactDetails'));
   },
 
   interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
@@ -70,17 +98,28 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
 
   save: function() {
     if (this.get('isValid')) {
-      var model = this.get('content');
+      var model = this.get('model');
       var speakCountryCode = this.get('clientAccessNumberCountry');
 
       model.setProperties({
+        scheduledCallTime: this.get('scheduledCallTime'),
+        interactionType: this.get('interactionType'),
+        advisorPhoneNumber: this.get('advisorPhoneNumber'),
+        advisorPhoneCountryCode: this.get('advisorPhoneCountryCode'),
         clientAccessNumberCountry: speakCountryCode,
+        additionalContactDetails: this.get('additionalContactDetails'),
         speak: speakCountryCode ? true : false
       });
 
       var requestPromise = PromiseController.create({
-        promise: this.get('content').save().catch(function() {
-          notify('There has been an error scheduling the interaction.', 'error');
+        promise: this.get('model').save().catch(() => {
+          if (this.get('model.errors.length') > 0) {
+            this.set('errors', this.get('model.errors'));
+          } else {
+            notify('There has been an error scheduling the interaction.', 'error');
+          }
+
+          return Ember.RSVP.Promise.reject();
         })
       });
 
