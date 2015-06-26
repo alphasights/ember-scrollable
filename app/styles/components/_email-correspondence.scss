@@ -1,4 +1,12 @@
 .email-correspondence {
+  tr.selected {
+    background-color: $base;
+
+    &:hover {
+      background-color: $base;
+    }
+  }
+
   .sender {
     text-align: center;
   }
