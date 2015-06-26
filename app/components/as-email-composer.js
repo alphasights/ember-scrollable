@@ -60,10 +60,6 @@ export default Ember.Component.extend(InboundActions, {
       this.toggleProperty('isEditingHeader');
     },
 
-    togglePreview: function() {
-      this.toggleProperty('showPreview');
-    },
-
     changeSelectedTemplate: function() {
       if (Ember.isPresent(this.get('selectedTemplate'))) {
         this.set('model.body', this.get('selectedTemplate.body'));

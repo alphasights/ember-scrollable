@@ -103,7 +103,7 @@ QUnit.module("Whiteboard", {
       "projects": [{
         "id": 4,
         "status": "high",
-        "name": "Example Project 4",
+        "name": "Team Project",
         "client_code": "EP",
         "details_url": "/projects/4",
         "created_at": "2009-07-14T17:05:32.909+01:00",
@@ -125,7 +125,7 @@ QUnit.module("Whiteboard", {
       "projects": [{
         "id": 5,
         "status": "high",
-        "name": "Example Project 5",
+        "name": "Whiteboard Project",
         "client_code": "EP",
         "details_url": "/projects/5",
         "created_at": "2009-07-14T17:05:32.909+01:00",
@@ -480,7 +480,7 @@ test("Change selected team", function(assert) {
   select('.whiteboard-select select ', 'Example Team 2');
 
   andThen(function() {
-    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 4');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Team Project');
   });
 });
 
@@ -500,6 +500,6 @@ test("Change selected whiteboard", function(assert) {
   select('.whiteboard-select select ', 'Cool whiteboard');
 
   andThen(function() {
-    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Example Project 5');
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
   });
 });
