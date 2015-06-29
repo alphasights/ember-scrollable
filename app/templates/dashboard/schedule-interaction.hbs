@@ -33,10 +33,10 @@
           selection=occurrence
           timeZoneOptions=timeZoneOptions
           occurrences=unavailabilityOccurrences
-          timeZone=selectedTimeZone}}
+          timeZone=scheduleInteractionForm.selectedTimeZone}}
 
         <section class="form">
-          {{#as-form model=this action="submit" as |form|}}
+          {{#as-form model=scheduleInteractionForm action="scheduleInteraction" as |form|}}
             {{#as-form/fieldset}}
               {{as-form/input
                 form=form
@@ -46,25 +46,25 @@
                 label="Call Time"
                 disabled=true}}
 
-              {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=phoneCountryCodes}}
+              {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=scheduleInteractionForm.phoneCountryCodes}}
               {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
 
               {{as-form/select
                 form=form
                 name="interactionType"
                 label="Interaction Type"
-                content=interactionTypesForSelect
+                content=scheduleInteractionForm.interactionTypesForSelect
                 optionGroupPath="classification"
               }}
 
-              {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=speakDialIns}}
+              {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=scheduleInteractionForm.speakDialIns}}
               {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
             {{/as-form/fieldset}}
 
             {{#as-action-group}}
               {{#as-form/submit
                 form=form
-                requestPromise=requestPromise}}
+                requestPromise=scheduleInteractionForm.requestPromise}}
                 Schedule Interaction
               {{/as-form/submit}}
 

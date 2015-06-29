@@ -10,7 +10,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
-  showForm: false,
   requestPromise: null,
 
   profiles: Ember.computed('model.advisor', 'model.clientContact', function() {
@@ -35,6 +34,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/projects/${projectId}/proposal#advisorship_${interactionId}`;
   }),
 
+  invoiceUrl: Ember.computed('model.advisor', function() {
+    let advisorId = this.get('model.advisor.id');
+
+    return `${EmberENV.pistachioUrl}/invoices/new?advisor_id=${advisorId}`;
+  }),
+
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
@@ -52,8 +57,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('completionForm').save().then(() => {
         notify('The interaction has been completed.');
         this.get('sidePanel').send('close');
-      }, function() {
-        notify('There has been an error completing the interaction.', 'error');
       });
     },
 
@@ -61,8 +64,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    toggleForm: function() {
-      this.toggleProperty('showForm');
+    toggleDrawer: function() {
+      this.get('sidePanel').send('toggleDrawer');
     },
 
     cancel: function() {
@@ -90,6 +93,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
           this.transitionToRoute('dashboard.interaction', this.get('model.id'));
         })
       }));
+    },
+
+    close: function() {
+      this.get('sidePanel').send('hideDrawer');
     }
   }
 });

@@ -92,16 +92,17 @@
     }
   }
 
+  .expandable-list,
+  .email-viewer {
+    padding: $column-gutter;
+  }
+
   .profile {
     padding: 0 $column-gutter / 2;
 
     .front {
       @extend %panel-widget;
     }
-  }
-
-  .project-history {
-    padding: $column-gutter;
   }
 
   .alert {

@@ -2,7 +2,12 @@
   <header>
     <h1>{{title}}</h1>
 
-    {{yield}}
+    {{#if person.timeZone}}
+      <div class="call-time">
+        <i></i>
+        <span>{{time-zone-abbreviation now person.timeZone}}</span>
+      </div>
+    {{/if}}
   </header>
 
   <div class="content">

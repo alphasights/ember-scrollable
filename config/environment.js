@@ -7,12 +7,17 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
 
+    featureFlags: {
+      'pay-advisor': false
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
 
+      almondApiBaseUrl: '/api/v1',
       apiBaseUrl: '/swordfish',
       blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
@@ -36,15 +41,11 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' *.segment.io *.segment.com *.intercom.io *.heapanalytics.com *.intercomcdn.com use.typekit.net",
       'font-src': "'self' *.gstatic.com data: use.typekit.net",
-      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000",
+      'connect-src': "'self' *.segment.io wss://*.intercom.io *.intercom.io http://localhost:3001 http://localhost:3000 https://almond-production.herokuapp.com",
       'img-src': "'self' data: *.amazonaws.com *.heapanalytics.com *.intercomcdn.com *.honeybadger.io p.typekit.net;",
       'style-src': "'self' 'unsafe-inline' *.mxpnl.com *.googleapis.com use.typekit.net",
       'media-src': "'self'"
     },
-
-    featureFlags: {
-      'advisor-follow-up': false
-    }
   };
 
   if (environment === 'development') {
@@ -53,7 +54,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.featureFlags['advisor-follow-up'] = true;
+    ENV.featureFlags['pay-advisor'] = true;
   }
 
   if (environment === 'test') {
@@ -70,6 +71,8 @@ module.exports = function(environment) {
     ENV.EmberENV.segmentWriteKey = null;
     ENV.EmberENV.intercomAppId = null;
     ENV.EmberENV.honeybadgerApiKey = null;
+    ENV.EmberENV.almondApiBaseUrl = '/swordfish';
+    ENV.featureFlags['pay-advisor'] = true;
     // ENV.EmberENV.logErrors = false;
   }
 
@@ -78,7 +81,7 @@ module.exports = function(environment) {
     ENV.EmberENV.apiBaseUrl = 'https://secure.alphasights.com/swordfish';
     ENV.EmberENV.segmentWriteKey = 'CGOpboMXwCElX7EGGZBI6qz4OyP4xZPw';
     ENV.EmberENV.intercomAppId = '6abaf27ec429d23649acebc2818fd4e87257e347';
-    ENV.EmberENV.brazilUrl = 'https://brazil-production.herokuapp.com';
+    ENV.EmberENV.almondApiBaseUrl = 'https://almond-production.herokuapp.com/api/v1';
   }
 
   return ENV;

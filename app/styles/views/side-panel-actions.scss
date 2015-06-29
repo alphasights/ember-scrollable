@@ -7,5 +7,9 @@
     .action .confirmation {
       padding: 0 $column-gutter !important;
     }
+
+    .action.close {
+      float: right;
+    }
   }
 }

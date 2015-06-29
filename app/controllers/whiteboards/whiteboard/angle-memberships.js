@@ -10,8 +10,7 @@ export default Ember.Controller.extend({
   results: [],
 
   memberships: Ember.computed('model.memberships.[]', function() {
-    // TODO: Remove the filterBy when https://github.com/emberjs/data/issues/2666 is fixed
-    return this.get('model.memberships').sortBy('createdAt').filterBy('isDeleted', false);
+    return this.get('model.memberships').sortBy('createdAt');
   }),
 
   members: Ember.computed('requestPromise', 'whiteboard.members', 'results', function() {
@@ -60,10 +59,6 @@ export default Ember.Controller.extend({
       });
 
       membership.save();
-    },
-
-    remove: function(membership) {
-      membership.destroyRecord();
     }
   }
 });

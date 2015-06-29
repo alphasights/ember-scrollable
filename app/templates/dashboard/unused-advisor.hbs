@@ -18,15 +18,17 @@
       </header>
 
       <section class="profile">
-        {{as-profile
-          person=model.advisor
-          title="Unused Advisor"
-          class="advisor"}}
+        {{as-profile person=model.advisor title="Unused Advisor" class="advisor"}}
       </section>
 
-      {{#if features.advisorFollowUp}}
+      {{#as-expandable-list title="Email Correspondence"}}
+        {{as-email-correspondence emails=emails actionHandler=this}}
+      {{/as-expandable-list}}
+
+      {{#as-expandable-list title="Project History"}}
         {{as-project-history projectHistory=projectHistory}}
-      {{/if}}
+      {{/as-expandable-list}}
+
     {{/as-side-panel/content}}
 
     {{#as-side-panel/footer}}
@@ -41,32 +43,45 @@
           Remove Advisor
         {{/as-action}}
 
-        {{#if features.advisorFollowUp}}
-          {{#as-action action="toggleFollowUp" requestPromise=requestPromise}}
-            Follow Up
-          {{/as-action}}
-        {{/if}}
+        {{#as-action action="showFollowUp" requestPromise=requestPromise}}
+          Follow Up
+        {{/as-action}}
       {{/as-action-group}}
     {{/as-side-panel/footer}}
   {{/as-side-panel/main}}
 
   {{#as-side-panel/drawer}}
     {{#as-side-panel/content}}
-      {{as-email-composer
-        model=email
-        templates=emailTemplates
-        variables=emailVariables
-        actionReceiver=emailComposer}}
+      {{#if (eq drawerContent "emailComposer")}}
+        {{as-email-composer
+          model=emailDelivery
+          templates=emailTemplates
+          variables=emailVariables
+          showPreview=displayingPreview}}
+      {{/if}}
+
+      {{#if (eq drawerContent "emailViewer")}}
+        {{as-email-viewer email=selectedEmail}}
+      {{/if}}
     {{/as-side-panel/content}}
+      {{#as-side-panel/footer}}
+        {{#as-action-group}}
+          {{#if (eq drawerContent "emailComposer")}}
+            {{#as-action action="send" requestPromise=requestPromise}}
+              Send
+            {{/as-action}}
 
-    {{#as-side-panel/footer}}
-      {{#as-action-group}}
-        {{#as-action action="send" requestPromise=requestPromise}}
-          Send
-        {{/as-action}}
+            {{#as-action action="togglePreview"}}
+              {{#if displayingPreview}}
+                Edit
+              {{else}}
+                Preview
+              {{/if}}
+            {{/as-action}}
+          {{/if}}
 
-        {{#as-action action="preview"}}Preview{{/as-action}}
-      {{/as-action-group}}
-    {{/as-side-panel/footer}}
+          {{#as-action action="close" class="close"}}Close{{/as-action}}
+        {{/as-action-group}}
+      {{/as-side-panel/footer}}
   {{/as-side-panel/drawer}}
 {{/as-side-panel}}

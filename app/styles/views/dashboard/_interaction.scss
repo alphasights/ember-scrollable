@@ -221,6 +221,10 @@ $interaction-header-height:
   .form {
     padding: $column-gutter;
 
+    &.completion form #{$form-field-selector} {
+      @include form-item-large();
+    }
+
     ul.errors {
       margin-top: $column-gutter;
       padding: 0 $column-gutter;
@@ -230,6 +234,12 @@ $interaction-header-height:
 
         margin-bottom: rem-calc(2px);
       }
+    }
+
+    .pay-advisor {
+      @extend %button-primary;
+
+      float: right;
     }
 
     form {
