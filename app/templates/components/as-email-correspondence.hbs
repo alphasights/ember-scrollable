@@ -1,0 +1,19 @@
+<table>
+  {{#each emails as |email|}}
+    <tr {{action "viewEmail" email}} class={{if (eq selectedEmail.id email.id) "selected"}}>
+      <td class="subject">
+        {{as-text-ellipsis text=email.subject characterLimit=40}}
+      </td>
+      <td class="from">
+        {{extract-name-from-email email.from}}
+      </td>
+      <td class="sent-at">
+        {{#tool-tipster title=(ago email.sentAt)}}
+          {{moment email.sentAt "D MMM YYYY"}}
+        {{/tool-tipster}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+
+{{page-numbers content=emails}}

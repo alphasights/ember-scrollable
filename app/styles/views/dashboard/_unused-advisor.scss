@@ -48,6 +48,10 @@
       height: 100%;
     }
 
+    .side-panel-footer .actions .close {
+      float: right;
+    }
+
     form {
       background-color: $white;
       border-radius: 0;
@@ -92,16 +96,17 @@
     }
   }
 
+  .expandable-list,
+  .email-viewer {
+    padding: $column-gutter;
+  }
+
   .profile {
     padding: 0 $column-gutter / 2;
 
     .front {
       @extend %panel-widget;
     }
-  }
-
-  .project-history {
-    padding: $column-gutter;
   }
 
   .alert {
