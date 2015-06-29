@@ -45,7 +45,6 @@ export default Form.extend({
     }
 
     this.set('scheduledCallTime', model.get('scheduledCallTime'));
-    this.set('interactionType', model.get('interactionType'));
     this.set('advisorPhoneNumber', model.get('advisorPhoneNumber'));
     this.set('clientAccessNumberCountry', model.get('clientAccessNumberCountry'));
     this.set('additionalContactDetails', model.get('additionalContactDetails'));
