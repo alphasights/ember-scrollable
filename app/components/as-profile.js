@@ -15,6 +15,10 @@ export default Ember.Component.extend({
     return this.get('flipped');
   }),
 
+  now: Ember.computed(function() {
+    return new Date();
+  }),
+
   actions: {
     flip: function() {
       this.toggleProperty('flipped');
