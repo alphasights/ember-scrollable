@@ -163,7 +163,15 @@
                 name="speakQuality"
                 form=form
                 label="Speak"
+                prompt=""
                 content=completionForm.speakQualityOptions}}
+
+              {{#if completionForm.speakExplanationNeeded}}
+                {{as-form/input
+                  name="speakExplanation"
+                  form=form
+                  label="More info"}}
+              {{/if}}
           {{/as-form/fieldset}}
 
           {{#as-action-group}}
