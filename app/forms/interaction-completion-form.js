@@ -72,7 +72,7 @@ export default Form.extend({
     }
   },
 
-  qualityOptions: Ember.computed(function() {
+  qualityOptionsForSelect: Ember.computed(function() {
     return _.map(qualityOptionsMapping, function(value, key) {
       return Ember.Object.create({
         id: key,
@@ -81,7 +81,7 @@ export default Form.extend({
     });
   }),
 
-  speakQualityOptions: Ember.computed(function() {
+  speakQualityOptionsForSelect: Ember.computed(function() {
     return _.map(speakQualityOptionsMapping, function(value, key) {
       return Ember.Object.create({
         id: key,

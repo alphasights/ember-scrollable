@@ -112,7 +112,7 @@
 
     {{#as-side-panel/footer}}
       {{#as-action-group}}
-        {{#as-action action="toggleNestedSidePanel"}}
+        {{#as-action action="toggleDrawer"}}
           Complete Interaction
         {{/as-action}}
 
@@ -157,14 +157,14 @@
               name="quality"
               form=form
               label="Call Quality"
-              content=completionForm.qualityOptions}}
+              content=completionForm.qualityOptionsForSelect}}
 
               {{as-form/select
                 name="speakQuality"
                 form=form
                 label="Speak"
                 prompt=""
-                content=completionForm.speakQualityOptions}}
+                content=completionForm.speakQualityOptionsForSelect}}
 
               {{#if completionForm.speakExplanationNeeded}}
                 {{as-form/input

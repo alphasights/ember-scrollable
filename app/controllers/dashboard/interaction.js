@@ -64,7 +64,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    toggleNestedSidePanel: function() {
+    toggleDrawer: function() {
       this.get('sidePanel').send('toggleDrawer');
     },
 
