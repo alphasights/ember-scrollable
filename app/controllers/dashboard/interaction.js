@@ -93,6 +93,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
           this.transitionToRoute('dashboard.interaction', this.get('model.id'));
         })
       }));
+    },
+
+    close: function() {
+      this.get('sidePanel').send('hideDrawer');
     }
   }
 });
