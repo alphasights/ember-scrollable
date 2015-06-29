@@ -76,19 +76,7 @@
           <ul>
             {{#each profiles as |profile|}}
               <li>
-                {{#as-profile
-                  person=profile.person
-                  title=profile.title
-                  class=profile.class}}
-                  {{#if profile.person.timeZone}}
-                    <div class="call-time">
-                      {{#tool-tipster title=(local-moment model.scheduledCallTime profile.person.timeZone "h:mm A z")}}
-                        <i></i>
-                        <span>{{local-moment model.scheduledCallTime profile.person.timeZone "z"}}</span>
-                      {{/tool-tipster}}
-                    </div>
-                  {{/if}}
-                {{/as-profile}}
+                {{as-profile person=profile.person title=profile.title class=profile.class}}  
               </li>
             {{/each}}
           </ul>
