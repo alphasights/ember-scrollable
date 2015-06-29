@@ -179,7 +179,9 @@
               Charge Client
             {{/as-form/submit}}
 
-            <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+            {{#if features.payAdvisor}}
+              <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+            {{/if}}
           {{/as-action-group}}
         {{/as-form}}
       </section>
