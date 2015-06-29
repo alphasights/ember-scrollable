@@ -1,5 +1,16 @@
 # Phoenix Changelog
 
+### Release 0.0.6 (June 29, 2015)
+
+- [#381](https://github.com/alphasights/phoenix/pull/381) Move call completion form to nested side panel
+- [#392](https://github.com/alphasights/phoenix/pull/392) Show time zone in every profile card
+- [#390 BUGFIX](https://github.com/alphasights/phoenix/pull/390) Fix squished avatars in the project history list
+- [#303](https://github.com/alphasights/phoenix/pull/303) Add email correspondence to unused advisor side panel
+- [#384 BUGFIX](https://github.com/alphasights/phoenix/pull/384) Fix scheduling form bug that caused weird validation messages to appear
+- [#362](https://github.com/alphasights/phoenix/pull/362) Improve notifications style
+- [#369](https://github.com/alphasights/phoenix/pull/369) Clear quick jump input when focusing out
+- [#377](https://github.com/alphasights/phoenix/pull/377) Add team member filter to the whiteboard
+
 ### Release 0.0.5 (June 22, 2015)
 
 - [#336](https://github.com/alphasights/phoenix/pull/336) Add email composer to unused advisor sidepanel (feature flagged)
