@@ -1,6 +1,5 @@
 import Ember from 'ember';
-import EmberValidations from 'ember-validations';
-import PromiseController from 'phoenix/controllers/promise';
+import Form from 'phoenix/forms/form';
 
 const qualityOptionsMapping = {
   'good': 'Good',
@@ -9,13 +8,22 @@ const qualityOptionsMapping = {
 
 const qualityOptions = ['good', 'bad'];
 
-export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
-  requestPromise: null,
+export default Form.extend({
+  genericErrorMessage: 'There has been an error completing the interaction.',
 
-  init: function() {
-    this._super.apply(this, arguments);
+  setDefaultValues: function() {
+    this.set('quality', 'good');
+    this.set('interactionType', this.get('model.interaction.interactionType'));
+  },
 
-    this.get('content').set('quality', 'good');
+  setPersistedValues: function() {
+    var model = this.get('model');
+
+    model.setProperties({
+      duration: this.get('duration'),
+      quality: this.get('quality'),
+      interactionType: this.get('interactionType')
+    });
   },
 
   validations: {
@@ -39,19 +47,5 @@ export default Ember.ObjectProxy.extend(EmberValidations.Mixin, {
         name: qualityOptionsMapping[option]
       });
     });
-  }),
-
-  save: function() {
-    if (this.get('isValid')) {
-      var requestPromise = PromiseController.create({
-        promise: this.get('content').save()
-      });
-
-      this.set('requestPromise', requestPromise);
-
-      return requestPromise;
-    } else {
-      return Ember.RSVP.Promise.reject('Completion form validation failed');
-    }
-  }
+  })
 });
