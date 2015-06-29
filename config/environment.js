@@ -7,6 +7,10 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
 
+    featureFlags: {
+      'pay-advisor': false
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -50,6 +54,7 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.featureFlags['pay-advisor'] = true;
   }
 
   if (environment === 'test') {
@@ -67,6 +72,7 @@ module.exports = function(environment) {
     ENV.EmberENV.intercomAppId = null;
     ENV.EmberENV.honeybadgerApiKey = null;
     ENV.EmberENV.almondApiBaseUrl = '/swordfish';
+    ENV.featureFlags['pay-advisor'] = true;
     // ENV.EmberENV.logErrors = false;
   }
 

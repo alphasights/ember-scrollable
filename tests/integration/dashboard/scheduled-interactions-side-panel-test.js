@@ -22,13 +22,6 @@ const interaction = {
   used: false
 };
 
-const interactionCompletion = {
-  duration: 20,
-  quality: 'bad',
-  interactionType: 'call',
-  interactionId: '1'
-};
-
 QUnit.module("Scheduled Interactions Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
@@ -322,6 +315,15 @@ test("Reschedule Interaction failure shows error message and stays on the intera
   });
 });
 
+const interactionCompletion = {
+  duration: 20,
+  quality: 'bad',
+  interactionType: 'call',
+  interactionId: '1',
+  speakQuality: 'other',
+  speakExplanation: 'Client was grumpy.'
+};
+
 test("Complete Interaction completes the call and closes the side panel", function(assert) {
   const successMessage = 'The interaction has been completed.';
 
@@ -331,7 +333,9 @@ test("Complete Interaction completes the call and closes the side panel", functi
         "duration": interactionCompletion.duration,
         "quality": interactionCompletion.quality,
         "interaction_type": interactionCompletion.interactionType,
-        "interaction_id": interactionCompletion.interactionId
+        "interaction_id": interactionCompletion.interactionId,
+        "speak_quality": interactionCompletion.speakQuality,
+        "speak_explanation": interactionCompletion.speakExplanation
       }
     },
 
@@ -363,6 +367,8 @@ test("Complete Interaction completes the call and closes the side panel", functi
   click('button:contains("Complete Interaction")');
   fillIn('input[name=duration]', '20');
   select('select[name=quality] ', 'Bad');
+  select('select[name=speakQuality] ', 'Other issue');
+  fillIn('input[name=speakExplanation]', interactionCompletion.speakExplanation);
   click('button:contains("Charge Client")');
 
   andThen(function() {
@@ -382,7 +388,9 @@ test("Complete Interaction shows error message in case of failure", function(ass
         "duration": interactionCompletion.duration,
         "quality": interactionCompletion.quality,
         "interaction_type": interactionCompletion.interactionType,
-        "interaction_id": interactionCompletion.interactionId
+        "interaction_id": interactionCompletion.interactionId,
+        "speak_quality": interactionCompletion.speakQuality,
+        "speak_explanation": interactionCompletion.speakExplanation
       }
     }
   });
@@ -393,6 +401,8 @@ test("Complete Interaction shows error message in case of failure", function(ass
   click('button:contains("Complete Interaction")');
   fillIn('input[name=duration]', '20');
   select('select[name=quality] ', 'Bad');
+  select('select[name=speakQuality] ', 'Other issue');
+  fillIn('input[name=speakExplanation]', interactionCompletion.speakExplanation);
   click('button:contains("Charge Client")');
 
   andThen(function() {

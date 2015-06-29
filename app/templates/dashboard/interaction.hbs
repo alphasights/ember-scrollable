@@ -95,37 +95,12 @@
             {{/each}}
           </ul>
         </section>
-
-        {{#if showForm}}
-          <section class="form">
-            {{#as-form model=completionForm action="chargeClient" as |form|}}
-              {{#as-form/fieldset}}
-                {{as-form/input
-                  name="duration"
-                  form=form
-                  label="Call Duration (minutes)"}}
-
-                {{as-form/select
-                  name="quality"
-                  form=form
-                  label="Call Quality"
-                  content=completionForm.qualityOptions}}
-              {{/as-form/fieldset}}
-
-              {{#as-action-group}}
-                {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
-                  Charge Client
-                {{/as-form/submit}}
-              {{/as-action-group}}
-            {{/as-form}}
-          </section>
-        {{/if}}
       </div>
     {{/as-side-panel/content}}
 
     {{#as-side-panel/footer}}
       {{#as-action-group}}
-        {{#as-action action="toggleForm"}}
+        {{#as-action action="toggleDrawer"}}
           Complete Interaction
         {{/as-action}}
 
@@ -155,4 +130,55 @@
       {{/as-action-group}}
     {{/as-side-panel/footer}}
   {{/as-side-panel/main}}
+
+  {{#as-side-panel/drawer}}
+    {{#as-side-panel/content}}
+      <section class="completion form">
+        {{#as-form model=completionForm action="chargeClient" as |form|}}
+          {{#as-form/fieldset}}
+            {{as-form/input
+              name="duration"
+              form=form
+              label="Call Duration (minutes)"}}
+
+            {{as-form/select
+              name="quality"
+              form=form
+              label="Call Quality"
+              content=completionForm.qualityOptionsForSelect}}
+
+              {{as-form/select
+                name="speakQuality"
+                form=form
+                label="Speak"
+                prompt=""
+                content=completionForm.speakQualityOptionsForSelect}}
+
+              {{#if completionForm.speakExplanationNeeded}}
+                {{as-form/input
+                  name="speakExplanation"
+                  form=form
+                  label="More info"}}
+              {{/if}}
+          {{/as-form/fieldset}}
+
+          {{#as-action-group}}
+            {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
+              Charge Client
+            {{/as-form/submit}}
+
+            {{#if features.payAdvisor}}
+              <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+            {{/if}}
+          {{/as-action-group}}
+        {{/as-form}}
+      </section>
+    {{/as-side-panel/content}}
+    {{#as-side-panel/footer}}
+      {{#as-action-group}}
+        {{#as-action action="close" class="close"}}Close{{/as-action}}
+      {{/as-action-group}}
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/drawer}}
+
 {{/as-side-panel}}
