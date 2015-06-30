@@ -17,6 +17,6 @@ select {
   top: 15px !important;
 }
 
-.intercom-launcher {
-  display: none;
+#intercom-container .intercom-launcher {
+  display: none !important;
 }
