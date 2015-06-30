@@ -127,31 +127,6 @@ $interaction-header-height:
     }
   }
 
-  .profile header {
-    h1,
-    .call-time {
-      @extend %grid-column-6;
-
-      margin: 0;
-    }
-
-    .call-time {
-      color: $small-font-color;
-      font-size: $h5-font-size;
-      text-align: right;
-
-      > div {
-        display: inline-block;
-      }
-
-      i {
-        @include icon('globe');
-
-        color: lighten($small-font-color, 20%);
-      }
-    }
-  }
-
   .profiles {
     @extend %grid-column-12;
 

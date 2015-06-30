@@ -102,6 +102,10 @@
 
     .front {
       @extend %panel-widget;
+
+      > header * {
+        color: #ffffff;
+      }
     }
   }
 
