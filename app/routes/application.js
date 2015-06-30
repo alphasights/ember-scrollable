@@ -35,6 +35,7 @@ export default Ember.Route.extend({
       } else if (error.errors[0].status === '404') {
         logError(error);
         this.render('not_found', { into: 'application' });
+        return true;
       } else {
         logError(error);
         return true;
