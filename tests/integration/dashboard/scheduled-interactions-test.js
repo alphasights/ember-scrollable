@@ -148,8 +148,8 @@ test("Show interaction details", function(assert) {
       callTime: $interaction.find('.call-times .local-time').text().trim(),
       advisorCallTime: $interaction.find('.call-times .advisor span:last').text().trim(),
       clientCallTime: $interaction.find('.call-times .client span:last').text().trim(),
-      advisorCallTimezone: $interaction.find('.profiles .advisor .call-time span').text().trim(),
-      clientCallTimezone: $interaction.find('.profiles .client .call-time span').text().trim()
+      advisorCallTimezone: $interaction.find('.profiles .advisor .time-zone span').text().trim(),
+      clientCallTimezone: $interaction.find('.profiles .client .time-zone span').text().trim()
     };
 
     assert.deepEqual(interactionDetails, {

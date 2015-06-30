@@ -8,7 +8,35 @@ $profile-avatar-container-size: $avatar-size;
     @include flip-panel-icons;
 
     padding: 0 !important;
+  }
 
+  .front {
+    > header {
+      @extend %grid-row;
+
+      h1,
+      .time-zone {
+        @extend %grid-column-6;
+
+        margin: 0;
+      }
+
+      .time-zone {
+        color: $small-font-color;
+        font-size: $h5-font-size;
+        text-align: right;
+
+        > div {
+          display: inline-block;
+        }
+
+        i {
+          @include icon('globe');
+
+          color: lighten($small-font-color, 20%);
+        }
+      }
+    }
   }
 
   .front,
