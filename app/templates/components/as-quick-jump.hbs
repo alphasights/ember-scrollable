@@ -7,13 +7,12 @@
     type="text"
     placeholder="Jump to advisors, client, projects and more..."
     value=query
-    focus-in="onBarFocusIn"
-    focus-out="onBarFocusOut"
-    targetObject=view}}
+    focus-in="activate"
+    focus-out="clear"}}
 </div>
 
 <div class="actions">
-  {{#liquid-if view.isActive use="crossFade"}}
+  {{#liquid-if isActive use="crossFade"}}
     <div class="close" {{action "clear"}}>
       <button title="Close"></button>
     </div>
@@ -23,7 +22,7 @@
   {{/liquid-if}}
 </div>
 
-{{#liquid-if view.isActive containerless=true use="crossFade"}}
+{{#liquid-if isActive containerless=true use="crossFade"}}
   <div class="results">
     {{#liquid-if requestPromise.isFulfilled use="crossFade"}}
       {{#if results}}
