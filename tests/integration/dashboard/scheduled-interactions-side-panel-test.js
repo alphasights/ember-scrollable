@@ -19,7 +19,8 @@ const interaction = {
   advisorId: '11',
   clientContactId: '299',
   projectId: '14',
-  used: false
+  used: false,
+  paymentRequired: true
 };
 
 QUnit.module("Scheduled Interactions Side Panel", {
@@ -98,7 +99,8 @@ QUnit.module("Scheduled Interactions Side Panel", {
           "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
           "advisor_phone_number": interaction.advisorPhoneNumber,
           "speak_phone_number": interaction.speakPhoneNumber,
-          "speak_code": interaction.speakCode
+          "speak_code": interaction.speakCode,
+          "payment_required": interaction.paymentRequired
         }
       ],
       "checklist_items": []
@@ -127,7 +129,8 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
         "dial_in_number": "1234567",
         "primary_contact_id": 1,
         "speak": true,
-        "client_access_number_country": "US"
+        "client_access_number_country": "US",
+        "payment_required": true
       }
     ]
   }});
@@ -230,6 +233,7 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
     "interaction": {
       "actioned": interaction.actioned,
       "client_access_number_country": interaction.clientAccessNumberCountry,
+      "payment_required": interaction.paymentRequired,
       "additional_contact_details": interaction.additionalContactDetails,
       "requested_at": interaction.requestedAt,
       "scheduled_call_time": null,
@@ -239,10 +243,10 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
       "advisor_phone_number": interaction.advisorPhoneNumber,
       "speak_phone_number": interaction.speakPhoneNumber,
       "speak_code": interaction.speakCode,
+      "used": interaction.used,
       "advisor_id": interaction.advisorId,
       "client_contact_id": interaction.clientContactId,
-      "project_id": interaction.projectId,
-      "used": interaction.used
+      "project_id": interaction.projectId
     }
   }});
 
@@ -324,7 +328,7 @@ const interactionCompletion = {
   speakExplanation: 'Client was grumpy.'
 };
 
-test("Complete Interaction completes the call and closes the side panel", function(assert) {
+test("Complete Interaction completes the call", function(assert) {
   const successMessage = 'The interaction has been completed.';
 
   var handler = defineFixture('POST', '/interaction_completions', {
@@ -374,8 +378,6 @@ test("Complete Interaction completes the call and closes the side panel", functi
   andThen(function() {
     assert.equal(handler.called, true);
     assert.equal($('.messenger-message-inner:first').text().trim(), successMessage);
-    assert.equal(find('.scheduled-interactions article').length, 0);
-    assert.equal(currentURL(), '/dashboard');
   });
 });
 
