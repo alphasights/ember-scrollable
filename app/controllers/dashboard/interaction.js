@@ -56,7 +56,22 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     chargeClient: function() {
       this.get('completionForm').save().then(() => {
         notify('The interaction has been completed.');
-        this.get('sidePanel').send('close');
+      });
+    },
+
+    dontPayAdvisor: function() {
+      this.set('model.paymentRequired', false);
+
+      this.get('advisorPaymentForm').save().then(() => {
+        notify('The advisor will not be paid.');
+      });
+    },
+
+    changePayment: function() {
+      this.set('model.paymentRequired', true);
+
+      this.get('advisorPaymentForm').save().then(() => {
+        notify('The advisor can now be paid.');
       });
     },
 

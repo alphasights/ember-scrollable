@@ -76,7 +76,7 @@
           <ul>
             {{#each profiles as |profile|}}
               <li>
-                {{as-profile person=profile.person title=profile.title class=profile.class}}  
+                {{as-profile person=profile.person title=profile.title class=profile.class}}
               </li>
             {{/each}}
           </ul>
@@ -166,12 +166,32 @@
             {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
               Charge Client
             {{/as-form/submit}}
-
-            {{#if features.payAdvisor}}
-              <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
-            {{/if}}
           {{/as-action-group}}
         {{/as-form}}
+      </section>
+
+      <section class="advisor-payment form">
+        {{#if features.payAdvisor}}
+          {{#if model.paymentRequired}}
+            {{#as-form model=advisorPaymentForm action="dontPayAdvisor" as |form|}}
+              {{#as-action-group}}
+                <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+                {{#as-form/submit form=form requestPromise=form.requestPromise}}
+                  Don't Pay
+                {{/as-form/submit}}
+              {{/as-action-group}}
+            {{/as-form}}
+          {{else}}
+            {{#as-form model=advisorPaymentForm action="changePayment" as |form|}}
+              <span>The advisor will not be paid.</span>
+              {{#as-action-group}}
+                {{#as-form/submit form=form requestPromise=form.requestPromise}}
+                  Change
+                {{/as-form/submit}}
+              {{/as-action-group}}
+            {{/as-form}}
+          {{/if}}
+        {{/if}}
       </section>
     {{/as-side-panel/content}}
     {{#as-side-panel/footer}}
