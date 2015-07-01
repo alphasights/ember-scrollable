@@ -215,10 +215,23 @@ $interaction-header-height:
       #{$form-field-selector} {
         @include form-item-small();
       }
+
+      fieldset {
+        margin-top: 0;
+      }
     }
   }
 
+  .advisor-payment,
+  .completion {
+    overflow: auto;
+  }
+
   .advisor-payment {
+    .actions span {
+      line-height: $side-panel-actions-height;
+    }
+
     .action {
       float: right;
     }
