@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import PromiseController from 'phoenix/controllers/promise';
+import KeyEventsMixin from 'phoenix/mixins/key-events';
 import { request } from 'ic-ajax';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(KeyEventsMixin, {
   classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
   tagName: 'section',
 
