@@ -59,19 +59,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       });
     },
 
-    dontPayAdvisor: function() {
-      this.set('model.paymentRequired', false);
+    toggleAdvisorPayment: function() {
+      this.toggleProperty('model.paymentRequired');
 
       this.get('advisorPaymentForm').save().then(() => {
-        notify('The advisor will not be paid.');
-      });
-    },
+        let paymentVerb;
 
-    changePayment: function() {
-      this.set('model.paymentRequired', true);
+         if (this.get('model.paymentRequired') === true) {
+           paymentVerb = 'can now';
+         } else {
+           paymentVerb = 'will not';
+         }
 
-      this.get('advisorPaymentForm').save().then(() => {
-        notify('The advisor can now be paid.');
+        notify(`The advisor ${paymentVerb} be paid.`);
       });
     },
 

@@ -136,6 +136,7 @@
       <section class="completion form">
         {{#as-form model=completionForm action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
+            <h2>Client Completion</h2>
             {{as-form/input
               name="duration"
               form=form
@@ -172,25 +173,26 @@
 
       <section class="advisor-payment form">
         {{#if features.payAdvisor}}
-          {{#if model.paymentRequired}}
-            {{#as-form model=advisorPaymentForm action="dontPayAdvisor" as |form|}}
+          {{#as-form model=advisorPaymentForm action="toggleAdvisorPayment" as |form|}}
+            {{#as-form/fieldset}}
+              <h2>Advisor Payment</h2>
+            {{/as-form/fieldset}}
               {{#as-action-group}}
-                <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+                {{#if model.paymentRequired}}
+                  <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+                {{else}}
+                  <span>The advisor will not be paid.</span>
+                {{/if}}
+
                 {{#as-form/submit form=form requestPromise=form.requestPromise}}
-                  Don't Pay
+                  {{#if model.paymentRequired}}
+                    Don't Pay
+                  {{else}}
+                    Change
+                  {{/if}}
                 {{/as-form/submit}}
               {{/as-action-group}}
-            {{/as-form}}
-          {{else}}
-            {{#as-form model=advisorPaymentForm action="changePayment" as |form|}}
-              <span>The advisor will not be paid.</span>
-              {{#as-action-group}}
-                {{#as-form/submit form=form requestPromise=form.requestPromise}}
-                  Change
-                {{/as-form/submit}}
-              {{/as-action-group}}
-            {{/as-form}}
-          {{/if}}
+          {{/as-form}}
         {{/if}}
       </section>
     {{/as-side-panel/content}}
