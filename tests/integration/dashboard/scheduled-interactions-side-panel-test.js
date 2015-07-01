@@ -328,7 +328,7 @@ const interactionCompletion = {
   speakExplanation: 'Client was grumpy.'
 };
 
-test("Complete Interaction completes the call", function(assert) {
+test("Complete Interaction and Charge Client completes the call", function(assert) {
   const successMessage = 'The interaction has been completed.';
 
   var handler = defineFixture('POST', '/interaction_completions', {
@@ -381,34 +381,57 @@ test("Complete Interaction completes the call", function(assert) {
   });
 });
 
-test("Complete Interaction shows error message in case of failure", function(assert) {
-  var handler = defineFixture('POST', '/interaction_completions', {
-    status: 500,
-
-    request: {
-      "interaction_completion": {
-        "duration": interactionCompletion.duration,
-        "quality": interactionCompletion.quality,
-        "interaction_type": interactionCompletion.interactionType,
-        "interaction_id": interactionCompletion.interactionId,
-        "speak_quality": interactionCompletion.speakQuality,
-        "speak_explanation": interactionCompletion.speakExplanation
-      }
+test("Complete Interaction and Don't Pay Advisor/Change updates the interaction", function(assert) {
+  let dontPayAdvisorRequest = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
+    "interaction": {
+      "actioned": interaction.actioned,
+      "client_access_number_country": interaction.clientAccessNumberCountry,
+      "additional_contact_details": interaction.additionalContactDetails,
+      "payment_required": false,
+      "requested_at": interaction.requestedAt,
+      "scheduled_call_time": null,
+      "speak": interaction.speak,
+      "interaction_type": interaction.interactionType,
+      "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+      "advisor_phone_number": interaction.advisorPhoneNumber,
+      "speak_phone_number": interaction.speakPhoneNumber,
+      "speak_code": interaction.speakCode,
+      "used": interaction.used,
+      "advisor_id": interaction.advisorId,
+      "client_contact_id": interaction.clientContactId,
+      "project_id": interaction.projectId
     }
-  });
+  }});
+
 
   visit('/dashboard');
 
   click('.scheduled-interactions article:first');
   click('button:contains("Complete Interaction")');
-  fillIn('input[name=duration]', '20');
-  select('select[name=quality] ', 'Bad');
-  select('select[name=speakQuality] ', 'Other issue');
-  fillIn('input[name=speakExplanation]', interactionCompletion.speakExplanation);
-  click('button:contains("Charge Client")');
+
+  let buttonText = "Don't Pay";
+  click(`button:contains(${buttonText})`);
 
   andThen(function() {
-    const message = 'There has been an error completing the interaction.';
+    const message = 'The advisor will not be paid.';
+    assert.equal(
+      message, $('.messenger .messenger-message-inner').first().text().trim(),
+      "it displays a notification that the advisor will not be paid"
+    );
+    assert.equal(
+      message, $('.advisor-payment .actions span').first().text().trim(),
+      "it updates the content to say the advisor will not be paid"
+    );
+  });
+
+  click("button:contains('Change')");
+
+  andThen(function() {
+    const message = 'The advisor can now be paid.';
     assert.equal(message, $('.messenger .messenger-message-inner').first().text().trim());
+    assert.equal(
+      $(`button:contains(${buttonText})`).length, 1,
+      "it displays the Don't Pay button again after clicking 'Change'"
+    );
   });
 });
