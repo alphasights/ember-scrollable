@@ -13,7 +13,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
   isActive: false,
   isLoading: Ember.computed.oneWay('requestPromise.isLoading'),
   placeholder: null,
-  focusedIndex: null,
+  focusedElementIndex: null,
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -161,32 +161,21 @@ export default Ember.Component.extend(KeyEventsMixin, {
     });
 
     this.$().on('mouseenter', '.results article', (element) => {
-      this.set('focusedIndex', null);
-      $(element).addClass('focused');
-    });
-
-    this.$().on('mouseleave', '.results article', (element) => {
-      this.set('focusedIndex', null);
-      $(element).removeClass('focused');
+      this.set('focusedElementIndex', null);
     });
   },
 
   resetResultElements: function() {
     this.set('resultElements', this.$('.results article'));
-    this.set('focusedIndex', null);
+    this.set('focusedElementIndex', null);
   },
 
-  focusOnResult: Ember.observer('focusedIndex', function() {
+  focusOnResult: Ember.observer('focusedElementIndex', function() {
     var elements = this.get('resultElements');
-    var focusedElement = $(elements).filter('.focused');
-
     $(elements).removeClass('focused');
 
-    if (Ember.isPresent(focusedElement)) {
-      var index = elements.index(focusedElement[0]);
-      $(elements[index + 1]).addClass('focused');
-    } else {
-      $(elements[this.get('focusedIndex')]).addClass('focused');
+    if (this.get('focusedElementIndex') != null) {
+      $(elements[Math.abs(this.get('focusedElementIndex')) % elements.length]).addClass('focused');
     }
   }),
 
@@ -208,18 +197,18 @@ export default Ember.Component.extend(KeyEventsMixin, {
     },
 
     downArrow: function() {
-      if (this.get('focusedIndex') == null) {
-        this.set('focusedIndex', 0)
+      if (this.get('focusedElementIndex') == null) {
+        this.set('focusedElementIndex', 0)
       } else {
-        this.incrementProperty('focusedIndex', 1);
+        this.incrementProperty('focusedElementIndex', 1);
       }
     },
 
     upArrow: function() {
-      if (this.get('focusedIndex') == 0) {
-        this.set('focusedIndex', null)
+      if (this.get('focusedElementIndex') == 0) {
+        this.set('focusedElementIndex', this.get('resultElements').length - 1);
       } else {
-        this.decrementProperty('focusedIndex', 1);
+        this.decrementProperty('focusedElementIndex', 1);
       }
     }
   },
