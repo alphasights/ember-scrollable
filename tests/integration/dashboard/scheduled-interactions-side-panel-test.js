@@ -389,7 +389,7 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
       "additional_contact_details": interaction.additionalContactDetails,
       "payment_required": false,
       "requested_at": interaction.requestedAt,
-      "scheduled_call_time": null,
+      "scheduled_call_time": interaction.scheduledCallTime,
       "speak": interaction.speak,
       "interaction_type": interaction.interactionType,
       "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
@@ -423,6 +423,27 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
       "it updates the content to say the advisor will not be paid"
     );
   });
+
+  let changeAdvisorPaymentRequest = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
+    "interaction": {
+      "actioned": interaction.actioned,
+      "client_access_number_country": interaction.clientAccessNumberCountry,
+      "additional_contact_details": interaction.additionalContactDetails,
+      "payment_required": true,
+      "requested_at": interaction.requestedAt,
+      "scheduled_call_time": interaction.scheduledCallTime,
+      "speak": interaction.speak,
+      "interaction_type": interaction.interactionType,
+      "advisor_phone_country_code": interaction.advisorPhoneCountryCode,
+      "advisor_phone_number": interaction.advisorPhoneNumber,
+      "speak_phone_number": interaction.speakPhoneNumber,
+      "speak_code": interaction.speakCode,
+      "used": interaction.used,
+      "advisor_id": interaction.advisorId,
+      "client_contact_id": interaction.clientContactId,
+      "project_id": interaction.projectId
+    }
+  }});
 
   click("button:contains('Change')");
 
