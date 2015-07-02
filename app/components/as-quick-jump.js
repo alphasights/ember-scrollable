@@ -125,7 +125,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
 
           Ember.run.scheduleOnce('afterRender', () => {
             this.resetResultElements();
-          })
+          });
         })
       });
 
@@ -154,13 +154,13 @@ export default Ember.Component.extend(KeyEventsMixin, {
     });
 
     this.$('input').on('keydown', (event) => {
-      if (event.keyCode == 10 || event.keyCode == 13) {
+      if (event.keyCode === 10 || event.keyCode === 13) {
         event.preventDefault();
         window.open(this.$('.results article.focused a').attr('href'));
       }
     });
 
-    this.$().on('mouseenter', '.results article', (element) => {
+    this.$().on('mouseenter', '.results article', () => {
       this.set('focusedElementIndex', null);
     });
   },
@@ -172,10 +172,10 @@ export default Ember.Component.extend(KeyEventsMixin, {
 
   focusOnResult: Ember.observer('focusedElementIndex', function() {
     var elements = this.get('resultElements');
-    $(elements).removeClass('focused');
+    Ember.$(elements).removeClass('focused');
 
     if (this.get('focusedElementIndex') != null) {
-      $(elements[Math.abs(this.get('focusedElementIndex')) % elements.length]).addClass('focused');
+      Ember.$(elements[Math.abs(this.get('focusedElementIndex')) % elements.length]).addClass('focused');
     }
   }),
 
@@ -198,14 +198,14 @@ export default Ember.Component.extend(KeyEventsMixin, {
 
     downArrow: function() {
       if (this.get('focusedElementIndex') == null) {
-        this.set('focusedElementIndex', 0)
+        this.set('focusedElementIndex', 0);
       } else {
         this.incrementProperty('focusedElementIndex', 1);
       }
     },
 
     upArrow: function() {
-      if (this.get('focusedElementIndex') == 0) {
+      if (this.get('focusedElementIndex') === 0) {
         this.set('focusedElementIndex', this.get('resultElements').length - 1);
       } else {
         this.decrementProperty('focusedElementIndex', 1);
