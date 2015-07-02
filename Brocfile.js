@@ -38,6 +38,7 @@ if (EmberApp.env() === 'test') {
   app.import('bower_components/jquery-simulate-ext/libs/jquery.simulate.js', { type: 'test' });
   app.import('bower_components/jquery-simulate-ext/src/jquery.simulate.ext.js', { type: 'test' });
   app.import('bower_components/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js', { type: 'test' });
+  app.import('bower_components/deep-diff/index.js');
 }
 
 module.exports = app.toTree();
