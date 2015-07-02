@@ -175,7 +175,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
     Ember.$(elements).removeClass('focused');
 
     if (this.get('focusedElementIndex') != null) {
-      Ember.$(elements[Math.abs(this.get('focusedElementIndex')) % elements.length]).addClass('focused');
+      Ember.$(elements[this.get('focusedElementIndex') % elements.length]).addClass('focused');
     }
   }),
 
