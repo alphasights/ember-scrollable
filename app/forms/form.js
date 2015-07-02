@@ -8,7 +8,9 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
 
   init: function() {
     this._super.apply(this, arguments);
-    this.setDefaultValues();
+    if (this.setDefaultValues !== undefined) {
+      this.setDefaultValues();
+    }
   },
 
   save: function() {
