@@ -142,7 +142,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
       var $nonBlurringElements = this.$('.bar, .results');
 
       if ($target.closest($nonBlurringElements).length === 0) {
-        this.set('isActive', false);
+        this.send('clear');
       }
 
       return true;
