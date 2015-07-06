@@ -89,6 +89,18 @@ var Fixtures = Ember.Object.extend({
     } else {
       Ember.Logger.log("Request made did not match any defined request fixtures. The issued request was:");
       Ember.Logger.log(request);
+
+      let lastMatchingFixtureRequest = handlers[handlers.length - 1].fixture.request;
+      let diff = DeepDiff.diff(parsedRequestBody, lastMatchingFixtureRequest);
+      let differences = _.map(diff, function(difference) {
+        difference.request = difference.lhs;
+        difference.fixture = difference.rhs;
+
+        return _.omit(difference, 'lhs', 'rhs');
+      });
+
+      Ember.Logger.log("The diff between the request and the last matching fixture was:");
+      Ember.Logger.log(differences);
     }
 
     return response;

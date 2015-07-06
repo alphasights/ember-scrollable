@@ -1,6 +1,7 @@
 {
   "name": "phoenix",
   "dependencies": {
+    "deep-diff": "0.3.2",
     "ember": "1.13.2",
     "ember-data": "1.13.1",
     "ember-cli-moment-shim": "0.0.3",

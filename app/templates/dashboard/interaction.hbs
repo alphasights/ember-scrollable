@@ -76,7 +76,7 @@
           <ul>
             {{#each profiles as |profile|}}
               <li>
-                {{as-profile person=profile.person title=profile.title class=profile.class}}  
+                {{as-profile person=profile.person title=profile.title class=profile.class}}
               </li>
             {{/each}}
           </ul>
@@ -136,6 +136,7 @@
       <section class="completion form">
         {{#as-form model=completionForm action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
+            <h1>Client Completion</h1>
             {{as-form/input
               name="duration"
               form=form
@@ -166,12 +167,35 @@
             {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
               Charge Client
             {{/as-form/submit}}
-
-            {{#if features.payAdvisor}}
-              <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
-            {{/if}}
           {{/as-action-group}}
         {{/as-form}}
+      </section>
+
+      <section class="advisor-payment form">
+        {{#if features.payAdvisor}}
+          {{#as-form model=advisorPaymentForm action="toggleAdvisorPayment" as |form|}}
+            {{#as-form/fieldset}}
+              <h1>Advisor Payment</h1>
+            {{/as-form/fieldset}}
+              {{#as-action-group}}
+                <div class="pay-advisor">
+                  {{#liquid-if model.paymentRequired use="crossFade"}}
+                    <a href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+                  {{else}}
+                    <span>The advisor will not be paid.</span>
+                  {{/liquid-if}}
+                </div>
+
+                {{#as-form/submit form=form requestPromise=form.requestPromise}}
+                  {{#if model.paymentRequired}}
+                    Don't Pay
+                  {{else}}
+                    Change
+                  {{/if}}
+                {{/as-form/submit}}
+              {{/as-action-group}}
+          {{/as-form}}
+        {{/if}}
       </section>
     {{/as-side-panel/content}}
     {{#as-side-panel/footer}}

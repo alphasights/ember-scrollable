@@ -211,16 +211,63 @@ $interaction-header-height:
       }
     }
 
-    .pay-advisor {
-      @extend %button-primary;
-
-      float: right;
-    }
-
     form {
       #{$form-field-selector} {
         @include form-item-small();
       }
+
+      fieldset {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .advisor-payment,
+  .completion {
+    overflow: auto;
+
+    h1 {
+      font-size: $h3-font-size;
+      letter-spacing: 0;
+      padding-left: $column-gutter / 2;
+    }
+  }
+
+  .advisor-payment {
+    fieldset {
+      padding: $column-gutter / 2;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .actions {
+      @include clearfix;
+
+      .pay-advisor {
+        float: left;
+        height: $side-panel-actions-height;
+
+        .liquid-container,
+        .liquid-child {
+          height: 100%;
+        }
+
+        a {
+          @extend %button-primary;
+        }
+
+        span {
+          display: inline-block;
+          line-height: $side-panel-actions-height;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .action {
+      float: right;
     }
   }
 }
