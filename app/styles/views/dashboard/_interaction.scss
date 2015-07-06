@@ -228,18 +228,27 @@ $interaction-header-height:
   }
 
   .advisor-payment {
+    .liquid-container {
+      @include clearfix;
+
+      display: inline-block;
+    }
+
     .actions span {
       line-height: $side-panel-actions-height;
     }
 
+    .liquid-child &:first-child {
+      line-height: $side-panel-actions-height;
+    }
+
     .action {
+      display: inline-block;
       float: right;
     }
 
     .pay-advisor {
       @extend %button-primary;
-
-      float: left;
     }
   }
 }
