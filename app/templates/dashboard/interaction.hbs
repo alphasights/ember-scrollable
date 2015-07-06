@@ -136,7 +136,7 @@
       <section class="completion form">
         {{#as-form model=completionForm action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
-            <h3>Client Completion</h3>
+            <h1>Client Completion</h1>
             {{as-form/input
               name="duration"
               form=form
@@ -175,7 +175,7 @@
         {{#if features.payAdvisor}}
           {{#as-form model=advisorPaymentForm action="toggleAdvisorPayment" as |form|}}
             {{#as-form/fieldset}}
-              <h3>Advisor Payment</h3>
+              <h1>Advisor Payment</h1>
             {{/as-form/fieldset}}
               {{#as-action-group}}
                 <div class="pay-advisor">

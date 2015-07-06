@@ -225,10 +225,20 @@ $interaction-header-height:
   .advisor-payment,
   .completion {
     overflow: auto;
+
+    h1 {
+      font-size: $h3-font-size;
+      letter-spacing: 0;
+      padding-left: $column-gutter / 2;
+    }
   }
 
   .advisor-payment {
-    h3 {
+    fieldset {
+      padding: $column-gutter / 2;
+    }
+
+    h1 {
       margin: 0;
     }
 
