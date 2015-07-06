@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
+import AdvisorPaymentForm from 'phoenix/forms/advisor-payment-form';
 import InteractionCompletionForm from 'phoenix/forms/interaction-completion-form';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
@@ -27,6 +28,11 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
       completionForm: InteractionCompletionForm.create({
         model: models.completion,
+        container: this.get('container')
+      }),
+
+      advisorPaymentForm: AdvisorPaymentForm.create({
+        model: models.interaction,
         container: this.get('container')
       }),
 

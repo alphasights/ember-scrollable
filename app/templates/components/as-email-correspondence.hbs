@@ -8,8 +8,8 @@
         {{extract-name-from-email email.from}}
       </td>
       <td class="sent-at">
-        {{#tool-tipster title=(ago email.sentAt)}}
-          {{moment email.sentAt "D MMM YYYY"}}
+        {{#tool-tipster title=(moment email.sentAt "D MMM YYYY")}}
+          {{ago email.sentAt}}
         {{/tool-tipster}}
       </td>
     </tr>

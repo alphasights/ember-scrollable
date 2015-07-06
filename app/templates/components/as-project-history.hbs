@@ -10,7 +10,9 @@
 
       <td class="occurred-at">
         {{#if projectHistory.occurredAt}}
-          {{moment projectHistory.occurredAt "D MMM YYYY"}} ({{ago projectHistory.occurredAt}})
+          {{#tool-tipster title=(moment projectHistory.occurredAt "D MMM YYYY")}}
+            {{ago projectHistory.occurredAt}}
+          {{/tool-tipster}}
         {{/if}}
       </td>
 

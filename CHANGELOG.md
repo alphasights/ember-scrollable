@@ -1,5 +1,10 @@
 # Phoenix Changelog
 
+### Release 0.0.7
+
+- [#418 BUGFIX](https://github.com/alphasights/phoenix/pull/418) Fix quick jump result links not working sometimes
+- [#414](https://github.com/alphasights/phoenix/pull/414) Add section to interaction completion form for paying/not paying advisor
+
 ### Release 0.0.6 (June 29, 2015)
 
 - [#381](https://github.com/alphasights/phoenix/pull/381) Move call completion form to nested side panel

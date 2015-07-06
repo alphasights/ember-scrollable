@@ -33,7 +33,8 @@
     "moment",
     "Timecop",
     "lookup",
-    "Messenger"
+    "Messenger",
+    "DeepDiff"
   ],
   "node": false,
   "browser": false,

@@ -1,11 +1,18 @@
 import Ember from 'ember';
-import PromiseController from './promise';
+import PromiseController from 'phoenix/controllers/promise';
+import KeyEventsMixin from 'phoenix/mixins/key-events';
 import { request } from 'ic-ajax';
 
-export default Ember.Controller.extend({
+export default Ember.Component.extend(KeyEventsMixin, {
+  classNameBindings: [':quick-jump', 'isActive:active', 'isLoading:loading'],
+  tagName: 'section',
+
   query: null,
   results: null,
   requestPromise: null,
+  isActive: false,
+  isLoading: Ember.computed.oneWay('requestPromise.isLoading'),
+  placeholder: null,
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -123,9 +130,50 @@ export default Ember.Controller.extend({
     }
   },
 
+  clickEventName: Ember.computed('elementId', function() {
+    return `click.${this.get('elementId')}`;
+  }),
+
+  didInsertElement: function() {
+    this._super.apply(this, arguments);
+
+    Ember.$(document).on(this.get('clickEventName'), (event) => {
+      var $target = Ember.$(event.target);
+      var $nonBlurringElements = this.$('.bar, .results');
+
+      if ($target.closest($nonBlurringElements).length === 0) {
+        this.send('clear');
+      }
+
+      return true;
+    });
+  },
+
+  willDestroyElement: function() {
+    this._super.apply(this, arguments);
+
+    Ember.$(document).off(this.get('clickEventName'));
+  },
+
+  onIsActiveDidChange: Ember.observer('isActive', function() {
+    if (!this.get('isActive')) {
+      this.$('input').blur();
+    }
+  }),
+
+  keyEvents: {
+    esc: function() {
+      this.set('isActive', false);
+    }
+  },
+
   actions: {
     clear: function() {
       this.set('query', null);
+    },
+
+    activate: function() {
+      this.set('isActive', true);
     }
   }
 });
