@@ -62,17 +62,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     toggleAdvisorPayment: function() {
       this.toggleProperty('model.paymentRequired');
 
-      this.get('advisorPaymentForm').save().then(() => {
-        let paymentVerb;
-
-         if (this.get('model.paymentRequired') === true) {
-           paymentVerb = 'can now';
-         } else {
-           paymentVerb = 'will not';
-         }
-
-        notify(`The advisor ${paymentVerb} be paid.`);
-      });
+      this.get('advisorPaymentForm').save();
     },
 
     hideSidePanel: function() {

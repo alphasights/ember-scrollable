@@ -415,10 +415,6 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
   andThen(function() {
     const message = 'The advisor will not be paid.';
     assert.equal(
-      message, $('.messenger .messenger-message-inner').first().text().trim(),
-      "it displays a notification that the advisor will not be paid"
-    );
-    assert.equal(
       message, $('.advisor-payment .actions span').first().text().trim(),
       "it updates the content to say the advisor will not be paid"
     );
@@ -448,8 +444,6 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
   click("button:contains('Change')");
 
   andThen(function() {
-    const message = 'The advisor can now be paid.';
-    assert.equal(message, $('.messenger .messenger-message-inner').first().text().trim());
     assert.equal(
       $(`button:contains(${buttonText})`).length, 1,
       "it displays the Don't Pay button again after clicking 'Change'"
