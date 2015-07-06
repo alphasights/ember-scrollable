@@ -178,11 +178,13 @@
               <h3>Advisor Payment</h3>
             {{/as-form/fieldset}}
               {{#as-action-group}}
-                {{#liquid-if model.paymentRequired use="crossFade"}}
-                  <a class="pay-advisor" href={{invoiceUrl}} target="_blank">Pay Advisor</a>
-                {{else}}
-                  <span>The advisor will not be paid.</span>
-                {{/liquid-if}}
+                <div class="pay-advisor">
+                  {{#liquid-if model.paymentRequired use="crossFade"}}
+                    <a href={{invoiceUrl}} target="_blank">Pay Advisor</a>
+                  {{else}}
+                    <span>The advisor will not be paid.</span>
+                  {{/liquid-if}}
+                </div>
 
                 {{#as-form/submit form=form requestPromise=form.requestPromise}}
                   {{#if model.paymentRequired}}

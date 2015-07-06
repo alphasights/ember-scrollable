@@ -233,28 +233,31 @@ $interaction-header-height:
     }
 
     .actions {
-      .liquid-container {
-        @include clearfix;
+      @include clearfix;
 
-        display: inline-block;
+      .pay-advisor {
+        float: left;
+        height: $side-panel-actions-height;
+
+        .liquid-container,
+        .liquid-child {
+          height: 100%;
+        }
+
+        a {
+          @extend %button-primary;
+        }
+
+        span {
+          display: inline-block;
+          line-height: $side-panel-actions-height;
+          vertical-align: middle;
+        }
       }
-
-      span {
-        line-height: $side-panel-actions-height;
-      }
-    }
-
-    .liquid-child &:first-child {
-      line-height: $side-panel-actions-height;
     }
 
     .action {
-      display: inline-block;
       float: right;
-    }
-
-    .pay-advisor {
-      @extend %button-primary;
     }
   }
 }
