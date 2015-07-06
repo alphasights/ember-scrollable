@@ -71,5 +71,9 @@ $project-history-baby-blue: #54acb0;
       margin: 0;
       min-width: $avatar-size;
     }
+
+    .occurred-at {
+      white-space: nowrap;
+    }
   }
 }

@@ -250,7 +250,7 @@ test("Project history shows advisor past projects", function(assert) {
     }, {
       projectName: projects[2].name,
       projectCodeName: projects[2].codename,
-      occurredAt: '18 Feb 2015 (30 minutes ago)',
+      occurredAt: '30 minutes ago',
       outreachStatus: projectHistory[2].outreachStatus,
       primaryContactAvatarUrl: primaryContact.avatarUrl
     }]);
