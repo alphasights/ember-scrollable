@@ -189,10 +189,10 @@ test("Schedule interaction makes an API request and displays a notification", fu
   selectTime({ day: 0, timeSlot: 0 });
 
   // Set the interaction type
-  select('select[name=interactionType] ', 'One-on-one');
+  select('select[name=interactionType]', 'One-on-one');
 
   // Select speak dial in
-  select('select[name=clientAccessNumberCountry] ', 'Australia');
+  select('select[name=clientAccessNumberCountry]', 'Australia');
 
   // Fill in advisor phone number
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
