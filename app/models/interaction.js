@@ -8,6 +8,7 @@ export default DS.Model.extend({
   clientAccessNumberCountry: DS.attr('string'),
   clientContact: DS.belongsTo('clientContact'),
   additionalContactDetails: DS.attr('string'),
+  interactionCompletions: DS.hasMany('interactionCompletion'),
   paymentRequired: DS.attr('boolean'),
   primaryContact: DS.belongsTo('user'),
   project: DS.belongsTo('project'),
@@ -29,6 +30,10 @@ export default DS.Model.extend({
         this.get('paymentRequired') === true &&
         this.get('hasAdvisorInvoice') === false
       );
+  }),
+
+  mostRecentInteractionCompletion: Ember.computed('interactionCompletions', function() {
+    return this.get('interactionCompletions').get('firstObject');
   }),
 
   pistachioUrl: Ember.computed('id', function() {

@@ -100,6 +100,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       }));
     },
 
+    amendCompletion: function() {
+      this.get('completionForm').set('editingDisabled', false);
+    },
+
     close: function() {
       this.get('sidePanel').send('hideDrawer');
     }

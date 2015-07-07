@@ -7,10 +7,10 @@ export default Ember.Controller.extend(EmberValidations.Mixin, {
   requestPromise: null,
 
   init: function() {
-    this._super.apply(this, arguments);
     if (this.setDefaultValues !== undefined) {
       this.setDefaultValues();
     }
+    this._super.apply(this, arguments);
   },
 
   save: function() {

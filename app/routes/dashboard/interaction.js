@@ -12,12 +12,20 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   model: function(params) {
     return this.store.find('interaction', params.interaction_id).then((interaction) => {
+      let mostRecentCompletion = interaction.get('mostRecentInteractionCompletion');
+      let completion;
+
+      if (mostRecentCompletion) {
+        completion = mostRecentCompletion;
+      } else {
+        completion = this.store.createRecord('interactionCompletion', {
+          interaction: interaction
+        });
+      }
+
       return Ember.RSVP.hash({
         interaction: interaction,
-
-        completion: this.store.createRecord('interactionCompletion', {
-          interaction: interaction
-        })
+        completion: completion
       });
     });
   },
