@@ -10,10 +10,11 @@ $interaction-header-height:
   $side-panel-actions-height;
 
 .side-panel.interaction {
-  .side-panel-content header {
+  .side-panel-content > header {
     @extend %grid-row;
 
     width: 100%;
+    padding: $column-gutter $column-gutter / 2;
 
     .date {
       @extend %grid-column-small-12;
