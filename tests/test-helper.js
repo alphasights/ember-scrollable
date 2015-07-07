@@ -1,5 +1,5 @@
 import resolver from './helpers/resolver';
-import registerSelectHelper from 'emberx-select/helpers/register-select-helper';
+import registerSelectHelper from './helpers/register-select-helper';
 import startApp from './helpers/start-app';
 import Fixtures from './helpers/fixtures';
 import Ember from 'ember';
