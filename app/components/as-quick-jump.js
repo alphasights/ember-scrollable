@@ -13,7 +13,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
   isActive: false,
   isLoading: Ember.computed.oneWay('requestPromise.isLoading'),
   placeholder: null,
-  focusedElementIndex: null,
+  resultComponents: [],
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -122,10 +122,6 @@ export default Ember.Component.extend(KeyEventsMixin, {
             .flatten()
             .value()
           );
-
-          Ember.run.scheduleOnce('afterRender', () => {
-            this.resetResultElements();
-          });
         })
       });
 
@@ -156,28 +152,10 @@ export default Ember.Component.extend(KeyEventsMixin, {
     this.$('input').on('keydown', (event) => {
       if (event.keyCode === 10 || event.keyCode === 13) {
         event.preventDefault();
-        window.open(this.$('.results article.focused a').attr('href'));
+        this.get('focusedComponent').send('visit');
       }
     });
-
-    this.$().on('mouseenter', '.results article', () => {
-      this.set('focusedElementIndex', null);
-    });
   },
-
-  resetResultElements: function() {
-    this.set('resultElements', this.$('.results article'));
-    this.set('focusedElementIndex', null);
-  },
-
-  focusOnResult: Ember.observer('focusedElementIndex', function() {
-    var elements = this.get('resultElements');
-    Ember.$(elements).removeClass('focused');
-
-    if (this.get('focusedElementIndex') != null) {
-      Ember.$(elements[this.get('focusedElementIndex') % elements.length]).addClass('focused');
-    }
-  }),
 
   willDestroyElement: function() {
     this._super.apply(this, arguments);
@@ -191,24 +169,45 @@ export default Ember.Component.extend(KeyEventsMixin, {
     }
   }),
 
+  focusedComponent: Ember.computed({
+    set: function(key, value, previousValue) {
+      if (previousValue != null) {
+        previousValue.set('focused', false);
+      }
+
+      value.set('focused', true);
+      return value;
+    },
+
+    get: function() {
+      this._super.apply(this, arguments);
+    }
+  }),
+
   keyEvents: {
     esc: function() {
       this.set('isActive', false);
     },
 
     downArrow: function() {
-      if (this.get('focusedElementIndex') == null) {
-        this.set('focusedElementIndex', 0);
+      var resultComponents = this.get('resultComponents');
+      var focusedComponent = resultComponents.objectAt(resultComponents.indexOf(this.get('focusedComponent')) + 1);
+
+      if (focusedComponent != null) {
+        this.set('focusedComponent', focusedComponent);
       } else {
-        this.incrementProperty('focusedElementIndex', 1);
+        this.set('focusedComponent', resultComponents.get('firstObject'));
       }
     },
 
     upArrow: function() {
-      if (this.get('focusedElementIndex') === 0) {
-        this.set('focusedElementIndex', this.get('resultElements').length - 1);
+      var resultComponents = this.get('resultComponents');
+      var focusedComponent = resultComponents.objectAt(resultComponents.indexOf(this.get('focusedComponent')) - 1);
+
+      if (focusedComponent != null) {
+        this.set('focusedComponent', focusedComponent);
       } else {
-        this.decrementProperty('focusedElementIndex', 1);
+        this.set('focusedComponent', resultComponents.get('lastObject'));
       }
     }
   },

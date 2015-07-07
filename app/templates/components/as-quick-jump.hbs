@@ -32,7 +32,7 @@
             <ul>
               {{#each section.results as |result|}}
                 <li>
-                  {{as-quick-jump-result result=result tagName="article"}}
+                  {{as-quick-jump-result result=result tagName="article" root=this}}
                 </li>
               {{/each}}
             </ul>
