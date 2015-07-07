@@ -25,9 +25,9 @@ export default DS.Model.extend({
   hasIncompletePaymentSteps: Ember.computed('used', 'paymentRequired', 'hasAdvisorInvoice', function() {
     return this.get('used') === false ||
       (
-        this.get('used') === true
-        && this.get('paymentRequired') === true
-        && this.get('hasAdvisorInvoice') === false
+        this.get('used') === true &&
+        this.get('paymentRequired') === true &&
+        this.get('hasAdvisorInvoice') === false
       );
   }),
 

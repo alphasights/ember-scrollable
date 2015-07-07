@@ -77,7 +77,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "checklist_item_ids": [],
           "requested_at": '2015-02-18T10:00:00.000+00:00',
           "actioned": false,
-          "payment_required": true
+          "payment_required": true,
+          "has_advisor_invoice": false
         }
       ],
       "checklist_items": []
@@ -162,7 +163,8 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "advisor_phone_number": advisorPhoneNumber,
       "advisor_phone_country_code": '1',
       "used": false,
-      "payment_required": true
+      "payment_required": true,
+      "has_advisor_invoice": false
     }
   }, response: {
     "interactions": []

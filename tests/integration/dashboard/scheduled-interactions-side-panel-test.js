@@ -20,7 +20,8 @@ const interaction = {
   clientContactId: '299',
   projectId: '14',
   used: false,
-  paymentRequired: true
+  paymentRequired: true,
+  hasAdvisorInvoice: false
 };
 
 QUnit.module("Scheduled Interactions Side Panel", {
@@ -100,7 +101,8 @@ QUnit.module("Scheduled Interactions Side Panel", {
           "advisor_phone_number": interaction.advisorPhoneNumber,
           "speak_phone_number": interaction.speakPhoneNumber,
           "speak_code": interaction.speakCode,
-          "payment_required": interaction.paymentRequired
+          "payment_required": interaction.paymentRequired,
+          "has_advisor_invoice": interaction.hasAdvisorInvoice
         }
       ],
       "checklist_items": []
@@ -246,7 +248,8 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
       "used": interaction.used,
       "advisor_id": interaction.advisorId,
       "client_contact_id": interaction.clientContactId,
-      "project_id": interaction.projectId
+      "project_id": interaction.projectId,
+      "has_advisor_invoice": interaction.hasAdvisorInvoice
     }
   }});
 
