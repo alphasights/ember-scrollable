@@ -90,21 +90,27 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     var clientTimeZone = this.get('model.clientContact.timeZone');
 
     if (advisorTimeZone != null) {
-      timeZoneOptions.push(TimeZoneOption.create({
-        value: advisorTimeZone,
-        title: 'Advisor Time Zone'
-      }));
+      timeZoneOptions.push(this._buildTimeZoneOptionWithLabel(
+        advisorTimeZone,
+        'Advisor Time Zone'
+      ));
     }
 
     if (clientTimeZone != null) {
-      timeZoneOptions.push(TimeZoneOption.create({
-        value: clientTimeZone,
-        title: 'Client Time Zone'
-      }));
+      timeZoneOptions.push(this._buildTimeZoneOptionWithLabel(
+        clientTimeZone,
+        'Client Time Zone'
+      ));
     }
 
     return timeZoneOptions;
   }),
+
+  _buildTimeZoneOptionWithLabel: function(timeZone, label) {
+    var option = TimeZoneOption.create({ value: timeZone });
+    option.set('label', `${label} (${option.get('abbreviation')})`);
+    return option;
+  },
 
   actions: {
     hideSidePanel: function() {
