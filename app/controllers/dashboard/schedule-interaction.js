@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
-import TimeZoneOption from 'phoenix/models/as-calendar/time-zone-option';
-import Occurrence from 'phoenix/models/as-calendar/occurrence';
+import TimeZoneOption from 'ember-calendar/models/time-zone-option';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
-var InteractionOccurrence = Occurrence.extend({
+var InteractionOccurrence = Ember.Object.extend({
   interaction: null,
-  scheduledCallTime: Ember.computed.alias('interaction.scheduledCallTime'),
+  startsAt: Ember.computed.alias('interaction.scheduledCallTime'),
   interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
 
@@ -39,28 +38,22 @@ var InteractionOccurrence = Occurrence.extend({
     } else {
       return moment.duration(60, 'minute');
     }
+  }),
+
+  endsAt: Ember.computed('startsAt', 'duration', function() {
+    return moment(this.get('startsAt')).add(this.get('duration'));
   })
 });
 
-var UnavailabilityOccurrence = Occurrence.extend({
+var UnavailabilityOccurrence = Ember.Object.extend({
   unavailability: null,
   title: Ember.computed.oneWay('unavailability.title'),
   day: Ember.computed.oneWay('unavailability.day'),
+  startsAt: Ember.computed.oneWay('unavailability.startsAt'),
+  endsAt: Ember.computed.oneWay('unavailability.endsAt'),
 
   type: Ember.computed('unavailability.type', function() {
     return this.get('unavailability.type').dasherize();
-  }),
-
-  time: Ember.computed('unavailability.startsAt', function() {
-    return moment(this.get('unavailability.startsAt'));
-  }),
-
-  endingTime: Ember.computed('unavailability.endsAt', function() {
-    return moment(this.get('unavailability.endsAt'));
-  }),
-
-  duration: Ember.computed('endingTime', 'time', function() {
-    return moment.duration(this.get('endingTime').diff(this.get('time')));
   })
 });
 
@@ -128,6 +121,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         });
 
       this.set('requestPromise', requestPromise);
+    },
+
+    calendarAddOccurrence: function(occurrence) {
+      this.get('occurrence').set('startsAt', occurrence.get('startsAt'));
     },
 
     scheduleInteraction: function() {

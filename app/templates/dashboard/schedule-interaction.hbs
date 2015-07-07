@@ -30,10 +30,12 @@
 
       <section class="scheduling">
         {{as-calendar
-          selection=occurrence
-          timeZoneOptions=timeZoneOptions
+          title="Schedule call"
           occurrences=unavailabilityOccurrences
-          timeZone=scheduleInteractionForm.selectedTimeZone}}
+          dayStartingTime="7:00"
+          dayEndingTime="21:30"
+          timeSlotDuration="00:30"
+          onAddOccurrence="calendarAddOccurrence"}}
 
         <section class="form">
           {{#as-form model=scheduleInteractionForm action="scheduleInteraction" as |form|}}
