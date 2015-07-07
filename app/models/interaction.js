@@ -20,6 +20,16 @@ export default DS.Model.extend({
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
   used: DS.attr('boolean', { defaultValue: false }),
+  hasAdvisorInvoice: DS.attr('boolean', { defaultValue: false }),
+
+  hasIncompletePaymentSteps: Ember.computed('used', 'paymentRequired', 'hasAdvisorInvoice', function() {
+    return this.get('used') === false ||
+      (
+        this.get('used') === true
+        && this.get('paymentRequired') === true
+        && this.get('hasAdvisorInvoice') === false
+      );
+  }),
 
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;
