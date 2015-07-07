@@ -89,6 +89,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     var advisorTimeZone = this.get('model.advisor.timeZone');
     var clientTimeZone = this.get('model.clientContact.timeZone');
 
+    timeZoneOptions.push(this._buildTimeZoneOptionWithLabel(
+      jstz.determine().name(),
+      'Your Time Zone'
+    ));
+
     if (advisorTimeZone != null) {
       timeZoneOptions.push(this._buildTimeZoneOptionWithLabel(
         advisorTimeZone,

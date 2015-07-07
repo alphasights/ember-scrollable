@@ -26,7 +26,8 @@
     "underscore": "1.7.0",
     "jquery-simulate": "1.0.1",
     "interact": "1.2.4",
-    "lodash": "3.10.0"
+    "lodash": "3.10.0",
+    "bower-jstz": "bower-packages/bower-jstz#1.0.5"
   },
   "resolutions": {
     "jquery": "1.11.1"
