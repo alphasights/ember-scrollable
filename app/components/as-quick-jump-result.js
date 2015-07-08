@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['type', ':quick-jump-result', 'focused'],
+  classNameBindings: ['type', ':quick-jump-result', 'isFocused:focused'],
 
   type: Ember.computed.oneWay('result.type'),
   id: Ember.computed.oneWay('result.id'),
@@ -29,6 +29,10 @@ export default Ember.Component.extend({
 
   unregisterWithRoot: Ember.on('willDestroyElement', function() {
     this.get('root.resultComponents').removeObject(this);
+  }),
+
+  isFocused: Ember.computed('root.focusedComponent', function() {
+    return this.get('root.focusedComponent') === this;
   }),
 
   typeProperties: {

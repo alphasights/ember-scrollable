@@ -14,6 +14,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
   isLoading: Ember.computed.oneWay('requestPromise.isLoading'),
   placeholder: null,
   resultComponents: [],
+  focusedComponent: null,
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -166,21 +167,6 @@ export default Ember.Component.extend(KeyEventsMixin, {
   onIsActiveDidChange: Ember.observer('isActive', function() {
     if (!this.get('isActive')) {
       this.$('input').blur();
-    }
-  }),
-
-  focusedComponent: Ember.computed({
-    set: function(key, value, previousValue) {
-      if (previousValue != null) {
-        previousValue.set('focused', false);
-      }
-
-      value.set('focused', true);
-      return value;
-    },
-
-    get: function() {
-      this._super.apply(this, arguments);
     }
   }),
 
