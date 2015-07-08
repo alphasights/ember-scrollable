@@ -33,7 +33,11 @@ export default Form.extend({
       this.set('editingDisabled', true);
     }
     this.set('duration', this.get('model.duration'));
-    this.set('quality', this.get('model.quality'));
+    if (Ember.isPresent(this.get('model.quality'))) {
+      this.set('quality', this.get('model.quality'));
+    } else {
+      this.set('quality', 'good');
+    }
     this.set('interactionType', this.get('model.interaction.interactionType'));
     this.set('speakQuality', this.get('model.speakQuality'));
     this.set('speakExplanation', this.get('model.speakExplanation'));
