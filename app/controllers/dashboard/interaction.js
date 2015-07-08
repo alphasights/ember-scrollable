@@ -3,6 +3,7 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
@@ -111,7 +112,25 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     amendCompletion: function() {
-      this.get('completionForm').set('editingDisabled', false);
+      let completionForm = this.get('completionForm');
+      let completion = completionForm.get('model');
+      let requestParams = `interaction_completion_id=${completion.get('id')}`;
+
+      PromiseController.create({
+        promise: request({
+          url: `${EmberENV.apiBaseUrl}/interaction_completion_amendments?${requestParams}`,
+          type: 'POST'
+        }).then((response) => {
+          this.store.pushPayload(response);
+          let newCompletion = this.store.createRecord('interactionCompletion', {
+            interaction: this.get('model')
+          });
+          this.set('completionForm.model', newCompletion);
+          completionForm.set('editingDisabled', false);
+        }, () => {
+          notify('There has been an error.', 'error');
+        })
+      });
     },
 
     close: function() {
