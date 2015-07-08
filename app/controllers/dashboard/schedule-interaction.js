@@ -113,7 +113,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   _buildTimeZoneOptionWithLabel: function(timeZone, label) {
     var option = TimeZoneOption.create({ value: timeZone });
-    option.set('label', `${label} (${option.get('abbreviation')})`);
+    option.set('description', `${label} (${option.get('abbreviation')})`);
     return option;
   },
 
