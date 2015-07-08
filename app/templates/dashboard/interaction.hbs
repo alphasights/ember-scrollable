@@ -169,7 +169,11 @@
 
           {{#as-action-group}}
             {{#liquid-if completionForm.editingDisabled  use="crossFade"}}
-              {{#as-action action="amendCompletion"}}Amend{{/as-action}}
+              {{#if (eq currentUser.id model.primaryContact.id)}}
+                {{#as-action action="amendCompletion"}}Amend{{/as-action}}
+              {{else}}
+                <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="completion-url" target="_blank">completion page</a>.</span>
+              {{/if}}
             {{else}}
               {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
                 Charge Client

@@ -6,6 +6,7 @@ import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
+  currentUser: Ember.inject.service(),
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
@@ -40,6 +41,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/invoices/new?advisor_id=${advisorId}`;
   }),
 
+  completionUrl: Ember.computed('model.project', function() {
+    let projectId = this.get('model.project.id');
+
+    return `${EmberENV.pistachioUrl}/projects/${projectId}/completion`;
+  }),
+
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
@@ -54,8 +61,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   actions: {
     chargeClient: function() {
-      this.get('completionForm').save().then(() => {
+      let completionForm = this.get('completionForm');
+
+      completionForm.save().then(() => {
         notify('The interaction has been completed.');
+        completionForm.set('editingDisabled', true);
       });
     },
 
