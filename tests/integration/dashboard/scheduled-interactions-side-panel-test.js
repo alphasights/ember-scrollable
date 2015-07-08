@@ -342,7 +342,8 @@ test("Complete Interaction and Charge Client completes the call", function(asser
         "interaction_type": interactionCompletion.interactionType,
         "interaction_id": interactionCompletion.interactionId,
         "speak_quality": interactionCompletion.speakQuality,
-        "speak_explanation": interactionCompletion.speakExplanation
+        "speak_explanation": interactionCompletion.speakExplanation,
+        "voided_at": null
       }
     },
 
