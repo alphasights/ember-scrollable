@@ -128,7 +128,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
           this.set('completionForm.model', newCompletion);
           completionForm.set('editingDisabled', false);
         }, () => {
-          notify('There has been an error.', 'error');
+          notify('There has been an error amending the interaction.', 'error');
         })
       });
     },
