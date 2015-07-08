@@ -140,12 +140,14 @@
             {{as-form/input
               name="duration"
               form=form
+              disabled=completionForm.editingDisabled
               label="Call Duration (minutes)"}}
 
             {{as-form/select
               name="quality"
               form=form
               label="Call Quality"
+              disabled=completionForm.editingDisabled
               content=completionForm.qualityOptionsForSelect}}
 
               {{as-form/select
@@ -153,20 +155,30 @@
                 form=form
                 label="Speak"
                 prompt=""
+                disabled=completionForm.editingDisabled
                 content=completionForm.speakQualityOptionsForSelect}}
 
               {{#if completionForm.speakExplanationNeeded}}
                 {{as-form/input
                   name="speakExplanation"
                   form=form
+                  disabled=completionForm.editingDisabled
                   label="More info"}}
               {{/if}}
           {{/as-form/fieldset}}
 
           {{#as-action-group}}
-            {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
-              Charge Client
-            {{/as-form/submit}}
+            {{#liquid-if completionForm.editingDisabled  use="crossFade"}}
+              {{#if (eq currentUser.id model.primaryContact.id)}}
+                {{#as-action action="amendCompletion"}}Amend{{/as-action}}
+              {{else}}
+                <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="url" target="_blank">completion page</a>.</span>
+              {{/if}}
+            {{else}}
+              {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
+                Charge Client
+              {{/as-form/submit}}
+            {{/liquid-if}}
           {{/as-action-group}}
         {{/as-form}}
       </section>

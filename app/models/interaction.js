@@ -8,6 +8,7 @@ export default DS.Model.extend({
   clientAccessNumberCountry: DS.attr('string'),
   clientContact: DS.belongsTo('clientContact'),
   additionalContactDetails: DS.attr('string'),
+  interactionCompletions: DS.hasMany('interactionCompletion'),
   paymentRequired: DS.attr('boolean'),
   primaryContact: DS.belongsTo('user'),
   project: DS.belongsTo('project'),
@@ -20,6 +21,23 @@ export default DS.Model.extend({
   speakPhoneNumber: DS.attr('string'),
   speakCode: DS.attr('string'),
   used: DS.attr('boolean', { defaultValue: false }),
+  hasAdvisorInvoice: DS.attr('boolean', { defaultValue: false }),
+
+  hasIncompletePaymentSteps: Ember.computed('used', 'paymentRequired', 'hasAdvisorInvoice', function() {
+    return this.get('used') === false ||
+      (
+        this.get('used') === true &&
+        this.get('paymentRequired') === true &&
+        this.get('hasAdvisorInvoice') === false
+      );
+  }),
+
+  validInteractionCompletion: Ember.computed('interactionCompletions.[]', function() {
+    return this.get('interactionCompletions')
+      .filterBy('voidedAt', null)
+      .sortBy('createdAt')
+      .get('lastObject');
+  }),
 
   pistachioUrl: Ember.computed('id', function() {
     return `${EmberENV.pistachioUrl}/interactions/${this.get('id')}`;

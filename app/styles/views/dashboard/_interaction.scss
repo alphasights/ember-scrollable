@@ -233,6 +233,12 @@ $interaction-header-height:
     }
   }
 
+  .completion {
+    .url {
+      padding: 0;
+    }
+  }
+
   .advisor-payment {
     fieldset {
       padding: $column-gutter / 2;

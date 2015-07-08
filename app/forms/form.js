@@ -6,12 +6,11 @@ import notify from 'phoenix/helpers/notify';
 export default Ember.Controller.extend(EmberValidations.Mixin, {
   requestPromise: null,
 
-  init: function() {
-    this._super.apply(this, arguments);
+  initializeValues: Ember.on('init', function() {
     if (this.setDefaultValues !== undefined) {
       this.setDefaultValues();
     }
-  },
+  }),
 
   save: function() {
     if (this.get('isValid')) {
