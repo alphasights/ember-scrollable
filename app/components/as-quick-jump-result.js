@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNameBindings: ['type', ':quick-jump-result'],
+  classNameBindings: ['type', ':quick-jump-result', 'isFocused:focused'],
 
   type: Ember.computed.oneWay('result.type'),
   id: Ember.computed.oneWay('result.id'),
@@ -21,6 +21,18 @@ export default Ember.Component.extend({
 
   resultProperties: Ember.computed('type', function() {
     return this.typeProperties[this.get('type')];
+  }),
+
+  registerWithRoot: Ember.on('didInsertElement', function() {
+    this.get('root.resultComponents').pushObject(this);
+  }),
+
+  unregisterWithRoot: Ember.on('willDestroyElement', function() {
+    this.get('root.resultComponents').removeObject(this);
+  }),
+
+  isFocused: Ember.computed('root.focusedComponent', function() {
+    return this.get('root.focusedComponent') === this;
   }),
 
   typeProperties: {
@@ -61,6 +73,12 @@ export default Ember.Component.extend({
       titlePath: 'name',
       detailsPath: 'teamName',
       path: 'faces'
+    }
+  },
+
+  actions: {
+    visit: function() {
+      window.open(this.get('url'));
     }
   }
 });

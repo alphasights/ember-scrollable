@@ -3,6 +3,7 @@ $calendar-occurrence-default-color: $anchor-font-color;
 .side-panel.interaction.schedule-interaction {
   header > .content {
     @extend %grid-column-medium-12;
+    @extend %grid-column-large-12;
 
     h1 {
       line-height: $header-line-height;

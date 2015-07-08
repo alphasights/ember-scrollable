@@ -13,6 +13,8 @@ export default Ember.Component.extend(KeyEventsMixin, {
   isActive: false,
   isLoading: Ember.computed.oneWay('requestPromise.isLoading'),
   placeholder: null,
+  resultComponents: [],
+  focusedComponent: null,
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -147,6 +149,13 @@ export default Ember.Component.extend(KeyEventsMixin, {
 
       return true;
     });
+
+    this.$('input').on('keydown', (event) => {
+      if (event.keyCode === 10 || event.keyCode === 13) {
+        event.preventDefault();
+        this.get('focusedComponent').send('visit');
+      }
+    });
   },
 
   willDestroyElement: function() {
@@ -164,6 +173,28 @@ export default Ember.Component.extend(KeyEventsMixin, {
   keyEvents: {
     esc: function() {
       this.set('isActive', false);
+    },
+
+    downArrow: function() {
+      var resultComponents = this.get('resultComponents');
+      var focusedComponent = resultComponents.objectAt(resultComponents.indexOf(this.get('focusedComponent')) + 1);
+
+      if (focusedComponent != null) {
+        this.set('focusedComponent', focusedComponent);
+      } else {
+        this.set('focusedComponent', resultComponents.get('firstObject'));
+      }
+    },
+
+    upArrow: function() {
+      var resultComponents = this.get('resultComponents');
+      var focusedComponent = resultComponents.objectAt(resultComponents.indexOf(this.get('focusedComponent')) - 1);
+
+      if (focusedComponent != null) {
+        this.set('focusedComponent', focusedComponent);
+      } else {
+        this.set('focusedComponent', resultComponents.get('lastObject'));
+      }
     }
   },
 
