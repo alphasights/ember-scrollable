@@ -4,10 +4,11 @@ section.projects {
 
     padding: $column-gutter !important;
 
-    .new-project {
+    a {
       @extend %button-primary;
 
       float: right;
+      margin-left: rem-calc(15);
     }
   }
 }
