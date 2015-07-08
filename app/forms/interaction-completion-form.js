@@ -29,7 +29,7 @@ export default Form.extend({
   editingDisabled: false,
 
   setDefaultValues: function() {
-    if (this.get('model.id')) {
+    if (this.get('model.id') != null) {
       this.set('editingDisabled', true);
     }
     this.set('duration', this.get('model.duration'));
