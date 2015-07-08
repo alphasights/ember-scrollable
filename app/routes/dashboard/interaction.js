@@ -12,11 +12,11 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   model: function(params) {
     return this.store.find('interaction', params.interaction_id).then((interaction) => {
-      let activeCompletion = interaction.get('activeInteractionCompletion');
+      let validCompletion = interaction.get('validInteractionCompletion');
       let completion;
 
-      if (activeCompletion) {
-        completion = activeCompletion;
+      if (validCompletion) {
+        completion = validCompletion;
       } else {
         completion = this.store.createRecord('interactionCompletion', {
           interaction: interaction

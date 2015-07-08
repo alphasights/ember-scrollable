@@ -32,12 +32,11 @@ export default DS.Model.extend({
       );
   }),
 
-  activeInteractionCompletion: Ember.computed('interactionCompletions', function() {
+  validInteractionCompletion: Ember.computed('interactionCompletions.[]', function() {
     return this.get('interactionCompletions')
-    .filterBy('voidedAt', null)
-    .sortBy('createdAt')
-    .reverse()
-    .get('firstObject');
+      .filterBy('voidedAt', null)
+      .sortBy('createdAt')
+      .get('lastObject');
   }),
 
   pistachioUrl: Ember.computed('id', function() {
