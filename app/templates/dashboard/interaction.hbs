@@ -172,7 +172,7 @@
               {{#if (eq currentUser.id model.primaryContact.id)}}
                 {{#as-action action="amendCompletion"}}Amend{{/as-action}}
               {{else}}
-                <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="completion-url" target="_blank">completion page</a>.</span>
+                <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="url" target="_blank">completion page</a>.</span>
               {{/if}}
             {{else}}
               {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
