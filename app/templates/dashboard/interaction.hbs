@@ -137,11 +137,37 @@
         {{#as-form model=completionForm action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
             <h1>Client Completion</h1>
-            {{as-form/input
-              name="duration"
+            {{as-form/select
               form=form
-              disabled=completionForm.editingDisabled
-              label="Call Duration (minutes)"}}
+              name="interactionType"
+              label="Interaction Type"
+              content=completionForm.interactionTypesForSelect
+              optionGroupPath="classification"
+            }}
+
+            {{#if completionForm.isDurationBased}}
+              {{as-form/input
+                name="duration"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Call Duration (minutes)"}}
+            {{/if}}
+
+            {{#if completionForm.isCustomCredit}}
+              {{as-form/input
+                name="customCredits"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Credits"}}
+            {{/if}}
+
+            {{#if completionForm.isNonCredit}}
+              {{as-form/input
+                name="customRevenue"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Price (USD)"}}
+            {{/if}}
 
             {{as-form/select
               name="quality"

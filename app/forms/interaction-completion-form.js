@@ -25,6 +25,8 @@ const speakQualityOptions = speakQualityOptionsMapping.keys;
 
 export default Form.extend({
   genericErrorMessage: 'There has been an error completing the interaction.',
+  interactionTypes: null,
+  interactionClassifications: null,
   speakExplanationNeeded: Ember.computed.equal('speakQuality', 'other'),
   editingDisabled: false,
 
@@ -32,12 +34,14 @@ export default Form.extend({
     if (this.get('model.id') != null) {
       this.set('editingDisabled', true);
     }
-    this.set('duration', this.get('model.duration'));
     if (Ember.isPresent(this.get('model.quality'))) {
       this.set('quality', this.get('model.quality'));
     } else {
       this.set('quality', 'good');
     }
+    this.set('duration', this.get('model.duration'));
+    this.set('customCredits', this.get('model.customCredits'));
+    this.set('customRevenue', this.get('model.customRevenue'));
     this.set('interactionType', this.get('model.interaction.interactionType'));
     this.set('speakQuality', this.get('model.speakQuality'));
     this.set('speakExplanation', this.get('model.speakExplanation'));
@@ -47,12 +51,51 @@ export default Form.extend({
     var model = this.get('model');
 
     model.setProperties({
+      customCredits: this.get('customCredits'),
+      customRevenue: this.get('customRevenue'),
       duration: this.get('duration'),
-      quality: this.get('quality'),
       interactionType: this.get('interactionType'),
+      quality: this.get('quality'),
       speakQuality: this.get('speakQuality'),
       speakExplanation: this.get('speakExplanation')
     });
+  },
+
+  isDurationBased: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('duration_based');
+  }),
+
+  isNonCredit: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('non_credit');
+  }),
+
+  isCustomCredit: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('custom_credit');
+  }),
+
+  interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
+    var classifications = this.get('interactionClassifications');
+    var interactionTypes = this.get('interactionTypes');
+
+    var types = _.map(classifications, function(typeIds, classification) {
+      return _.map(typeIds, function(typeId) {
+        return {
+          id: typeId,
+          name: interactionTypes[typeId],
+          classification: _.map(classification.split('_'), function(word){
+            return word.capitalize();
+          }).join(' ')
+        };
+      });
+    });
+
+    return _.flatten(types);
+  }),
+
+  _isOfClassification: function(classification) {
+    let classifications = this.get('interactionClassifications');
+
+    return classifications[classification].indexOf(this.get('interactionType')) > -1;
   },
 
   validations: {

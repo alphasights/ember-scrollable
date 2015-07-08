@@ -2,6 +2,7 @@ import Ember from 'ember';
 import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 import AdvisorPaymentForm from 'phoenix/forms/advisor-payment-form';
 import InteractionCompletionForm from 'phoenix/forms/interaction-completion-form';
+import { request } from 'ic-ajax';
 
 export default Ember.Route.extend(SidePanelRouteMixin, {
   titleToken: function(models) {
@@ -25,6 +26,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
       return Ember.RSVP.hash({
         interaction: interaction,
+        interactionTypes: request(`${EmberENV.apiBaseUrl}/interaction_types`),
         completion: completion
       });
     });
@@ -36,6 +38,8 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
       completionForm: InteractionCompletionForm.create({
         model: models.completion,
+        interactionTypes: models.interactionTypes.interaction_types,
+        interactionClassifications: models.interactionTypes.classifications,
         container: this.get('container')
       }),
 
