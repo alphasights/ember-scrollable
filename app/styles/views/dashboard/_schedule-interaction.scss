@@ -1,3 +1,5 @@
+$calendar-occurrence-default-color: $anchor-font-color;
+
 .side-panel.interaction.schedule-interaction {
   header > .content {
     @extend %grid-column-medium-12;
@@ -16,16 +18,15 @@
 
     padding: $column-gutter / 2 $column-gutter !important;
 
-    .calendar {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+    .as-calendar-occurrence {
+      &.selection,
+      &.preview {
+        background-color: $calendar-occurrence-default-color;
+        border-color: darken($calendar-occurrence-default-color, 5%);
 
-    .calendar-occurrence {
-      &.alpha-call,
-      &.client-busy {
-        background-color: $alert-color;
-        border-color: darken($alert-color, 5%);
+        .remove:hover {
+          color: darken($calendar-occurrence-default-color, 10%);
+        }
       }
     }
   }

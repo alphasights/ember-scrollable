@@ -13,8 +13,8 @@ $interaction-header-height:
   .side-panel-content > header {
     @extend %grid-row;
 
-    width: 100%;
     padding: $column-gutter $column-gutter / 2;
+    width: 100%;
 
     .date {
       @extend %grid-column-small-12;

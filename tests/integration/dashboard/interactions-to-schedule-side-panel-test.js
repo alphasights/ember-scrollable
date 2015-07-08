@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
+import '../../helpers/select-time';
 import testHelper from '../../test-helper';
 
 const interaction = {
@@ -87,10 +88,10 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "unavailabilities": [
         {
           "id": 123,
-          "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
-          "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
+          "starts_at": moment().utc().startOf('isoWeek').add(9, 'hours').toISOString(),
+          "ends_at": moment().utc().startOf('isoWeek').add(10, 'hours').toISOString(),
           "day": null,
-          "interaction_id": interaction.id,
+          "interaction_id": 2,
           "type": 'alpha_call',
           "title": 'AlphaCall'
         }
@@ -133,13 +134,18 @@ test("Display other Alpha Calls in calendar", function(assert) {
   click('.interactions-to-schedule article:first');
 
   andThen(function() {
-    var nineAmCallSlot = find('.times:first li:nth-child(5) li:first article');
-
+    var nineAmCallSlot = find('.as-calendar-occurrence:first');
     assert.equal(nineAmCallSlot.text().trim(), 'AlphaCall');
   });
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
+  var oldDetermine = window.jstz.determine;
+
+  window.jstz.determine = function() {
+    return { name: function() { return 'UTC'; } };
+  };
+
   var callType = 'call';
   var accessCountry = 'AU';
   var advisorPhoneNumber = '5553214567';
@@ -155,7 +161,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
+      "scheduled_call_time": moment().utc().startOf('isoWeek').add(7, 'hours').toISOString(),
       "speak": true,
       "speak_phone_number": null,
       "speak_code": null,
@@ -178,7 +184,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Select time slot from calendar
   // Monday 7 AM
-  click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
+  selectTime({ day: 0, timeSlot: 0 });
 
   // Set the interaction type
   select('select[name=interactionType] ', 'One-on-one');
@@ -200,6 +206,8 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
+
+    window.jstz.determine = oldDetermine;
   });
 });
 

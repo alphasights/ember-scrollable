@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import jstz from 'jstz';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'ember-calendar/models/time-zone-option';
 import notify from 'phoenix/helpers/notify';
@@ -9,28 +10,7 @@ var InteractionOccurrence = Ember.Object.extend({
   startsAt: Ember.computed.alias('interaction.scheduledCallTime'),
   interactionType: Ember.computed.oneWay('interaction.interactionType'),
   title: 'Scheduled Call',
-
-  time: Ember.computed('scheduledCallTime', {
-    set: function(_, value) {
-      if (value != null) {
-        this.set('scheduledCallTime', value.toDate());
-      } else {
-        this.set('scheduledCallTime', null);
-      }
-
-      return value;
-    },
-
-    get: function() {
-      var scheduledCallTime = this.get('scheduledCallTime');
-
-      if (scheduledCallTime != null) {
-        return moment(scheduledCallTime);
-      } else {
-        return null;
-      }
-    }
-  }),
+  isSelection: true,
 
   duration: Ember.computed('interactionType', function() {
     if (this.get('interactionType') === 'half_hour_call') {
@@ -40,21 +20,22 @@ var InteractionOccurrence = Ember.Object.extend({
     }
   }),
 
-  endsAt: Ember.computed('startsAt', 'duration', function() {
-    return moment(this.get('startsAt')).add(this.get('duration'));
+  endsAt: Ember.computed('startsAt', 'duration', {
+    get: function() {
+      return moment(this.get('startsAt')).add(this.get('duration')).toDate();
+    },
+
+    set: function(_, value) {
+      return value;
+    }
   })
 });
 
 var UnavailabilityOccurrence = Ember.Object.extend({
   unavailability: null,
-  title: Ember.computed.oneWay('unavailability.title'),
-  day: Ember.computed.oneWay('unavailability.day'),
   startsAt: Ember.computed.oneWay('unavailability.startsAt'),
   endsAt: Ember.computed.oneWay('unavailability.endsAt'),
-
-  type: Ember.computed('unavailability.type', function() {
-    return this.get('unavailability.type').dasherize();
-  })
+  title: Ember.computed.oneWay('unavailability.title')
 });
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
@@ -64,24 +45,39 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
 
-  visibleUnavailabilities: Ember.computed(
-    'unavailabilities.@each.{interactionId}',
-    'model.id',
-    function() {
-      return this.get('unavailabilities').filter((unavailability) => {
-        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10);
-      });
-    }
-  ),
-
   unavailabilityOccurrences: Ember.computed('visibleUnavailabilities.[]', function() {
     return this.get('visibleUnavailabilities').map(function(unavailability) {
       return UnavailabilityOccurrence.create({ unavailability: unavailability });
     });
   }),
 
-  occurrence: Ember.computed('scheduleInteractionForm', function() {
-    return InteractionOccurrence.create({ interaction: this.get('scheduleInteractionForm') });
+  interactionOccurrence: Ember.computed('scheduleInteractionForm.scheduledCallTime', function() {
+    var scheduleInteractionForm = this.get('scheduleInteractionForm');
+
+    if (scheduleInteractionForm.get('scheduledCallTime') != null) {
+      return InteractionOccurrence.create({ interaction: scheduleInteractionForm });
+    } else {
+      return null;
+    }
+  }),
+
+  visibleUnavailabilities: Ember.computed(
+    'unavailabilities.@each.{interactionId}',
+    'model.id', function() {
+      return this.get('unavailabilities').filter((unavailability) => {
+        return parseInt(unavailability.get('interactionId'), 10) !== parseInt(this.get('model.id'), 10);
+      });
+  }),
+
+  occurrences: Ember.computed('interactionOccurrence', 'visibleUnavailabilities.[]', function() {
+    var visibleUnavailabilities = this.get('visibleUnavailabilities');
+    var interactionOccurrence = this.get('interactionOccurrence');
+
+    if (interactionOccurrence != null) {
+      return [interactionOccurrence].concat(visibleUnavailabilities);
+    } else {
+      return visibleUnavailabilities;
+    }
   }),
 
   timeZoneOptions: Ember.computed('model.advisor.timeZone', 'model.clientContact.timeZone', function() {
@@ -135,7 +131,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     calendarAddOccurrence: function(occurrence) {
-      this.get('occurrence').set('startsAt', occurrence.get('startsAt'));
+      this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
+    },
+
+    calendarUpdateOccurrence: function(occurrence, properties) {
+      occurrence.setProperties(properties);
+    },
+
+    calendarRemoveOccurrence: function() {
+      this.get('occurrences').removeObject(this.get('interactionOccurrence'));
+
+      Ember.run.next(() => {
+        this.set('scheduleInteractionForm.scheduledCallTime', null);
+      });
     },
 
     scheduleInteraction: function() {
