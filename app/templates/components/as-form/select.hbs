@@ -6,23 +6,29 @@
   disabled=disabled
   label=label
   class="form-select" as |value|}}
-  {{#x-select name=name value=value disabled=disabled}}
+  <select name={{name}} onchange={{action (mut value) value="target.value"}}>
     {{#if (not (eq prompt null))}}
-      {{#x-option value=null}}{{prompt}}{{/x-option}}
+      <option value={{null}} selected={{eq item.id null}}>
+        {{prompt}}
+      </option>
     {{/if}}
 
     {{#if optionGroupPath}}
       {{#each groupedContent as |group|}}
         <optgroup label={{group.label}}>
           {{#each group.content as |item|}}
-            {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+            <option value={{item.id}} selected={{eq item.id value}}>
+              {{item.name}}
+            </option>
           {{/each}}
         </optgroup>
       {{/each}}
     {{else}}
       {{#each content as |item|}}
-        {{#x-option value=item.id}}{{item.name}}{{/x-option}}
+        <option value={{item.id}} selected={{eq item.id value}}>
+          {{item.name}}
+        </option>
       {{/each}}
     {{/if}}
-  {{/x-select}}
+  </select>
 {{/as-form/field}}
