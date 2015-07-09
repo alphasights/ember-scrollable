@@ -43,5 +43,9 @@
         display: inline-block;
       }
     }
+
+    .send-confirmation-email {
+      @extend %button-primary;
+    }
   }
 }

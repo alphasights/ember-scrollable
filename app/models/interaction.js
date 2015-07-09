@@ -31,5 +31,9 @@ export default DS.Model.extend({
 
   schedulingUrl: Ember.computed('id', 'project.id', function() {
     return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#scheduling_${this.get('id')}`;
-  })
+  }),
+
+  invitationUrl: Ember.computed('id', 'project.id', function() {
+    return `${EmberENV.pistachioUrl}/projects/${this.get('project.id')}/proposal#invitation_${this.get('id')}`;
+  }),
 });
