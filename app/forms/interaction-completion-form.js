@@ -26,10 +26,21 @@ const speakQualityOptions = speakQualityOptionsMapping.keys;
 export default Form.extend({
   genericErrorMessage: 'There has been an error completing the interaction.',
   speakExplanationNeeded: Ember.computed.equal('speakQuality', 'other'),
+  editingDisabled: false,
 
   setDefaultValues: function() {
-    this.set('quality', 'good');
+    if (this.get('model.id') != null) {
+      this.set('editingDisabled', true);
+    }
+    this.set('duration', this.get('model.duration'));
+    if (Ember.isPresent(this.get('model.quality'))) {
+      this.set('quality', this.get('model.quality'));
+    } else {
+      this.set('quality', 'good');
+    }
     this.set('interactionType', this.get('model.interaction.interactionType'));
+    this.set('speakQuality', this.get('model.speakQuality'));
+    this.set('speakExplanation', this.get('model.speakExplanation'));
   },
 
   setPersistedValues: function() {

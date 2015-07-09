@@ -3,9 +3,11 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
 import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   needs: ['dashboard'],
+  currentUser: Ember.inject.service(),
   dashboard: Ember.computed.oneWay('controllers.dashboard'),
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
@@ -40,6 +42,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/invoices/new?advisor_id=${advisorId}`;
   }),
 
+  completionUrl: Ember.computed('model.project', function() {
+    let projectId = this.get('model.project.id');
+
+    return `${EmberENV.pistachioUrl}/projects/${projectId}/completion`;
+  }),
+
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       InteractionCancellation.create().cancel(this.get('model'), response => {
@@ -54,8 +62,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   actions: {
     chargeClient: function() {
-      this.get('completionForm').save().then(() => {
+      let completionForm = this.get('completionForm');
+
+      completionForm.save().then(() => {
         notify('The interaction has been completed.');
+        completionForm.set('editingDisabled', true);
       });
     },
 
@@ -98,6 +109,28 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
           this.transitionToRoute('dashboard.interaction', this.get('model.id'));
         })
       }));
+    },
+
+    amendCompletion: function() {
+      let completionForm = this.get('completionForm');
+      let completion = completionForm.get('model');
+      let requestParams = `interaction_completion_id=${completion.get('id')}`;
+
+      PromiseController.create({
+        promise: request({
+          url: `${EmberENV.apiBaseUrl}/interaction_completion_amendments?${requestParams}`,
+          type: 'POST'
+        }).then((response) => {
+          this.store.pushPayload(response);
+          let newCompletion = this.store.createRecord('interactionCompletion', {
+            interaction: this.get('model')
+          });
+          this.set('completionForm.model', newCompletion);
+          completionForm.set('editingDisabled', false);
+        }, () => {
+          notify('There has been an error amending the interaction.', 'error');
+        })
+      });
     },
 
     close: function() {
