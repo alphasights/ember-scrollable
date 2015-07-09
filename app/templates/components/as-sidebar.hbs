@@ -1,0 +1,63 @@
+<header>
+  <img src="assets/images/logo.png" alt={{applicationName}} />
+  <h1>{{applicationName}}</h1>
+</header>
+
+{{#as-scrollable tagName="nav"}}
+  <header>
+    <div class="toggle-collapse">
+      <button {{action "toggleCollapse"}}></button>
+    </div>
+
+    <h1>Menu</h1>
+  </header>
+
+  <ul>
+    {{#each navigationItems as |item|}}
+      <li class={{item.id}}>
+        {{#link-to item.routeName}}
+          <i></i>
+          <span>{{item.name}}</span>
+
+          {{#if item.bubbleCount}}
+            <span class="bubble">{{item.bubbleCount}}</span>
+          {{/if}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+
+    <li class="advisors-search">
+      <a href={{advisorsSearchUrl}} target="_blank">
+        <i></i>
+        <span>Advisors Search</span>
+      </a>
+    </li>
+  </ul>
+{{/as-scrollable}}
+
+{{#if currentUser}}
+  <footer>
+    <div class="toggle-actions">
+      {{#rl-dropdown-container class="dropdown"}}
+        {{#rl-dropdown-toggle class="actions"}}{{/rl-dropdown-toggle}}
+
+        {{#rl-dropdown tagName="ul" class="top" closeOnChildClick=true}}
+          {{#each actionItems as |actionItem|}}
+            <li>
+              <a {{action actionItem.name target=actionsTarget}}>
+                {{actionItem.label}}
+              </a>
+            </li>
+          {{/each}}
+        {{/rl-dropdown}}
+      {{/rl-dropdown-container}}
+    </div>
+
+    <div class="picture">
+      <img alt="Profile Picture"
+        src={{currentUser.avatarUr}} title={{currentUser.initials}} />
+    </div>
+
+    <div class="name">{{currentUser.name}}</div>
+  </footer>
+{{/if}}

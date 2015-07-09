@@ -10,5 +10,9 @@ section.projects {
       float: right;
       margin-left: rem-calc(15);
     }
+
+    .projects-search {
+      @extend %button-secondary;
+    }
   }
 }
