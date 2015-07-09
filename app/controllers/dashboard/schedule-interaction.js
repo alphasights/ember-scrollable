@@ -64,7 +64,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   visibleUnavailabilities: Ember.computed(
     'unavailabilities.@each.{interactionId}',
     'model.id', function() {
-      return this.get('unavailabilities').filter((unavailability) => {
+      return [this.get('unavailabilities')].filter((unavailability) => {
         return parseInt(unavailability.get('interactionId'), 10) !== parseInt(this.get('model.id'), 10);
       });
   }),
@@ -113,6 +113,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return option;
   },
 
+  _validateOccurrenceProperties: function(properties) {
+    return this.get('visibleUnavailabilities').every(function(occurrence) {
+      return !(properties.endsAt > occurrence.get('startsAt') &&
+             properties.startsAt < occurrence.get('endsAt'));
+    });
+  },
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
@@ -131,11 +138,15 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     calendarAddOccurrence: function(occurrence) {
-      this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
+      if (this._validateOccurrenceProperties(occurrence.getProperties('startsAt'))) {
+        this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
+      }
     },
 
     calendarUpdateOccurrence: function(occurrence, properties) {
-      occurrence.setProperties(properties);
+      if (this._validateOccurrenceProperties(properties)) {
+        occurrence.setProperties(properties);
+      }
     },
 
     calendarRemoveOccurrence: function() {
