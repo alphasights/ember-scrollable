@@ -8,7 +8,7 @@ export default Ember.Controller.extend(TeamSwitcheableControllerMixin, {
 
   filterPriority: 'high',
   newProjectUrl: `${EmberENV.pistachioUrl}/projects/new`,
-  projectsSearchUrl: `${EmberENV.pistachioUrl}/projects`,
+  projectSearchUrl: `${EmberENV.pistachioUrl}/projects`,
 
   actions: {
     showProject: function(project) {

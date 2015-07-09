@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
     label: 'Logout'
   }],
 
-  advisorsSearchUrl: `${EmberENV.pistachioUrl}/advisors`,
+  advisorSearchUrl: `${EmberENV.pistachioUrl}/advisors`,
 
   actions: {
     savePreferences: function() {
