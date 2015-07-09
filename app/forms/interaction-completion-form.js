@@ -65,7 +65,7 @@ export default Form.extend({
     return this._isOfClassification('duration_based');
   }),
 
-  isNonCredit: Ember.computed('interactionType', 'interactionClassifications', function() {
+  isPriceBased: Ember.computed('interactionType', 'interactionClassifications', function() {
     return this._isOfClassification('non_credit');
   }),
 
@@ -100,7 +100,31 @@ export default Form.extend({
 
   validations: {
     duration: {
-      numericality: { onlyInteger: true, greaterThanOrEqualTo: 0 }
+      numericality: {
+        'if': function(object) {
+          return object.get('isDurationBased');
+        },
+        onlyInteger: true,
+        greaterThanOrEqualTo: 0
+      }
+    },
+
+    customCredits: {
+      numericality: {
+        'if': function(object) {
+          return object.get('isCustomCredit');
+        },
+        greaterThanOrEqualTo: 0
+      }
+    },
+
+    customRevenue: {
+      numericality: {
+        'if': function(object) {
+          return object.get('isPriceBased');
+        },
+        greaterThanOrEqualTo: 0
+      }
     },
 
     quality: {
