@@ -26,9 +26,12 @@ Ember.Test.registerAsyncHelper('selectTime', function(app, options) {
   Ember.run(() => {
     var $target = $('.as-calendar-timetable-content');
     var point = pointForTime(options);
+    var event = $.Event('click');
 
-    $target.simulate('mousedown', point);
-    $target.simulate('mouseup', point);
+    event.pageX = point.clientX;
+    event.pageY = point.clientY;
+
+    $target.trigger(event);
   });
 
   return app.testHelpers.wait();
