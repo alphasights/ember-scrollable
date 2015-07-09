@@ -76,6 +76,10 @@ export default Form.extend({
     return this._isOfClassification('custom_credit');
   }),
 
+  requiresPdfConfirmation: Ember.computed('isCustomCredit', 'customCredits', function() {
+    return this.get('isCustomCredit') && this.get('customCredits') > 4;
+  }),
+
   interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
     var classifications = this.get('interactionClassifications');
     var interactionTypes = this.get('interactionTypes');
@@ -117,7 +121,8 @@ export default Form.extend({
         'if': function(object) {
           return object.get('isCustomCredit');
         },
-        greaterThanOrEqualTo: 0
+        greaterThanOrEqualTo: 0,
+        lessThanOrEqualTo: 4
       }
     },
 

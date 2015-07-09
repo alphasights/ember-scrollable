@@ -202,9 +202,13 @@
                 <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="url" target="_blank">completion page</a>.</span>
               {{/if}}
             {{else}}
-              {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
-                Charge Client
-              {{/as-form/submit}}
+              {{#liquid-if completionForm.requiresPdfConfirmation use="crossFade"}}
+                <span>Custom credit interactions above 4 credits require a PDF confirmation to be uploaded on the <a href={{model.pistachioUrl}} class="url" target="_blank">interaction page</a>.</span>
+              {{else}}
+                {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
+                  Charge Client
+                {{/as-form/submit}}
+              {{/liquid-if}}
             {{/liquid-if}}
           {{/as-action-group}}
         {{/as-form}}
