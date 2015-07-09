@@ -1,10 +1,8 @@
 import resolver from './helpers/resolver';
-import registerSelectHelper from './helpers/register-select-helper';
+import select from './helpers/select';
 import startApp from './helpers/start-app';
 import Fixtures from './helpers/fixtures';
 import Ember from 'ember';
-
-registerSelectHelper();
 
 import {
   setResolver
