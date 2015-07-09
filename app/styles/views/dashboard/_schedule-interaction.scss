@@ -30,6 +30,26 @@ $calendar-occurrence-default-color: $anchor-font-color;
         }
       }
     }
+
+    .as-calendar-header > nav {
+      &, ul {
+        height: 5rem;
+      }
+
+      ul {
+        display: table;
+        float: right;
+      }
+
+      li {
+        display: table-cell;
+        vertical-align: middle;
+
+        button {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 
   .form {
