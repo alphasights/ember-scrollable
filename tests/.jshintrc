@@ -30,6 +30,7 @@
     "EmberENV",
     "select",
     "dragAndDrop",
+    "selectTime",
     "moment",
     "Timecop",
     "lookup",

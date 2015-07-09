@@ -29,11 +29,32 @@
       </section>
 
       <section class="scheduling">
-        {{as-calendar
-          selection=occurrence
+        {{#as-calendar
+          title="Schedule call"
+          occurrences=occurrences
+          dayStartingTime="7:00"
+          dayEndingTime="21:30"
+          timeSlotDuration="00:30"
           timeZoneOptions=timeZoneOptions
-          occurrences=unavailabilityOccurrences
-          timeZone=scheduleInteractionForm.selectedTimeZone}}
+          timeZoneSearchEnabled=false
+          onAddOccurrence="calendarAddOccurrence" as |occurrence timetable calendar|}}
+          {{#if occurrence.content.isSelection}}
+            {{as-calendar/timetable/occurrence
+              class="selection"
+              model=occurrence
+              timeSlotHeight=calendar.timeSlotHeight
+              timetable=timetable
+              timeSlotDuration=calendar.modelTimeSlotDuration
+              isResizable=false
+              onUpdate="calendarUpdateOccurrence"
+              onRemove="calendarRemoveOccurrence"}}
+          {{else}}
+            {{as-calendar/occurrence
+              model=occurrence
+              timeSlotHeight=calendar.timeSlotHeight
+              timeSlotDuration=calendar.modelTimeSlotDuration}}
+          {{/if}}
+        {{/as-calendar}}
 
         <section class="form">
           {{#as-form model=scheduleInteractionForm action="scheduleInteraction" as |form|}}
