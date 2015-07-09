@@ -115,8 +115,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   _validateOccurrenceProperties: function(properties) {
     return this.get('visibleUnavailabilities').every(function(occurrence) {
-      return !(properties.endsAt > occurrence.get('startsAt') &&
-             properties.startsAt < occurrence.get('endsAt'));
+      return (properties.endsAt <= occurrence.get('startsAt') ||
+             properties.startsAt >= occurrence.get('endsAt'));
     });
   },
 
@@ -138,7 +138,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     calendarAddOccurrence: function(occurrence) {
-      if (this._validateOccurrenceProperties(occurrence.getProperties('startsAt'))) {
+      if (this._validateOccurrenceProperties(occurrence.getProperties('startsAt', 'endsAt'))) {
         this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
       }
     },
