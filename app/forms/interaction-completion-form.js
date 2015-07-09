@@ -48,12 +48,15 @@ export default Form.extend({
   },
 
   setPersistedValues: function() {
-    var model = this.get('model');
+    let model = this.get('model');
+    let customCredits = this.get('isCustomCredit') ? this.get('customCredits') : null;
+    let customRevenue = this.get('isPriceBased') ? this.get('customRevenue') : null;
+    let duration = this.get('isDurationBased') ? this.get('duration') : null;
 
     model.setProperties({
-      customCredits: this.get('customCredits'),
-      customRevenue: this.get('customRevenue'),
-      duration: this.get('duration'),
+      customCredits: customCredits,
+      customRevenue: customRevenue,
+      duration: duration,
       interactionType: this.get('interactionType'),
       quality: this.get('quality'),
       speakQuality: this.get('speakQuality'),
