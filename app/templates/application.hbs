@@ -1,12 +1,18 @@
-{{as-sidebar
+{{#as-sidebar
   applicationName="Phoenix"
   currentUser=currentUser.model
   navigationItems=navigationItems
   actionItems=actionItems
   actionsTarget=this
   isCollapsed=preferences.sidebarCollapsed
-  toggleCollapse="savePreferences"
-  advisorSearchUrl=advisorSearchUrl}}
+  toggleCollapse="savePreferences"}}
+  <li class="advisor-search">
+    <a href={{advisorSearchUrl}} target="_blank">
+      <i></i>
+      <span>Advisor Search</span>
+    </a>
+  </li>
+{{/as-sidebar}}
 
 <main>
   {{as-quick-jump}}
