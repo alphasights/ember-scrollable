@@ -37,6 +37,7 @@
           timeSlotDuration="00:30"
           timeZoneOptions=timeZoneOptions
           timeZoneSearchEnabled=false
+          timeZone=scheduleInteractionForm.timeZone
           onAddOccurrence="calendarAddOccurrence" as |occurrence timetable calendar|}}
           {{#if occurrence.content.isSelection}}
             {{as-calendar/timetable/occurrence
@@ -59,13 +60,19 @@
         <section class="form">
           {{#as-form model=scheduleInteractionForm action="scheduleInteraction" as |form|}}
             {{#as-form/fieldset}}
-              {{as-form/input
+              {{#as-form/input
                 form=form
                 name="formattedScheduledCallTime"
-                placeholder="Please select a call time from the calendar."
                 errorProperty="scheduledCallTime"
-                label="Call Time"
-                disabled=true}}
+                label=scheduleInteractionForm.scheduledCallTimeLabel as |value|}}
+                {{input
+                  type="text"
+                  name="formattedScheduledCallTime"
+                  placeholder="Please select a call time from the calendar."
+                  value=value
+                  action="setScheduledCallTime"
+                  on="focus-out"}}
+              {{/as-form/input}}
 
               {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=scheduleInteractionForm.phoneCountryCodes}}
               {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}

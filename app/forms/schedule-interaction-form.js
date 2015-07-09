@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import jstz from 'jstz';
 import Form from 'phoenix/forms/form';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
@@ -8,8 +9,9 @@ export default Form.extend({
   interactionTypes: null,
   interactionClassifications: null,
   speakDialInCountries: null,
-  selectedTimeZone: null,
+  timeZone: jstz.determine().name(),
   phoneCountryCodes: phoneCountryCodes,
+  dateFormat: 'D MMM, h:mm A',
 
   validations: {
     interactionType: {
@@ -84,14 +86,34 @@ export default Form.extend({
     return _.flatten(types);
   }),
 
-  formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'selectedTimeZone', function() {
-    var scheduledCallTime = this.get('scheduledCallTime');
+  formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'timeZone', {
+    get: function() {
+      var scheduledCallTime = this.get('scheduledCallTime');
 
-    if (scheduledCallTime != null) {
-      return localMoment(scheduledCallTime, this.get('selectedTimeZone'), 'D MMM, h:mm A');
-    } else {
-      return null;
+      if (scheduledCallTime != null) {
+        return localMoment(scheduledCallTime, this.get('timeZone'), this.get('dateFormat'));
+      } else {
+        return null;
+      }
+    },
+
+    set: function(_, value) {
+      return value;
     }
+  }),
+
+  setScheduledCallTime: function(string) {
+    var result = moment.tz(string, this.get('dateFormat'), this.get('timeZone'));
+
+    if (result.isValid()) {
+      this.set('scheduledCallTime', result);
+    } else {
+      this.notifyPropertyChange('formattedScheduledCallTime');
+    }
+  },
+
+  scheduledCallTimeLabel: Ember.computed('timeZone', function() {
+    return `Call Time (${moment.tz(this.get('timeZone')).format('z')})`;
   }),
 
   speakDialIns: Ember.computed('speakDialInCountries', function() {

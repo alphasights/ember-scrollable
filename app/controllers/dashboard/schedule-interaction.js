@@ -146,6 +146,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       });
     },
 
+    setScheduledCallTime: function(value) {
+      this.get('scheduleInteractionForm').setScheduledCallTime(value);
+    },
+
     scheduleInteraction: function() {
       this.get('scheduleInteractionForm').save().then(() => {
         var advisorName = this.get('model.advisor.name');

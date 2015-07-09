@@ -6,5 +6,9 @@
   errorMessage=errorMessage
   label=label
   disabled=disabled as |value|}}
-  {{input type="text" name=name placeholder=placeholder value=value disabled=disabled}}
+  {{#if hasBlock}}
+    {{yield value this}}
+  {{else}}
+    {{input type="text" name=name placeholder=placeholder value=value disabled=disabled}}
+  {{/if}}
 {{/as-form/field}}
