@@ -40,6 +40,12 @@ export default Ember.Component.extend({
 
     onProjectClick: function(project) {
       this.sendAction('onProjectClick', project);
+    },
+
+    changeSelectedTeamMember: function() {
+      let teamMemberId = event.target.value;
+      let selectedTeamMember = this.get('teamMembers').findBy('id', teamMemberId) || null;
+      this.set('selectedTeamMember', selectedTeamMember);
     }
   }
 });
