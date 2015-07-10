@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
-import '../../helpers/select-time';
+import '../../helpers/calendar-select-time';
 import testHelper from '../../test-helper';
 
 const interaction = {
@@ -186,7 +186,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Select time slot from calendar
   // Monday 7 AM
-  selectTime({ day: 0, timeSlot: 0 });
+  calendarSelectTime({ day: 0, timeSlot: 0 });
 
   // Set the interaction type
   select('select[name=interactionType] ', 'One-on-one');
