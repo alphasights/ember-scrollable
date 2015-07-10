@@ -60,10 +60,15 @@ export default Ember.Component.extend(InboundActions, {
       this.toggleProperty('isEditingHeader');
     },
 
-    changeSelectedTemplate: function() {
-      if (Ember.isPresent(this.get('selectedTemplate'))) {
-        this.set('model.body', this.get('selectedTemplate.body'));
-        this.set('model.subject', this.get('selectedTemplate.subject'));
+    changeSelectedTemplate: function(selectedTemplateId) {
+      let selectedTemplate = this.get('templates').findBy('id', selectedTemplateId) || null;
+
+      if (Ember.isPresent(selectedTemplate)) {
+        this.set('model.body', selectedTemplate.get('body'));
+        this.set('model.subject', selectedTemplate.get('subject'));
+      } else {
+        this.set('model.body', null);
+        this.set('model.subject', null);
       }
     }
   }
