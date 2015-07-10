@@ -8,9 +8,18 @@ const interaction = {
   id: 1
 };
 
+var oldDetermine;
+
 QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
+
+    oldDetermine = window.jstz.determine;
+
+    window.jstz.determine = function() {
+      return { name: function() { return 'UTC'; } };
+    };
+
 
     defineFixture('GET', '/interactions', { params: { primary_contact_id: '1' }, response: {
       "advisors": [
@@ -127,6 +136,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
 
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
+
+    window.jstz.determine = oldDetermine;
   }
 });
 
@@ -141,12 +152,6 @@ test("Display other Alpha Calls in calendar", function(assert) {
 });
 
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
-  var oldDetermine = window.jstz.determine;
-
-  window.jstz.determine = function() {
-    return { name: function() { return 'UTC'; } };
-  };
-
   var callType = 'call';
   var accessCountry = 'AU';
   var advisorPhoneNumber = '5553214567';
@@ -208,8 +213,6 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
-
-    window.jstz.determine = oldDetermine;
   });
 });
 
