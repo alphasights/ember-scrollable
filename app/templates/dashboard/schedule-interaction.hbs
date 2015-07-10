@@ -78,7 +78,13 @@
                 optionGroupPath="classification"
               }}
 
-              {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=scheduleInteractionForm.speakDialIns}}
+              {{as-form/select
+                form=form
+                name="clientAccessNumberCountry"
+                label="Speak Dial-In Country"
+                content=scheduleInteractionForm.speakDialIns
+                prompt="Do Not Use Speak"}}
+                
               {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
             {{/as-form/fieldset}}
 

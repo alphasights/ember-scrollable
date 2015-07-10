@@ -8,9 +8,7 @@
   class="form-select" as |value|}}
   <select name={{name}} onchange={{action (mut value) value="target.value"}}>
     {{#if (not (eq prompt null))}}
-      <option value={{null}} selected={{eq item.id null}}>
-        {{prompt}}
-      </option>
+      <option value="">{{prompt}}</option>
     {{/if}}
 
     {{#if optionGroupPath}}
