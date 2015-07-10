@@ -20,7 +20,6 @@ QUnit.module("Interactions To Schedule Side Panel", {
       return { name: function() { return 'UTC'; } };
     };
 
-
     defineFixture('GET', '/interactions', { params: { primary_contact_id: '1' }, response: {
       "advisors": [
         {
