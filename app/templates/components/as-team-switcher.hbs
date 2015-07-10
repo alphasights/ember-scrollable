@@ -1,9 +1,11 @@
 <div class="select">
-  {{#x-select value=selectedTeam}}
-    {{#x-option value=null}}{{prompt}}{{/x-option}}
+  <select name={{name}} onchange={{action "changeSelectedTeam"}}>
+    <option value="">{{prompt}}</option>
 
     {{#each teams as |team|}}
-      {{#x-option value=team}}{{team.name}}{{/x-option}}
+      <option value={{team.id}} selected={{eq teamId team.id}}>
+        {{team.name}}
+      </option>
     {{/each}}
-  {{/x-select}}
+  </select>
 </div>
