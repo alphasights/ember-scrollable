@@ -7,9 +7,8 @@ export default Ember.Component.extend({
   teamId: null,
 
   actions: {
-    changeSelectedTeam: function() {
-      let selectedTeamId = event.target.value || null;
-      this.sendAction('selectTeam', selectedTeamId);
+    changeSelectedTeam: function(selectedTeamId) {
+      this.sendAction('selectTeam', selectedTeamId || null);
     }
   }
 });

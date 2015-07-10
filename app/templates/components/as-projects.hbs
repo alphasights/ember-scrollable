@@ -25,7 +25,7 @@
     </div>
 
     <div class="team-member">
-      <select onchange={{action "changeSelectedTeamMember"}}>
+      <select onchange={{action "changeSelectedTeamMember" value="target.value"}}>
         <option value="">All</option>
 
         {{#each teamMembers as |teamMember|}}

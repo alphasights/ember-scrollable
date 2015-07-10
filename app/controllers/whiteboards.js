@@ -30,8 +30,7 @@ export default Ember.Controller.extend({
       /* jshint newcap: true */
     },
 
-    changeSelectedWhiteboard: function() {
-      let selectedWhiteboardId = event.target.value;
+    changeSelectedWhiteboard: function(selectedWhiteboardId) {
       this.set('selectedWhiteboard', this.get('whiteboards').findBy('id', selectedWhiteboardId));
       this.transitionToRoute('whiteboards.whiteboard', selectedWhiteboardId);
     },
