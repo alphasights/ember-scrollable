@@ -1,5 +1,5 @@
 <div class="select">
-  <select name={{name}} onchange={{action "changeSelectedTeam" value="target.value"}}>
+  <select onchange={{action "changeSelectedTeam" value="target.value"}}>
     <option value="">{{prompt}}</option>
 
     {{#each teams as |team|}}
