@@ -36,7 +36,7 @@
           dayEndingTime="21:30"
           timeSlotDuration="00:30"
           timeZoneOptions=timeZoneOptions
-          timeZoneSearchEnabled=false
+          showTimeZoneSearch=false
           timeZone=scheduleInteractionForm.timeZone
           onAddOccurrence="calendarAddOccurrence" as |occurrence timetable calendar|}}
           {{#if occurrence.content.isSelection}}
@@ -45,7 +45,7 @@
               model=occurrence
               timeSlotHeight=calendar.timeSlotHeight
               timetable=timetable
-              timeSlotDuration=calendar.modelTimeSlotDuration
+              timeSlotDuration=calendar.timeSlotDuration
               isResizable=false
               onUpdate="calendarUpdateOccurrence"
               onRemove="calendarRemoveOccurrence"}}
@@ -53,7 +53,7 @@
             {{as-calendar/occurrence
               model=occurrence
               timeSlotHeight=calendar.timeSlotHeight
-              timeSlotDuration=calendar.modelTimeSlotDuration}}
+              timeSlotDuration=calendar.timeSlotDuration}}
           {{/if}}
         {{/as-calendar}}
 
