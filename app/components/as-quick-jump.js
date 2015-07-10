@@ -170,6 +170,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
   actions: {
     clear: function() {
       this.set('query', null);
+      this.set('isActive', false);
     },
 
     activate: function() {
