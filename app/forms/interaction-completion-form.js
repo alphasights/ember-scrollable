@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
-import EmberValidations, { validator } from 'ember-validations';
+import EmberValidations from 'ember-validations';
 import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
 const qualityOptionsMapping = {
