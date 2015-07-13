@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
+import EmberValidations, { validator } from 'ember-validations';
 
 const qualityOptionsMapping = {
   'good': 'Good',
@@ -105,6 +106,11 @@ export default Form.extend({
     return classifications[classification].indexOf(this.get('interactionType')) > -1;
   },
 
+  _customCreditErrorMessage: function() {
+    let pistachioLink = `<a href=${this.get('model.interaction.pistachioUrl')} class="url" target="_blank">interaction page</a>`;
+    return Ember.String.htmlSafe(`<span>Custom credit interactions above 4 credits require a PDF confirmation to be uploaded on the ${pistachioLink}.</span>`);
+  },
+
   validations: {
     duration: {
       numericality: {
@@ -117,13 +123,15 @@ export default Form.extend({
     },
 
     customCredits: {
-      numericality: {
-        'if': function(object) {
-          return object.get('isCustomCredit');
-        },
-        greaterThanOrEqualTo: 0,
-        lessThanOrEqualTo: 4
-      }
+      inline: EmberValidations.validator(function() {
+        if (this.model.get('isCustomCredit')) {
+          if (this.model.get('customCredits') <= 0 ) {
+            return "Custom credits must be greater than 0.";
+          } else if (this.model.get('customCredits') > 4 ) {
+            return this.model._customCreditErrorMessage();
+          }
+        }
+      })
     },
 
     customRevenue: {
