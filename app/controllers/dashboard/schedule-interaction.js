@@ -113,6 +113,13 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return option;
   },
 
+  _validateOccurrenceProperties: function(properties) {
+    return this.get('visibleUnavailabilities').every(function(occurrence) {
+      return (properties.endsAt <= occurrence.get('startsAt') ||
+             properties.startsAt >= occurrence.get('endsAt'));
+    });
+  },
+
   actions: {
     hideSidePanel: function() {
       this.transitionToRoute('dashboard');
@@ -131,11 +138,15 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     calendarAddOccurrence: function(occurrence) {
-      this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
+      if (this._validateOccurrenceProperties(occurrence.getProperties('startsAt', 'endsAt'))) {
+        this.set('scheduleInteractionForm.scheduledCallTime', occurrence.get('startsAt'));
+      }
     },
 
     calendarUpdateOccurrence: function(occurrence, properties) {
-      occurrence.setProperties(properties);
+      if (this._validateOccurrenceProperties(properties)) {
+        occurrence.setProperties(properties);
+      }
     },
 
     calendarRemoveOccurrence: function() {
@@ -144,6 +155,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       Ember.run.next(() => {
         this.set('scheduleInteractionForm.scheduledCallTime', null);
       });
+    },
+
+    setScheduledCallTime: function(value) {
+      this.get('scheduleInteractionForm').setScheduledCallTime(value);
     },
 
     scheduleInteraction: function() {

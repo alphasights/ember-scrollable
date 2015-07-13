@@ -35,7 +35,8 @@
     "Timecop",
     "lookup",
     "Messenger",
-    "DeepDiff"
+    "DeepDiff",
+    "calendarSelectTime"
   ],
   "node": false,
   "browser": false,
