@@ -25,13 +25,15 @@
     </div>
 
     <div class="team-member">
-      {{#x-select value=selectedTeamMember}}
-        <option>All</option>
+      <select onchange={{action "changeSelectedTeamMember" value="target.value"}}>
+        <option value="">All</option>
 
         {{#each teamMembers as |teamMember|}}
-          {{#x-option value=teamMember}}{{teamMember.name}}{{/x-option}}
+          <option value={{teamMember.id}} selected={{eq teamMember selectedTeamMember}}>
+            {{teamMember.name}}
+          </option>
         {{/each}}
-      {{/x-select}}
+      </select>
     </div>
   {{/if}}
 </header>

@@ -1,6 +1,19 @@
 # Phoenix Changelog
 
-### Release 0.0.7
+### Release 0.0.8 (July 13, 2015)
+
+- [#432](https://github.com/alphasights/phoenix/pull/432) Allow to manually set the scheduled call time
+- [#431](https://github.com/alphasights/phoenix/pull/431) Add send confirmation email button
+- [#427](https://github.com/alphasights/phoenix/pull/427) Add projects search and advisors search links
+- [#428](https://github.com/alphasights/phoenix/pull/428) Integrate new ember-calendar
+  - Improve calendar performance
+  - Highlight the current day
+  - Enable scheduled call time slot drag & drop
+- [#429](https://github.com/alphasights/phoenix/pull/429) Move email composer subject to the settings
+- [#422](https://github.com/alphasights/phoenix/pull/422) Show interactions with incomplete payment steps in scheduled interactions widget
+- [#416](https://github.com/alphasights/phoenix/pull/416) Implement quick jump results arrow navigation
+
+### Release 0.0.7 (July 6, 2015)
 
 - [#418 BUGFIX](https://github.com/alphasights/phoenix/pull/418) Fix quick jump result links not working sometimes
 - [#414](https://github.com/alphasights/phoenix/pull/414) Add section to interaction completion form for paying/not paying advisor

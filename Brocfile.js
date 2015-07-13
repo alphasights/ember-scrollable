@@ -33,6 +33,12 @@ app.import('bower_components/underscore/underscore.js');
 app.import('bower_components/messenger/build/js/messenger.js');
 app.import('bower_components/messenger/build/css/messenger.css');
 app.import('bower_components/messenger/build/css/messenger-theme-block.css');
+app.import('bower_components/bower-jstz/jstz.js');
+
+app.import('vendor/jstz-shim.js', {
+  type: 'vendor',
+  exports: { 'jstz': ['default'] }
+});
 
 if (EmberApp.env() === 'test') {
   app.import('bower_components/jquery-simulate-ext/libs/jquery.simulate.js', { type: 'test' });

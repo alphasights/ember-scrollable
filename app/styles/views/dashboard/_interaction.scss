@@ -10,7 +10,7 @@ $interaction-header-height:
   $side-panel-actions-height;
 
 .side-panel.interaction {
-  .side-panel-content header {
+  .side-panel-content > div > header {
     @extend %grid-row;
 
     padding: $column-gutter $column-gutter / 2;
@@ -230,6 +230,12 @@ $interaction-header-height:
       font-size: $h3-font-size;
       letter-spacing: 0;
       padding-left: $column-gutter / 2;
+    }
+  }
+
+  .completion {
+    .url {
+      padding: 0;
     }
   }
 

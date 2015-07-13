@@ -319,7 +319,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
   }});
 
   visit('/dashboard');
-  select('.dashboard > header .select select ', 'NYSC18 - The McKountry Klub');
+  select('.dashboard > header .select select', 'NYSC18 - The McKountry Klub');
 
   andThen(function() {
     var interactions = find('.scheduled-interactions article').toArray().map(function(interaction) {

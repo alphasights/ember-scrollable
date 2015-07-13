@@ -4,11 +4,9 @@
 @import 'settings';
 @import 'default';
 
+@import 'addons/ember-calendar/main';
+
 @import 'components/avatar';
-@import 'components/calendar';
-@import 'components/calendar/occurrence';
-@import 'components/calendar/time';
-@import 'components/calendar/time-zone-option';
 @import 'components/checklist-status';
 @import 'components/email-correspondence';
 @import 'components/email-viewer';
