@@ -10,7 +10,8 @@ export default Ember.Mixin.create({
   }),
 
   queryParams: {
-    teamId: 'team_id'
+    teamId: 'team_id',
+    whiteboardId: 'whiteboard_id'
   },
 
   actions: {
