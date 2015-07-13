@@ -324,6 +324,8 @@ test("Reschedule Interaction failure shows error message and stays on the intera
 
 const interactionCompletion = {
   duration: 20,
+  customCredits: null,
+  customRevenue: null,
   quality: 'bad',
   interactionType: 'call',
   interactionId: '1',
@@ -338,6 +340,8 @@ test("Complete Interaction and Charge Client completes the call", function(asser
     request: {
       "interaction_completion": {
         "duration": interactionCompletion.duration,
+        "custom_credits": interactionCompletion.customCredits,
+        "custom_revenue": interactionCompletion.customRevenue,
         "quality": interactionCompletion.quality,
         "interaction_type": interactionCompletion.interactionType,
         "interaction_id": interactionCompletion.interactionId,
