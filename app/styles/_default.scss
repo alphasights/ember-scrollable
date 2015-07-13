@@ -1,3 +1,5 @@
+$validation-error-color: #ff7f7d;
+
 ul,
 li,
 ul li ul,
@@ -19,4 +21,9 @@ select {
 
 #intercom-container .intercom-launcher {
   display: none !important;
+}
+
+form .with-errors .error a {
+  color: $validation-error-color;
+  text-decoration: underline;
 }
