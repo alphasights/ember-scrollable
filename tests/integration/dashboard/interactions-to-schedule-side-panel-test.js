@@ -190,22 +190,11 @@ test("Schedule interaction makes an API request and displays a notification", fu
   // Monday 7 AM
   selectTime({ day: 0, timeSlot: 0 });
 
-  // Set the interaction type
   select('select[name=interactionType]', 'One-on-one');
-
-  // Select speak dial in
   select('select[name=clientAccessNumberCountry]', 'Australia');
-  //
-  // // Select advisor phone country code
   select('select[name=advisorPhoneCountryCode]', '+81 Japan');
-
-  // Fill in advisor phone number
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
-
-  // Select speak dial in
   fillIn('input[name=additionalContactDetails]', additionalContactDetails);
-
-  // Submit form
   click("button:contains('Schedule Interaction')");
 
   andThen(function() {
