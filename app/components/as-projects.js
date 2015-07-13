@@ -43,8 +43,8 @@ export default Ember.Component.extend({
     },
 
     changeSelectedTeamMember: function(teamMemberId) {
-      let selectedTeamMember = this.get('teamMembers').findBy('id', teamMemberId) || null;
-      this.set('selectedTeamMember', selectedTeamMember);
+      let selectedTeamMember = this.get('teamMembers').findBy('id', teamMemberId);
+      this.set('selectedTeamMember', Ember.isPresent(selectedTeamMember) ? selectedTeamMember : null);
     }
   }
 });

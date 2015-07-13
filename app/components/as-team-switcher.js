@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   actions: {
     changeSelectedTeam: function(selectedTeamId) {
-      this.sendAction('selectTeam', selectedTeamId || null);
+      this.sendAction('selectTeam', Ember.isPresent(selectedTeamId) ? selectedTeamId : null);
     }
   }
 });

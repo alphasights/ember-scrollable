@@ -61,7 +61,7 @@ export default Ember.Component.extend(InboundActions, {
     },
 
     changeSelectedTemplate: function(selectedTemplateId) {
-      let selectedTemplate = this.get('templates').findBy('id', selectedTemplateId) || null;
+      let selectedTemplate = this.get('templates').findBy('id', selectedTemplateId);
 
       if (Ember.isPresent(selectedTemplate)) {
         this.set('model.body', selectedTemplate.get('body'));
