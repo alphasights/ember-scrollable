@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   model: null,
-  teams: null,
 
   id: Ember.computed.oneWay('model.id'),
   name: Ember.computed.oneWay('model.name'),

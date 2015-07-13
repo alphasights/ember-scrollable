@@ -22,7 +22,7 @@ export default Ember.Route.extend({
     });
   },
 
-  afterModel: function(models) {
+  afterModel: function() {
     this.get('currentUser').setupIntercom();
   },
 
