@@ -7,12 +7,14 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
 
   model: function(params) {
     var teamId = params.teamId;
+    var whiteboardId = params.whiteboardId;
     var projects;
     var teamMembers;
 
-    if (teamId != null) {
-      projects = this.store.find('project', { team_id: teamId, all_time: true });
-      teamMembers = this.store.find('user', { team_id: teamId });
+    if (teamId != null || whiteboardId != null) {
+      var queryParams = Ember.isPresent(teamId) ? { team_id: teamId } : { whiteboard_id: whiteboardId };
+      projects = this.store.find('project', _.extend(queryParams, { all_time: true }));
+      teamMembers = this.store.find('user', queryParams);
     } else {
       projects = this.store.find('project', { user_id: this.get('currentUser.id'), all_time: true });
     }

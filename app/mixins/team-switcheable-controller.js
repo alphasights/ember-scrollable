@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   currentUser: Ember.inject.service(),
   teamId: null,
-  teams: Ember.computed.oneWay('currentUser.teams'),
+  whiteboardId: null,
 
   isTeamView: Ember.computed('teamId', function() {
     return this.get('teamId') !== null;
@@ -16,7 +16,13 @@ export default Ember.Mixin.create({
 
   actions: {
     selectTeam: function(teamId) {
+      this.set('whiteboardId', null);
       this.set('teamId', teamId);
+    },
+
+    selectWhiteboard: function(whiteboardId) {
+      this.set('teamId', null);
+      this.set('whiteboardId', whiteboardId);
     }
   }
 });

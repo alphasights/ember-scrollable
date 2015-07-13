@@ -1,11 +1,21 @@
 <div class="select">
-  <select onchange={{action "changeSelectedTeam" value="target.value"}}>
+  <select onchange={{action "changeSelection" value="target.value"}}>
     <option value="">{{prompt}}</option>
 
-    {{#each teams as |team|}}
-      <option value={{team.id}} selected={{eq teamId team.id}}>
-        {{team.name}}
-      </option>
-    {{/each}}
+    <optgroup label="Teams">
+      {{#each teams as |team|}}
+        <option value="team-{{team.id}}" selected={{eq teamId team.id}}>
+          {{team.name}}
+        </option>
+      {{/each}}
+    </optgroup>
+
+    <optgroup label="Whiteboards">
+      {{#each whiteboards as |whiteboard|}}
+        <option value="whiteboard-{{whiteboard.id}}" selected={{eq whiteboardId whiteboard.id}}>
+          {{whiteboard.name}}
+        </option>
+      {{/each}}
+    </optgroup>
   </select>
 </div>

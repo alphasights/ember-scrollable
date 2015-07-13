@@ -1,9 +1,10 @@
 <header>
   {{as-team-switcher
-    teams=teams
-    prompt=currentUser.name
+    user=currentUser
     selectTeam="selectTeam"
-    teamId=teamId}}
+    selectWhiteboard="selectWhiteboard"
+    teamId=teamId
+    whiteboardId=whiteboardId}}
 
     <a href={{newProjectUrl}} target="_blank">New Project</a>
     <a class="projects-search" href={{projectSearchUrl}} target="_blank">Project Search</a>
