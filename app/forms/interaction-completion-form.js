@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
 import EmberValidations, { validator } from 'ember-validations';
+import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
 const qualityOptionsMapping = {
   'good': 'Good',
@@ -24,7 +25,7 @@ const speakQualityOptionsMapping = {
 
 const speakQualityOptions = speakQualityOptionsMapping.keys;
 
-export default Form.extend({
+export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error completing the interaction.',
   interactionTypes: null,
   interactionClassifications: null,
@@ -79,25 +80,6 @@ export default Form.extend({
 
   requiresPdfConfirmation: Ember.computed('isCustomCredit', 'customCredits', function() {
     return this.get('isCustomCredit') && this.get('customCredits') > 4;
-  }),
-
-  interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
-    var classifications = this.get('interactionClassifications');
-    var interactionTypes = this.get('interactionTypes');
-
-    var types = _.map(classifications, function(typeIds, classification) {
-      return _.map(typeIds, function(typeId) {
-        return {
-          id: typeId,
-          name: interactionTypes[typeId],
-          classification: _.map(classification.split('_'), function(word){
-            return word.capitalize();
-          }).join(' ')
-        };
-      });
-    });
-
-    return _.flatten(types);
   }),
 
   _isOfClassification: function(classification) {
