@@ -128,7 +128,8 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "dial_ins":{
         "AU":"Australia",
         "AT":"Austria",
-        "BE":"Belgium"
+        "BE":"Belgium",
+        "HK": "Hong Kong"
       }
     }});
   },
@@ -153,6 +154,7 @@ test("Display other Alpha Calls in calendar", function(assert) {
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
   var callType = 'call';
   var accessCountry = 'AU';
+  var advisorPhoneCountryCode = '81';
   var advisorPhoneNumber = '5553214567';
   var additionalContactDetails = 'Super keen';
 
@@ -171,7 +173,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "speak_phone_number": null,
       "speak_code": null,
       "advisor_phone_number": advisorPhoneNumber,
-      "advisor_phone_country_code": '1',
+      "advisor_phone_country_code": advisorPhoneCountryCode,
       "used": false,
       "payment_required": true,
       "has_advisor_invoice": false
@@ -192,19 +194,11 @@ test("Schedule interaction makes an API request and displays a notification", fu
   // Monday 7 AM
   calendarSelectTime({ day: 0, timeSlot: 0 });
 
-  // Set the interaction type
-  select('select[name=interactionType] ', 'One-on-one');
-
-  // Select speak dial in
-  select('select[name=clientAccessNumberCountry] ', 'Australia');
-
-  // Fill in advisor phone number
+  select('select[name=interactionType]', 'One-on-one');
+  select('select[name=clientAccessNumberCountry]', 'Australia');
+  select('select[name=advisorPhoneCountryCode]', '+81 Japan');
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
-
-  // Select speak dial in
   fillIn('input[name=additionalContactDetails]', additionalContactDetails);
-
-  // Submit form
   click("button:contains('Schedule Interaction')");
 
   andThen(function() {

@@ -41,5 +41,9 @@ export default Ember.Route.extend({
     controller.set('projects', models.projects);
     controller.set('members', models.members);
     this.controllerFor('whiteboards').set('selectedWhiteboard', models.whiteboard);
+  },
+
+  beforeModel: function() {
+    this.controllerFor('whiteboards').set('showWhiteboardSelect', false);
   }
 });

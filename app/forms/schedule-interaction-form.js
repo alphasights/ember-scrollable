@@ -123,7 +123,6 @@ export default Form.extend({
       return { id: countryCode, name: country };
     });
 
-    dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
   }),
 

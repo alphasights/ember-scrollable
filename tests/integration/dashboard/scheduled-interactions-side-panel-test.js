@@ -374,8 +374,8 @@ test("Complete Interaction and Charge Client completes the call", function(asser
   click('.scheduled-interactions article:first');
   click('button:contains("Complete Interaction")');
   fillIn('input[name=duration]', '20');
-  select('select[name=quality] ', 'Bad');
-  select('select[name=speakQuality] ', 'Other issue');
+  select('select[name=quality]', 'Bad');
+  select('select[name=speakQuality]', 'Other issue');
   fillIn('input[name=speakExplanation]', interactionCompletion.speakExplanation);
   click('button:contains("Charge Client")');
 
