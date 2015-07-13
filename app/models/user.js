@@ -11,5 +11,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   teamId: DS.attr('string'),
   intercomUserHash: DS.attr('string'),
-  timeZone: DS.attr('string')
+  timeZone: DS.attr('string'),
+  teams: DS.hasMany('teams'),
+  whiteboards: DS.hasMany('whiteboards')
 });
