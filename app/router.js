@@ -12,6 +12,7 @@ Router.map(function() {
     this.resource('dashboard.unused-advisor', { path: '/unused_advisors/:unused_advisor_id' });
   });
 
+  this.resource('labs');
   this.resource('performance');
   this.resource('projects');
 
