@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
+import EmberValidations from 'ember-validations';
+import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
 const qualityOptionsMapping = {
   'good': 'Good',
@@ -23,8 +25,10 @@ const speakQualityOptionsMapping = {
 
 const speakQualityOptions = speakQualityOptionsMapping.keys;
 
-export default Form.extend({
+export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error completing the interaction.',
+  interactionTypes: null,
+  interactionClassifications: null,
   speakExplanationNeeded: Ember.computed.equal('speakQuality', 'other'),
   editingDisabled: false,
 
@@ -32,32 +36,93 @@ export default Form.extend({
     if (this.get('model.id') != null) {
       this.set('editingDisabled', true);
     }
-    this.set('duration', this.get('model.duration'));
     if (Ember.isPresent(this.get('model.quality'))) {
       this.set('quality', this.get('model.quality'));
     } else {
       this.set('quality', 'good');
     }
+    this.set('duration', this.get('model.duration'));
+    this.set('customCredits', this.get('model.customCredits'));
+    this.set('customRevenue', this.get('model.customRevenue'));
     this.set('interactionType', this.get('model.interaction.interactionType'));
     this.set('speakQuality', this.get('model.speakQuality'));
     this.set('speakExplanation', this.get('model.speakExplanation'));
   },
 
   setPersistedValues: function() {
-    var model = this.get('model');
+    let model = this.get('model');
+    let customCredits = this.get('isCustomCredit') ? this.get('customCredits') : null;
+    let customRevenue = this.get('isPriceBased') ? this.get('customRevenue') : null;
+    let duration = this.get('isDurationBased') ? this.get('duration') : null;
 
     model.setProperties({
-      duration: this.get('duration'),
-      quality: this.get('quality'),
+      customCredits: customCredits,
+      customRevenue: customRevenue,
+      duration: duration,
       interactionType: this.get('interactionType'),
+      quality: this.get('quality'),
       speakQuality: this.get('speakQuality'),
       speakExplanation: this.get('speakExplanation')
     });
   },
 
+  isDurationBased: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('duration_based');
+  }),
+
+  isPriceBased: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('non_credit');
+  }),
+
+  isCustomCredit: Ember.computed('interactionType', 'interactionClassifications', function() {
+    return this._isOfClassification('custom_credit');
+  }),
+
+  requiresPdfConfirmation: Ember.computed('isCustomCredit', 'customCredits', function() {
+    return this.get('isCustomCredit') && this.get('customCredits') > 4;
+  }),
+
+  _isOfClassification: function(classification) {
+    let classifications = this.get('interactionClassifications');
+
+    return classifications[classification].indexOf(this.get('interactionType')) > -1;
+  },
+
+  _customCreditErrorMessage: function() {
+    let pistachioLink = `<a href=${this.get('model.interaction.pistachioUrl')} class="url" target="_blank">interaction page</a>`;
+    return Ember.String.htmlSafe(`<span>Custom credit interactions above 4 credits require a PDF confirmation to be uploaded on the ${pistachioLink}.</span>`);
+  },
+
   validations: {
     duration: {
-      numericality: { onlyInteger: true, greaterThanOrEqualTo: 0 }
+      numericality: {
+        'if': function(object) {
+          return object.get('isDurationBased');
+        },
+        onlyInteger: true,
+        greaterThanOrEqualTo: 0
+      }
+    },
+
+    customCredits: {
+      inline: EmberValidations.validator(function() {
+        if (this.model.get('isCustomCredit')) {
+          if (this.model.get('customCredits') <= 0 ) {
+            return "Custom credits must be greater than 0.";
+          } else if (this.model.get('customCredits') > 4 ) {
+            return this.model._customCreditErrorMessage();
+          }
+        }
+      })
+    },
+
+    customRevenue: {
+      numericality: {
+        'if': function(object) {
+          return object.get('isPriceBased');
+        },
+        greaterThanOrEqualTo: 0
+      }
     },
 
     quality: {

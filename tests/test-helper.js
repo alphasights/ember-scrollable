@@ -61,17 +61,42 @@ export default {
     this.app.fixtures.define('GET', '/interaction_types', { response: {
       "interaction_types": {
         "call": "One-on-one Call",
-        "hosted_call": 'Hosted Call',
-        "summarised_call": 'Interaction Summary'
+        "half_hour_call": "Half-Hour Call",
+        "follow_up": "Reduced credit Follow up Call",
+        "multi_party_call": "Multiparty Call",
+        "hosted_call": "Hosted Call",
+        "interpreted_call": "Translated Call",
+        "meeting": "One-on-one Meeting",
+        "multi_party_event": "Multiparty Meeting",
+        "free_follow_up": "Free Follow up Call",
+        "free_call": "Free Call",
+        "workshop": "Workshop",
+        "short_term_advisory": "Advisory Work",
+        "advisor_embargo": "Advisor Embargo",
+        "direct_engagement": "Direct Engagement - Non-exclusive",
+        "committed_engagement": "Direct Engagement - Exclusive",
+        "longer_term_relationship": "Longer Term Contract",
+        "industry_survey": "Industry Survey",
+        "summarised_call": "Interaction Summary",
+        "industry_expert_report": "Industry Expert Report",
+        "custom_half_hour_call": "Custom Half-Hour Call",
+        "senior_executive_introduction": "Senior Executive Introduction",
+        "advisor_day": "Advisor Day(s)",
+        "advisory_event": "Advisory Event",
+        "operating_partner_event": "Operating Partner Event",
+        "employment_event": "Employment Event",
+        "transaction_event": "Transaction Event",
+        "long_term": "Advisory Work",
+        "report": "Report",
+        "full_time": "Full-time Placement"
       },
       "classifications": {
-        "hosted": [
-          "hosted_call",
-          "summarised_call"
-        ],
-        "duration_based": [
-          "call"
-        ]
+        "hosted_interaction": ["hosted_call", "summarised_call"],
+        "duration_based": ["call", "half_hour_call", "follow_up", "meeting", "hosted_call", "interpreted_call", "free_follow_up", "free_call"],
+        "custom_credit": ["advisor_day", "custom_half_hour_call", "industry_expert_report", "industry_survey", "multi_party_call", "multi_party_event", "senior_executive_introduction", "short_term_advisory", "summarised_call", "workshop"],
+        "fixed_credit": ["advisor_embargo", "committed_engagement", "direct_engagement", "longer_term_relationship"],
+        "non_credit": ["advisory_event", "employment_event", "full_time", "long_term", "operating_partner_event", "report", "transaction_event"],
+        "scheduled_call_time_optional": ["advisor_embargo", "advisory_event", "committed_engagement", "direct_engagement", "employment_event", "full_time", "industry_expert_report", "industry_survey", "long_term", "longer_term_relationship", "operating_partner_event", "report", "senior_executive_introduction", "short_term_advisory", "transaction_event"]
       }
     }});
 
