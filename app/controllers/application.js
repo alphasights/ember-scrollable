@@ -22,6 +22,8 @@ export default Ember.Controller.extend({
     label: 'Logout'
   }],
 
+  advisorSearchUrl: `${EmberENV.pistachioUrl}/advisors`,
+
   actions: {
     savePreferences: function() {
       this.get('preferences.model').save();

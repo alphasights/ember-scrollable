@@ -1,15 +1,24 @@
 import Ember from 'ember';
 import { test } from 'ember-qunit';
 import '../../helpers/define-fixture';
+import '../../helpers/calendar-select-time';
 import testHelper from '../../test-helper';
 
 const interaction = {
   id: 1
 };
 
+var oldDetermine;
+
 QUnit.module("Interactions To Schedule Side Panel", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
+
+    oldDetermine = window.jstz.determine;
+
+    window.jstz.determine = function() {
+      return { name: function() { return 'UTC'; } };
+    };
 
     defineFixture('GET', '/interactions', { params: { primary_contact_id: '1' }, response: {
       "advisors": [
@@ -88,10 +97,10 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "unavailabilities": [
         {
           "id": 123,
-          "starts_at": moment().utc().startOf('week').add(9, 'hours').toISOString(),
-          "ends_at": moment().utc().startOf('week').add(10, 'hours').toISOString(),
+          "starts_at": moment().utc().startOf('isoWeek').add(9, 'hours').toISOString(),
+          "ends_at": moment().utc().startOf('isoWeek').add(10, 'hours').toISOString(),
           "day": null,
-          "interaction_id": interaction.id,
+          "interaction_id": 2,
           "type": 'alpha_call',
           "title": 'AlphaCall'
         }
@@ -119,13 +128,16 @@ QUnit.module("Interactions To Schedule Side Panel", {
       "dial_ins":{
         "AU":"Australia",
         "AT":"Austria",
-        "BE":"Belgium"
+        "BE":"Belgium",
+        "HK": "Hong Kong"
       }
     }});
   },
 
   afterEach: function() {
     testHelper.afterEach.apply(this, arguments);
+
+    window.jstz.determine = oldDetermine;
   }
 });
 
@@ -134,8 +146,7 @@ test("Display other Alpha Calls in calendar", function(assert) {
   click('.interactions-to-schedule article:first');
 
   andThen(function() {
-    var nineAmCallSlot = find('.times:first li:nth-child(5) li:first article');
-
+    var nineAmCallSlot = find('.as-calendar-occurrence:first');
     assert.equal(nineAmCallSlot.text().trim(), 'AlphaCall');
   });
 });
@@ -143,6 +154,7 @@ test("Display other Alpha Calls in calendar", function(assert) {
 test("Schedule interaction makes an API request and displays a notification", function(assert) {
   var callType = 'call';
   var accessCountry = 'AU';
+  var advisorPhoneCountryCode = '81';
   var advisorPhoneNumber = '5553214567';
   var additionalContactDetails = 'Super keen';
 
@@ -156,12 +168,12 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().utc().startOf('week').add(1, 'day').add(7, 'hours').toISOString(),
+      "scheduled_call_time": moment().utc().startOf('isoWeek').add(7, 'hours').toISOString(),
       "speak": true,
       "speak_phone_number": null,
       "speak_code": null,
       "advisor_phone_number": advisorPhoneNumber,
-      "advisor_phone_country_code": '1',
+      "advisor_phone_country_code": advisorPhoneCountryCode,
       "used": false,
       "payment_required": true,
       "has_advisor_invoice": false
@@ -180,21 +192,13 @@ test("Schedule interaction makes an API request and displays a notification", fu
 
   // Select time slot from calendar
   // Monday 7 AM
-  click('ul.days > li:nth-child(2) .times li:nth-child(1) article');
+  calendarSelectTime({ day: 0, timeSlot: 0 });
 
-  // Set the interaction type
-  select('select[name=interactionType] ', 'One-on-one');
-
-  // Select speak dial in
-  select('select[name=clientAccessNumberCountry] ', 'Australia');
-
-  // Fill in advisor phone number
+  select('select[name=interactionType]', 'One-on-one');
+  select('select[name=clientAccessNumberCountry]', 'Australia');
+  select('select[name=advisorPhoneCountryCode]', '+81 Japan');
   fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
-
-  // Select speak dial in
   fillIn('input[name=additionalContactDetails]', additionalContactDetails);
-
-  // Submit form
   click("button:contains('Schedule Interaction')");
 
   andThen(function() {

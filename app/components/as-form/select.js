@@ -3,6 +3,7 @@ import groupByForSelect from 'phoenix/helpers/group-by-for-select';
 
 export default Ember.Component.extend({
   errorProperty: Ember.computed.oneWay('name'),
+  prompt: null,
 
   groupedContent: Ember.computed('content.[]', 'optionGroupPath', function() {
     var content = this.get('content') || [];

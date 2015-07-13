@@ -29,22 +29,50 @@
       </section>
 
       <section class="scheduling">
-        {{as-calendar
-          selection=occurrence
+        {{#as-calendar
+          title="Schedule call"
+          occurrences=occurrences
+          dayStartingTime="7:00"
+          dayEndingTime="21:30"
+          timeSlotDuration="00:30"
           timeZoneOptions=timeZoneOptions
-          occurrences=unavailabilityOccurrences
-          timeZone=scheduleInteractionForm.selectedTimeZone}}
+          showTimeZoneSearch=false
+          timeZone=scheduleInteractionForm.timeZone
+          onAddOccurrence="calendarAddOccurrence" as |occurrence timetable calendar|}}
+          {{#if occurrence.content.isSelection}}
+            {{as-calendar/timetable/occurrence
+              class="selection"
+              model=occurrence
+              timeSlotHeight=calendar.timeSlotHeight
+              timetable=timetable
+              timeSlotDuration=calendar.timeSlotDuration
+              isResizable=false
+              onUpdate="calendarUpdateOccurrence"
+              onRemove="calendarRemoveOccurrence"}}
+          {{else}}
+            {{as-calendar/occurrence
+              model=occurrence
+              timeSlotHeight=calendar.timeSlotHeight
+              timeSlotDuration=calendar.timeSlotDuration}}
+          {{/if}}
+        {{/as-calendar}}
 
         <section class="form">
           {{#as-form model=scheduleInteractionForm action="scheduleInteraction" as |form|}}
             {{#as-form/fieldset}}
-              {{as-form/input
+              {{#as-form/input
                 form=form
                 name="formattedScheduledCallTime"
-                placeholder="Please select a call time from the calendar."
                 errorProperty="scheduledCallTime"
-                label="Call Time"
-                disabled=true}}
+                label=scheduleInteractionForm.scheduledCallTimeLabel as |value|}}
+                {{input
+                  type="text"
+                  name="formattedScheduledCallTime"
+                  placeholder="Please select a call time from the calendar."
+                  value=value
+                  action="setScheduledCallTime"
+                  on="focus-out"}}
+              {{/as-form/input}}
 
               {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=scheduleInteractionForm.phoneCountryCodes}}
               {{as-form/input form=form name="advisorPhoneNumber" errorMessage="not a valid phone number"}}
@@ -54,10 +82,15 @@
                 name="interactionType"
                 label="Interaction Type"
                 content=scheduleInteractionForm.interactionTypesForSelect
-                optionGroupPath="classification"
-              }}
+                optionGroupPath="classification"}}
 
-              {{as-form/select form=form name="clientAccessNumberCountry" label="Speak Dial-In Country" content=scheduleInteractionForm.speakDialIns}}
+              {{as-form/select
+                form=form
+                name="clientAccessNumberCountry"
+                label="Speak Dial-In Country"
+                content=scheduleInteractionForm.speakDialIns
+                prompt="Do Not Use Speak"}}
+
               {{as-form/input form=form name="additionalContactDetails" label="Additional Contact Details"}}
             {{/as-form/fieldset}}
 
@@ -78,6 +111,12 @@
                 requestPromise=requestPromise}}
                 Cancel Interaction
               {{/as-action}}
+
+              <div class="action">
+                <a href={{model.invitationUrl}} class="send-confirmation-email" target="_blank">
+                  Send confirmation email
+                </a>
+              </div>
             {{/as-action-group}}
           {{/as-form}}
         </section>

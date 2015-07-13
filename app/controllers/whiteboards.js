@@ -4,8 +4,7 @@ import groupByForSelect from 'phoenix/helpers/group-by-for-select';
 export default Ember.Controller.extend({
   currentUser: Ember.inject.service(),
   showWhiteboardSelect: false,
-  selectedWhiteboard: null,
-  whiteboardSelectChanged: false,
+  selectedWhiteboardId: null,
   multipleWhiteboardsAvailable: Ember.computed.gt('whiteboards.length', 1),
 
   whiteboards: Ember.computed('model.[]', 'currentUser.teams.@each.defaultWhiteboard', function() {
@@ -20,14 +19,6 @@ export default Ember.Controller.extend({
     return `${EmberENV.pistachioUrl}/whiteboard`;
   }),
 
-  selectedWhiteboardDidChange: Ember.observer('selectedWhiteboard', function() {
-    if (this.get('whiteboardSelectChanged')) {
-      this.set('whiteboardSelectChanged', false);
-      this.set('showWhiteboardSelect', false);
-      this.transitionToRoute('whiteboards.whiteboard', this.get('selectedWhiteboard.id'));
-    }
-  }),
-
   actions: {
     toggleWhiteboardSelect: function() {
       this.toggleProperty('showWhiteboardSelect');
@@ -39,8 +30,9 @@ export default Ember.Controller.extend({
       /* jshint newcap: true */
     },
 
-    changeSelectedWhiteboard: function() {
-      this.set('whiteboardSelectChanged', true);
+    changeSelectedWhiteboard: function(selectedWhiteboardId) {
+      this.set('selectedWhiteboard', this.get('whiteboards').findBy('id', selectedWhiteboardId));
+      this.transitionToRoute('whiteboards.whiteboard', selectedWhiteboardId);
     },
   }
 });

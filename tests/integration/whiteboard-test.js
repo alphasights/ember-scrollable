@@ -477,7 +477,7 @@ test("Change selected team", function(assert) {
   visit('/whiteboards');
 
   click('.whiteboard-select button');
-  select('.whiteboard-select select ', 'Example Team 2');
+  select('.whiteboard-select select', 'Example Team 2');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Team Project');
@@ -497,7 +497,7 @@ test("Change selected whiteboard", function(assert) {
   visit('/whiteboards');
 
   click('.whiteboard-select button');
-  select('.whiteboard-select select ', 'Cool whiteboard');
+  select('.whiteboard-select select', 'Cool whiteboard');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
