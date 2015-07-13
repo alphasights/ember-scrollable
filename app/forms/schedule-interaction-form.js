@@ -108,7 +108,7 @@ export default Form.extend({
     if (result.isValid()) {
       this.set('scheduledCallTime', result);
     } else {
-      this.notifyPropertyChange('formattedScheduledCallTime');
+      this._reloadValidScheduledCallTime();
     }
   },
 
@@ -125,5 +125,9 @@ export default Form.extend({
 
     dialInOptions.unshift({ id: null, name: 'Do Not Use Speak' });
     return dialInOptions;
-  })
+  }),
+
+  _reloadValidScheduledCallTime: function() {
+    this.notifyPropertyChange('formattedScheduledCallTime');
+  }
 });
