@@ -154,11 +154,10 @@ test("Team switchers displays all projects for the team", function(assert) {
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": team.id,
-      "avatarUrl": Fixtures.EMPTY_IMAGE_URL
-    }
-  }});
+      "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
+      "teams": [team.id]
+    },
 
-  defineFixture('GET', '/teams', { response: {
     "teams": [
       {
         "name" : "NYSC18 - The McKountry Klub",

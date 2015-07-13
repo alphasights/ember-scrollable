@@ -8,7 +8,7 @@ moduleForModel('project', 'Project', {
   needs: [
     'model:project', 'model:angle-team-membership', 'model:angle', 'model:user',
     'model:interaction', 'model:advisor', 'model:checklist-item',
-    'model:client-contact', 'model:delivery-performance'
+    'model:client-contact', 'model:delivery-performance', 'model:team', 'model:whiteboard'
   ],
 
   beforeEach: function() {
@@ -130,4 +130,3 @@ test('#progress returns the correct value when the deliveryTarget is not 0', fun
 
   assert.equal(this.model.get('progress'), 0.25);
 });
-

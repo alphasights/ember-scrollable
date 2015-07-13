@@ -24,8 +24,19 @@ export default {
           "teamId": 1,
           "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
           "timeZone": "Etc/UTC",
-          "email": 'example@user.com'
-        }
+          "email": 'example@user.com',
+          "teams": [1, 2]
+        },
+
+        "teams": [{
+          "name": "Example Team",
+          "id": 1,
+          "office": "Example Office"
+        }, {
+          "name": "Example Team 2",
+          "id": 2,
+          "office": "Example Office"
+        }]
       }
     });
 
@@ -40,18 +51,6 @@ export default {
 
     this.app.fixtures.define('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
       "interactions": []
-    }});
-
-    this.app.fixtures.define('GET', '/teams', { response: {
-      "teams": [{
-        "name": "Example Team",
-        "id": 1,
-        "office": "Example Office"
-      }, {
-        "name": "Example Team 2",
-        "id": 2,
-        "office": "Example Office"
-      }]
     }});
 
     this.app.fixtures.define('GET', '/unused_advisors', { response: {
