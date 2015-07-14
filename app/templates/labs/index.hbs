@@ -1,5 +1,7 @@
 <h1>Labs</h1>
-{{outlet}}
+{{#if currentUser.model.developer}}
+  {{#link-to 'labs.new'}}New{{/link-to}}
+{{/if}}
 <ul>
   {{#each sortedFeatures as |feature|}}
     {{as-lab
