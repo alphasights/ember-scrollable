@@ -157,10 +157,6 @@ QUnit.module("Whiteboard", {
     defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
       "users": []
     }});
-
-    defineFixture('GET', '/whiteboards', { response: {
-      "whiteboards": []
-    }});
   },
 
   afterEach: function() {
