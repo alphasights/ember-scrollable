@@ -16,4 +16,18 @@ export default Form.extend({
       description: this.get('description')
     });
   },
+
+  validations: {
+    name: {
+      presence: true
+    },
+
+    briefDescription: {
+      presence: true
+    },
+
+    limit: {
+      numericality: { allowBlank: true, onlyInteger: true }
+    }
+  }
 });

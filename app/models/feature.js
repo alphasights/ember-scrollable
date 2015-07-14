@@ -4,7 +4,6 @@ import Ember from 'ember';
 export default DS.Model.extend({
   name: DS.attr('string'),
   briefDescription: DS.attr('string'),
-  description: DS.attr('string'),
   limit: DS.attr('number'),
   owner: DS.belongsTo('user'),
   featureParticipations: DS.hasMany('featureParticipation'),
