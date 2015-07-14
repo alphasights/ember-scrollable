@@ -1,0 +1,34 @@
+<h1>New Feature</h1>
+<section class="form">
+  {{#as-form model=featureForm action="createFeature" as |form|}}
+    {{#as-form/fieldset}}
+      {{as-form/input
+        form=form
+        name="name"
+        label="Name"}}
+
+      {{as-form/input
+        form=form
+        name="briefDescription"
+        label="Brief Description"}}
+
+      {{as-form/input
+        form=form
+        name="limit"
+        label="Limit"}}
+
+      {{as-form/input
+        form=form
+        name="description"
+        label="Description"}}
+    {{/as-form/fieldset}}
+
+    {{#as-action-group}}
+      {{#as-form/submit
+        form=form
+        requestPromise=featureForm.requestPromise}}
+        Create Feature
+      {{/as-form/submit}}
+    {{/as-action-group}}
+  {{/as-form}}
+</section>

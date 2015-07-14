@@ -1,0 +1,11 @@
+<h1>Labs</h1>
+{{outlet}}
+<ul>
+  {{#each sortedFeatures as |feature|}}
+    {{as-lab
+      feature=feature
+      currentUser=currentUser
+      leave="destroyParticipation"
+      join="createParticipation"}}
+  {{/each}}
+</ul>
