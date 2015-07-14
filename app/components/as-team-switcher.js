@@ -13,7 +13,9 @@ export default Ember.Component.extend({
     changeSelection: function(selectionId) {
       let id = Ember.isPresent(selectionId) ? selectionId : null;
 
-      if (id.lastIndexOf('team-', 0) === 0) {
+      if (id == null) {
+        this.sendAction('selectTeam', null);
+      } else if (id.lastIndexOf('team-', 0) === 0) {
         this.sendAction('selectTeam', id.replace('team-', ''));
       } else if (id.lastIndexOf('whiteboard-', 0) === 0) {
         this.sendAction('selectWhiteboard', id.replace('whiteboard-', ''));
