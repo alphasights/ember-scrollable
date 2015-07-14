@@ -100,7 +100,7 @@ QUnit.module("Interactions To Schedule Side Panel", {
           "starts_at": moment().utc().startOf('isoWeek').add(9, 'hours').toISOString(),
           "ends_at": moment().utc().startOf('isoWeek').add(10, 'hours').toISOString(),
           "day": null,
-          "interaction_id": 2,
+          "interaction_id": interaction.id,
           "type": 'alpha_call',
           "title": 'AlphaCall'
         }
