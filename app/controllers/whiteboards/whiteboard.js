@@ -10,7 +10,14 @@ export default Ember.Controller.extend({
   arrangedProjects: null,
   whiteboardId: null,
   teamId: null,
-  modelId: Ember.computed.any('teamId', 'whiteboardId'),
+
+  modelRouteId: Ember.computed('teamId', 'whiteboardId', function() {
+    if (Ember.isPresent(this.get('teamId'))) {
+      return `team-${this.get('teamId')}`;
+    } else {
+      return this.get('whiteboardId');
+    }
+  }),
 
   actions: {
     reorderProjects: function(projects) {
@@ -37,7 +44,7 @@ export default Ember.Controller.extend({
     },
 
     showProject: function(project) {
-      this.transitionToRoute('whiteboards.whiteboard.project', this.get('modelId'), project.get('id'));
+      this.transitionToRoute('whiteboards.whiteboard.project', this.get('modelRouteId'), project.get('id'));
     },
 
     onProjectsChange: function(projects) {
