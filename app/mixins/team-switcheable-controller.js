@@ -16,13 +16,15 @@ export default Ember.Mixin.create({
 
   actions: {
     selectTeam: function(teamId) {
-      this.set('whiteboardId', null);
-      this.set('teamId', teamId);
+      this.setProperties({ whiteboardId: null, teamId: teamId });
     },
 
     selectWhiteboard: function(whiteboardId) {
-      this.set('teamId', null);
-      this.set('whiteboardId', whiteboardId);
+      this.setProperties({ teamId: null, whiteboardId: whiteboardId });
+    },
+
+    resetTeamSelection: function() {
+      this.setProperties({ teamId: null, whiteboardId: null });
     }
   }
 });

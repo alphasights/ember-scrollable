@@ -1,6 +1,8 @@
 <div class="select">
   <select onchange={{action "changeSelection" value="target.value"}}>
-    <option value="">{{prompt}}</option>
+    {{#if prompt}}
+      <option value="">{{prompt}}</option>
+    {{/if}}
 
     <optgroup label="Teams">
       {{#each teams as |team|}}
@@ -10,12 +12,14 @@
       {{/each}}
     </optgroup>
 
-    <optgroup label="Whiteboards">
-      {{#each whiteboards as |whiteboard|}}
-        <option value="whiteboard-{{whiteboard.id}}" selected={{eq whiteboardId whiteboard.id}}>
-          {{whiteboard.name}}
-        </option>
-      {{/each}}
-    </optgroup>
+    {{#if whiteboards}}
+      <optgroup label="Whiteboards">
+        {{#each whiteboards as |whiteboard|}}
+          <option value="whiteboard-{{whiteboard.id}}" selected={{eq whiteboardId whiteboard.id}}>
+            {{whiteboard.name}}
+          </option>
+        {{/each}}
+      </optgroup>
+    {{/if}}
   </select>
 </div>

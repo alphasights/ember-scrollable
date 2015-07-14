@@ -1,39 +1,7 @@
 .whiteboards {
-  .whiteboard-select {
-    h1,
-    .toggle {
-      display: inline-block;
-      height: $h1-font-size;
-      vertical-align: middle;
-    }
+  > header {
+    @include clearfix;
 
-    h1 {
-      line-height: $h1-font-size;
-      padding-right: $column-gutter / 2;
-    }
-
-    .select {
-      @include form-select($inner-wrapper: null, $inline: true);
-
-      margin-right: $column-gutter / 2;
-    }
-
-    label {
-      @include form-label();
-
-      display: inline-block;
-    }
-
-    .toggle {
-      margin-bottom: 0;
-    }
-
-    &.open {
-      margin: $column-gutter 0;
-
-      .toggle {
-        background-color: $info-color;
-      }
-    }
+    padding: $column-gutter !important;
   }
 }

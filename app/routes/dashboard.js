@@ -6,13 +6,7 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   currentUser: Ember.inject.service(),
 
   titleToken: function(model) {
-    let teamMembers = model.teamMembers;
-
-    if (teamMembers) {
-      return 'Team Dashboard';
-    } else {
-      return 'Dashboard';
-    }
+    return 'Dashboard';
   },
 
   model: function(params) {

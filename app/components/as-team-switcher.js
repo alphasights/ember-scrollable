@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   teams: Ember.computed.oneWay('user.teams'),
   whiteboards: Ember.computed.oneWay('user.whiteboards'),
-  prompt: Ember.computed.oneWay('user.name'),
+  prompt: null,
   teamId: null,
   whiteboardId: null,
 
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       } else if (selectionId.lastIndexOf('whiteboard-', 0) === 0) {
         this.sendAction('selectWhiteboard', selectionId.replace('whiteboard-', ''));
       } else {
-        this.sendAction('selectTeam', null);
+        this.sendAction('resetTeamSelection');
       }
     }
   }
