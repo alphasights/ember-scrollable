@@ -25,7 +25,8 @@ export default {
           "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
           "timeZone": "Etc/UTC",
           "email": 'example@user.com',
-          "teams": [1, 2]
+          "teams": [1, 2],
+          "whiteboards": [1]
         },
 
         "teams": [{
@@ -36,7 +37,14 @@ export default {
           "name": "Example Team 2",
           "id": 2,
           "office": "Example Office"
-        }]
+        }],
+
+        "whiteboards": [
+          {
+            "id": 1,
+            "name": "Cool whiteboard"
+          }
+        ]
       }
     });
 

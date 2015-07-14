@@ -7,6 +7,7 @@ export default Ember.Service.extend({
   name: Ember.computed.oneWay('model.name'),
   email: Ember.computed.oneWay('model.email'),
   teamId: Ember.computed.oneWay('model.teamId'),
+  whiteboardId: Ember.computed.oneWay('model.whiteboardId'),
   teams: Ember.computed.oneWay('model.teams'),
   whiteboards: Ember.computed.oneWay('model.whiteboards'),
 
