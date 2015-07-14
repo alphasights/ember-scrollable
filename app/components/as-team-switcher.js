@@ -11,14 +11,12 @@ export default Ember.Component.extend({
 
   actions: {
     changeSelection: function(selectionId) {
-      let id = Ember.isPresent(selectionId) ? selectionId : null;
-
-      if (id == null) {
+      if (selectionId.lastIndexOf('team-', 0) === 0) {
+        this.sendAction('selectTeam', selectionId.replace('team-', ''));
+      } else if (selectionId.lastIndexOf('whiteboard-', 0) === 0) {
+        this.sendAction('selectWhiteboard', selectionId.replace('whiteboard-', ''));
+      } else {
         this.sendAction('selectTeam', null);
-      } else if (id.lastIndexOf('team-', 0) === 0) {
-        this.sendAction('selectTeam', id.replace('team-', ''));
-      } else if (id.lastIndexOf('whiteboard-', 0) === 0) {
-        this.sendAction('selectWhiteboard', id.replace('whiteboard-', ''));
       }
     }
   }
