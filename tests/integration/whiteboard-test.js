@@ -472,8 +472,7 @@ test("Remove a member from an angle", function(assert) {
 test("Change selected team", function(assert) {
   visit('/whiteboards');
 
-  click('.whiteboard-select button');
-  select('.whiteboard-select select', 'Example Team 2');
+  select('.whiteboards > header .select select', 'Example Team 2');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Team Project');
@@ -483,8 +482,7 @@ test("Change selected team", function(assert) {
 test("Change selected whiteboard", function(assert) {
   visit('/whiteboards');
 
-  click('.whiteboard-select button');
-  select('.whiteboard-select select', 'Cool whiteboard');
+  select('.whiteboards > header .select select', 'Cool whiteboard');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
@@ -526,10 +524,9 @@ test("Default to personal whiteboard is present instead of team", function(asser
     }
   });
 
-  click('.whiteboard-select button');
-  select('.whiteboard-select select', 'Cool whiteboard');
+  select('.whiteboards > header .select select', 'Cool whiteboard');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
   });
-})
+});
