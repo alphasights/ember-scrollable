@@ -524,7 +524,7 @@ test("Default to personal whiteboard is present instead of team", function(asser
     }
   });
 
-  select('.whiteboards > header .select select', 'Cool whiteboard');
+  visit('/whiteboards');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
