@@ -6,6 +6,12 @@ export default Ember.Route.extend({
   currentUser: Ember.inject.service(),
   titleToken: 'New Feature',
 
+  beforeModel: function() {
+    if (this.get('currentUser.model.developer') != true) {
+      this.transitionTo('labs');
+    }
+  },
+
   model: function() {
     return Ember.RSVP.hash({
       badges: request(`${EmberENV.apiBaseUrl}/badges`).badges,
