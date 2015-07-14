@@ -10,17 +10,6 @@
     focus-in="activate"}}
 </div>
 
-<div class="actions">
-  {{#liquid-if isActive use="crossFade"}}
-    <div class="close" {{action "clear"}}>
-      <button title="Close"></button>
-    </div>
-  {{else}}
-    <div class="content">
-    </div>
-  {{/liquid-if}}
-</div>
-
 {{#liquid-if isActive containerless=true use="crossFade"}}
   <div class="results">
     {{#liquid-if requestPromise.isFulfilled use="crossFade"}}
