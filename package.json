@@ -40,7 +40,7 @@
     "ember-cli-inject-live-reload": "1.3.0",
     "ember-cli-inline-content": "0.4.0",
     "ember-cli-pagination": "0.6.6",
-    "ember-cli-paint": "1.10.5",
+    "ember-cli-paint": "1.10.6",
     "ember-cli-pretender": "0.3.2",
     "ember-cli-qunit": "0.3.13",
     "ember-cli-showdown": "2.2.0",
