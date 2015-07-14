@@ -8,6 +8,9 @@ export default Ember.Controller.extend({
 
   filterPriority: 'high',
   arrangedProjects: null,
+  whiteboardId: null,
+  teamId: null,
+  modelId: Ember.computed.any('teamId', 'whiteboardId'),
 
   actions: {
     reorderProjects: function(projects) {
@@ -34,7 +37,7 @@ export default Ember.Controller.extend({
     },
 
     showProject: function(project) {
-      this.transitionToRoute('whiteboards.whiteboard.project', this.get('model.id'), project.get('id'));
+      this.transitionToRoute('whiteboards.whiteboard.project', this.get('modelId'), project.get('id'));
     },
 
     onProjectsChange: function(projects) {

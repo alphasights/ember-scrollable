@@ -30,6 +30,8 @@ export default Ember.Route.extend({
   setupController: function(controller, models) {
     controller.set('projects', models.projects);
     controller.set('members', models.members);
+    controller.set('whiteboardId', models.whiteboardId);
+    controller.set('teamId', models.teamId);
     this.controllerFor('whiteboards').set('teamId', models.teamId);
     this.controllerFor('whiteboards').set('whiteboardId', models.whiteboardId);
   }
