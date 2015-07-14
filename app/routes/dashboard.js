@@ -4,10 +4,7 @@ import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
 export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   currentUser: Ember.inject.service(),
-
-  titleToken: function(model) {
-    return 'Dashboard';
-  },
+  titleToken: 'Dashboard',
 
   model: function(params) {
     var interactions, teamMembers, deliveryPerformance;

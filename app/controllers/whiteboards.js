@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import groupByForSelect from 'phoenix/helpers/group-by-for-select';
 
 export default Ember.Controller.extend({
   currentUser: Ember.inject.service(),
