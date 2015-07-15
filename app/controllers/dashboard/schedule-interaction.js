@@ -63,10 +63,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   visibleUnavailabilities: Ember.computed(
     'unavailabilities.[]',
-    'model.id', function() {
+    'model.id',
+    'scheduleInteractionForm.scheduledCallTime', function() {
+      let isUnavailabilityNotTheScheduledCall = (unavailability) => {
+        if (this.get('scheduleInteractionForm.scheduledCallTime') != null) {
+          return unavailability.get('startsAt').getTime() !== this.get('scheduleInteractionForm.scheduledCallTime').getTime();
+        } else {
+          return true;
+        }
+      };
+
       return this.get('unavailabilities').filter((unavailability) => {
         return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10) &&
-          unavailability.get('startsAt').getTime() !== this.get('scheduleInteractionForm.scheduledCallTime').getTime();
+          isUnavailabilityNotTheScheduledCall(unavailability);
       });
   }),
 
