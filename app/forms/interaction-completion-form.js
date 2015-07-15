@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
-import EmberValidations from 'ember-validations';
+import { validator } from 'ember-validations';
 import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
 const qualityOptionsMapping = {
@@ -105,7 +105,7 @@ export default Form.extend(SelectableInteractionTypesMixin, {
     },
 
     customCredits: {
-      inline: EmberValidations.validator(function() {
+      inline: validator(function() {
         if (this.model.get('isCustomCredit')) {
           if (this.model.get('customCredits') <= 0 ) {
             return "Custom credits must be greater than 0.";
