@@ -5,7 +5,9 @@
       <img class="avatar avatar-large" src={{owner.avatarUrl}} title={{owner.name}} alt={{owner.name}}>
     </div>
 
-    {{#link-to 'labs.edit' feature.id}}Edit{{/link-to}}
+    {{#if currentUser.model.developer}}
+      {{#link-to 'labs.edit' feature.id}}Edit{{/link-to}}
+    {{/if}}
   </header>
 
   <div class="brief-description">

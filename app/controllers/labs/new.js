@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
     create: function() {
       this.get('featureForm').save().then((featureForm) => {
         let featureName = featureForm.get('name');
-        let verb = this.get('saveNotificationVerb');
 
         notify(`The feature, ${featureName}, has been created.`);
         this.transitionToRoute('labs');

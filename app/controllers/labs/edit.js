@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
     update: function() {
       this.get('featureForm').save().then((featureForm) => {
         let featureName = featureForm.get('name');
-        let verb = this.get('saveNotificationVerb');
 
         notify(`The feature, ${featureName}, has been updated.`);
         this.transitionToRoute('labs');
