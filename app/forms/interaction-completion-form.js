@@ -23,8 +23,6 @@ const speakQualityOptionsMapping = {
   'other': 'Other issue'
 };
 
-const speakQualityOptions = speakQualityOptionsMapping.keys;
-
 export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error completing the interaction.',
   interactionTypes: null,
@@ -131,8 +129,11 @@ export default Form.extend(SelectableInteractionTypesMixin, {
     },
 
     speakQuality: {
-      presence: true,
-      inclusion: { in: speakQualityOptions }
+      presence: {
+        'if': function(object) {
+          return object.get('interaction.speak');
+        }
+      }
     },
 
     speakExplanation: {
