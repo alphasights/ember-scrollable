@@ -6,7 +6,10 @@ export default Ember.Component.extend({
   owner: Ember.computed.oneWay('feature.owner'),
   featureParticipations: Ember.computed.oneWay('feature.featureParticipations'),
   maxNumberOfShownUsers: 10,
-  canParticipate: Ember.computed.not('_hasReachedLimit'),
+
+  canParticipate: Ember.computed('_hasReachedLimit', '_isCurrentUserParticipating', function() {
+    return this.get('_isCurrentUserParticipating') || !this.get('_hasReachedLimit');
+  }),
 
   participationButtonText: Ember.computed('_isCurrentUserParticipating', function() {
     return this.get('_isCurrentUserParticipating') ? 'Leave' : 'Join';
