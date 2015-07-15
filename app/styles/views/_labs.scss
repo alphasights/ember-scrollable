@@ -1,0 +1,15 @@
+div.labs {
+  > ul {
+    @extend %grid-row;
+
+    margin: 0 $column-gutter;
+
+    > li {
+      @extend %grid-column-3;
+
+      border: 1px solid $iron;
+      border-radius: 5px;
+      margin: $column-gutter / 2;
+    }
+  }
+}

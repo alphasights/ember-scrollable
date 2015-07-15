@@ -1,0 +1,24 @@
+.lab {
+  padding: 15px;
+
+  header {
+    @extend %grid-row;
+  }
+
+  h1 {
+    @extend %grid-column-10;
+
+    font-size: $h2-font-size;
+    padding: 0;
+  }
+
+  .owner {
+    @extend %grid-column-2;
+
+    padding: 0;
+
+    img {
+      float: right;
+    }
+  }
+}

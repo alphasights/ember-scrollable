@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  tagName: 'article',
+  classNameBindings: [':lab'],
   feature: null,
   currentUser: null,
   owner: Ember.computed.oneWay('feature.owner'),

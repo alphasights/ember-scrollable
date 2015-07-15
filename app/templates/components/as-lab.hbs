@@ -1,28 +1,30 @@
-<li>
-  <header>
-    <h1 class="name">{{feature.name}}</h1>
-    <div class="owner">
-      <img class="avatar avatar-large" src={{owner.avatarUrl}} title={{owner.name}} alt={{owner.name}}>
-    </div>
-
-    {{#if currentUser.model.developer}}
-      {{#link-to 'labs.edit' feature.id}}Edit{{/link-to}}
-    {{/if}}
-  </header>
-
-  <div class="brief-description">
-    {{feature.briefDescription}}
+<header>
+  <h1 class="name">{{feature.name}}</h1>
+  <div class="owner">
+    <img class="avatar avatar-large" src={{owner.avatarUrl}} title={{owner.name}} alt={{owner.name}}>
   </div>
+</header>
 
-  <div class="testers">
-    <span>{{feature.testers.length}} participants.</span>
-  </div>
+<div class="brief-description">
+  {{feature.briefDescription}}
+</div>
 
-  <div class="participate">
-    {{#if canParticipate}}
-      <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
-    {{else}}
-      <span>This feature has reached the maximum number of testers.</span>
-    {{/if}}
-  </div>
-</li>
+<div class="participate">
+  <span>{{feature.testers.length}} participants.</span>
+
+  {{#if currentUser.model.developer}}
+    {{#link-to 'labs.edit' feature.id}}Edit{{/link-to}}
+  {{/if}}
+
+  {{#if canParticipate}}
+    <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
+  {{else}}
+    {{#tool-tipster
+      title="This feature has reached the maximum number of testers."
+      position="bottom-left"
+      tagName="span"
+      maxWidth=400}}
+      <button>Join</button>
+    {{/tool-tipster}}
+  {{/if}}
+</div>
