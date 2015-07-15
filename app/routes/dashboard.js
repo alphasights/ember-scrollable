@@ -4,32 +4,19 @@ import TeamSwitcheableRouteMixin from 'phoenix/mixins/team-switcheable-route';
 
 export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
   currentUser: Ember.inject.service(),
-
-  queryParams: {
-    teamId: {
-      refreshModel: true
-    }
-  },
-
-  titleToken: function(model) {
-    let teamMembers = model.teamMembers;
-
-    if (teamMembers) {
-      return 'Team Dashboard';
-    } else {
-      return 'Dashboard';
-    }
-  },
+  titleToken: 'Dashboard',
 
   model: function(params) {
     var interactions, teamMembers, deliveryPerformance;
     var teamId = params.teamId;
+    var whiteboardId = params.whiteboardId;
 
-    if (teamId != null) {
-      interactions = this.store.find('interaction', { team_id: teamId });
-      teamMembers = this.store.find('user', { team_id: teamId });
+    if (teamId != null || whiteboardId != null) {
+      var queryParams = Ember.isPresent(teamId) ? { team_id: teamId } : { whiteboard_id: whiteboardId };
+      interactions = this.store.find('interaction', queryParams);
+      teamMembers = this.store.find('user', queryParams);
 
-      deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
+      deliveryPerformance = this.store.find('deliveryPerformance', queryParams).then(function(deliveryPerformances) {
         return TeamDeliveryPerformance.create({ userPerformances: deliveryPerformances.toArray() });
       });
     } else {

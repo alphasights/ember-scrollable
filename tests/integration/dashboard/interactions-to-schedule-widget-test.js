@@ -213,11 +213,10 @@ test("Filter interactions to schedule by Team Member", function(assert) {
       "name": andrewRath.name,
       "time_zone": "America/New_York",
       "initials": andrewRath.initials,
-      "team_id": team.id
-    }
-  }});
+      "team_id": team.id,
+      "teams": [team.id]
+    },
 
-  defineFixture('GET', '/teams', { response: {
     "teams": [
       {
         "name": "NYSC13 - McKin' It Rain",

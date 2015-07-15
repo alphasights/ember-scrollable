@@ -7,8 +7,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   navigableModels: Ember.computed.oneWay('whiteboard.arrangedProjects'),
 
-  modelRouteParams: Ember.computed('whiteboard.model.id', function () {
-    return ['whiteboards.whiteboard.project', this.get('whiteboard.model.id')];
+  modelRouteParams: Ember.computed('whiteboard.modelRouteId', function () {
+    return ['whiteboards.whiteboard.project', this.get('whiteboard.modelRouteId')];
   }),
 
   anglesSorting: ['createdAt:desc'],
@@ -16,7 +16,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   actions: {
     hideSidePanel: function() {
-      this.transitionToRoute('whiteboards.whiteboard', this.get('whiteboard.model.id'));
+      this.transitionToRoute('whiteboards.whiteboard', this.get('whiteboard.modelRouteId'));
     }
   }
 });
