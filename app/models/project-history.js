@@ -21,7 +21,7 @@ export default DS.Model.extend({
   occurredAt: DS.attr('date'),
   outreachStatus: DS.attr('string'),
   project: DS.belongsTo('project', { async: false }),
-  primaryContact: DS.belongsTo('user'),
+  primaryContact: DS.belongsTo('user', { async: false }),
 
   humanizedOutreachStatus: Ember.computed('outreachStatus', function(){
     return STATUSES[this.get('outreachStatus')];

@@ -19,8 +19,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU2",
         "id": 2,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -145,8 +145,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU3",
         "id": 3,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }]
     }});
 

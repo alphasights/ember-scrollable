@@ -21,8 +21,8 @@ QUnit.module("Projects", {
       "users": [{
         "initials": "EU2",
         "id": 2,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -154,7 +154,7 @@ test("Team switchers displays all projects for the team", function(assert) {
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": team.id,
-      "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+      "avatar_url": Fixtures.EMPTY_IMAGE_URL
     }
   }});
 
@@ -176,7 +176,7 @@ test("Team switchers displays all projects for the team", function(assert) {
         "time_zone": "America/New_York",
         "initials": "SSa",
         "team_id": team.id,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }
     ]
   }});
@@ -185,8 +185,8 @@ test("Team switchers displays all projects for the team", function(assert) {
     "users": [{
       "initials": "EU2",
       "id": 2,
-      "teamId": team.id,
-      "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+      "team_id": team.id,
+      "avatar_url": Fixtures.EMPTY_IMAGE_URL
     }],
 
     "angles": [{
@@ -273,7 +273,7 @@ test("Team switchers displays all projects for the team", function(assert) {
       title: 'Example Project 4',
       codename: 'Chocolate 4',
       clientCode: 'EP',
-      memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
+      memberAvatarUrl: undefined,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: '1 Delivered',
       upcomingCount: '2 Upcoming',
