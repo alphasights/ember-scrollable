@@ -65,7 +65,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     'unavailabilities.@each.{interactionId}',
     'model.id', function() {
       return this.get('unavailabilities').filter((unavailability) => {
-        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10);
+        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10) &&
+          unavailability.get('startsAt').getTime() !== this.get('scheduleInteractionForm.scheduledCallTime').getTime();
       });
   }),
 
