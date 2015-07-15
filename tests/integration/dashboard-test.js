@@ -39,19 +39,22 @@ test('Switching to a whiteboard triggers the right requests', function(assert) {
 });
 
 test('Switching to back to the current user triggers the right requests', function(assert) {
-  let interactionsHandler = defineFixture('GET', '/interactions', {
+  defineFixture('GET', '/interactions', {
+    params: { whiteboard_id: '1' },
     response: {
       "interactions": []
     }
   });
 
-  let usersHandler = defineFixture('GET', '/users', {
+  defineFixture('GET', '/users', {
+    params: { whiteboard_id: '1' },
     response: {
       "users": []
     }
   });
 
-  let deliverPerformancesHandler = defineFixture('GET', '/delivery_performances', {
+  defineFixture('GET', '/delivery_performances', {
+    params: { whiteboard_id: '1' },
     response: {
       "delivery_performances": []
     }
@@ -59,11 +62,16 @@ test('Switching to back to the current user triggers the right requests', functi
 
   visit('/dashboard?whiteboard_id=1');
 
+  let interactionsHandler = defineFixture('GET', '/interactions', {
+    params: { primary_contact_id: '1' },
+    response: {
+      "interactions": []
+    }
+  });
+
   select('.dashboard > header .select select', 'Example User');
 
   andThen(function() {
     assert.equal(interactionsHandler.called, true);
-    assert.equal(usersHandler.called, true);
-    assert.equal(deliverPerformancesHandler.called, true);
   });
 });
