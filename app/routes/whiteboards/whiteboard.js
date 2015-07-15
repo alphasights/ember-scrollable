@@ -31,8 +31,8 @@ export default Ember.Route.extend({
 
     return Ember.RSVP.hash({
       whiteboard: whiteboard,
-      members: this.store.find('user', queryParams),
-      projects: this.store.find('project', queryParams)
+      members: this.store.query('user', queryParams),
+      projects: this.store.query('project', queryParams)
     });
   },
 

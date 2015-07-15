@@ -11,10 +11,10 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
     var teamMembers;
 
     if (teamId != null) {
-      projects = this.store.find('project', { team_id: teamId, all_time: true });
-      teamMembers = this.store.find('user', { team_id: teamId });
+      projects = this.store.query('project', { team_id: teamId, all_time: true });
+      teamMembers = this.store.query('user', { team_id: teamId });
     } else {
-      projects = this.store.find('project', { user_id: this.get('currentUser.id'), all_time: true });
+      projects = this.store.query('project', { user_id: this.get('currentUser.id'), all_time: true });
     }
 
     return Ember.RSVP.hash({
