@@ -292,7 +292,7 @@ test("Team switchers displays all projects for the team", function(assert) {
 
 test('Switching to a whiteboard triggers the right requests', function(assert) {
   let projectsHandler = defineFixture('GET', '/projects', {
-    params: { whiteboard_id: '1', all_time: true },
+    params: { whiteboard_id: '1', all_time: 'true' },
     response: {
       "projects": []
     }
