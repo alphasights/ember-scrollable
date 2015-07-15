@@ -289,3 +289,28 @@ test("Team switchers displays all projects for the team", function(assert) {
     }]);
   });
 });
+
+test('Switching to a whiteboard triggers the right requests', function(assert) {
+  let projectsHandler = defineFixture('GET', '/projects', {
+    params: { whiteboard_id: '1', all_time: true },
+    response: {
+      "projects": []
+    }
+  });
+
+  let usersHandler = defineFixture('GET', '/users', {
+    params: { whiteboard_id: '1' },
+    response: {
+      "users": []
+    }
+  });
+
+  visit('/projects');
+
+  select('.projects > header .select select', 'Cool whiteboard');
+
+  andThen(function() {
+    assert.equal(projectsHandler.called, true);
+    assert.equal(usersHandler.called, true);
+  });
+});
