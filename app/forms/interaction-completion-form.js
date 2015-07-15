@@ -21,8 +21,6 @@ const speakQualityOptionsMapping = {
   'other': 'Other issue'
 };
 
-const speakQualityOptions = speakQualityOptionsMapping.keys;
-
 export default Form.extend({
   genericErrorMessage: 'There has been an error completing the interaction.',
   speakExplanationNeeded: Ember.computed.equal('speakQuality', 'other'),
@@ -66,8 +64,11 @@ export default Form.extend({
     },
 
     speakQuality: {
-      presence: true,
-      inclusion: { in: speakQualityOptions }
+      presence: {
+        'if': function(object) {
+          return object.get('interaction.speak');
+        }
+      }
     },
 
     speakExplanation: {
