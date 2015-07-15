@@ -5,7 +5,7 @@ export default DS.Model.extend({
   customCredits: DS.attr('number'),
   customRevenue: DS.attr('number'),
   duration: DS.attr('number'),
-  interaction: DS.belongsTo('interaction'),
+  interaction: DS.belongsTo('interaction', { async: false }),
   interactionType: DS.attr('string'),
   quality: DS.attr('string'),
   speakQuality: DS.attr('string'),

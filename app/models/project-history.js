@@ -20,7 +20,7 @@ const STATUSES = {
 export default DS.Model.extend({
   occurredAt: DS.attr('date'),
   outreachStatus: DS.attr('string'),
-  project: DS.belongsTo('project'),
+  project: DS.belongsTo('project', { async: false }),
   primaryContact: DS.belongsTo('user'),
 
   humanizedOutreachStatus: Ember.computed('outreachStatus', function(){
