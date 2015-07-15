@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 
   model: function() {
     return Ember.RSVP.hash({
-      badges: request(`${EmberENV.apiBaseUrl}/badges`).badges,
+      badges: request(`${EmberENV.apiBaseUrl}/badges`),
       feature: this.store.createRecord('feature', {
         owner: this.get('currentUser.model')
       })
@@ -27,8 +27,9 @@ export default Ember.Route.extend({
       featureForm: FeatureForm.create({
         model: models.feature,
         container: this.get('container'),
-        badges: models.badges
-      })
+        badges: models.badges.badges,
+        features: this.controllerFor('labs').get('model')
+      }),
     });
   }
 });

@@ -8,6 +8,12 @@
         name="name"
         label="Name"}}
 
+      {{as-form/select
+        form=form
+        name="badgeName"
+        label="Badge Name"
+        content=featureForm.availableBadgeNames}}
+
       {{as-form/input
         form=form
         name="briefDescription"
