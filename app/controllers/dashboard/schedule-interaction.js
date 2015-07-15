@@ -62,7 +62,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   }),
 
   visibleUnavailabilities: Ember.computed(
-    'unavailabilities.@each.{interactionId}',
+    'unavailabilities.[]',
     'model.id', function() {
       return this.get('unavailabilities').filter((unavailability) => {
         return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10) &&
@@ -169,6 +169,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
         this.get('dashboard').propertyDidChange('interactionsToSchedule');
         this.get('dashboard').propertyDidChange('scheduledInteractions');
+        this.propertyDidChange('visibleUnavailabilities');
         notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
       });
     }
