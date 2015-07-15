@@ -26,14 +26,14 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
     var teamId = params.teamId;
 
     if (teamId != null) {
-      interactions = this.store.find('interaction', { team_id: teamId });
-      teamMembers = this.store.find('user', { team_id: teamId });
+      interactions = this.store.query('interaction', { team_id: teamId });
+      teamMembers = this.store.query('user', { team_id: teamId });
 
-      deliveryPerformance = this.store.find('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
+      deliveryPerformance = this.store.query('deliveryPerformance', { team_id: teamId }).then(function(deliveryPerformances) {
         return TeamDeliveryPerformance.create({ userPerformances: deliveryPerformances.toArray() });
       });
     } else {
-      interactions = this.store.find(
+      interactions = this.store.query(
         'interaction', { primary_contact_id: this.get('currentUser.id') }
       );
 
@@ -49,7 +49,7 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
       interactions: interactions,
       teamMembers: teamMembers,
       deliveryPerformance: deliveryPerformance,
-      unusedAdvisors: this.store.find('unusedAdvisor')
+      unusedAdvisors: this.store.findAll('unusedAdvisor')
     });
   }
 });

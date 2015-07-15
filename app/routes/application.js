@@ -17,7 +17,7 @@ export default Ember.Route.extend({
     return this.get('currentUser').authenticate().then((currentUser) => {
       return Ember.RSVP.hash({
         currentUser: currentUser,
-        teams: this.store.find('team'),
+        teams: this.store.findAll('team'),
         preferences: this.get('preferences').fetch()
       });
     });
