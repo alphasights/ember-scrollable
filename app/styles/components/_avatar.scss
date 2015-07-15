@@ -1,6 +1,3 @@
-$avatar-size: 50px;
-$avatar-size-tiny: $avatar-size * .5;
-
 .avatar {
   @include detached-border($color: $global-section-border-color);
 

@@ -26,10 +26,6 @@ QUnit.module("Side Panel", {
     defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
       "users": []
     }});
-
-    defineFixture('GET', '/whiteboards', { response: {
-      "whiteboards": []
-    }});
   },
 
   afterEach: function() {

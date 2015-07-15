@@ -10,6 +10,9 @@ export default DS.Model.extend({
   jsonWebToken: DS.attr('string'),
   name: DS.attr('string'),
   teamId: DS.attr('string'),
+  whiteboardId: DS.attr('string'),
   intercomUserHash: DS.attr('string'),
-  timeZone: DS.attr('string')
+  timeZone: DS.attr('string'),
+  teams: DS.hasMany('teams'),
+  whiteboards: DS.hasMany('whiteboards')
 });

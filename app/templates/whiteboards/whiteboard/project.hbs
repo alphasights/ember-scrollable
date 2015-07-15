@@ -57,7 +57,7 @@
               <article>
                 <div class="title">{{angle.title}}</div>
 
-                {{render "whiteboards.whiteboard.angle-memberships" angle tagName="section"}}
+                {{as-angle-memberships model=angle whiteboard=whiteboard}}
               </article>
             </li>
           {{/each}}

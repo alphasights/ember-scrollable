@@ -6,6 +6,7 @@
 
 @import 'addons/ember-calendar/main';
 
+@import 'components/angle-memberships';
 @import 'components/avatar';
 @import 'components/checklist-status';
 @import 'components/email-correspondence';
@@ -41,5 +42,4 @@
 @import 'views/side-panel-loading';
 @import 'views/side-panel-actions';
 @import 'views/whiteboards';
-@import 'views/whiteboards/whiteboard/angle-memberships';
 @import 'views/whiteboards/whiteboard/project';

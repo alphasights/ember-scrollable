@@ -2,12 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   model: null,
-  teams: null,
 
   id: Ember.computed.oneWay('model.id'),
   name: Ember.computed.oneWay('model.name'),
   email: Ember.computed.oneWay('model.email'),
   teamId: Ember.computed.oneWay('model.teamId'),
+  whiteboardId: Ember.computed.oneWay('model.whiteboardId'),
+  teams: Ember.computed.oneWay('model.teams'),
+  whiteboards: Ember.computed.oneWay('model.whiteboards'),
 
   authenticate: function() {
     return this.store.find('user', 'me').then((user) => {

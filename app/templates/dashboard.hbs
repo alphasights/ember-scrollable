@@ -1,9 +1,12 @@
 <header>
   {{as-team-switcher
-    teams=teams
-    prompt=currentUser.name
+    user=currentUser
     selectTeam="selectTeam"
-    teamId=teamId}}
+    selectWhiteboard="selectWhiteboard"
+    resetTeamSelection="resetTeamSelection"
+    teamId=teamId
+    whiteboardId=whiteboardId
+    prompt=currentUser.name}}
 </header>
 
 <ul class="widgets">

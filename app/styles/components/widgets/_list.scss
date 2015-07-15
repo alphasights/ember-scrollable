@@ -3,6 +3,10 @@
     &.team-members ul {
       width: 250px;
 
+      * {
+        color: $body-font-color;
+      }
+
       li,
       li a {
         line-height: 40px;
@@ -20,7 +24,6 @@
     button {
       background-color: transparent;
       border-color: transparent;
-      color: $white;
       margin: 0;
 
       i {
