@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   classNameBindings: [':angle-memberships'],
   store: Ember.inject.service(),
 
+  model: null,
   whiteboard: null,
   requestPromise: null,
   query: null,
