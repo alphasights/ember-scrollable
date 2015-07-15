@@ -17,7 +17,7 @@
         <i></i>
       {{/as-progress-indicator}}
 
-      {{input type="text" value=query click=view.onSearchClick}}
+      <input type="text" oninput={{action "queryDidChange" value="target.value"}} onclick={{action "onSearchClick"}}>
     </li>
 
     <li class="results">
