@@ -1,0 +1,35 @@
+{{#link-to 'labs'}}Back{{/link-to}}
+<section class="form">
+  {{#as-form model=featureForm action=formAction as |form|}}
+    {{#as-form/fieldset}}
+      {{as-form/input
+        form=form
+        name="name"
+        label="Name"}}
+
+      {{as-form/select
+        form=form
+        name="badgeName"
+        label="Badge Name"
+        content=featureForm.availableBadgeNames}}
+
+      {{as-form/input
+        form=form
+        name="briefDescription"
+        label="Brief Description"}}
+
+      {{as-form/input
+        form=form
+        name="limit"
+        label="Limit"}}
+    {{/as-form/fieldset}}
+
+    {{#as-action-group}}
+      {{#as-form/submit
+        form=form
+        requestPromise=featureForm.requestPromise}}
+        {{buttonText}}
+      {{/as-form/submit}}
+    {{/as-action-group}}
+  {{/as-form}}
+</section>

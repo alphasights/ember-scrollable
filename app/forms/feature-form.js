@@ -5,6 +5,10 @@ export default Form.extend({
   genericErrorMessage: 'There has been an error with the feature.',
 
   setDefaultValues: function(){
+    this.set('name', this.get('model.name'));
+    this.set('badgeName', this.get('model.badgeName'));
+    this.set('briefDescription', this.get('model.briefDescription'));
+    this.set('limit', this.get('model.limit'));
   },
 
   setPersistedValues: function() {
@@ -18,10 +22,13 @@ export default Form.extend({
     });
   },
 
-  availableBadgeNames: Ember.computed('badges', '_usedBadgeNames', function() {
+  availableBadgeNames: Ember.computed('badges', '_usedBadgeNames', 'badgeName', function() {
     let allBadges = this.get('badges');
     let usedBadgeNames = this.get('_usedBadgeNames');
     let availableBadges = _.difference(allBadges, usedBadgeNames);
+    if (this.get('badgeName')) {
+      availableBadges.splice(0, 0, this.get('badgeName'));
+    }
 
     return _.map(availableBadges, function(badgeName) {
       let humanizedBadgeName = badgeName.replace(/_/g, ' ').replace( /\b\w/g, function(word) {

@@ -14,6 +14,7 @@ Router.map(function() {
 
   this.resource('labs', function() {
     this.route('new');
+    this.resource('labs.edit', { path: '/:feature_id/edit' });
   });
   this.resource('performance');
   this.resource('projects');
