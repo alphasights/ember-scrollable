@@ -9,8 +9,8 @@ export default Ember.Component.extend({
   featureParticipations: Ember.computed.oneWay('feature.featureParticipations'),
   maxNumberOfShownUsers: 10,
 
-  canParticipate: Ember.computed('_hasReachedLimit', '_isCurrentUserParticipating', function() {
-    return this.get('_isCurrentUserParticipating') || !this.get('_hasReachedLimit');
+  canParticipate: Ember.computed('feature.hasReachedLimit', '_isCurrentUserParticipating', function() {
+    return this.get('_isCurrentUserParticipating') || !this.get('feature.hasReachedLimit');
   }),
 
   participationButtonText: Ember.computed('_isCurrentUserParticipating', function() {
@@ -27,10 +27,6 @@ export default Ember.Component.extend({
 
   _currentUserParticipation: Ember.computed('currentUser', 'featureParticipations.[]', function() {
     return this.get('featureParticipations').findBy('user', this.get('currentUser.model'));
-  }),
-
-  _hasReachedLimit: Ember.computed('feature.limit', 'featureParticipations.[]', function() {
-    return this.get('feature.limit') !== null && this.get('featureParticipations.length') >= this.get('feature.limit');
   }),
 
   actions: {

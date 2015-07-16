@@ -1,15 +1,34 @@
-  <header>
-    <h1>Labs</h1>
-    {{#if currentUser.model.developer}}
-      {{#link-to 'labs.new' classNames="new"}}New Lab{{/link-to}}
-    {{/if}}
-  </header>
+<header>
+  <h1>Labs</h1>
+
+  <div class="filter">
+    <ul>
+      {{#link-to (query-params selectedFilter="all") tagName="li"}}
+        All ({{allLabsCount}})
+      {{/link-to}}
+
+      {{#link-to (query-params selectedFilter="mine") tagName="li"}}
+        Mine ({{myLabsCount}})
+      {{/link-to}}
+
+      {{#link-to (query-params selectedFilter="available") tagName="li"}}
+        Available ({{availableLabsCount}})
+      {{/link-to}}
+    </ul>
+  </div>
+
+  {{#if currentUser.model.developer}}
+    <div class="new">
+      {{#link-to 'labs.new'}}New Lab{{/link-to}}
+    </div>
+  {{/if}}
+</header>
 
 <ul>
-  {{#each sortedFeatures as |feature|}}
+  {{#each arrangedContent as |lab|}}
     <li>
       {{as-lab
-        feature=feature
+        feature=lab
         currentUser=currentUser
         leave="destroyParticipation"
         join="createParticipation"}}

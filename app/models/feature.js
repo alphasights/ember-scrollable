@@ -8,5 +8,11 @@ export default DS.Model.extend({
   owner: DS.belongsTo('user'),
   featureParticipations: DS.hasMany('featureParticipation'),
   testers: Ember.computed.mapBy('featureParticipations', 'user'),
-  badgeName: DS.attr('string')
+  badgeName: DS.attr('string'),
+
+  hasReachedLimit: Ember.computed('limit', 'featureParticipations.[]', function() {
+    let limit = this.get('limit');
+
+    return limit !== null && this.get('featureParticipations.length') >= limit;
+  })
 });
