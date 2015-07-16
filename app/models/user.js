@@ -13,6 +13,6 @@ export default DS.Model.extend({
   whiteboardId: DS.attr('string'),
   intercomUserHash: DS.attr('string'),
   timeZone: DS.attr('string'),
-  teams: DS.hasMany('teams'),
-  whiteboards: DS.hasMany('whiteboards')
+  teams: DS.hasMany('team', { async: false }),
+  whiteboards: DS.hasMany('whiteboard', { async: false })
 });
