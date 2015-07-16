@@ -11,11 +11,6 @@
 
 <div class="participate">
   <span>{{feature.testers.length}} participants.</span>
-
-  {{#if currentUser.model.developer}}
-    {{#link-to 'labs.edit' feature.id}}Edit{{/link-to}}
-  {{/if}}
-
   {{#if canParticipate}}
     <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
   {{else}}
@@ -27,5 +22,9 @@
       maxWidth=400}}
       <button class="disabled">Join</button>
     {{/tool-tipster}}
+  {{/if}}
+
+  {{#if currentUser.model.developer}}
+    {{#link-to 'labs.edit' feature.id classNames="edit"}}Edit{{/link-to}}
   {{/if}}
 </div>

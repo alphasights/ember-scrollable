@@ -55,7 +55,8 @@ $participate-height: 40px;
 
   .join,
   .leave,
-  .disabled {
+  .disabled,
+  .edit {
     @extend %button-tiny;
 
     float: right;
@@ -67,6 +68,11 @@ $participate-height: 40px;
 
   .leave {
     @extend %button-secondary;
+  }
+
+  .edit {
+    @extend %button-warning;
+    margin-right: $column-gutter / 4;
   }
 
   .disabled-tooltip {
