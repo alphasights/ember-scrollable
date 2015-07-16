@@ -208,10 +208,17 @@ test("Schedule interaction makes an API request and displays a notification", fu
     let message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
   });
+});
 
-  var manuallyEditedScheduledCallTime = scheduledCallTime.add(15, 'minute');
+test("Schedule interaction inputting time as text makes an API request and displays a notification", function(assert){
+  var callType = 'call';
+  var accessCountry = 'AU';
+  var advisorPhoneCountryCode = '81';
+  var advisorPhoneNumber = '5553214567';
+  var additionalContactDetails = 'Super keen';
+  var scheduledCallTime = moment().utc().startOf('isoWeek').add(7, 'hours').add(15, 'minute');
 
-  var manualHandler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
       "actioned": false,
       "advisor_id": "1",
@@ -221,7 +228,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": manuallyEditedScheduledCallTime.toISOString(),
+      "scheduled_call_time": scheduledCallTime.toISOString(),
       "speak": true,
       "speak_phone_number": null,
       "speak_code": null,
@@ -235,11 +242,23 @@ test("Schedule interaction makes an API request and displays a notification", fu
     "interactions": []
   }});
 
-  fillIn('input[name=formattedScheduledCallTime]', manuallyEditedScheduledCallTime.format('D MMM, h:mm A'));
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+
+  andThen(function() {
+    assert.equal($('select[name=interactionType]').val(), 'summarised_call');
+  });
+
+  select('select[name=interactionType]', 'One-on-one');
+  select('select[name=clientAccessNumberCountry]', 'Australia');
+  select('select[name=advisorPhoneCountryCode]', '+81 Japan');
+  fillIn('input[name=formattedScheduledCallTime]', scheduledCallTime.format('D MMM, h:mm A'));
+  fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
+  fillIn('input[name=additionalContactDetails]', additionalContactDetails);
   click("button:contains('Schedule Interaction')");
 
   andThen(function() {
-    assert.equal(manualHandler.called, true);
+    assert.equal(handler.called, true);
 
     let message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
