@@ -21,12 +21,12 @@ export default {
           "name": "Example User",
           "initials": "EU",
           "id": 1,
-          "teamId": 1,
-          "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
-          "timeZone": "Etc/UTC",
+          "team_id": 1,
+          "avatar_url": Fixtures.EMPTY_IMAGE_URL,
+          "time_zone": "Etc/UTC",
           "email": 'example@user.com',
-          "teams": [1, 2],
-          "whiteboards": [1]
+          "team_ids": [1, 2],
+          "whiteboard_ids": [1]
         },
 
         "teams": [{

@@ -30,7 +30,7 @@ export default Ember.Component.extend({
 
   _queryDidChange: function(query) {
     var requestPromise = PromiseController.create({
-      promise: this.get('store').find('user', { query: query }).then(response => {
+      promise: this.get('store').query('user', { query: query }).then(response => {
         if (requestPromise === this.get('requestPromise')) {
           this.set('results', response);
         }
