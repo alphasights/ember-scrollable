@@ -8,5 +8,16 @@ export default ListWidgetComponent.extend({
 
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
   listItemTemplateName: 'components/as-widget/scheduled-interactions/list-item',
-  emptyMessage: 'no scheduled interactions.'
+  emptyMessage: 'no scheduled interactions.',
+  interactionsWithIncompleteChecklistItems: Ember.computed.filterBy('arrangedContent', 'hasIncompleteChecklistItems', true),
+
+  alert: Ember.computed('interactionsWithIncompleteChecklistItems.length', function() {
+    let count = this.get('interactionsWithIncompleteChecklistItems.length');
+
+    if (count > 0) {
+      return `${count} ${count > 1 ? 'interactions' : 'interaction'} with an incomplete checklist in total`;
+    } else {
+      return '';
+    }
+  })
 });

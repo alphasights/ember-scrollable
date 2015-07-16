@@ -1,4 +1,11 @@
 .dashboard .widget.list {
+  .alert {
+    @include alert($warning-color);
+
+    padding: 0 $column-gutter / 2;
+    margin: 0;
+  }
+
   .filters .dropdown {
     &.team-members ul {
       width: 250px;

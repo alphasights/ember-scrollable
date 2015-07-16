@@ -23,6 +23,12 @@ export default DS.Model.extend({
   used: DS.attr('boolean', { defaultValue: false }),
   hasAdvisorInvoice: DS.attr('boolean', { defaultValue: false }),
 
+  hasIncompleteChecklistItems: Ember.computed('checklistItems.@each.completed', function() {
+    return _.every(this.get('checklistItems').toArray(), function(checklistItem) {
+      return !checklistItem.get('completed');
+    });
+  }),
+
   hasIncompletePaymentSteps: Ember.computed('used', 'paymentRequired', 'hasAdvisorInvoice', function() {
     return this.get('used') === false ||
       (
