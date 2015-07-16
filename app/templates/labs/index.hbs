@@ -1,16 +1,18 @@
-<div class='labs'>
-  {{#if currentUser.model.developer}}
-    {{#link-to 'labs.new'}}New{{/link-to}}
-  {{/if}}
-  <ul>
-    {{#each sortedFeatures as |feature|}}
-      <li>
-        {{as-lab
-          feature=feature
-          currentUser=currentUser
-          leave="destroyParticipation"
-          join="createParticipation"}}
-    </li>
-    {{/each}}
-  </ul>
-</div>
+  <header>
+    <h1>Labs</h1>
+    {{#if currentUser.model.developer}}
+      {{#link-to 'labs.new' classNames="new"}}New Lab{{/link-to}}
+    {{/if}}
+  </header>
+
+<ul>
+  {{#each sortedFeatures as |feature|}}
+    <li>
+      {{as-lab
+        feature=feature
+        currentUser=currentUser
+        leave="destroyParticipation"
+        join="createParticipation"}}
+  </li>
+  {{/each}}
+</ul>

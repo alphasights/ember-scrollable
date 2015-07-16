@@ -21,6 +21,7 @@ $participate-height: 40px;
     font-size: $h2-font-size;
     line-height: $h2-font-size * 1.5;
     padding: 0;
+    padding-top: $column-gutter / 4;
   }
 
   .owner {
@@ -28,7 +29,7 @@ $participate-height: 40px;
     @extend %grid-column-small-3;
 
     min-width: $small-avatar-size;
-    padding: 0;
+    padding: 0 !important;
 
     img {
       float: right;
@@ -39,7 +40,6 @@ $participate-height: 40px;
   }
 
   .brief-description {
-    border-bottom: 1px dashed #ccc;
     line-height: $base-font-size * 1.5;
     margin-bottom: $participate-height;
     padding-bottom: 10px;
@@ -47,6 +47,7 @@ $participate-height: 40px;
 
   .participate {
     bottom: 0;
+    color: $small-font-color;
     height: $participate-height;
     padding-right: $column-gutter;
     position: absolute;

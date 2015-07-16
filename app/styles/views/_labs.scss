@@ -1,8 +1,25 @@
-div.labs {
+section.labs {
+  margin: 0 $column-gutter / 2;
+
+  > header {
+    @include clearfix;
+
+    padding: $column-gutter / 2 !important;
+
+    h1 {
+      margin: 0 !important;
+    }
+
+    a {
+      @extend %button-primary;
+
+      float: right;
+    }
+  }
+
   > ul {
     display: flex;
     flex-flow: row wrap;
-    margin: 0 $column-gutter;
 
     > li {
       @media #{$small-only} {
