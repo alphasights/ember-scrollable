@@ -501,8 +501,8 @@ test("Default to personal whiteboard is present instead of team", function(asser
         "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
         "timeZone": "Etc/UTC",
         "email": 'example@user.com',
-        "teams": [1, 2],
-        "whiteboards": [1]
+        "team_ids": [1, 2],
+        "whiteboard_ids": [1]
       },
 
       "teams": [{

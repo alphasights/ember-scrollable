@@ -214,7 +214,7 @@ test("Filter interactions to schedule by Team Member", function(assert) {
       "time_zone": "America/New_York",
       "initials": andrewRath.initials,
       "team_id": team.id,
-      "teams": [team.id]
+      "team_ids": [team.id]
     },
 
     "teams": [

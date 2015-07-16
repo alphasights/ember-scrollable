@@ -211,7 +211,7 @@ test("Team switchers displays all upcoming interactions for the team", function(
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": team.id,
-      "teams": [team.id]
+      "team_ids": [team.id]
     },
 
     "teams": [

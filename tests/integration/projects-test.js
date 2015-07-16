@@ -155,7 +155,7 @@ test("Team switchers displays all projects for the team", function(assert) {
       "initials": "SSa",
       "team_id": team.id,
       "avatar_url": Fixtures.EMPTY_IMAGE_URL,
-      "teams": [team.id]
+      "team_ids": [team.id]
     },
 
     "teams": [
