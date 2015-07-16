@@ -106,7 +106,7 @@ export default Form.extend({
     var result = moment.tz(string, this.get('dateFormat'), this.get('timeZone'));
 
     if (result.isValid()) {
-      this.set('scheduledCallTime', result);
+      this.set('scheduledCallTime', result.toDate());
     } else {
       this._reloadValidScheduledCallTime();
     }
