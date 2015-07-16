@@ -20,11 +20,12 @@
     <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
   {{else}}
     {{#tool-tipster
+      class="disabled-tooltip"
       title="This feature has reached the maximum number of testers."
-      position="bottom-left"
+      position="top"
       tagName="span"
       maxWidth=400}}
-      <button>Join</button>
+      <button class="disabled">Join</button>
     {{/tool-tipster}}
   {{/if}}
 </div>

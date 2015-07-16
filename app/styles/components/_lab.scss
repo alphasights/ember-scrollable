@@ -1,24 +1,75 @@
+$small-avatar-size: $avatar-size;
+$participate-height: 40px;
+
 .lab {
-  padding: 15px;
+  border: 1px solid $iron;
+  border-radius: 5px;
+  padding: $column-gutter / 4 $column-gutter / 2;
+  width: 100%;
+  position: relative;
 
   header {
     @extend %grid-row;
+
+    padding-bottom: 15px;
   }
 
   h1 {
     @extend %grid-column-10;
+    @extend %grid-column-small-9;
 
     font-size: $h2-font-size;
+    line-height: $h2-font-size * 1.5;
     padding: 0;
   }
 
   .owner {
     @extend %grid-column-2;
+    @extend %grid-column-small-3;
 
-    padding: 0;
+    padding: 0 !important;
+    min-width: $small-avatar-size;
 
     img {
       float: right;
+      height: $small-avatar-size;
+      min-width: $small-avatar-size;
+      width: $small-avatar-size;
     }
+  }
+
+  .brief-description {
+    line-height: $base-font-size * 1.5;
+    margin-bottom: $participate-height;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+  }
+
+  .participate {
+    position: absolute;
+    bottom: 0;
+    height: $participate-height;
+    padding-right: $column-gutter;
+    width: 100%;
+  }
+
+  .join,
+  .leave,
+  .disabled {
+    @extend %button-tiny;
+
+    float: right;
+  }
+
+  .join {
+    @extend %button-primary;
+  }
+
+  .leave {
+    @extend %button-secondary;
+  }
+
+  .disabled-tooltip {
+    float: right;
   }
 }
