@@ -157,7 +157,7 @@ test("Send follow up email", function(assert) {
     var emailDeliveryMessage = $('.messenger .messenger-message-inner').last().text().trim();
     var advisorRemovalMessage = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(emailDeliveryMessage, 'Your email has been sent.');
-    assert.equal(advisorRemovalMessage, 'The advisor IceFrog has been removed from the list.');
+    assert.equal(advisorRemovalMessage, 'The advisor IceFrog was removed from the list.');
   });
 });
 
