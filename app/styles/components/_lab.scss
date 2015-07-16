@@ -5,8 +5,8 @@ $participate-height: 40px;
   border: 1px solid $iron;
   border-radius: 5px;
   padding: $column-gutter / 4 $column-gutter / 2;
-  width: 100%;
   position: relative;
+  width: 100%;
 
   header {
     @extend %grid-row;
@@ -27,8 +27,8 @@ $participate-height: 40px;
     @extend %grid-column-2;
     @extend %grid-column-small-3;
 
-    padding: 0 !important;
     min-width: $small-avatar-size;
+    padding: 0;
 
     img {
       float: right;
@@ -39,17 +39,17 @@ $participate-height: 40px;
   }
 
   .brief-description {
+    border-bottom: 1px dashed #ccc;
     line-height: $base-font-size * 1.5;
     margin-bottom: $participate-height;
     padding-bottom: 10px;
-    border-bottom: 1px dashed #ccc;
   }
 
   .participate {
-    position: absolute;
     bottom: 0;
     height: $participate-height;
     padding-right: $column-gutter;
+    position: absolute;
     width: 100%;
   }
 
