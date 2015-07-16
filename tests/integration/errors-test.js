@@ -30,7 +30,11 @@ test("First load error message", function(assert) {
 });
 
 test("Transition error message", function(assert) {
-  defineFixture('GET', '/whiteboards', { status: 500 });
+  defineFixture('GET', '/projects', { params: { team_id: '1' }, status: 500 });
+
+  defineFixture('GET', '/users', { params: { team_id: '1' }, response: {
+    "users": []
+  }});
 
   visit('/');
   visit('/whiteboards');
@@ -42,10 +46,6 @@ test("Transition error message", function(assert) {
 });
 
 test("404 error message", function(assert) {
-  defineFixture('GET', '/whiteboards', { response: {
-    "whiteboards": []
-  }});
-
   defineFixture('GET', '/projects', { params: { team_id: '1' }, status: 404 });
 
   defineFixture('GET', '/users', { params: { team_id: '1' }, response: {

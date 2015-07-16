@@ -1,48 +1,7 @@
 .whiteboards {
-  .beta-alert {
-    @include alert($bg: $info-color);
+  > header {
+    @include clearfix;
 
-    border: 0;
-    font-size: $base-font-size;
-    margin-bottom: 0;
-    margin-top: $column-gutter / 2;
-  }
-
-  .whiteboard-select {
-    h1,  
-    .toggle {
-      display: inline-block;
-      height: $h1-font-size;
-      vertical-align: middle;
-    }
-
-    h1 {
-      line-height: $h1-font-size;
-      padding-right: $column-gutter / 2;
-    }
-
-    .select {
-      @include form-select($inner-wrapper: null, $inline: true);
-
-      margin-right: $column-gutter / 2;
-    }
-
-    label {
-      @include form-label();
-
-      display: inline-block;
-    }
-
-    .toggle {
-      margin-bottom: 0;
-    }
-
-    &.open {
-      margin: $column-gutter 0;
-
-      .toggle {
-        background-color: $info-color;
-      }
-    }
+    padding: $column-gutter !important;
   }
 }

@@ -210,8 +210,17 @@ test("Team switchers displays all upcoming interactions for the team", function(
       "name": "Sarah Saltz",
       "time_zone": "America/New_York",
       "initials": "SSa",
-      "team_id": team.id
-    }
+      "team_id": team.id,
+      "team_ids": [team.id]
+    },
+
+    "teams": [
+      {
+        "name" : "NYSC18 - The McKountry Klub",
+        "id": team.id,
+        "office": "New York"
+      }
+    ]
   }});
 
   defineFixture('GET', '/users', { params: { team_id: team.id.toString() }, response: {
@@ -222,16 +231,6 @@ test("Team switchers displays all upcoming interactions for the team", function(
         "time_zone": "America/New_York",
         "initials": "SSa",
         "team_id": team.id
-      }
-    ]
-  }});
-
-  defineFixture('GET', '/teams', { response: {
-    "teams": [
-      {
-        "name" : "NYSC18 - The McKountry Klub",
-        "id": team.id,
-        "office": "New York"
       }
     ]
   }});

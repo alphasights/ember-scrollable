@@ -1,1 +1,7 @@
+$avatar-size: 50px;
+$avatar-size-tiny: $avatar-size * .5;
 
+$super-number-height: 60px;
+$super-number-arrow-color: lighten($header-font-color, 25%);
+$super-number-arrow-size: 20px;
+$super-number-arrow-padding: ($super-number-height - (2 * $super-number-arrow-size)) / 2;
