@@ -70,8 +70,7 @@
                   name="formattedScheduledCallTime"
                   placeholder="Please select a call time from the calendar."
                   value=value
-                  action="setScheduledCallTime"
-                  on="focus-out"}}
+                  focus-out="setScheduledCallTime"}}
               {{/as-form/input}}
 
               {{as-form/select form=form name="advisorPhoneCountryCode" label="Advisor Phone Number" content=scheduleInteractionForm.phoneCountryCodes}}

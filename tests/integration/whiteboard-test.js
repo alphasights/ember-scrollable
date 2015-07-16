@@ -19,8 +19,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU2",
         "id": 2,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -145,8 +145,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU3",
         "id": 3,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }]
     }});
 
@@ -496,13 +496,13 @@ test("Default to personal whiteboard is present instead of team", function(asser
         "name": "Example User",
         "initials": "EU",
         "id": 1,
-        "teamId": 1,
-        "whiteboardId": 1,
+        "team_id": 1,
+        "whiteboard_id": 1,
         "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
         "timeZone": "Etc/UTC",
         "email": 'example@user.com',
-        "teams": [1, 2],
-        "whiteboards": [1]
+        "team_ids": [1, 2],
+        "whiteboard_ids": [1]
       },
 
       "teams": [{

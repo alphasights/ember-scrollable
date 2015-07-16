@@ -6,7 +6,7 @@ export default DS.Model.extend(PerformableMixin, {
   currentMonthCreditCount: DS.attr('number'),
   monthlyTarget: DS.attr('number'),
   unusedAdvisorsCount: DS.attr('number'),
-  user: DS.belongsTo('user'),
+  user: DS.belongsTo('user', { async: false }),
 
   onPaceCreditTarget: Ember.computed('monthlyTarget', function() {
     return Math.round(
