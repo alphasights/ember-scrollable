@@ -2,8 +2,8 @@
   .alert {
     @include alert($warning-color);
 
-    padding: 0 $column-gutter / 2;
     margin: 0;
+    padding: 0 $column-gutter / 2;
   }
 
   .filters .dropdown {
