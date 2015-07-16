@@ -39,6 +39,11 @@ const primaryContact = {
   id: 1
 };
 
+const checklistItem = {
+  id: 1,
+  completed: false
+};
+
 QUnit.module("Scheduled interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
@@ -65,6 +70,12 @@ QUnit.module("Scheduled interactions", {
           "company_name": personalAdvisor.companyName,
           "time_zone": 'Europe/Moscow'
         }
+     ],
+     "checklist_items": [
+       {
+         "id": checklistItem.id,
+         "completed": checklistItem.completed
+       }
      ],
      "client_contacts": [
         {
@@ -114,7 +125,17 @@ QUnit.module("Scheduled interactions", {
           "client_contact_id": clientContact.id,
           "project_id": project.id,
           "actioned": false,
-          "primary_contact_id":primaryContact.id
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 2,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id,
+          "checklist_item_ids": [checklistItem.id]
         }
       ]
     }});
@@ -177,23 +198,31 @@ test("Show upcoming interactions list", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
-    var $interaction = find('.scheduled-interactions article:first');
+    var interactionListItems = find('.scheduled-interactions article').toArray().map(function(interaction) {
+      var $interaction = $(interaction);
+      
+      return {
+        advisorName: $interaction.find('.title span').text().trim(),
+        projectName: $interaction.find('.title small').text().trim(),
+        isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
+        localCallTime: $interaction.find('.time span').text().trim(),
+        relativeCallTime: $interaction.find('.time small').text().trim()
+      };
+    });
 
-    var interactionListItem = {
-      advisorName: $interaction.find('.title span').text().trim(),
-      projectName: $interaction.find('.title small').text().trim(),
-      isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
-      localCallTime: $interaction.find('.time span').text().trim(),
-      relativeCallTime: $interaction.find('.time small').text().trim()
-    };
-
-    assert.deepEqual(interactionListItem, {
+    assert.deepEqual(interactionListItems, [{
       advisorName: personalAdvisor.name,
       projectName: project.name,
       isChecklistComplete: true,
       localCallTime: '20 Feb, 10:00 AM',
       relativeCallTime: 'in 30 minutes'
-    });
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: false,
+      localCallTime: '20 Feb, 10:00 AM',
+      relativeCallTime: 'in 30 minutes'
+    }]);
   });
 });
 

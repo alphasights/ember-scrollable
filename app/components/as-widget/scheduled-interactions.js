@@ -1,23 +1,12 @@
 import Ember from 'ember';
-import ListWidgetComponent from 'phoenix/components/as-widget/list';
+import InteractionsWidgetComponent from 'phoenix/components/as-widget/interactions';
 
-export default ListWidgetComponent.extend({
-  classNameBindings: [':interactions', ':scheduled-interactions'],
+export default InteractionsWidgetComponent.extend({
+  classNameBindings: [':scheduled-interactions'],
 
   name: 'Scheduled Interactions',
 
   hasTeamMemberFilter: Ember.computed.oneWay('isTeamView'),
   listItemTemplateName: 'components/as-widget/scheduled-interactions/list-item',
-  emptyMessage: 'no scheduled interactions.',
-  interactionsWithIncompleteChecklistItems: Ember.computed.filterBy('arrangedContent', 'hasIncompleteChecklistItems', true),
-
-  alert: Ember.computed('interactionsWithIncompleteChecklistItems.length', function() {
-    let count = this.get('interactionsWithIncompleteChecklistItems.length');
-
-    if (count > 0) {
-      return `${count} ${count > 1 ? 'interactions' : 'interaction'} with an incomplete checklist in total`;
-    } else {
-      return '';
-    }
-  })
+  emptyMessage: 'no scheduled interactions.'
 });
