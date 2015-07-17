@@ -117,7 +117,7 @@ export default {
   },
 
   afterEach: function() {
-    $('.messenger .messenger-message').remove()
+    $('.messenger .messenger-message').remove();
 
     this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);
