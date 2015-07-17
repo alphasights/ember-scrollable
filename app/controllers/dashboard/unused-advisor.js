@@ -69,6 +69,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       email.save().then(() => {
         notify(`Your email has been sent.`);
         this.get('sidePanel').send('close');
+        this.send('remove');
       }).catch(function() {
         notify('There has been an error sending your email.', 'error');
       });
