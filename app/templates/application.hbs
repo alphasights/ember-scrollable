@@ -24,21 +24,28 @@
   {{outlet "side-panel"}}
 </main>
 
-{{#if showAppSwitcher}}
-  <div class="app-switcher-overlay" {{action "toggleAppSwitcher"}}></div>
-
-  <div class="app-switcher-modal">
+<div {{bind-attr class=":app-switcher showAppSwitcher:active"}} {{action "toggleAppSwitcher"}}>
+  <div class="content">
     <header>
       <h1>Switch Context</h1>
     </header>
 
     <ul>
-      <li>Pistachio</li>
-      <li>Octopus</li>
-      <li>Reporting</li>
+      <li class="pistachio">
+        <i></i>
+        <span>Pistachio</span>
+      </li>
+      <li class="octopus">
+        <i></i>
+        <span>Octopus</span>
+      </li>
+      <li class="reporting">
+        <i></i>
+        <span>Reporting</span>
+      </li>
     </ul>
   </div>
-{{/if}}
+</div>
 
 <div class="app-switcher-toggle" {{action "toggleAppSwitcher"}}>
   <i></i>
