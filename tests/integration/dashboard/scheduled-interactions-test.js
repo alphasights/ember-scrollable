@@ -183,16 +183,16 @@ test("Show upcoming interactions list", function(assert) {
       advisorName: $interaction.find('.title span').text().trim(),
       projectName: $interaction.find('.title small').text().trim(),
       isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
-      localCallTime: $interaction.find('.time span').text().trim(),
-      relativeCallTime: $interaction.find('.time small').text().trim()
+      callTime: $interaction.find('.time span:first').text().trim(),
+      callDate: $interaction.find('.time span:last').text().trim()
     };
 
     assert.deepEqual(interactionListItem, {
       advisorName: personalAdvisor.name,
       projectName: project.name,
       isChecklistComplete: true,
-      localCallTime: '20 Feb, 10:00 AM',
-      relativeCallTime: 'in 30 minutes'
+      callTime: '10:00 AM',
+      callDate: 'Fri 20 Feb'
     });
   });
 });
