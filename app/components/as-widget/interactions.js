@@ -10,7 +10,7 @@ export default ListWidgetComponent.extend({
     let count = this.get('interactionsWithIncompleteChecklistItems.length');
 
     if (count > 0) {
-      return `${count} ${count > 1 ? 'interactions have' : 'interaction has'} incomplete checklist items`;
+      return `${count} ${count > 1 ? 'interactions have' : 'interaction has'} incomplete checklist items.`;
     } else {
       return '';
     }

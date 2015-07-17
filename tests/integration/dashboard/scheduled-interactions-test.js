@@ -136,7 +136,34 @@ QUnit.module("Scheduled interactions", {
           "actioned": false,
           "primary_contact_id": primaryContact.id,
           "checklist_item_ids": [checklistItem.id]
-        }
+        },
+        {
+          "id": 3,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 4,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 5,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
       ]
     }});
   },
@@ -200,7 +227,7 @@ test("Show upcoming interactions list", function(assert) {
   andThen(function() {
     var interactionListItems = find('.scheduled-interactions article').toArray().map(function(interaction) {
       var $interaction = $(interaction);
-      
+
       return {
         advisorName: $interaction.find('.title span').text().trim(),
         projectName: $interaction.find('.title small').text().trim(),
@@ -222,7 +249,21 @@ test("Show upcoming interactions list", function(assert) {
       isChecklistComplete: false,
       localCallTime: '20 Feb, 10:00 AM',
       relativeCallTime: 'in 30 minutes'
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: true,
+      localCallTime: '20 Feb, 10:00 AM',
+      relativeCallTime: 'in 30 minutes'
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: true,
+      localCallTime: '20 Feb, 10:00 AM',
+      relativeCallTime: 'in 30 minutes'
     }]);
+
+    assert.equal($('.scheduled-interactions .alert').text().trim(), '1 interaction has incomplete checklist items.');
   });
 });
 
