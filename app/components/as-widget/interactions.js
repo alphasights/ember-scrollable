@@ -9,10 +9,10 @@ export default ListWidgetComponent.extend({
   alert: Ember.computed('interactionsWithIncompleteChecklistItems.length', function() {
     let count = this.get('interactionsWithIncompleteChecklistItems.length');
 
-    if (count > 0) {
-      return `${count} ${count > 1 ? 'interactions have' : 'interaction has'} incomplete checklist items.`;
-    } else {
-      return '';
-    }
+    return `${count} ${count > 1 ? 'interactions have' : 'interaction has'} incomplete checklist items.`;
+  }),
+
+  displayAlert: Ember.computed('interactionsWithIncompleteChecklistItems.length', 'hasMoreItems', function() {
+    return this.get('interactionsWithIncompleteChecklistItems.length') > 0 && this.get('hasMoreItems');
   })
 });
