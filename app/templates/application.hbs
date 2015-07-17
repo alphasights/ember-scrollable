@@ -23,30 +23,3 @@
 
   {{outlet "side-panel"}}
 </main>
-
-<div {{bind-attr class=":app-switcher showAppSwitcher:active"}} {{action "toggleAppSwitcher"}}>
-  <div class="content">
-    <header>
-      <h1>Switch Context</h1>
-    </header>
-
-    <ul>
-      <li class="pistachio">
-        <i></i>
-        <span>Pistachio</span>
-      </li>
-      <li class="octopus">
-        <i></i>
-        <span>Octopus</span>
-      </li>
-      <li class="reporting">
-        <i></i>
-        <span>Reporting</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="app-switcher-toggle" {{action "toggleAppSwitcher"}}>
-  <i></i>
-</div>

@@ -38,10 +38,6 @@ export default Ember.Controller.extend({
       /* jshint newcap: false */
       Intercom('show');
       /* jshint newcap: true */
-    },
-
-    toggleAppSwitcher: function() {
-      this.toggleProperty('showAppSwitcher');
     }
   }
 });

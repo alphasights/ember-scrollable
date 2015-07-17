@@ -10,6 +10,22 @@
     focus-in="activate"}}
 </div>
 
+<div class="actions">
+  {{#liquid-if isActive use="crossFade"}}
+    <div class="close" {{action "clear"}}>
+      <button title="Close"></button>
+    </div>
+  {{else}}
+    <div class="content">
+      <ul class="navigation-actions">
+        <li>
+          <button class="change-app" {{action "toggleAppSwitcher"}}></button>
+        </li>
+      </ul>
+    </div>
+  {{/liquid-if}}
+</div>
+
 {{#liquid-if isActive containerless=true use="crossFade"}}
   <div class="results">
     {{#liquid-if requestPromise.isFulfilled use="crossFade"}}
@@ -35,3 +51,26 @@
     {{/liquid-if}}
   </div>
 {{/liquid-if}}
+
+<div {{bind-attr class=":app-switcher showAppSwitcher:active"}} {{action "toggleAppSwitcher"}}>
+  <div class="content">
+    <header>
+      <h1>Switch Context</h1>
+    </header>
+
+    <ul>
+      <li class="pistachio">
+        <i></i>
+        <span>Pistachio</span>
+      </li>
+      <li class="octopus">
+        <i></i>
+        <span>Octopus</span>
+      </li>
+      <li class="reporting">
+        <i></i>
+        <span>Reporting</span>
+      </li>
+    </ul>
+  </div>
+</div>
