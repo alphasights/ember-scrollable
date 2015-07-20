@@ -1,5 +1,6 @@
 $small-avatar-size: $avatar-size;
 $participate-height: 40px;
+$gold: #FFD700;
 
 .lab {
   border: 1px solid $iron;
@@ -7,6 +8,10 @@ $participate-height: 40px;
   padding: $column-gutter / 4 $column-gutter / 2;
   position: relative;
   width: 100%;
+
+  &.mine {
+    border: 1px solid $gold;
+  }
 
   header {
     @extend %grid-row;
