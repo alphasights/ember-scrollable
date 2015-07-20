@@ -274,6 +274,9 @@ test("Cancel Interaction unschedules the call and transitions to the to schedule
     assert.equal(currentURL(), `/dashboard/interactions/${interaction.id}/schedule`,
       'transitions to the scheduling side panel'
     );
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "The interaction has been cancelled.");
   });
 });
 

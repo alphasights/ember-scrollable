@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
-import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import RequestCancellation from 'phoenix/services/request-cancellation';
 import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
@@ -50,8 +50,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
-      InteractionCancellation.create().cancel(this.get('model'), response => {
-        notify('The interaction has been cancelled.');
+      RequestCancellation.create().cancel(this.get('model'), response => {
+        notify('The request has been cancelled.');
         this.store.pushPayload(response);
         this.get('dashboard').propertyDidChange('scheduledInteractions');
         this.get('sidePanel').send('close');
@@ -107,6 +107,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         promise: model.save().then(() => {
           this.get('dashboard').propertyDidChange('scheduledInteractions');
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
+          notify('The interaction has been cancelled.');
         }, () => {
           notify('There has been an error rescheduling the interaction.', 'error');
           model.rollback();
