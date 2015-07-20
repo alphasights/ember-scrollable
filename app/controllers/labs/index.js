@@ -32,8 +32,8 @@ export default Ember.Controller.extend({
     return this.get('_myLabs.length');
   }),
 
-  _sortedLabs: Ember.computed('model.[]', function() {
-    return this.get('model').sortBy('name');
+  _sortedLabs: Ember.computed('model.@each.name', function() {
+    return this.get('model').rejectBy('name', undefined).sortBy('name');
   }),
 
   _myLabs: Ember.computed('_sortedLabs.@each.featureParticipations', function() {
