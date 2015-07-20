@@ -39,6 +39,11 @@ const primaryContact = {
   id: 1
 };
 
+const checklistItem = {
+  id: 1,
+  completed: false
+};
+
 QUnit.module("Scheduled interactions", {
   beforeEach: function() {
     testHelper.beforeEach.apply(this, arguments);
@@ -65,6 +70,12 @@ QUnit.module("Scheduled interactions", {
           "company_name": personalAdvisor.companyName,
           "time_zone": 'Europe/Moscow'
         }
+     ],
+     "checklist_items": [
+       {
+         "id": checklistItem.id,
+         "completed": checklistItem.completed
+       }
      ],
      "client_contacts": [
         {
@@ -114,8 +125,45 @@ QUnit.module("Scheduled interactions", {
           "client_contact_id": clientContact.id,
           "project_id": project.id,
           "actioned": false,
-          "primary_contact_id":primaryContact.id
-        }
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 2,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id,
+          "checklist_item_ids": [checklistItem.id]
+        },
+        {
+          "id": 3,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 4,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
+        {
+          "id": 5,
+          "scheduled_call_time": personalAdvisor.scheduledCallTime,
+          "advisor_id": personalAdvisor.id,
+          "client_contact_id": clientContact.id,
+          "project_id": project.id,
+          "actioned": false,
+          "primary_contact_id": primaryContact.id
+        },
       ]
     }});
   },
@@ -177,23 +225,45 @@ test("Show upcoming interactions list", function(assert) {
   visit('/dashboard');
 
   andThen(function() {
-    var $interaction = find('.scheduled-interactions article:first');
+    var interactionListItems = find('.scheduled-interactions article').toArray().map(function(interaction) {
+      var $interaction = $(interaction);
 
-    var interactionListItem = {
-      advisorName: $interaction.find('.title span').text().trim(),
-      projectName: $interaction.find('.title small').text().trim(),
-      isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
-      localCallTime: $interaction.find('.time span').text().trim(),
-      relativeCallTime: $interaction.find('.time small').text().trim()
-    };
+      return {
+        advisorName: $interaction.find('.title span').text().trim(),
+        projectName: $interaction.find('.title small').text().trim(),
+        isChecklistComplete: $interaction.find('.checklist-status.complete').length === 1,
+        callTime: $interaction.find('.time span:first').text().trim(),
+        callDate: $interaction.find('.time span:last').text().trim()
+      };
+    });
 
-    assert.deepEqual(interactionListItem, {
+    assert.deepEqual(interactionListItems, [{
       advisorName: personalAdvisor.name,
       projectName: project.name,
       isChecklistComplete: true,
-      localCallTime: '20 Feb, 10:00 AM',
-      relativeCallTime: 'in 30 minutes'
-    });
+      callTime: '10:00 AM',
+      callDate: 'Fri 20 Feb'
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: false,
+      callTime: '10:00 AM',
+      callDate: 'Fri 20 Feb'
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: true,
+      callTime: '10:00 AM',
+      callDate: 'Fri 20 Feb'
+    }, {
+      advisorName: personalAdvisor.name,
+      projectName: project.name,
+      isChecklistComplete: true,
+      callTime: '10:00 AM',
+      callDate: 'Fri 20 Feb'
+    }]);
+
+    assert.equal($('.scheduled-interactions .alert').text().trim(), '1 interaction has incomplete checklist items.');
   });
 });
 
@@ -210,8 +280,17 @@ test("Team switchers displays all upcoming interactions for the team", function(
       "name": "Sarah Saltz",
       "time_zone": "America/New_York",
       "initials": "SSa",
-      "team_id": team.id
-    }
+      "team_id": team.id,
+      "team_ids": [team.id]
+    },
+
+    "teams": [
+      {
+        "name" : "NYSC18 - The McKountry Klub",
+        "id": team.id,
+        "office": "New York"
+      }
+    ]
   }});
 
   defineFixture('GET', '/users', { params: { team_id: team.id.toString() }, response: {
@@ -222,16 +301,6 @@ test("Team switchers displays all upcoming interactions for the team", function(
         "time_zone": "America/New_York",
         "initials": "SSa",
         "team_id": team.id
-      }
-    ]
-  }});
-
-  defineFixture('GET', '/teams', { response: {
-    "teams": [
-      {
-        "name" : "NYSC18 - The McKountry Klub",
-        "id": team.id,
-        "office": "New York"
       }
     ]
   }});

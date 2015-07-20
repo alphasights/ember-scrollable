@@ -19,8 +19,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU2",
         "id": 2,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -145,8 +145,8 @@ QUnit.module("Whiteboard", {
       "users": [{
         "initials": "EU3",
         "id": 3,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }]
     }});
 
@@ -156,10 +156,6 @@ QUnit.module("Whiteboard", {
 
     defineFixture('GET', '/users', { params: { whiteboard_id: '1' }, response: {
       "users": []
-    }});
-
-    defineFixture('GET', '/whiteboards', { response: {
-      "whiteboards": []
     }});
   },
 
@@ -476,8 +472,7 @@ test("Remove a member from an angle", function(assert) {
 test("Change selected team", function(assert) {
   visit('/whiteboards');
 
-  click('.whiteboard-select button');
-  select('.whiteboard-select select', 'Example Team 2');
+  select('.whiteboards > header .select select', 'Example Team 2');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Team Project');
@@ -485,19 +480,51 @@ test("Change selected team", function(assert) {
 });
 
 test("Change selected whiteboard", function(assert) {
-  defineFixture('GET', '/whiteboards', { response: {
-    "whiteboards": [
-      {
-        "id": 1,
-        "name": "Cool whiteboard"
-      }
-    ]
-  }});
-
   visit('/whiteboards');
 
-  click('.whiteboard-select button');
-  select('.whiteboard-select select', 'Cool whiteboard');
+  select('.whiteboards > header .select select', 'Cool whiteboard');
+
+  andThen(function() {
+    assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');
+  });
+});
+
+test("Default to personal whiteboard is present instead of team", function(assert) {
+  defineFixture('GET', '/users/me', {
+    response: {
+      "user": {
+        "name": "Example User",
+        "initials": "EU",
+        "id": 1,
+        "team_id": 1,
+        "whiteboard_id": 1,
+        "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
+        "timeZone": "Etc/UTC",
+        "email": 'example@user.com',
+        "team_ids": [1, 2],
+        "whiteboard_ids": [1]
+      },
+
+      "teams": [{
+        "name": "Example Team",
+        "id": 1,
+        "office": "Example Office"
+      }, {
+        "name": "Example Team 2",
+        "id": 2,
+        "office": "Example Office"
+      }],
+
+      "whiteboards": [
+        {
+          "id": 1,
+          "name": "Cool whiteboard"
+        }
+      ]
+    }
+  });
+
+  visit('/whiteboards');
 
   andThen(function() {
     assert.equal(find('.whiteboard-project-list-item .details .name').text().trim(), 'Whiteboard Project');

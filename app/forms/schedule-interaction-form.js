@@ -3,8 +3,9 @@ import jstz from 'jstz';
 import Form from 'phoenix/forms/form';
 import phoneCountryCodes from 'phoenix/models/phone-country-codes';
 import localMoment from 'phoenix/helpers/local-moment';
+import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
-export default Form.extend({
+export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error scheduling the interaction.',
   interactionTypes: null,
   interactionClassifications: null,
@@ -67,25 +68,6 @@ export default Form.extend({
     });
   },
 
-  interactionTypesForSelect: Ember.computed('interactionTypes', 'interactionClassifications', function() {
-    var classifications = this.get('interactionClassifications');
-    var interactionTypes = this.get('interactionTypes');
-
-    var types = _.map(classifications, function(typeIds, classification) {
-      return _.map(typeIds, function(typeId) {
-        return {
-          id: typeId,
-          name: interactionTypes[typeId],
-          classification: _.map(classification.split('_'), function(word){
-            return word.capitalize();
-          }).join(' ')
-        };
-      });
-    });
-
-    return _.flatten(types);
-  }),
-
   formattedScheduledCallTime: Ember.computed('scheduledCallTime', 'timeZone', {
     get: function() {
       var scheduledCallTime = this.get('scheduledCallTime');
@@ -106,7 +88,7 @@ export default Form.extend({
     var result = moment.tz(string, this.get('dateFormat'), this.get('timeZone'));
 
     if (result.isValid()) {
-      this.set('scheduledCallTime', result);
+      this.set('scheduledCallTime', result.toDate());
     } else {
       this._reloadValidScheduledCallTime();
     }

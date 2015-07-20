@@ -6,7 +6,7 @@ export default Ember.Service.extend({
   sidebarCollapsed: Ember.computed.alias('model.sidebarCollapsed'),
 
   fetch: function() {
-    return this.store.find('preferences').then((preferences) => {
+    return this.store.findAll('preferences').then((preferences) => {
       if (Ember.isEmpty(preferences)) {
         var newPreferences = this.store.createRecord('preferences');
         newPreferences.save();

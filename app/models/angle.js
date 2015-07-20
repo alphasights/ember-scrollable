@@ -2,8 +2,8 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  angleTeamMemberships: DS.hasMany('angleTeamMembership'),
-  project: DS.belongsTo('project'),
+  angleTeamMemberships: DS.hasMany('angleTeamMembership', { async: false }),
+  project: DS.belongsTo('project', { async: false }),
   title: DS.attr('string'),
   createdAt: DS.attr('date'),
 
