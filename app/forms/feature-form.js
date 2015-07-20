@@ -2,13 +2,18 @@ import Ember from 'ember';
 import Form from 'phoenix/forms/form';
 
 export default Form.extend({
-  genericErrorMessage: 'There has been an error with the feature.',
+  genericErrorMessage: 'There has been an error with the lab.',
 
   setDefaultValues: function(){
     this.set('name', this.get('model.name'));
     this.set('badgeName', this.get('model.badgeName'));
     this.set('briefDescription', this.get('model.briefDescription'));
     this.set('limit', this.get('model.limit'));
+    if (this.get('limit') != null) {
+      this.set('showLimit', true);
+    } else {
+      this.set('showLimit', false);
+    }
   },
 
   setPersistedValues: function() {

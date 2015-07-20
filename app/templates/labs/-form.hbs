@@ -18,11 +18,21 @@
         name="briefDescription"
         label="Brief Description"}}
 
-      {{as-form/input
+      {{#as-form/input
         form=form
-        name="limit"
-        type="number"
-        label="Limit"}}
+        label="Limit the number of participants"
+        classNames="limit-participants"}}
+          {{input type="checkbox" name="showLimit" checked=featureForm.showLimit}}
+      {{/as-form/input}}
+
+      {{#liquid-if featureForm.showLimit}}
+        {{as-form/input
+          form=form
+          name="limit"
+          type="number"
+          classNames="participant-limit"
+          placeholder="Maximum number of participants"}}
+      {{/liquid-if}}
     {{/as-form/fieldset}}
 
     {{#as-action-group}}

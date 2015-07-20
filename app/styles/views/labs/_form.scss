@@ -1,4 +1,6 @@
 $h1-line-height: rem-calc(56);
+$limit-participants-height: rem-calc(29);
+$participant-limit-height: rem-calc(76);
 
 section.labs .edit-lab,
 section.labs .new-lab {
@@ -20,5 +22,38 @@ section.labs .new-lab {
 
   .form-submission-action {
     float: right;
+  }
+
+  .limit-participants {
+    height: $limit-participants-height;
+    min-height: $limit-participants-height;
+
+    .form-field {
+      height: $limit-participants-height;
+
+      > label {
+        float: left;
+        line-height: $limit-participants-height;
+      }
+
+      .content {
+        float: left;
+        line-height: $limit-participants-height;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  fieldset .liquid-container {
+    clear: both;
+  }
+
+  .participant-limit {
+    height: $participant-limit-height;
+    min-height: $participant-limit-height;
+
+    label {
+      display: none;
+    }
   }
 }
