@@ -48,7 +48,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/projects/${projectId}/completion`;
   }),
 
-  _cancel: function(withdrawFromCompliance = false) {
+  _cancelRequest: function(withdrawFromCompliance = false) {
     var requestPromise =
       RequestCancellation.create().cancel(this.get('model'), response => {
         this.store.pushPayload(response);
@@ -84,11 +84,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     },
 
     cancelRequest: function() {
-      this._cancel(false);
+      this._cancelRequest(false);
     },
 
     withdrawAndCancelRequest: function() {
-      this._cancel(true);
+      this._cancelRequest(true);
     },
 
     changeTime: function() {
