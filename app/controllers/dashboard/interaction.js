@@ -84,15 +84,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('sidePanel').send('toggleDrawer');
     },
 
-    cancel: function() {
+    cancelRequest: function() {
       this._cancel(false);
     },
 
-    withdrawAndCancel: function() {
+    withdrawAndCancelRequest: function() {
       this._cancel(true);
     },
 
-    reschedule: function() {
+    changeTime: function() {
+      this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
+    },
+
+    cancelInteraction: function() {
       var model = this.get('model');
 
       this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));

@@ -101,31 +101,41 @@
     {{#as-side-panel/footer}}
       {{#as-action-group}}
         {{#as-action action="toggleDrawer"}}
-          Complete Interaction
+          Complete
         {{/as-action}}
 
-        {{#as-action action="reschedule"}}
-          Reschedule Interaction
+        {{#as-action action="changeTime"}}
+          Change Time
         {{/as-action}}
 
         {{#as-action
           showConfirmation=true
-          action="cancel"
+          action="cancelInteraction"
           buttonClass="error cancel"
           confirmationButtonLabel="Yes, Cancel Interaction"
-          confirmationMessage="Are you sure you want to cancel the interaction?"
+          confirmationMessage="Are you sure you want to cancel the interaction? This will delete the calendar invitation."
           requestPromise=requestPromise}}
           Cancel Interaction
         {{/as-action}}
 
         {{#as-action
           showConfirmation=true
-          action="withdrawAndCancel"
+          action="cancelRequest"
+          buttonClass="error cancel"
+          confirmationButtonLabel="Yes, Cancel Request"
+          confirmationMessage="Are you sure you want to cancel the request?"
+          requestPromise=requestPromise}}
+          Cancel Request
+        {{/as-action}}
+
+        {{#as-action
+          showConfirmation=true
+          action="withdrawAndCancelRequest"
           buttonClass="error"
           confirmationButtonLabel="Yes, Cancel and Withdraw"
           confirmationMessage="Are you sure you want to cancel the interaction and withdraw from client compliance?"
           requestPromise=requestPromise}}
-          Cancel and Withdraw Interaction
+          Cancel and Withdraw Request
         {{/as-action}}
       {{/as-action-group}}
     {{/as-side-panel/footer}}
