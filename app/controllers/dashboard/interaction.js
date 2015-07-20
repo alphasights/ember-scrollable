@@ -51,7 +51,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   _cancel: function(withdrawFromCompliance = false) {
     var requestPromise =
       RequestCancellation.create().cancel(this.get('model'), response => {
-        notify('The request has been cancelled.');
         this.store.pushPayload(response);
         this.get('dashboard').propertyDidChange('scheduledInteractions');
         this.get('sidePanel').send('close');
