@@ -12,7 +12,7 @@ export default Ember.Object.extend({
         url: `${EmberENV.apiBaseUrl}/interests/${model.get('id')}?${params}`,
         type: 'DELETE'
       }).then(successCallback, () => {
-        notify('The interaction could not be cancelled.', 'error');
+        notify('The request could not be cancelled.', 'error');
       })
     });
 
