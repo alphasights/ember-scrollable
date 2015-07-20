@@ -1,5 +1,15 @@
 # Phoenix Changelog
 
+### Release 0.0.9 (July 20, 2015)
+
+- [#472](https://github.com/alphasights/phoenix/pull/472) Add warning message if there are incomplete interactions
+- [#473](https://github.com/alphasights/phoenix/pull/473) Show day of the week in scheduled interactions widget
+- [#466](https://github.com/alphasights/phoenix/pull/466) Automatically remove advisor after following up
+- [#469](https://github.com/alphasights/phoenix/pull/469) Always show on pace target on hover
+- [#447](https://github.com/alphasights/phoenix/pull/447) Add whiteboards to the team switcher
+- [#430](https://github.com/alphasights/phoenix/pull/430) Add interaction types to call completion form
+- [#424](https://github.com/alphasights/phoenix/pull/424) Improve scheduling form selects performance
+
 ### Release 0.0.8 (July 13, 2015)
 
 - [#432](https://github.com/alphasights/phoenix/pull/432) Allow to manually set the scheduled call time

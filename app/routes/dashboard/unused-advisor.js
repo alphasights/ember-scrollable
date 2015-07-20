@@ -19,8 +19,8 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
       return Ember.RSVP.hash({
         unusedAdvisor: unusedAdvisor,
         emails: this.findPaged('email', { emails: advisorEmails }),
-        emailTemplates: this.store.find('emailTemplate', { purpose: "Unused Advisor" }),
-        emailVariables: this.store.find('emailVariable', {
+        emailTemplates: this.store.query('emailTemplate', { purpose: "Unused Advisor" }),
+        emailVariables: this.store.query('emailVariable', {
           concerning_type: "email/unused_advisorship_email",
           concerning_id: unusedAdvisor.get('id')
         }),

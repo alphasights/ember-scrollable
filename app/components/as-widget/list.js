@@ -15,6 +15,7 @@ export default WidgetComponent.extend({
   collapsedMaxVisibleItems: 4,
   selectedTeamMember: null,
   emptyMessageBase: 'There are',
+  alert: null,
 
   fullEmptyMessage: Ember.computed('emptyMessageBase', 'emptyMessage', 'selectedTeamMember', function() {
     var emptyMessageBase;

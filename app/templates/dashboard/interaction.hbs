@@ -137,11 +137,38 @@
         {{#as-form model=completionForm action="chargeClient" as |form|}}
           {{#as-form/fieldset}}
             <h1>Client Completion</h1>
-            {{as-form/input
-              name="duration"
+            {{as-form/select
               form=form
+              name="interactionType"
+              label="Interaction Type"
+              content=completionForm.interactionTypesForSelect
               disabled=completionForm.editingDisabled
-              label="Call Duration (minutes)"}}
+              optionGroupPath="classification"
+            }}
+
+            {{#if completionForm.isDurationBased}}
+              {{as-form/input
+                name="duration"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Call Duration (minutes)"}}
+            {{/if}}
+
+            {{#if completionForm.isCustomCredit}}
+              {{as-form/input
+                name="customCredits"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Credits"}}
+            {{/if}}
+
+            {{#if completionForm.isPriceBased}}
+              {{as-form/input
+                name="customRevenue"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Price (USD)"}}
+            {{/if}}
 
             {{as-form/select
               name="quality"
@@ -177,6 +204,7 @@
                 <span>The interaction has already been completed. To amend, please visit the <a href={{completionUrl}} class="url" target="_blank">completion page</a>.</span>
               {{/if}}
             {{else}}
+
               {{#as-form/submit form=form requestPromise=completionForm.requestPromise}}
                 Charge Client
               {{/as-form/submit}}
