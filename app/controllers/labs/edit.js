@@ -2,7 +2,7 @@ import Ember from 'ember';
 import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend({
-  buttonText: 'Update Lab',
+  buttonText: 'Save',
   formAction: 'update',
 
   actions: {
