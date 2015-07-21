@@ -1,3 +1,5 @@
+{{page-numbers content=emails}}
+
 <table>
   {{#each emails as |email|}}
     <tr {{action "viewEmail" email}} class={{if (eq selectedEmail.id email.id) "selected"}}>
