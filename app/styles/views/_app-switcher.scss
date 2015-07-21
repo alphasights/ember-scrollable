@@ -1,6 +1,4 @@
 $app-switcher-default-settings: (
-  width: 460px,
-  height: 200px,
   icon-width: 48px,
 
   apps: (
@@ -35,7 +33,7 @@ $app-switcher-default-settings: (
   border-radius: $global-radius;
   display: block;
   height: $width;
-  margin: $column-gutter auto;
+  margin: $column-gutter auto $column-gutter / 2;
   width: $width;
 }
 
@@ -51,6 +49,7 @@ $app-switcher-default-settings: (
         display: block;
         font-size: $small-font-size;
         font-weight: $font-weight-bold;
+        margin-bottom: $column-gutter / 2;
         text-align: center;
         text-transform: uppercase;
       }
@@ -59,40 +58,27 @@ $app-switcher-default-settings: (
 }
 
 .app-switcher {
-  @include overlay;
+  @include modal($use-content-size: true);
 
-  > .content {
-    @extend %panel-default;
-    @include panel-background(color(gray, smoke));
 
-    left: 50%;
-    margin-left: -(app-switcher-settings(width) / 2);
-    margin-top: -(app-switcher-settings(height) / 2);
-    min-height: app-switcher-settings(height);
-    min-width: app-switcher-settings(width);
-    position: absolute;
-    top: -100%;
-    transition: top $global-transition-duration $global-transition-easing;
-
+  > div {
     > header {
-      font-weight: $font-weight-bold;
       text-align: center;
-      text-transform: uppercase;
     }
 
-    > ul {
-      @extend %grid-row;
+    > .content {
+      padding: 0 $column-gutter;
 
-      > li {
-        @extend %grid-column-4;
-        @include app-switcher-icons;
+      > ul {
+        @extend %grid-row;
 
-        text-align: center;
+        > li {
+          @extend %grid-column-4;
+          @include app-switcher-icons;
+
+          text-align: center;
+        }
       }
     }
-  }
-
-  &.active > .content {
-    top: 50%;
   }
 }
