@@ -4,12 +4,12 @@ import Ember from 'ember';
 const PRIORITIES = ['low', 'medium', 'high'];
 
 export default DS.Model.extend({
-  analyst_1: DS.belongsTo('user'),
-  angles: DS.hasMany('angle'),
+  analyst_1: DS.belongsTo('user', { async: false }),
+  angles: DS.hasMany('angle', { async: false }),
   clientCode: DS.attr('string'),
   createdAt: DS.attr('date'),
   detailsUrl: DS.attr('string'),
-  interactions: DS.hasMany('interaction'),
+  interactions: DS.hasMany('interaction', { async: false }),
   leftToScheduleAdvisorsCount: DS.attr('number'),
   name: DS.attr('string'),
   proposedAdvisorsCount: DS.attr('number'),

@@ -3,7 +3,7 @@ import EmberValidations from 'ember-validations';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
 
-export default Ember.Controller.extend(EmberValidations.Mixin, {
+export default Ember.Controller.extend(EmberValidations, {
   requestPromise: null,
 
   initializeValues: Ember.on('init', function() {

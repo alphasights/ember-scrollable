@@ -1,7 +1,18 @@
 .dashboard .widget.list {
+  .alert {
+    @include alert($warning-color);
+
+    margin: 0;
+    padding: 0 $column-gutter / 2;
+  }
+
   .filters .dropdown {
     &.team-members ul {
       width: 250px;
+
+      * {
+        color: $body-font-color;
+      }
 
       li,
       li a {
@@ -20,7 +31,6 @@
     button {
       background-color: transparent;
       border-color: transparent;
-      color: $white;
       margin: 0;
 
       i {

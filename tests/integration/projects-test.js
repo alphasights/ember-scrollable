@@ -21,8 +21,8 @@ QUnit.module("Projects", {
       "users": [{
         "initials": "EU2",
         "id": 2,
-        "teamId": 1,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "team_id": 1,
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }],
 
       "angles": [{
@@ -154,11 +154,10 @@ test("Team switchers displays all projects for the team", function(assert) {
       "time_zone": "America/New_York",
       "initials": "SSa",
       "team_id": team.id,
-      "avatarUrl": Fixtures.EMPTY_IMAGE_URL
-    }
-  }});
+      "avatar_url": Fixtures.EMPTY_IMAGE_URL,
+      "team_ids": [team.id]
+    },
 
-  defineFixture('GET', '/teams', { response: {
     "teams": [
       {
         "name" : "NYSC18 - The McKountry Klub",
@@ -176,7 +175,7 @@ test("Team switchers displays all projects for the team", function(assert) {
         "time_zone": "America/New_York",
         "initials": "SSa",
         "team_id": team.id,
-        "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+        "avatar_url": Fixtures.EMPTY_IMAGE_URL
       }
     ]
   }});
@@ -185,8 +184,8 @@ test("Team switchers displays all projects for the team", function(assert) {
     "users": [{
       "initials": "EU2",
       "id": 2,
-      "teamId": team.id,
-      "avatarUrl": Fixtures.EMPTY_IMAGE_URL
+      "team_id": team.id,
+      "avatar_url": Fixtures.EMPTY_IMAGE_URL
     }],
 
     "angles": [{
@@ -273,7 +272,7 @@ test("Team switchers displays all projects for the team", function(assert) {
       title: 'Example Project 4',
       codename: 'Chocolate 4',
       clientCode: 'EP',
-      memberAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
+      memberAvatarUrl: undefined,
       leadAvatarUrl: Fixtures.EMPTY_IMAGE_URL,
       deliveredCount: '1 Delivered',
       upcomingCount: '2 Upcoming',
@@ -288,5 +287,30 @@ test("Team switchers displays all projects for the team", function(assert) {
       upcomingCount: '4 Upcoming',
       requestedCount: '7 Requested'
     }]);
+  });
+});
+
+test('Switching to a whiteboard triggers the right requests', function(assert) {
+  let projectsHandler = defineFixture('GET', '/projects', {
+    params: { whiteboard_id: '1', all_time: 'true' },
+    response: {
+      "projects": []
+    }
+  });
+
+  let usersHandler = defineFixture('GET', '/users', {
+    params: { whiteboard_id: '1' },
+    response: {
+      "users": []
+    }
+  });
+
+  visit('/projects');
+
+  select('.projects > header .select select', 'Cool whiteboard');
+
+  andThen(function() {
+    assert.equal(projectsHandler.called, true);
+    assert.equal(usersHandler.called, true);
   });
 });

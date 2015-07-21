@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Form from 'phoenix/forms/form';
-import EmberValidations from 'ember-validations';
+import { validator } from 'ember-validations';
 import SelectableInteractionTypesMixin from 'phoenix/mixins/selectable-interaction-types-form';
 
 const qualityOptionsMapping = {
@@ -22,8 +22,6 @@ const speakQualityOptionsMapping = {
   'advisor_not_dialed': 'Advisor not dialed',
   'other': 'Other issue'
 };
-
-const speakQualityOptions = speakQualityOptionsMapping.keys;
 
 export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error completing the interaction.',
@@ -105,7 +103,7 @@ export default Form.extend(SelectableInteractionTypesMixin, {
     },
 
     customCredits: {
-      inline: EmberValidations.validator(function() {
+      inline: validator(function() {
         if (this.model.get('isCustomCredit')) {
           if (this.model.get('customCredits') <= 0 ) {
             return "Custom credits must be greater than 0.";
@@ -131,8 +129,11 @@ export default Form.extend(SelectableInteractionTypesMixin, {
     },
 
     speakQuality: {
-      presence: true,
-      inclusion: { in: speakQualityOptions }
+      presence: {
+        'if': function(object) {
+          return object.get('interaction.speak');
+        }
+      }
     },
 
     speakExplanation: {

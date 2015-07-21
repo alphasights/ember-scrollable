@@ -1,5 +1,11 @@
 {{#if visibleContent}}
   <ul>
+    {{#if displayAlert}}
+      <li class="alert">
+        {{alert}}
+      </li>
+    {{/if}}
+
     {{#each visibleContent as |model|}}
       <li>
         {{partial listItemTemplateName}}

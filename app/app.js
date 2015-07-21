@@ -13,6 +13,7 @@ var App;
 
 App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
+  podModulePrefix: config.podModulePrefix,
   Resolver: Resolver
 });
 

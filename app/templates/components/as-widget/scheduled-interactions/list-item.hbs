@@ -11,8 +11,8 @@
   </div>
 
   <div class="time">
-    <span>{{moment model.scheduledCallTime "D MMM, h:mm A"}}</span>
-    <small>{{ago model.scheduledCallTime}}</small>
+    <span>{{moment model.scheduledCallTime "h:mm A"}}</span><br>
+    <span>{{moment model.scheduledCallTime "ddd D MMM"}}</span>
   </div>
 
   {{as-checklist-status items=model.checklistItems showTooltip=true}}

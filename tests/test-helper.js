@@ -21,11 +21,30 @@ export default {
           "name": "Example User",
           "initials": "EU",
           "id": 1,
-          "teamId": 1,
-          "avatarUrl": Fixtures.EMPTY_IMAGE_URL,
-          "timeZone": "Etc/UTC",
-          "email": 'example@user.com'
-        }
+          "team_id": 1,
+          "avatar_url": Fixtures.EMPTY_IMAGE_URL,
+          "time_zone": "Etc/UTC",
+          "email": 'example@user.com',
+          "team_ids": [1, 2],
+          "whiteboard_ids": [1]
+        },
+
+        "teams": [{
+          "name": "Example Team",
+          "id": 1,
+          "office": "Example Office"
+        }, {
+          "name": "Example Team 2",
+          "id": 2,
+          "office": "Example Office"
+        }],
+
+        "whiteboards": [
+          {
+            "id": 1,
+            "name": "Cool whiteboard"
+          }
+        ]
       }
     });
 
@@ -40,18 +59,6 @@ export default {
 
     this.app.fixtures.define('GET', '/interactions', { params: { primary_contact_id: "1" }, response: {
       "interactions": []
-    }});
-
-    this.app.fixtures.define('GET', '/teams', { response: {
-      "teams": [{
-        "name": "Example Team",
-        "id": 1,
-        "office": "Example Office"
-      }, {
-        "name": "Example Team 2",
-        "id": 2,
-        "office": "Example Office"
-      }]
     }});
 
     this.app.fixtures.define('GET', '/unused_advisors', { response: {
@@ -110,9 +117,7 @@ export default {
   },
 
   afterEach: function() {
-    /* jshint newcap: false */
-    Messenger().hideAll();
-    /* jshint newcap: true */
+    $('.messenger .messenger-message').remove();
 
     this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);

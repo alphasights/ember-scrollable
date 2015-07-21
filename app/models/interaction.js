@@ -3,15 +3,15 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   actioned: DS.attr('boolean'),
-  advisor: DS.belongsTo('advisor'),
-  checklistItems: DS.hasMany('checklistItem'),
+  advisor: DS.belongsTo('advisor', { async: false }),
+  checklistItems: DS.hasMany('checklistItem', { async: false }),
   clientAccessNumberCountry: DS.attr('string'),
-  clientContact: DS.belongsTo('clientContact'),
+  clientContact: DS.belongsTo('clientContact', { async: false }),
   additionalContactDetails: DS.attr('string'),
-  interactionCompletions: DS.hasMany('interactionCompletion'),
+  interactionCompletions: DS.hasMany('interactionCompletion', { async: false }),
   paymentRequired: DS.attr('boolean'),
-  primaryContact: DS.belongsTo('user'),
-  project: DS.belongsTo('project'),
+  primaryContact: DS.belongsTo('user', { async: false }),
+  project: DS.belongsTo('project', { async: false }),
   requestedAt: DS.attr('date'),
   scheduledCallTime: DS.attr('date'),
   speak: DS.attr('boolean'),
@@ -22,6 +22,13 @@ export default DS.Model.extend({
   speakCode: DS.attr('string'),
   used: DS.attr('boolean', { defaultValue: false }),
   hasAdvisorInvoice: DS.attr('boolean', { defaultValue: false }),
+
+  hasIncompleteChecklistItems: Ember.computed('checklistItems.@each.completed', function() {
+    return this.get('checklistItems.length') > 0 &&
+      _.some(this.get('checklistItems').toArray(), function(checklistItem) {
+        return !checklistItem.get('completed');
+      });
+  }),
 
   hasIncompletePaymentSteps: Ember.computed('used', 'paymentRequired', 'hasAdvisorInvoice', function() {
     return this.get('used') === false ||
