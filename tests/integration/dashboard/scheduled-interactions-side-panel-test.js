@@ -180,7 +180,7 @@ test("Cancel and withdraw request returns to dashboard and removes interaction f
 
   visit('/dashboard');
   click('.scheduled-interactions article:first');
-  click("button:contains('Cancel and Withdraw Request')");
+  click("button:contains('Cancel and Withdraw Request'):first");
   click("button:contains('Yes, Cancel and Withdraw Request')");
 
   andThen(function() {
