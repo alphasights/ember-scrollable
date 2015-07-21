@@ -66,7 +66,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     'model.id', function() {
       return this.get('unavailabilities').filter((unavailability) => {
         return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10) &&
-          parseInt(unavailability.get('id'), 10) !== parseInt(this.get('model.id'), 10);
+          parseInt(unavailability.get('sourceInteractionId'), 10) !== parseInt(this.get('model.id'), 10);
       });
   }),
 

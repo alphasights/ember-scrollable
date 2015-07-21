@@ -6,5 +6,6 @@ export default DS.Model.extend({
   day: DS.attr('string'),
   interactionId: DS.attr('number'),
   title: DS.attr('string'),
-  type: DS.attr('string')
+  type: DS.attr('string'),
+  sourceInteractionId: Ember.computed.oneWay('id')
 });
