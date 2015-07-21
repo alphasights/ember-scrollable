@@ -16,13 +16,7 @@
       <button title="Close"></button>
     </div>
   {{else}}
-    <div class="content">
-      <ul class="navigation-actions">
-        <li>
-          <button class="change-app" {{action "toggleAppSwitcher"}}></button>
-        </li>
-      </ul>
-    </div>
+    {{yield this}}
   {{/liquid-if}}
 </div>
 
@@ -51,28 +45,3 @@
     {{/liquid-if}}
   </div>
 {{/liquid-if}}
-
-<div {{bind-attr class=":app-switcher showAppSwitcher:active"}} {{action "toggleAppSwitcher"}}>
-  <div>
-    <header>
-      <h1>Switch Context</h1>
-    </header>
-
-    <div class="content">
-      <ul>
-        <li class="pistachio">
-          <i></i>
-          <span>Pistachio</span>
-        </li>
-        <li class="octopus">
-          <i></i>
-          <span>Octopus</span>
-        </li>
-        <li class="reporting">
-          <i></i>
-          <span>Reporting</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>

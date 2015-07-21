@@ -40,7 +40,7 @@ $app-switcher-default-settings: (
 @mixin app-switcher-icons {
   @each $app, $background-color in app-switcher-settings(apps) {
     &.#{$app} {
-      > i {
+      > a > i {
         @include app-switcher-icon($background-color);
       }
 
