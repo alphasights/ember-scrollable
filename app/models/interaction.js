@@ -25,7 +25,7 @@ export default DS.Model.extend({
 
   hasIncompleteChecklistItems: Ember.computed('checklistItems.@each.completed', function() {
     return this.get('checklistItems.length') > 0 &&
-      _.every(this.get('checklistItems').toArray(), function(checklistItem) {
+      _.some(this.get('checklistItems').toArray(), function(checklistItem) {
         return !checklistItem.get('completed');
       });
   }),
