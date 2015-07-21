@@ -452,7 +452,7 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
     }
   }});
 
-  click("button:contains('Change')");
+  click(".advisor-payment button:contains('Change')");
 
   andThen(function() {
     assert.equal(
