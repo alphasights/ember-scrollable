@@ -13,7 +13,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
   },
 
   model: function(params) {
-    return this.store.find('unusedAdvisor', params.unused_advisor_id).then((unusedAdvisor) => {
+    return this.store.findRecord('unusedAdvisor', params.unused_advisor_id).then((unusedAdvisor) => {
       let advisorEmails = unusedAdvisor.get('advisor.emails').join(',');
 
       return Ember.RSVP.hash({
@@ -24,7 +24,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
           concerning_type: "email/unused_advisorship_email",
           concerning_id: unusedAdvisor.get('id')
         }),
-        projectHistory: this.store.find('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
+        projectHistory: this.store.query('projectHistory', { advisor_id: unusedAdvisor.get('advisor.id') })
       });
     });
   },
