@@ -13,7 +13,7 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
 
-      almondApiBaseUrl: '/api/v1',
+      almondApiBaseUrl: '/api/v2',
       apiBaseUrl: '/swordfish',
       blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
