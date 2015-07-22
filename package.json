@@ -44,7 +44,7 @@
     "ember-cli-pretender": "0.3.2",
     "ember-cli-qunit": "0.3.13",
     "ember-cli-showdown": "2.2.0",
-    "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git",
+    "ember-cli-super-number": "git+https://git@github.com/alphasights/ember-cli-super-number.git#cafae81ab9",
     "ember-cli-timecop": "0.2.0",
     "ember-cli-tooltipster": "0.0.9",
     "ember-cli-typekit": "0.0.3",
