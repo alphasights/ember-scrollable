@@ -57,7 +57,10 @@
           model=emailDelivery
           templates=emailTemplates
           variables=emailVariables
-          showPreview=displayingPreview}}
+          showPreview=displayingPreview
+          selectedTemplate=selectedEmailTemplate
+          onChangeSelectedTemplateId="changeSelectedEmailTemplateId"
+          }}
       {{/if}}
 
       {{#if (eq drawerContent "emailViewer")}}

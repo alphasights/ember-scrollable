@@ -4,6 +4,7 @@ export default Ember.Service.extend({
   model: null,
 
   sidebarCollapsed: Ember.computed.alias('model.sidebarCollapsed'),
+  unusedAdvisorEmailTemplateId: Ember.computed.alias('model.unusedAdvisorEmailTemplateId'),
 
   fetch: function() {
     return this.store.findAll('preferences').then((preferences) => {

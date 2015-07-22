@@ -4,6 +4,7 @@ import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
   dashboard: Ember.inject.controller(),
+  preferences: Ember.inject.service(),
 
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
@@ -20,6 +21,29 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   emailTemplates: null,
   drawerContent: null,
   displayingPreview: false,
+
+  savedEmailTemplateId: Ember.computed.alias('preferences.unusedAdvisorEmailTemplateId'),
+  selectedEmailTemplateId: Ember.computed('savedEmailTemplateId', {
+    set: function(_, templateId) {
+      let template = this.get('emailTemplates').findBy('id', templateId);
+
+      if (Ember.isPresent(template)) {
+        this.set('emailDelivery.body', template.get('body'));
+        this.set('emailDelivery.subject', template.get('subject'));
+        this.set('savedEmailTemplateId', templateId);
+      } else {
+        this.set('emailDelivery.body', null);
+        this.set('emailDelivery.subject', null);
+        this.set('savedEmailTemplateId', null);
+      }
+
+      return templateId;
+    }
+  }),
+
+  selectedEmailTemplate: Ember.computed('emailTemplates.[]', 'selectedEmailTemplateId', function() {
+    return this.get('emailTemplates').findBy('id', this.get('selectedEmailTemplateId'));
+  }),
 
   _paramatizeEmailAddresses: function(emailString) {
     if (emailString != null) {
@@ -76,6 +100,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     close: function() {
       this.get('sidePanel').send('hideDrawer');
-    }
+    },
+
+    changeSelectedEmailTemplateId: function(templateId) {
+      this.set('selectedEmailTemplateId', templateId);
+      this.get('preferences.model').save();
+    },
   }
 });
