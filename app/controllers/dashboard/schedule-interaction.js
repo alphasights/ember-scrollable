@@ -39,8 +39,7 @@ var UnavailabilityOccurrence = Ember.Object.extend({
 });
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,

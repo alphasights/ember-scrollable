@@ -24,7 +24,7 @@ export default Ember.Route.extend(TeamSwitcheableRouteMixin, {
         'interaction', { primary_contact_id: this.get('currentUser.id') }
       );
 
-      deliveryPerformance = this.store.find('deliveryPerformance', 'me').then((value) => {
+      deliveryPerformance = this.store.findRecord('deliveryPerformance', 'me').then((value) => {
         this.store.recordForId('deliveryPerformance', 'me').unloadRecord();
         return value;
       });

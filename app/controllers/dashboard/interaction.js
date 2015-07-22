@@ -6,9 +6,8 @@ import InteractionCancellation from 'phoenix/services/interaction-cancellation';
 import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
   currentUser: Ember.inject.service(),
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 

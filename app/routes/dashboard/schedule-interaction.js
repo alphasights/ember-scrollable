@@ -8,7 +8,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, {
 
   model: function(params) {
     return Ember.RSVP.hash({
-      interaction: this.store.find('interaction', params.interaction_id),
+      interaction: this.store.findRecord('interaction', params.interaction_id),
       unavailabilities: this.store.query('unavailability', {
         interaction_id: params.interaction_id
       }),

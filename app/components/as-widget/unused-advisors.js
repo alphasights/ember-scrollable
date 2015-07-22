@@ -13,7 +13,7 @@ export default ListWidgetComponent.extend({
   actions: {
     removeUnusedAdvisor: function(unusedAdvisorId) {
       if (window.confirm('Are you sure you want to remove the advisor from the list?')) {
-        this.get('store').find('unusedAdvisor', unusedAdvisorId).then(function(unusedAdvisor) {
+        this.get('store').findRecord('unusedAdvisor', unusedAdvisorId).then(function(unusedAdvisor) {
           unusedAdvisor.destroyRecord().then(function() {
             notify(`The advisor ${unusedAdvisor.get('advisor.name')} was removed from the list.`);
           });
