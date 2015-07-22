@@ -21,16 +21,16 @@ export default Form.extend({
 
     model.setProperties({
       name: this.get('name'),
+      badgeName: this.get('badgeName'),
       briefDescription: this.get('briefDescription'),
       limit: this.get('limit'),
       description: this.get('description')
     });
   },
 
-  availableBadgeNames: Ember.computed('badges', '_usedBadgeNames', 'badgeName', function() {
-    let allBadges = this.get('badges');
-    let usedBadgeNames = this.get('_usedBadgeNames');
-    let availableBadges = _.difference(allBadges, usedBadgeNames);
+  availableBadgeNames: Ember.computed('_availableBadges', 'badgeName', function() {
+    let availableBadges = this.get('_availableBadges');
+
     if (this.get('badgeName')) {
       availableBadges.splice(0, 0, this.get('badgeName'));
     }
@@ -50,6 +50,12 @@ export default Form.extend({
     });
   }),
 
+  _availableBadges: Ember.computed('badges', '_usedBadgeNames', function() {
+    let allBadges = this.get('badges');
+    let usedBadgeNames = this.get('_usedBadgeNames');
+    return  _.difference(allBadges, usedBadgeNames);
+  }),
+
   validations: {
     name: {
       presence: true
@@ -61,6 +67,11 @@ export default Form.extend({
 
     limit: {
       numericality: { allowBlank: true, onlyInteger: true }
+    },
+
+    badgeName: {
+      presence: true,
+      inclusion: { in: '_availableBadges' }
     }
   }
 });
