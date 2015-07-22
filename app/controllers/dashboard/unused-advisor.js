@@ -3,8 +3,7 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
 
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
