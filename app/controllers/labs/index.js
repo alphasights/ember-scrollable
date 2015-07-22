@@ -36,15 +36,8 @@ export default Ember.Controller.extend({
     return this.get('model').rejectBy('name', undefined).sortBy('name');
   }),
 
-  _myLabs: Ember.computed('_sortedLabs.@each.featureParticipations', function() {
-    return _.filter(this.get('_sortedLabs'), (lab) => {
-      let participation = lab.get('featureParticipations')
-        .findBy('user', this.get('currentUser.model'));
-
-      if (participation) {
-        return true;
-      }
-    });
+  _myLabs: Ember.computed('currentUser.model.featureParticipations', function() {
+    return this.get('currentUser.model.featureParticipations').mapBy('feature');
   }),
 
   _availableLabs: Ember.computed('_sortedLabs.@each.hasReachedLimit', '_myLabs', function() {

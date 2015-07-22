@@ -25,8 +25,8 @@ export default Ember.Component.extend({
     return !Ember.isEmpty(this.get('_currentUserParticipation'));
   }),
 
-  _currentUserParticipation: Ember.computed('currentUser', 'featureParticipations.[]', function() {
-    return this.get('featureParticipations').findBy('user', this.get('currentUser.model'));
+  _currentUserParticipation: Ember.computed('feature', 'currentUser.model.featureParticipations.[]', function() {
+    return this.get('currentUser.model.featureParticipations').findBy('feature', this.get('feature'));
   }),
 
   actions: {

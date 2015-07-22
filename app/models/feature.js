@@ -6,13 +6,12 @@ export default DS.Model.extend({
   briefDescription: DS.attr('string'),
   limit: DS.attr('number'),
   owner: DS.belongsTo('user'),
-  featureParticipations: DS.hasMany('featureParticipation'),
-  testers: Ember.computed.mapBy('featureParticipations', 'user'),
+  featureParticipationsCount: DS.attr('number'),
   badgeName: DS.attr('string'),
 
-  hasReachedLimit: Ember.computed('limit', 'featureParticipations.[]', function() {
+  hasReachedLimit: Ember.computed('limit',  'featureParticipationIdsCount', function() {
     let limit = this.get('limit');
 
-    return limit !== null && this.get('featureParticipations.length') >= limit;
+    return limit !== null && this.get('featureParticipationsCount') >= limit;
   })
 });

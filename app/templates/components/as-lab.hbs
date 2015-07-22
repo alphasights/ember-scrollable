@@ -1,8 +1,5 @@
 <header>
   <h1 class="name">{{feature.name}}</h1>
-  <div class="owner">
-    <img class="avatar avatar-large" src={{owner.avatarUrl}} title={{owner.name}} alt={{owner.name}}>
-  </div>
 </header>
 
 <div class="brief-description">
@@ -10,7 +7,7 @@
 </div>
 
 <div class="participate">
-  <span>{{feature.testers.length}} participants.</span>
+  <span>{{feature.featureParticipationsCount}}  participants.</span>
   {{#if canParticipate}}
     <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
   {{else}}
