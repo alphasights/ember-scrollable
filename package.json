@@ -1,7 +1,7 @@
 {
   "name": "ember-scrollable",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A simple Ember wrapper around Trackpad Scroll Emulator",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/alphasights/ember-scrollable",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Eugenio Depalo <eugenio@alphasights.com>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
