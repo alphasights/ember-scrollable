@@ -1,0 +1,47 @@
+button {
+  margin: 10px 0;
+}
+
+.vertical {
+  margin: 10px 0;
+  width: 250px;
+
+  p {
+    margin: 0;
+    padding: 10px;
+
+    &:nth-child(odd) {
+      background: #f0f0f0;
+    }
+  }
+}
+
+.horizontal {
+  height: 130px;
+  margin: 10px 0;
+  width: 500px;
+
+  .content {
+    display: inline-block;
+    height: 130px;
+    white-space: nowrap;
+  }
+
+  ul {
+    list-style-type: none;
+    overflow: auto;
+    padding-left: 0;
+
+    > li {
+      background: #666;
+      color: #fff;
+      display: inline-block;
+      font-size: 24px;
+      height: 100px;
+      line-height: 100px;
+      margin-right: 10px;
+      text-align: center;
+      width: 100px;
+    }
+  }
+}

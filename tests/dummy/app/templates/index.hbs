@@ -2,76 +2,66 @@
   <h1>Vertical</h1>
 
   {{#as-scrollable}}
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
-    <p class="odd">Some content</p>
-    <p>Some more content</p>
-    <p class="odd">Some content</p>
-    <p>Some more content</p>
-    <p class="odd">Some content</p>
-    <p>Some more content</p>
-    <p class="odd">Some content</p>
-    <p>Some more content</p>
-    <p class="odd">Some content</p>
+    <p>Some content</p>
     <p>Some more content</p>
 
     {{#if verticalShowMore}}
-      <p class="odd">Some content</p>
+      <p>Some content</p>
       <p>Some more content</p>
-      <p class="odd">Some content</p>
+      <p>Some content</p>
       <p>Some more content</p>
-      <p class="odd">Some content</p>
+      <p>Some content</p>
       <p>Some more content</p>
-      <p class="odd">Some content</p>
-      <p>Some more content</p>
-      <p class="odd">Some content</p>
+      <p>Some content</p>
       <p>Some more content</p>
     {{/if}}
   {{/as-scrollable}}
 
-  <button {{action "toggleVerticalShowMore"}}>Show more</button>
+  <button {{action "toggleVerticalShowMore"}}>Show More</button>
 </section>
 
 <section class="horizontal">
   <h1>Horizontal</h1>
 
   {{#as-scrollable horizontal=true}}
-    <div class="boxes">
-      <div class="box">1</div>
-      <div class="box">2</div>
-      <div class="box">3</div>
-      <div class="box">4</div>
-      <div class="box">5</div>
-      <div class="box">6</div>
-      <div class="box">7</div>
-      <div class="box">8</div>
-      <div class="box">9</div>
-      <div class="box">10</div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
 
       {{#if horizontalShowMore}}
-        <div class="box">11</div>
-        <div class="box">12</div>
-        <div class="box">13</div>
-        <div class="box">14</div>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
       {{/if}}
-    </div>
+    </ul>
   {{/as-scrollable}}
 
-  <button {{action "toggleHorizontalShowMore"}}>Show more</button>
+  <button {{action "toggleHorizontalShowMore"}}>Show More</button>
 </section>
