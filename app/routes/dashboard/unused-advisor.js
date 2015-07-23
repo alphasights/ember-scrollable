@@ -5,6 +5,7 @@ import PaginatedRouteMixin from 'ember-cli-pagination/remote/route-mixin';
 export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
   perPage: 10,
   currentUser: Ember.inject.service(),
+  preferences: Ember.inject.service(),
 
   titleToken: function(models) {
     let advisorName = models.unusedAdvisor.get('advisor.name');
@@ -42,5 +43,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
     controller.set('emailTemplates', models.emailTemplates);
     controller.set('emailVariables', models.emailVariables);
     controller.set('projectHistory', models.projectHistory);
+    controller.set('selectedEmailTemplate', models.emailTemplates.findBy('id',
+      this.get('preferences.unusedAdvisorEmailTemplateId')));
   }
 });
