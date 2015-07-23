@@ -5,12 +5,15 @@ export default Ember.Component.extend(InboundActions, {
   classNameBindings: [':email-composer'],
   model: null,
   templates: null,
-  selectedTemplate: null,
+  selectedTemplateId: null,
   isEditingHeader: false,
   showPreview: false,
 
   personalTemplates: Ember.computed.filterBy('templates', 'global', false),
   globalTemplates: Ember.computed.filterBy('templates', 'global', true),
+  selectedTemplate: Ember.computed('selectedTemplateId', function() {
+    return this.get('templates').findBy('id', this.get('selectedTemplateId'));
+  }),
 
   initializeDefaults: Ember.on('init', function() {
     if (this.get('templates') == null) {
