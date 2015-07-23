@@ -22,27 +22,18 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   drawerContent: null,
   displayingPreview: false,
 
+  selectedEmailTemplate: null,
   savedEmailTemplateId: Ember.computed.alias('preferences.unusedAdvisorEmailTemplateId'),
-  selectedEmailTemplateId: Ember.computed('savedEmailTemplateId', {
-    set: function(_, templateId) {
-      let template = this.get('emailTemplates').findBy('id', templateId);
+  updateEmailDeliveryFields: Ember.observer('selectedEmailTemplate', 'emailDelivery', function() {
+    var template = this.get('selectedEmailTemplate');
 
-      if (Ember.isPresent(template)) {
-        this.set('emailDelivery.body', template.get('body'));
-        this.set('emailDelivery.subject', template.get('subject'));
-        this.set('savedEmailTemplateId', templateId);
-      } else {
-        this.set('emailDelivery.body', null);
-        this.set('emailDelivery.subject', null);
-        this.set('savedEmailTemplateId', null);
-      }
-
-      return templateId;
+    if (Ember.isPresent(template)) {
+      this.set('emailDelivery.body', template.get('body'));
+      this.set('emailDelivery.subject', template.get('subject'));
+    } else {
+      this.set('emailDelivery.body', null);
+      this.set('emailDelivery.subject', null);
     }
-  }),
-
-  selectedEmailTemplate: Ember.computed('emailTemplates.[]', 'selectedEmailTemplateId', function() {
-    return this.get('emailTemplates').findBy('id', this.get('selectedEmailTemplateId'));
   }),
 
   _paramatizeEmailAddresses: function(emailString) {
@@ -102,8 +93,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('sidePanel').send('hideDrawer');
     },
 
-    changeSelectedEmailTemplateId: function(templateId) {
-      this.set('selectedEmailTemplateId', templateId);
+    changeSelectedEmailTemplate: function(template) {
+      this.set('selectedEmailTemplate', template);
+      this.set('savedEmailTemplateId', template.get('id'));
       this.get('preferences.model').save();
     },
   }

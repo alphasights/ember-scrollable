@@ -43,6 +43,7 @@ export default Ember.Route.extend(SidePanelRouteMixin, PaginatedRouteMixin, {
     controller.set('emailTemplates', models.emailTemplates);
     controller.set('emailVariables', models.emailVariables);
     controller.set('projectHistory', models.projectHistory);
-    controller.set('selectedEmailTemplateId', this.get('preferences.model.unusedAdvisorEmailTemplateId'));
+    controller.set('selectedEmailTemplate', models.emailTemplates.findBy('id',
+      this.get('preferences.unusedAdvisorEmailTemplateId')));
   }
 });
