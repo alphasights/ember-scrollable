@@ -1,6 +1,7 @@
 <section class="vertical">
   <h1>Vertical</h1>
 
+  {{!-- BEGIN-SNIPPET vertical --}}
   {{#as-scrollable}}
     <p>Some content</p>
     <p>Some more content</p>
@@ -34,6 +35,9 @@
       <p>Some more content</p>
     {{/if}}
   {{/as-scrollable}}
+  {{!-- END-SNIPPET --}}
+
+  {{code-snippet name="vertical.hbs"}}
 
   <button {{action "toggleVerticalShowMore"}}>Show More</button>
 </section>
@@ -41,6 +45,9 @@
 <section class="horizontal">
   <h1>Horizontal</h1>
 
+  {{code-snippet name="horizontal.hbs"}}
+
+  {{!-- BEGIN-SNIPPET horizontal --}}
   {{#as-scrollable horizontal=true}}
     <ul>
       <li>1</li>
@@ -62,6 +69,28 @@
       {{/if}}
     </ul>
   {{/as-scrollable}}
+  {{!-- END-SNIPPET --}}
 
   <button {{action "toggleHorizontalShowMore"}}>Show More</button>
+</section>
+
+<section class="no-auto-hide">
+  <h1>No Auto Hide</h1>
+
+  {{code-snippet name="no-auto-hide.hbs"}}
+
+  {{!-- BEGIN-SNIPPET no-auto-hide --}}
+  {{#as-scrollable autoHide=false}}
+    <p>Some content</p>
+    <p>Some more content</p>
+    <p>Some content</p>
+    <p>Some more content</p>
+    <p>Some content</p>
+    <p>Some more content</p>
+    <p>Some content</p>
+    <p>Some more content</p>
+    <p>Some content</p>
+    <p>Some more content</p>
+  {{/as-scrollable}}
+  {{!-- END-SNIPPET --}}
 </section>
