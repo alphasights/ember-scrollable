@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+npm install -g bower
+npm install
+bower install
+bundle install
