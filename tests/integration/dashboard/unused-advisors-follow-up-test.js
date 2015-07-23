@@ -37,7 +37,8 @@ QUnit.module("Unused Advisors Follow Up", {
           "name": "Example Template",
           "body": "Really good template.",
           "subject": "Example Subject",
-          "purpose": "Unused Advisor"
+          "purpose": "Unused Advisor",
+          "global": "true"
         }]
       }
     });
