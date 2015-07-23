@@ -2,4 +2,4 @@
 
 set -e
 
-bundle exec scss-lint app
+bundle exec scss-lint tests/dummy/app
