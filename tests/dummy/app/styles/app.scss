@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
 }
 
@@ -6,7 +7,9 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -16,14 +19,14 @@ button {
 
 section {
   clear: both;
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 10px;
   overflow: auto;
 
   h1 {
     border-bottom: 1px solid #ededed;
     border-top: 1px solid #ededed;
-    padding: 10px;
     margin: 10px 0;
+    padding: 10px;
   }
 }
 
@@ -31,18 +34,20 @@ pre {
   margin: 0;
 }
 
-.output, .code {
+.output,
+.code {
   float: left;
   width: 50%;
 }
 
-.vertical-demo, .no-auto-hide-demo {
+.vertical-demo,
+.no-auto-hide-demo {
   p {
     margin: 0;
     padding: 10px;
 
     &:nth-child(odd) {
-      background: #f0f0f0;
+      background: #ededed;
     }
   }
 }
@@ -58,13 +63,13 @@ pre {
 
   ul {
     list-style-type: none;
+    margin: 0;
     overflow: auto;
     padding-left: 0;
-    margin: 0;
 
     > li {
-      background: #666;
-      color: #fff;
+      background: #666666;
+      color: #ffffff;
       display: inline-block;
       font-size: 24px;
       height: 100px;
