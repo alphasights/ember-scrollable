@@ -23,7 +23,6 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   displayingPreview: false,
 
   selectedEmailTemplate: null,
-  savedEmailTemplateId: Ember.computed.alias('preferences.unusedAdvisorEmailTemplateId'),
   updateEmailDeliveryFields: Ember.observer('selectedEmailTemplate', 'emailDelivery', function() {
     var template = this.get('selectedEmailTemplate');
 
@@ -95,8 +94,8 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     changeSelectedEmailTemplate: function(template) {
       this.set('selectedEmailTemplate', template);
-      this.set('savedEmailTemplateId', template.get('id'));
-      this.get('preferences.model').save();
+      this.set('preferences.unusedAdvisorEmailTemplateId', template.get('id'));
+      this.get('preferences').save();
     },
   }
 });

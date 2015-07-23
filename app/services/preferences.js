@@ -16,5 +16,9 @@ export default Ember.Service.extend({
         this.set('model', preferences.get('firstObject'));
       }
     });
+  },
+
+  save: function() {
+    return this.get('model').save();
   }
 });
