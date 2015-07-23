@@ -23,7 +23,7 @@ A simple wrapper around Trackpad Scroll Emulator.
 {{/as-scrollable}}
 ```
 
-## Configurating the Component
+## Configuring the Component
 
 The component accepts the following options:
 
