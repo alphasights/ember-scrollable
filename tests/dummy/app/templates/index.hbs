@@ -1,96 +1,86 @@
-<section class="vertical">
+<section class="vertical-demo">
   <h1>Vertical</h1>
 
-  {{!-- BEGIN-SNIPPET vertical --}}
-  {{#as-scrollable}}
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
+  <div class="output">
+    {{!-- BEGIN-SNIPPET vertical --}}
+    {{#as-scrollable}}
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+    {{/as-scrollable}}
+    {{!-- END-SNIPPET --}}
+  </div>
 
-    {{#if verticalShowMore}}
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-    {{/if}}
-  {{/as-scrollable}}
-  {{!-- END-SNIPPET --}}
-
-  {{code-snippet name="vertical.hbs"}}
-
-  <button {{action "toggleVerticalShowMore"}}>Show More</button>
+  <div class="code">
+    {{code-snippet name="vertical.hbs"}}
+  </div>
 </section>
 
-<section class="horizontal">
+<section class="horizontal-demo">
   <h1>Horizontal</h1>
 
-  {{code-snippet name="horizontal.hbs"}}
+  <div class="output">
+    {{!-- BEGIN-SNIPPET horizontal --}}
+    {{#as-scrollable horizontal=true}}
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul>
+    {{/as-scrollable}}
+    {{!-- END-SNIPPET --}}
+  </div>
 
-  {{!-- BEGIN-SNIPPET horizontal --}}
-  {{#as-scrollable horizontal=true}}
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-
-      {{#if horizontalShowMore}}
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-      {{/if}}
-    </ul>
-  {{/as-scrollable}}
-  {{!-- END-SNIPPET --}}
-
-  <button {{action "toggleHorizontalShowMore"}}>Show More</button>
+  <div class="code">
+    {{code-snippet name="horizontal.hbs"}}
+  </div>
 </section>
 
-<section class="no-auto-hide">
+<section class="no-auto-hide-demo">
   <h1>No Auto Hide</h1>
 
-  {{code-snippet name="no-auto-hide.hbs"}}
+  <div class="output">
+    {{!-- BEGIN-SNIPPET no-auto-hide --}}
+    {{#as-scrollable autoHide=false}}
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+      <p>Some content</p>
+      <p>Some more content</p>
+    {{/as-scrollable}}
+    {{!-- END-SNIPPET --}}
+  </div>
 
-  {{!-- BEGIN-SNIPPET no-auto-hide --}}
-  {{#as-scrollable autoHide=false}}
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-    <p>Some content</p>
-    <p>Some more content</p>
-  {{/as-scrollable}}
-  {{!-- END-SNIPPET --}}
+  <div class="code">
+    {{code-snippet name="no-auto-hide.hbs"}}
+  </div>
 </section>

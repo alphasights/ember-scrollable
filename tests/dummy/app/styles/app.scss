@@ -1,11 +1,42 @@
+html, body {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 button {
   margin: 10px 0;
 }
 
-.vertical {
-  margin: 10px 0;
-  width: 250px;
+section {
+  clear: both;
+  margin: 0 10px 10px 10px;
+  overflow: auto;
 
+  h1 {
+    border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    padding: 10px;
+    margin: 10px 0;
+  }
+}
+
+pre {
+  margin: 0;
+}
+
+.output, .code {
+  float: left;
+  width: 50%;
+}
+
+.vertical-demo, .no-auto-hide-demo {
   p {
     margin: 0;
     padding: 10px;
@@ -16,10 +47,8 @@ button {
   }
 }
 
-.horizontal {
+.horizontal-demo .as-scrollable {
   height: 110px;
-  margin: 10px 0;
-  width: 500px;
 
   .content {
     display: inline-block;
@@ -31,6 +60,7 @@ button {
     list-style-type: none;
     overflow: auto;
     padding-left: 0;
+    margin: 0;
 
     > li {
       background: #666;
@@ -44,4 +74,12 @@ button {
       width: 100px;
     }
   }
+}
+
+.as-scrollable {
+  width: 100%;
+}
+
+.output {
+  padding-right: 10px;
 }
