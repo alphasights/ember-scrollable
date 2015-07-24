@@ -67,7 +67,7 @@
     "express": "4.12.4",
     "github": "^0.2.3",
     "glob": "4.5.3",
-    "liquid-fire": "git+https://github.com/ef4/liquid-fire.git#4fe371be59",
+    "liquid-fire": "0.21.0",
     "morgan": "1.5.3"
   }
 }
