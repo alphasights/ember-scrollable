@@ -277,7 +277,7 @@ test("Schedule interaction shows errors if validation fails", function(assert) {
   });
 });
 
-test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
+test("Cancel request returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
       {
@@ -307,7 +307,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click("button:contains('Cancel Interaction')");
+  click("button:contains('Cancel Request')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -320,11 +320,11 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction has been cancelled.");
+    assert.equal(message, "The request has been cancelled.");
   });
 });
 
-test("Cancel Interaction Failure", function(assert) {
+test("Cancel Request Failure", function(assert) {
   defineFixture('DELETE', '/interests/1', {
     params: { withdraw_from_compliance: 'false' },
     status: 500
@@ -338,7 +338,7 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.interactions-to-schedule article:first');
-  click("button:contains('Cancel Interaction')");
+  click("button:contains('Cancel Request')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -347,7 +347,7 @@ test("Cancel Interaction Failure", function(assert) {
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction could not be cancelled.",
+    assert.equal(message, "The request could not be cancelled.",
       'displays a message that it could not be cancelled'
     );
   });

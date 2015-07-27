@@ -4,9 +4,13 @@ import InboundActions from 'ember-component-inbound-actions/inbound-actions';
 export default Ember.Component.extend(InboundActions, {
   classNameBindings: [':email-composer'],
   model: null,
+  templates: null,
   selectedTemplate: null,
   isEditingHeader: false,
   showPreview: false,
+
+  personalTemplates: Ember.computed.filterBy('templates', 'global', false),
+  globalTemplates: Ember.computed.filterBy('templates', 'global', true),
 
   initializeDefaults: Ember.on('init', function() {
     if (this.get('templates') == null) {
@@ -60,16 +64,9 @@ export default Ember.Component.extend(InboundActions, {
       this.toggleProperty('isEditingHeader');
     },
 
-    changeSelectedTemplate: function(selectedTemplateId) {
-      let selectedTemplate = this.get('templates').findBy('id', selectedTemplateId);
-
-      if (Ember.isPresent(selectedTemplate)) {
-        this.set('model.body', selectedTemplate.get('body'));
-        this.set('model.subject', selectedTemplate.get('subject'));
-      } else {
-        this.set('model.body', null);
-        this.set('model.subject', null);
-      }
+    changeSelectedTemplateId: function(templateId) {
+      var template = this.get('templates').findBy('id', templateId);
+      this.sendAction('onChangeSelectedTemplate', template);
     }
   }
 });

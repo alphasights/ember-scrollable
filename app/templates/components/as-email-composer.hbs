@@ -4,14 +4,28 @@
       {{#liquid-if isEditingHeader}}
         {{#as-form/fieldset}}
           {{#as-form/field name="template" label="Template" classNameBindings=":form-select"}}
-            <select name="template" onchange={{action "changeSelectedTemplate" value="target.value"}}>
+            <select name="template" onchange={{action "changeSelectedTemplateId" value="target.value"}}>
               <option value="">Choose a template...</option>
 
-              {{#each templates as |template|}}
-                <option value={{template.id}} selected={{eq template selectedTemplate}}>
-                  {{template.name}}
-                </option>
-              {{/each}}
+              {{#if personalTemplates}}
+                <optgroup label="Personal">
+                  {{#each personalTemplates as |template|}}
+                    <option value={{template.id}} selected={{eq template selectedTemplate}}>
+                      {{template.name}}
+                    </option>
+                  {{/each}}
+                </optgroup>
+              {{/if}}
+
+              {{#if globalTemplates}}
+                <optgroup label="Global">
+                  {{#each globalTemplates as |template|}}
+                    <option value={{template.id}} selected={{eq template selectedTemplate}}>
+                      {{template.name}}
+                    </option>
+                  {{/each}}
+                </optgroup>
+              {{/if}}
             </select>
           {{/as-form/field}}
 

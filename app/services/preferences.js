@@ -4,6 +4,7 @@ export default Ember.Service.extend({
   model: null,
 
   sidebarCollapsed: Ember.computed.alias('model.sidebarCollapsed'),
+  unusedAdvisorEmailTemplateId: Ember.computed.alias('model.unusedAdvisorEmailTemplateId'),
 
   fetch: function() {
     return this.store.findAll('preferences').then((preferences) => {
@@ -15,5 +16,9 @@ export default Ember.Service.extend({
         this.set('model', preferences.get('firstObject'));
       }
     });
+  },
+
+  save: function() {
+    return this.get('model').save();
   }
 });

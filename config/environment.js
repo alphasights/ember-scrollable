@@ -7,13 +7,17 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
 
+    featureFlags: {
+      'app-switcher': false
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
       },
 
-      almondApiBaseUrl: '/api/v1',
+      almondApiBaseUrl: '/api/v2',
       apiBaseUrl: '/swordfish',
       blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
@@ -50,6 +54,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.featureFlags['app-switcher'] = true
   }
 
   if (environment === 'test') {

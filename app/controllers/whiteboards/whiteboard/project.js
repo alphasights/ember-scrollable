@@ -2,8 +2,7 @@ import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['whiteboards/whiteboard'],
-  whiteboard: Ember.computed.oneWay('controllers.whiteboards/whiteboard'),
+  whiteboard: Ember.inject.controller('whiteboards/whiteboard'),
 
   navigableModels: Ember.computed.oneWay('whiteboard.arrangedProjects'),
 
