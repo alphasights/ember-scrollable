@@ -48,13 +48,26 @@ export default Ember.Controller.extend({
 
   actions: {
     destroyParticipation: function(participation) {
-      participation.destroyRecord();
+      participation.get('feature').decrementProperty('featureParticipationsCount');
+
+      participation.destroyRecord().catch(function() {
+        participation.rollback();
+        participation.transitionTo('loaded.saved');
+        participation.get('feature').rollback();
+      });
     },
 
     createParticipation: function(feature) {
-      this.store.createRecord('featureParticipation', {
+      feature.incrementProperty('featureParticipationsCount');
+
+      let featureParticipation = this.store.createRecord('featureParticipation', {
         feature: feature, user: this.get('currentUser.model')
-      }).save();
+      });
+
+      featureParticipation.save().catch(function() {
+        featureParticipation.destroy();
+        feature.rollback();
+      });
     }
   }
 });

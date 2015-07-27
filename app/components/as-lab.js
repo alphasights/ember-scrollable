@@ -7,7 +7,6 @@ export default Ember.Component.extend({
   currentUser: null,
   owner: Ember.computed.oneWay('feature.owner'),
   featureParticipations: Ember.computed.oneWay('feature.featureParticipations'),
-  maxNumberOfShownUsers: 10,
 
   canParticipate: Ember.computed('feature.hasReachedLimit', '_isCurrentUserParticipating', function() {
     return this.get('_isCurrentUserParticipating') || !this.get('feature.hasReachedLimit');
