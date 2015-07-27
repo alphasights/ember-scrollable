@@ -1,5 +1,14 @@
 # Phoenix Changelog
 
+### Release 0.1.0 (July 27, 2015)
+
+- [#492 BUGFIX](https://github.com/alphasights/phoenix/pull/492) Fix dragging and scrolling bug
+- [#478](https://github.com/alphasights/phoenix/pull/478) Allow users to change the call time of a scheduled call
+- [#490](https://github.com/alphasights/phoenix/pull/490) Show lists scrollbar in main content
+- [#482](https://github.com/alphasights/phoenix/pull/482) Add recipient names to the email correspondence list
+- [#486](https://github.com/alphasights/phoenix/pull/486) Group email templates in personal and global. Remember last used template.
+- [#467 BUGFIX](https://github.com/alphasights/phoenix/pull/467) Don't block previously scheduled time slot after rescheduling
+
 ### Release 0.0.9 (July 20, 2015)
 
 - [#472](https://github.com/alphasights/phoenix/pull/472) Add warning message if there are incomplete interactions
