@@ -3,7 +3,7 @@ import jstz from 'jstz';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'ember-calendar/models/time-zone-option';
 import notify from 'phoenix/helpers/notify';
-import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import RequestCancellation from 'phoenix/services/request-cancellation';
 
 var InteractionOccurrence = Ember.Object.extend({
   interaction: null,
@@ -39,8 +39,7 @@ var UnavailabilityOccurrence = Ember.Object.extend({
 });
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
   navigableModels: Ember.computed.oneWay('dashboard.interactionsToSchedule'),
   modelRouteParams: ['dashboard.schedule-interaction'],
   requestPromise: null,
@@ -62,10 +61,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   }),
 
   visibleUnavailabilities: Ember.computed(
-    'unavailabilities.@each.{interactionId}',
+    'unavailabilities.[]',
     'model.id', function() {
       return this.get('unavailabilities').filter((unavailability) => {
-        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10);
+        return parseInt(unavailability.get('interactionId'), 10) === parseInt(this.get('model.id'), 10) &&
+          parseInt(unavailability.get('sourceInteractionId'), 10) !== parseInt(this.get('model.id'), 10);
       });
   }),
 
@@ -125,12 +125,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    cancel: function() {
+    cancelRequest: function() {
       var requestPromise =
-        InteractionCancellation.create().cancel(this.get('model'), response => {
+        RequestCancellation.create().cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-          notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
         });
 
@@ -168,6 +167,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
         this.get('dashboard').propertyDidChange('interactionsToSchedule');
         this.get('dashboard').propertyDidChange('scheduledInteractions');
+        this.propertyDidChange('visibleUnavailabilities');
         notify(`An interaction between ${advisorName} and ${clientName} has been scheduled.`);
       });
     }

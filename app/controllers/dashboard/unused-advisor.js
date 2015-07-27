@@ -3,8 +3,8 @@ import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import notify from 'phoenix/helpers/notify';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
+  preferences: Ember.inject.service(),
 
   navigableModels: Ember.computed.oneWay('dashboard.unusedAdvisors'),
   modelRouteParams: ['dashboard.unused-advisor'],
@@ -21,6 +21,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
   emailTemplates: null,
   drawerContent: null,
   displayingPreview: false,
+
+  selectedEmailTemplate: null,
+  updateEmailDeliveryFields: Ember.observer('selectedEmailTemplate', 'emailDelivery', function() {
+    var template = this.get('selectedEmailTemplate');
+
+    if (Ember.isPresent(template)) {
+      this.set('emailDelivery.body', template.get('body'));
+      this.set('emailDelivery.subject', template.get('subject'));
+    } else {
+      this.set('emailDelivery.body', null);
+      this.set('emailDelivery.subject', null);
+    }
+  }),
 
   _paramatizeEmailAddresses: function(emailString) {
     if (emailString != null) {
@@ -69,6 +82,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       email.save().then(() => {
         notify(`Your email has been sent.`);
         this.get('sidePanel').send('close');
+        this.send('remove');
       }).catch(function() {
         notify('There has been an error sending your email.', 'error');
       });
@@ -76,6 +90,12 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     close: function() {
       this.get('sidePanel').send('hideDrawer');
-    }
+    },
+
+    changeSelectedEmailTemplate: function(template) {
+      this.set('selectedEmailTemplate', template);
+      this.set('preferences.unusedAdvisorEmailTemplateId', template.get('id'));
+      this.get('preferences').save();
+    },
   }
 });

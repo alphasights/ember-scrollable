@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   startsAt: DS.attr('date'),
@@ -6,5 +7,6 @@ export default DS.Model.extend({
   day: DS.attr('string'),
   interactionId: DS.attr('number'),
   title: DS.attr('string'),
-  type: DS.attr('string')
+  type: DS.attr('string'),
+  sourceInteractionId: Ember.computed.oneWay('id')
 });

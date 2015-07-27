@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
 
   actions: {
     savePreferences: function() {
-      this.get('preferences.model').save();
+      this.get('preferences').save();
     },
 
     logout: function() {

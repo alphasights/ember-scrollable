@@ -2,13 +2,12 @@ import Ember from 'ember';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import PromiseController from 'phoenix/controllers/promise';
 import notify from 'phoenix/helpers/notify';
-import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import RequestCancellation from 'phoenix/services/request-cancellation';
 import { request } from 'ic-ajax';
 
 export default Ember.Controller.extend(ModelsNavigationMixin, {
-  needs: ['dashboard'],
   currentUser: Ember.inject.service(),
-  dashboard: Ember.computed.oneWay('controllers.dashboard'),
+  dashboard: Ember.inject.controller(),
   navigableModels: Ember.computed.oneWay('dashboard.scheduledInteractions'),
   modelRouteParams: ['dashboard.interaction'],
 
@@ -36,10 +35,10 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/projects/${projectId}/proposal#advisorship_${interactionId}`;
   }),
 
-  invoiceUrl: Ember.computed('model.advisor', function() {
-    let advisorId = this.get('model.advisor.id');
+  invoiceUrl: Ember.computed('model', function() {
+    let interactionId = this.get('model.id');
 
-    return `${EmberENV.pistachioUrl}/invoices/new?advisor_id=${advisorId}`;
+    return `${EmberENV.pistachioUrl}/invoices/new?advisorship=${interactionId}`;
   }),
 
   completionUrl: Ember.computed('model.project', function() {
@@ -48,10 +47,9 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
     return `${EmberENV.pistachioUrl}/projects/${projectId}/completion`;
   }),
 
-  _cancel: function(withdrawFromCompliance = false) {
+  _cancelRequest: function(withdrawFromCompliance = false) {
     var requestPromise =
-      InteractionCancellation.create().cancel(this.get('model'), response => {
-        notify('The interaction has been cancelled.');
+      RequestCancellation.create().cancel(this.get('model'), response => {
         this.store.pushPayload(response);
         this.get('dashboard').propertyDidChange('scheduledInteractions');
         this.get('sidePanel').send('close');
@@ -59,7 +57,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
 
     this.set('requestPromise', requestPromise);
   },
-
+ 
   actions: {
     chargeClient: function() {
       let completionForm = this.get('completionForm');
@@ -84,15 +82,19 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.get('sidePanel').send('toggleDrawer');
     },
 
-    cancel: function() {
-      this._cancel(false);
+    cancelRequest: function() {
+      this._cancelRequest(false);
     },
 
-    withdrawAndCancel: function() {
-      this._cancel(true);
+    withdrawAndCancelRequest: function() {
+      this._cancelRequest(true);
     },
 
-    reschedule: function() {
+    changeTime: function() {
+      this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
+    },
+
+    cancelInteraction: function() {
       var model = this.get('model');
 
       this.transitionToRoute('dashboard.schedule-interaction', this.get('model.id'));
@@ -103,6 +105,7 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
         promise: model.save().then(() => {
           this.get('dashboard').propertyDidChange('scheduledInteractions');
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
+          notify('The interaction has been cancelled.');
         }, () => {
           notify('There has been an error rescheduling the interaction.', 'error');
           model.rollback();

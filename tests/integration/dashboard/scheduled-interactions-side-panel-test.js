@@ -114,7 +114,7 @@ QUnit.module("Scheduled Interactions Side Panel", {
   }
 });
 
-test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
+test("Cancel request returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
       {
@@ -139,8 +139,8 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
 
   visit('/dashboard');
   click('.scheduled-interactions article:first');
-  click("button.cancel:contains('Cancel Interaction')");
-  click("button:contains('Yes, Cancel Interaction')");
+  click("button.cancel:contains('Cancel Request')");
+  click("button:contains('Yes, Cancel Request')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -152,11 +152,11 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction has been cancelled.");
+    assert.equal(message, "The request has been cancelled.");
   });
 });
 
-test("Cancel and withdraw interaction returns to dashboard and removes interaction from the widget", function(assert) {
+test("Cancel and withdraw request returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "true" }, response: {
     "interactions": [
       {
@@ -180,8 +180,8 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
 
   visit('/dashboard');
   click('.scheduled-interactions article:first');
-  click("button:contains('Cancel and Withdraw Interaction')");
-  click("button:contains('Yes, Cancel and Withdraw')");
+  click("button:contains('Cancel and Withdraw Request'):first");
+  click("button:contains('Yes, Cancel and Withdraw Request')");
 
   andThen(function() {
     assert.equal(currentURL(), '/dashboard',
@@ -193,11 +193,11 @@ test("Cancel and withdraw interaction returns to dashboard and removes interacti
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction has been cancelled.");
+    assert.equal(message, "The request has been cancelled.");
   });
 });
 
-test("Cancel Interaction Failure", function(assert) {
+test("Cancel Request Failure", function(assert) {
   defineFixture('DELETE', '/interests/1', {
     params: { withdraw_from_compliance: 'false' },
     status: 500
@@ -211,8 +211,8 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.scheduled-interactions article:first');
-  click("button:contains('Cancel Interaction')");
-  click("button:contains('Yes, Cancel Interaction')");
+  click("button:contains('Cancel Request')");
+  click("button:contains('Yes, Cancel Request')");
 
   andThen(function() {
     assert.equal(find('.scheduled-interactions article').length, 1,
@@ -220,13 +220,13 @@ test("Cancel Interaction Failure", function(assert) {
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction could not be cancelled.",
+    assert.equal(message, "The request could not be cancelled.",
       'displays a message that it could not be cancelled'
     );
   });
 });
 
-test("Reschedule Interaction unschedules the call and transitions to the to schedule side panel", function(assert) {
+test("Cancel Interaction unschedules the call and transitions to the to schedule side panel", function(assert) {
   defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
     "unavailabilities": []
   }});
@@ -264,7 +264,7 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
   });
 
   click('.scheduled-interactions article:first');
-  click("button:contains('Reschedule Interaction')");
+  click("button:contains('Cancel Interaction')");
 
   andThen(function() {
     assert.equal(find('.scheduled-interactions article').length, 0,
@@ -274,10 +274,13 @@ test("Reschedule Interaction unschedules the call and transitions to the to sche
     assert.equal(currentURL(), `/dashboard/interactions/${interaction.id}/schedule`,
       'transitions to the scheduling side panel'
     );
+
+    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "The interaction has been cancelled.");
   });
 });
 
-test("Reschedule Interaction failure shows error message and stays on the interaction side panel", function(assert) {
+test("Cancel Interaction failure shows error message and stays on the interaction side panel", function(assert) {
   defineFixture('GET', '/unavailabilities', { params: { interaction_id: '1' }, response: {
     "unavailabilities": []
   }});
@@ -307,7 +310,7 @@ test("Reschedule Interaction failure shows error message and stays on the intera
 
   visit('/dashboard');
   click('.scheduled-interactions article:first');
-  click("button:contains('Reschedule Interaction')");
+  click("button:contains('Cancel Interaction')");
 
   andThen(function() {
     const message = 'There has been an error rescheduling the interaction.';
@@ -376,7 +379,7 @@ test("Complete Interaction and Charge Client completes the call", function(asser
   visit('/dashboard');
 
   click('.scheduled-interactions article:first');
-  click('button:contains("Complete Interaction")');
+  click('button:contains("Complete")');
   fillIn('input[name=duration]', '20');
   select('select[name=quality]', 'Bad');
   select('select[name=speakQuality]', 'Other issue');
@@ -415,7 +418,7 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
   visit('/dashboard');
 
   click('.scheduled-interactions article:first');
-  click('button:contains("Complete Interaction")');
+  click('button:contains("Complete")');
 
   let buttonText = "Don't Pay";
   click(`button:contains(${buttonText})`);
@@ -449,7 +452,7 @@ test("Complete Interaction and Don't Pay Advisor/Change updates the interaction"
     }
   }});
 
-  click("button:contains('Change')");
+  click(".advisor-payment button:contains('Change')");
 
   andThen(function() {
     assert.equal(

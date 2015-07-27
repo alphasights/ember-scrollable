@@ -12,7 +12,7 @@ export default Ember.Service.extend({
   whiteboards: Ember.computed.oneWay('model.whiteboards'),
 
   authenticate: function() {
-    return this.store.find('user', 'me').then((user) => {
+    return this.store.findRecord('user', 'me').then((user) => {
       this.store.recordForId('user', 'me').unloadRecord();
       this.set('model', user);
       Ember.$.ajaxPrefilter(function(options) {

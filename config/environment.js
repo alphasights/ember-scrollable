@@ -8,7 +8,7 @@ module.exports = function(environment) {
     locationType: 'auto',
 
     featureFlags: {
-      'pay-advisor': false
+      'app-switcher': false
     },
 
     EmberENV: {
@@ -17,7 +17,7 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
 
-      almondApiBaseUrl: '/api/v1',
+      almondApiBaseUrl: '/api/v2',
       apiBaseUrl: '/swordfish',
       blankAvatarUrl: '/images/default_avatar.png',
       honeybadgerApiKey: 'e9d6e886d2610eafae260a0219c427b1',
@@ -54,7 +54,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.featureFlags['pay-advisor'] = true;
+
+    ENV.featureFlags['app-switcher'] = true
   }
 
   if (environment === 'test') {
@@ -72,7 +73,6 @@ module.exports = function(environment) {
     ENV.EmberENV.intercomAppId = null;
     ENV.EmberENV.honeybadgerApiKey = null;
     ENV.EmberENV.almondApiBaseUrl = '/swordfish';
-    ENV.featureFlags['pay-advisor'] = true;
     // ENV.EmberENV.logErrors = false;
   }
 

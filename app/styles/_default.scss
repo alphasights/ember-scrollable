@@ -27,3 +27,12 @@ form .with-errors .error a {
   color: $validation-error-color;
   text-decoration: underline;
 }
+
+body > .ember-view {
+  height: 100%;
+}
+
+.as-scrollable {
+  height: 100%;
+  width: 100%;
+}

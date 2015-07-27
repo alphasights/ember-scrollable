@@ -157,6 +157,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
   var advisorPhoneCountryCode = '81';
   var advisorPhoneNumber = '5553214567';
   var additionalContactDetails = 'Super keen';
+  var scheduledCallTime = moment().utc().startOf('isoWeek').add(7, 'hours');
 
   var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
     "interaction": {
@@ -168,7 +169,7 @@ test("Schedule interaction makes an API request and displays a notification", fu
       "interaction_type": callType,
       "project_id": "32522",
       "requested_at": "2015-02-18T10:00:00.000Z",
-      "scheduled_call_time": moment().utc().startOf('isoWeek').add(7, 'hours').toISOString(),
+      "scheduled_call_time": scheduledCallTime.toISOString(),
       "speak": true,
       "speak_phone_number": null,
       "speak_code": null,
@@ -204,7 +205,62 @@ test("Schedule interaction makes an API request and displays a notification", fu
   andThen(function() {
     assert.equal(handler.called, true);
 
-    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    let message = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
+  });
+});
+
+test("Schedule interaction inputting time as text makes an API request and displays a notification", function(assert){
+  var callType = 'call';
+  var accessCountry = 'AU';
+  var advisorPhoneCountryCode = '81';
+  var advisorPhoneNumber = '5553214567';
+  var additionalContactDetails = 'Super keen';
+  var scheduledCallTime = moment().utc().startOf('isoWeek').add(7, 'hours').add(15, 'minute');
+
+  var handler = defineFixture('PUT', `/interactions/${interaction.id}`, { request: {
+    "interaction": {
+      "actioned": false,
+      "advisor_id": "1",
+      "client_access_number_country": accessCountry,
+      "client_contact_id": "21387",
+      "additional_contact_details": additionalContactDetails,
+      "interaction_type": callType,
+      "project_id": "32522",
+      "requested_at": "2015-02-18T10:00:00.000Z",
+      "scheduled_call_time": scheduledCallTime.toISOString(),
+      "speak": true,
+      "speak_phone_number": null,
+      "speak_code": null,
+      "advisor_phone_number": advisorPhoneNumber,
+      "advisor_phone_country_code": advisorPhoneCountryCode,
+      "used": false,
+      "payment_required": true,
+      "has_advisor_invoice": false
+    }
+  }, response: {
+    "interactions": []
+  }});
+
+  visit('/dashboard');
+  click('.interactions-to-schedule article:first');
+
+  andThen(function() {
+    assert.equal($('select[name=interactionType]').val(), 'summarised_call');
+  });
+
+  select('select[name=interactionType]', 'One-on-one');
+  select('select[name=clientAccessNumberCountry]', 'Australia');
+  select('select[name=advisorPhoneCountryCode]', '+81 Japan');
+  fillIn('input[name=formattedScheduledCallTime]', scheduledCallTime.format('D MMM, h:mm A'));
+  fillIn('input[name=advisorPhoneNumber]', advisorPhoneNumber);
+  fillIn('input[name=additionalContactDetails]', additionalContactDetails);
+  click("button:contains('Schedule Interaction')");
+
+  andThen(function() {
+    assert.equal(handler.called, true);
+
+    let message = $('.messenger .messenger-message-inner').first().text().trim();
     assert.equal(message, "An interaction between Johnny Advisor and Bob Client has been scheduled.");
   });
 });
@@ -221,7 +277,7 @@ test("Schedule interaction shows errors if validation fails", function(assert) {
   });
 });
 
-test("Cancel interaction returns to dashboard and removes interaction from the widget", function(assert) {
+test("Cancel request returns to dashboard and removes interaction from the widget", function(assert) {
   defineFixture('DELETE', '/interests/1', { params: { "withdraw_from_compliance": "false" }, response: {
     "interactions": [
       {
@@ -251,7 +307,7 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
   });
 
   click('.interactions-to-schedule article:first');
-  click("button:contains('Cancel Interaction')");
+  click("button:contains('Cancel Request')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -264,11 +320,11 @@ test("Cancel interaction returns to dashboard and removes interaction from the w
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction has been cancelled.");
+    assert.equal(message, "The request has been cancelled.");
   });
 });
 
-test("Cancel Interaction Failure", function(assert) {
+test("Cancel Request Failure", function(assert) {
   defineFixture('DELETE', '/interests/1', {
     params: { withdraw_from_compliance: 'false' },
     status: 500
@@ -282,7 +338,7 @@ test("Cancel Interaction Failure", function(assert) {
   });
 
   click('.interactions-to-schedule article:first');
-  click("button:contains('Cancel Interaction')");
+  click("button:contains('Cancel Request')");
   click("button:contains('Confirm')");
 
   andThen(function() {
@@ -291,7 +347,7 @@ test("Cancel Interaction Failure", function(assert) {
     );
 
     var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, "The interaction could not be cancelled.",
+    assert.equal(message, "The request could not be cancelled.",
       'displays a message that it could not be cancelled'
     );
   });

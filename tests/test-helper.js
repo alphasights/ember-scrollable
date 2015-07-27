@@ -118,9 +118,7 @@ export default {
   },
 
   afterEach: function() {
-    /* jshint newcap: false */
-    Messenger().hideAll();
-    /* jshint newcap: true */
+    $('.messenger .messenger-message').remove();
 
     this.app.fixtures.destroy();
     Ember.run(this.app, this.app.destroy);

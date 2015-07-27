@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import ListWidgetComponent from 'phoenix/components/as-widget/list';
+import InteractionsWidgetComponent from 'phoenix/components/as-widget/interactions';
 
-export default ListWidgetComponent.extend({
-  classNameBindings: [':interactions', ':interactions-to-schedule'],
+export default InteractionsWidgetComponent.extend({
+  classNameBindings: [':interactions-to-schedule'],
 
   name: 'Interactions To Schedule',
 

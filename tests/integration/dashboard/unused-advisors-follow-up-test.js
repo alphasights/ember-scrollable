@@ -37,7 +37,8 @@ QUnit.module("Unused Advisors Follow Up", {
           "name": "Example Template",
           "body": "Really good template.",
           "subject": "Example Subject",
-          "purpose": "Unused Advisor"
+          "purpose": "Unused Advisor",
+          "global": "true"
         }]
       }
     });
@@ -121,7 +122,7 @@ QUnit.module("Unused Advisors Follow Up", {
 });
 
 test("Send follow up email", function(assert) {
-  var handler = defineFixture('POST', '/email_deliveries', {
+  var postHandler = defineFixture('POST', '/email_deliveries', {
     request: {
       "email_delivery": {
         "subject": `Hello ${unusedAdvisor.advisor.name}`,
@@ -138,6 +139,8 @@ test("Send follow up email", function(assert) {
     response: {}
   });
 
+  var deleteHandler = defineFixture('DELETE', `/unused_advisors/${unusedAdvisor.id}`);
+
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
 
   click("button:contains('Follow Up')");
@@ -150,14 +153,17 @@ test("Send follow up email", function(assert) {
   click("button:contains('Send')");
 
   andThen(function() {
-    assert.equal(handler.called, true);
-    var message = $('.messenger .messenger-message-inner').first().text().trim();
-    assert.equal(message, 'Your email has been sent.');
+    assert.equal(postHandler.called, true);
+    assert.equal(deleteHandler.called, true);
+    var emailDeliveryMessage = $('.messenger .messenger-message-inner').last().text().trim();
+    var advisorRemovalMessage = $('.messenger .messenger-message-inner').first().text().trim();
+    assert.equal(emailDeliveryMessage, 'Your email has been sent.');
+    assert.equal(advisorRemovalMessage, 'The advisor IceFrog was removed from the list.');
   });
 });
 
 test("Send follow up email using a template", function(assert) {
-  var handler = defineFixture('POST', '/email_deliveries', {
+  var postHandler = defineFixture('POST', '/email_deliveries', {
     request: {
       "email_delivery": {
         "subject": "Example Subject",
@@ -174,6 +180,8 @@ test("Send follow up email using a template", function(assert) {
     response: {}
   });
 
+  var deleteHandler = defineFixture('DELETE', `/unused_advisors/${unusedAdvisor.id}`);
+
   visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
 
   click("button:contains('Follow Up')");
@@ -189,11 +197,14 @@ test("Send follow up email using a template", function(assert) {
   click("button:contains('Send')");
 
   andThen(function() {
-    var message = $('.messenger .messenger-message-inner').first().text().trim();
+    var emailDeliveryMessage = $('.messenger .messenger-message-inner').last().text().trim();
+    var advisorRemovalMessage = $('.messenger .messenger-message-inner').first().text().trim();
 
-    assert.equal(handler.called, true);
+    assert.equal(postHandler.called, true);
+    assert.equal(deleteHandler.called, true);
     assert.equal(find('.email-composer .alert').length, 0);
-    assert.equal(message, 'Your email has been sent.');
+    assert.equal(emailDeliveryMessage, 'Your email has been sent.');
+    assert.equal(advisorRemovalMessage, 'The advisor IceFrog was removed from the list.');
   });
 });
 
@@ -218,5 +229,31 @@ test("Follow up email variables validation", function(assert) {
 
   andThen(function() {
     assert.equal(find('.email-composer .alert').text().trim(), "{{motto}} is not a valid placeholder.");
+  });
+});
+
+test("Remember last used email template", function(assert) {
+  if (window.localStorage != null) {
+    window.localStorage.clear();
+  }
+
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+  click("button:contains('Follow Up')");
+
+  andThen(function() {
+    assert.equal(find('.email-composer .header dl').text().match(/Example Template/), null);
+  });
+
+  click("a:contains('Change Settings')");
+  select('select[name=template]', 'Example Template');
+  click('.side-panel-header .close button');
+
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+  click("button:contains('Follow Up')");
+
+  andThen(function() {
+    var match = find('.email-composer .header dl').text().match(/Example Template/);
+    assert.notEqual(match, null);
+    assert.equal(match[0], "Example Template");
   });
 });
