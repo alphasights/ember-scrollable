@@ -7,6 +7,10 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
 
+    featureFlags: {
+      'app-switcher': false
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -50,6 +54,8 @@ module.exports = function(environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.featureFlags['app-switcher'] = true
   }
 
   if (environment === 'test') {
