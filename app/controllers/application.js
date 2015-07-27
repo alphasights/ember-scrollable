@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   currentUser: Ember.inject.service(),
   preferences: Ember.inject.service(),
-  showAppSwitcher: false,
 
   navigationItems: [{
     id: 'dashboard', name: 'Dashboard', routeName: 'dashboard'
@@ -38,10 +37,6 @@ export default Ember.Controller.extend({
       /* jshint newcap: false */
       Intercom('show');
       /* jshint newcap: true */
-    },
-
-    toggleAppSwitcher: function() {
-      this.toggleProperty('showAppSwitcher');
     }
   }
 });

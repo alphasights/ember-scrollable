@@ -15,18 +15,8 @@
     </li>
   {{/as-sidebar}}
 
-<main>
-  {{#as-quick-jump}}
-    <div class="content">
-      <ul class="navigation-actions">
-        <li>
-          <button class="change-app" {{action "toggleAppSwitcher"}}></button>
-        </li>
-      </ul>
-    </div>
-  {{/as-quick-jump}}
-
-  {{as-app-switcher active=showAppSwitcher onClickOverlay="toggleAppSwitcher"}}
+  <main>
+    {{as-quick-jump}}
 
     {{#as-scrollable class="content"}}
       {{outlet}}

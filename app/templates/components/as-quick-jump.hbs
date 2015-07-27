@@ -16,7 +16,13 @@
       <button title="Close"></button>
     </div>
   {{else}}
-    {{yield this}}
+    <div class="content">
+      <ul class="navigation-actions">
+        <li>
+          <button class="change-app" {{action "toggleAppSwitcher"}}></button>
+        </li>
+      </ul>
+    </div>
   {{/liquid-if}}
 </div>
 
@@ -45,3 +51,5 @@
     {{/liquid-if}}
   </div>
 {{/liquid-if}}
+
+{{as-app-switcher active=showAppSwitcher onClickOverlay="toggleAppSwitcher"}}
