@@ -5,17 +5,13 @@ export default Ember.Component.extend(InboundActions, {
   classNameBindings: [':app-switcher', 'isActive:active'],
   isActive: false,
 
-  click: function() {
-    this._clickOverlay();
-  },
+  onClickOverlay: Ember.on('click', function() {
+    this.set('isActive', false);
+  }),
 
   actions: {
     toggle: function() {
       this.toggleProperty('isActive');
     }
-  },
-
-  _clickOverlay: function() {
-    this.set('isActive', false);
   }
 });
