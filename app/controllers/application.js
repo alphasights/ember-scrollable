@@ -15,8 +15,8 @@ export default Ember.Controller.extend({
   }],
 
   actionItems: [{
-    name: 'feedback',
-    label: 'Feedback'
+    name: 'help',
+    label: 'Help'
   }, {
     name: 'logout',
     label: 'Logout'
@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
       this.get('currentUser').logout();
     },
 
-    feedback: function() {
+    help: function() {
       /* jshint newcap: false */
       Intercom('show');
       /* jshint newcap: true */
