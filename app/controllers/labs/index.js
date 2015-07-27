@@ -8,41 +8,29 @@ export default Ember.Controller.extend({
 
   selectedFilter: 'all',
 
-  arrangedContent: Ember.computed('_myLabs', '_availableLabs', 'selectedFilter', function() {
+  arrangedContent: Ember.computed('myLabs', 'availableLabs', 'selectedFilter', function() {
     let selectedFilter = this.get('selectedFilter');
 
     if (selectedFilter === 'mine') {
-      return this.get('_myLabs');
+      return this.get('myLabs');
     } else if (selectedFilter === 'available') {
-      return this.get('_availableLabs');
+      return this.get('availableLabs');
     } else {
-      return this.get('_sortedLabs');
+      return this.get('sortedLabs');
     }
   }),
 
-  availableLabsCount: Ember.computed('_availableLabs.length', function() {
-    return this.get('_availableLabs.length');
-  }),
-
-  allLabsCount: Ember.computed('_sortedLabs.length', function() {
-    return this.get('_sortedLabs.length');
-  }),
-
-  myLabsCount: Ember.computed('_myLabs.length', function() {
-    return this.get('_myLabs.length');
-  }),
-
-  _sortedLabs: Ember.computed('model.@each.name', function() {
+  sortedLabs: Ember.computed('model.@each.name', function() {
     return this.get('model').rejectBy('name', undefined).sortBy('name');
   }),
 
-  _myLabs: Ember.computed('currentUser.model.featureParticipations', function() {
+  myLabs: Ember.computed('currentUser.model.featureParticipations', function() {
     return this.get('currentUser.model.featureParticipations').mapBy('feature');
   }),
 
-  _availableLabs: Ember.computed('_sortedLabs.@each.hasReachedLimit', '_myLabs', function() {
+  availableLabs: Ember.computed('sortedLabs.@each.hasReachedLimit', 'myLabs', function() {
     return _.difference(
-      this.get('_sortedLabs'), this.get('_myLabs')
+      this.get('sortedLabs'), this.get('myLabs')
     ).filterBy('hasReachedLimit', false);
   }),
 

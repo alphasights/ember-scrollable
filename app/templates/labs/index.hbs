@@ -4,15 +4,15 @@
   <div class="filter">
     <ul>
       {{#link-to (query-params selectedFilter="all") tagName="li"}}
-        All ({{allLabsCount}})
+        All ({{sortedLabs.length}})
       {{/link-to}}
 
       {{#link-to (query-params selectedFilter="mine") tagName="li"}}
-        Mine ({{myLabsCount}})
+        Mine ({{myLabs.length}})
       {{/link-to}}
 
       {{#link-to (query-params selectedFilter="available") tagName="li"}}
-        Available ({{availableLabsCount}})
+        Available ({{availableLabs.length}})
       {{/link-to}}
     </ul>
   </div>
