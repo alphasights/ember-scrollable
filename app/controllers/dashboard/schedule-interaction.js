@@ -3,7 +3,7 @@ import jstz from 'jstz';
 import ModelsNavigationMixin from 'ember-cli-paint/mixins/models-navigation';
 import TimeZoneOption from 'ember-calendar/models/time-zone-option';
 import notify from 'phoenix/helpers/notify';
-import InteractionCancellation from 'phoenix/services/interaction-cancellation';
+import RequestCancellation from 'phoenix/services/request-cancellation';
 
 var InteractionOccurrence = Ember.Object.extend({
   interaction: null,
@@ -125,12 +125,11 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       this.transitionToRoute('dashboard');
     },
 
-    cancel: function() {
+    cancelRequest: function() {
       var requestPromise =
-        InteractionCancellation.create().cancel(this.get('model'), response => {
+        RequestCancellation.create().cancel(this.get('model'), response => {
           this.store.pushPayload(response);
           this.get('dashboard').propertyDidChange('interactionsToSchedule');
-          notify('The interaction has been cancelled.');
           this.get('sidePanel').send('close');
         });
 
