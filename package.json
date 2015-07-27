@@ -60,7 +60,7 @@
     "ember-localstorage-adapter": "0.5.4",
     "ember-moment": "1.2.1",
     "ember-rl-dropdown": "git+https://git@github.com/alphasights/ember-rl-dropdown.git",
-    "ember-sortable": "1.3.0",
+    "ember-sortable": "git+https://git@github.com/alphasights/ember-sortable#ede-support-scrolling",
     "ember-truth-helpers": "0.0.5",
     "ember-validations": "git+https://github.com/MikeAski/ember-validations.git#remove-ember-keys",
     "ember-watson": "^0.3.1",
