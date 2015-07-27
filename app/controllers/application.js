@@ -12,6 +12,8 @@ export default Ember.Controller.extend({
     id: 'whiteboards', name: 'Whiteboards', routeName: 'whiteboards'
   }, {
     id: 'performance', name: 'Performance', routeName: 'performance'
+  }, {
+    id: 'labs', name: 'Labs', routeName: 'labs'
   }],
 
   actionItems: [{

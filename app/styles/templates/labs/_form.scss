@@ -1,0 +1,59 @@
+$h1-line-height: rem-calc(56);
+$limit-participants-height: rem-calc(29);
+$participant-limit-height: rem-calc(76);
+
+section.labs .edit-lab,
+section.labs .new-lab {
+  margin: 0 $column-gutter;
+
+  > header {
+    margin: $column-gutter / 2 0;
+
+    h1 {
+      display: inline-block;
+      line-height: $h1-line-height;
+    }
+
+    a {
+      float: right;
+      line-height: $h1-line-height;
+    }
+  }
+
+  .form-submission-action {
+    float: right;
+  }
+
+  .limit-participants {
+    height: $limit-participants-height;
+    min-height: $limit-participants-height;
+
+    .form-field {
+      height: $limit-participants-height;
+
+      > label {
+        float: left;
+        line-height: $limit-participants-height;
+      }
+
+      .content {
+        float: left;
+        line-height: $limit-participants-height;
+        margin-left: 15px;
+      }
+    }
+  }
+
+  fieldset .liquid-container {
+    clear: both;
+  }
+
+  .participant-limit {
+    height: $participant-limit-height;
+    min-height: $participant-limit-height;
+
+    label {
+      display: none;
+    }
+  }
+}
