@@ -4,15 +4,7 @@ import '../helpers/define-fixture';
 import Fixtures from '../helpers/fixtures';
 import testHelper from '../test-helper';
 
-QUnit.module("Labs", {
-  beforeEach: function() {
-    testHelper.beforeEach.apply(this, arguments);
-  },
-
-  afterEach: function() {
-    testHelper.afterEach.apply(this, arguments);
-  }
-});
+QUnit.module("Labs", testHelper);
 
 test("Create New Lab", function(assert) {
   defineFixture('GET', '/v1/features', { response: {
@@ -27,11 +19,21 @@ test("Create New Lab", function(assert) {
     ]
   }});
 
+  defineFixture('POST', '/v1/features', { request: {
+    "feature": {
+      "badge_name": "wine_connoisseur",
+      "brief_description": "Business Business Business",
+      "limit": 100,
+      "name": "<3 Junior Achievement"
+    }
+  }});
+
   visit('/labs');
 
   andThen(function() {
     assert.equal(currentURL(), '/labs');
   });
+
   click("a:contains('New Lab')");
 
   andThen(function() {

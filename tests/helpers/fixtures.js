@@ -12,7 +12,7 @@ var Fixtures = Ember.Object.extend({
       console.log('------------');
     };
 
-    this.handlers = {};
+    this.handlers = { 'GET': [], 'POST': [], 'PUT': [], 'DELETE': [] };
   },
 
   destroy: function() {
@@ -32,14 +32,14 @@ var Fixtures = Ember.Object.extend({
       called: false
     };
 
-    var handlers = this.handlers[url];
+    var handlers = this.handlers[method][url];
 
     if(handlers == null) {
       handlers = [];
 
       this.server[method.toLowerCase()](
         `${EmberENV.apiBaseUrl}${url}`, function(request) {
-          return this._handleRequest(url, request);
+          return this._handleRequest(method, url, request);
         }.bind(this)
       );
     }
@@ -50,14 +50,14 @@ var Fixtures = Ember.Object.extend({
       });
     }
 
-    this.handlers[url] = handlers;
+    this.handlers[method][url] = handlers;
     handlers.pushObject(handler);
 
     return handler;
   },
 
-  _handleRequest: function(url, request) {
-    var handlers = this.handlers[url];
+  _handleRequest: function(method, url, request) {
+    var handlers = this.handlers[method][url];
     var parsedRequestBody = null;
 
     if(request.requestBody != null) {

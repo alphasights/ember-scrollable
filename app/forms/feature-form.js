@@ -28,12 +28,8 @@ export default Form.extend({
     });
   },
 
-  availableBadgeNames: Ember.computed('_availableBadges', 'badgeName', function() {
+  availableBadgeNames: Ember.computed('_availableBadges.[]', function() {
     let availableBadges = this.get('_availableBadges');
-
-    if (this.get('badgeName')) {
-      availableBadges.splice(0, 0, this.get('badgeName'));
-    }
 
     return _.map(availableBadges, function(badgeName) {
       let humanizedBadgeName = badgeName.replace(/_/g, ' ').replace( /\b\w/g, function(word) {
@@ -44,15 +40,16 @@ export default Form.extend({
     });
   }),
 
-  _usedBadgeNames: Ember.computed('features', function() {
+  _usedBadgeNames: Ember.computed('features.[]', function() {
     return _.map(this.get('features').toArray(), function(feature){
       return feature.get('badgeName');
     });
   }),
 
-  _availableBadges: Ember.computed('badges', '_usedBadgeNames', function() {
+  _availableBadges: Ember.computed('badges.[]', '_usedBadgeNames.[]', 'badgeName', function() {
     let allBadges = this.get('badges');
     let usedBadgeNames = this.get('_usedBadgeNames');
+    usedBadgeNames.addObject(this.get('badgeName'));
     return  _.difference(allBadges, usedBadgeNames);
   }),
 
@@ -70,8 +67,7 @@ export default Form.extend({
     },
 
     badgeName: {
-      presence: true,
-      inclusion: { in: '_availableBadges' }
+      presence: true
     }
   }
 });
