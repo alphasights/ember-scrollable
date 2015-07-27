@@ -81,7 +81,7 @@ test("Edit Lab", function(assert) {
     "current_user_feature_participations": []
   }});
 
-  let handler = defineFixture('PUT', '/v1/features/1', { request: {
+  let handler = defineFixture('PUT', `/v1/features/${feature.id}`, { request: {
     "feature": {
       "badge_name": feature.badgeName,
       "brief_description": feature.briefDescription,
@@ -94,7 +94,7 @@ test("Edit Lab", function(assert) {
   click("a:contains('Edit')");
 
   andThen(function() {
-    assert.equal(currentURL(), '/labs/1/edit');
+    assert.equal(currentURL(), `/labs/${feature.id}/edit`);
   });
 
   fillIn('input[name=name]', "Really <3 Junior Achievement");
@@ -132,6 +132,7 @@ test("Join Lab", function(assert) {
 
     response: {
       "feature_participation": {
+        "id": 1,
         "feature_id": feature.id,
         "user_id": 1
       },
@@ -154,6 +155,62 @@ test("Join Lab", function(assert) {
 
   andThen(function() {
     assert.equal($('.participate span').first().text().trim(), '1 participants.');
+    assert.equal(handler.called, true);
+  });
+});
+
+const featureParticipation = {
+  id: 1,
+  userId: 1
+};
+
+test("Leave Lab", function(assert) {
+  defineFixture('GET', '/v1/features', { response: {
+    "features": [
+      {
+        "id": feature.id,
+        "badge_name": feature.badgeName,
+        "brief_description": feature.briefDescription,
+        "limit": feature.limit,
+        "name": feature.name,
+        "feature_participations_count": 1
+      }
+    ],
+    "current_user_feature_participations": [
+      {
+        "id": featureParticipation.id,
+        "feature_id": feature.id,
+        "user_id": featureParticipation.userId
+      }
+    ]
+  }});
+
+  let handler = defineFixture('DELETE', `/v1/feature_participations/${featureParticipation.id}`, {
+    response: {
+      "feature_participation": {
+        "id": featureParticipation.id,
+        "feature_id": feature.id,
+        "user_id": featureParticipation.userId
+      },
+
+      "features": [
+        {
+          "id": feature.id,
+          "badge_name": feature.badgeName,
+          "brief_description": feature.briefDescription,
+          "limit": feature.limit,
+          "name": feature.name,
+          "feature_participations_count": 1
+        }
+      ]
+    }
+  });
+
+  visit('/labs');
+  click("button:contains('Leave')");
+
+  andThen(function() {
+    assert.equal($('.participate span').first().text().trim(), '0 participants.');
     assert.equal(handler.called, true);
   });
 });
