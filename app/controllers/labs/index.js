@@ -21,7 +21,7 @@ export default Ember.Controller.extend({
   }),
 
   sortedLabs: Ember.computed('model.@each.name', function() {
-    return this.get('model').rejectBy('name', undefined).sortBy('name');
+    return this.get('model').rejectBy('isDirty', true).sortBy('name');
   }),
 
   myLabs: Ember.computed('currentUser.model.featureParticipations', function() {
