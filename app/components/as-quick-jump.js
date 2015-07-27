@@ -206,6 +206,10 @@ export default Ember.Component.extend(KeyEventsMixin, {
 
     activate: function() {
       this.set('isActive', true);
+    },
+
+    toggleAppSwitcher: function() {
+      this.get('appSwitcher').send('toggle');
     }
   }
 });

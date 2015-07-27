@@ -6,6 +6,7 @@
 - [#473](https://github.com/alphasights/phoenix/pull/473) Show day of the week in scheduled interactions widget
 - [#466](https://github.com/alphasights/phoenix/pull/466) Automatically remove advisor after following up
 - [#469](https://github.com/alphasights/phoenix/pull/469) Always show on pace target on hover
+- [#450](https://github.com/alphasights/phoenix/pull/450) Fix project navigation after changing priority
 - [#447](https://github.com/alphasights/phoenix/pull/447) Add whiteboards to the team switcher
 - [#430](https://github.com/alphasights/phoenix/pull/430) Add interaction types to call completion form
 - [#424](https://github.com/alphasights/phoenix/pull/424) Improve scheduling form selects performance

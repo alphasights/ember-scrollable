@@ -100,22 +100,22 @@
                 Schedule Interaction
               {{/as-form/submit}}
 
-              {{#as-action
-                action="cancel"
-                buttonClass="error"
-                showConfirmation=true
-                confirmationStateClass="alert"
-                confirmationButtonLabel="Yes, Cancel Interaction"
-                confirmationMessage="Are you sure you want to cancel the interaction?"
-                requestPromise=requestPromise}}
-                Cancel Interaction
-              {{/as-action}}
-
               <div class="action">
                 <a href={{model.invitationUrl}} class="send-confirmation-email" target="_blank">
                   Send confirmation email
                 </a>
               </div>
+
+              {{#as-action
+                action="cancelRequest"
+                buttonClass="error"
+                showConfirmation=true
+                confirmationStateClass="alert"
+                confirmationButtonLabel="Yes, Cancel Request"
+                confirmationMessage="Are you sure you want to cancel the request?"
+                requestPromise=requestPromise}}
+                Cancel Request
+              {{/as-action}}
             {{/as-action-group}}
           {{/as-form}}
         </section>

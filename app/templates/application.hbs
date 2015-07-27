@@ -18,9 +18,13 @@
   <main>
     {{as-quick-jump}}
 
-    {{#as-scrollable class="content"}}
-      {{outlet}}
-    {{/as-scrollable}}
+    <div class="content">
+      {{#as-scrollable}}
+        <div class="main-content">
+          {{outlet}}
+        </div>
+      {{/as-scrollable}}
+    </div>
 
     {{outlet "side-panel"}}
   </main>
