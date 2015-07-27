@@ -1,20 +1,22 @@
-<header>
-  {{as-team-switcher
-    user=currentUser
-    selectTeam="selectTeam"
-    selectWhiteboard="selectWhiteboard"
-    resetTeamSelection="resetTeamSelection"
-    teamId=teamId
-    whiteboardId=whiteboardId
-    prompt=currentUser.name}}
+<section class="projects">
+  <header>
+    {{as-team-switcher
+      user=currentUser
+      selectTeam="selectTeam"
+      selectWhiteboard="selectWhiteboard"
+      resetTeamSelection="resetTeamSelection"
+      teamId=teamId
+      whiteboardId=whiteboardId
+      prompt=currentUser.name}}
 
-    <a href={{newProjectUrl}} target="_blank">New Project</a>
-    <a class="projects-search" href={{projectSearchUrl}} target="_blank">Project Search</a>
-</header>
+      <a href={{newProjectUrl}} target="_blank">New Project</a>
+      <a class="projects-search" href={{projectSearchUrl}} target="_blank">Project Search</a>
+  </header>
 
-{{as-projects
-  projects=model
-  filterPriority=filterPriority
-  listItemComponent="as-project-list-item"
-  onProjectClick="showProject"
-  teamMembers=teamMembers}}
+  {{as-projects
+    projects=model
+    filterPriority=filterPriority
+    listItemComponent="as-project-list-item"
+    onProjectClick="showProject"
+    teamMembers=teamMembers}}
+</section>

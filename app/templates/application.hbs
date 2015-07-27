@@ -1,18 +1,19 @@
-{{#as-sidebar
-  applicationName="Phoenix"
-  currentUser=currentUser.model
-  navigationItems=navigationItems
-  actionItems=actionItems
-  actionsTarget=this
-  isCollapsed=preferences.sidebarCollapsed
-  toggleCollapse="savePreferences"}}
-  <li class="advisor-search">
-    <a href={{advisorSearchUrl}} target="_blank">
-      <i></i>
-      <span>Advisor Search</span>
-    </a>
-  </li>
-{{/as-sidebar}}
+<section class="application">
+  {{#as-sidebar
+    applicationName="Phoenix"
+    currentUser=currentUser.model
+    navigationItems=navigationItems
+    actionItems=actionItems
+    actionsTarget=this
+    isCollapsed=preferences.sidebarCollapsed
+    toggleCollapse="savePreferences"}}
+    <li class="advisor-search">
+      <a href={{advisorSearchUrl}} target="_blank">
+        <i></i>
+        <span>Advisor Search</span>
+      </a>
+    </li>
+  {{/as-sidebar}}
 
 <main>
   {{#as-quick-jump}}
@@ -27,9 +28,10 @@
 
   {{as-app-switcher active=showAppSwitcher onClickOverlay="toggleAppSwitcher"}}
 
-  {{#as-scrollable class="content"}}
-    {{outlet}}
-  {{/as-scrollable}}
+    {{#as-scrollable class="content"}}
+      {{outlet}}
+    {{/as-scrollable}}
 
-  {{outlet "side-panel"}}
-</main>
+    {{outlet "side-panel"}}
+  </main>
+</section>

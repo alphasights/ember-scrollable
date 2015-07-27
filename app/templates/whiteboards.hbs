@@ -1,11 +1,13 @@
-<header>
-  {{as-team-switcher
-    user=currentUser
-    selectTeam="selectTeam"
-    selectWhiteboard="selectWhiteboard"
-    resetTeamSelection="resetTeamSelection"
-    teamId=teamId
-    whiteboardId=whiteboardId}}
-</header>
+<section class="whiteboards">
+  <header>
+    {{as-team-switcher
+      user=currentUser
+      selectTeam="selectTeam"
+      selectWhiteboard="selectWhiteboard"
+      resetTeamSelection="resetTeamSelection"
+      teamId=teamId
+      whiteboardId=whiteboardId}}
+  </header>
 
-{{outlet}}
+  {{outlet}}
+</section>

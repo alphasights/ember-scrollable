@@ -37,7 +37,8 @@ QUnit.module("Unused Advisors Follow Up", {
           "name": "Example Template",
           "body": "Really good template.",
           "subject": "Example Subject",
-          "purpose": "Unused Advisor"
+          "purpose": "Unused Advisor",
+          "global": "true"
         }]
       }
     });
@@ -228,5 +229,31 @@ test("Follow up email variables validation", function(assert) {
 
   andThen(function() {
     assert.equal(find('.email-composer .alert').text().trim(), "{{motto}} is not a valid placeholder.");
+  });
+});
+
+test("Remember last used email template", function(assert) {
+  if (window.localStorage != null) {
+    window.localStorage.clear();
+  }
+
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+  click("button:contains('Follow Up')");
+
+  andThen(function() {
+    assert.equal(find('.email-composer .header dl').text().match(/Example Template/), null);
+  });
+
+  click("a:contains('Change Settings')");
+  select('select[name=template]', 'Example Template');
+  click('.side-panel-header .close button');
+
+  visit(`/dashboard/unused_advisors/${unusedAdvisor.id}`);
+  click("button:contains('Follow Up')");
+
+  andThen(function() {
+    var match = find('.email-composer .header dl').text().match(/Example Template/);
+    assert.notEqual(match, null);
+    assert.equal(match[0], "Example Template");
   });
 });

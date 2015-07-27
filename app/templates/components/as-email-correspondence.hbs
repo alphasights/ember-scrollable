@@ -7,7 +7,11 @@
         {{as-text-ellipsis text=email.subject characterLimit=40}}
       </td>
       <td class="from">
-        {{extract-name-from-email email.from}}
+        {{#if email.from.name}}
+          {{email.from.name}}
+        {{else}}
+          {{email.from.address}}
+        {{/if}}
       </td>
       <td class="sent-at">
         {{#tool-tipster title=(moment email.sentAt "D MMM YYYY")}}
