@@ -15,7 +15,6 @@ export default Ember.Component.extend(KeyEventsMixin, {
   placeholder: null,
   resultComponents: [],
   focusedComponent: null,
-  showAppSwitcher: false,
 
   resultSectionsOrder: [
     'user', 'contact', 'advisor', 'project', 'entity', 'account', 'target'
@@ -210,7 +209,7 @@ export default Ember.Component.extend(KeyEventsMixin, {
     },
 
     toggleAppSwitcher: function() {
-      this.toggleProperty('showAppSwitcher');
+      this.get('appSwitcher').send('toggle');
     }
   }
 });
