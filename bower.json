@@ -27,7 +27,8 @@
     "jquery-simulate": "1.0.1",
     "interact": "1.2.4",
     "lodash": "3.10.0",
-    "bower-jstz": "bower-packages/bower-jstz#1.0.5"
+    "bower-jstz": "bower-packages/bower-jstz#1.0.5",
+    "trackpad-scroll-emulator": "^1.0.8"
   },
   "resolutions": {
     "jquery": "1.11.1"

@@ -3,32 +3,34 @@
   <h1>{{applicationName}}</h1>
 </header>
 
-{{#as-scrollable tagName="nav"}}
-  <header>
-    <div class="toggle-collapse">
-      <button {{action "toggleCollapse"}}></button>
-    </div>
+<nav>
+  {{#as-scrollable}}
+    <header>
+      <div class="toggle-collapse">
+        <button {{action "toggleCollapse"}}></button>
+      </div>
 
-    <h1>Menu</h1>
-  </header>
+      <h1>Menu</h1>
+    </header>
 
-  <ul>
-    {{#each navigationItems as |item|}}
-      <li class={{item.id}}>
-        {{#link-to item.routeName}}
-          <i></i>
-          <span>{{item.name}}</span>
+    <ul>
+      {{#each navigationItems as |item|}}
+        <li class={{item.id}}>
+          {{#link-to item.routeName}}
+            <i></i>
+            <span>{{item.name}}</span>
 
-          {{#if item.bubbleCount}}
-            <span class="bubble">{{item.bubbleCount}}</span>
-          {{/if}}
-        {{/link-to}}
-      </li>
-    {{/each}}
+            {{#if item.bubbleCount}}
+              <span class="bubble">{{item.bubbleCount}}</span>
+            {{/if}}
+          {{/link-to}}
+        </li>
+      {{/each}}
 
-    {{yield}}
-  </ul>
-{{/as-scrollable}}
+      {{yield}}
+    </ul>
+  {{/as-scrollable}}
+</nav>
 
 {{#if currentUser}}
   <footer>
