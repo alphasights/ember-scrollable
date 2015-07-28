@@ -104,12 +104,16 @@ export default Ember.Controller.extend(ModelsNavigationMixin, {
       ));
     }
 
+    moment.tz.names().forEach(function(timeZone) {
+      timeZoneOptions.push(TimeZoneOption.create({ value: timeZone }));
+    });
+
     return timeZoneOptions;
   }),
 
   _buildTimeZoneOptionWithLabel: function(timeZone, label) {
     var option = TimeZoneOption.create({ value: timeZone });
-    option.set('description', `${label} (${option.get('abbreviation')})`);
+    option.set('description', `${label} (${option.get('_offset')} ${option.get('abbreviation')})`);
     return option;
   },
 
