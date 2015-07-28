@@ -12,9 +12,10 @@ const qualityOptions = qualityOptionsMapping.keys;
 
 const speakQualityOptionsMapping = {
   'no_known_issues': 'No known issues',
-  'disconnected_10': 'Call disconnected: ≤10 mins',
-  'disconnected_30': 'Call disconnected: 11 - 30 mins',
-  'disconnected_60': 'Call disconnected: 31 - 60 mins',
+  'disconnected': 'Call dropped or disconnected',
+  'noise': 'Static or noise heard',
+  'echo': 'Voice echo heard',
+  'no_audio': 'Could not hear other party',
   'poor_line_quality': 'Poor line quality identified by client or advisor',
   'breaking_up': 'Call broke up (jitter)',
   'lag': 'Voice lag or delay',
@@ -27,24 +28,35 @@ export default Form.extend(SelectableInteractionTypesMixin, {
   genericErrorMessage: 'There has been an error completing the interaction.',
   interactionTypes: null,
   interactionClassifications: null,
-  speakExplanationNeeded: Ember.computed.equal('speakQuality', 'other'),
   editingDisabled: false,
+
+  speakExplanationNeeded: Ember.computed('speakQuality', function() {
+    return this.get('speakQuality') !== 'no_known_issues';
+  }),
 
   setDefaultValues: function() {
     if (this.get('model.id') != null) {
       this.set('editingDisabled', true);
     }
+
     if (Ember.isPresent(this.get('model.quality'))) {
       this.set('quality', this.get('model.quality'));
     } else {
       this.set('quality', 'good');
     }
+
+    if (Ember.isPresent(this.get('model.speakQuality'))) {
+      this.set('speakQuality', this.get('model.speakQuality'));
+    } else {
+      this.set('speakQuality', 'no_known_issues');
+    }
+
     this.set('duration', this.get('model.duration'));
     this.set('customCredits', this.get('model.customCredits'));
     this.set('customRevenue', this.get('model.customRevenue'));
     this.set('interactionType', this.get('model.interaction.interactionType'));
-    this.set('speakQuality', this.get('model.speakQuality'));
     this.set('speakExplanation', this.get('model.speakExplanation'));
+    this.set('speakExplanationOriginator', this.get('model.speakExplanationOriginator'));
   },
 
   setPersistedValues: function() {
@@ -60,7 +72,8 @@ export default Form.extend(SelectableInteractionTypesMixin, {
       interactionType: this.get('interactionType'),
       quality: this.get('quality'),
       speakQuality: this.get('speakQuality'),
-      speakExplanation: this.get('speakExplanation')
+      speakExplanation: this.get('speakExplanation'),
+      speakExplanationOriginator: this.get('speakExplanationOriginator')
     });
   },
 
@@ -165,5 +178,26 @@ export default Form.extend(SelectableInteractionTypesMixin, {
         name: value
       });
     });
+  }),
+
+  speakExplanationOriginatorsForSelect: Ember.computed(function() {
+    return [
+      {
+        id: 'advisor',
+        name: 'Advisor',
+      },
+      {
+        id: 'client',
+        name: 'Client',
+      },
+      {
+        id: 'both',
+        name: 'Both',
+      },
+      {
+        id: 'neither',
+        name: 'Neither',
+      }
+    ]
   })
 });

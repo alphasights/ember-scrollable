@@ -10,5 +10,6 @@ export default DS.Model.extend({
   quality: DS.attr('string'),
   speakQuality: DS.attr('string'),
   speakExplanation: DS.attr('string'),
-  voidedAt: DS.attr('date')
+  voidedAt: DS.attr('date'),
+  speakExplanationOriginator: DS.attr('string')
 });
