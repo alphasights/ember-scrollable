@@ -198,6 +198,6 @@ export default Form.extend(SelectableInteractionTypesMixin, {
         id: 'neither',
         name: 'Neither',
       }
-    ]
+    ];
   })
 });
