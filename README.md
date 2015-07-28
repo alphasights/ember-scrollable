@@ -357,29 +357,40 @@ Router.map(function() {
 }
 ```
 
-Create the route by inheriting from the `side-panel` route.
+Create the route by mixing in the `side-panel` route mixin.
 
 ```javascript
-import SidePanelRoute from '../side-panel';
+import SidePanelRouteMixin from 'ember-cli-paint/mixins/side-panel-route';
 
-export default SidePanelRoute.extend({
-  viewName: 'projects',
-  sidePanelActionsTemplateName: 'projects-side-panel-actions'
-});
+export default SidePanelRoute.extend(SidePanelRouteMixin);
 ```
 
-Assigning a `viewName` and `sidePanelActionsTemplateName` is optional.
-`viewName` should be used when you need a custom view for the side panel (e.g. you need to setup events on `didInsertElement`).
-`sidePanelActionsTemplateName` should be used when you need buttons to be displayed at the top of the side panel in the actions header.
+Wrap the route template with the `as-side-panel` component
 
-Views specified with `viewName` should inherit from the `side-panel` view.
+```hbs
+{{#as-side-panel class="interaction" close="hideSidePanel" previous="previous" next="next" actionReceiver=sidePanel}}
+  {{#as-side-panel/main}}
+    {{as-side-panel/header}}
 
-```javascript
-import SidePanelView from '../side-panel';
-
-export default SidePanelView.extend({
-  classNameBindings: [':projects']
-});
+    {{#as-side-panel/content}}
+       <!-- content -->
+    {{/as-side-panel/content}}
+    
+    {{#as-side-panel/footer}}
+      <!-- content -->
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/main}}
+  
+  {{#as-side-panel/drawer}}
+    {{#as-side-panel/content}}
+      <!-- content -->
+    {{/as-side-panel/content}}
+    
+    {{#as-side-panel/footer}}
+      <!-- content -->
+    {{/as-side-panel/footer}}
+  {{/as-side-panel/drawer}}
+{{/as-side-panel}}
 ```
 
 ## Further Reading / Useful Links
