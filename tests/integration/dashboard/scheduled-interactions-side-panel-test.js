@@ -333,7 +333,8 @@ const interactionCompletion = {
   interactionType: 'call',
   interactionId: '1',
   speakQuality: 'other',
-  speakExplanation: 'Client was grumpy.'
+  speakExplanation: 'Client was grumpy.',
+  speakExplanationOriginator: 'client'
 };
 
 test("Complete Interaction and Charge Client completes the call", function(assert) {
@@ -350,6 +351,7 @@ test("Complete Interaction and Charge Client completes the call", function(asser
         "interaction_id": interactionCompletion.interactionId,
         "speak_quality": interactionCompletion.speakQuality,
         "speak_explanation": interactionCompletion.speakExplanation,
+        "speak_explanation_originator": interactionCompletion.speakExplanationOriginator,
         "voided_at": null
       }
     },
@@ -384,6 +386,7 @@ test("Complete Interaction and Charge Client completes the call", function(asser
   select('select[name=quality]', 'Bad');
   select('select[name=speakQuality]', 'Other issue');
   fillIn('input[name=speakExplanation]', interactionCompletion.speakExplanation);
+  select('select[name=speakExplanationOriginator]', 'Client');
   click('button:contains("Charge Client")');
 
   andThen(function() {

@@ -241,6 +241,10 @@ $interaction-header-height:
     .url {
       padding: 0;
     }
+
+    .report-problem {
+      padding: $column-gutter / 2;
+    }
   }
 
   .advisor-payment {
