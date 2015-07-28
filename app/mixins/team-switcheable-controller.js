@@ -5,8 +5,8 @@ export default Ember.Mixin.create({
   teamId: null,
   whiteboardId: null,
 
-  isTeamView: Ember.computed('teamId', function() {
-    return this.get('teamId') !== null;
+  isTeamView: Ember.computed('teamId', 'whiteboardId', function() {
+    return this.get('teamId') !== null || this.get('whiteboardId') !== null;
   }),
 
   queryParams: {
