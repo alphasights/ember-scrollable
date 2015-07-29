@@ -8,16 +8,16 @@ export default Ember.Component.extend({
   email: null,
 
   senderName: Ember.computed('email.from', function() {
-    var from = this.get('email.from');
+    var email = this.get('email');
 
-    if (Ember.isPresent(from.get('name'))) {
-      return from.get('name');
+    if (Ember.isPresent(email.get('from.name'))) {
+      return email.get('from.name');
     } else {
-      return extractNameFromEmail(from.get('address'));
+      return extractNameFromEmail(email.get('from.address'));
     }
   }),
 
-  info: Ember.computed('email.from', 'email.sentAt', function() {
+  info: Ember.computed('senderName', 'email.sentAt', function() {
     let momentSentAt = moment(this.get('email.sentAt'));
     let dateSent = momentSentAt.format('D MMM');
     let timeAgo = momentSentAt.fromNow();
