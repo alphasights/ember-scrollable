@@ -1,5 +1,12 @@
 # Phoenix Changelog
 
+### Release 0.1.1 (July 29, 2015)
+
+- [#503](https://github.com/alphasights/phoenix/pull/503) Add Speak Explanation Originator field to interaction completion form
+- [#501](https://github.com/alphasights/phoenix/pull/501) Allow to filter by team member when selecting a whiteboard
+- [#498](https://github.com/alphasights/phoenix/pull/498) Allow to select any time zone in the schedule call calendar
+- [#448](https://github.com/alphasights/phoenix/pull/448) Add Labs
+
 ### Release 0.1.0 (July 27, 2015)
 
 - [#492 BUGFIX](https://github.com/alphasights/phoenix/pull/492) Fix dragging and scrolling bug
