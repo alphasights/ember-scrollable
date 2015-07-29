@@ -14,5 +14,6 @@ export default DS.Model.extend({
   intercomUserHash: DS.attr('string'),
   timeZone: DS.attr('string'),
   teams: DS.hasMany('team', { async: false }),
-  whiteboards: DS.hasMany('whiteboard', { async: false })
+  whiteboards: DS.hasMany('whiteboard', { async: false }),
+  featureParticipations: DS.hasMany('featureParticipation')
 });

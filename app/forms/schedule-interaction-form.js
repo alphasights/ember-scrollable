@@ -95,7 +95,8 @@ export default Form.extend(SelectableInteractionTypesMixin, {
   },
 
   scheduledCallTimeLabel: Ember.computed('timeZone', function() {
-    return `Call Time (${moment.tz(this.get('timeZone')).format('z')})`;
+    var momentTime = moment.tz(this.get('timeZone'));
+    return `Call Time (${momentTime.format('Z')} ${momentTime.format('z')})`;
   }),
 
   speakDialIns: Ember.computed('speakDialInCountries', function() {

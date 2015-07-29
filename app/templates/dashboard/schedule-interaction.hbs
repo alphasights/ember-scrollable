@@ -36,7 +36,8 @@
           dayEndingTime="21:30"
           timeSlotDuration="00:30"
           timeZoneOptions=timeZoneOptions
-          showTimeZoneSearch=false
+          showTimeZoneSearch=true
+          defaultTimeZoneQuery="Your Time Zone|Advisor Time Zone|Client Time Zone"
           timeZone=scheduleInteractionForm.timeZone
           onAddOccurrence="calendarAddOccurrence" as |occurrence timetable calendar|}}
           {{#if occurrence.content.isSelection}}

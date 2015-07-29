@@ -7,13 +7,14 @@
 @import 'addons/ember-calendar/main';
 
 @import 'components/angle-memberships';
-@import 'components/app-switcher';
 @import 'components/avatar';
 @import 'components/checklist-status';
 @import 'components/email-correspondence';
 @import 'components/email-viewer';
 @import 'components/expandable-list';
+@import 'components/lab';
 @import 'components/notifications';
+@import 'components/pagination';
 @import 'components/page-placeholder';
 @import 'components/pagination';
 @import 'components/priority-select';
@@ -39,6 +40,8 @@
 @import 'templates/dashboard/interaction';
 @import 'templates/dashboard/schedule-interaction';
 @import 'templates/dashboard/unused-advisor';
+@import 'templates/labs';
+@import 'templates/labs/form';
 @import 'templates/projects';
 @import 'templates/side-panel-actions';
 @import 'templates/side-panel-loading';

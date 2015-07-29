@@ -1,0 +1,37 @@
+<header>
+  <h1>Labs</h1>
+
+  <div class="filter">
+    <ul>
+      {{#link-to (query-params selectedFilter="all") tagName="li"}}
+        All ({{sortedLabs.length}})
+      {{/link-to}}
+
+      {{#link-to (query-params selectedFilter="mine") tagName="li"}}
+        Mine ({{myLabs.length}})
+      {{/link-to}}
+
+      {{#link-to (query-params selectedFilter="available") tagName="li"}}
+        Available ({{availableLabs.length}})
+      {{/link-to}}
+    </ul>
+  </div>
+
+  {{#if currentUser.model.developer}}
+    <div class="new">
+      {{#link-to 'labs.new'}}New Lab{{/link-to}}
+    </div>
+  {{/if}}
+</header>
+
+<ul>
+  {{#each arrangedContent as |lab|}}
+    <li>
+      {{as-lab
+        feature=lab
+        currentUser=currentUser
+        leave="destroyParticipation"
+        join="createParticipation"}}
+    </li>
+  {{/each}}
+</ul>

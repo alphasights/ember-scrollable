@@ -1,0 +1,69 @@
+$small-avatar-size: $avatar-size;
+$participate-height: 40px;
+$gold: #ffd700;
+
+.lab {
+  border: 1px solid $iron;
+  border-radius: 5px;
+  padding: $column-gutter / 4 $column-gutter / 2;
+  position: relative;
+  width: 100%;
+
+  &.mine {
+    border: 1px solid $gold;
+  }
+
+  header {
+    @extend %grid-row;
+
+    padding-bottom: 15px;
+  }
+
+  h1 {
+    font-size: $h2-font-size;
+    line-height: $h2-font-size * 1.5;
+    padding: 0;
+    padding-top: $column-gutter / 4;
+  }
+
+  .brief-description {
+    line-height: $base-font-size * 1.5;
+    margin-bottom: $participate-height;
+    padding-bottom: 10px;
+  }
+
+  .participate {
+    bottom: 0;
+    color: $small-font-color;
+    height: $participate-height;
+    padding-right: $column-gutter;
+    position: absolute;
+    width: 100%;
+  }
+
+  .join,
+  .leave,
+  .disabled,
+  .edit {
+    @extend %button-tiny;
+
+    float: right;
+  }
+
+  .join {
+    @extend %button-primary;
+  }
+
+  .leave {
+    @extend %button-secondary;
+  }
+
+  .edit {
+    @extend %button-warning;
+    margin-right: $column-gutter / 4;
+  }
+
+  .disabled-tooltip {
+    float: right;
+  }
+}

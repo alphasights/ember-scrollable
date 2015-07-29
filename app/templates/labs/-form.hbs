@@ -1,0 +1,46 @@
+<section class="form">
+  {{#as-form model=featureForm action=formAction as |form|}}
+    {{#as-form/fieldset}}
+      {{as-form/input
+        form=form
+        name="name"
+        label="Name"}}
+
+      {{as-form/select
+        form=form
+        name="badgeName"
+        label="Badge Name"
+        prompt=""
+        content=featureForm.availableBadgeNames}}
+
+      {{as-form/input
+        form=form
+        name="briefDescription"
+        label="Brief Description"}}
+
+      {{#as-form/input
+        form=form
+        label="Limit the number of participants"
+        classNames="limit-participants"}}
+          {{input type="checkbox" name="showLimit" checked=featureForm.showLimit}}
+      {{/as-form/input}}
+
+      {{#liquid-if featureForm.showLimit}}
+        {{as-form/input
+          form=form
+          name="limit"
+          type="number"
+          classNames="participant-limit"
+          placeholder="Maximum number of participants"}}
+      {{/liquid-if}}
+    {{/as-form/fieldset}}
+
+    {{#as-action-group}}
+      {{#as-form/submit
+        form=form
+        requestPromise=featureForm.requestPromise}}
+        {{buttonText}}
+      {{/as-form/submit}}
+    {{/as-action-group}}
+  {{/as-form}}
+</section>

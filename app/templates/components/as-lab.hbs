@@ -1,0 +1,27 @@
+<header>
+  <h1 class="name">{{feature.name}}</h1>
+</header>
+
+<div class="brief-description">
+  {{feature.briefDescription}}
+</div>
+
+<div class="participate">
+  <span>{{feature.featureParticipationsCount}} participants.</span>
+  {{#if canParticipate}}
+    <button {{action "toggleParticipation"}} class={{participationButtonClass}}>{{participationButtonText}}</button>
+  {{else}}
+    {{#tool-tipster
+      class="disabled-tooltip"
+      title="This feature has reached the maximum number of testers."
+      position="top"
+      tagName="span"
+      maxWidth=400}}
+      <button class="disabled">Join</button>
+    {{/tool-tipster}}
+  {{/if}}
+
+  {{#if currentUser.model.developer}}
+    {{#link-to 'labs.edit' feature.id classNames="edit"}}Edit{{/link-to}}
+  {{/if}}
+</div>

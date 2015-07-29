@@ -12,11 +12,13 @@ export default Ember.Controller.extend({
     id: 'whiteboards', name: 'Whiteboards', routeName: 'whiteboards'
   }, {
     id: 'performance', name: 'Performance', routeName: 'performance'
+  }, {
+    id: 'labs', name: 'Labs', routeName: 'labs'
   }],
 
   actionItems: [{
-    name: 'feedback',
-    label: 'Feedback'
+    name: 'help',
+    label: 'Help'
   }, {
     name: 'logout',
     label: 'Logout'
@@ -33,7 +35,7 @@ export default Ember.Controller.extend({
       this.get('currentUser').logout();
     },
 
-    feedback: function() {
+    help: function() {
       /* jshint newcap: false */
       Intercom('show');
       /* jshint newcap: true */

@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    submitFeedback: function() {
+    submitHelp: function() {
       /* jshint newcap: false */
       Intercom('showNewMessage');
       /* jshint newcap: true */

@@ -28,14 +28,6 @@ $page-placeholder-icon-size: $h1-font-size * 2;
     }
   }
 
-  &.projects i {
-    @include icon(folder);
-  }
-
-  &.dashboard i {
-    @include icon(tachometer);
-  }
-
   &.performance i {
     @include icon(bar-chart);
   }

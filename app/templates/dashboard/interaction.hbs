@@ -192,9 +192,14 @@
                 name="speakQuality"
                 form=form
                 label="Speak"
-                prompt=""
                 disabled=completionForm.editingDisabled
                 content=completionForm.speakQualityOptionsForSelect}}
+            {{else}}
+              <div class="report-problem">
+                <a href="https://docs.google.com/a/alphasights.com/forms/d/1VSvf3y9jMgY3YgTaAABAzUfHBkvdLMi1cVO7M0stuZg/viewform" target='_blank'>
+                  Problem with the call? Report it here.
+                </a>
+              </div>
             {{/if}}
 
             {{#if completionForm.speakExplanationNeeded}}
@@ -203,6 +208,14 @@
                 form=form
                 disabled=completionForm.editingDisabled
                 label="More info"}}
+
+              {{as-form/select
+                name="speakExplanationOriginator"
+                form=form
+                disabled=completionForm.editingDisabled
+                label="Who Reported"
+                prompt=""
+                content=completionForm.speakExplanationOriginatorsForSelect}}
             {{/if}}
           {{/as-form/fieldset}}
 
