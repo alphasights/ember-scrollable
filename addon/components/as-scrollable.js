@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(InboundActionsMixin, {
   classNameBindings: [':as-scrollable', ':tse-scrollable', 'horizontal'],
-  
+
   horizontal: false,
   autoHide: true,
 
@@ -14,5 +15,11 @@ export default Ember.Component.extend({
 
   _teardownTrackpadScrollEmulator: Ember.on('willDestroyElement', function() {
     this.$().TrackpadScrollEmulator('destroy');
-  })
+  }),
+
+  actions: {
+    recalculate: function() {
+      this.$().TrackpadScrollEmulator('recalculate');
+    }
+  }
 });
