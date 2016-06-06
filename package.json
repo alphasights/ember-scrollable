@@ -23,7 +23,6 @@
     "ember-cli": "2.6.0-beta.3",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
-    "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-jshint": "^1.0.0",
@@ -45,9 +44,10 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
-    "ember-component-inbound-actions": "1.0.1",
+    "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-node-assets": "0.1.3",
-    "trackpad-scroll-emulator": "taras/trackpad-scroll-emulator#dd5e916727e63ea2f1bf1ccad4099c99ab7303fc"
+    "ember-component-inbound-actions": "1.0.1",
+    "trackpad-scroll-emulator": "git://github.com/taras/trackpad-scroll-emulator.git#dd5e916727e63ea2f1bf1ccad4099c99ab7303fc"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
