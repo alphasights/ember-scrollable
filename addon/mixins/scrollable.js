@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 const {
-  run: { scheduleOnce }
+  run: { scheduleOnce, bind, debounce }
 } = Ember;
 
 export default Ember.Mixin.create({
@@ -9,6 +9,7 @@ export default Ember.Mixin.create({
 
   horizontal: false,
   autoHide: true,
+  scrollBuffer: 50,
 
   didInsertElement() {
     this._super(...arguments);
@@ -22,12 +23,25 @@ export default Ember.Mixin.create({
     this._destroyTrackpadScrollEmulator();
   },
 
+  sendScrollEnd() {
+    this.sendAction('scrollEnd');
+  },
+
   _setupTrackpadScrollEmulator() {
-     this.$().TrackpadScrollEmulator({ wrapContent: false, autoHide: this.get('autoHide') });
+    this.$().TrackpadScrollEmulator({ 
+      wrapContent: false, 
+      autoHide: this.get('autoHide'),
+      onScrollEnd: bind(this, this._onScrollEnd),
+      scrollBuffer: this.get('scrollBuffer')
+    });
   },
 
   _destroyTrackpadScrollEmulator() {
     this.$().TrackpadScrollEmulator('destroy');    
+  },
+  
+  _onScrollEnd() {
+    debounce(this, this.sendScrollEnd, 200);
   },
   
   actions: {
