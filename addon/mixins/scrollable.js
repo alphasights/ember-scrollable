@@ -34,6 +34,7 @@ export default Ember.Mixin.create({
       onScrollEnd: bind(this, this._onScrollEnd),
       scrollBuffer: this.get('scrollBuffer')
     });
+    this._didSetup = true;
   },
 
   _destroyTrackpadScrollEmulator() {
@@ -41,12 +42,22 @@ export default Ember.Mixin.create({
   },
   
   _onScrollEnd() {
-    debounce(this, this.sendScrollEnd, 200);
+    debounce(this, this.sendScrollEnd, 1000, true);
+  },
+  
+  _recalculateTrackpadScrollEmulator() {
+    this.$().TrackpadScrollEmulator('recalculate');
   },
   
   actions: {
     recalculate() {
-      this.$().TrackpadScrollEmulator('recalculate');
+      this._recalculateTrackpadScrollEmulator();
+    },
+    update(value) {
+      if (this._didSetup) {
+        scheduleOnce('afterRender', this, this._recalculateTrackpadScrollEmulator);        
+      }
+      return value;
     }
   }
 });

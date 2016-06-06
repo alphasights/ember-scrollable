@@ -1,5 +1,8 @@
 <div class="tse-scroll-content">
   <div class="tse-content scrollable-content">
-    {{yield}}
+    {{yield (hash 
+      recalculate=(action 'recalculate')
+      update=(action 'update')
+    )}}
   </div>
 </div>
