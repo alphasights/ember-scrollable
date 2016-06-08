@@ -1,3 +1,3 @@
-import AsScrollable from 'ember-scrollable/components/as-scrollable';
+import ScrollableComponent from 'ember-scrollable/components/scrollable';
 
-export default AsScrollable;
+export default ScrollableComponent;
