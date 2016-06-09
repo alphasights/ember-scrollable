@@ -174,6 +174,9 @@ export default Ember.Mixin.create({
   },
 
   showScrollbar() {
+    if (this.isDestroyed) {
+      return;
+    }
     this.set('showHandle', true);
 
     if (!this.get('autoHide')) {
@@ -184,6 +187,9 @@ export default Ember.Mixin.create({
   },
 
   hideScrollbar() {
+    if (this.isDestroyed) {
+      return;
+    }
     this.set('showHandle', false);
   },
 
