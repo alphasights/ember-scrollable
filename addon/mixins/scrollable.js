@@ -86,9 +86,9 @@ export default Ember.Mixin.create({
   },
 
   setupScrollbar() {
-    let scrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
+    let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
-    let scrollbar = new scrollbarClass({
+    let scrollbar = new ScrollbarClass({
       scrollContentElement: this._scrollContentElement,
       scrollbarElement: this._scrollbarElement,
       handleElement: this._handleElement,
@@ -104,6 +104,7 @@ export default Ember.Mixin.create({
     this.scrollbar = scrollbar;
 
     if (!this.get('autoHide')) {
+      // should show scrollbar, also is this in the right place?
       this.updateScrollbar();
     }
   },
@@ -133,7 +134,7 @@ export default Ember.Mixin.create({
     this.off('mouseUp', this, this.endDrag);
   },
 
-  jumpScroll() {
+  jumpScroll(e) {
     // If the drag handle element was pressed, don't do anything here.
     if (e.target === this._handleElement[0]) {
       return;
@@ -158,7 +159,6 @@ export default Ember.Mixin.create({
 
   flashScrollbar() {
     this.updateScrollbar();
-    this.showScrollbar();
   },
 
   updateScrollbar() {
@@ -166,7 +166,8 @@ export default Ember.Mixin.create({
       return;
     }
 
-    if (this.scrollbar.update()) {
+    if (this.scrollbar.isNecessary()) {
+      this.scrollbar.update();
       this.showScrollbar();
     } else {
       this.hideScrollbar();
@@ -197,19 +198,6 @@ export default Ember.Mixin.create({
     this._super(...arguments);
     
     window.removeEventListener('resize', this._resizeHandler, true);
-  },
-
-  sendScrollEnd() {
-    this.sendAction('scrollEnd');
-  },
-
-  _setupScrollable() {
-
-    this._didSetup = true;
-  },
-
-  _onScrollEnd() {
-    debounce(this, this.sendScrollEnd, 1000, true);
   },
 
   actions: {

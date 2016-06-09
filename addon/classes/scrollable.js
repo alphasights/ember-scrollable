@@ -3,6 +3,8 @@ const {
   String: { camelize } 
 } = Ember;
 
+const pageJumpMultp = 7/8;
+
 export default class Scrollable {
   constructor(options) {
     this.scrollContentElement = options.scrollContentElement;
@@ -80,9 +82,13 @@ export default class Scrollable {
     this.scrollTo(scrollPos);
   }
 
+  isNecessary() {
+    return this.scrollbarSize() < this.contentOuterSize();
+  }
+
   update() {
-    let contentSize = this.contentOuterSize();
     let scrollOffset = this.scrollOffset();
+    let contentSize = this.contentOuterSize();
     let scrollbarSize = this.scrollbarSize();
     let scrollbarRatio = scrollbarSize / contentSize;
 
@@ -91,13 +97,7 @@ export default class Scrollable {
     let handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2;
     let handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
-    let isScrollbarVisible = scrollbarSize < contentSize;
-
-    if (isScrollbarVisible) {
-      this.updateHandle(handleOffset, handleSize);
-    }
-
-    return isScrollbarVisible;
+    this.updateHandle(handleOffset, handleSize);
    }
 
    isScrolledToBottom(scrollBuffer = 0) {
@@ -115,7 +115,7 @@ export class Vertical extends Scrollable {
     super(options);
 
     this.scrollOffsetAttr = 'scrollTop';
-    this.offsetAttr = 'top'
+    this.offsetAttr = 'top';
     this.sizeAttr = 'height';
   }
 
