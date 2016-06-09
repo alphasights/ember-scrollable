@@ -211,7 +211,7 @@ export default Ember.Mixin.create({
     /**
      * Update action should be called when size of the scroll area changes
      */
-    update() {
+    recalculate() {
       this.updateScrollbar();
     },
 
