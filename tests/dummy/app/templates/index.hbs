@@ -3,7 +3,7 @@
 
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
-    {{#as-scrollable}}
+    {{#as-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
       <p>Some content</p>
       <p>Some more content</p>
       <p>Some content</p>

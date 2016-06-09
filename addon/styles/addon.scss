@@ -1,0 +1,104 @@
+/**
+ * TrackpadScrollEmulator
+ * Author: Jonathan Nicol @f6design
+ * https://github.com/jnicol/trackpad-scroll-emulator
+ */
+
+.tse-scrollable {
+  position : relative;
+  overflow : hidden;
+  width : 200px; /* Default value. Overwite this if you want. */
+  height : 300px; /* Default value. Overwite this if you want. */
+
+  .tse-scroll-content {
+    overflow : hidden;
+    overflow-y : scroll;
+  }
+
+  /* No longer using ::scrollbar too, since it breaks Chrome 25 */
+  .tse-scroll-content::-webkit-scrollbar {
+    width : 0;
+    height : 0;
+  }
+}
+
+.tse-scrollbar {
+  position : absolute;
+  z-index : 99;
+  top : 0;
+  right : 0;
+  bottom : 0;
+  width : 11px;
+
+  .drag-handle {
+    position : absolute;
+    right : 2px;
+    width : 7px;
+    min-height : 10px;
+    -webkit-transition : opacity 0.2s linear;
+       -moz-transition : opacity 0.2s linear;
+        -ms-transition : opacity 0.2s linear;
+         -o-transition : opacity 0.2s linear;
+            transition : opacity 0.2s linear;
+    opacity : 0;
+    -webkit-border-radius : 7px;
+       -moz-border-radius : 7px;
+            border-radius : 7px;
+    background : #6c6e71;
+    -webkit-background-clip : padding-box;
+       -moz-background-clip : padding;
+  }
+
+  &:hover .drag-handle {
+    -webkit-transition : opacity 0 linear;
+       -moz-transition : opacity 0 linear;
+        -ms-transition : opacity 0 linear;
+         -o-transition : opacity 0 linear;
+            transition : opacity 0 linear;
+    /* When hovered, remove all transitions from drag handle */
+
+    opacity : 0.7;
+  }
+
+  .drag-handle.visible {
+    opacity : 0.7;
+  }
+}
+
+
+/* Horizontal scroller */
+.tse-scrollable.horizontal {
+  .tse-scroll-content {
+    overflow-x : scroll;
+    overflow-y : hidden;
+  }
+
+  .tse-scroll-content::-webkit-scrollbar,
+  .tse-scroll-content::scrollbar {
+    width : auto;
+    height : 0;
+  }
+
+  .tse-scrollbar {
+    top : auto;
+    left : 0;
+    width : auto;
+    height : 11px;
+
+    .drag-handle {
+      top : 2px;
+      right : auto;
+      width : auto;
+      min-width : 10px;
+      height : 7px;
+      min-height : 0;
+    }
+  }
+}
+
+/* Used when testing the scrollbar width */
+/* No longer using ::scrollbar too, since it breaks Chrome 25 */
+.scrollbar-width-tester::-webkit-scrollbar {
+  width : 0;
+  height : 0;
+}
