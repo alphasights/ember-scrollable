@@ -45,8 +45,7 @@
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-sass": "5.3.1",
-    "ember-component-inbound-actions": "1.0.1",
-    "trackpad-scroll-emulator": "taras/trackpad-scroll-emulator.git#28d071bd3a8c25e46c5737dde0ff46c0620f81d4"
+    "ember-component-inbound-actions": "1.0.1"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
