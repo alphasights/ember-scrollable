@@ -80,7 +80,7 @@ export default class Scrollable {
     this.scrollTo(scrollPos);
   }
 
-  resizeScrollbar() {
+  update() {
     let contentSize = this.contentOuterSize();
     let scrollOffset = this.scrollOffset();
     let scrollbarSize = this.scrollbarSize();

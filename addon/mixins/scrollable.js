@@ -79,7 +79,7 @@ export default Ember.Mixin.create({
 
   setupResize() {
     this._resizeHandler = () => {
-      debounce(this, this.updateScrollbars, 16);
+      debounce(this, this.updateScrollbar, 16);
     };
 
     window.addEventListener('resize', this._resizeHandler, true);
@@ -101,11 +101,11 @@ export default Ember.Mixin.create({
 
     scrollbar.resizeScrollContent();
 
-    if (!this.get('autoHide')) {
-      this.showScrollbar();
-    }
-
     this.scrollbar = scrollbar;
+
+    if (!this.get('autoHide')) {
+      this.updateScrollbar();
+    }
   },
 
   startDrag(e) {
@@ -147,12 +147,16 @@ export default Ember.Mixin.create({
   },
 
   flashScrollbar() {
-    this.updateScrollbars();
+    this.updateScrollbar();
     this.showScrollbar();
   },
 
-  updateScrollbars() {
-    if (this.scrollbar.resizeScrollbar()) {
+  updateScrollbar() {
+    if (!this.scrollbar) {
+      return;
+    }
+
+    if (this.scrollbar.update()) {
       this.showScrollbar();
     } else {
       this.hideScrollbar();
@@ -188,14 +192,6 @@ export default Ember.Mixin.create({
     this._didSetup = true;
   },
 
-  _destroyScrollable() {
-
-  },
-  
-  _recalculateScrollable() {
-
-  },
-
   _onScrollEnd() {
     debounce(this, this.sendScrollEnd, 1000, true);
   },
@@ -203,10 +199,10 @@ export default Ember.Mixin.create({
   actions: {
     
     /**
-     * Recalculate action should be called when size of the scroll area changes
+     * Update action should be called when size of the scroll area changes
      */
-    recalculate() {
-      this._recalculateScrollable();
+    update() {
+      this.updateScrollbar();
     },
 
     /**
@@ -214,17 +210,15 @@ export default Ember.Mixin.create({
      * 
      * for example
      * ```
-     * {{#as-scrollable as |scrollbars|}}
-     *   {{#each (compute (pipe scrollbars.update) rows) as |row|}}
+     * {{#as-scrollable as |scrollbar|}}
+     *   {{#each (compute scrollbar.update rows) as |row|}}
      *     {{row.title}}
      *   {{/each}}
      * {{/as-scrollable}}
      * ```
      */
     update(value) {
-      if (this._didSetup) {
-        scheduleOnce('afterRender', this, this._recalculateScrollable);        
-      }
+      scheduleOnce('afterRender', this, this.updateScrollbar);
       return value;
     }
   }
