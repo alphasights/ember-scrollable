@@ -100,6 +100,14 @@ export default class Scrollable {
     return isScrollbarVisible;
    }
 
+   isScrolledToBottom(scrollBuffer = 0) {
+     let scrollOffset = this.scrollOffset();
+     let contentSize = this.contentOuterSize();
+     let scrollbarSize = this.scrollbarSize();
+
+     return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
+   }
+
 }
 
 export class Vertical extends Scrollable {

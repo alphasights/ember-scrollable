@@ -144,6 +144,16 @@ export default Ember.Mixin.create({
 
   scrolled() {
     this.flashScrollbar();
+
+    let scrollBuffer = this.get('scrollBuffer');
+    
+    if (this.scrollbar.isScrolledToBottom(scrollBuffer)) {
+      debounce(this, this.sendScrolledToBottom, 100);
+    }
+  },
+
+  sendScrolledToBottom() {
+    this.sendAction('onScrolledToBottom');
   },
 
   flashScrollbar() {
