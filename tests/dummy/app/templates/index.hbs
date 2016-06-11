@@ -3,28 +3,31 @@
 
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
-    {{#as-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-    {{/as-scrollable}}
+    <div style="height: 400px;">
+      {{#as-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/as-scrollable}}
+    </div>
+
     {{!-- END-SNIPPET --}}
   </div>
 
@@ -65,18 +68,20 @@
 
   <div class="output">
     {{!-- BEGIN-SNIPPET no-auto-hide --}}
-    {{#as-scrollable autoHide=false}}
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-      <p>Some content</p>
-      <p>Some more content</p>
-    {{/as-scrollable}}
+    <div style="height: 200px;">
+      {{#as-scrollable autoHide=false}}
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/as-scrollable}}
+    </div>
     {{!-- END-SNIPPET --}}
   </div>
 
@@ -90,9 +95,11 @@
 
   <div class="output">
     {{!-- BEGIN-SNIPPET no-scrollbar-demo --}}
-    {{#as-scrollable}}
-      <p>Some content</p>
-    {{/as-scrollable}}
+    <div style="height: 200px;">
+      {{#as-scrollable}}
+        <p>Some content</p>
+      {{/as-scrollable}}
+    </div>
     {{!-- END-SNIPPET --}}
   </div>
 
