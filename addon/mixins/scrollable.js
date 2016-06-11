@@ -74,7 +74,8 @@ export default Ember.Mixin.create({
     this.scrollbar = this.createScrollbar();
 
     this.scrollbar.update();
-    this.showScrollbar();
+    this.checkScrolledToBottom();
+    this.showScrollbar();    
   },
 
   setupElements() {
@@ -145,6 +146,10 @@ export default Ember.Mixin.create({
     this.scrollbar.update();
     this.showScrollbar();
 
+    this.checkScrolledToBottom();
+  },
+
+  checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
     
     if (this.scrollbar.isScrolledToBottom(scrollBuffer)) {
