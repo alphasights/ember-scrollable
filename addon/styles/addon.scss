@@ -7,12 +7,12 @@
 .tse-scrollable {
   position : relative;
   overflow : hidden;
-  width : 200px; /* Default value. Overwite this if you want. */
-  height : 300px; /* Default value. Overwite this if you want. */
 
   .tse-scroll-content {
     overflow : hidden;
     overflow-y : scroll;
+
+    position: absolute;
   }
 
   /* No longer using ::scrollbar too, since it breaks Chrome 25 */

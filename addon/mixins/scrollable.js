@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
     this.setupElements();
 
     if (this.get('autoHide')) {
-      this.on('mouseEnter', this, this.flashScrollbar);
+      this.on('mouseEnter', this, this.showScrollbar);
     }
 
     this._handleElement.on('mousedown', bind(this, this.startDrag));
@@ -68,6 +68,13 @@ export default Ember.Mixin.create({
     this._scrollContentElement.on('scroll', bind(this, this.scrolled));
 
     scheduleOnce('afterRender', this, this.setupScrollbar);
+  },
+
+  setupScrollbar() {
+    this.scrollbar = this.createScrollbar();
+
+    this.scrollbar.update();
+    this.showScrollbar();
   },
 
   setupElements() {
@@ -79,16 +86,16 @@ export default Ember.Mixin.create({
 
   setupResize() {
     this._resizeHandler = () => {
-      debounce(this, this.updateScrollbar, 16);
+      debounce(this, this.resizeScrollbar, 16);
     };
 
     window.addEventListener('resize', this._resizeHandler, true);
   },
 
-  setupScrollbar() {
+  createScrollbar() {
     let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
-    let scrollbar = new ScrollbarClass({
+    return new ScrollbarClass({
       scrollContentElement: this._scrollContentElement,
       scrollbarElement: this._scrollbarElement,
       handleElement: this._handleElement,
@@ -98,15 +105,6 @@ export default Ember.Mixin.create({
       height: this.$().height(),
       scrollbarWidth: this._scrollbarWidth
     });
-
-    scrollbar.resizeScrollContent();
-
-    this.scrollbar = scrollbar;
-
-    if (!this.get('autoHide')) {
-      // should show scrollbar, also is this in the right place?
-      this.updateScrollbar();
-    }
   },
 
   startDrag(e) {
@@ -144,7 +142,8 @@ export default Ember.Mixin.create({
   },
 
   scrolled() {
-    this.flashScrollbar();
+    this.scrollbar.update();
+    this.showScrollbar();
 
     let scrollBuffer = this.get('scrollBuffer');
     
@@ -157,21 +156,23 @@ export default Ember.Mixin.create({
     this.sendAction('onScrolledToBottom');
   },
 
-  flashScrollbar() {
-    this.updateScrollbar();
-  },
-
-  updateScrollbar() {
+  resizeScrollbar() {
     if (!this.scrollbar) {
       return;
     }
 
-    if (this.scrollbar.isNecessary()) {
-      this.scrollbar.update();
-      this.showScrollbar();
-    } else {
-      this.hideScrollbar();
+    this.scrollbar = this.createScrollbar();
+
+    if (!this.scrollbar.isNecessary()) {
+      this.removeScrollbar();
     }
+
+    this.scrollbar.update();
+    this.showScrollbar();
+  },
+
+  removeScrollbar() {
+
   },
 
   showScrollbar() {
@@ -206,7 +207,7 @@ export default Ember.Mixin.create({
      * Update action should be called when size of the scroll area changes
      */
     recalculate() {
-      this.updateScrollbar();
+      this.resizeScrollbar();
     },
 
     /**
@@ -222,7 +223,7 @@ export default Ember.Mixin.create({
      * ```
      */
     update(value) {
-      scheduleOnce('afterRender', this, this.updateScrollbar);
+      scheduleOnce('afterRender', this, this.resizeScrollbar);
       return value;
     }
   }

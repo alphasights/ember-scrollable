@@ -108,6 +108,11 @@ export default class Scrollable {
      return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
    }
 
+   remove() {
+     this.scrollContentElement.width('');
+     this.scrollContentElement.height('');
+   }
+
 }
 
 export class Vertical extends Scrollable {
@@ -117,6 +122,8 @@ export class Vertical extends Scrollable {
     this.scrollOffsetAttr = 'scrollTop';
     this.offsetAttr = 'top';
     this.sizeAttr = 'height';
+
+    this.resizeScrollContent();
   }
 
   resizeScrollContent() {
@@ -144,6 +151,8 @@ export class Horizontal extends Scrollable {
     this.scrollOffsetAttr = 'scrollLeft';
     this.offsetAttr = 'left';
     this.sizeAttr = 'width';
+
+    this.resizeScrollContent();
   }
 
   resizeScrollContent() {
