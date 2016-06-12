@@ -17,6 +17,10 @@ export default class Scrollable {
     this.scrollbarWidth       = options.scrollbarWidth;
   }
 
+  get isNecessary() {
+    return this.scrollbarSize() < this.contentOuterSize();
+  }
+
   startDrag(e) {
     this.dragOffset = this.eventOffset(e) - this.handleOffset();
   }
@@ -82,10 +86,6 @@ export default class Scrollable {
     this.scrollTo(scrollPos);
   }
 
-  isNecessary() {
-    return this.scrollbarSize() < this.contentOuterSize();
-  }
-
   update() {
     let scrollOffset = this.scrollOffset();
     let contentSize = this.contentOuterSize();
@@ -95,7 +95,9 @@ export default class Scrollable {
     // Calculate new height/position of drag handle.
     // Offset of 2px allows for a small top/bottom or left/right margin around handle.
     let handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2;
-    let handleSize = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+
+    // check if content is scrollbar is longer than content
+    let handleSize = scrollbarRatio > 1 ? 0 : Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
     this.updateHandle(handleOffset, handleSize);
    }
@@ -108,6 +110,11 @@ export default class Scrollable {
      return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
    }
 
+   remove() {
+     this.scrollContentElement.width('');
+     this.scrollContentElement.height('');
+   }
+
 }
 
 export class Vertical extends Scrollable {
@@ -117,6 +124,9 @@ export class Vertical extends Scrollable {
     this.scrollOffsetAttr = 'scrollTop';
     this.offsetAttr = 'top';
     this.sizeAttr = 'height';
+
+    this.resizeScrollContent();
+    this.update();
   }
 
   resizeScrollContent() {
@@ -144,6 +154,9 @@ export class Horizontal extends Scrollable {
     this.scrollOffsetAttr = 'scrollLeft';
     this.offsetAttr = 'left';
     this.sizeAttr = 'width';
+
+    this.resizeScrollContent();
+    this.update();
   }
 
   resizeScrollContent() {
