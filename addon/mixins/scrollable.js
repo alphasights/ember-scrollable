@@ -71,11 +71,15 @@ export default Ember.Mixin.create({
   },
 
   setupScrollbar() {
-    this.scrollbar = this.createScrollbar();
+    let scrollbar = this.createScrollbar();
 
-    this.scrollbar.update();
+    this.set('scrollbar', scrollbar);
+
     this.checkScrolledToBottom();
-    this.showScrollbar();    
+
+    if (scrollbar.isNecessary) {
+      this.showScrollbar();    
+    }
   },
 
   setupElements() {
@@ -113,7 +117,7 @@ export default Ember.Mixin.create({
     // selectable during the drag.
     e.preventDefault();
 
-    this.scrollbar.startDrag(e);
+    this.get('scrollbar').startDrag(e);
 
     this.on('mouseMove', this, this.drag);
     this.on('mouseUp', this, this.endDrag);
@@ -125,7 +129,7 @@ export default Ember.Mixin.create({
   drag(e) {
     e.preventDefault();
 
-    this.scrollbar.drag(e);
+    this.get('scrollbar').drag(e);
   },
 
   endDrag() {
@@ -139,11 +143,11 @@ export default Ember.Mixin.create({
       return;
     }
 
-    this.scrollbar.jumpScroll(e);
+    this.get('scrollbar').jumpScroll(e);
   },
 
   scrolled() {
-    this.scrollbar.update();
+    this.get('scrollbar').update();
     this.showScrollbar();
 
     this.checkScrolledToBottom();
@@ -152,7 +156,7 @@ export default Ember.Mixin.create({
   checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
     
-    if (this.scrollbar.isScrolledToBottom(scrollBuffer)) {
+    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
   },
@@ -162,22 +166,15 @@ export default Ember.Mixin.create({
   },
 
   resizeScrollbar() {
-    if (!this.scrollbar) {
+    let scrollbar = this.get('scrollbar');
+    if (!scrollbar) {
       return;
     }
 
-    this.scrollbar = this.createScrollbar();
+    scrollbar = this.createScrollbar();
+    this.set('scrollbar', scrollbar);
 
-    if (!this.scrollbar.isNecessary()) {
-      this.removeScrollbar();
-    }
-
-    this.scrollbar.update();
     this.showScrollbar();
-  },
-
-  removeScrollbar() {
-
   },
 
   showScrollbar() {
