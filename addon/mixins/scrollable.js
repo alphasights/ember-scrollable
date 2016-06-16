@@ -93,7 +93,7 @@ export default Ember.Mixin.create({
     this._resizeHandler = () => {
       debounce(this, this.resizeScrollbar, 16);
     };
-
+    
     window.addEventListener('resize', this._resizeHandler, true);
   },
 
