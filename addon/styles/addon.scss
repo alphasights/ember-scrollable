@@ -11,6 +11,15 @@
   height: 100%;
   width: 100%;
 
+  // this animation allows us to bind to transitioned event in javascript
+  &.horizontal {
+    transition: width 0.01s;
+  }
+
+  &.vertical {
+    transition: height 0.01s;
+  }
+
   .tse-scroll-content {
     overflow : hidden;
     overflow-y : scroll;
