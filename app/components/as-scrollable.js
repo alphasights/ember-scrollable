@@ -1,3 +1,5 @@
-import ScrollableComponent from 'ember-scrollable/components/scrollable';
+import EmberScrollable from 'ember-scrollable/components/ember-scrollable';
 
-export default ScrollableComponent;
+export default EmberScrollable.extend({
+  classNames: 'as-scrollable'
+});

@@ -4,7 +4,7 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
     <div style="height: 400px;">
-      {{#as-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
+      {{#ember-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
         <p>Some content</p>
         <p>Some more content</p>
         <p>Some content</p>
@@ -25,7 +25,7 @@
         <p>Some more content</p>
         <p>Some content</p>
         <p>Some more content</p>
-      {{/as-scrollable}}
+      {{/ember-scrollable}}
     </div>
 
     {{!-- END-SNIPPET --}}
@@ -41,7 +41,7 @@
 
   <div class="output">
     {{!-- BEGIN-SNIPPET horizontal --}}
-    {{#as-scrollable horizontal=true}}
+    {{#ember-scrollable horizontal=true}}
       <ul>
         <li>1</li>
         <li>2</li>
@@ -54,7 +54,7 @@
         <li>9</li>
         <li>10</li>
       </ul>
-    {{/as-scrollable}}
+    {{/ember-scrollable}}
     {{!-- END-SNIPPET --}}
   </div>
 
@@ -69,7 +69,7 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET no-auto-hide --}}
     <div style="height: 200px;">
-      {{#as-scrollable autoHide=false}}
+      {{#ember-scrollable autoHide=false}}
         <p>Some content</p>
         <p>Some more content</p>
         <p>Some content</p>
@@ -80,7 +80,7 @@
         <p>Some more content</p>
         <p>Some content</p>
         <p>Some more content</p>
-      {{/as-scrollable}}
+      {{/ember-scrollable}}
     </div>
     {{!-- END-SNIPPET --}}
   </div>
@@ -96,9 +96,9 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET no-scrollbar-demo --}}
     <div style="height: 200px;">
-      {{#as-scrollable}}
+      {{#ember-scrollable}}
         <p>Some content</p>
-      {{/as-scrollable}}
+      {{/ember-scrollable}}
     </div>
     {{!-- END-SNIPPET --}}
   </div>

@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
+import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
@@ -11,8 +13,9 @@ const handleSelector = '.drag-handle';
 const scrollContentSelector = '.tse-scroll-content';
 const contentSelector = '.tse-content';
 
-export default Ember.Mixin.create({
-  classNameBindings: [':as-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
+export default Ember.Component.extend(InboundActionsMixin, {
+  layout,
+  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
 
   horizontal: false,
   autoHide: true,
@@ -23,6 +26,24 @@ export default Ember.Mixin.create({
 
     this.setupResize();
     this.measureScrollbar();
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.setupElements();
+
+    if (this.get('autoHide')) {
+      this.on('mouseEnter', this, this.showScrollbar);
+    }
+
+    this.$().on('transitionend', this._resizeHandler);
+    
+    this._handleElement.on('mousedown', bind(this, this.startDrag));
+    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
+    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
+
+    scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
   measureScrollbar() {
@@ -53,24 +74,6 @@ export default Ember.Mixin.create({
 
     this._scrollbarWidth = scrollbarWidth();
 
-  },
-
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.setupElements();
-
-    if (this.get('autoHide')) {
-      this.on('mouseEnter', this, this.showScrollbar);
-    }
-
-    this.$().on('transitionend webkitTransitionEnd', this._resizeHandler);
-    
-    this._handleElement.on('mousedown', bind(this, this.startDrag));
-    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
-    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
-
-    scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
   setupScrollbar() {
