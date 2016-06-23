@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.3.0
+
+### Pull Requests
+
+- [#10](https://github.com/alphasights/ember-scrollable/pull/10)  Refactored the component to make ember-scrollable primary component  *by [alphasights](https://github.com/alphasights)*
+
 ## 0.2.7
 
 ### Pull Requests
