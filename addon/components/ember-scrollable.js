@@ -4,8 +4,8 @@ import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
-  get,
-  run: { scheduleOnce, debounce, bind }
+  run: { scheduleOnce, debounce, bind },
+  computed
 } = Ember;
 
 const scrollbarSelector = '.tse-scrollbar';
@@ -20,6 +20,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
   horizontal: false,
   autoHide: true,
   scrollBuffer: 50,
+
+  selector: computed('elementId', function(){
+    return `#${this.elementId}`;
+  }),
 
   init() {
     this._super(...arguments);
@@ -36,8 +40,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('autoHide')) {
       this.on('mouseEnter', this, this.showScrollbar);
     }
-
-    this.$().on('transitionend', this._resizeHandler);
     
     this._handleElement.on('mousedown', bind(this, this.startDrag));
     this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
@@ -76,6 +78,22 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.setupElements();
+
+    if (this.get('autoHide')) {
+      this.on('mouseEnter', this, this.showScrollbar);
+    }
+    
+    this._handleElement.on('mousedown', bind(this, this.startDrag));
+    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
+    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
+
+    scheduleOnce('afterRender', this, this.setupScrollbar);
+  },
+
   setupScrollbar() {
     let scrollbar = this.createScrollbar();
 
@@ -96,12 +114,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   setupResize() {
-    this._resizeHandler = (e) => {
-      let type = e && get(e, 'type');
-      let propertyName = e && get(e, 'originalEvent.propertyName');
-      if (type === 'resize' || propertyName === 'height' || propertyName === 'width') {
-        debounce(this, this.resizeScrollbar, e, 16);
-      }
+    this._resizeHandler = () => {
+      debounce(this, this.resizeScrollbar, 16);
     };
     
     window.addEventListener('resize', this._resizeHandler, true);

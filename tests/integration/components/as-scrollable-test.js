@@ -1,9 +1,11 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
+import wait from 'ember-test-helpers/wait';
 
 const {
-  run: { later }
+  run: { later },
+  String: { htmlSafe }
 } = Ember;
 
 moduleForComponent('as-scrollable', 'Integration | Component | as scrollable', {
@@ -11,13 +13,11 @@ moduleForComponent('as-scrollable', 'Integration | Component | as scrollable', {
 });
 
 test(`adjusts to the height of it's container`, function(assert) {
-  assert.expect(2);
-  let done = assert.async();
 
-  this.set('height', '200px');
+  this.set('style', htmlSafe('height: 200px;'));
 
   this.render(hbs`
-    <div style="height: {{height}}">
+    <div style={{style}}>
       {{#as-scrollable}}
         <p>content</p>
         <p>content</p>
@@ -43,14 +43,13 @@ test(`adjusts to the height of it's container`, function(assert) {
     </div>
   `);
 
-  assert.equal(this.$('.tse-scroll-content').height(), '200', 'height is 200px');
+  assert.equal(this.$('.tse-scroll-content').height(), 200, 'height is 200px');
 
-  this.set('height', '400px');
+  this.set('style', htmlSafe('height: 400px;'));
 
-  stop();
   later(()=>{
-    debugger;
     assert.equal(this.$('.tse-scroll-content').height(), '400', 'height is 400px');
-    done();
   }, 20);
+
+  return wait();
 });
