@@ -8,17 +8,18 @@ const {
   String: { htmlSafe }
 } = Ember;
 
-moduleForComponent('as-scrollable', 'Integration | Component | as scrollable', {
+moduleForComponent('ember-scrollable', 'Integration | Component | as scrollable', {
   integration: true
 });
 
 test(`adjusts to the height of it's container`, function(assert) {
+  assert.expect(2);
 
   this.set('style', htmlSafe('height: 200px;'));
 
   this.render(hbs`
     <div style={{style}}>
-      {{#as-scrollable}}
+      {{#ember-scrollable}}
         <p>content</p>
         <p>content</p>
         <p>content</p>
@@ -39,11 +40,11 @@ test(`adjusts to the height of it's container`, function(assert) {
         <p>content</p>
         <p>content</p>
         <p>content</p>
-      {{/as-scrollable}}
+      {{/ember-scrollable}}
     </div>
   `);
 
-  assert.equal(this.$('.tse-scroll-content').height(), 200, 'height is 200px');
+  assert.equal(this.$('.tse-scroll-content').height(), '200', 'height is 200px');
 
   this.set('style', htmlSafe('height: 400px;'));
 

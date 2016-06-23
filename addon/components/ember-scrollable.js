@@ -1,9 +1,11 @@
 import Ember from 'ember';
+import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
+import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
-  get,
-  run: { scheduleOnce, debounce, bind }
+  run: { scheduleOnce, debounce, bind },
+  computed
 } = Ember;
 
 const scrollbarSelector = '.tse-scrollbar';
@@ -11,18 +13,39 @@ const handleSelector = '.drag-handle';
 const scrollContentSelector = '.tse-scroll-content';
 const contentSelector = '.tse-content';
 
-export default Ember.Mixin.create({
-  classNameBindings: [':as-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
+export default Ember.Component.extend(InboundActionsMixin, {
+  layout,
+  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
 
   horizontal: false,
   autoHide: true,
   scrollBuffer: 50,
+
+  selector: computed('elementId', function(){
+    return `#${this.elementId}`;
+  }),
 
   init() {
     this._super(...arguments);
 
     this.setupResize();
     this.measureScrollbar();
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this.setupElements();
+
+    if (this.get('autoHide')) {
+      this.on('mouseEnter', this, this.showScrollbar);
+    }
+    
+    this._handleElement.on('mousedown', bind(this, this.startDrag));
+    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
+    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
+
+    scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
   measureScrollbar() {
@@ -63,8 +86,6 @@ export default Ember.Mixin.create({
     if (this.get('autoHide')) {
       this.on('mouseEnter', this, this.showScrollbar);
     }
-
-    this.$().on('transitionend webkitTransitionEnd', this._resizeHandler);
     
     this._handleElement.on('mousedown', bind(this, this.startDrag));
     this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
@@ -93,12 +114,8 @@ export default Ember.Mixin.create({
   },
 
   setupResize() {
-    this._resizeHandler = (e) => {
-      let type = e && get(e, 'type');
-      let propertyName = e && get(e, 'originalEvent.propertyName');
-      if (type === 'resize' || propertyName === 'height' || propertyName === 'width') {
-        debounce(this, this.resizeScrollbar, e, 16);
-      }
+    this._resizeHandler = () => {
+      debounce(this, this.resizeScrollbar, 16);
     };
     
     window.addEventListener('resize', this._resizeHandler, true);
