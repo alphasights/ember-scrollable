@@ -78,22 +78,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.setupElements();
-
-    if (this.get('autoHide')) {
-      this.on('mouseEnter', this, this.showScrollbar);
-    }
-    
-    this._handleElement.on('mousedown', bind(this, this.startDrag));
-    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
-    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
-
-    scheduleOnce('afterRender', this, this.setupScrollbar);
-  },
-
   setupScrollbar() {
     let scrollbar = this.createScrollbar();
 
