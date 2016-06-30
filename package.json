@@ -50,9 +50,6 @@
     "ember-component-inbound-actions": "1.0.1",
     "ember-element-resize-detector": "0.1.1"
   },
-  "peerDependencies": {
-    "ember-element-resize-detector": "0.1.1"
-  },
   "ember-addon": {
     "configPath": "tests/dummy/config"
   }
