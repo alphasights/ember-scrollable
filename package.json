@@ -48,7 +48,7 @@
     "ember-cli-sass": "5.3.1",
     "ember-cli-version-checker": "1.1.6",
     "ember-component-inbound-actions": "1.0.1",
-    "ember-element-resize-detector": "0.1.4"
+    "ember-element-resize-detector": "0.1.5"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
