@@ -15,7 +15,12 @@ module.exports = {
   },
 
   included: function(app) {
-   this._super.included(app);
+    if (app.app) {
+      app = app.app;
+    }
+    this.app = app;
+
+    this._super.included.apply(this, arguments);
   },
 
   treeFor: function() {
