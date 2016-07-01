@@ -1,6 +1,6 @@
 {
   "name": "ember-scrollable",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A simple Ember wrapper around Trackpad Scroll Emulator",
   "directories": {
     "doc": "doc",

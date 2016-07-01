@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.3.1
+
+### Pull Requests
+
+- [#11](https://github.com/alphasights/ember-scrollable/pull/11)  Removed duplicate didInsertElement  *by [Thijs van den Anker](https://github.com/thijsvdanker)*
+- [#7](https://github.com/alphasights/ember-scrollable/pull/7)  Check scrollbar height for large collections  *by [Kirill Shaplyko](https://github.com/Baltazore)*
+- [#12](https://github.com/alphasights/ember-scrollable/pull/12)  Loading nested dependencies via vendor  *by [alphasights](https://github.com/alphasights)*
+
 ## 0.3.0
 
 ### Pull Requests
