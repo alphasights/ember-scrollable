@@ -40,7 +40,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('autoHide')) {
       this.on('mouseEnter', this, this.showScrollbar);
     }
-    
+
     this._handleElement.on('mousedown', bind(this, this.startDrag));
     this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
     this._scrollContentElement.on('scroll', bind(this, this.scrolled));
@@ -86,7 +86,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.checkScrolledToBottom();
 
     if (scrollbar.isNecessary) {
-      this.showScrollbar();    
+      this.showScrollbar();
     }
   },
 
@@ -101,11 +101,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._resizeHandler = () => {
       debounce(this, this.resizeScrollbar, 16);
     };
-    
+
     window.addEventListener('resize', this._resizeHandler, true);
   },
 
   createScrollbar() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
+
     let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
     return new ScrollbarClass({
@@ -163,7 +167,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
-    
+
     if (this.get('scrollbar').isScrolledToBottom(scrollBuffer)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
@@ -186,7 +190,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   showScrollbar() {
-    if (this.isDestroyed) {
+    if (this.get('isDestroyed')) {
       return;
     }
     this.set('showHandle', true);
@@ -199,7 +203,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   hideScrollbar() {
-    if (this.isDestroyed) {
+    if (this.get('isDestroyed')) {
       return;
     }
     this.set('showHandle', false);
@@ -213,7 +217,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   actions: {
-    
+
     /**
      * Update action should be called when size of the scroll area changes
      */
@@ -222,8 +226,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     },
 
     /**
-     * Can be called when scrollbars changes as a result of value change, 
-     * 
+     * Can be called when scrollbars changes as a result of value change,
+     *
      * for example
      * ```
      * {{#as-scrollable as |scrollbar|}}
