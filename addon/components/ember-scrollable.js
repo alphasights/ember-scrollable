@@ -236,6 +236,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     update(value) {
       scheduleOnce('afterRender', this, this.resizeScrollbar);
       return value;
+    },
+
+    /**
+     * Scroll Top action should be called when when the scroll area should be scrolled top manually
+     */
+    scrollTop() {
+      this.get('scrollbar').scrollTo(0);
     }
   }
 });
