@@ -15,7 +15,7 @@ module.exports = {
   },
 
   included: function(app) {
-    if (app.app) {
+    while (app.app) {
       app = app.app;
     }
     this.app = app;
