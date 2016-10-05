@@ -18,9 +18,9 @@ A simple wrapper around Trackpad Scroll Emulator.
 ```htmlbars
 {{! app/templates/index.hbs }}
 
-{{#as-scrollable}}
+{{#ember-scrollable}}
   Some long content...
-{{/as-scrollable}}
+{{/ember-scrollable}}
 ```
 
 ## Configuring the Component
