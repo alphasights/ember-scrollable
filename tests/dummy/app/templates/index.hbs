@@ -27,7 +27,6 @@
         <p>Some more content</p>
       {{/ember-scrollable}}
     </div>
-
     {{!-- END-SNIPPET --}}
   </div>
 
@@ -105,5 +104,44 @@
 
   <div class="code">
     {{code-snippet name="no-scrollbar-demo.hbs"}}
+  </div>
+</section>
+
+<section class="resize-demo">
+  <h1>Auto resizing</h1>
+  <button {{action 'toggleHeight'}}>Make {{if isShort 'Tall' 'Short'}}</button>
+  <p>The scrollbar automatically recalculates when the height of the parent container changes. </p>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET vertical --}}
+    <div class={{if isShort 'is-short' 'is-tall'}}>
+      {{#ember-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+
+  <div class="code">
+    {{code-snippet name="vertical.hbs"}}
   </div>
 </section>
