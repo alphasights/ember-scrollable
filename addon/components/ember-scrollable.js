@@ -5,7 +5,8 @@ import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
   run: { scheduleOnce, debounce, bind },
-  computed
+  computed,
+  $
 } = Ember;
 
 const scrollbarSelector = '.tse-scrollbar';
