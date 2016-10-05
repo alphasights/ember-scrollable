@@ -9,6 +9,8 @@ const {
   $
 } = Ember;
 
+const hideDelay = Ember.testing ? 16 : 1000;
+
 const scrollbarSelector = '.tse-scrollbar';
 const handleSelector = '.drag-handle';
 const scrollContentSelector = '.tse-scroll-content';
@@ -200,7 +202,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return;
     }
 
-    debounce(this, this.hideScrollbar, 1000);
+    debounce(this, this.hideScrollbar, hideDelay);
   },
 
   hideScrollbar() {
