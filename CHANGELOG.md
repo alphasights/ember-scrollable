@@ -10,6 +10,7 @@ Changelog
 - [#14](https://github.com/alphasights/ember-scrollable/pull/14)  Bail from createScrollbar if isDestroyed.  *by [blimmer/bug](https://github.com/blimmer/bug)*
 - [#21](https://github.com/alphasights/ember-scrollable/pull/21)  Fix horizontal scroll demo  *by [Kirill Shaplyko](https://github.com/Baltazore)*
 - [#20](https://github.com/alphasights/ember-scrollable/pull/20)  Updated to Ember 2.8  *by [Kirill Shaplyko](https://github.com/Baltazore)*
+- [#23](https://github.com/alphasights/ember-scrollable/pull/23)  Removed hide delay in tests by [Taras Mankovski]
 
 ## 0.3.2
 
