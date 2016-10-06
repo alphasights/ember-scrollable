@@ -23,6 +23,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   horizontal: false,
   autoHide: true,
   scrollBuffer: 50,
+  scrollTo: null,
 
   selector: computed('elementId', function(){
     return `#${this.elementId}`;
@@ -161,11 +162,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.get('scrollbar').jumpScroll(e);
   },
 
-  scrolled() {
+  scrolled(event) {
     this.get('scrollbar').update();
     this.showScrollbar();
 
     this.checkScrolledToBottom();
+
+    debounce(this, this.sendScroll, event, 100);
   },
 
   checkScrolledToBottom() {
@@ -179,6 +182,20 @@ export default Ember.Component.extend(InboundActionsMixin, {
   sendScrolledToBottom() {
     this.sendAction('onScrolledToBottom');
   },
+
+  sendScroll(event) {
+    this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+  },
+
+  scrollToObserver: Ember.observer('scrollTo', function() {
+    const offset = Number.parseInt(this.get('scrollTo'), 10);
+
+    if (Number.isNaN(offset)) {
+      return;
+    }
+
+    this.get('scrollbar').scrollTo(offset);
+  }),
 
   resizeScrollbar() {
     let scrollbar = this.get('scrollbar');
@@ -249,7 +266,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
      * Scroll Top action should be called when when the scroll area should be scrolled top manually
      */
     scrollTop() {
-      this.get('scrollbar').scrollTo(0);
+      this.set('scrollTo', 0);
     }
   }
 });
