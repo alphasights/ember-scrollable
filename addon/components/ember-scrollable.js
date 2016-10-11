@@ -168,7 +168,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     this.checkScrolledToBottom();
 
-    debounce(this, this.sendScroll, event, 100);
+    this.sendScroll(event);
   },
 
   checkScrolledToBottom() {
