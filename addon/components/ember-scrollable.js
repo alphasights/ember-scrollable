@@ -195,7 +195,9 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   sendScroll(event) {
-    this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+    if (this.get('onScroll')) {
+      this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+    }
   },
 
   scrollToPosition(offset) {
