@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.3.4
+
+### Pull Requests
+
+- [#25](https://github.com/alphasights/ember-scrollable/pull/25)  scrollTo and onScroll *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## 0.3.3
 
 ### Pull Requests
