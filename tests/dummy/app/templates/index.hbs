@@ -145,3 +145,53 @@
     {{code-snippet name="vertical.hbs"}}
   </div>
 </section>
+
+<section class="event-and-setter-demo">
+  <h1>Scroll event and setting the offset</h1>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET event-and-setter --}}
+    <label id="targetScrollOffset">
+      targetScrollOffset: {{input value=targetScrollOffset type="number" min=0 step=10 max=400}}
+    </label>
+    <br>
+    <label id="currentScrollOffset">
+      currentScrollOffset: {{currentScrollOffset}} px
+    </label>
+
+    <hr>
+
+    <div style="height: 400px;">
+      {{#ember-scrollable
+        scrollTo=targetScrollOffset
+        onScroll=(action (mut currentScrollOffset))
+      }}
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+
+  <div class="code">
+    {{code-snippet name="event-and-setter.hbs"}}
+  </div>
+</section>

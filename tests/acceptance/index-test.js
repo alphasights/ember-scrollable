@@ -39,3 +39,21 @@ test('resizable scrollbar', function(assert) {
   });
 
 });
+
+test('scrollTo and onScroll', function(assert) {
+  visit('/');
+
+  andThen(function() {
+    assert.ok($('.event-and-setter-demo .ember-scrollable').length, 'scrolling demo rendered');
+    assert.ok($('.event-and-setter-demo .ember-scrollable .drag-handle').length, 'scrolling handle rendered');
+  });
+
+  const offset = 123;
+
+  fillIn('#targetScrollOffset input', offset);
+
+  andThen(function(){
+    assert.ok(~$('#currentScrollOffset').text().indexOf(String(offset)), 'scrollOffset matches');
+  });
+
+});

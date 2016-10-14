@@ -23,6 +23,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
   horizontal: false,
   autoHide: true,
   scrollBuffer: 50,
+  scrollTo: null,
+  _scrollTo: null,
 
   selector: computed('elementId', function(){
     return `#${this.elementId}`;
@@ -49,6 +51,16 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._scrollContentElement.on('scroll', bind(this, this.scrolled));
 
     scheduleOnce('afterRender', this, this.setupScrollbar);
+  },
+
+  didReceiveAttrs() {
+    const oldOffset = this.get('_scrollTo');
+    const newOffset = this.get('scrollTo');
+
+    if (oldOffset !== newOffset) {
+      this.set('_scrollTo', newOffset);
+      this.scrollToPosition(newOffset);
+    }
   },
 
   measureScrollbar() {
@@ -161,11 +173,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.get('scrollbar').jumpScroll(e);
   },
 
-  scrolled() {
+  scrolled(event) {
     this.get('scrollbar').update();
     this.showScrollbar();
 
     this.checkScrolledToBottom();
+
+    this.sendScroll(event);
   },
 
   checkScrolledToBottom() {
@@ -178,6 +192,22 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   sendScrolledToBottom() {
     this.sendAction('onScrolledToBottom');
+  },
+
+  sendScroll(event) {
+    if (this.get('onScroll')) {
+      this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+    }
+  },
+
+  scrollToPosition(offset) {
+    offset = Number.parseInt(offset, 10);
+
+    if (Number.isNaN(offset)) {
+      return;
+    }
+
+    this.get('scrollbar').scrollTo(offset);
   },
 
   resizeScrollbar() {
@@ -249,7 +279,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
      * Scroll Top action should be called when when the scroll area should be scrolled top manually
      */
     scrollTop() {
-      this.get('scrollbar').scrollTo(0);
+      this.set('scrollTo', 0);
     }
   }
 });

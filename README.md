@@ -29,6 +29,8 @@ The component accepts the following options:
 
 - `horizontal`: Enables horizontal scrolling (default: `false`)
 - `autoHide`: Enables auto hiding of the scrollbars on mouse out (default: `true`)
+- `scrollTo`: Set this property to manually scroll to a certain position
+- `onScroll(scrollOffset, event)`: action triggered whenever the user scrolls, called with the current `scrollOffset` and the original scroll `event`
 - `onScrolledToBottom`: action triggered when user scrolled to the bottom
 
 ## Developing
