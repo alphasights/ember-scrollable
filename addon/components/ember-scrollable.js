@@ -6,7 +6,8 @@ import { Horizontal, Vertical } from '../classes/scrollable';
 const {
   run: { scheduleOnce, debounce, bind },
   computed,
-  $
+  $,
+  isPresent
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
@@ -98,6 +99,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     this.set('scrollbar', scrollbar);
 
+    this.scrollToPosition(this.get('scrollTo'));
     this.checkScrolledToBottom();
 
     if (scrollbar.isNecessary) {
@@ -207,7 +209,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return;
     }
 
-    this.get('scrollbar').scrollTo(offset);
+    const scrollbar = this.get('scrollbar');
+    if (isPresent(scrollbar)) {
+      scrollbar.scrollTo(offset);
+    }
   },
 
   resizeScrollbar() {
