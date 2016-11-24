@@ -308,11 +308,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
      *
      * for example
      * ```
-     * {{#ember-scrollable as |scrollbar|}}
+     * {{#as-scrollable as |scrollbar|}}
      *   {{#each (compute scrollbar.update rows) as |row|}}
      *     {{row.title}}
      *   {{/each}}
-     * {{/ember-scrollable}}
+     * {{/as-scrollable}}
      * ```
      */
     update(value) {
