@@ -1,6 +1,6 @@
 import Ember from 'ember';
-const { 
-  String: { camelize } 
+const {
+  String: { camelize }
 } = Ember;
 
 const pageJumpMultp = 7/8;
@@ -24,7 +24,7 @@ export default class Scrollable {
   startDrag(e) {
     this.dragOffset = this.eventOffset(e) - this.handleOffset();
   }
-  
+
   handleOffset() {
     return this.handleElement.offset()[this.offsetAttr];
   }
@@ -144,8 +144,13 @@ export class Vertical extends Scrollable {
     return e.pageY;
   }
 
+  /**
+   * Returns the offset from the anchor point derived from this MouseEvent
+   * @param e MouseEvent
+   * @return {Number}
+   */
   jumpScrollEventOffset(e) {
-    return e.originalEvent.layerY;
+    return e.layerY;
   }
 
   updateHandle(top, height) {
@@ -175,8 +180,13 @@ export class Horizontal extends Scrollable {
     return e.pageX;
   }
 
+  /**
+   * Returns the offset from the anchor point derived from this MouseEvent
+   * @param e MouseEvent
+   * @return {Number}
+   */
   jumpScrollEventOffset(e) {
-    return e.originalEvent.layerX;
+    return e.layerX;
   }
 
   updateHandle(left, width) {

@@ -4,8 +4,10 @@ import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
-  run: { scheduleOnce, debounce, bind },
-  computed,
+  run: {
+    scheduleOnce,
+    debounce
+  },
   $,
   isPresent
 } = Ember;
@@ -21,15 +23,43 @@ export default Ember.Component.extend(InboundActionsMixin, {
   layout,
   classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
 
+  /**
+   * If horizontal is true, the scrollbar will be shown horizontally, else vertically.
+   *
+   * @property horizontal
+   * @public
+   * @type Boolean
+   * @default false
+   */
   horizontal: false,
+  /**
+   * Indicates whether the scrollbar should auto hide after a given period of time (see hideDelay),
+   * or remain persitent alongside the content to be scrolled.
+   *
+   * @property autoHide
+   * @public
+   * @type Boolean
+   * @default true
+   */
   autoHide: true,
   scrollBuffer: 50,
+  /**
+   * Number indicating offset from anchor point (top for vertical, left for horizontal) where the scroll handle
+   * should be rendered.
+   *
+   * @property scrollTo
+   * @public
+   * @type Number
+   */
   scrollTo: null,
-  _scrollTo: null,
-
-  selector: computed('elementId', function(){
-    return `#${this.elementId}`;
-  }),
+  /**
+   * Previous scrollTo value. Useful for calculating changes in scrollTo.
+   *
+   * @property _previousScrollTo
+   * @private
+   * @type Number
+   */
+  _previousScrollTo: null,
 
   init() {
     this._super(...arguments);
@@ -40,26 +70,16 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   didInsertElement() {
     this._super(...arguments);
-
     this.setupElements();
-
-    if (this.get('autoHide')) {
-      this.on('mouseEnter', this, this.showScrollbar);
-    }
-
-    this._handleElement.on('mousedown', bind(this, this.startDrag));
-    this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
-    this._scrollContentElement.on('scroll', bind(this, this.scrolled));
-
     scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
   didReceiveAttrs() {
-    const oldOffset = this.get('_scrollTo');
+    const oldOffset = this.get('_previousScrollTo');
     const newOffset = this.get('scrollTo');
 
     if (oldOffset !== newOffset) {
-      this.set('_scrollTo', newOffset);
+      this.set('_previousScrollTo', newOffset);
       this.scrollToPosition(newOffset);
     }
   },
@@ -152,9 +172,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.on('mouseUp', this, this.endDrag);
   },
 
+  mouseEnter(){
+    if (this.get('autoHide')) {
+      this.showScrollbar();
+    }
+  },
+
   /**
-  * Drag scrollbar handle
-  */
+   * Drag scrollbar handle
+   */
   drag(e) {
     e.preventDefault();
 
@@ -166,6 +192,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.off('mouseUp', this, this.endDrag);
   },
 
+  /**
+   * Handles when user clicks on scrollbar, but not on the actual handle, and the scroll should
+   * jump to the selected position.
+   *
+   * @method jumpScroll
+   * @param e
+   */
   jumpScroll(e) {
     // If the drag handle element was pressed, don't do anything here.
     if (e.target === this._handleElement[0]) {
@@ -175,6 +208,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.get('scrollbar').jumpScroll(e);
   },
 
+  /**
+   * Callback for the scroll event emitted by the container of the content that can scroll.
+   * Here we update the scrollbar to reflect the scrolled position.
+   *
+   * @method scrolled
+   * @param event
+   */
   scrolled(event) {
     this.get('scrollbar').update();
     this.showScrollbar();
@@ -268,11 +308,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
      *
      * for example
      * ```
-     * {{#as-scrollable as |scrollbar|}}
+     * {{#ember-scrollable as |scrollbar|}}
      *   {{#each (compute scrollbar.update rows) as |row|}}
      *     {{row.title}}
      *   {{/each}}
-     * {{/as-scrollable}}
+     * {{/ember-scrollable}}
      * ```
      */
     update(value) {
@@ -285,6 +325,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
      */
     scrollTop() {
       this.set('scrollTo', 0);
+    },
+    startDrag(){
+      this.startDrag(...arguments);
+    },
+    jumpScroll() {
+      this.jumpScroll(...arguments);
+    },
+    scrolled(){
+      this.scrolled(...arguments);
     }
   }
 });
