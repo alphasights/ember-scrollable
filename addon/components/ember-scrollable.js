@@ -2,6 +2,7 @@ import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
+import {styleify} from '../util/css';
 
 const {
   run: {
