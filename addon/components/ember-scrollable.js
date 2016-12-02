@@ -186,6 +186,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     // selectable during the drag.
     e.preventDefault();
 
+    // TODO suspicious
     this.get('scrollbar').startDrag(e);
 
     this.on('mouseMove', this, this.drag);
@@ -204,6 +205,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   drag(e) {
     e.preventDefault();
 
+    // TODO this stateful, bad. set object properties, and trigger style from there
     this.get('scrollbar').drag(e);
   },
 
@@ -225,6 +227,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return;
     }
 
+    // TODO this stateful, bad. set object properties, and trigger style from there
     this.get('scrollbar').jumpScroll(e);
   },
 
