@@ -87,8 +87,10 @@ export default class Scrollable {
   }
 
   update() {
+    // we own this data
     let scrollOffset = this.scrollOffset();
     let contentSize = this.contentOuterSize();
+    // we pass this to the child
     let scrollbarSize = this.scrollbarSize();
     let scrollbarRatio = scrollbarSize / contentSize;
 
@@ -105,7 +107,7 @@ export default class Scrollable {
       handleSize = handleSizeCalculated < 10 ? 10 : handleSizeCalculated;
     }
 
-    this.updateHandle(handleOffset, handleSize);
+    return {handleOffset, handleSize}
    }
 
    isScrolledToBottom(scrollBuffer = 0) {
@@ -132,7 +134,6 @@ export class Vertical extends Scrollable {
     this.sizeAttr = 'height';
 
     this.resizeScrollContent();
-    this.update();
   }
 
   resizeScrollContent() {
@@ -153,9 +154,6 @@ export class Vertical extends Scrollable {
     return e.layerY;
   }
 
-  updateHandle(top, height) {
-    this.handleElement.css({ top, height });
-  }
 }
 
 export class Horizontal extends Scrollable {
@@ -167,7 +165,6 @@ export class Horizontal extends Scrollable {
     this.sizeAttr = 'width';
 
     this.resizeScrollContent();
-    this.update();
   }
 
   resizeScrollContent() {
@@ -189,8 +186,5 @@ export class Horizontal extends Scrollable {
     return e.layerX;
   }
 
-  updateHandle(left, width) {
-    this.handleElement.css({ left, width });
-  }
 }
 

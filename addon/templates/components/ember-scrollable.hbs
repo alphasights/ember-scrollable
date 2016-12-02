@@ -1,6 +1,6 @@
 {{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
 <div class="tse-scrollbar" onmousedown={{action 'jumpScroll'}}>
-    <div class="drag-handle {{if showHandle 'visible'}}" onmousedown={{action 'startDrag'}}></div>
+    <div class="drag-handle {{if showHandle 'visible'}}" onmousedown={{action 'startDrag'}} style={{handleStyles}}></div>
 </div>
 <div class="tse-scroll-content" onscroll={{action 'scrolled'}}>
   <div class="tse-content scrollable-content">

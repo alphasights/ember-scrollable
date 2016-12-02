@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import layout from '../templates/components/ember-scrollable';
-import { Horizontal, Vertical } from '../classes/scrollable';
+import {Horizontal, Vertical} from '../classes/scrollable';
 import {styleify} from '../util/css';
 
 const {
+  computed,
   run: {
     scheduleOnce,
     debounce
@@ -85,6 +86,22 @@ export default Ember.Component.extend(InboundActionsMixin, {
     }
   },
 
+  handleOffset: null,
+  handleSize: null,
+
+  handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
+    const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
+    if (this.get('horizontal')) {
+      return {left: handleOffset, width: handleSize};
+    } else {
+      return {top: handleOffset, height: handleSize};
+    }
+  }),
+
+  handleStyles: computed('handleStylesJSON.{top,left,width,height}', function() {
+    return styleify(this.get('handleStylesJSON'));
+  }),
+
   measureScrollbar() {
 
     /**
@@ -117,9 +134,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   setupScrollbar() {
     let scrollbar = this.createScrollbar();
-
-    this.set('scrollbar', scrollbar);
-
     this.scrollToPosition(this.get('scrollTo'));
     this.checkScrolledToBottom();
 
@@ -150,7 +164,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
-    return new ScrollbarClass({
+    const scrollbar = new ScrollbarClass({
       scrollContentElement: this._scrollContentElement,
       scrollbarElement: this._scrollbarElement,
       handleElement: this._handleElement,
@@ -160,6 +174,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
       height: this.$().height(),
       scrollbarWidth: this._scrollbarWidth
     });
+
+    this.set('scrollbar', scrollbar);
+    this.updateScrollbarAndSetupProperties();
+    return scrollbar;
+
   },
 
   startDrag(e) {
@@ -209,6 +228,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.get('scrollbar').jumpScroll(e);
   },
 
+  updateScrollbarAndSetupProperties() {
+    const {handleOffset, handleSize} = this.get('scrollbar').update();
+    this.set('handleOffset', handleOffset + 'px');
+    this.set('handleSize', handleSize + 'px');
+  },
+
   /**
    * Callback for the scroll event emitted by the container of the content that can scroll.
    * Here we update the scrollbar to reflect the scrolled position.
@@ -217,13 +242,14 @@ export default Ember.Component.extend(InboundActionsMixin, {
    * @param event
    */
   scrolled(event) {
-    this.get('scrollbar').update();
+    this.updateScrollbarAndSetupProperties();
     this.showScrollbar();
 
     this.checkScrolledToBottom();
 
     this.sendScroll(event);
   },
+
 
   checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
@@ -262,9 +288,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return;
     }
 
-    scrollbar = this.createScrollbar();
-    this.set('scrollbar', scrollbar);
-
+    this.createScrollbar();
     this.showScrollbar();
   },
 
