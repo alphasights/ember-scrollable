@@ -92,9 +92,17 @@ export default Ember.Component.extend(InboundActionsMixin, {
   handleOffset: null,
   handleSize: null,
 
+  sizeAttr: computed('horizontal', function() {
+    return this.get('horizontal') ? 'width': 'height';
+  }),
+
   scrollOffsetAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'scrollLeft' : 'scrollTop';
   }),
+
+  scrollOffset() {
+    return this._scrollContentElement[this.get('scrollOffsetAttr')]();
+  },
 
   handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
     const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
@@ -117,6 +125,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
   scrollContentStyles: computed('scrollContentStylesJSON.{height,width}', function() {
     return styleify(this.get('scrollContentStylesJSON'));
   }),
+
+  scrollContentSize() {
+    return this._scrollContentElement[this.get('sizeAttr')]();
+  },
 
   measureScrollbar() {
 
@@ -197,7 +209,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
     const scrollbar = new ScrollbarClass({
-      scrollContentElement: this._scrollContentElement,
       scrollbarElement: this._scrollbarElement,
       handleElement: this._handleElement,
       contentElement: this._contentElement
@@ -259,12 +270,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
     }
 
     // TODO this stateful, bad. set object properties, and trigger style from there
-    const scrollPos = this.get('scrollbar').jumpScroll(e);
+    const scrollPos = this.get('scrollbar').jumpScroll(e, this.scrollOffset(), this.scrollContentSize());
     this.scrollToPosition(scrollPos);
   },
 
   updateScrollbarAndSetupProperties() {
-    const {handleOffset, handleSize} = this.get('scrollbar').update();
+    const {handleOffset, handleSize} = this.get('scrollbar').update(this.scrollOffset());
     this.set('handleOffset', handleOffset + 'px');
     this.set('handleSize', handleSize + 'px');
   },
@@ -289,7 +300,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
 
-    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer)) {
+    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer), this.scrollOffset()) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
   },
@@ -300,7 +311,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   sendScroll(event) {
     if (this.get('onScroll')) {
-      this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+      this.sendAction('onScroll', this.scrollOffset(), event);
     }
   },
 
