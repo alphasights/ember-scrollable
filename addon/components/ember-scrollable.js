@@ -67,7 +67,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._super(...arguments);
 
     this.setupResize();
-    this.measureScrollbar();
+    // this.measureScrollbar();
   },
 
   didInsertElement() {
@@ -82,12 +82,19 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     if (oldOffset !== newOffset) {
       this.set('_previousScrollTo', newOffset);
-      this.scrollToPosition(newOffset);
     }
+  },
+
+  didRender() {
+    this.scrollToPosition(this.get('scrollTo'));
   },
 
   handleOffset: null,
   handleSize: null,
+
+  scrollOffsetAttr: computed('horizontal', function() {
+    return this.get('horizontal') ? 'scrollLeft' : 'scrollTop';
+  }),
 
   handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
     const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
@@ -100,6 +107,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   handleStyles: computed('handleStylesJSON.{top,left,width,height}', function() {
     return styleify(this.get('handleStylesJSON'));
+  }),
+
+  scrollContentStylesJSON: computed('scrollContentHeight', 'scrollContentWidth', function() {
+    const {scrollContentHeight, scrollContentWidth} = this.getProperties('scrollContentHeight', 'scrollContentWidth');
+    return {width: scrollContentWidth + 'px', height: scrollContentHeight + 'px'};
+  }),
+
+  scrollContentStyles: computed('scrollContentStylesJSON.{height,width}', function() {
+    return styleify(this.get('scrollContentStylesJSON'));
   }),
 
   measureScrollbar() {
@@ -128,7 +144,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return (width - widthMinusScrollbars);
     }
 
-    this._scrollbarWidth = scrollbarWidth();
+    return scrollbarWidth();
 
   },
 
@@ -157,6 +173,22 @@ export default Ember.Component.extend(InboundActionsMixin, {
     window.addEventListener('resize', this._resizeHandler, true);
   },
 
+  resizeScrollContent() {
+    const width = this.$().width();
+    const height = this.$().height();
+    const scrollbarThickness = this.measureScrollbar();
+
+    if (this.get('horizontal')) {
+      this.set('scrollContentWidth', width);
+      this.set('scrollContentHeight', height + scrollbarThickness);
+      // TODO resize the element height so it doesn't overlap with the scrollbar
+      this._contentElement.height(height);
+    } else {
+      this.set('scrollContentWidth', width + scrollbarThickness);
+      this.set('scrollContentHeight', height);
+    }
+  },
+
   createScrollbar() {
     if (this.get('isDestroyed')) {
       return;
@@ -168,12 +200,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
       scrollContentElement: this._scrollContentElement,
       scrollbarElement: this._scrollbarElement,
       handleElement: this._handleElement,
-      contentElement: this._contentElement,
-
-      width: this.$().width(),
-      height: this.$().height(),
-      scrollbarWidth: this._scrollbarWidth
+      contentElement: this._contentElement
     });
+
+    this.resizeScrollContent();
 
     this.set('scrollbar', scrollbar);
     this.updateScrollbarAndSetupProperties();
@@ -206,7 +236,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     e.preventDefault();
 
     // TODO this stateful, bad. set object properties, and trigger style from there
-    this.get('scrollbar').drag(e);
+    const scrollPos = this.get('scrollbar').drag(e);
+    this.scrollToPosition(scrollPos);
   },
 
   endDrag() {
@@ -228,7 +259,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     }
 
     // TODO this stateful, bad. set object properties, and trigger style from there
-    this.get('scrollbar').jumpScroll(e);
+    const scrollPos = this.get('scrollbar').jumpScroll(e);
+    this.scrollToPosition(scrollPos);
   },
 
   updateScrollbarAndSetupProperties() {
@@ -281,7 +313,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     const scrollbar = this.get('scrollbar');
     if (isPresent(scrollbar)) {
-      scrollbar.scrollTo(offset);
+      this._scrollContentElement[this.get('scrollOffsetAttr')](offset);
     }
   },
 

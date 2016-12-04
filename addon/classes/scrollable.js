@@ -11,10 +11,6 @@ export default class Scrollable {
     this.scrollbarElement     = options.scrollbarElement;
     this.handleElement        = options.handleElement;
     this.contentElement       = options.contentElement;
-
-    this.width                = options.width;
-    this.height               = options.height;
-    this.scrollbarWidth       = options.scrollbarWidth;
   }
 
   get isNecessary() {
@@ -49,10 +45,6 @@ export default class Scrollable {
     return this.contentElement[camelize(`outer-${this.sizeAttr}`)]();
   }
 
-  scrollTo(scrollPos) {
-    this.scrollContentElement[this.scrollOffsetAttr](scrollPos);
-  }
-
   scrollOffset() {
     return this.scrollContentElement[this.scrollOffsetAttr]();
   }
@@ -70,7 +62,7 @@ export default class Scrollable {
     // Scroll the content by the same percentage.
     let scrollPos = dragPerc * this.contentSize();
 
-    this.scrollTo(scrollPos);
+    return scrollPos;
   }
 
   jumpScroll(e) {
@@ -83,7 +75,7 @@ export default class Scrollable {
 
     let scrollPos = (eventOffset < handleOffset) ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
 
-    this.scrollTo(scrollPos);
+    return scrollPos;
   }
 
   update() {
@@ -132,13 +124,6 @@ export class Vertical extends Scrollable {
     this.scrollOffsetAttr = 'scrollTop';
     this.offsetAttr = 'top';
     this.sizeAttr = 'height';
-
-    this.resizeScrollContent();
-  }
-
-  resizeScrollContent() {
-    this.scrollContentElement.width(this.width + this.scrollbarWidth);
-    this.scrollContentElement.height(this.height);
   }
 
   eventOffset(e) {
@@ -163,14 +148,6 @@ export class Horizontal extends Scrollable {
     this.scrollOffsetAttr = 'scrollLeft';
     this.offsetAttr = 'left';
     this.sizeAttr = 'width';
-
-    this.resizeScrollContent();
-  }
-
-  resizeScrollContent() {
-    this.scrollContentElement.width(this.width);
-    this.scrollContentElement.height(this.height + this.scrollbarWidth);
-    this.contentElement.height(this.height);
   }
 
   eventOffset(e) {

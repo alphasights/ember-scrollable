@@ -2,7 +2,7 @@
 <div class="tse-scrollbar" onmousedown={{action 'jumpScroll'}}>
     <div class="drag-handle {{if showHandle 'visible'}}" onmousedown={{action 'startDrag'}} style={{handleStyles}}></div>
 </div>
-<div class="tse-scroll-content" onscroll={{action 'scrolled'}}>
+<div class="tse-scroll-content" onscroll={{action 'scrolled'}} style={{scrollContentStyles}}>
   <div class="tse-content scrollable-content">
     {{yield (hash
       recalculate=(action 'recalculate')
