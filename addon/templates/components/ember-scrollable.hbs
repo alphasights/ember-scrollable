@@ -1,7 +1,12 @@
 {{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
-<div class="tse-scrollbar" onmousedown={{action 'jumpScroll'}}>
-    <div class="drag-handle {{if showHandle 'visible'}}" onmousedown={{action 'startDrag'}} style={{handleStyles}}></div>
-</div>
+{{ember-scrollbar
+  handleOffset=handleOffset
+  handleSize=handleSize
+  horizontal=horizontal
+  showHandle=showHandle
+  onJumpTo=(action 'jumpTo')
+  onDrag=(action 'drag')
+}}
 {{#scroll-content-element
     height=scrollContentHeight
     width=scrollContentWidth

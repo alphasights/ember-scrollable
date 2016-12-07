@@ -3,7 +3,6 @@ const {
   String: { camelize }
 } = Ember;
 
-const pageJumpMultp = 7/8;
 
 export default class Scrollable {
   constructor(options) {
@@ -16,56 +15,13 @@ export default class Scrollable {
     return this.scrollbarSize() < this.contentOuterSize();
   }
 
-  startDrag(e) {
-    return this.eventOffset(e) - this.handleOffset();
-  }
-
-  handleOffset() {
-    return this.handleElement.offset()[this.offsetAttr];
-  }
-
-  handlePositionOffset() {
-    return this.handleElement.position()[this.offsetAttr];
-  }
-
-  scrollbarOffset() {
-    return this.scrollbarElement.offset()[this.offsetAttr];
-  }
 
   scrollbarSize() {
     return this.scrollbarElement[this.sizeAttr]();
   }
 
-  contentSize() {
-    return this.contentElement[this.sizeAttr]();
-  }
-
   contentOuterSize() {
     return this.contentElement[camelize(`outer-${this.sizeAttr}`)]();
-  }
-
-  drag(e, dragOffset) {
-    let eventOffset = this.eventOffset(e);
-
-    let dragPos = eventOffset - this.scrollbarOffset() - dragOffset;
-    // Convert the mouse position into a percentage of the scrollbar height/width.
-    let dragPerc = dragPos / this.scrollbarSize();
-    // Scroll the content by the same percentage.
-    let scrollPos = dragPerc * this.contentSize();
-
-    return scrollPos;
-  }
-
-  jumpScroll(e, scrollOffset, scrollContentSize) {
-    // The content will scroll by 7/8 of a page.
-    let jumpAmt = pageJumpMultp * scrollContentSize;
-
-    let eventOffset = this.jumpScrollEventOffset(e);
-    let handleOffset = this.handlePositionOffset();
-
-    let scrollPos = (eventOffset < handleOffset) ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
-
-    return scrollPos;
   }
 
   update(scrollOffset) {

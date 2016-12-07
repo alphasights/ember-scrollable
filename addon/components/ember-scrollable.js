@@ -2,7 +2,6 @@ import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import layout from '../templates/components/ember-scrollable';
 import {Horizontal, Vertical} from '../classes/scrollable';
-import {styleify} from '../util/css';
 
 const {
   computed,
@@ -14,6 +13,7 @@ const {
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
+const PAGE_JUMP_MULTIPLE = 7/8;
 
 const scrollbarSelector = '.tse-scrollbar';
 const handleSelector = '.drag-handle';
@@ -72,25 +72,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
   dragOffset: 0,
 
   sizeAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'width': 'height';
-  }),
-
-
-  handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
-    const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
-    if (this.get('horizontal')) {
-      return {left: handleOffset, width: handleSize};
-    } else {
-      return {top: handleOffset, height: handleSize};
-    }
-  }),
-
-  handleStyles: computed('handleStylesJSON.{top,left,width,height}', function() {
-    return styleify(this.get('handleStylesJSON'));
+    return this.get('horizontal') ? 'width' : 'height';
   }),
 
   scrollContentSize() {
     return this._scrollContentElement[this.get('sizeAttr')]();
+  },
+
+  contentSize() {
+    return this._contentElement[this.get('sizeAttr')]();
   },
 
   measureScrollbar() {
@@ -183,53 +173,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   },
 
-  startDrag(e) {
-    // Preventing the event's default action stops text being
-    // selectable during the drag.
-    e.preventDefault();
-
-    const dragOffset = this.get('scrollbar').startDrag(e);
-    this.set('dragOffset', dragOffset);
-
-    this.on('mouseMove', this, this.drag);
-    this.on('mouseUp', this, this.endDrag);
-  },
-
   mouseEnter(){
     if (this.get('autoHide')) {
       this.showScrollbar();
     }
-  },
-
-  /**
-   * Drag scrollbar handle
-   */
-  drag(e) {
-    e.preventDefault();
-
-    const scrollPos = this.get('scrollbar').drag(e, this.get('dragOffset'));
-    this.set('scrollTo', scrollPos);
-  },
-
-  endDrag() {
-    this.off('mouseMove', this, this.drag);
-    this.off('mouseUp', this, this.endDrag);
-  },
-
-  /**
-   * Handles when user clicks on scrollbar, but not on the actual handle, and the scroll should
-   * jump to the selected position.
-   *
-   * @method jumpScroll
-   * @param e
-   */
-  jumpScroll(e) {
-    // If the drag handle element was pressed, don't do anything here.
-    if (e.target === this._handleElement[0]) {
-      return;
-    }
-    const scrollPos = this.get('scrollbar').jumpScroll(e, this.get('scrollTo'), this.scrollContentSize());
-    this.set('scrollTo', scrollPos);
   },
 
   updateScrollbarAndSetupProperties(scrollOffset) {
@@ -343,14 +290,18 @@ export default Ember.Component.extend(InboundActionsMixin, {
     scrollTop() {
       this.set('scrollTo', 0);
     },
-    startDrag(){
-      this.startDrag(...arguments);
-    },
-    jumpScroll() {
-      this.jumpScroll(...arguments);
-    },
     scrolled(){
       this.scrolled(...arguments);
+    },
+    drag(dragPerc) {
+      const srcollTo = dragPerc * this.contentSize();
+      this.set('scrollTo', srcollTo);
+    },
+    jumpTo(jumpPositive) {
+      const scrollOffset = this.get('scrollTo');
+      let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize();
+      let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
+      this.set('scrollTo', scrollPos);
     }
   }
 });

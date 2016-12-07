@@ -17,4 +17,4 @@ function styleify(obj) {
 
 }
 
-export {styleify}
+export {styleify};
