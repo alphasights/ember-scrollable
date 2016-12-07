@@ -10,8 +10,7 @@ const {
     scheduleOnce,
     debounce
   },
-  $,
-  isPresent
+  $
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
@@ -53,15 +52,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
    * @public
    * @type Number
    */
-  scrollTo: null,
-  /**
-   * Previous scrollTo value. Useful for calculating changes in scrollTo.
-   *
-   * @property _previousScrollTo
-   * @private
-   * @type Number
-   */
-  _previousScrollTo: null,
+  scrollTo: 0,
 
   init() {
     this._super(...arguments);
@@ -76,35 +67,14 @@ export default Ember.Component.extend(InboundActionsMixin, {
     scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
-  didReceiveAttrs() {
-    const oldOffset = this.get('_previousScrollTo');
-    const newOffset = this.get('scrollTo');
-
-    if (oldOffset !== newOffset) {
-      this.set('_previousScrollTo', newOffset);
-    }
-  },
-
-  didRender() {
-    this.scrollToPosition(this.get('scrollTo'));
-  },
-
-  handleOffset: null,
   handleSize: null,
-
-  dragOffset: null,
+  handleOffset: 0,
+  dragOffset: 0,
 
   sizeAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'width': 'height';
   }),
 
-  scrollOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'scrollLeft' : 'scrollTop';
-  }),
-
-  scrollOffset() {
-    return this._scrollContentElement[this.get('scrollOffsetAttr')]();
-  },
 
   handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
     const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
@@ -155,7 +125,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   setupScrollbar() {
     let scrollbar = this.createScrollbar();
-    this.scrollToPosition(this.get('scrollTo'));
     this.checkScrolledToBottom();
 
     if (scrollbar.isNecessary) {
@@ -219,7 +188,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     // selectable during the drag.
     e.preventDefault();
 
-    // TODO suspicious
     const dragOffset = this.get('scrollbar').startDrag(e);
     this.set('dragOffset', dragOffset);
 
@@ -240,7 +208,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     e.preventDefault();
 
     const scrollPos = this.get('scrollbar').drag(e, this.get('dragOffset'));
-    this.scrollToPosition(scrollPos);
+    this.set('scrollTo', scrollPos);
   },
 
   endDrag() {
@@ -260,12 +228,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (e.target === this._handleElement[0]) {
       return;
     }
-    const scrollPos = this.get('scrollbar').jumpScroll(e, this.scrollOffset(), this.scrollContentSize());
-    this.scrollToPosition(scrollPos);
+    const scrollPos = this.get('scrollbar').jumpScroll(e, this.get('scrollTo'), this.scrollContentSize());
+    this.set('scrollTo', scrollPos);
   },
 
-  updateScrollbarAndSetupProperties() {
-    const {handleOffset, handleSize} = this.get('scrollbar').update(this.scrollOffset());
+  updateScrollbarAndSetupProperties(scrollOffset) {
+    const {handleOffset, handleSize} = this.get('scrollbar').update(scrollOffset);
     this.set('handleOffset', handleOffset + 'px');
     this.set('handleSize', handleSize + 'px');
   },
@@ -277,20 +245,21 @@ export default Ember.Component.extend(InboundActionsMixin, {
    * @method scrolled
    * @param event
    */
-  scrolled(event) {
-    this.updateScrollbarAndSetupProperties();
+  scrolled(event, scrollOffset) {
+    this.updateScrollbarAndSetupProperties(scrollOffset);
     this.showScrollbar();
 
-    this.checkScrolledToBottom();
+    this.checkScrolledToBottom(scrollOffset);
 
-    this.sendScroll(event);
+    this.sendScroll(event, scrollOffset);
+
   },
 
 
-  checkScrolledToBottom() {
+  checkScrolledToBottom(scrollOffset) {
     let scrollBuffer = this.get('scrollBuffer');
 
-    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer), this.scrollOffset()) {
+    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer, scrollOffset)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
   },
@@ -299,23 +268,9 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.sendAction('onScrolledToBottom');
   },
 
-  sendScroll(event) {
+  sendScroll(event, scrollOffset) {
     if (this.get('onScroll')) {
-      this.sendAction('onScroll', this.scrollOffset(), event);
-    }
-  },
-
-  scrollToPosition(offset) {
-    offset = Number.parseInt(offset, 10);
-
-    if (Number.isNaN(offset)) {
-      return;
-    }
-
-    const scrollbar = this.get('scrollbar');
-    if (isPresent(scrollbar)) {
-      // scrollTop, etc functions will trigger the scroll event. TODO encapusulate this logic in a component
-      this._scrollContentElement[this.get('scrollOffsetAttr')](offset);
+      this.sendAction('onScroll', scrollOffset, event);
     }
   },
 
