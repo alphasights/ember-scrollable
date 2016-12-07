@@ -13,7 +13,7 @@ const {
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
-const PAGE_JUMP_MULTIPLE = 7/8;
+const PAGE_JUMP_MULTIPLE = 7 / 8;
 
 const scrollbarSelector = '.tse-scrollbar';
 const handleSelector = '.drag-handle';
@@ -67,6 +67,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
     scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
+  isDragging: false,
   handleSize: null,
   handleOffset: 0,
   dragOffset: 0,
@@ -179,8 +180,29 @@ export default Ember.Component.extend(InboundActionsMixin, {
     }
   },
 
+  mouseMove(e){
+    if (this.get('autoHide')) {
+      this.showScrollbar();
+    }
+    const eventOffset = e[this.get('eventOffsetAttr')];
+    this.set('mouseOffset', eventOffset);
+  },
+
+  mouseLeave() {
+    this.set('isDragging', false);
+  },
+
+  mouseUp() {
+    this.set('isDragging', false);
+  },
+
+  eventOffsetAttr: computed('horizontal', function() {
+    return this.get('horizontal') ? 'pageX' : 'pageY';
+  }),
+
+
   updateScrollbarAndSetupProperties(scrollOffset) {
-    const {handleOffset, handleSize} = this.get('scrollbar').update(scrollOffset);
+    const {handleOffset, handleSize} = this.get('scrollbar').getHandlePositionAndSize(scrollOffset);
     this.set('handleOffset', handleOffset + 'px');
     this.set('handleSize', handleSize + 'px');
   },
@@ -302,6 +324,9 @@ export default Ember.Component.extend(InboundActionsMixin, {
       let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize();
       let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
       this.set('scrollTo', scrollPos);
+    },
+    dragStart() {
+      this.set('isDragging', true);
     }
   }
 });

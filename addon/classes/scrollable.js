@@ -1,14 +1,14 @@
 import Ember from 'ember';
 const {
-  String: { camelize }
+  String: {camelize}
 } = Ember;
 
 
 export default class Scrollable {
   constructor(options) {
-    this.scrollbarElement     = options.scrollbarElement;
-    this.handleElement        = options.handleElement;
-    this.contentElement       = options.contentElement;
+    this.scrollbarElement = options.scrollbarElement;
+    this.handleElement = options.handleElement;
+    this.contentElement = options.contentElement;
   }
 
   get isNecessary() {
@@ -24,7 +24,7 @@ export default class Scrollable {
     return this.contentElement[camelize(`outer-${this.sizeAttr}`)]();
   }
 
-  update(scrollOffset) {
+  getHandlePositionAndSize(scrollOffset) {
     // we own this data
     let contentSize = this.contentOuterSize();
     // we pass this to the child
@@ -44,15 +44,15 @@ export default class Scrollable {
       handleSize = handleSizeCalculated < 10 ? 10 : handleSizeCalculated;
     }
 
-    return {handleOffset, handleSize}
-   }
+    return {handleOffset, handleSize};
+  }
 
-   isScrolledToBottom(scrollBuffer = 0, scrollOffset) {
-     let contentSize = this.contentOuterSize();
-     let scrollbarSize = this.scrollbarSize();
+  isScrolledToBottom(scrollBuffer, scrollOffset) {
+    let contentSize = this.contentOuterSize();
+    let scrollbarSize = this.scrollbarSize();
 
-     return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
-   }
+    return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
+  }
 
 }
 
@@ -63,20 +63,6 @@ export class Vertical extends Scrollable {
     this.offsetAttr = 'top';
     this.sizeAttr = 'height';
   }
-
-  eventOffset(e) {
-    return e.pageY;
-  }
-
-  /**
-   * Returns the offset from the anchor point derived from this MouseEvent
-   * @param e MouseEvent
-   * @return {Number}
-   */
-  jumpScrollEventOffset(e) {
-    return e.layerY;
-  }
-
 }
 
 export class Horizontal extends Scrollable {
@@ -86,19 +72,5 @@ export class Horizontal extends Scrollable {
     this.offsetAttr = 'left';
     this.sizeAttr = 'width';
   }
-
-  eventOffset(e) {
-    return e.pageX;
-  }
-
-  /**
-   * Returns the offset from the anchor point derived from this MouseEvent
-   * @param e MouseEvent
-   * @return {Number}
-   */
-  jumpScrollEventOffset(e) {
-    return e.layerX;
-  }
-
 }
 

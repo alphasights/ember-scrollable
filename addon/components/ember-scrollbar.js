@@ -4,6 +4,7 @@ import {styleify} from '../util/css';
 
 const {
   computed,
+  isPresent,
   K
 } = Ember;
 
@@ -14,26 +15,28 @@ export default Ember.Component.extend({
   classNameBindings: [':tse-scrollbar'],
   onDrag: K,
   onJumpTo: K,
+  onDragStart: K,
 
   horizontal: false,
+  isDragging: false,
   showHandle: false,
   handleSize: null,
-  handleOffset:0,
+  handleOffset: 0,
 
   offsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'left': 'top';
+    return this.get('horizontal') ? 'left' : 'top';
   }),
 
   jumpScrollOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'offsetX': 'offsetY';
+    return this.get('horizontal') ? 'offsetX' : 'offsetY';
   }),
 
   eventOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'pageX': 'pageY';
+    return this.get('horizontal') ? 'pageX' : 'pageY';
   }),
 
   sizeAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'width': 'height';
+    return this.get('horizontal') ? 'width' : 'height';
   }),
 
 
@@ -63,10 +66,27 @@ export default Ember.Component.extend({
 
     const dragOffset = this._startDrag(e);
     this.set('dragOffset', dragOffset);
+    this.get('onDragStart')(e)
+  },
 
-    // TODO move to funciton callbacks and a isDragging state
-    this.on('mouseMove', this, this.drag);
-    this.on('mouseUp', this, this.endDrag);
+  mouseMove(e) {
+    if (this.get('isDragging')) {
+      this.drag(e);
+    }
+  },
+
+  mouseUp() {
+    this.endDrag()
+  },
+
+
+  didReceiveAttrs() {
+    const mouseOffset = this.get('mouseOffset');
+    if (isPresent(mouseOffset)) {
+      if (this.get('isDragging')) {
+        this._drag(mouseOffset, this.get('dragOffset'));
+      }
+    }
   },
 
   /**
@@ -74,12 +94,13 @@ export default Ember.Component.extend({
    */
   drag(e) {
     e.preventDefault();
-    this._drag(e, this.get('dragOffset'));
+
+    let eventOffset = this._eventOffset(e);
+    this._drag(eventOffset, this.get('dragOffset'));
   },
 
   endDrag() {
-    this.off('mouseMove', this, this.drag);
-    this.off('mouseUp', this, this.endDrag);
+    this.set('isDragging', false);
   },
 
   /**
@@ -98,7 +119,6 @@ export default Ember.Component.extend({
   },
 
 
-
   // private stuff
   /**
    * Convert the mouse position into a percentage of the scrollbar height/width.
@@ -108,9 +128,7 @@ export default Ember.Component.extend({
    * @param dragOffset
    * @private
    */
-    _drag(e, dragOffset) {
-    let eventOffset = this._eventOffset(e);
-
+  _drag(eventOffset, dragOffset) {
     let dragPos = eventOffset - this._scrollbarOffset() - dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
     let dragPerc = dragPos / this._scrollbarSize();
@@ -149,7 +167,7 @@ export default Ember.Component.extend({
     return this.$().offset()[this.get('offsetAttr')];
   },
 
-    /**
+  /**
    * Returns the offset from the anchor point derived from this MouseEvent
    * @param e MouseEvent
    * @return {Number}
