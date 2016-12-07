@@ -17,7 +17,7 @@ export default class Scrollable {
   }
 
   startDrag(e) {
-    this.dragOffset = this.eventOffset(e) - this.handleOffset();
+    return this.eventOffset(e) - this.handleOffset();
   }
 
   handleOffset() {
@@ -44,10 +44,10 @@ export default class Scrollable {
     return this.contentElement[camelize(`outer-${this.sizeAttr}`)]();
   }
 
-  drag(e) {
+  drag(e, dragOffset) {
     let eventOffset = this.eventOffset(e);
 
-    let dragPos = eventOffset - this.scrollbarOffset() - this.dragOffset;
+    let dragPos = eventOffset - this.scrollbarOffset() - dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
     let dragPerc = dragPos / this.scrollbarSize();
     // Scroll the content by the same percentage.

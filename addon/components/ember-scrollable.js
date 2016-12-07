@@ -92,6 +92,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
   handleOffset: null,
   handleSize: null,
 
+  dragOffset: null,
+
   sizeAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'width': 'height';
   }),
@@ -115,15 +117,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   handleStyles: computed('handleStylesJSON.{top,left,width,height}', function() {
     return styleify(this.get('handleStylesJSON'));
-  }),
-
-  scrollContentStylesJSON: computed('scrollContentHeight', 'scrollContentWidth', function() {
-    const {scrollContentHeight, scrollContentWidth} = this.getProperties('scrollContentHeight', 'scrollContentWidth');
-    return {width: scrollContentWidth + 'px', height: scrollContentHeight + 'px'};
-  }),
-
-  scrollContentStyles: computed('scrollContentStylesJSON.{height,width}', function() {
-    return styleify(this.get('scrollContentStylesJSON'));
   }),
 
   scrollContentSize() {
@@ -193,7 +186,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('horizontal')) {
       this.set('scrollContentWidth', width);
       this.set('scrollContentHeight', height + scrollbarThickness);
-      // TODO resize the element height so it doesn't overlap with the scrollbar
       this._contentElement.height(height);
     } else {
       this.set('scrollContentWidth', width + scrollbarThickness);
@@ -228,7 +220,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     e.preventDefault();
 
     // TODO suspicious
-    this.get('scrollbar').startDrag(e);
+    const dragOffset = this.get('scrollbar').startDrag(e);
+    this.set('dragOffset', dragOffset);
 
     this.on('mouseMove', this, this.drag);
     this.on('mouseUp', this, this.endDrag);
@@ -246,8 +239,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   drag(e) {
     e.preventDefault();
 
-    // TODO this stateful, bad. set object properties, and trigger style from there
-    const scrollPos = this.get('scrollbar').drag(e);
+    const scrollPos = this.get('scrollbar').drag(e, this.get('dragOffset'));
     this.scrollToPosition(scrollPos);
   },
 
@@ -268,8 +260,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (e.target === this._handleElement[0]) {
       return;
     }
-
-    // TODO this stateful, bad. set object properties, and trigger style from there
     const scrollPos = this.get('scrollbar').jumpScroll(e, this.scrollOffset(), this.scrollContentSize());
     this.scrollToPosition(scrollPos);
   },
@@ -324,6 +314,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     const scrollbar = this.get('scrollbar');
     if (isPresent(scrollbar)) {
+      // scrollTop, etc functions will trigger the scroll event. TODO encapusulate this logic in a component
       this._scrollContentElement[this.get('scrollOffsetAttr')](offset);
     }
   },
