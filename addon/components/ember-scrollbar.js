@@ -66,7 +66,7 @@ export default Ember.Component.extend({
 
     const dragOffset = this._startDrag(e);
     this.set('dragOffset', dragOffset);
-    this.get('onDragStart')(e)
+    this.get('onDragStart')(e);
   },
 
   mouseMove(e) {
@@ -76,7 +76,7 @@ export default Ember.Component.extend({
   },
 
   mouseUp() {
-    this.endDrag()
+    this.endDrag();
   },
 
 
