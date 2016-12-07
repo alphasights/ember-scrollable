@@ -10,6 +10,13 @@ const {
 
 const handleSelector = '.drag-handle';
 
+/**
+ * Handles displaying and moving the handle within the confines of it's template.
+ * Has callbacks for intending to dragging and jump to particular positions.
+ *
+ * @class EmberScrollbar
+ * @extends Ember.Component
+ */
 export default Ember.Component.extend({
   layout,
   classNameBindings: [':tse-scrollbar'],

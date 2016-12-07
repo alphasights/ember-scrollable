@@ -8,6 +8,14 @@ const {
   K
 } = Ember;
 
+/**
+ *
+ * Handles scroll events within the body of the scroll content,
+ * properly sets scrollTop / scrollLeft property depending on the configuration and the given scrollTo.
+ *
+ * @class ScrollContentElement
+ * @extends Ember.Component
+ */
 export default Ember.Component.extend({
   classNameBindings: [':tse-scroll-content'],
   attributeBindings: ['style'],
@@ -15,7 +23,7 @@ export default Ember.Component.extend({
   onScroll: K,
   height: null,
   width: null,
-  stylesJSON: computed('height', 'scrollContentWidth', function() {
+  stylesJSON: computed('height', 'width', function() {
     const {height, width} = this.getProperties('height', 'width');
     return {width: width + 'px', height: height + 'px'};
   }),
@@ -28,7 +36,7 @@ export default Ember.Component.extend({
     return styleify(this.get('stylesJSON'));
   }),
 
-
+  // TODO separate into two properties for x and y scrolling when supporting two way
   scrollTo: 0,
 
   /**
