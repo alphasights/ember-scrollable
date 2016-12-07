@@ -7,7 +7,6 @@ const {
 export default class Scrollable {
   constructor(options) {
     this.scrollbarElement = options.scrollbarElement;
-    this.handleElement = options.handleElement;
     this.contentElement = options.contentElement;
   }
 

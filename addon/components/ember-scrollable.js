@@ -16,7 +16,6 @@ const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
 
 const scrollbarSelector = '.tse-scrollbar';
-const handleSelector = '.drag-handle';
 const scrollContentSelector = '.tse-scroll-content';
 const contentSelector = '.tse-content';
 
@@ -125,9 +124,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   setupElements() {
     this._scrollContentElement = this.$(`${scrollContentSelector}`);
-    this._scrollbarElement = this.$(`${scrollbarSelector}:first`);
-    this._handleElement = this.$(`${handleSelector}:first`);
     this._contentElement = this.$(`${contentSelector}:first`);
+    // TODO now let's try to support two scroll bars.
+    //  maybe some properties called hasHorizontalScrollbar, hasVerticalScrollbar
+    // might want to move into a seperate component if we want it to have a different api scrollToX, scrollToY
+    this._scrollbarElement = this.$(`${scrollbarSelector}:first`);
   },
 
   setupResize() {
@@ -162,7 +163,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     const scrollbar = new ScrollbarClass({
       scrollbarElement: this._scrollbarElement,
-      handleElement: this._handleElement,
       contentElement: this._contentElement
     });
 
