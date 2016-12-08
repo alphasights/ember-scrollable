@@ -21,7 +21,7 @@ const contentSelector = '.tse-content';
 
 export default Ember.Component.extend(InboundActionsMixin, {
   layout,
-  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical'],
+  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical', 'double:horizontal'],
 
   /**
    * If horizontal is true, the scrollbar will be shown horizontally, else vertically.
@@ -32,6 +32,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
    * @default false
    */
   horizontal: false,
+
+  /**
+   * Use double scrollbar, ignores horizontal attribute if this is set.
+   *
+   * @property double
+   * @public
+   * @type Boolean
+   */
+  double: false,
   /**
    * Indicates whether the scrollbar should auto hide after a given period of time (see hideDelay),
    * or remain persitent alongside the content to be scrolled.
@@ -53,6 +62,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
    */
   scrollTo: 0,
 
+  scrollToX: 0,
+  scrollToY: 0,
+
+  horizontalScrollbar: null,
+  verticalScrollbar: null,
+
   init() {
     this._super(...arguments);
 
@@ -66,21 +81,24 @@ export default Ember.Component.extend(InboundActionsMixin, {
     scheduleOnce('afterRender', this, this.setupScrollbar);
   },
 
-  isDragging: false,
-  handleSize: null,
-  handleOffset: 0,
+  isHorizontalDragging: false,
+  isVerticalDragging: false,
+  horizontalHandleSize: null,
+  verticalHandleSize: null,
+  horizontalHandleOffset: 0,
+  verticalHandleOffest: 0,
   dragOffset: 0,
 
   sizeAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'width' : 'height';
   }),
 
-  scrollContentSize() {
-    return this._scrollContentElement[this.get('sizeAttr')]();
+  scrollContentSize(sizeAttr) {
+    return this._scrollContentElement[sizeAttr]();
   },
 
-  contentSize() {
-    return this._contentElement[this.get('sizeAttr')]();
+  contentSize(sizeAttr) {
+    return this._contentElement[sizeAttr]();
   },
 
   measureScrollbar() {
@@ -114,12 +132,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   setupScrollbar() {
-    let scrollbar = this.createScrollbar();
-    this.checkScrolledToBottom();
-
-    if (scrollbar.isNecessary) {
-      this.showScrollbar();
-    }
+    this.createScrollbar().map((scrollbar) => {
+      this.checkScrolledToBottom(scrollbar);
+      if (scrollbar.isNecessary) {
+        this.showScrollbar();
+      }
+    });
   },
 
   setupElements() {
@@ -144,13 +162,18 @@ export default Ember.Component.extend(InboundActionsMixin, {
     const height = this.$().height();
     const scrollbarThickness = this.measureScrollbar();
 
-    if (this.get('horizontal')) {
-      this.set('scrollContentWidth', width);
-      this.set('scrollContentHeight', height + scrollbarThickness);
-      this._contentElement.height(height);
-    } else {
+    if (this.get('double')) {
       this.set('scrollContentWidth', width + scrollbarThickness);
-      this.set('scrollContentHeight', height);
+      this.set('scrollContentHeight', height + scrollbarThickness);
+    } else {
+      if (this.get('horizontal')) {
+        this.set('scrollContentWidth', width);
+        this.set('scrollContentHeight', height + scrollbarThickness);
+        this._contentElement.height(height);
+      } else {
+        this.set('scrollContentWidth', width + scrollbarThickness);
+        this.set('scrollContentHeight', height);
+      }
     }
   },
 
@@ -158,20 +181,35 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('isDestroyed')) {
       return;
     }
+    if (this.get('double')) {
+      const horizontalScrollbar = new Horizontal({
+        scrollbarElement: this.$(`${scrollbarSelector}.horizontal`),
+        contentElement: this._contentElement
+      });
+      const verticalScrollbar = new Vertical({
+        scrollbarElement: this.$(`${scrollbarSelector}.vertical`),
+        contentElement: this._contentElement
 
-    let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
+      });
+      this.set('horizontalScrollbar', horizontalScrollbar);
+      this.set('verticalScrollbar', verticalScrollbar);
+      this.resizeScrollContent();
+      this.updateScrollbarAndSetupProperties(0, 'horizontal');
+      this.updateScrollbarAndSetupProperties(0, 'vertical');
+      return [horizontalScrollbar, verticalScrollbar];
+    } else {
+      const ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
+      const propertyName = this.get('horizontal') ? 'horizontal' : 'vertical';
+      const scrollbar = new ScrollbarClass({
+        scrollbarElement: this._scrollbarElement,
+        contentElement: this._contentElement
+      });
 
-    const scrollbar = new ScrollbarClass({
-      scrollbarElement: this._scrollbarElement,
-      contentElement: this._contentElement
-    });
-
-    this.resizeScrollContent();
-
-    this.set('scrollbar', scrollbar);
-    this.updateScrollbarAndSetupProperties();
-    return scrollbar;
-
+      this.set(`${propertyName}Scrollbar`, scrollbar);
+      this.resizeScrollContent();
+      // TODO needed? this.updateScrollbarAndSetupProperties();
+      return [scrollbar];
+    }
   },
 
   mouseEnter(){
@@ -201,10 +239,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
   }),
 
 
-  updateScrollbarAndSetupProperties(scrollOffset) {
-    const {handleOffset, handleSize} = this.get('scrollbar').getHandlePositionAndSize(scrollOffset);
-    this.set('handleOffset', handleOffset + 'px');
-    this.set('handleSize', handleSize + 'px');
+  updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
+    const {handleOffset, handleSize} = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
+    this.set(`${scrollbarDirection}HandleOffset`, handleOffset + 'px');
+    this.set(`${scrollbarDirection}HandleSize`, handleSize + 'px');
   },
 
   /**
@@ -213,22 +251,23 @@ export default Ember.Component.extend(InboundActionsMixin, {
    *
    * @method scrolled
    * @param event
+   * @param scrollOffset
+   * @param scrollDirection 'vertical' or 'horizontal'
    */
-  scrolled(event, scrollOffset) {
-    this.updateScrollbarAndSetupProperties(scrollOffset);
+  scrolled(event, scrollOffset, scrollDirection) {
+    this.updateScrollbarAndSetupProperties(scrollOffset, scrollDirection);
     this.showScrollbar();
 
-    this.checkScrolledToBottom(scrollOffset);
+    this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
 
     this.sendScroll(event, scrollOffset);
-
   },
 
 
-  checkScrolledToBottom(scrollOffset) {
+  checkScrolledToBottom(scrollbar, scrollOffset) {
     let scrollBuffer = this.get('scrollBuffer');
 
-    if (this.get('scrollbar').isScrolledToBottom(scrollBuffer, scrollOffset)) {
+    if (scrollbar.isScrolledToBottom(scrollBuffer, scrollOffset)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
   },
@@ -244,7 +283,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   resizeScrollbar() {
-    let scrollbar = this.get('scrollbar');
+    let scrollbar = this.get('horizontalScrollbar');
     if (!scrollbar) {
       return;
     }
@@ -279,6 +318,23 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.$().off('transitionend webkitTransitionEnd', this._resizeHandler);
     window.removeEventListener('resize', this._resizeHandler, true);
   },
+
+  drag(dragPerc, scrollProp, sizeAttr) {
+    const srcollTo = dragPerc * this.contentSize(sizeAttr);
+    this.set(scrollProp, srcollTo);
+  },
+
+  startDragging(isDraggingProp) {
+    this.set(isDraggingProp, true);
+  },
+
+  jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
+    const scrollOffset = this.get(scrollToProp);
+    let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize(sizeAttr);
+    let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
+    this.set(scrollToProp, scrollPos);
+  },
+
 
   actions: {
 
@@ -315,18 +371,23 @@ export default Ember.Component.extend(InboundActionsMixin, {
     scrolled(){
       this.scrolled(...arguments);
     },
-    drag(dragPerc) {
-      const srcollTo = dragPerc * this.contentSize();
-      this.set('scrollTo', srcollTo);
+    horizontalDrag(dragPerc) {
+      this.drag(dragPerc, 'scrollToX', 'width');
     },
-    jumpTo(jumpPositive) {
-      const scrollOffset = this.get('scrollTo');
-      let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize();
-      let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
-      this.set('scrollTo', scrollPos);
+    verticalDrag(dragPerc) {
+      this.drag(dragPerc, 'scrollToY', 'height');
     },
-    dragStart() {
-      this.set('isDragging', true);
+    horizontalJumpTo(jumpPositive) {
+      this.jumpScroll(jumpPositive, 'scrollToX', 'width');
+    },
+    verticalJumpTo(jumpPositive) {
+      this.jumpScroll(jumpPositive, 'scrollToY', 'height');
+    },
+    horizontalDragStart() {
+      this.startDragging('isHorizontalDragging');
+    },
+    verticalDragStart() {
+      this.startDragging('isVerticalDragging');
     }
   }
 });

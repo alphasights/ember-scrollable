@@ -37,28 +37,40 @@ export default Ember.Component.extend({
   }),
 
   // TODO separate into two properties for x and y scrolling when supporting two way
-  scrollTo: 0,
+  scrollToX: 0,
+  scrollToY: 0,
 
   /**
    * Previous scrollTo value. Useful for calculating changes in scrollTo.
    *
-   * @property _previousScrollTo
+   * @property previousScrollTo
    * @private
    * @type Number
    */
-  _previousScrollTo: 0,
+  previousScrollToX: 0,
+
+  previousScrollToY: 0,
 
   scrolled(e) {
-    this.get('onScroll')(e, e.target[this.get('scrollOffsetAttr')]);
+    const newScrollLeft = e.target.scrollLeft;
+    const newScrollTop = e.target.scrollTop;
+
+    const horizontal = newScrollLeft === this.get('previousScrollToX');
+    if (horizontal) {
+      this.get('onScroll')(e, newScrollLeft, 'horizontal');
+    } else {
+      this.get('onScroll')(e, newScrollTop, 'vertical');
+    }
   },
 
-  scrollToPosition(offset) {
+  scrollToPosition(offset, direction) {
     offset = Number.parseInt(offset, 10);
 
     if (Number.isNaN(offset)) {
       return;
     }
-    this.$()[this.get('scrollOffsetAttr')](offset);
+    const scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
+    this.$()[scrollOffsetAttr](offset);
   },
 
   didInsertElement() {
@@ -67,13 +79,15 @@ export default Ember.Component.extend({
   },
 
   didReceiveAttrs() {
-    const oldOffset = this.get('_previousScrollTo');
-    const newOffset = this.get('scrollTo');
+    ['X', 'Y'].forEach((direction) => {
+      const oldOffsetX = this.get(`previousScrollTo${direction}`);
+      const newOffsetX = this.get(`scrollTo${direction}`);
 
-    if (oldOffset !== newOffset) {
-      this.set('_previousScrollTo', newOffset);
-      scheduleOnce('afterRender', this, this.scrollToPosition, this.get('scrollTo'));
-    }
+      if (oldOffsetX !== newOffsetX) {
+        this.set(`previousScrollTo${direction}`, newOffsetX);
+        scheduleOnce('afterRender', this, this.scrollToPosition, this.get(`scrollTo${direction}`), direction);
+      }
+    });
   }
 
 });

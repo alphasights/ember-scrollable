@@ -1,27 +1,54 @@
 {{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
-{{ember-scrollbar
-  handleOffset=handleOffset
-  handleSize=handleSize
-  horizontal=horizontal
-  showHandle=showHandle
-  isDragging=isDragging
-  mouseOffset=mouseOffset
-  onJumpTo=(action 'jumpTo')
-  onDrag=(action 'drag')
-  onDragStart=(action 'dragStart')
-}}
+{{#if double}}
+  {{ember-scrollbar
+    class='horizontal'
+    handleOffset=horizontalHandleOffset
+    handleSize=horizontalHandleSize
+    horizontal=true
+    showHandle=showHandle
+    isDragging=isHorizontalDragging
+    mouseOffset=mouseOffset
+    onJumpTo=(action 'horizontalJumpTo')
+    onDrag=(action 'horizontalDrag')
+    onDragStart=(action 'horizontalDragStart')
+  }}
+  {{ember-scrollbar
+    class='vertical'
+    handleOffset=verticalHandleOffset
+    handleSize=verticalHandleSize
+    horizontal=false
+    showHandle=showHandle
+    isDragging=isVerticalDragging
+    mouseOffset=mouseOffset
+    onJumpTo=(action 'verticalJumpTo')
+    onDrag=(action 'verticalDrag')
+    onDragStart=(action 'verticalDragStart')
+  }}
+{{else}}
+{{!--ember-scrollbar-->
+  <!--handleOffset=handleOffset-->
+  <!--handleSize=handleSize-->
+  <!--horizontal=horizontal-->
+  <!--showHandle=showHandle-->
+  <!--isDragging=isDragging-->
+  <!--mouseOffset=mouseOffset-->
+  <!--onJumpTo=(action 'jumpTo')-->
+  <!--onDrag=(action 'drag')-->
+  <!--onDragStart=(action 'dragStart')
+--}}
+{{/if}}
 {{#scroll-content-element
-    height=scrollContentHeight
-    width=scrollContentWidth
-    horizontal=horizontal
-    scrollTo=scrollTo
-    onScroll=(action 'scrolled')
+  height=scrollContentHeight
+  width=scrollContentWidth
+  scrollToX=scrollToX
+  scrollToY=scrollToY
+  onScroll=(action 'scrolled')
 }}
   <div class="tse-content scrollable-content">
     {{yield (hash
-      recalculate=(action 'recalculate')
-      update=(action 'update')
-      scrollTop=(action 'scrollTop')
-    )}}
+              recalculate=(action 'recalculate')
+              update=(action 'update')
+              scrollTop=(action 'scrollTop')
+            )}}
   </div>
 {{/scroll-content-element}}
