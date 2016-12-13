@@ -19,7 +19,7 @@ const handleSelector = '.drag-handle';
  */
 export default Ember.Component.extend({
   layout,
-  classNameBindings: [':tse-scrollbar'],
+  classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
   onDrag: K,
   onJumpTo: K,
   onDragStart: K,

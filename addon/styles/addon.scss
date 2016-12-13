@@ -121,9 +121,25 @@
   height: 0;
 }
 
-.tse-scrollable.horizontal.vertical {
-  .tse-scroll-content {
-    overflow-x: scroll;
-    overflow-y: scroll;
+.tse-scrollable {
+  &.horizontal {
+    .tse-scroll-content {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
+  }
+
+  &.vertical {
+    .tse-scroll-content {
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+
+  &.horizontal.vertical {
+    .tse-scroll-content {
+      overflow-x: scroll;
+      overflow-y: scroll;
+    }
   }
 }
