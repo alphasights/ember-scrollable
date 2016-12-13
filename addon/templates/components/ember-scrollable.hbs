@@ -1,7 +1,6 @@
 {{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
 {{#if double}}
   {{ember-scrollbar
-    class='horizontal'
     handleOffset=horizontalHandleOffset
     handleSize=horizontalHandleSize
     horizontal=true
@@ -10,10 +9,10 @@
     mouseOffset=mouseOffset
     onJumpTo=(action 'horizontalJumpTo')
     onDrag=(action 'horizontalDrag')
-    onDragStart=(action 'horizontalDragStart')
+    onDragStart=(action 'horizontalDragBoundary' true)
+    onDragEnd=(action 'horizontalDragBoundary' false)
   }}
   {{ember-scrollbar
-    class='vertical'
     handleOffset=verticalHandleOffset
     handleSize=verticalHandleSize
     horizontal=false
@@ -22,20 +21,22 @@
     mouseOffset=mouseOffset
     onJumpTo=(action 'verticalJumpTo')
     onDrag=(action 'verticalDrag')
-    onDragStart=(action 'verticalDragStart')
+    onDragStart=(action 'verticalBoundaryEvent' true)
+    onDragEnd=(action 'verticalBoundaryEvent' false)
   }}
 {{else}}
-{{!--ember-scrollbar-->
-  <!--handleOffset=handleOffset-->
-  <!--handleSize=handleSize-->
-  <!--horizontal=horizontal-->
-  <!--showHandle=showHandle-->
-  <!--isDragging=isDragging-->
-  <!--mouseOffset=mouseOffset-->
-  <!--onJumpTo=(action 'jumpTo')-->
-  <!--onDrag=(action 'drag')-->
-  <!--onDragStart=(action 'dragStart')
---}}
+  {{ember-scrollbar
+    handleOffset=(if horizontal horizontalHandleOffset verticalHandleOffset)
+    handleSize=(if horizontal horizontalHandleSize verticalHandleSize)
+    horizontal=horizontal
+    showHandle=showHandle
+    isDragging=(if horizontal isHorizontalDragging isVerticalDragging)
+    mouseOffset=mouseOffset
+    onJumpTo=(action (concat '' (if horizontal 'horizontalJumpTo' 'verticalJumpTo')))
+    onDrag=(action (concat '' (if horizontal 'horizontalDrag' 'verticalDrag')))
+    onDragStart=(action (concat '' (if horizontal 'horizontalDragBoundary' 'verticalBoundaryEvent')) true)
+    onDragEnd=(action (concat '' (if horizontal 'horizontalDragBoundary' 'verticalBoundaryEvent')) false)
+   }}
 {{/if}}
 {{#scroll-content-element
   height=scrollContentHeight

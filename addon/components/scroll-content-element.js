@@ -55,7 +55,7 @@ export default Ember.Component.extend({
     const newScrollLeft = e.target.scrollLeft;
     const newScrollTop = e.target.scrollTop;
 
-    const horizontal = newScrollLeft === this.get('previousScrollToX');
+    const horizontal = newScrollLeft !== this.get('previousScrollToX');
     if (horizontal) {
       this.get('onScroll')(e, newScrollLeft, 'horizontal');
     } else {
@@ -80,12 +80,12 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() {
     ['X', 'Y'].forEach((direction) => {
-      const oldOffsetX = this.get(`previousScrollTo${direction}`);
-      const newOffsetX = this.get(`scrollTo${direction}`);
+      const oldOffset = this.get(`previousScrollTo${direction}`);
+      const newOffset = this.get(`scrollTo${direction}`);
 
-      if (oldOffsetX !== newOffsetX) {
-        this.set(`previousScrollTo${direction}`, newOffsetX);
-        scheduleOnce('afterRender', this, this.scrollToPosition, this.get(`scrollTo${direction}`), direction);
+      if (oldOffset !== newOffset) {
+        this.set(`previousScrollTo${direction}`, newOffset);
+        scheduleOnce('afterRender', this, this.scrollToPosition, newOffset, direction);
       }
     });
   }

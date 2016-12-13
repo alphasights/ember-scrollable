@@ -23,6 +23,7 @@ export default Ember.Component.extend({
   onDrag: K,
   onJumpTo: K,
   onDragStart: K,
+  onDragEnd: K,
 
   horizontal: false,
   isDragging: false,
@@ -70,6 +71,7 @@ export default Ember.Component.extend({
     // Preventing the event's default action stops text being
     // selectable during the drag.
     e.preventDefault();
+    e.stopPropagation();
 
     const dragOffset = this._startDrag(e);
     this.set('dragOffset', dragOffset);
@@ -89,8 +91,8 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() {
     const mouseOffset = this.get('mouseOffset');
-    if (isPresent(mouseOffset)) {
-      if (this.get('isDragging')) {
+    if (this.get('isDragging')) {
+      if (isPresent(mouseOffset)) {
         this._drag(mouseOffset, this.get('dragOffset'));
       }
     }
@@ -107,7 +109,7 @@ export default Ember.Component.extend({
   },
 
   endDrag() {
-    this.set('isDragging', false);
+    this.get('onDragEnd')();
   },
 
   /**

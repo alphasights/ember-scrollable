@@ -60,7 +60,16 @@ export default Ember.Component.extend(InboundActionsMixin, {
    * @public
    * @type Number
    */
-  scrollTo: 0,
+  scrollTo: computed('horizontal', {
+    get(){
+      return this.get('horizontal') ? this.get('scrollToX') : this.get('scrollToY');
+    },
+    set(key, value){
+      const prop = this.get('horizontal') ? 'scrollToX': 'scrollToY';
+      this.set(prop, value);
+      return value;
+    }
+  }),
 
   scrollToX: 0,
   scrollToY: 0,
@@ -143,10 +152,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
   setupElements() {
     this._scrollContentElement = this.$(`${scrollContentSelector}`);
     this._contentElement = this.$(`${contentSelector}:first`);
-    // TODO now let's try to support two scroll bars.
-    //  maybe some properties called hasHorizontalScrollbar, hasVerticalScrollbar
-    // might want to move into a seperate component if we want it to have a different api scrollToX, scrollToY
-    this._scrollbarElement = this.$(`${scrollbarSelector}:first`);
   },
 
   setupResize() {
@@ -201,13 +206,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
       const ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
       const propertyName = this.get('horizontal') ? 'horizontal' : 'vertical';
       const scrollbar = new ScrollbarClass({
-        scrollbarElement: this._scrollbarElement,
+        scrollbarElement: this.$(`${scrollbarSelector}.${propertyName}`),
         contentElement: this._contentElement
       });
 
       this.set(`${propertyName}Scrollbar`, scrollbar);
       this.resizeScrollContent();
-      // TODO needed? this.updateScrollbarAndSetupProperties();
+      this.updateScrollbarAndSetupProperties(0, propertyName);
       return [scrollbar];
     }
   },
@@ -324,8 +329,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.set(scrollProp, srcollTo);
   },
 
-  startDragging(isDraggingProp) {
-    this.set(isDraggingProp, true);
+  toggleDraggingBoundary(isDraggingProp, startOrEnd) {
+    this.set(isDraggingProp, startOrEnd);
   },
 
   jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
@@ -383,11 +388,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
     verticalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToY', 'height');
     },
-    horizontalDragStart() {
-      this.startDragging('isHorizontalDragging');
+    horizontalDragBoundary(isStart) {
+      this.toggleDraggingBoundary('isHorizontalDragging', isStart);
     },
-    verticalDragStart() {
-      this.startDragging('isVerticalDragging');
+    verticalBoundaryEvent(isStart) {
+      this.toggleDraggingBoundary('isVerticalDragging', isStart);
     }
   }
 });
