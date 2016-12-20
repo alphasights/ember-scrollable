@@ -216,6 +216,10 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   resizeScrollbar() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
+
     let scrollbar = this.get('scrollbar');
     if (!scrollbar) {
       return;
