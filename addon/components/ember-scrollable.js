@@ -65,7 +65,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return this.get('horizontal') ? this.get('scrollToX') : this.get('scrollToY');
     },
     set(key, value){
-      const prop = this.get('horizontal') ? 'scrollToX': 'scrollToY';
+      const prop = this.get('horizontal') ? 'scrollToX' : 'scrollToY';
       this.set(prop, value);
       return value;
     }
@@ -97,6 +97,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
   horizontalHandleOffset: 0,
   verticalHandleOffest: 0,
   dragOffset: 0,
+  horizontalMouseOffset: 0,
+  verticalMouseOffset: 0,
 
   sizeAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'width' : 'height';
@@ -227,16 +229,19 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('autoHide')) {
       this.showScrollbar();
     }
-    const eventOffset = e[this.get('eventOffsetAttr')];
-    this.set('mouseOffset', eventOffset);
+    const {pageX, pageY} = e;
+    this.set('horizontalMouseOffset', pageX);
+    this.set('verticalMouseOffset', pageY);
   },
 
   mouseLeave() {
-    this.set('isDragging', false);
+    this.set('isHorizontalDragging', false);
+    this.set('isVerticalDragging', false);
   },
 
   mouseUp() {
-    this.set('isDragging', false);
+    this.set('isVerticalDragging', false);
+    this.set('isHorizontalDragging', false);
   },
 
   eventOffsetAttr: computed('horizontal', function() {

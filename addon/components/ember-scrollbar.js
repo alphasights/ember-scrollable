@@ -78,16 +78,9 @@ export default Ember.Component.extend({
     this.get('onDragStart')(e);
   },
 
-  mouseMove(e) {
-    if (this.get('isDragging')) {
-      this.drag(e);
-    }
-  },
-
   mouseUp() {
     this.endDrag();
   },
-
 
   didReceiveAttrs() {
     const mouseOffset = this.get('mouseOffset');
