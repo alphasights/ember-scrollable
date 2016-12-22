@@ -4,7 +4,7 @@ import {styleify} from '../util/css';
 
 const {
   computed,
-  run: {bind, scheduleOnce},
+  run: {bind, schedule},
   K
 } = Ember;
 
@@ -136,8 +136,10 @@ export default Ember.Component.extend({
     const horizontal = newScrollLeft !== this.get('previousScrollToX');
     if (horizontal) {
       this.get('onScroll')(e, newScrollLeft, 'horizontal');
+      this.set(`previousScrollToX`, newScrollLeft);
     } else {
       this.get('onScroll')(e, newScrollTop, 'vertical');
+      this.set(`previousScrollToY`, newScrollTop);
     }
   },
 
@@ -172,8 +174,7 @@ export default Ember.Component.extend({
       const newOffset = this.get(`scrollTo${direction}`);
 
       if (oldOffset !== newOffset) {
-        this.set(`previousScrollTo${direction}`, newOffset);
-        scheduleOnce('afterRender', this, this.scrollToPosition, newOffset, direction);
+        schedule('afterRender', this, this.scrollToPosition, newOffset, direction);
       }
     });
   }
