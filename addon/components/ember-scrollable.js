@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
+import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
 import {Horizontal, Vertical} from '../classes/scrollable';
 
@@ -19,7 +20,7 @@ const scrollbarSelector = '.tse-scrollbar';
 const scrollContentSelector = '.tse-scroll-content';
 const contentSelector = '.tse-content';
 
-export default Ember.Component.extend(InboundActionsMixin, {
+export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   layout,
   classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical', 'double:horizontal'],
 
@@ -79,8 +80,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
   init() {
     this._super(...arguments);
-
-    this.setupResize();
     // this.measureScrollbar();
   },
 
@@ -88,6 +87,9 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._super(...arguments);
     this.setupElements();
     scheduleOnce('afterRender', this, this.setupScrollbar);
+    this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
+    this.addEventListener(document.body, 'mousemove', (e) => this.moveHandle(e));
+    this.setupResize();
   },
 
   isHorizontalDragging: false,
@@ -111,6 +113,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
   contentSize(sizeAttr) {
     return this._contentElement[sizeAttr]();
   },
+
+  setupElements() {
+    this._scrollContentElement = this.$(`${scrollContentSelector}`);
+    this._contentElement = this.$(`${contentSelector}:first`);
+  },
+
 
   measureScrollbar() {
 
@@ -151,17 +159,12 @@ export default Ember.Component.extend(InboundActionsMixin, {
     });
   },
 
-  setupElements() {
-    this._scrollContentElement = this.$(`${scrollContentSelector}`);
-    this._contentElement = this.$(`${contentSelector}:first`);
+  _resizeHandler(){
+    debounce(this, this.resizeScrollbar, 16);
   },
 
   setupResize() {
-    this._resizeHandler = () => {
-      debounce(this, this.resizeScrollbar, 16);
-    };
-
-    window.addEventListener('resize', this._resizeHandler, true);
+    this.addEventListener(window, 'resize', this._resizeHandler, true);
   },
 
   resizeScrollContent() {
@@ -225,21 +228,19 @@ export default Ember.Component.extend(InboundActionsMixin, {
     }
   },
 
-  mouseMove(e){
+
+  moveHandle(e){
     if (this.get('autoHide')) {
       this.showScrollbar();
     }
-    const {pageX, pageY} = e;
-    this.set('horizontalMouseOffset', pageX);
-    this.set('verticalMouseOffset', pageY);
+    if (this.get('isHorizontalDragging') || this.get('isVerticalDragging')) {
+      const {pageX, pageY} = e;
+      this.set('horizontalMouseOffset', pageX);
+      this.set('verticalMouseOffset', pageY);
+    }
   },
 
-  mouseLeave() {
-    this.set('isHorizontalDragging', false);
-    this.set('isVerticalDragging', false);
-  },
-
-  mouseUp() {
+  endDrag(e) {
     this.set('isVerticalDragging', false);
     this.set('isHorizontalDragging', false);
   },
@@ -293,11 +294,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   resizeScrollbar() {
-    let scrollbar = this.get('horizontalScrollbar');
-    if (!scrollbar) {
-      return;
-    }
-
     this.createScrollbar();
     this.showScrollbar();
   },
@@ -326,7 +322,6 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._super(...arguments);
 
     this.$().off('transitionend webkitTransitionEnd', this._resizeHandler);
-    window.removeEventListener('resize', this._resizeHandler, true);
   },
 
   drag(dragPerc, scrollProp, sizeAttr) {
