@@ -133,11 +133,10 @@ export default Ember.Component.extend({
     const newScrollLeft = e.target.scrollLeft;
     const newScrollTop = e.target.scrollTop;
 
-    const horizontal = newScrollLeft !== this.get('previousScrollToX');
-    if (horizontal) {
+    if (newScrollLeft !== this.get('previousScrollToX')) {
       this.get('onScroll')(e, newScrollLeft, 'horizontal');
       this.set(`previousScrollToX`, newScrollLeft);
-    } else {
+    } else if (newScrollTop !== this.get('previousScrollToY')) {
       this.get('onScroll')(e, newScrollTop, 'vertical');
       this.set(`previousScrollToY`, newScrollTop);
     }
@@ -161,9 +160,15 @@ export default Ember.Component.extend({
     this.$()[scrollOffsetAttr](offset);
   },
 
+  configureInitialScrollPosition() {
+    this.scrollToPosition(this.get('scrollToX'), 'X');
+    this.scrollToPosition(this.get('scrollToY'), 'Y');
+  },
+
   didInsertElement() {
     this._super(...arguments);
     this.$().on('scroll', bind(this, this.scrolled));
+    this.configureInitialScrollPosition();
   },
 
   didReceiveAttrs() {
