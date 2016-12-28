@@ -72,16 +72,37 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     }
   }),
 
+  /**
+   * Position in pixels for which to scroll horizontal scrollbar.
+   *
+   * @property scrollToX
+   * @public
+   * @type Number
+   */
   scrollToX: 0,
+  /**
+   * Position in pixels for which to scroll vertical scrollbar.
+   *
+   * @property scrollToY
+   * @public
+   * @type Number
+   */
   scrollToY: 0,
 
+  /**
+   * Local reference the horizontal scrollbar.
+   *
+   * @property horizontalScrollbar
+   * @private
+   */
   horizontalScrollbar: null,
+  /**
+   * Local reference the vertical scrollbar.
+   *
+   * @property verticalScrollbar
+   * @private
+   */
   verticalScrollbar: null,
-
-  init() {
-    this._super(...arguments);
-    // this.measureScrollbar();
-  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -92,19 +113,77 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.setupResize();
   },
 
-  isHorizontalDragging: false,
-  isVerticalDragging: false,
-  horizontalHandleSize: null,
-  verticalHandleSize: null,
-  horizontalHandleOffset: 0,
-  verticalHandleOffest: 0,
-  dragOffset: 0,
-  horizontalMouseOffset: 0,
-  verticalMouseOffset: 0,
+  willDestroyElement() {
+    this._super(...arguments);
 
-  sizeAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'width' : 'height';
-  }),
+    this.$().off('transitionend webkitTransitionEnd', this._resizeHandler);
+  },
+
+
+  /**
+   * Inidcates that the horizontal scrollbar is dragging at this moment in time.
+   * @property isHorizontalDragging
+   * @private
+   */
+  isHorizontalDragging: false,
+  /**
+   * Inidcates that the vertical scrollbar is dragging at this moment in time.
+   * @property isVerticalDragging
+   * @private
+   */
+  isVerticalDragging: false,
+  /**
+   * Size in pixels of the handle within the horizontal scrollbar.
+   * Determined by a ration between the scroll content and the scroll viewport
+   *
+   * @property horizontalHandleSize
+   * @private
+   */
+  horizontalHandleSize: null,
+  /**
+   * Size in pixels of the handle within the vertical scrollbar.
+   * Determined by a ration between the scroll content and the scroll viewport
+   *
+   * @property verticalHandleSize
+   * @private
+   */
+  verticalHandleSize: null,
+  /**
+   * Amount in pixels offset from the anchor (leftmost point of horizontal scrollbar)
+   *
+   * @property horizontalHandleOffset
+   * @private
+   */
+  horizontalHandleOffset: 0,
+  /**
+   * Amount in pixels offset from the anchor (topmost point of vertical scrollbar)
+   *
+   * @property verticalHandleOffest
+   * @private
+   */
+  verticalHandleOffest: 0,
+  /**
+   *
+   * @property dragOffset
+   * @private
+   */
+  dragOffset: 0,
+  /**
+   * Horizontal offset in pixels from the boundary of the scrollable container to the mouse.
+   *
+   * @property horizontalMouseOffset
+   * @private
+   * @type Number
+   */
+  horizontalMouseOffset: 0,
+  /**
+   * Vertical offset in pixels from the boundary of the scrollable container to the mouse.
+   *
+   * @property verticalMouseOffset
+   * @private
+   * @type Number
+   */
+  verticalMouseOffset: 0,
 
   scrollContentSize(sizeAttr) {
     return this._scrollContentElement[sizeAttr]();
@@ -199,7 +278,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       const verticalScrollbar = new Vertical({
         scrollbarElement: this.$(`${scrollbarSelector}.vertical`),
         contentElement: this._contentElement
-
       });
       this.set('horizontalScrollbar', horizontalScrollbar);
       this.set('verticalScrollbar', verticalScrollbar);
@@ -222,13 +300,25 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     }
   },
 
+  /**
+   * Show the scrollbar(s) when the user enters the scroll viewport
+   *
+   * @method mouseEnter
+   * @private
+   */
   mouseEnter(){
     if (this.get('autoHide')) {
       this.showScrollbar();
     }
   },
 
-
+  /**
+   * Callback for the mouse move event. If any scrollbar is in the dragging state, update the mouse offset.
+   *
+   * @method moveHandle
+   * @param e
+   * @private
+   */
   moveHandle(e){
     if (this.get('autoHide')) {
       this.showScrollbar();
@@ -240,16 +330,26 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     }
   },
 
+  /**
+   * Called on mouse up to indicate dragging is over.
+   *
+   * @method endDrag
+   * @param e
+   * @private
+   */
   endDrag(e) {
     this.set('isVerticalDragging', false);
     this.set('isHorizontalDragging', false);
   },
 
-  eventOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'pageX' : 'pageY';
-  }),
-
-
+  /**
+   * Calculates and setups the correct handle position using the scrollbar offset and size
+   *
+   * @method updateScrollbarAndSetupProperties
+   * @param scrollOffset
+   * @param scrollbarDirection
+   * @private
+   */
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
     const {handleOffset, handleSize} = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
     this.set(`${scrollbarDirection}HandleOffset`, handleOffset + 'px');
@@ -264,6 +364,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @param event
    * @param scrollOffset
    * @param scrollDirection 'vertical' or 'horizontal'
+   * @private
    */
   scrolled(event, scrollOffset, scrollDirection) {
     this.updateScrollbarAndSetupProperties(scrollOffset, scrollDirection);
@@ -318,21 +419,42 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.set('showHandle', false);
   },
 
-  willDestroyElement() {
-    this._super(...arguments);
-
-    this.$().off('transitionend webkitTransitionEnd', this._resizeHandler);
-  },
-
+  /**
+   * Sets scrollTo{X,Y} by using the ratio of offset to content size
+   *
+   * @method drag
+   * @param dragPerc
+   * @param scrollProp
+   * @param sizeAttr
+   * @private
+   */
   drag(dragPerc, scrollProp, sizeAttr) {
     const srcollTo = dragPerc * this.contentSize(sizeAttr);
     this.set(scrollProp, srcollTo);
   },
 
+  /**
+   * Sets is{Horizontal,Vertical}Dragging to true or false when the handle starts or ends dragging
+   *
+   * @method toggleDraggingBoundary
+   * @param isDraggingProp 'isHorizontalDragging' or 'isVerticalDragging'
+   * @param startOrEnd true if starting to drag, false if ending
+   * @private
+   */
   toggleDraggingBoundary(isDraggingProp, startOrEnd) {
     this.set(isDraggingProp, startOrEnd);
   },
 
+  /**
+   * Jumps a page because user clicked on scroll bar not scroll bar handle.
+   *
+   * @method jumpScroll
+   * @param jumpPositive if true the user clicked between the handle and the end, if false, the user clicked between the
+   *  anchor and the handle
+   * @param scrollToProp 'scrollToX' or 'scrollToY'
+   * @param sizeAttr 'width' or 'height'
+   * @private
+   */
   jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
     const scrollOffset = this.get(scrollToProp);
     let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize(sizeAttr);
