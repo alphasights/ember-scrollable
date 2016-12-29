@@ -6,6 +6,7 @@ import {Horizontal, Vertical} from '../classes/scrollable';
 
 const {
   computed,
+  isPresent,
   run: {
     scheduleOnce,
     debounce
@@ -22,26 +23,26 @@ const contentSelector = '.tse-content';
 
 export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   layout,
-  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal:horizontal:vertical', 'double:horizontal'],
+  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal', 'vertical'],
 
   /**
-   * If horizontal is true, the scrollbar will be shown horizontally, else vertically.
+   * If true, a scrollbar will be shown horizontally
    *
    * @property horizontal
    * @public
    * @type Boolean
    * @default false
    */
-  horizontal: false,
+  horizontal: null,
 
   /**
-   * Use double scrollbar, ignores horizontal attribute if this is set.
+   * If true, a scrollbar will be shown vertically
    *
-   * @property double
+   * @property vertical
    * @public
    * @type Boolean
    */
-  double: false,
+  vertical: null,
   /**
    * Indicates whether the scrollbar should auto hide after a given period of time (see hideDelay),
    * or remain persitent alongside the content to be scrolled.
@@ -61,12 +62,12 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Number
    */
-  scrollTo: computed('horizontal', {
+  scrollTo: computed('vertical', {
     get(){
-      return this.get('horizontal') ? this.get('scrollToX') : this.get('scrollToY');
+      return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
     },
     set(key, value){
-      const prop = this.get('horizontal') ? 'scrollToX' : 'scrollToY';
+      const prop = this.get('vertical') ? 'scrollToY': 'scrollToX' ;
       this.set(prop, value);
       return value;
     }
@@ -103,6 +104,15 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   verticalScrollbar: null,
+
+  didReceiveAttrs() {
+    const horizontal = this.get('horizontal');
+    const vertical = this.get('horizontal');
+    // Keep backwards compatible functionality wherein vertical is default when neither vertical or horizontal are explicitly set
+    if (!horizontal && !isPresent(vertical)) {
+      this.set('vertical', true);
+    }
+  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -251,11 +261,14 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     const height = this.$().height();
     const scrollbarThickness = this.measureScrollbar();
 
-    if (this.get('double')) {
+    const hasHorizontal = this.get('horizontal');
+    const hasVertical = this.get('vertical');
+
+    if (hasHorizontal && hasVertical) {
       this.set('scrollContentWidth', width + scrollbarThickness);
       this.set('scrollContentHeight', height + scrollbarThickness);
     } else {
-      if (this.get('horizontal')) {
+      if (hasHorizontal) {
         this.set('scrollContentWidth', width);
         this.set('scrollContentHeight', height + scrollbarThickness);
         this._contentElement.height(height);
@@ -270,34 +283,29 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     if (this.get('isDestroyed')) {
       return;
     }
-    if (this.get('double')) {
-      const horizontalScrollbar = new Horizontal({
-        scrollbarElement: this.$(`${scrollbarSelector}.horizontal`),
-        contentElement: this._contentElement
-      });
+    const scrollbars = [];
+
+    this.resizeScrollContent();
+
+    if (this.get('vertical')) {
       const verticalScrollbar = new Vertical({
         scrollbarElement: this.$(`${scrollbarSelector}.vertical`),
         contentElement: this._contentElement
       });
-      this.set('horizontalScrollbar', horizontalScrollbar);
       this.set('verticalScrollbar', verticalScrollbar);
-      this.resizeScrollContent();
-      this.updateScrollbarAndSetupProperties(0, 'horizontal');
       this.updateScrollbarAndSetupProperties(0, 'vertical');
-      return [horizontalScrollbar, verticalScrollbar];
-    } else {
-      const ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
-      const propertyName = this.get('horizontal') ? 'horizontal' : 'vertical';
-      const scrollbar = new ScrollbarClass({
-        scrollbarElement: this.$(`${scrollbarSelector}.${propertyName}`),
+      scrollbars.push(verticalScrollbar);
+    }
+    if (this.get('horizontal')) {
+      const horizontalScrollbar = new Horizontal({
+        scrollbarElement: this.$(`${scrollbarSelector}.horizontal`),
         contentElement: this._contentElement
       });
-
-      this.set(`${propertyName}Scrollbar`, scrollbar);
-      this.resizeScrollContent();
-      this.updateScrollbarAndSetupProperties(0, propertyName);
-      return [scrollbar];
+      this.set('horizontalScrollbar', horizontalScrollbar);
+      this.updateScrollbarAndSetupProperties(0, 'horizontal');
+      scrollbars.push(horizontalScrollbar);
     }
+    return scrollbars;
   },
 
   /**
@@ -337,7 +345,9 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @param e
    * @private
    */
+
   endDrag(e) {
+    /* jshint unused:vars */
     this.set('isVerticalDragging', false);
     this.set('isHorizontalDragging', false);
   },
@@ -493,7 +503,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
      * Scroll Top action should be called when when the scroll area should be scrolled top manually
      */
     scrollTop() {
-      this.set('scrollTo', 0);
+      this.set('scrollToY', 0);
     },
     scrolled(){
       this.scrolled(...arguments);

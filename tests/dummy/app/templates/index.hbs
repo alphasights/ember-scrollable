@@ -113,7 +113,7 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET dual-scroll --}}
     <div class="double-scroll-container">
-      {{#ember-scrollable double=true onScrolledToBottom=(action 'log' 'Bottom reached!')}}
+      {{#ember-scrollable horizontal=true vertical=true onScrolledToBottom=(action 'log' 'Bottom reached!')}}
         <div class="wide-content">
           <p>Some content</p>
           <p>Some more content</p>

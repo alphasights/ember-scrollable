@@ -1,5 +1,5 @@
 {{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
-{{#if double}}
+{{#if horizontal}}
   {{ember-scrollbar
     handleOffset=horizontalHandleOffset
     handleSize=horizontalHandleSize
@@ -12,6 +12,8 @@
     onDragStart=(action 'horizontalDragBoundary' true)
     onDragEnd=(action 'horizontalDragBoundary' false)
   }}
+{{/if}}
+{{#if vertical}}
   {{ember-scrollbar
     handleOffset=verticalHandleOffset
     handleSize=verticalHandleSize
@@ -24,19 +26,6 @@
     onDragStart=(action 'verticalBoundaryEvent' true)
     onDragEnd=(action 'verticalBoundaryEvent' false)
   }}
-{{else}}
-  {{ember-scrollbar
-    handleOffset=(if horizontal horizontalHandleOffset verticalHandleOffset)
-    handleSize=(if horizontal horizontalHandleSize verticalHandleSize)
-    horizontal=horizontal
-    showHandle=showHandle
-    isDragging=(if horizontal isHorizontalDragging isVerticalDragging)
-    mouseOffset=(if horizontal horizontalMouseOffset verticalMouseOffset)
-    onJumpTo=(action (concat '' (if horizontal 'horizontalJumpTo' 'verticalJumpTo')))
-    onDrag=(action (concat '' (if horizontal 'horizontalDrag' 'verticalDrag')))
-    onDragStart=(action (concat '' (if horizontal 'horizontalDragBoundary' 'verticalBoundaryEvent')) true)
-    onDragEnd=(action (concat '' (if horizontal 'horizontalDragBoundary' 'verticalBoundaryEvent')) false)
-   }}
 {{/if}}
 {{#scroll-content-element
   height=scrollContentHeight
