@@ -362,8 +362,8 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    */
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
     const {handleOffset, handleSize} = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
-    this.set(`${scrollbarDirection}HandleOffset`, handleOffset + 'px');
-    this.set(`${scrollbarDirection}HandleSize`, handleSize + 'px');
+    this.set(`${scrollbarDirection}HandleOffset`, handleOffset);
+    this.set(`${scrollbarDirection}HandleSize`, handleSize);
   },
 
   /**

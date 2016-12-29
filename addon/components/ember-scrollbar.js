@@ -51,9 +51,9 @@ export default Ember.Component.extend({
   handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
     const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
     if (this.get('horizontal')) {
-      return {left: handleOffset, width: handleSize};
+      return {left: handleOffset + 'px', width: handleSize + 'px'};
     } else {
-      return {top: handleOffset, height: handleSize};
+      return {top: handleOffset + 'px', height: handleSize + 'px'};
     }
   }),
 
@@ -91,16 +91,6 @@ export default Ember.Component.extend({
     }
   },
 
-  /**
-   * Drag scrollbar handle
-   */
-  drag(e) {
-    e.preventDefault();
-
-    let eventOffset = this._eventOffset(e);
-    this._drag(eventOffset, this.get('dragOffset'));
-  },
-
   endDrag() {
     this.get('onDragEnd')();
   },
@@ -121,7 +111,7 @@ export default Ember.Component.extend({
   },
 
 
-  // private stuff
+  // private methods
   /**
    * Convert the mouse position into a percentage of the scrollbar height/width.
    * and sends to parent
@@ -191,10 +181,6 @@ export default Ember.Component.extend({
   actions: {
     startDrag(){
       this.startDrag(...arguments);
-    },
-    jumpScroll() {
-      this.jumpScroll(...arguments);
     }
   }
-
 });
