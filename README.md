@@ -5,7 +5,7 @@
 Climate](https://codeclimate.com/github/alphasights/ember-scrollable/badges/gpa.svg)](https://codeclimate.com/github/alphasights/ember-scrollable)
 [![Build Status](https://travis-ci.org/alphasights/ember-scrollable.svg?branch=master)](https://travis-ci.org/alphasights/ember-scrollable)
 
-A simple wrapper around Trackpad Scroll Emulator.
+A simple scrollbar implementation inspired by Trackpad Scroll Emulator.
 
 [Check out the demo](https://alphasights.github.io/ember-scrollable/demo)
 
