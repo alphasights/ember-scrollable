@@ -81,12 +81,16 @@ export default Ember.Component.extend(InboundActionsMixin, {
       var width = $(tempEl).innerWidth();
       var widthMinusScrollbars = $('div', tempEl).innerWidth();
       tempEl.remove();
+      
       // On OS X if the scrollbar is set to auto hide it will have zero width. On webkit we can still
       // hide it using ::-webkit-scrollbar { width:0; height:0; } but there is no moz equivalent. So we're
       // forced to sniff Firefox and return a hard-coded scrollbar width. I know, I know...
-      if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-        return 17;
-      }
+      
+      // https://github.com/alphasights/ember-scrollable/issues/34
+      // if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+      //  return 17;
+      // }
+      
       return (width - widthMinusScrollbars);
     }
 
