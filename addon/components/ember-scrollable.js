@@ -6,6 +6,7 @@ import {Horizontal, Vertical} from '../classes/scrollable';
 
 const {
   computed,
+  deprecate,
   isPresent,
   run: {
     scheduleOnce,
@@ -67,6 +68,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
     },
     set(key, value){
+      deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
       const prop = this.get('vertical') ? 'scrollToY': 'scrollToX' ;
       this.set(prop, value);
       return value;
