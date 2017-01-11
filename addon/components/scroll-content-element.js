@@ -1,10 +1,13 @@
 import Ember from 'ember';
 import layout from '../templates/components/scroll-content-element';
+import DomMixin from 'ember-lifeline/mixins/dom';
 import {styleify} from '../util/css';
 
 const {
   computed,
-  run: {bind, schedule},
+  run: {
+    schedule
+  },
   K
 } = Ember;
 
@@ -16,7 +19,7 @@ const {
  * @class ScrollContentElement
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(DomMixin, {
   /**
    * Adds the `tse-scroll-content` class to this element which is in charge of removing the default scrollbar(s) from
    * this element (the container for the content being scrolled). Also the `tse-scroll-content` class enables
@@ -167,7 +170,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.$().on('scroll', bind(this, this.scrolled));
+    this.addEventListener(this.$(), 'scroll', (e) => {
+      this.scrolled(e);
+    });
     this.configureInitialScrollPosition();
   },
 
