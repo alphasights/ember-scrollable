@@ -16,6 +16,16 @@
 
     {{content-for "head-footer"}}
     {{content-for "test-head-footer"}}
+
+    <style>
+      /*
+        Remove the default QUnit zoom done via transform: scale(0.5) since
+        it screws up with the width & height calcultaions in testing.
+      */
+      #ember-testing {
+        transform: none;
+      }
+    </style>
   </head>
   <body>
     {{content-for "body"}}
