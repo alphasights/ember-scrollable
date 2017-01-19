@@ -1,8 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 
-const zoom = 0.5;
-
 moduleForAcceptance('Acceptance | ember-scrollbar');
 
 test('vertical scrollbar', function(assert) {
@@ -23,19 +21,19 @@ test('resizable scrollbar', function(assert) {
   andThen(function() {
     assert.ok($('.resize-demo .ember-scrollable').length, 'resize demo rendered');
     assert.ok($('.resize-demo .ember-scrollable .drag-handle').length, 'resize handle rendered');
-    assert.equal($('.resize-demo .ember-scrollable').height(), 200 * zoom);
+    assert.equal($('.resize-demo .ember-scrollable').height(), 200);
   });
 
   click('button:contains(Make Tall)');
 
   andThen(function(){
-    assert.equal($('.resize-demo .ember-scrollable').height(), 400 * zoom);
+    assert.equal($('.resize-demo .ember-scrollable').height(), 400);
   });
 
   click('button:contains(Make Short)');
 
   andThen(function(){
-    assert.equal($('.resize-demo .ember-scrollable').height(), 200 * zoom);
+    assert.equal($('.resize-demo .ember-scrollable').height(), 200);
   });
 
 });
