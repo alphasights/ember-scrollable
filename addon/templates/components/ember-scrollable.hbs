@@ -2,9 +2,10 @@
 <div class="tse-scrollbar"><div class="drag-handle {{if showHandle 'visible'}}"></div></div>
 <div class="tse-scroll-content">
   <div class="tse-content scrollable-content">
-    {{yield (hash 
+    {{yield (hash
       recalculate=(action 'recalculate')
       update=(action 'update')
+      scrollTop=(action 'scrollTop')
     )}}
   </div>
 </div>

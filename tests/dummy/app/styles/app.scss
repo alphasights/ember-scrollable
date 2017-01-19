@@ -52,7 +52,7 @@ pre {
   }
 }
 
-.horizontal-demo .as-scrollable {
+.horizontal-demo .tse-scrollable {
   height: 110px;
 
   .scrollable-content {
@@ -83,4 +83,12 @@ pre {
 
 .output {
   padding-right: 10px;
+}
+
+.is-short {
+  height: 200px;
+}
+
+.is-tall {
+  height: 400px;
 }

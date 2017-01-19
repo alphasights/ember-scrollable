@@ -5,7 +5,7 @@
 Climate](https://codeclimate.com/github/alphasights/ember-scrollable/badges/gpa.svg)](https://codeclimate.com/github/alphasights/ember-scrollable)
 [![Build Status](https://travis-ci.org/alphasights/ember-scrollable.svg?branch=master)](https://travis-ci.org/alphasights/ember-scrollable)
 
-A simple wrapper around Trackpad Scroll Emulator.
+A simple scrollbar implementation inspired by Trackpad Scroll Emulator.
 
 [Check out the demo](https://alphasights.github.io/ember-scrollable/demo)
 
@@ -18,9 +18,9 @@ A simple wrapper around Trackpad Scroll Emulator.
 ```htmlbars
 {{! app/templates/index.hbs }}
 
-{{#as-scrollable}}
+{{#ember-scrollable}}
   Some long content...
-{{/as-scrollable}}
+{{/ember-scrollable}}
 ```
 
 ## Configuring the Component
@@ -29,6 +29,8 @@ The component accepts the following options:
 
 - `horizontal`: Enables horizontal scrolling (default: `false`)
 - `autoHide`: Enables auto hiding of the scrollbars on mouse out (default: `true`)
+- `scrollTo`: Set this property to manually scroll to a certain position
+- `onScroll(scrollOffset, event)`: action triggered whenever the user scrolls, called with the current `scrollOffset` and the original scroll `event`
 - `onScrolledToBottom`: action triggered when user scrolled to the bottom
 
 ## Developing

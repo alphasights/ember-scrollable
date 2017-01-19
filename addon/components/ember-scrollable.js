@@ -5,8 +5,12 @@ import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
   run: { scheduleOnce, debounce, bind },
-  computed
+  computed,
+  $,
+  isPresent
 } = Ember;
+
+const hideDelay = Ember.testing ? 16 : 1000;
 
 const scrollbarSelector = '.tse-scrollbar';
 const handleSelector = '.drag-handle';
@@ -20,6 +24,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
   horizontal: false,
   autoHide: true,
   scrollBuffer: 50,
+  scrollTo: null,
+  _scrollTo: null,
 
   selector: computed('elementId', function(){
     return `#${this.elementId}`;
@@ -40,12 +46,22 @@ export default Ember.Component.extend(InboundActionsMixin, {
     if (this.get('autoHide')) {
       this.on('mouseEnter', this, this.showScrollbar);
     }
-    
+
     this._handleElement.on('mousedown', bind(this, this.startDrag));
     this._scrollbarElement.on('mousedown', bind(this, this.jumpScroll));
     this._scrollContentElement.on('scroll', bind(this, this.scrolled));
 
     scheduleOnce('afterRender', this, this.setupScrollbar);
+  },
+
+  didReceiveAttrs() {
+    const oldOffset = this.get('_scrollTo');
+    const newOffset = this.get('scrollTo');
+
+    if (oldOffset !== newOffset) {
+      this.set('_scrollTo', newOffset);
+      this.scrollToPosition(newOffset);
+    }
   },
 
   measureScrollbar() {
@@ -83,10 +99,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
 
     this.set('scrollbar', scrollbar);
 
+    this.scrollToPosition(this.get('scrollTo'));
     this.checkScrolledToBottom();
 
     if (scrollbar.isNecessary) {
-      this.showScrollbar();    
+      this.showScrollbar();
     }
   },
 
@@ -101,11 +118,15 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this._resizeHandler = () => {
       debounce(this, this.resizeScrollbar, 16);
     };
-    
+
     window.addEventListener('resize', this._resizeHandler, true);
   },
 
   createScrollbar() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
+
     let ScrollbarClass = this.get('horizontal') ? Horizontal : Vertical;
 
     return new ScrollbarClass({
@@ -154,16 +175,18 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.get('scrollbar').jumpScroll(e);
   },
 
-  scrolled() {
+  scrolled(event) {
     this.get('scrollbar').update();
     this.showScrollbar();
 
     this.checkScrolledToBottom();
+
+    this.sendScroll(event);
   },
 
   checkScrolledToBottom() {
     let scrollBuffer = this.get('scrollBuffer');
-    
+
     if (this.get('scrollbar').isScrolledToBottom(scrollBuffer)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
@@ -173,7 +196,30 @@ export default Ember.Component.extend(InboundActionsMixin, {
     this.sendAction('onScrolledToBottom');
   },
 
+  sendScroll(event) {
+    if (this.get('onScroll')) {
+      this.sendAction('onScroll', this.get('scrollbar').scrollOffset(), event);
+    }
+  },
+
+  scrollToPosition(offset) {
+    offset = Number.parseInt(offset, 10);
+
+    if (Number.isNaN(offset)) {
+      return;
+    }
+
+    const scrollbar = this.get('scrollbar');
+    if (isPresent(scrollbar)) {
+      scrollbar.scrollTo(offset);
+    }
+  },
+
   resizeScrollbar() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
+
     let scrollbar = this.get('scrollbar');
     if (!scrollbar) {
       return;
@@ -186,7 +232,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   showScrollbar() {
-    if (this.isDestroyed) {
+    if (this.get('isDestroyed')) {
       return;
     }
     this.set('showHandle', true);
@@ -195,11 +241,11 @@ export default Ember.Component.extend(InboundActionsMixin, {
       return;
     }
 
-    debounce(this, this.hideScrollbar, 1000);
+    debounce(this, this.hideScrollbar, hideDelay);
   },
 
   hideScrollbar() {
-    if (this.isDestroyed) {
+    if (this.get('isDestroyed')) {
       return;
     }
     this.set('showHandle', false);
@@ -213,7 +259,7 @@ export default Ember.Component.extend(InboundActionsMixin, {
   },
 
   actions: {
-    
+
     /**
      * Update action should be called when size of the scroll area changes
      */
@@ -222,8 +268,8 @@ export default Ember.Component.extend(InboundActionsMixin, {
     },
 
     /**
-     * Can be called when scrollbars changes as a result of value change, 
-     * 
+     * Can be called when scrollbars changes as a result of value change,
+     *
      * for example
      * ```
      * {{#as-scrollable as |scrollbar|}}
@@ -236,6 +282,13 @@ export default Ember.Component.extend(InboundActionsMixin, {
     update(value) {
       scheduleOnce('afterRender', this, this.resizeScrollbar);
       return value;
+    },
+
+    /**
+     * Scroll Top action should be called when when the scroll area should be scrolled top manually
+     */
+    scrollTop() {
+      this.set('scrollTo', 0);
     }
   }
 });
