@@ -34,8 +34,8 @@ test('Horizontal: offset and size get routed properly', function(assert) {
 
   // TODO no idea why offset and width are showing up as half of the set properties
   // they look fine when I copy this code to the test app
-  assert.equal(this.$(handleClass).position().left, this.get('offset') / 2);
-  assert.equal(Number.parseInt(this.$(handleClass).css('width')), this.get('size') / 2);
+  assert.equal(this.$(handleClass).position().left, this.get('offset'));
+  assert.equal(Number.parseInt(this.$(handleClass).css('width')), this.get('size'));
 });
 
 test('Vertical: offset and size get routed properly', function(assert) {
@@ -61,8 +61,8 @@ test('Vertical: offset and size get routed properly', function(assert) {
 
   // TODO no idea why offset and width are showing up as half of the set properties
   // they look fine when I copy this code to the test app
-  assert.equal(this.$(handleClass).position().top, this.get('offset') / 2);
-  assert.equal(Number.parseInt(this.$(handleClass).css('height')), this.get('size') / 2);
+  assert.equal(this.$(handleClass).position().top, this.get('offset'));
+  assert.equal(Number.parseInt(this.$(handleClass).css('height')), this.get('size'));
 });
 
 
