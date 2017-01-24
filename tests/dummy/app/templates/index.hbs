@@ -106,6 +106,47 @@
     {{code-snippet name="no-scrollbar-demo.hbs"}}
   </div>
 </section>
+<!-- TODO rename class and apply styles to dual scroll demo class-->
+<section class="vertical-demo">
+  <h1>Double Scroll</h1>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET dual-scroll --}}
+    <div class="double-scroll-container">
+      {{#ember-scrollable horizontal=true vertical=true onScrolledToBottom=(action 'log' 'Bottom reached!')}}
+        <div class="wide-content">
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+          <p>Some content</p>
+          <p>Some more content</p>
+        </div>
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+
+  <div class="code">
+    {{code-snippet name="double.hbs"}}
+  </div>
+</section>
+
+
 
 <section class="resize-demo">
   <h1>Auto resizing</h1>
