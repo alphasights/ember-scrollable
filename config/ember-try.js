@@ -2,24 +2,24 @@
 module.exports = {
   scenarios: [
     {
-      name: 'default',
+      name: 'ember-lts-2.4',
       bower: {
-        dependencies: { }
+        dependencies: {
+          'ember': 'lts-2-4'
+        },
+        resolutions: {
+          'ember': 'lts-2-4'
+        }
       }
     },
     {
-      name: 'ember-1.13',
+      name: 'ember-lts-2.8',
       bower: {
         dependencies: {
-          'ember': '~1.13.0'
+          'ember': 'lts-2-8'
         },
         resolutions: {
-          'ember': '~1.13.0'
-        }
-      },
-      npm: {
-        dependencies: {
-          "ember-hash-helper-polyfill": "0.1.1"
+          'ember': 'lts-2-8'
         }
       }
     },
@@ -27,7 +27,7 @@ module.exports = {
       name: 'ember-release',
       bower: {
         dependencies: {
-          'ember': 'components/ember#release'
+          'ember': 'release'
         },
         resolutions: {
           'ember': 'release'
@@ -38,7 +38,7 @@ module.exports = {
       name: 'ember-beta',
       bower: {
         dependencies: {
-          'ember': 'components/ember#beta'
+          'ember': 'beta'
         },
         resolutions: {
           'ember': 'beta'
@@ -49,7 +49,7 @@ module.exports = {
       name: 'ember-canary',
       bower: {
         dependencies: {
-          'ember': 'components/ember#canary'
+          'ember': 'canary'
         },
         resolutions: {
           'ember': 'canary'

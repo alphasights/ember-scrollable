@@ -92,3 +92,16 @@ pre {
 .is-tall {
   height: 400px;
 }
+
+.double-scroll-container {
+  height: 400px;
+  width: 300px;
+
+  .scrollable-content {
+    display:  inline-block;
+  }
+  .wide-content {
+    width: 500px;
+  }
+
+}

@@ -1,11 +1,44 @@
-{{resize-detector selector on-resize=(action 'recalculate')}}
-<div class="tse-scrollbar"><div class="drag-handle {{if showHandle 'visible'}}"></div></div>
-<div class="tse-scroll-content">
+{{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
+{{#if horizontal}}
+  {{ember-scrollbar
+    handleOffset=horizontalHandleOffset
+    handleSize=horizontalHandleSize
+    horizontal=true
+    showHandle=showHandle
+    isDragging=isHorizontalDragging
+    mouseOffset=horizontalMouseOffset
+    onJumpTo=(action 'horizontalJumpTo')
+    onDrag=(action 'horizontalDrag')
+    onDragStart=(action 'horizontalDragBoundary' true)
+    onDragEnd=(action 'horizontalDragBoundary' false)
+  }}
+{{/if}}
+{{#if vertical}}
+  {{ember-scrollbar
+    handleOffset=verticalHandleOffset
+    handleSize=verticalHandleSize
+    horizontal=false
+    showHandle=showHandle
+    isDragging=isVerticalDragging
+    mouseOffset=verticalMouseOffset
+    onJumpTo=(action 'verticalJumpTo')
+    onDrag=(action 'verticalDrag')
+    onDragStart=(action 'verticalBoundaryEvent' true)
+    onDragEnd=(action 'verticalBoundaryEvent' false)
+  }}
+{{/if}}
+{{#scroll-content-element
+  height=scrollContentHeight
+  width=scrollContentWidth
+  scrollToX=scrollToX
+  scrollToY=scrollToY
+  onScroll=(action 'scrolled')
+}}
   <div class="tse-content scrollable-content">
     {{yield (hash
-      recalculate=(action 'recalculate')
-      update=(action 'update')
-      scrollTop=(action 'scrollTop')
-    )}}
+              recalculate=(action 'recalculate')
+              update=(action 'update')
+              scrollTop=(action 'scrollTop')
+            )}}
   </div>
-</div>
+{{/scroll-content-element}}

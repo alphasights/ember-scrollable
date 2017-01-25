@@ -21,12 +21,5 @@ module.exports = {
     this.app = app;
 
     this._super.included.apply(this, arguments);
-  },
-
-  treeFor: function() {
-    if (this._checkerForEmber.lt('2.3.0') && this.parent === this.project) {
-      console.warn('hash helper is required by ember-scrollable, please install ember-hash-helper-polyfill or upgrade.');
-    }
-    return this._super.treeFor.apply(this, arguments);
   }
 };
