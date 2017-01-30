@@ -1,6 +1,15 @@
 Changelog
 =========
 
+## 0.4.0
+
+### Pull Requests
+
+- [#29](https://github.com/alphasights/ember-scrollable/pull/29)  One Way Data flow & Two Scrollbars  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#35](https://github.com/alphasights/ember-scrollable/pull/35)  [BUGFIX] Remove forced scrollbar width in firefox  *by [Offir Golan](https://github.com/offirgolan)*
+- [#40](https://github.com/alphasights/ember-scrollable/pull/40)  Move 'ember-lifeline' into dependencies  *by [Michelle S](https://github.com/lonelyghost)*
+- [#42](https://github.com/alphasights/ember-scrollable/pull/42)  [BUGFIX] Remove unused version checker  *by [Offir Golan](https://github.com/offirgolan)*
+
 ## 0.3.4
 
 ### Pull Requests
