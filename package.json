@@ -36,7 +36,6 @@
     "ember-data": "^2.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-lifeline": "1.0.0",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.11"
@@ -50,7 +49,8 @@
     "ember-cli-sass": "5.3.1",
     "ember-cli-version-checker": "1.2.0",
     "ember-component-inbound-actions": "1.0.1",
-    "ember-element-resize-detector": "0.1.5"
+    "ember-element-resize-detector": "0.1.5",
+    "ember-lifeline": "1.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
