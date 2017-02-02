@@ -116,12 +116,13 @@ export default Ember.Component.extend({
    * Convert the mouse position into a percentage of the scrollbar height/width.
    * and sends to parent
    *
-   * @param e
+   * @param eventOffset
    * @param dragOffset
    * @private
    */
   _drag(eventOffset, dragOffset) {
-    let dragPos = eventOffset - this._scrollbarOffset() - dragOffset;
+    const scrollbarOffset = this._scrollbarOffset();
+    let dragPos = eventOffset - scrollbarOffset - dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
     let dragPerc = dragPos / this._scrollbarSize();
     this.get('onDrag')(dragPerc);

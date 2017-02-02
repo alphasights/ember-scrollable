@@ -10,13 +10,16 @@ const {
   isPresent,
   run: {
     scheduleOnce,
-    debounce
+    debounce,
+    throttle
   },
   $
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
+
+const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
 
 const scrollbarSelector = '.tse-scrollbar';
 const scrollContentSelector = '.tse-scroll-content';
@@ -69,7 +72,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     },
     set(key, value){
       deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
-      const prop = this.get('vertical') ? 'scrollToY': 'scrollToX' ;
+      const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
       this.set(prop, value);
       return value;
     }
@@ -121,7 +124,9 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.setupElements();
     scheduleOnce('afterRender', this, this.setupScrollbar);
     this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
-    this.addEventListener(document.body, 'mousemove', (e) => this.moveHandle(e));
+    this.addEventListener(document.body, 'mousemove', (e) => {
+      throttle(this, this.moveHandle, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
+    });
     this.setupResize();
   },
 
@@ -228,16 +233,16 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       var width = $(tempEl).innerWidth();
       var widthMinusScrollbars = $('div', tempEl).innerWidth();
       tempEl.remove();
-      
+
       // On OS X if the scrollbar is set to auto hide it will have zero width. On webkit we can still
       // hide it using ::-webkit-scrollbar { width:0; height:0; } but there is no moz equivalent. So we're
       // forced to sniff Firefox and return a hard-coded scrollbar width. I know, I know...
-      
+
       // https://github.com/alphasights/ember-scrollable/issues/34
       // if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
       //  return 17;
       // }
-      
+
       return (width - widthMinusScrollbars);
     }
 
@@ -337,11 +342,10 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     if (this.get('autoHide')) {
       this.showScrollbar();
     }
-    if (this.get('isHorizontalDragging') || this.get('isVerticalDragging')) {
-      const {pageX, pageY} = e;
-      this.set('horizontalMouseOffset', pageX);
-      this.set('verticalMouseOffset', pageY);
-    }
+    const {pageX, pageY} = e;
+    this.set('horizontalMouseOffset', pageX);
+    this.set('verticalMouseOffset', pageY);
+
   },
 
   /**
