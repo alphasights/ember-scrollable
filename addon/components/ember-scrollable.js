@@ -320,14 +320,14 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   /**
-   * Show the scrollbar(s) when the user enters the scroll viewport
+   * Show the scrollbar(s) when the user moves within the scroll viewport
    *
-   * @method mouseEnter
+   * @method mouseMove
    * @private
    */
-  mouseEnter(){
+  mouseMove(){
     if (this.get('autoHide')) {
-      this.showScrollbar();
+      throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
   },
 
@@ -339,13 +339,9 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   moveHandle(e){
-    if (this.get('autoHide')) {
-      this.showScrollbar();
-    }
     const {pageX, pageY} = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
-
   },
 
   /**
