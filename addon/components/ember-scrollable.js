@@ -125,7 +125,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     scheduleOnce('afterRender', this, this.setupScrollbar);
     this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
     this.addEventListener(document.body, 'mousemove', (e) => {
-      throttle(this, this.moveHandle, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
+      throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     });
     this.setupResize();
   },
@@ -332,13 +332,13 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   /**
-   * Callback for the mouse move event. If any scrollbar is in the dragging state, update the mouse offset.
+   * Callback for the mouse move event. Update the mouse offsets given the new mouse position.
    *
-   * @method moveHandle
+   * @method updateMouseOffset
    * @param e
    * @private
    */
-  moveHandle(e){
+  updateMouseOffset(e){
     const {pageX, pageY} = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
