@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.4.1
+
+### Pull Requests
+
+- [#44](https://github.com/alphasights/ember-scrollable/pull/44)  [BUGFIX] Remove Sass as a dependency  *by [alphasights](https://github.com/alphasights)*
+- [#48](https://github.com/alphasights/ember-scrollable/pull/48)  #45: Fixes [on click of the scrollbar, it scrolls back to the top]  *by [alexander-alvarez/fix](https://github.com/alexander-alvarez/fix)*
+- [#49](https://github.com/alphasights/ember-scrollable/pull/49)  Fixes #46: Show Scrollbar on mousemove in component  *by [alexander-alvarez/fix](https://github.com/alexander-alvarez/fix)*
+
 ## 0.4.0
 
 ### Pull Requests
