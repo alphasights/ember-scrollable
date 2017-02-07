@@ -4,8 +4,7 @@ import {styleify} from '../util/css';
 
 const {
   computed,
-  isPresent,
-  K
+  isPresent
 } = Ember;
 
 const handleSelector = '.drag-handle';
@@ -20,10 +19,10 @@ const handleSelector = '.drag-handle';
 export default Ember.Component.extend({
   layout,
   classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
-  onDrag: K,
-  onJumpTo: K,
-  onDragStart: K,
-  onDragEnd: K,
+  onDrag(){},
+  onJumpTo(){},
+  onDragStart(){},
+  onDragEnd(){},
 
   horizontal: false,
   isDragging: false,

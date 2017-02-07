@@ -7,8 +7,7 @@ const {
   computed,
   run: {
     schedule
-  },
-  K
+  }
 } = Ember;
 
 /**
@@ -39,7 +38,7 @@ export default Ember.Component.extend(DomMixin, {
    * @public
    * @type Function
    */
-  onScroll: K,
+  onScroll(){},
 
   /**
    * Height of this content. Note content must have a height that is larger than this in order to cause overflow-y,
