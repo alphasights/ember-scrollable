@@ -154,9 +154,9 @@ export default Ember.Component.extend(DomMixin, {
    * @param direction String -- 'X' | 'Y' -- indicates what direction is being scrolled
    */
   scrollToPosition(offset, direction) {
-    offset = parseInt(offset, 10);
+    offset = (Number.parseInt || parseInt)(offset, 10);
 
-    if (isNaN(offset)) {
+    if ((Number.isNaN || isNan)(offset)) {
       return;
     }
     const scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
