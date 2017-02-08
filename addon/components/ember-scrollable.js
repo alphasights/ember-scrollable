@@ -512,13 +512,13 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       this.set('scrollToY', 0);
     },
     scrolled(){
-      this.scrolled(...arguments);
+      scheduleOnce('afterRender', this, 'scrolled', ...arguments);
     },
     horizontalDrag(dragPerc) {
-      this.drag(dragPerc, 'scrollToX', 'width');
+      scheduleOnce('afterRender', this, 'drag', dragPerc, 'scrollToX', 'width');
     },
     verticalDrag(dragPerc) {
-      this.drag(dragPerc, 'scrollToY', 'height');
+      scheduleOnce('afterRender', this, 'drag', dragPerc, 'scrollToY', 'height');
     },
     horizontalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToX', 'width');
