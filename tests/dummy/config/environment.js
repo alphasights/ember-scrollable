@@ -44,7 +44,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/ember-scrollable/demo';
+    ENV.locationType = 'hash';
+    ENV.rootURL = '/ember-scrollable/';
   }
 
   return ENV;

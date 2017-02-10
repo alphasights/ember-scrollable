@@ -7,7 +7,7 @@ Climate](https://codeclimate.com/github/alphasights/ember-scrollable/badges/gpa.
 
 A simple scrollbar implementation inspired by Trackpad Scroll Emulator.
 
-[Check out the demo](https://alphasights.github.io/ember-scrollable/demo)
+[Check out the demo](https://alphasights.github.io/ember-scrollable)
 
 ## Installation
 

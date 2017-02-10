@@ -147,7 +147,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     scheduleOnce('afterRender', this, this.setupScrollbar);
     this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
     this.addEventListener(document.body, 'mousemove', (e) => {
-      throttle(this, this.moveHandle, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
+      throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     });
     this.setupResize();
   },
@@ -342,32 +342,28 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   /**
-   * Show the scrollbar(s) when the user enters the scroll viewport
+   * Show the scrollbar(s) when the user moves within the scroll viewport
    *
-   * @method mouseEnter
+   * @method mouseMove
    * @private
    */
-  mouseEnter(){
+  mouseMove(){
     if (this.get('autoHide')) {
-      this.showScrollbar();
+      throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
   },
 
   /**
-   * Callback for the mouse move event. If any scrollbar is in the dragging state, update the mouse offset.
+   * Callback for the mouse move event. Update the mouse offsets given the new mouse position.
    *
-   * @method moveHandle
+   * @method updateMouseOffset
    * @param e
    * @private
    */
-  moveHandle(e){
-    if (this.get('autoHide')) {
-      this.showScrollbar();
-    }
+  updateMouseOffset(e){
     const {pageX, pageY} = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
-
   },
 
   /**
@@ -532,13 +528,13 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       this.set('scrollToY', 0);
     },
     scrolled(){
-      this.scrolled(...arguments);
+      scheduleOnce('afterRender', this, 'scrolled', ...arguments);
     },
     horizontalDrag(dragPerc) {
-      this.dragHandle(dragPerc, 'scrollToX', 'width');
+      scheduleOnce('afterRender', this, 'dragHandle', dragPerc, 'scrollToX', 'width');
     },
     verticalDrag(dragPerc) {
-      this.dragHandle(dragPerc, 'scrollToY', 'height');
+      scheduleOnce('afterRender', this, 'dragHandle', dragPerc, 'scrollToY', 'height');
     },
     horizontalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToX', 'width');
