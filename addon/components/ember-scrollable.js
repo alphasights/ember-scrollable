@@ -96,6 +96,28 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   scrollToY: 0,
 
   /**
+   * Action called when scrolling.
+   *
+   * First argument is the scrollOffset
+   * Second is the scroll event
+   *
+   * @property onScroll
+   * @public
+   * @type Function
+   */
+  onScroll(){},
+
+
+  /**
+   * Action called when scroll handle reaches the end of the scrollbar "track".
+   *
+   * @property onScrolledToBottom
+   * @public
+   * @type Function
+   */
+  onScrolledToBottom(){},
+
+  /**
    * Local reference the horizontal scrollbar.
    *
    * @property horizontalScrollbar
@@ -392,7 +414,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
 
     this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
 
-    this.sendScroll(event, scrollOffset);
+     this.get('onScroll')(scrollOffset, event);
   },
 
 
@@ -405,13 +427,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   sendScrolledToBottom() {
-    this.sendAction('onScrolledToBottom');
-  },
-
-  sendScroll(event, scrollOffset) {
-    if (this.get('onScroll')) {
-      this.sendAction('onScroll', scrollOffset, event);
-    }
+    this.get('onScrolledToBottom')();
   },
 
   resizeScrollbar() {
@@ -442,13 +458,13 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   /**
    * Sets scrollTo{X,Y} by using the ratio of offset to content size
    *
-   * @method drag
+   * @method dragHandle
    * @param dragPerc
    * @param scrollProp
    * @param sizeAttr
    * @private
    */
-  drag(dragPerc, scrollProp, sizeAttr) {
+  dragHandle(dragPerc, scrollProp, sizeAttr) {
     const srcollTo = dragPerc * this.contentSize(sizeAttr);
     this.set(scrollProp, srcollTo);
   },
@@ -519,10 +535,10 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       this.scrolled(...arguments);
     },
     horizontalDrag(dragPerc) {
-      this.drag(dragPerc, 'scrollToX', 'width');
+      this.dragHandle(dragPerc, 'scrollToX', 'width');
     },
     verticalDrag(dragPerc) {
-      this.drag(dragPerc, 'scrollToY', 'height');
+      this.dragHandle(dragPerc, 'scrollToY', 'height');
     },
     horizontalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToX', 'width');
