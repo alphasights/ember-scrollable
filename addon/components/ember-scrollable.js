@@ -452,15 +452,16 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   /**
-   * Sets scrollTo{X,Y} by using the ratio of offset to content size
+   * Sets scrollTo{X,Y} by using the ratio of offset to content size.
+   * Called when the handle in ember-scrollbar is dragged.
    *
-   * @method dragHandle
+   * @method updateScrollProperty
    * @param dragPerc
    * @param scrollProp
    * @param sizeAttr
    * @private
    */
-  dragHandle(dragPerc, scrollProp, sizeAttr) {
+  updateScrollProperty(scrollProp, dragPerc, sizeAttr) {
     const srcollTo = dragPerc * this.contentSize(sizeAttr);
     this.set(scrollProp, srcollTo);
   },
@@ -531,10 +532,10 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       scheduleOnce('afterRender', this, 'scrolled', ...arguments);
     },
     horizontalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'dragHandle', dragPerc, 'scrollToX', 'width');
+      scheduleOnce('afterRender', this, 'updateScrollProperty', 'scrollToX', dragPerc, 'width');
     },
     verticalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'dragHandle', dragPerc, 'scrollToY', 'height');
+      scheduleOnce('afterRender', this, 'updateScrollProperty', 'scrollToY', dragPerc, 'height');
     },
     horizontalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToX', 'width');
