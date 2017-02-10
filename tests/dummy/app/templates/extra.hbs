@@ -1,0 +1,72 @@
+{{#link-to 'index'}}
+  Home
+{{/link-to}}
+<section class="vertical-demo">
+  <h1>Synchronized Scrolling</h1>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET vertical --}}
+    <div style="height: 400px;">
+      {{#ember-scrollable scrollToY=scrollToY onScroll=(action (mut scrollToY))}}
+        <p>
+          {{#draggable-object content=this}}
+            Drag Me!
+          {{/draggable-object}}
+        </p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET vertical --}}
+    <div style="height: 400px;">
+      {{#ember-scrollable scrollToY=scrollToY onScroll=(action (mut scrollToY))}}
+        <p>
+          {{#draggable-object content=this}}
+            Drag Me!
+          {{/draggable-object}}
+        </p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+        <p>Some content</p>
+        <p>Some more content</p>
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+</section>
