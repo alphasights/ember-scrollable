@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.3
+
+### Pull Requests
+
+- [#54](https://github.com/alphasights/ember-scrollable/pull/54)  Fixing #39: Allowing to draggable elments inside of ember-scrollable  *by [alexander-alvarez/fixing](https://github.com/alexander-alvarez/fixing)*
+
 ## 0.4.2
 
 ### Pull Requests
