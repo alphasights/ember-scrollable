@@ -7,7 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('extra');
+  this.route('cookbook');
 });
 
 export default Router;
