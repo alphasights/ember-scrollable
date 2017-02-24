@@ -138,7 +138,7 @@ test('clicking on bar triggers onJumpTo and not startDrag', function(assert) {
 });
 
 
-test('Horizontal: onJumpTo has positive first argument when click to the left of handle', function(assert) {
+test('Horizontal: onJumpTo first argument is true when click to the left of handle', function(assert) {
   assert.expect(1);
 
   const deltaX =  9; // some number less than 10, therefore `towardsAnchor` will be true
@@ -171,7 +171,7 @@ test('Horizontal: onJumpTo has positive first argument when click to the left of
 
 });
 
-test('Horizontal: onJumpTo has negative first argument when click to the right of handle', function(assert) {
+test('Horizontal: onJumpTo first argument is false when click to the right of handle', function(assert) {
   assert.expect(1);
 
   const deltaX = 30; // more than offset of 10
@@ -205,7 +205,7 @@ test('Horizontal: onJumpTo has negative first argument when click to the right o
 });
 
 
-test('Vertical: onJumpTo has positive first argument when click to the top of handle', function(assert) {
+test('Vertical: onJumpTo first argument is true when click to the top of handle', function(assert) {
   assert.expect(1);
 
   const deltaY = 2; // less than offset of 10
@@ -238,7 +238,7 @@ test('Vertical: onJumpTo has positive first argument when click to the top of ha
 
 });
 
-test('Vertical: onJumpTo has negative first argument when clicking below the vertical handle', function(assert) {
+test('Vertical: onJumpTo first argument is false when clicking below the vertical handle', function(assert) {
   assert.expect(1);
 
   const deltaY = 30; // more than offset of 10
