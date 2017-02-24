@@ -128,16 +128,21 @@ export default Ember.Component.extend({
   },
 
   /**
-   * sends direction and scroll offset
+   * Calls `onJumpTo` action with a boolean indicating the direction of the jump, and the jQuery MouseDown event.
+   *
+   * If towardsAnchor is true, the jump is in a direction towards from the initial anchored position of the scrollbar.
+   *  i.e. for a vertical scrollbar, towardsAnchor=true indicates moving upwards, and towardsAnchor=false is downwards
+   *       for a horizontal scrollbar, towardsAnchor=true indicates moving left, and towardsAnchor=false is right
+   *
    * @param e
    * @private
    */
   _jumpScroll(e) {
     let eventOffset = this._jumpScrollEventOffset(e);
     let handleOffset = this._handlePositionOffset();
-    const jumpPositive = (eventOffset < handleOffset);
+    const towardsAnchor = (eventOffset < handleOffset);
 
-    this.get('onJumpTo')(jumpPositive, e);
+    this.get('onJumpTo')(towardsAnchor, e);
   },
 
 
