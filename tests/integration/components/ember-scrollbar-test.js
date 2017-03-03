@@ -1,8 +1,6 @@
-import Ember from 'ember';
-import {moduleForComponent, test} from 'ember-qunit';
+import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-
-const {$: jQuery} = Ember;
+import { click, find, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
 
 moduleForComponent('ember-scrollbar', 'Integration | Component | ember scrollbar', {
   integration: true
@@ -10,6 +8,14 @@ moduleForComponent('ember-scrollbar', 'Integration | Component | ember scrollbar
 
 const handleClass = '.drag-handle';
 const barClass = '.tse-scrollbar';
+
+function leftElementOffset(selector){
+  return find(selector).getBoundingClientRect().left;
+}
+
+function topElementOffset(selector){
+  return find(selector).getBoundingClientRect().top;
+}
 
 test('Horizontal: offset and size get routed properly', function(assert) {
   assert.expect(2);
@@ -32,8 +38,6 @@ test('Horizontal: offset and size get routed properly', function(assert) {
     </div>
   </div>`);
 
-  // TODO no idea why offset and width are showing up as half of the set properties
-  // they look fine when I copy this code to the test app
   assert.equal(this.$(handleClass).position().left, this.get('offset'));
   assert.equal(Number.parseInt(this.$(handleClass).css('width')), this.get('size'));
 });
@@ -59,14 +63,12 @@ test('Vertical: offset and size get routed properly', function(assert) {
     </div>
   </div>`);
 
-  // TODO no idea why offset and width are showing up as half of the set properties
-  // they look fine when I copy this code to the test app
   assert.equal(this.$(handleClass).position().top, this.get('offset'));
   assert.equal(Number.parseInt(this.$(handleClass).css('height')), this.get('size'));
 });
 
 
-test('mousedown event on handle triggers startDrag, but not onJumpTo', function(assert) {
+test('click event on handle triggers startDrag, but not onJumpTo', function(assert) {
   assert.expect(1);
 
   this.setProperties({
@@ -96,10 +98,10 @@ test('mousedown event on handle triggers startDrag, but not onJumpTo', function(
     </div>
   </div>`);
 
-  this.$(handleClass).trigger('mousedown');
+  click(handleClass);
 });
 
-test('mousedown event on bar triggers onJumpTo and not startDrag', function(assert) {
+test('clicking on bar triggers onJumpTo and not startDrag', function(assert) {
   assert.expect(1);
 
   this.setProperties({
@@ -131,14 +133,15 @@ test('mousedown event on bar triggers onJumpTo and not startDrag', function(asse
     </div>
   </div>`);
 
-  // WHEN we mousedown on the bar and not the handle
-  this.$(barClass).trigger('mousedown');
+  // WHEN we click on the bar and not the handle
+  click(barClass);
 });
 
 
-test('Horizontal: onJumpTo has positive first argument when to the left of handle', function(assert) {
+test('Horizontal: onJumpTo first argument is true when click to the left of handle', function(assert) {
   assert.expect(1);
 
+  const deltaX =  9; // some number less than 10, therefore `towardsAnchor` will be true
   this.setProperties({
     size: 40,
     offset: 10
@@ -163,24 +166,21 @@ test('Horizontal: onJumpTo has positive first argument when to the left of handl
   </div>`);
 
   // WHEN
-  const event = jQuery.Event("mousedown");
-  // TODO for some reason the realized offset is getting set to half of what is passed in during testing
-  // change offsetX to 5+ but < 10 and the test will fail because of this
-  event.offsetX = 2;
-  this.$(barClass).trigger(event);
-
+  const clientX = leftElementOffset(barClass) + deltaX;
+  click(barClass, { clientX });
 
 });
 
-test('Horizontal: onJumpTo has negative first argument when to the right of handle', function(assert) {
+test('Horizontal: onJumpTo first argument is false when click to the right of handle', function(assert) {
   assert.expect(1);
 
+  const deltaX = 30; // more than offset of 10
   this.setProperties({
     size: 40,
     offset: 10
   });
   this.on('onJumpTo', function(towardsAnchor) {
-    assert.notOk(towardsAnchor, 'towardsAnchor should be false if going towards away from anchor');
+    assert.notOk(towardsAnchor, 'towardsAnchor should be false if going away from anchor');
   });
 
   this.render(hbs`
@@ -199,16 +199,16 @@ test('Horizontal: onJumpTo has negative first argument when to the right of hand
   </div>`);
 
   // WHEN
-  const event = jQuery.Event("mousedown");
-  event.offsetX = 30;
-  this.$(barClass).trigger(event);
+  const clientX = leftElementOffset(barClass) + deltaX;
+  click(barClass, { clientX });
 
 });
 
 
-test('Vertical: onJumpTo has positive first argument when to the top of handle', function(assert) {
+test('Vertical: onJumpTo first argument is true when click to the top of handle', function(assert) {
   assert.expect(1);
 
+  const deltaY = 2; // less than offset of 10
   this.setProperties({
     size: 40,
     offset: 10
@@ -233,18 +233,15 @@ test('Vertical: onJumpTo has positive first argument when to the top of handle',
   </div>`);
 
   // WHEN
-  const event = jQuery.Event("mousedown");
-  // TODO for some reason the realized offset is getting set to half of what is passed in during testing
-  // change offsetY to 5+ but < 10 and the test will fail because of this
-  event.offsetY = 2;
-  this.$(barClass).trigger(event);
-
+  const clientY = topElementOffset(barClass) + deltaY;
+  click(barClass, { clientY });
 
 });
 
-test('Vertical: onJumpTo has negative first argument when to the bottom of handle', function(assert) {
+test('Vertical: onJumpTo first argument is false when clicking below the vertical handle', function(assert) {
   assert.expect(1);
 
+  const deltaY = 30; // more than offset of 10
   this.setProperties({
     size: 40,
     offset: 10
@@ -269,9 +266,8 @@ test('Vertical: onJumpTo has negative first argument when to the bottom of handl
   </div>`);
 
   // WHEN
-  const event = jQuery.Event("mousedown");
-  event.offsetY = 30;
-  this.$(barClass).trigger(event);
+  const clientY = topElementOffset(barClass) + deltaY;
+  click(barClass, { clientY });
 
 });
 
@@ -303,7 +299,7 @@ test('mouseup event triggers onDragEnd', function(assert) {
     </div>
   </div>`);
 
-  this.$(handleClass).trigger('mouseup');
+  triggerEvent(handleClass, 'mouseup');
 
   assert.ok(called);
 });
