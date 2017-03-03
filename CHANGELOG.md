@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.4
+
+### Pull Requests
+
+- [#58](https://github.com/alphasights/ember-scrollable/pull/58)  Fix: Scrollbar visible when content changes to no longer have overflow  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+
 ## 0.4.3
 
 ### Pull Requests
