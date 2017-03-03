@@ -95,13 +95,29 @@
 </section>
 
 <section class="no-scrollbar-demo">
-  <h1>No Scroll</h1>
-
+  <h1>No Scroll </h1>
+  <button {{action 'toggleHeight'}}>Make {{if isShort 'Overflow' 'No Overflow'}}</button>
   <div class="output">
     {{!-- BEGIN-SNIPPET no-scrollbar-demo --}}
     <div style="height: 200px;">
       {{#ember-scrollable}}
         <p>Some content</p>
+        {{#unless isShort}}
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+          <p>Some content</p>
+        {{/unless}}
       {{/ember-scrollable}}
     </div>
     {{!-- END-SNIPPET --}}

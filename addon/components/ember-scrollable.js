@@ -122,7 +122,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   didInsertElement() {
     this._super(...arguments);
     this.setupElements();
-    scheduleOnce('afterRender', this, this.setupScrollbar);
+    scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
     this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
     this.addEventListener(document.body, 'mousemove', (e) => {
       throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
@@ -250,7 +250,12 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
 
   },
 
-  setupScrollbar() {
+  /**
+   * Used to create/reset scrollbar(s) if they are necessary
+   *
+   * @method createScrollbarAndShowIfNecessary
+   */
+  createScrollbarAndShowIfNecessary() {
     this.createScrollbar().map((scrollbar) => {
       this.checkScrolledToBottom(scrollbar);
       if (scrollbar.isNecessary) {
@@ -290,6 +295,12 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     }
   },
 
+  /**
+   * Creates the corresponding scrollbar(s) from the configured `vertical` and `horizontal` properties
+   *
+   * @method createScrollbar
+   * @return {Array} Scrollbar(s) that were created
+   */
   createScrollbar() {
     if (this.get('isDestroyed')) {
       return;
@@ -411,8 +422,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   resizeScrollbar() {
-    this.createScrollbar();
-    this.showScrollbar();
+    this.createScrollbarAndShowIfNecessary();
   },
 
   showScrollbar() {
