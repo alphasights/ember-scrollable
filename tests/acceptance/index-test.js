@@ -68,3 +68,33 @@ test('scrollTo and onScroll', function(assert) {
 
 });
 
+
+test('When element resized from no-overflow => overflow => no-overflow, no scrollbar is visible on mouseover', function(assert) {
+  let scrollArea;
+  let toggleButtonSelector = '.no-scrollbar-demo button';
+  visit('/');
+
+  andThen(function() {
+    assert.ok(find('.no-scrollbar-demo .ember-scrollable'), 'resize demo rendered');
+    assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle:not(.visible)'), 'resize handle rendered, but not visible');
+    scrollArea = find('.no-scrollbar-demo .ember-scrollable .tse-content');
+    assert.equal(elementHeight(scrollArea), 18, 'there is no overflow as 18 < 200px');
+
+    click(toggleButtonSelector);
+  });
+
+  andThen(function() {
+    assert.equal(elementHeight(scrollArea), 494, 'there is overflow as 494 > 200px');
+
+    triggerEvent(scrollArea, 'mousemove');
+    assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle.visible'), 'handle shows up visible');
+
+    click(toggleButtonSelector);
+  });
+
+  andThen(function() {
+    assert.equal(elementHeight(scrollArea), 18);
+    assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle:not(.visible)'), 'handle goes away when overflow is gone');
+  });
+
+});
