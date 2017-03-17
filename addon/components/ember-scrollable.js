@@ -123,8 +123,8 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this._super(...arguments);
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
-    this.addEventListener(document.body, 'mouseup', (e) => this.endDrag(e));
-    this.addEventListener(document.body, 'mousemove', (e) => {
+    this.addEventListener(window, 'mouseup', (e) => this.endDrag(e));
+    this.addEventListener(window, 'mousemove', (e) => {
       throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     });
     this.setupResize();
