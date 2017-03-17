@@ -2,7 +2,7 @@ import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
-import {Horizontal, Vertical} from '../classes/scrollable';
+import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
   computed,
@@ -350,7 +350,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   updateMouseOffset(e){
-    const {pageX, pageY} = e;
+    const { pageX, pageY } = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
   },
@@ -378,7 +378,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
-    const {handleOffset, handleSize} = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
+    const { handleOffset, handleSize } = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
     this.set(`${scrollbarDirection}HandleOffset`, handleOffset);
     this.set(`${scrollbarDirection}HandleSize`, handleSize);
   },

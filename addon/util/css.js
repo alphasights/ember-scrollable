@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const {isEmpty, String: {htmlSafe}} = Ember;
+const { isEmpty, String: { htmlSafe } } = Ember;
 
 function styleify(obj) {
   if (isEmpty(obj)) {
@@ -17,4 +17,4 @@ function styleify(obj) {
 
 }
 
-export {styleify};
+export { styleify };
