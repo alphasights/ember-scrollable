@@ -2,7 +2,7 @@ import Ember from 'ember';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
-import {Horizontal, Vertical} from '../classes/scrollable';
+import { Horizontal, Vertical } from '../classes/scrollable';
 
 const {
   computed,
@@ -71,6 +71,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
     },
     set(key, value){
+      // TODO this is deprecated. remove eventually.
       deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
       const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
       this.set(prop, value);
@@ -94,6 +95,24 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @type Number
    */
   scrollToY: 0,
+
+  /**
+   * Callback when the content is scrolled horizontally.
+   *
+   * @method onScrollX
+   * @public
+   * @type Function
+   */
+  onScrollX() {},
+
+  /**
+   * Callback when the content is scrolled vertically.
+   *
+   * @method onScrollY
+   * @public
+   * @type Function
+   */
+  onScrollY() {},
 
   /**
    * Local reference the horizontal scrollbar.
@@ -350,7 +369,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   updateMouseOffset(e){
-    const {pageX, pageY} = e;
+    const { pageX, pageY } = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
   },
@@ -378,7 +397,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
-    const {handleOffset, handleSize} = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
+    const { handleOffset, handleSize } = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
     this.set(`${scrollbarDirection}HandleOffset`, handleOffset);
     this.set(`${scrollbarDirection}HandleSize`, handleSize);
   },
@@ -398,7 +417,9 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.showScrollbar();
 
     this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
-
+    const direction = scrollDirection === 'vertical' ? 'Y' : 'X';
+    this.get(`onScroll${direction}`)(scrollOffset);
+    // TODO this is deprecated. remove eventually.
     this.sendScroll(event, scrollOffset);
   },
 
@@ -417,6 +438,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
 
   sendScroll(event, scrollOffset) {
     if (this.get('onScroll')) {
+      deprecate('Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks');
       this.sendAction('onScroll', scrollOffset, event);
     }
   },
@@ -496,11 +518,12 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
      * Update action should be called when size of the scroll area changes
      */
     recalculate() {
+      // TODO this is effectively the same as `update`, except for update returns the passed in value. Keep one, and rename `resizeScrollbar` to be clear.
       this.resizeScrollbar();
     },
 
     /**
-     * Can be called when scrollbars changes as a result of value change,
+     * Can be called when scrollbars change as a result of value change,
      *
      * for example
      * ```
@@ -520,6 +543,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
      * Scroll Top action should be called when when the scroll area should be scrolled top manually
      */
     scrollTop() {
+      // TODO some might expect the `scrollToY` action to be called here
       this.set('scrollToY', 0);
     },
     scrolled(){
