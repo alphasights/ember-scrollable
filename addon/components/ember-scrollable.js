@@ -256,6 +256,9 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @method createScrollbarAndShowIfNecessary
    */
   createScrollbarAndShowIfNecessary() {
+    if (this.get('isDestroyed')) {
+      return;
+    }
     this.createScrollbar().map((scrollbar) => {
       this.checkScrolledToBottom(scrollbar);
       if (scrollbar.isNecessary) {
