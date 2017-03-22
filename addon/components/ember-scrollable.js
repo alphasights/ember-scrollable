@@ -8,6 +8,9 @@ const {
   computed,
   deprecate,
   isPresent,
+  inject: {
+    service
+  },
   run: {
     scheduleOnce,
     debounce,
@@ -129,6 +132,8 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    */
   verticalScrollbar: null,
 
+  scrollbarThickness: service(),
+
   didReceiveAttrs() {
     const horizontal = this.get('horizontal');
     const vertical = this.get('horizontal');
@@ -235,35 +240,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   /**
-  * Original function by Jonathan Sharp:
-  * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
-  *
-  * Modified to work with newer jQuery version.
-  *
-  * @property scrollbarThickness
-  * @private
-  * @type Number
-  */
-  scrollbarThickness: computed(() => {
-    // Append a temporary scrolling element to the DOM, then measure
-    // the difference between between its outer and inner elements.
-    let tempEl = $(`
-      <div class="scrollbar-width-tester" style="width: 50px; position: absolute; top: 0px;">
-        <div style="overflow: scroll;">
-          <div class="scrollbar-width-tester__inner"></div>
-        </div>
-      </div>
-    `);
-    $('body').append(tempEl);
-    let width = $(tempEl).width();
-    let widthMinusScrollbars = $('.scrollbar-width-tester__inner', tempEl).width();
-    tempEl.remove();
-
-    return (width - widthMinusScrollbars);
-  }),
-
-
-  /**
    * Used to create/reset scrollbar(s) if they are necessary
    *
    * @method createScrollbarAndShowIfNecessary
@@ -291,7 +267,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   resizeScrollContent() {
     const width = this.$().width();
     const height = this.$().height();
-    const scrollbarThickness = this.get('scrollbarThickness');
+    const scrollbarThickness = this.get('scrollbarThickness.thickness');
 
     const hasHorizontal = this.get('horizontal');
     const hasVertical = this.get('vertical');
