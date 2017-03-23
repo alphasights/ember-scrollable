@@ -15,8 +15,7 @@ const {
     scheduleOnce,
     debounce,
     throttle
-  },
-  $
+  }
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
