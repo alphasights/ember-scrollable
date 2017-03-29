@@ -2,6 +2,7 @@ import Ember from 'ember';
 import layout from '../templates/components/scroll-content-element';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import {styleify} from '../util/css';
+import Number from '../util/number';
 
 const {
   computed,
