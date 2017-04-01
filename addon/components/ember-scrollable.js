@@ -8,12 +8,14 @@ const {
   computed,
   deprecate,
   isPresent,
+  inject: {
+    service
+  },
   run: {
     scheduleOnce,
     debounce,
     throttle
-  },
-  $
+  }
 } = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
@@ -67,10 +69,10 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @type Number
    */
   scrollTo: computed('vertical', {
-    get(){
+    get() {
       return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
     },
-    set(key, value){
+    set(key, value) {
       // TODO this is deprecated. remove eventually.
       deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
       const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
@@ -128,6 +130,8 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   verticalScrollbar: null,
+
+  scrollbarThickness: service(),
 
   didReceiveAttrs() {
     const horizontal = this.get('horizontal');
@@ -234,41 +238,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this._contentElement = this.$(`${contentSelector}:first`);
   },
 
-
-  measureScrollbar() {
-
-    /**
-     * Calculate scrollbar width
-     *
-     * Original function by Jonathan Sharp:
-     * http://jdsharp.us/jQuery/minute/calculate-scrollbar-width.php
-     * Updated to work in Chrome v25.
-     */
-    function scrollbarWidth() {
-      // Append a temporary scrolling element to the DOM, then measure
-      // the difference between between its outer and inner elements.
-      var tempEl = $('<div class="scrollbar-width-tester" style="width:50px;height:50px;overflow-y:scroll;position:absolute;top:-200px;left:-200px;"><div style="height:100px;"></div>');
-      $('body').append(tempEl);
-      var width = $(tempEl).innerWidth();
-      var widthMinusScrollbars = $('div', tempEl).innerWidth();
-      tempEl.remove();
-
-      // On OS X if the scrollbar is set to auto hide it will have zero width. On webkit we can still
-      // hide it using ::-webkit-scrollbar { width:0; height:0; } but there is no moz equivalent. So we're
-      // forced to sniff Firefox and return a hard-coded scrollbar width. I know, I know...
-
-      // https://github.com/alphasights/ember-scrollable/issues/34
-      // if (width === widthMinusScrollbars && navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-      //  return 17;
-      // }
-
-      return (width - widthMinusScrollbars);
-    }
-
-    return scrollbarWidth();
-
-  },
-
   /**
    * Used to create/reset scrollbar(s) if they are necessary
    *
@@ -286,7 +255,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     });
   },
 
-  _resizeHandler(){
+  _resizeHandler() {
     debounce(this, this.resizeScrollbar, 16);
   },
 
@@ -297,7 +266,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   resizeScrollContent() {
     const width = this.$().width();
     const height = this.$().height();
-    const scrollbarThickness = this.measureScrollbar();
+    const scrollbarThickness = this.get('scrollbarThickness.thickness');
 
     const hasHorizontal = this.get('horizontal');
     const hasVertical = this.get('vertical');
@@ -305,15 +274,13 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     if (hasHorizontal && hasVertical) {
       this.set('scrollContentWidth', width + scrollbarThickness);
       this.set('scrollContentHeight', height + scrollbarThickness);
+    } else if (hasHorizontal) {
+      this.set('scrollContentWidth', width);
+      this.set('scrollContentHeight', height + scrollbarThickness);
+      this._contentElement.height(height);
     } else {
-      if (hasHorizontal) {
-        this.set('scrollContentWidth', width);
-        this.set('scrollContentHeight', height + scrollbarThickness);
-        this._contentElement.height(height);
-      } else {
-        this.set('scrollContentWidth', width + scrollbarThickness);
-        this.set('scrollContentHeight', height);
-      }
+      this.set('scrollContentWidth', width + scrollbarThickness);
+      this.set('scrollContentHeight', height);
     }
   },
 
@@ -358,7 +325,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @method mouseMove
    * @private
    */
-  mouseMove(){
+  mouseMove() {
     if (this.get('autoHide')) {
       throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
@@ -371,7 +338,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @param e
    * @private
    */
-  updateMouseOffset(e){
+  updateMouseOffset(e) {
     const { pageX, pageY } = e;
     this.set('horizontalMouseOffset', pageX);
     this.set('verticalMouseOffset', pageY);
@@ -549,7 +516,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
       // TODO some might expect the `scrollToY` action to be called here
       this.set('scrollToY', 0);
     },
-    scrolled(){
+    scrolled() {
       scheduleOnce('afterRender', this, 'scrolled', ...arguments);
     },
     horizontalDrag(dragPerc) {
