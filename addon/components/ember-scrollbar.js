@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/ember-scrollbar';
-import {styleify} from '../util/css';
+import { styleify } from '../util/css';
 
 const {
   computed,
@@ -48,11 +48,11 @@ export default Ember.Component.extend({
 
 
   handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
-    const {handleOffset, handleSize} = this.getProperties('handleOffset', 'handleSize');
+    const { handleOffset, handleSize } = this.getProperties('handleOffset', 'handleSize');
     if (this.get('horizontal')) {
-      return {left: handleOffset + 'px', width: handleSize + 'px'};
+      return { left: handleOffset + 'px', width: handleSize + 'px' };
     } else {
-      return {top: handleOffset + 'px', height: handleSize + 'px'};
+      return { top: handleOffset + 'px', height: handleSize + 'px' };
     }
   }),
 

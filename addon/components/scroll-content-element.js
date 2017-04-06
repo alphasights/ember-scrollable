@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import layout from '../templates/components/scroll-content-element';
 import DomMixin from 'ember-lifeline/mixins/dom';
-import {styleify} from '../util/css';
+import { styleify } from '../util/css';
 import Number from '../util/number';
+
 
 const {
   computed,
@@ -89,8 +90,8 @@ export default Ember.Component.extend(DomMixin, {
    * @private
    */
   stylesJSON: computed('height', 'width', function() {
-    const {height, width} = this.getProperties('height', 'width');
-    return {width: width + 'px', height: height + 'px'};
+    const { height, width } = this.getProperties('height', 'width');
+    return { width: width + 'px', height: height + 'px' };
   }),
 
   /**
