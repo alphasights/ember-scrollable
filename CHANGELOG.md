@@ -1,6 +1,17 @@
 Changelog
 =========
 
+## 0.4.5
+
+### Pull Requests
+
+- [#62](https://github.com/alphasights/ember-scrollable/pull/62)  Minor fix  *by [Pierre-Luc Carmel Biron](https://github.com/plcarmel)*
+- [#63](https://github.com/alphasights/ember-scrollable/pull/63)  Adding `onScrollToX` and `onScrollToY` callbacks.  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#69](https://github.com/alphasights/ember-scrollable/pull/69)  Creating Number to polyfill  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#65](https://github.com/alphasights/ember-scrollable/pull/65)  calculate scrollbar width correctly  *by [Jan Buschtöns](https://github.com/buschtoens)*
+- [#60](https://github.com/alphasights/ember-scrollable/pull/60)  Mouse Events on Window Instead of DOM  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#70](https://github.com/alphasights/ember-scrollable/pull/70)  Fix a return value when our component has been torn down  *by [digabit](https://github.com/digabit)*
+
 ## 0.4.4
 
 ### Pull Requests
