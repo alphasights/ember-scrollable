@@ -3,13 +3,18 @@ import {moduleForComponent, test} from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
 
-const {run} = Ember;
-
 moduleForComponent('scroll-content-element', 'Integration | Component | scroll content element', {
   integration: true
 });
 
-const ARBITRARY_DELAY_TIME = 40;
+const flushScrollAndWait =  function() {
+  return wait().then(() => {
+    return new Ember.RSVP.Promise((resolve) => {
+      window.requestAnimationFrame(resolve);
+    });
+  });
+};
+
 const cssSelector = '.tse-scroll-content';
 
 const VERTICAL_TEMPLATE = hbs`
@@ -58,12 +63,11 @@ function testInitialOffsetTriggersAScrollEvent(assert, template, scrollProp, dir
   // Template block usage:
   this.render(template);
 
-  // TODO why run.later :(
-  run.later(this, () => {
+  flushScrollAndWait().then(() => {
     assert.deepEqual(scrolledCallArgs[0], [5, direction]);
     assert.deepEqual(scrolledCallArgs.length, 1);
     done();
-  }, ARBITRARY_DELAY_TIME);
+  });
   return done;
 }
 
@@ -130,23 +134,21 @@ function testScrollOccursAndEventTriggersWithDirectionAndOffset(assert, template
   this.render(template);
   // Initial non-zero offset triggers a scroll event.
 
-  // TODO can't figure out what i did wrong in order to need these run laters with an arbitrary time
-  // scroll event is aysync, but I don't feel it's bound correctly to ember's run loops
-  run.later(this, () => {
+  flushScrollAndWait().then(() => {
     // WHEN the scrollX position has moved left to 0px
     this.$(cssSelector)[scrollMethod](firstMovement);
-    run.later(this, () => {
+    flushScrollAndWait().then(() => {
       // and then right to 25px;
       this.$(cssSelector)[scrollMethod](secondMovement);
-      run.later(this, () => {
+      flushScrollAndWait().then(() => {
         //THEN scroll gets called accordingly, and a horizontal scroll is detected
         assert.deepEqual(scrolledCallArgs[0], [initialPosition, direction]);
         assert.deepEqual(scrolledCallArgs[1], [firstMovement, direction]);
         assert.deepEqual(scrolledCallArgs[2], [secondMovement, direction]);
         done();
-      }, ARBITRARY_DELAY_TIME);
-    }, ARBITRARY_DELAY_TIME);
-  }, ARBITRARY_DELAY_TIME);
+      });
+    });
+  });
 
   return done;
 }
