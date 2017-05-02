@@ -10,7 +10,7 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
     <div style="height: 400px;">
-      {{#ember-scrollable scrollToY=scrollToY onScroll=(action (mut scrollToY))}}
+      {{#ember-scrollable scrollToY=scrollToY onScrollY=(action (mut scrollToY))}}
         <p>
           {{#draggable-object content=this}}
             Drag Me!
@@ -43,7 +43,7 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
     <div style="height: 400px;">
-      {{#ember-scrollable scrollToY=scrollToY onScroll=(action (mut scrollToY))}}
+      {{#ember-scrollable scrollToY=scrollToY onScrollY=(action (mut scrollToY))}}
         <p>
           {{#draggable-object content=this}}
             Drag Me!
