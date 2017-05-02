@@ -23,7 +23,7 @@ const VERTICAL_TEMPLATE = hbs`
         height=10
         width=10
         scrollToY=scrollToY
-        onScrollY=(action 'scrolled')
+        onScroll=(action 'scrolled')
       }}
         <div style="height: 40px; width: 40px;">
           Content
@@ -38,7 +38,7 @@ const HORIZONTAL_TEMPLATE = hbs`
         height=10
         width=10
         scrollToX=scrollToX
-        onScrollX=(action 'scrolled')
+        onScroll=(action 'scrolled')
       }}
         <div style="height: 40px; width: 40px;">
           Content
