@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.4.6
+
+### Pull Requests
+
+- [#74](https://github.com/alphasights/ember-scrollable/pull/74)  Fixing the arbitrary delay time in test  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#75](https://github.com/alphasights/ember-scrollable/pull/75)  Friendly cleanup  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+- [#77](https://github.com/alphasights/ember-scrollable/pull/77)  Upgrade Ember Lifeline  *by [alphasights](https://github.com/alphasights)*
+
 ## 0.4.5
 
 ### Pull Requests
