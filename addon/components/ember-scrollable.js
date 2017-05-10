@@ -24,7 +24,6 @@ const PAGE_JUMP_MULTIPLE = 7 / 8;
 const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
 
 const scrollbarSelector = '.tse-scrollbar';
-const scrollContentSelector = '.tse-scroll-content';
 const contentSelector = '.tse-content';
 
 export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
@@ -225,16 +224,11 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    */
   verticalMouseOffset: 0,
 
-  scrollContentSize(sizeAttr) {
-    return this._scrollContentElement[sizeAttr]();
-  },
-
   contentSize(sizeAttr) {
     return this._contentElement[sizeAttr]();
   },
 
   setupElements() {
-    this._scrollContentElement = this.$(`${scrollContentSelector}`);
     this._contentElement = this.$(`${contentSelector}:first`);
   },
 
@@ -473,7 +467,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    */
   jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
     const scrollOffset = this.get(scrollToProp);
-    let jumpAmt = PAGE_JUMP_MULTIPLE * this.scrollContentSize(sizeAttr);
+    let jumpAmt = PAGE_JUMP_MULTIPLE * this.contentSize(sizeAttr);
     let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
     this.set(scrollToProp, scrollPos);
   },

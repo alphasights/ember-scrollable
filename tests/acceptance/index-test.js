@@ -77,7 +77,7 @@ test('When element resized from no-overflow => overflow => no-overflow, no scrol
   andThen(function() {
     assert.ok(find('.no-scrollbar-demo .ember-scrollable'), 'resize demo rendered');
     assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle:not(.visible)'), 'resize handle rendered, but not visible');
-    scrollArea = find('.no-scrollbar-demo .ember-scrollable .tse-content');
+    scrollArea = find('.no-scrollbar-demo .ember-scrollable .scrollable-content');
     assert.equal(elementHeight(scrollArea), 18, 'there is no overflow as 18 < 200px');
 
     click(toggleButtonSelector);
