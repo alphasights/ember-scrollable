@@ -8,14 +8,9 @@
   overflow: hidden;
   height: 100%;
   width: 100%;
-  /* No longer using ::scrollbar too, since it breaks Chrome 25 */
 }
 .tse-scrollable .tse-scroll-content {
   position: absolute;
-}
-.tse-scrollable .tse-scroll-content::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 .tse-scrollbar {
@@ -73,11 +68,6 @@
   overflow-x: scroll;
   overflow-y: hidden;
 }
-.tse-scrollable.horizontal .tse-scroll-content::-webkit-scrollbar,
-.tse-scrollable.horizontal .tse-scroll-content::scrollbar {
-  width: auto;
-  height: 0;
-}
 .tse-scrollable.horizontal .tse-scrollbar.horizontal {
   /* make the scrollbar span full length w/o setting the width */
   left: 0;
@@ -94,13 +84,6 @@
   min-width: 0;
   height: 7px;
   min-height: 0;
-}
-
-/* Used when testing the scrollbar width */
-/* No longer using ::scrollbar too, since it breaks Chrome 25 */
-.scrollbar-width-tester::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 .tse-scrollable.horizontal .tse-scroll-content {
