@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.7
+
+### Pull Requests
+
+- [#78](https://github.com/alphasights/ember-scrollable/pull/78)  remove all ::scrollbar pseudo selectors  *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## 0.4.6
 
 ### Pull Requests
