@@ -58,3 +58,4 @@ The component accepts the following options:
 ### Running Tests
 
 * `ember test --server`
+
