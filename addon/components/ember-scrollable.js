@@ -380,6 +380,8 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
     const direction = scrollDirection === 'vertical' ? 'Y' : 'X';
     this.get(`onScroll${direction}`)(scrollOffset);
+    // synchronize scrollToX / scrollToY
+    this.set(`scrollTo${direction}`, scrollOffset);
     // TODO this is deprecated. remove eventually.
     this.sendScroll(event, scrollOffset);
   },
