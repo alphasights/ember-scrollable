@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.8
+
+### Pull Requests
+
+- [#81](https://github.com/alphasights/ember-scrollable/pull/81)  Fixng scrollbar jumping around bug  *by [Alex Alvarez](https://github.com/alexander-alvarez)*
+
 ## 0.4.7
 
 ### Pull Requests
