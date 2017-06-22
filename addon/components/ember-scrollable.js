@@ -21,7 +21,7 @@ const {
 const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
 
-const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
+export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
 
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
@@ -146,9 +146,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
     this.addEventListener(window, 'mouseup', (e) => this.endDrag(e));
-    this.addEventListener(window, 'mousemove', (e) => {
-      throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
-    });
     this.setupResize();
   },
 
@@ -207,22 +204,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   dragOffset: 0,
-  /**
-   * Horizontal offset in pixels from the boundary of the scrollable container to the mouse.
-   *
-   * @property horizontalMouseOffset
-   * @private
-   * @type Number
-   */
-  horizontalMouseOffset: 0,
-  /**
-   * Vertical offset in pixels from the boundary of the scrollable container to the mouse.
-   *
-   * @property verticalMouseOffset
-   * @private
-   * @type Number
-   */
-  verticalMouseOffset: 0,
 
   contentSize(sizeAttr) {
     return this._contentElement[sizeAttr]();
@@ -320,19 +301,6 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     if (this.get('autoHide')) {
       throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
-  },
-
-  /**
-   * Callback for the mouse move event. Update the mouse offsets given the new mouse position.
-   *
-   * @method updateMouseOffset
-   * @param e
-   * @private
-   */
-  updateMouseOffset(e) {
-    const { pageX, pageY } = e;
-    this.set('horizontalMouseOffset', pageX);
-    this.set('verticalMouseOffset', pageY);
   },
 
   /**

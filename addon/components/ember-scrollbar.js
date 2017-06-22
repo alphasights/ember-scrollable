@@ -1,10 +1,15 @@
 import Ember from 'ember';
+import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollbar';
 import { styleify } from '../util/css';
+import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from './ember-scrollable';
 
 const {
   computed,
-  isPresent
+  isPresent,
+  run: {
+    throttle
+  }
 } = Ember;
 
 const handleSelector = '.drag-handle';
@@ -16,7 +21,7 @@ const handleSelector = '.drag-handle';
  * @class EmberScrollbar
  * @extends Ember.Component
  */
-export default Ember.Component.extend({
+export default Ember.Component.extend(DomMixin, {
   layout,
   classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
   onDrag(){},
@@ -29,6 +34,7 @@ export default Ember.Component.extend({
   showHandle: false,
   handleSize: null,
   handleOffset: 0,
+  mouseOffset: 0,
 
   offsetAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'left' : 'top';
@@ -90,8 +96,27 @@ export default Ember.Component.extend({
     }
   },
 
+  didInsertElement() {
+    this._super(...arguments);
+    this.addEventListener(window, 'mousemove', (e) => {
+      throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
+    });
+  },
+
   endDrag() {
     this.get('onDragEnd')();
+  },
+
+  /**
+   * Callback for the mouse move event. Update the mouse offsets given the new mouse position.
+   *
+   * @method updateMouseOffset
+   * @param e
+   * @private
+   */
+  updateMouseOffset(e) {
+    const { pageX, pageY } = e;
+    this.set('mouseOffset', this.get('horizontal') ? pageX : pageY);
   },
 
   /**
