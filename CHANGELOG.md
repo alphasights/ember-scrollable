@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.9
+
+### Pull Requests
+
+- [#83](https://github.com/alphasights/ember-scrollable/pull/83)  Move mouse position detection to ember-scrollbar  *by [Jan Buschtöns](https://github.com/buschtoens)*
+
 ## 0.4.8
 
 ### Pull Requests
