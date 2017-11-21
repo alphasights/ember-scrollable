@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
