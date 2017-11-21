@@ -171,7 +171,7 @@ export default Ember.Component.extend(DomMixin, {
 
   didInsertElement() {
     this._super(...arguments);
-    this.addEventListener(this.$(), 'scroll', (e) => {
+    this.addEventListener(this.$()[0], 'scroll', (e) => {
       this.scrolled(e);
     });
     this.configureInitialScrollPosition();
