@@ -312,7 +312,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
    */
 
   endDrag(e) {
-    /* jshint unused:vars */
+    /* eslint no-unused-vars: 0 */
     this.set('isVerticalDragging', false);
     this.set('isHorizontalDragging', false);
   },
