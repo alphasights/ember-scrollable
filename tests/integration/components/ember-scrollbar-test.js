@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { click, find, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForComponent('ember-scrollbar', 'Integration | Component | ember scrollbar', {
   integration: true
@@ -34,7 +34,7 @@ test('Horizontal: offset and size get routed properly', function(assert) {
       horizontal=true
       showHandle=true
     }}
-    
+
     </div>
   </div>`);
 
@@ -59,7 +59,7 @@ test('Vertical: offset and size get routed properly', function(assert) {
       horizontal=false
       showHandle=true
     }}
-    
+
     </div>
   </div>`);
 
@@ -94,7 +94,7 @@ test('click event on handle triggers startDrag, but not onJumpTo', function(asse
       onDragStart=(action 'onDragStart')
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -129,7 +129,7 @@ test('clicking on bar triggers onJumpTo and not startDrag', function(assert) {
       onDragStart=(action 'onDragStart')
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -161,7 +161,7 @@ test('Horizontal: onJumpTo first argument is true when click to the left of hand
       showHandle=true
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -194,7 +194,7 @@ test('Horizontal: onJumpTo first argument is false when click to the right of ha
       showHandle=true
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -228,7 +228,7 @@ test('Vertical: onJumpTo first argument is true when click to the top of handle'
       showHandle=true
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -261,7 +261,7 @@ test('Vertical: onJumpTo first argument is false when clicking below the vertica
       showHandle=true
       onJumpTo=(action 'onJumpTo')
     }}
-    
+
     </div>
   </div>`);
 
@@ -295,7 +295,7 @@ test('mouseup event triggers onDragEnd', function(assert) {
       showHandle=true
       onDragEnd=(action 'onDragEnd')
     }}
-    
+
     </div>
   </div>`);
 
@@ -333,7 +333,7 @@ test('Vertical: onDrag is called when a change occurs when onDragging is true an
       showHandle=true
       onDrag=(action 'onDrag')
     }}
-    
+
     </div>
   </div>`);
 
@@ -369,7 +369,7 @@ test('Horizontal: onDrag is called when a change occurs when onDragging is true 
       showHandle=true
       onDrag=(action 'onDrag')
     }}
-    
+
     </div>
   </div>`);
 

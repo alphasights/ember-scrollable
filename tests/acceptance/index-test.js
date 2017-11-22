@@ -1,6 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
-import { click, find, fillIn, triggerEvent } from 'ember-native-dom-helpers/test-support/helpers';
+import { click, fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 
 moduleForAcceptance('Acceptance | ember-scrollbar');
 
