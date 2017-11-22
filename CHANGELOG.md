@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.10
+
+### Pull Requests
+
+- [#88](https://github.com/alphasights/ember-scrollable/pull/88)  Update Dependencies  *by [Jonathan Johnson](https://github.com/jrjohnson)*
+
 ## 0.4.9
 
 ### Pull Requests
