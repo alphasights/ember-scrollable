@@ -4,7 +4,6 @@ import DomMixin from 'ember-lifeline/mixins/dom';
 import { styleify } from '../util/css';
 import Number from '../util/number';
 
-
 const {
   computed,
   run: {
@@ -171,9 +170,7 @@ export default Ember.Component.extend(DomMixin, {
 
   didInsertElement() {
     this._super(...arguments);
-    this.addEventListener(this.element, 'scroll', (e) => {
-      this.scrolled(e);
-    });
+    this.addEventListener(this.element, 'scroll', this.scrolled);
     this.configureInitialScrollPosition();
   },
 
