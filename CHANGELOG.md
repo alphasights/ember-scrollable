@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.4.11
+
+### Pull Requests
+
+- [#90](https://github.com/alphasights/ember-scrollable/pull/90)  avoid creating extra closure  *by [bekzod](https://github.com/bekzod)*
+
 ## 0.4.10
 
 ### Pull Requests
