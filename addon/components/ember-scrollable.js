@@ -145,7 +145,7 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
     this._super(...arguments);
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
-    this.addEventListener(window, 'mouseup', (e) => this.endDrag(e));
+    this.addEventListener(window, 'mouseup', this.endDrag);
     this.setupResize();
   },
 
