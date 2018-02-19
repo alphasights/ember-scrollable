@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
@@ -26,7 +25,7 @@ export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 =
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
-export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
+export default Ember.Component.extend(DomMixin, {
   layout,
   classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal', 'vertical'],
 
