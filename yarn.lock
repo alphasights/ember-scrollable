@@ -1536,6 +1536,13 @@ browserslist@^2.1.2:
     caniuse-lite "^1.0.30000760"
     electron-to-chromium "^1.3.27"
 
+browserslist@^2.2.2:
+  version "2.11.3"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.11.3.tgz#fe36167aed1bbcde4827ebfe71347a2cc70b99b2"
+  dependencies:
+    caniuse-lite "^1.0.30000792"
+    electron-to-chromium "^1.3.30"
+
 bser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bser/-/bser-2.0.0.tgz#9ac78d3ed5d915804fd87acb158bc797147a1719"
@@ -1610,6 +1617,10 @@ can-symlink@^1.0.0:
 caniuse-lite@^1.0.30000760:
   version "1.0.30000766"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000766.tgz#8a095cc5eb9923c27008ce4d0db23e65a3e28843"
+
+caniuse-lite@^1.0.30000792:
+  version "1.0.30000819"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000819.tgz#aabee5fd15a080febab6ae5d30c9ea15f4c6d4e2"
 
 capture-exit@^1.1.0:
   version "1.2.0"
@@ -2236,6 +2247,10 @@ electron-to-chromium@^1.3.27:
   version "1.3.27"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.27.tgz#78ecb8a399066187bb374eede35d9c70565a803d"
 
+electron-to-chromium@^1.3.30:
+  version "1.3.40"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.40.tgz#1fbd6d97befd72b8a6f921dc38d22413d2f6fddf"
+
 element-resize-detector@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.1.4.tgz#ec48a09b44ab0e35a352242e15406b3fa679d7f1"
@@ -2655,11 +2670,12 @@ ember-export-application-global@^2.0.0:
   dependencies:
     ember-cli-babel "^6.0.0-beta.7"
 
-ember-lifeline@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-2.0.0.tgz#ab2dadd3eed585605d1c4137c64aacec4d241c8e"
+ember-lifeline@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ember-lifeline/-/ember-lifeline-3.0.1.tgz#f1fb123ad277576a342bdbd09ea823c4a10b7e97"
   dependencies:
     ember-cli-babel "^6.8.2"
+    ember-weakmap "^3.1.1"
 
 ember-load-initializers@^1.0.0:
   version "1.0.0"
@@ -2753,6 +2769,14 @@ ember-try@^0.2.15:
     rimraf "^2.3.2"
     rsvp "^3.0.17"
     semver "^5.1.0"
+
+ember-weakmap@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/ember-weakmap/-/ember-weakmap-3.1.1.tgz#2ae6e0080b5b80cf0d108f7752dc69ea9603dbd7"
+  dependencies:
+    browserslist "^2.2.2"
+    debug "^3.1.0"
+    ember-cli-babel "^6.3.0"
 
 encodeurl@~1.0.1:
   version "1.0.1"
