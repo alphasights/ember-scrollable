@@ -22,7 +22,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-component-inbound-actions": "1.2.1",
     "ember-element-resize-detector": "0.1.5",
-    "ember-lifeline": "^2.0.0"
+    "ember-lifeline": "^3.0.1"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
