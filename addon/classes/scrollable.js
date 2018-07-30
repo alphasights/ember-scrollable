@@ -1,8 +1,4 @@
-import Ember from 'ember';
-const {
-  String: {camelize}
-} = Ember;
-
+import { camelize } from '@ember/string';
 
 export default class Scrollable {
   constructor(options) {

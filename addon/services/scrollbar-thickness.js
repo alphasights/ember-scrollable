@@ -1,10 +1,6 @@
-import Ember from 'ember';
-
-const {
-  computed,
-  Service,
-  $
-} = Ember;
+import { computed } from '@ember/object';
+import Service from '@ember/service';
+import $ from 'jquery';
 
 export default Service.extend({
   thickness: computed(() => {
