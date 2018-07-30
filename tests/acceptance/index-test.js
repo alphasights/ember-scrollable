@@ -1,6 +1,9 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
+import { visit, currentURL } from '@ember/test-helpers';
 import { click, fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
+import { timeout } from 'ember-scrollable/util/timeout';
+import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from 'ember-scrollable/components/ember-scrollable';
 
 module('Acceptance | ember-scrollbar', function(hooks) {
   setupApplicationTest(hooks);
@@ -47,6 +50,7 @@ module('Acceptance | ember-scrollbar', function(hooks) {
     offset = 123;
 
     await fillIn('#targetScrollOffset input', offset);
+    await timeout(THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     assert.ok(find('#currentScrollOffset').innerText.indexOf(String(offset)) !== -1, 'scrollOffset matches');
   });
 
@@ -64,7 +68,7 @@ module('Acceptance | ember-scrollbar', function(hooks) {
     await click(toggleButtonSelector);
     assert.equal(elementHeight(scrollArea), 494, 'there is overflow as 494 > 200px');
 
-    await triggerEvent(scrollArea, 'mousemove');
+    triggerEvent(scrollArea, 'mousemove');
     assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle.visible'), 'handle shows up visible');
 
     await click(toggleButtonSelector);

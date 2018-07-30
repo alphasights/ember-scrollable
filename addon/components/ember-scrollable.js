@@ -1,14 +1,14 @@
 import Ember from 'ember';
-import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
-import DomMixin from 'ember-lifeline/mixins/dom';
-import layout from '../templates/components/ember-scrollable';
-import { Horizontal, Vertical } from '../classes/scrollable';
 import { computed } from '@ember/object';
 import { deprecate } from '@ember/application/deprecations';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
+import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
+import DomMixin from 'ember-lifeline/mixins/dom';
+import layout from '../templates/components/ember-scrollable';
+import { Horizontal, Vertical } from '../classes/scrollable';
 
 const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
