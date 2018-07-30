@@ -356,13 +356,15 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   sendScrolledToBottom() {
-    this.sendAction('onScrolledToBottom');
+    if (this.get('onScrolledToBottom')) {
+      this.get('onScrolledToBottom')();
+    }
   },
 
   sendScroll(event, scrollOffset) {
     if (this.get('onScroll')) {
       deprecate('Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks');
-      this.sendAction('onScroll', scrollOffset, event);
+      this.get('onScroll')(scrollOffset, event);
     }
   },
 
