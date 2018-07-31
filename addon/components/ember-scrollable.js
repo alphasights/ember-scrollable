@@ -1,22 +1,14 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
+import { deprecate } from '@ember/application/deprecations';
+import { isPresent } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import { scheduleOnce, debounce, throttle } from '@ember/runloop';
+import Component from '@ember/component';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
-
-const {
-  computed,
-  deprecate,
-  isPresent,
-  inject: {
-    service
-  },
-  run: {
-    scheduleOnce,
-    debounce,
-    throttle
-  }
-} = Ember;
 
 const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
@@ -26,7 +18,7 @@ export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 =
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
-export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
+export default Component.extend(InboundActionsMixin, DomMixin, {
   layout,
   classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal', 'vertical'],
 
@@ -364,13 +356,15 @@ export default Ember.Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   sendScrolledToBottom() {
-    this.sendAction('onScrolledToBottom');
+    if (this.get('onScrolledToBottom')) {
+      this.get('onScrolledToBottom')();
+    }
   },
 
   sendScroll(event, scrollOffset) {
     if (this.get('onScroll')) {
       deprecate('Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks');
-      this.sendAction('onScroll', scrollOffset, event);
+      this.get('onScroll')(scrollOffset, event);
     }
   },
 

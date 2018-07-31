@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { Promise } from 'rsvp';
 import {moduleForComponent, test} from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
@@ -9,7 +9,7 @@ moduleForComponent('scroll-content-element', 'Integration | Component | scroll c
 
 const flushScrollAndWait =  function() {
   return wait().then(() => {
-    return new Ember.RSVP.Promise((resolve) => {
+    return new Promise((resolve) => {
       window.requestAnimationFrame(resolve);
     });
   });

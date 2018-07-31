@@ -1,9 +1,5 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
-
-const {
-  run
-} = Ember;
 
 moduleForComponent('ember-scrollable', 'Unit | Component | ember scrollable', {
   // Specify the other units that are required for this test

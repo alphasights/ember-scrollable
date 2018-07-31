@@ -1,8 +1,8 @@
 /* eslint no-console: 0 */
 
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   isShort: true,
   actions: {
     log(message) {

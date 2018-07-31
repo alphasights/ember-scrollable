@@ -1,16 +1,11 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { isPresent } from '@ember/utils';
+import { throttle } from '@ember/runloop';
+import Component from '@ember/component';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollbar';
 import { styleify } from '../util/css';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from './ember-scrollable';
-
-const {
-  computed,
-  isPresent,
-  run: {
-    throttle
-  }
-} = Ember;
 
 const handleSelector = '.drag-handle';
 
@@ -21,7 +16,7 @@ const handleSelector = '.drag-handle';
  * @class EmberScrollbar
  * @extends Ember.Component
  */
-export default Ember.Component.extend(DomMixin, {
+export default Component.extend(DomMixin, {
   layout,
   classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
   onDrag(){},
