@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 0.5.0
+
+### Pull Requests
+
+- [#95](https://github.com/alphasights/ember-scrollable/pull/95)  Upgrade  *by [Gaurav Munjal](https://github.com/Gaurav0)*
+
 ## 0.4.11
 
 ### Pull Requests
