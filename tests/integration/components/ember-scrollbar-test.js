@@ -311,7 +311,7 @@ module('Integration | Component | ember scrollbar', function(hooks) {
   });
 
 
-  test('Vertical: onDrag is called when a change occurs when onDragging is true and mouseOffset exists', async function(assert) {
+  test('Vertical: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function(assert) {
     assert.expect(1);
 
     this.setProperties({
@@ -334,7 +334,6 @@ module('Integration | Component | ember scrollbar', function(hooks) {
         handleSize=size
         horizontal=false
         dragOffset=30
-        mouseOffset=300
         isDragging=isDragging
         showHandle=true
         onDrag=(action 'onDrag')
@@ -345,10 +344,10 @@ module('Integration | Component | ember scrollbar', function(hooks) {
 
     // WHEN
     this.set('isDragging', true);
-
+    triggerEvent(window, 'mousemove', { pageX: 0, pageY: 0 });
   });
 
-  test('Horizontal: onDrag is called when a change occurs when onDragging is true and mouseOffset exists', async function(assert) {
+  test('Horizontal: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function(assert) {
     assert.expect(1);
 
     this.setProperties({
@@ -370,7 +369,6 @@ module('Integration | Component | ember scrollbar', function(hooks) {
         handleSize=size
         horizontal=true
         dragOffset=30
-        mouseOffset=300
         isDragging=isDragging
         showHandle=true
         onDrag=(action 'onDrag')
@@ -381,7 +379,7 @@ module('Integration | Component | ember scrollbar', function(hooks) {
 
     // WHEN
     this.set('isDragging', true);
-
+    triggerEvent(window, 'mousemove', { pageX: 0, pageY: 0 });
   });
 
   // TODO verify that the drag percentage is calculated from mouse offset and drag offset and is a percentage between 0 and 1 of the scrollbar size
