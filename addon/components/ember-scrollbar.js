@@ -29,7 +29,6 @@ export default Component.extend(DomMixin, {
   showHandle: false,
   handleSize: null,
   handleOffset: 0,
-  mouseOffset: 0,
 
   offsetAttr: computed('horizontal', function() {
     return this.get('horizontal') ? 'left' : 'top';
@@ -82,15 +81,6 @@ export default Component.extend(DomMixin, {
     this.endDrag();
   },
 
-  didReceiveAttrs() {
-    const mouseOffset = this.get('mouseOffset');
-    if (this.get('isDragging')) {
-      if (isPresent(mouseOffset)) {
-        this._drag(mouseOffset, this.get('dragOffset'));
-      }
-    }
-  },
-
   didInsertElement() {
     this._super(...arguments);
     this.addEventListener(window, 'mousemove', (e) => {
@@ -111,7 +101,11 @@ export default Component.extend(DomMixin, {
    */
   updateMouseOffset(e) {
     const { pageX, pageY } = e;
-    this.set('mouseOffset', this.get('horizontal') ? pageX : pageY);
+    const mouseOffset = this.get('horizontal') ? pageX : pageY;
+
+    if (this.get('isDragging') && isPresent(mouseOffset)) {
+      this._drag(mouseOffset, this.get('dragOffset'));
+    }
   },
 
   /**
