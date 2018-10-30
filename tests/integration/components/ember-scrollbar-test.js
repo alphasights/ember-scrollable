@@ -3,6 +3,8 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { click, find, triggerEvent } from 'ember-native-dom-helpers';
+import jQuery from 'jquery';
+
 
 module('Integration | Component | ember scrollbar', function(hooks) {
   setupRenderingTest(hooks);
@@ -24,7 +26,7 @@ module('Integration | Component | ember scrollbar', function(hooks) {
   }
 
   test('Horizontal: offset and size get routed properly', async function(assert) {
-    assert.expect(2);
+    assert.expect(4);
 
     this.setProperties({
       size: 40,
@@ -43,13 +45,14 @@ module('Integration | Component | ember scrollbar', function(hooks) {
 
       </div>
     </div>`);
-
-    assert.equal(this.$(handleClass).position().left, this.get('offset'));
-    assert.equal(Number.parseInt(this.$(handleClass).css('width')), this.get('size'));
+    assert.equal(jQuery(handleClass).position().left, this.get('offset'));
+    assert.equal(Number.parseInt(jQuery(handleClass).css('width')), this.get('size'));
+    assert.equal(this.get('element').querySelector(handleClass).offsetLeft, this.get('offset'));
+    assert.equal(Number.parseInt(this.get('element').querySelector(handleClass).style.width), this.get('size'));
   });
 
   test('Vertical: offset and size get routed properly', async function(assert) {
-    assert.expect(2);
+    assert.expect(4);
 
     this.setProperties({
       size: 40,
@@ -69,8 +72,10 @@ module('Integration | Component | ember scrollbar', function(hooks) {
       </div>
     </div>`);
 
-    assert.equal(this.$(handleClass).position().top, this.get('offset'));
-    assert.equal(Number.parseInt(this.$(handleClass).css('height')), this.get('size'));
+    assert.equal(jQuery(handleClass).position().top, this.get('offset'));
+    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.get('size'));
+    assert.equal(jQuery(handleClass).position().top, this.get('offset'));
+    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.get('size'));
   });
 
 
@@ -81,9 +86,11 @@ module('Integration | Component | ember scrollbar', function(hooks) {
       size: 40,
       offset: 10
     });
+
     this.actions.onDragStart = function() {
       assert.ok(true);
     };
+
     this.actions.onJumpTo = function() {
       assert.ok(false);
     };

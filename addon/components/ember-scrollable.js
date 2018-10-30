@@ -9,6 +9,7 @@ import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
+import { getHeight, getWidth } from '../util/measurements';
 
 const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
@@ -143,8 +144,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
 
   willDestroyElement() {
     this._super(...arguments);
-
-    this.$().off('transitionend webkitTransitionEnd', this._resizeHandler);
+    this.element.removeEventListener('transitionend webkitTransitionEnd', this._resizeHandler)
   },
 
 
@@ -198,11 +198,16 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   dragOffset: 0,
 
   contentSize(sizeAttr) {
-    return this._contentElement[sizeAttr]();
+
+    let getters = {
+      'height': getHeight,
+      'width': getWidth
+    }
+    return getters[sizeAttr](this._contentElement);
   },
 
   setupElements() {
-    this._contentElement = this.$(`${contentSelector}:first`);
+    this._contentElement = this.get('element').querySelector(`${contentSelector}`);
   },
 
   /**
@@ -228,8 +233,8 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   resizeScrollContent() {
-    const width = this.$().width();
-    const height = this.$().height();
+    const width = getWidth(this.element);
+    const height = getHeight(this.element);
     const scrollbarThickness = this.get('scrollbarThickness.thickness');
 
     const hasHorizontal = this.get('horizontal');
@@ -241,7 +246,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     } else if (hasHorizontal) {
       this.set('scrollContentWidth', width);
       this.set('scrollContentHeight', height + scrollbarThickness);
-      this._contentElement.height(height);
+      this._contentElement.height = height;
     } else {
       this.set('scrollContentWidth', width + scrollbarThickness);
       this.set('scrollContentHeight', height);
@@ -264,7 +269,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
 
     if (this.get('vertical')) {
       const verticalScrollbar = new Vertical({
-        scrollbarElement: this.$(`${scrollbarSelector}.vertical`),
+        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.vertical`),
         contentElement: this._contentElement
       });
       this.set('verticalScrollbar', verticalScrollbar);
@@ -273,7 +278,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     }
     if (this.get('horizontal')) {
       const horizontalScrollbar = new Horizontal({
-        scrollbarElement: this.$(`${scrollbarSelector}.horizontal`),
+        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.horizontal`),
         contentElement: this._contentElement
       });
       this.set('horizontalScrollbar', horizontalScrollbar);
