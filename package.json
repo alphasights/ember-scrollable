@@ -23,7 +23,7 @@
     "ember-cli-babel": "^6.8.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-component-inbound-actions": "^1.3.0",
-    "ember-element-resize-detector": "~0.2.0",
+    "ember-element-resize-detector": "~0.3.0",
     "ember-lifeline": "^3.0.1"
   },
   "devDependencies": {
