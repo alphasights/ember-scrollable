@@ -17,17 +17,16 @@ jobs:
     - name: Install, lint:hbs, lint:js, tests
       run: |
         npm install
-        npm run lint:hbs
         npm run lint:js
         npm test
-        
+
   additional:
     name: Ember additional ${{matrix.ember-release}}
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
-        ember-release: 
+        ember-release:
           - ember-lts-2.18
           - ember-lts-3.4
           - ember-lts-3.8
@@ -36,7 +35,7 @@ jobs:
           - ember-beta
           - ember-canary
           - ember-default-with-jquery
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -45,8 +44,8 @@ jobs:
       uses: actions/setup-node@master
       with:
         node-version: 10.x
-  
-    - name: Install, lint:hbs, lint:js, tests
+
+    - name: Install, lint:js, tests
       continue-on-error: true
       run: |
         npm install
