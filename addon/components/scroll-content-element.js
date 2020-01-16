@@ -154,8 +154,8 @@ export default Component.extend(DomMixin, {
     if (Number.isNaN(offset)) {
       return;
     }
-    const scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
-    this.$()[scrollOffsetAttr](offset);
+    let scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
+    this.get('element')[scrollOffsetAttr] = offset
   },
 
   configureInitialScrollPosition() {
@@ -183,4 +183,3 @@ export default Component.extend(DomMixin, {
   }
 
 });
-

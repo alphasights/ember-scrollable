@@ -6,6 +6,7 @@ import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollbar';
 import { styleify } from '../util/css';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from './ember-scrollable';
+import { capitalize } from '@ember/string';
 
 const handleSelector = '.drag-handle';
 
@@ -117,7 +118,7 @@ export default Component.extend(DomMixin, {
    */
   jumpScroll(e) {
     // If the drag handle element was pressed, don't do anything here.
-    if (e.target === this.$(handleSelector)[0]) {
+    if (e.target === this.get('element').querySelector(handleSelector)) {
       return;
     }
     this._jumpScroll(e);
@@ -166,16 +167,22 @@ export default Component.extend(DomMixin, {
 
 
   _handleOffset() {
-    return this.$(handleSelector).offset()[this.get('offsetAttr')];
+    return this.get('element').querySelector(handleSelector).getBoundingClientRect()[this.get('offsetAttr')];
   },
 
 
   _handlePositionOffset() {
-    return this.$(handleSelector).position()[this.get('offsetAttr')];
+    let el = this.get('element').querySelector(handleSelector);
+    let position = {
+        left: el.offsetLeft,
+        top: el.offsetTop
+    }
+
+    return position[this.get('offsetAttr')];
   },
 
   _scrollbarOffset() {
-    return this.$().offset()[this.get('offsetAttr')];
+    return this.get('element').getBoundingClientRect()[this.get('offsetAttr')];
   },
 
   /**
@@ -194,7 +201,7 @@ export default Component.extend(DomMixin, {
 
 
   _scrollbarSize() {
-    return this.$()[this.get('sizeAttr')]();
+    return this.get('element')[`offset${capitalize(this.get('sizeAttr'))}`];
   },
 
   actions: {
