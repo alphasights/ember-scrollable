@@ -1,6 +1,6 @@
 {
   "name": "ember-scrollable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OSX-like scrollbar components in ember",
   "keywords": [
     "ember-addon"
