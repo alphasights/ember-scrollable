@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 import { deprecate } from '@ember/application/deprecations';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
-import { scheduleOnce, debounce, throttle } from '@ember/runloop';
+import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
 import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
@@ -140,11 +140,17 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
     this.addEventListener(window, 'mouseup', this.endDrag);
     this.setupResize();
+
+    this.mouseMoveHandler = bind(this, this.onMouseMove)
+    this.element.addEventListener('mousemove', this.mouseMoveHandler)
   },
 
   willDestroyElement() {
     this._super(...arguments);
     this.element.removeEventListener('transitionend webkitTransitionEnd', this._resizeHandler)
+
+    this.element.removeEventListener('mousemove', this.mouseMoveHandler)
+    this.mouseMoveHandler = null
   },
 
 
@@ -196,6 +202,11 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   dragOffset: 0,
+  /**
+   * @property mouseMoveHandler
+   * @private
+   */
+  mouseMoveHandler: null,
 
   contentSize(sizeAttr) {
 
@@ -291,10 +302,10 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   /**
    * Show the scrollbar(s) when the user moves within the scroll viewport
    *
-   * @method mouseMove
+   * @method onMouseMove
    * @private
    */
-  mouseMove() {
+  onMouseMove() {
     if (this.get('autoHide')) {
       throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
