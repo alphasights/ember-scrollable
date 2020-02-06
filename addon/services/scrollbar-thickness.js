@@ -5,7 +5,7 @@ import { getWidth } from '../util/measurements';
 export default Service.extend({
   thickness: computed(() => {
     let tempEl = document.createElement('div');
-    tempEl.setAttribute('style', 'width: 50px; position: "absolute"; left: -100px;');
+    tempEl.setAttribute('style', 'width: 50px; position: absolute; left: -100px;');
     tempEl.classList.add('scrollbar-width-tester')
     tempEl.innerHTML = `<div style="overflow: scroll;"><div class="scrollbar-width-tester__inner"></div></div>`;
     document.body.appendChild(tempEl);
