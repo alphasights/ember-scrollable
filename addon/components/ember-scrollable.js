@@ -385,7 +385,12 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   resizeScrollbar() {
-    this.createScrollbarAndShowIfNecessary();
+    if (this.get('horizontalScrollbar')) {
+      this.updateScrollbarAndSetupProperties(this.get('scrollToX'), 'horizontal');
+    }
+    if (this.get('verticalScrollbar')) {
+      this.updateScrollbarAndSetupProperties(this.get('scrollToY'), 'vertical');
+    }
   },
 
   showScrollbar() {

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { visit, currentURL } from '@ember/test-helpers';
+import { visit, currentURL, triggerEvent as triggerEventTestHelper, settled } from '@ember/test-helpers';
 import { click, fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
 import { timeout } from 'ember-scrollable/util/timeout';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from 'ember-scrollable/components/ember-scrollable';
@@ -74,5 +74,26 @@ module('Acceptance | ember-scrollbar', function(hooks) {
     await click(toggleButtonSelector);
     assert.equal(elementHeight(scrollArea), 18);
     assert.ok(find('.no-scrollbar-demo .ember-scrollable .drag-handle:not(.visible)'), 'handle goes away when overflow is gone');
+  });
+
+  test('Scrollbar is resized and correctly positioned during infinite scroll', async function(assert) {
+    await visit('/');
+
+    let dragHandle = await find('.infinite-scroll-demo .drag-handle');
+    const dragHandleHeightBeforeScroll = parseInt(dragHandle.style.height);
+
+    const scrollContent = await find('.infinite-scroll-demo .tse-scroll-content');
+    // Move scrollbar to bottom
+    scrollContent.scrollTop =
+      scrollContent.scrollHeight - scrollContent.offsetHeight;
+    await triggerEventTestHelper('.tse-scroll-content', 'scroll');
+    // Wait for scroll event handler adds more scroll content
+    await settled();
+
+    dragHandle = await find('.infinite-scroll-demo .drag-handle');
+    // Drag handle size should be shorter than before since there is now more scroll content
+    assert.ok(parseInt(dragHandle.style.height) < dragHandleHeightBeforeScroll);
+    // Drag handle should not be reset back to the top
+    assert.ok(parseInt(dragHandle.style.top) !== 0);
   });
 });
