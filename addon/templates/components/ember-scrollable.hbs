@@ -1,37 +1,43 @@
 <div
-  class='ember-scrollable tse-scrollable {{if horizontal 'horizontal'}} {{
-    if vertical 'vertical'
+  class='ember-scrollable tse-scrollable {{if this.horizontal 'horizontal'}} {{
+    if this.vertical 'vertical'
   }}'
   {{did-insert this.elementInserted}}
   {{on-resize this.recalculate}}
 >
-  {{#if horizontal}}
-    {{ember-scrollbar
-      handleOffset=horizontalHandleOffset
-      handleSize=horizontalHandleSize
-      horizontal=true
-      showHandle=this.showHandle
-      isDragging=isHorizontalDragging
-      onJumpTo=(action 'horizontalJumpTo')
-      onDrag=(action 'horizontalDrag')
-      onDragStart=(action 'horizontalDragBoundary' true)
-      onDragEnd=(action 'horizontalDragBoundary' false)
-    }}
+  {{#if this.horizontal}}
+    <EmberScrollbar
+      @handleOffset={{this.horizontalHandleOffset}}
+      @handleSize={{this.horizontalHandleSize}}
+      @horizontal={{true}}
+      @showHandle={{this.showHandle}}
+      @isDragging={{this.isHorizontalDragging}}
+      @onJumpTo={{action 'horizontalJumpTo'}}
+      @onDrag={{action 'horizontalDrag'}}
+      @onDragStart={{action 'horizontalDragBoundary' true}}
+      @onDragEnd={{action 'horizontalDragBoundary' false}}
+    />
   {{/if}}
-  {{#if vertical}}
-    {{ember-scrollbar
-      handleOffset=verticalHandleOffset
-      handleSize=verticalHandleSize
-      horizontal=false
-      showHandle=this.showHandle
-      isDragging=isVerticalDragging
-      onJumpTo=(action 'verticalJumpTo')
-      onDrag=(action 'verticalDrag')
-      onDragStart=(action 'verticalBoundaryEvent' true)
-      onDragEnd=(action 'verticalBoundaryEvent' false)
-    }}
+  {{#if this.vertical}}
+    <EmberScrollbar
+      @handleOffset={{this.verticalHandleOffset}}
+      @handleSize={{this.verticalHandleSize}}
+      @horizontal={{false}}
+      @showHandle={{this.showHandle}}
+      @isDragging={{this.isVerticalDragging}}
+      @onJumpTo={{action 'verticalJumpTo'}}
+      @onDrag={{action 'verticalDrag'}}
+      @onDragStart={{action 'verticalBoundaryEvent' true}}
+      @onDragEnd={{action 'verticalBoundaryEvent' false}}
+    />
   {{/if}}
-  <ScrollContentElement @height={{scrollContentHeight}} @width={{scrollContentWidth}} @scrollToX={{scrollToX}} @scrollToY={{scrollToY}} @onScroll={{action 'scrolled'}}>
+  <ScrollContentElement
+    @height={{this.scrollContentHeight}}
+    @width={{this.scrollContentWidth}}
+    @scrollToX={{this.scrollToX}}
+    @scrollToY={{this.scrollToY}}
+    @onScroll={{action 'scrolled'}}
+  >
     <div class='tse-content scrollable-content'>
       {{yield
         (hash

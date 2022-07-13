@@ -1,7 +1,7 @@
 <section>
-  {{#link-to 'cookbook'}}
+  <LinkTo @route='cookbook'>
     Cookbook
-  {{/link-to}}
+  </LinkTo>
 </section>
 <section class='vertical-demo'>
   <h1>
@@ -190,8 +190,8 @@
   <h1>
     No Scroll
   </h1>
-  <button type="button" {{action 'toggleHeight'}}>
-    Make {{if isShort 'Overflow' 'No Overflow'}}
+  <button type='button' {{action 'toggleHeight'}}>
+    Make {{if this.isShort 'Overflow' 'No Overflow'}}
   </button>
   <div class='output'>
     {{! BEGIN-SNIPPET no-scrollbar-demo }}
@@ -200,7 +200,7 @@
         <p>
           Some content
         </p>
-        {{#unless isShort}}
+        {{#unless this.isShort}}
           <p>
             Some content
           </p>
@@ -255,7 +255,7 @@
     {{/let}}
   </div>
 </section>
-<!-- TODO rename class and apply styles to dual scroll demo class-->
+{{! TODO rename class and apply styles to dual scroll demo class}}
 <section class='vertical-demo'>
   <h1>
     Double Scroll
@@ -264,7 +264,11 @@
   <div class='output'>
     {{! BEGIN-SNIPPET dual-scroll }}
     <div class='double-scroll-container'>
-      <EmberScrollable @horizontal={{true}} @vertical={{true}} @onScrolledToBottom={{action 'log' 'Bottom reached!'}}>
+      <EmberScrollable
+        @horizontal={{true}}
+        @vertical={{true}}
+        @onScrolledToBottom={{action 'log' 'Bottom reached!'}}
+      >
         <div class='wide-content'>
           <p>
             Some content
@@ -344,8 +348,8 @@
   <h1>
     Auto resizing
   </h1>
-  <button type="button" {{action 'toggleHeight'}}>
-    Make {{if isShort 'Tall' 'Short'}}
+  <button type='button' {{action 'toggleHeight'}}>
+    Make {{if this.isShort 'Tall' 'Short'}}
   </button>
   <p>
     The scrollbar automatically recalculates when the height of the parent container changes.
@@ -353,7 +357,7 @@
 
   <div class='output'>
     {{! BEGIN-SNIPPET vertical }}
-    <div class={{if isShort 'is-short' 'is-tall'}}>
+    <div class={{if this.isShort 'is-short' 'is-tall'}}>
       <EmberScrollable @onScrolledToBottom={{action 'log' 'Bottom reached!'}}>
         <p>
           Some content
@@ -435,23 +439,27 @@
   <div class='output'>
     {{! BEGIN-SNIPPET event-and-setter }}
     <label id='targetScrollOffset'>
-      targetScrollOffset: {{input
-        value=targetScrollOffset
-        type='number'
-        min=0
-        step=10
-        max=400
-      }}
+      targetScrollOffset:
+      <Input
+        @value={{this.targetScrollOffset}}
+        @type='number'
+        min={{0}}
+        step={{10}}
+        max={{400}}
+      />
     </label>
     <br />
     <label id='currentScrollOffset'>
-      currentScrollOffset: {{currentScrollOffset}} px
+      currentScrollOffset: {{this.currentScrollOffset}} px
     </label>
 
     <hr />
 
     <div style='height: 400px;'>
-      <EmberScrollable @scrollToY={{targetScrollOffset}} @onScrollY={{action (mut currentScrollOffset)}}>
+      <EmberScrollable
+        @scrollToY={{this.targetScrollOffset}}
+        @onScrollY={{action (mut this.currentScrollOffset)}}
+      >
         <p>
           Some content
         </p>
