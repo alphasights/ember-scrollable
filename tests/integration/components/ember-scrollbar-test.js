@@ -7,12 +7,6 @@ import jQuery from 'jquery';
 module('Integration | Component | ember scrollbar', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function () {
-    this.actions = {};
-    this.send = (actionName, ...args) =>
-      this.actions[actionName].apply(this, args);
-  });
-
   const handleClass = '.drag-handle';
   const barClass = '.tse-scrollbar';
 
@@ -36,21 +30,24 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
       }}
 
       </div>
     </div>`);
-    assert.equal(jQuery(handleClass).position().left, this.offset);
-    assert.equal(Number.parseInt(jQuery(handleClass).css('width')), this.size);
-    assert.equal(
+    assert.strictEqual(jQuery(handleClass).position().left, this.offset);
+    assert.strictEqual(
+      Number.parseInt(jQuery(handleClass).css('width')),
+      this.size
+    );
+    assert.strictEqual(
       this.element.querySelector(handleClass).offsetLeft,
       this.offset
     );
-    assert.equal(
+    assert.strictEqual(
       Number.parseInt(this.element.querySelector(handleClass).style.width),
       this.size
     );
@@ -68,8 +65,8 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable vertical" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=false
         showHandle=true
       }}
@@ -77,10 +74,16 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       </div>
     </div>`);
 
-    assert.equal(jQuery(handleClass).position().top, this.offset);
-    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.size);
-    assert.equal(jQuery(handleClass).position().top, this.offset);
-    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.size);
+    assert.strictEqual(jQuery(handleClass).position().top, this.offset);
+    assert.strictEqual(
+      Number.parseInt(jQuery(handleClass).css('height')),
+      this.size
+    );
+    assert.strictEqual(jQuery(handleClass).position().top, this.offset);
+    assert.strictEqual(
+      Number.parseInt(jQuery(handleClass).css('height')),
+      this.size
+    );
   });
 
   test('click event on handle triggers startDrag, but not onJumpTo', async function (assert) {
@@ -91,11 +94,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       offset: 10,
     });
 
-    this.actions.onDragStart = function () {
+    this.onDragStart = function () {
       assert.ok(true);
     };
 
-    this.actions.onJumpTo = function () {
+    this.onJumpTo = function () {
       assert.ok(false);
     };
 
@@ -104,12 +107,12 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
-        onDragStart=(action 'onDragStart')
-        onJumpTo=(action 'onJumpTo')
+        onDragStart=this.onDragStart
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -126,11 +129,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       offset: 10,
     });
 
-    this.actions.onDragStart = function () {
+    this.onDragStart = function () {
       assert.ok(false);
     };
 
-    this.actions.onJumpTo = function () {
+    this.onJumpTo = function () {
       assert.ok(true);
     };
 
@@ -139,12 +142,12 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
-        onDragStart=(action 'onDragStart')
-        onJumpTo=(action 'onJumpTo')
+        onDragStart=this.onDragStart
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -162,7 +165,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       size: 40,
       offset: 10,
     });
-    this.actions.onJumpTo = function (towardsAnchor) {
+    this.onJumpTo = function (towardsAnchor) {
       assert.ok(
         towardsAnchor,
         'towardsAnchor should be true if going towards anchor'
@@ -174,11 +177,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
-        onJumpTo=(action 'onJumpTo')
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -197,7 +200,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       size: 40,
       offset: 10,
     });
-    this.actions.onJumpTo = function (towardsAnchor) {
+    this.onJumpTo = function (towardsAnchor) {
       assert.notOk(
         towardsAnchor,
         'towardsAnchor should be false if going away from anchor'
@@ -209,11 +212,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
-        onJumpTo=(action 'onJumpTo')
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -232,7 +235,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       size: 40,
       offset: 10,
     });
-    this.actions.onJumpTo = function (towardsAnchor) {
+    this.onJumpTo = function (towardsAnchor) {
       assert.ok(
         towardsAnchor,
         'towardsAnchor should be true if going towards anchor'
@@ -248,7 +251,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
         handleSize=size
         horizontal=false
         showHandle=true
-        onJumpTo=(action 'onJumpTo')
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -267,7 +270,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       size: 40,
       offset: 10,
     });
-    this.actions.onJumpTo = function (towardsAnchor) {
+    this.onJumpTo = function (towardsAnchor) {
       assert.notOk(
         towardsAnchor,
         'towardsAnchor should be false if going away from anchor'
@@ -279,11 +282,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable vertical" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=false
         showHandle=true
-        onJumpTo=(action 'onJumpTo')
+        onJumpTo=this.onJumpTo
       }}
 
       </div>
@@ -302,7 +305,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       offset: 10,
     });
     let called = false;
-    this.actions.onDragEnd = function () {
+    this.onDragEnd = function () {
       called = true;
     };
 
@@ -311,11 +314,11 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         showHandle=true
-        onDragEnd=(action 'onDragEnd')
+        onDragEnd=this.onDragEnd
       }}
 
       </div>
@@ -335,7 +338,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       isDragging: false,
     });
 
-    this.actions.onDrag = function () {
+    this.onDrag = function () {
       // THEN
       assert.ok(true);
     };
@@ -345,13 +348,13 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable vertical" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=false
         dragOffset=30
-        isDragging=isDragging
+        isDragging=this.isDragging
         showHandle=true
-        onDrag=(action 'onDrag')
+        onDrag=this.onDrag
       }}
 
       </div>
@@ -370,7 +373,7 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       offset: 10,
       isDragging: false,
     });
-    this.actions.onDrag = function () {
+    this.onDrag = function () {
       // THEN
       assert.ok(true);
     };
@@ -380,13 +383,13 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable horizontal" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=true
         dragOffset=30
-        isDragging=isDragging
+        isDragging=this.isDragging
         showHandle=true
-        onDrag=(action 'onDrag')
+        onDrag=this.onDrag
       }}
 
       </div>

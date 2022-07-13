@@ -21,7 +21,7 @@ module('Acceptance | ember-scrollbar', function (hooks) {
   test('vertical scrollbar', async function (assert) {
     await visit('/');
 
-    assert.equal(currentURL(), '/');
+    assert.strictEqual(currentURL(), '/');
 
     assert.ok(
       find('.vertical-demo .ember-scrollable'),
@@ -45,14 +45,14 @@ module('Acceptance | ember-scrollbar', function (hooks) {
       find('.resize-demo .ember-scrollable .drag-handle'),
       'resize handle rendered'
     );
-    assert.equal(elementHeight(elem), 200);
+    assert.strictEqual(elementHeight(elem), 200);
 
     await click(toggleButtonSelector); // make tall
 
-    assert.equal(elementHeight(elem), 400);
+    assert.strictEqual(elementHeight(elem), 400);
 
     await click(toggleButtonSelector); // make small
-    assert.equal(elementHeight(elem), 200);
+    assert.strictEqual(elementHeight(elem), 200);
   });
 
   test('scrollTo and onScroll', async function (assert) {

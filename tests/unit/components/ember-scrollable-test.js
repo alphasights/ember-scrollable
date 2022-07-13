@@ -14,6 +14,6 @@ module('Unit | Component | ember-scrollable', function (hooks) {
 
     let scrollbars = component.createScrollbar();
 
-    assert.equal(scrollbars.length, 0);
+    assert.strictEqual(scrollbars.length, 0);
   });
 });

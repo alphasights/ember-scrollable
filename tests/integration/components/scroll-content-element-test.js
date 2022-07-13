@@ -7,9 +7,6 @@ import jQuery from 'jquery';
 
 module('Integration | Component | scroll content element', function (hooks) {
   setupRenderingTest(hooks);
-  hooks.beforeEach(function () {
-    this.actions = {};
-  });
 
   const flushScrollAndWait = function () {
     return settled().then(() => {
@@ -27,7 +24,7 @@ module('Integration | Component | scroll content element', function (hooks) {
           height=10
           width=10
           scrollToY=this.scrollToY
-          onScroll=(action 'scrolled')
+          onScroll=this.scrolled
         }}
           <div style="height: 40px; width: 40px;">
             Content
@@ -42,7 +39,7 @@ module('Integration | Component | scroll content element', function (hooks) {
           height=10
           width=10
           scrollToX=this.scrollToX
-          onScroll=(action 'scrolled')
+          onScroll=this.scrolled
         }}
           <div style="height: 40px; width: 40px;">
             Content
@@ -64,7 +61,7 @@ module('Integration | Component | scroll content element', function (hooks) {
     });
 
     const scrolledCallArgs = [];
-    this.actions.scrolled = function (e, scollOffset, scrollDir) {
+    this.scrolled = function (e, scollOffset, scrollDir) {
       scrolledCallArgs.push([scollOffset, scrollDir]);
     };
 
@@ -109,7 +106,7 @@ module('Integration | Component | scroll content element', function (hooks) {
     });
 
     const scrolledCallArgs = [];
-    this.actions.scrolled = function (e, scollOffset, scrollDir) {
+    this.scrolled = function (e, scollOffset, scrollDir) {
       scrolledCallArgs.push([scollOffset, scrollDir]);
     };
 
@@ -117,7 +114,7 @@ module('Integration | Component | scroll content element', function (hooks) {
     render(template);
 
     return settled().then(() => {
-      assert.equal(scrolledCallArgs.length, 0);
+      assert.strictEqual(scrolledCallArgs.length, 0);
     });
   }
 
@@ -159,7 +156,7 @@ module('Integration | Component | scroll content element', function (hooks) {
       direction === 'horizontal' ? 'scrollLeft' : 'scrollTop';
 
     const scrolledCallArgs = [];
-    this.actions.scrolled = function (e, scrollOffset, scrollDir) {
+    this.scrolled = function (e, scrollOffset, scrollDir) {
       scrolledCallArgs.push([scrollOffset, scrollDir]);
     };
 

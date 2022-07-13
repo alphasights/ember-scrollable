@@ -1,5 +1,10 @@
 <div
-  class='drag-handle {{if @showHandle 'visible'}}'
-  style={{this.handleStyles}}
-  {{on 'mousedown' (action 'startDrag')}}
-></div>
+  class='tse-scrollbar {{if @horizontal 'horizontal' 'vertical'}}'
+  {{did-insert this.elementInserted}}
+>
+  <div
+    class='drag-handle {{if @showHandle 'visible'}}'
+    style={{this.handleStyles}}
+    {{on 'mousedown' this.startDrag}}
+  ></div>
+</div>
