@@ -20,10 +20,10 @@ const handleSelector = '.drag-handle';
 export default Component.extend(DomMixin, {
   layout,
   classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
-  onDrag(){},
-  onJumpTo(){},
-  onDragStart(){},
-  onDragEnd(){},
+  onDrag() {},
+  onJumpTo() {},
+  onDragStart() {},
+  onDragEnd() {},
 
   horizontal: false,
   isDragging: false,
@@ -31,41 +31,49 @@ export default Component.extend(DomMixin, {
   handleSize: null,
   handleOffset: 0,
 
-  offsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'left' : 'top';
+  offsetAttr: computed('horizontal', function () {
+    return this.horizontal ? 'left' : 'top';
   }),
 
-  jumpScrollOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'offsetX' : 'offsetY';
+  jumpScrollOffsetAttr: computed('horizontal', function () {
+    return this.horizontal ? 'offsetX' : 'offsetY';
   }),
 
-  eventOffsetAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'pageX' : 'pageY';
+  eventOffsetAttr: computed('horizontal', function () {
+    return this.horizontal ? 'pageX' : 'pageY';
   }),
 
-  sizeAttr: computed('horizontal', function() {
-    return this.get('horizontal') ? 'width' : 'height';
+  sizeAttr: computed('horizontal', function () {
+    return this.horizontal ? 'width' : 'height';
   }),
 
-
-  handleStylesJSON: computed('handleOffset', 'handleSize', 'horizontal', function() {
-    const { handleOffset, handleSize } = this.getProperties('handleOffset', 'handleSize');
-    if (this.get('horizontal')) {
-      return { left: handleOffset + 'px', width: handleSize + 'px' };
-    } else {
-      return { top: handleOffset + 'px', height: handleSize + 'px' };
+  handleStylesJSON: computed(
+    'handleOffset',
+    'handleSize',
+    'horizontal',
+    function () {
+      const { handleOffset, handleSize } = this.getProperties(
+        'handleOffset',
+        'handleSize'
+      );
+      if (this.horizontal) {
+        return { left: handleOffset + 'px', width: handleSize + 'px' };
+      } else {
+        return { top: handleOffset + 'px', height: handleSize + 'px' };
+      }
     }
-  }),
+  ),
 
-  handleStyles: computed('handleStylesJSON.{top,left,width,height}', function() {
-    return styleify(this.get('handleStylesJSON'));
-  }),
-
+  handleStyles: computed(
+    'handleStylesJSON.{top,left,width,height}',
+    function () {
+      return styleify(this.handleStylesJSON);
+    }
+  ),
 
   mouseDown(e) {
     this.jumpScroll(e);
   },
-
 
   startDrag(e) {
     // Preventing the event's default action stops text being
@@ -75,7 +83,7 @@ export default Component.extend(DomMixin, {
 
     const dragOffset = this._startDrag(e);
     this.set('dragOffset', dragOffset);
-    this.get('onDragStart')(e);
+    this.onDragStart(e);
   },
 
   mouseUp() {
@@ -85,12 +93,17 @@ export default Component.extend(DomMixin, {
   didInsertElement() {
     this._super(...arguments);
     this.addEventListener(window, 'mousemove', (e) => {
-      throttle(this, this.updateMouseOffset, e, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
+      throttle(
+        this,
+        this.updateMouseOffset,
+        e,
+        THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS
+      );
     });
   },
 
   endDrag() {
-    this.get('onDragEnd')();
+    this.onDragEnd();
   },
 
   /**
@@ -102,10 +115,10 @@ export default Component.extend(DomMixin, {
    */
   updateMouseOffset(e) {
     const { pageX, pageY } = e;
-    const mouseOffset = this.get('horizontal') ? pageX : pageY;
+    const mouseOffset = this.horizontal ? pageX : pageY;
 
-    if (this.get('isDragging') && isPresent(mouseOffset)) {
-      this._drag(mouseOffset, this.get('dragOffset'));
+    if (this.isDragging && isPresent(mouseOffset)) {
+      this._drag(mouseOffset, this.dragOffset);
     }
   },
 
@@ -118,12 +131,11 @@ export default Component.extend(DomMixin, {
    */
   jumpScroll(e) {
     // If the drag handle element was pressed, don't do anything here.
-    if (e.target === this.get('element').querySelector(handleSelector)) {
+    if (e.target === this.element.querySelector(handleSelector)) {
       return;
     }
     this._jumpScroll(e);
   },
-
 
   // private methods
   /**
@@ -139,7 +151,7 @@ export default Component.extend(DomMixin, {
     let dragPos = eventOffset - scrollbarOffset - dragOffset;
     // Convert the mouse position into a percentage of the scrollbar height/width.
     let dragPerc = dragPos / this._scrollbarSize();
-    this.get('onDrag')(dragPerc);
+    this.onDrag(dragPerc);
   },
 
   /**
@@ -155,34 +167,33 @@ export default Component.extend(DomMixin, {
   _jumpScroll(e) {
     let eventOffset = this._jumpScrollEventOffset(e);
     let handleOffset = this._handlePositionOffset();
-    const towardsAnchor = (eventOffset < handleOffset);
+    const towardsAnchor = eventOffset < handleOffset;
 
-    this.get('onJumpTo')(towardsAnchor, e);
+    this.onJumpTo(towardsAnchor, e);
   },
-
 
   _startDrag(e) {
     return this._eventOffset(e) - this._handleOffset();
   },
 
-
   _handleOffset() {
-    return this.get('element').querySelector(handleSelector).getBoundingClientRect()[this.get('offsetAttr')];
+    return this.element.querySelector(handleSelector).getBoundingClientRect()[
+      this.offsetAttr
+    ];
   },
 
-
   _handlePositionOffset() {
-    let el = this.get('element').querySelector(handleSelector);
+    let el = this.element.querySelector(handleSelector);
     let position = {
-        left: el.offsetLeft,
-        top: el.offsetTop
-    }
+      left: el.offsetLeft,
+      top: el.offsetTop,
+    };
 
-    return position[this.get('offsetAttr')];
+    return position[this.offsetAttr];
   },
 
   _scrollbarOffset() {
-    return this.get('element').getBoundingClientRect()[this.get('offsetAttr')];
+    return this.element.getBoundingClientRect()[this.offsetAttr];
   },
 
   /**
@@ -191,22 +202,20 @@ export default Component.extend(DomMixin, {
    * @return {Number}
    */
   _jumpScrollEventOffset(e) {
-    return e[this.get('jumpScrollOffsetAttr')];
+    return e[this.jumpScrollOffsetAttr];
   },
-
 
   _eventOffset(e) {
-    return e[this.get('eventOffsetAttr')];
+    return e[this.eventOffsetAttr];
   },
 
-
   _scrollbarSize() {
-    return this.get('element')[`offset${capitalize(this.get('sizeAttr'))}`];
+    return this.element[`offset${capitalize(this.sizeAttr)}`];
   },
 
   actions: {
-    startDrag(){
+    startDrag() {
       this.startDrag(...arguments);
-    }
-  }
+    },
+  },
 });

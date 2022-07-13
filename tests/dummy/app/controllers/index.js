@@ -10,6 +10,6 @@ export default Controller.extend({
     },
     toggleHeight() {
       this.toggleProperty('isShort');
-    }
-  }
+    },
+  },
 });

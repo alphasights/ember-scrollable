@@ -59,18 +59,16 @@ export default Component.extend(DomMixin, {
    * @public
    * @type Number
    */
-  scrollTo: computed('vertical', {
+  scrollTo: computed('scrollToX', 'scrollToY', 'vertical', {
     get() {
-      return this.get('vertical')
-        ? this.get('scrollToY')
-        : this.get('scrollToX');
+      return this.vertical ? this.scrollToY : this.scrollToX;
     },
     set(key, value) {
       // TODO this is deprecated. remove eventually.
       deprecate(
         'Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.'
       );
-      const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
+      const prop = this.vertical ? 'scrollToY' : 'scrollToX';
       this.set(prop, value);
       return value;
     },
@@ -129,8 +127,9 @@ export default Component.extend(DomMixin, {
   scrollbarThickness: service(),
 
   didReceiveAttrs() {
-    const horizontal = this.get('horizontal');
-    const vertical = this.get('horizontal');
+    this._super();
+    const horizontal = this.horizontal;
+    const vertical = this.horizontal;
     // Keep backwards compatible functionality wherein vertical is default when neither vertical or horizontal are explicitly set
     if (!horizontal && !isPresent(vertical)) {
       this.set('vertical', true);
@@ -254,8 +253,8 @@ export default Component.extend(DomMixin, {
     const height = getHeight(this.el);
     const scrollbarThickness = this.get('scrollbarThickness.thickness');
 
-    const hasHorizontal = this.get('horizontal');
-    const hasVertical = this.get('vertical');
+    const hasHorizontal = this.horizontal;
+    const hasVertical = this.vertical;
 
     if (hasHorizontal && hasVertical) {
       this.set('scrollContentWidth', width + scrollbarThickness);
@@ -284,7 +283,7 @@ export default Component.extend(DomMixin, {
 
     this.resizeScrollContent();
 
-    if (this.get('vertical')) {
+    if (this.vertical) {
       const verticalScrollbar = new Vertical({
         scrollbarElement: this.el.querySelector(
           `${scrollbarSelector}.vertical`
@@ -295,7 +294,7 @@ export default Component.extend(DomMixin, {
       this.updateScrollbarAndSetupProperties(0, 'vertical');
       scrollbars.push(verticalScrollbar);
     }
-    if (this.get('horizontal')) {
+    if (this.horizontal) {
       const horizontalScrollbar = new Horizontal({
         scrollbarElement: this.el.querySelector(
           `${scrollbarSelector}.horizontal`
@@ -378,7 +377,7 @@ export default Component.extend(DomMixin, {
   },
 
   checkScrolledToBottom(scrollbar, scrollOffset) {
-    let scrollBuffer = this.get('scrollBuffer');
+    let scrollBuffer = this.scrollBuffer;
 
     if (scrollbar.isScrolledToBottom(scrollBuffer, scrollOffset)) {
       debounce(this, this.sendScrolledToBottom, 100);
@@ -386,17 +385,17 @@ export default Component.extend(DomMixin, {
   },
 
   sendScrolledToBottom() {
-    if (this.get('onScrolledToBottom')) {
-      this.get('onScrolledToBottom')();
+    if (this.onScrolledToBottom) {
+      this.onScrolledToBottom();
     }
   },
 
   sendScroll(event, scrollOffset) {
-    if (this.get('onScroll')) {
+    if (this.onScroll) {
       deprecate(
         'Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks'
       );
-      this.get('onScroll')(scrollOffset, event);
+      this.onScroll(scrollOffset, event);
     }
   },
 
@@ -408,10 +407,10 @@ export default Component.extend(DomMixin, {
     if (this.isDestroyed) {
       return;
     }
-    
+
     this.set('showHandle', true);
 
-    if (!this.get('autoHide')) {
+    if (!this.autoHide) {
       return;
     }
 
@@ -419,7 +418,7 @@ export default Component.extend(DomMixin, {
   },
 
   hideScrollbar() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return;
     }
     this.set('showHandle', false);

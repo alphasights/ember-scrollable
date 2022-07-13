@@ -34,7 +34,7 @@ export default Component.extend(DomMixin, {
    * @public
    * @type Function
    */
-  onScroll(){},
+  onScroll() {},
 
   /**
    * Height of this content. Note content must have a height that is larger than this in order to cause overflow-y,
@@ -83,7 +83,7 @@ export default Component.extend(DomMixin, {
    * @property stylesJSON
    * @private
    */
-  stylesJSON: computed('height', 'width', function() {
+  stylesJSON: computed('height', 'width', function () {
     const { height, width } = this.getProperties('height', 'width');
     return { width: width + 'px', height: height + 'px' };
   }),
@@ -95,8 +95,8 @@ export default Component.extend(DomMixin, {
    * @private
    * @type String
    */
-  style: computed('stylesJSON.{height,width}', function() {
-    return styleify(this.get('stylesJSON'));
+  style: computed('stylesJSON.{height,width}', function () {
+    return styleify(this.stylesJSON);
   }),
 
   /**
@@ -131,11 +131,11 @@ export default Component.extend(DomMixin, {
     const newScrollLeft = e.target.scrollLeft;
     const newScrollTop = e.target.scrollTop;
 
-    if (newScrollLeft !== this.get('previousScrollToX')) {
-      this.get('onScroll')(e, newScrollLeft, 'horizontal');
+    if (newScrollLeft !== this.previousScrollToX) {
+      this.onScroll(e, newScrollLeft, 'horizontal');
       this.set(`previousScrollToX`, newScrollLeft);
-    } else if (newScrollTop !== this.get('previousScrollToY')) {
-      this.get('onScroll')(e, newScrollTop, 'vertical');
+    } else if (newScrollTop !== this.previousScrollToY) {
+      this.onScroll(e, newScrollTop, 'vertical');
       this.set(`previousScrollToY`, newScrollTop);
     }
   },
@@ -155,12 +155,12 @@ export default Component.extend(DomMixin, {
       return;
     }
     let scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
-    this.get('element')[scrollOffsetAttr] = offset
+    this.element[scrollOffsetAttr] = offset;
   },
 
   configureInitialScrollPosition() {
-    this.scrollToPosition(this.get('scrollToX'), 'X');
-    this.scrollToPosition(this.get('scrollToY'), 'Y');
+    this.scrollToPosition(this.scrollToX, 'X');
+    this.scrollToPosition(this.scrollToY, 'Y');
   },
 
   didInsertElement() {
@@ -170,6 +170,7 @@ export default Component.extend(DomMixin, {
   },
 
   didReceiveAttrs() {
+    this._super();
     // Sync property changes to `scrollToX` and `scrollToY` with the `scrollTop` and `scrollLeft` attributes
     // of the rendered DOM element.
     ['X', 'Y'].forEach((direction) => {
@@ -177,9 +178,14 @@ export default Component.extend(DomMixin, {
       const newOffset = this.get(`scrollTo${direction}`);
 
       if (oldOffset !== newOffset) {
-        schedule('afterRender', this, this.scrollToPosition, newOffset, direction);
+        schedule(
+          'afterRender',
+          this,
+          this.scrollToPosition,
+          newOffset,
+          direction
+        );
       }
     });
-  }
-
+  },
 });

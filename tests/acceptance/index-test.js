@@ -72,8 +72,9 @@ module('Acceptance | ember-scrollbar', function (hooks) {
 
     await fillIn('#targetScrollOffset input', offset);
     await timeout(THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
-    assert.ok(
-      find('#currentScrollOffset').innerText.indexOf(String(offset)) !== -1,
+    assert.notStrictEqual(
+      find('#currentScrollOffset').innerText.indexOf(String(offset)),
+      -1,
       'scrollOffset matches'
     );
   });

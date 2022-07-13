@@ -13,7 +13,6 @@ function styleify(obj) {
     return styleString;
   }, '');
   return htmlSafe(styles);
-
 }
 
 export { styleify };

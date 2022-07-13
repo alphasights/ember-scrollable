@@ -24,8 +24,8 @@ module.exports = function (environment) {
 
     'ember-composable-helpers': {
       only: ['concat'],
-      except: []
-    }
+      except: [],
+    },
   };
 
   if (environment === 'development') {

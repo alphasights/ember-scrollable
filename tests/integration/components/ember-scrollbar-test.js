@@ -44,20 +44,15 @@ module('Integration | Component | ember scrollbar', function (hooks) {
 
       </div>
     </div>`);
-    assert.equal(jQuery(handleClass).position().left, this.get('offset'));
+    assert.equal(jQuery(handleClass).position().left, this.offset);
+    assert.equal(Number.parseInt(jQuery(handleClass).css('width')), this.size);
     assert.equal(
-      Number.parseInt(jQuery(handleClass).css('width')),
-      this.get('size')
+      this.element.querySelector(handleClass).offsetLeft,
+      this.offset
     );
     assert.equal(
-      this.get('element').querySelector(handleClass).offsetLeft,
-      this.get('offset')
-    );
-    assert.equal(
-      Number.parseInt(
-        this.get('element').querySelector(handleClass).style.width
-      ),
-      this.get('size')
+      Number.parseInt(this.element.querySelector(handleClass).style.width),
+      this.size
     );
   });
 
@@ -82,16 +77,10 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       </div>
     </div>`);
 
-    assert.equal(jQuery(handleClass).position().top, this.get('offset'));
-    assert.equal(
-      Number.parseInt(jQuery(handleClass).css('height')),
-      this.get('size')
-    );
-    assert.equal(jQuery(handleClass).position().top, this.get('offset'));
-    assert.equal(
-      Number.parseInt(jQuery(handleClass).css('height')),
-      this.get('size')
-    );
+    assert.equal(jQuery(handleClass).position().top, this.offset);
+    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.size);
+    assert.equal(jQuery(handleClass).position().top, this.offset);
+    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.size);
   });
 
   test('click event on handle triggers startDrag, but not onJumpTo', async function (assert) {
