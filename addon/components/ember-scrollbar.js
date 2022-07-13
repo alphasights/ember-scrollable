@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import { throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import DomMixin from 'ember-lifeline/mixins/dom';
+import { addEventListener, runDisposables } from 'ember-lifeline';
 import layout from '../templates/components/ember-scrollbar';
 import { styleify } from '../util/css';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from './ember-scrollable';
@@ -17,7 +17,7 @@ const handleSelector = '.drag-handle';
  * @class EmberScrollbar
  * @extends Ember.Component
  */
-export default Component.extend(DomMixin, {
+export default Component.extend({
   layout,
   classNameBindings: [':tse-scrollbar', 'horizontal:horizontal:vertical'],
   onDrag() {},
@@ -90,7 +90,8 @@ export default Component.extend(DomMixin, {
 
   didInsertElement() {
     this._super(...arguments);
-    this.addEventListener(window, 'mousemove', (e) => {
+    
+    addEventListener(this, window, 'mousemove', (e) => {
       throttle(
         this,
         this.updateMouseOffset,
@@ -98,6 +99,12 @@ export default Component.extend(DomMixin, {
         THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS
       );
     });
+  },
+
+  willDestroy() {
+    this._super(...arguments);
+
+    runDisposables(this);
   },
 
   endDrag() {

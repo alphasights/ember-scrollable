@@ -5,7 +5,7 @@ import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import DomMixin from 'ember-lifeline/mixins/dom';
+import { addEventListener, runDisposables } from 'ember-lifeline';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 import { getHeight, getWidth } from '../util/measurements';
@@ -18,7 +18,7 @@ export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 =
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
-export default Component.extend(DomMixin, {
+export default Component.extend({
   scrollbarThickness: service(),
   
   layout,
@@ -142,7 +142,7 @@ export default Component.extend(DomMixin, {
 
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
-    this.addEventListener(window, 'mouseup', this.endDrag);
+    addEventListener(this, window, 'mouseup', this.endDrag);
     this.setupResize();
 
     this.mouseMoveHandler = bind(this, this.onMouseMove);
@@ -159,6 +159,8 @@ export default Component.extend(DomMixin, {
 
   willDestroy() {
     this._super(...arguments);
+
+    runDisposables(this);
 
     this.el?.removeEventListener(
       'transitionend webkitTransitionEnd',
@@ -255,7 +257,7 @@ export default Component.extend(DomMixin, {
   },
 
   setupResize() {
-    this.addEventListener(window, 'resize', this._resizeHandler, true);
+    addEventListener(this, window, 'resize', this._resizeHandler, true);
   },
 
   resizeScrollContent() {

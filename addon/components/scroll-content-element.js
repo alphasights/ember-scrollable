@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
 import layout from '../templates/components/scroll-content-element';
-import DomMixin from 'ember-lifeline/mixins/dom';
+import { addEventListener, runDisposables } from 'ember-lifeline';
 import { styleify } from '../util/css';
 import Number from '../util/number';
 
@@ -14,7 +14,7 @@ import Number from '../util/number';
  * @class ScrollContentElement
  * @extends Ember.Component
  */
-export default Component.extend(DomMixin, {
+export default Component.extend({
   /**
    * Adds the `tse-scroll-content` class to this element which is in charge of removing the default scrollbar(s) from
    * this element (the container for the content being scrolled). Also the `tse-scroll-content` class enables
@@ -165,8 +165,14 @@ export default Component.extend(DomMixin, {
 
   didInsertElement() {
     this._super(...arguments);
-    this.addEventListener(this.element, 'scroll', this.scrolled);
+    addEventListener(this, this.element, 'scroll', this.scrolled);
     this.configureInitialScrollPosition();
+  },
+
+  willDestroy() {
+    this._super(...arguments);
+
+    runDisposables(this);
   },
 
   didReceiveAttrs() {
