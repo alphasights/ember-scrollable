@@ -1,7 +1,7 @@
 import { Promise } from 'rsvp';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { settled } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import jQuery from 'jquery';
 
@@ -65,7 +65,7 @@ module('Integration | Component | scroll content element', function(hooks) {
     };
 
     // Template block usage:
-    this.render(template);
+    render(template);
 
     flushScrollAndWait().then(() => {
       assert.deepEqual(scrolledCallArgs[0], [5, direction]);
@@ -97,7 +97,7 @@ module('Integration | Component | scroll content element', function(hooks) {
     };
 
     // Template block usage:
-    this.render(template);
+    render(template);
 
 
     return settled().then(() => {
@@ -135,7 +135,7 @@ module('Integration | Component | scroll content element', function(hooks) {
     };
 
     // Template block usage:
-    this.render(template);
+    render(template);
     // Initial non-zero offset triggers a scroll event.
 
     flushScrollAndWait().then(() => {

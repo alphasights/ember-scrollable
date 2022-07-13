@@ -3,9 +3,9 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-scrollable',
+  name: require('./package').name,
 
-  included: function(app) {
+  included(app) {
     while (app.app) {
       app = app.app;
     }

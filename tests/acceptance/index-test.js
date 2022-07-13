@@ -1,7 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { visit, currentURL } from '@ember/test-helpers';
-import { click, fillIn, find, triggerEvent } from 'ember-native-dom-helpers';
+import { visit, currentURL, click, fillIn, find, triggerEvent } from '@ember/test-helpers';
 import { timeout } from 'ember-scrollable/util/timeout';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from 'ember-scrollable/components/ember-scrollable';
 

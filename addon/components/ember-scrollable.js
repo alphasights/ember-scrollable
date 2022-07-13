@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import { computed } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { deprecate } from '@ember/application/deprecations';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
 import DomMixin from 'ember-lifeline/mixins/dom';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
@@ -19,9 +18,9 @@ export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 =
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
-export default Component.extend(InboundActionsMixin, DomMixin, {
+export default Component.extend(DomMixin, {
   layout,
-  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal', 'vertical'],
+  tagName: '',
 
   /**
    * If true, a scrollbar will be shown horizontally
@@ -62,15 +61,19 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    */
   scrollTo: computed('vertical', {
     get() {
-      return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
+      return this.get('vertical')
+        ? this.get('scrollToY')
+        : this.get('scrollToX');
     },
     set(key, value) {
       // TODO this is deprecated. remove eventually.
-      deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
+      deprecate(
+        'Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.'
+      );
       const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
       this.set(prop, value);
       return value;
-    }
+    },
   }),
 
   /**
@@ -134,25 +137,29 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     }
   },
 
-  didInsertElement() {
-    this._super(...arguments);
+  elementInserted: action(function (element) {
+    this.el = element;
+
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
     this.addEventListener(window, 'mouseup', this.endDrag);
     this.setupResize();
 
-    this.mouseMoveHandler = bind(this, this.onMouseMove)
-    this.element.addEventListener('mousemove', this.mouseMoveHandler)
-  },
+    this.mouseMoveHandler = bind(this, this.onMouseMove);
+    this.el.addEventListener('mousemove', this.mouseMoveHandler);
+  }),
 
-  willDestroyElement() {
+  willDestroy() {
     this._super(...arguments);
-    this.element.removeEventListener('transitionend webkitTransitionEnd', this._resizeHandler)
+    this.el?.removeEventListener(
+      'transitionend webkitTransitionEnd',
+      this._resizeHandler
+    );
 
-    this.element.removeEventListener('mousemove', this.mouseMoveHandler)
-    this.mouseMoveHandler = null
+    this.el?.removeEventListener('mousemove', this.mouseMoveHandler);
+    this.mouseMoveHandler = null;
+    this.el = null;
   },
-
 
   /**
    * Inidcates that the horizontal scrollbar is dragging at this moment in time.
@@ -209,16 +216,15 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   mouseMoveHandler: null,
 
   contentSize(sizeAttr) {
-
     let getters = {
-      'height': getHeight,
-      'width': getWidth
-    }
+      height: getHeight,
+      width: getWidth,
+    };
     return getters[sizeAttr](this._contentElement);
   },
 
   setupElements() {
-    this._contentElement = this.get('element').querySelector(`${contentSelector}`);
+    this._contentElement = this.el.querySelector(`${contentSelector}`);
   },
 
   /**
@@ -244,8 +250,8 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   },
 
   resizeScrollContent() {
-    const width = getWidth(this.element);
-    const height = getHeight(this.element);
+    const width = getWidth(this.el);
+    const height = getHeight(this.el);
     const scrollbarThickness = this.get('scrollbarThickness.thickness');
 
     const hasHorizontal = this.get('horizontal');
@@ -271,7 +277,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @return {Array} Scrollbar(s) that were created
    */
   createScrollbar() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return [];
     }
     const scrollbars = [];
@@ -280,8 +286,10 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
 
     if (this.get('vertical')) {
       const verticalScrollbar = new Vertical({
-        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.vertical`),
-        contentElement: this._contentElement
+        scrollbarElement: this.el.querySelector(
+          `${scrollbarSelector}.vertical`
+        ),
+        contentElement: this._contentElement,
       });
       this.set('verticalScrollbar', verticalScrollbar);
       this.updateScrollbarAndSetupProperties(0, 'vertical');
@@ -289,8 +297,10 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     }
     if (this.get('horizontal')) {
       const horizontalScrollbar = new Horizontal({
-        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.horizontal`),
-        contentElement: this._contentElement
+        scrollbarElement: this.el.querySelector(
+          `${scrollbarSelector}.horizontal`
+        ),
+        contentElement: this._contentElement,
       });
       this.set('horizontalScrollbar', horizontalScrollbar);
       this.updateScrollbarAndSetupProperties(0, 'horizontal');
@@ -334,7 +344,9 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @private
    */
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
-    const { handleOffset, handleSize } = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
+    const { handleOffset, handleSize } = this.get(
+      `${scrollbarDirection}Scrollbar`
+    ).getHandlePositionAndSize(scrollOffset);
     this.set(`${scrollbarDirection}HandleOffset`, handleOffset);
     this.set(`${scrollbarDirection}HandleSize`, handleSize);
   },
@@ -353,7 +365,10 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     this.updateScrollbarAndSetupProperties(scrollOffset, scrollDirection);
     this.showScrollbar();
 
-    this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
+    this.checkScrolledToBottom(
+      this.get(`${scrollDirection}Scrollbar`),
+      scrollOffset
+    );
     const direction = scrollDirection === 'vertical' ? 'Y' : 'X';
     this.get(`onScroll${direction}`)(scrollOffset);
     // synchronize scrollToX / scrollToY
@@ -361,7 +376,6 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     // TODO this is deprecated. remove eventually.
     this.sendScroll(event, scrollOffset);
   },
-
 
   checkScrolledToBottom(scrollbar, scrollOffset) {
     let scrollBuffer = this.get('scrollBuffer');
@@ -379,7 +393,9 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
 
   sendScroll(event, scrollOffset) {
     if (this.get('onScroll')) {
-      deprecate('Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks');
+      deprecate(
+        'Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks'
+      );
       this.get('onScroll')(scrollOffset, event);
     }
   },
@@ -448,13 +464,13 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
   jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
     const scrollOffset = this.get(scrollToProp);
     let jumpAmt = PAGE_JUMP_MULTIPLE * this.contentSize(sizeAttr);
-    let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
+    let scrollPos = jumpPositive
+      ? scrollOffset - jumpAmt
+      : scrollOffset + jumpAmt;
     this.set(scrollToProp, scrollPos);
   },
 
-
   actions: {
-
     /**
      * Update action should be called when size of the scroll area changes
      */
@@ -491,10 +507,24 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
       scheduleOnce('afterRender', this, 'scrolled', ...arguments);
     },
     horizontalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'updateScrollToProperty', 'scrollToX', dragPerc, 'width');
+      scheduleOnce(
+        'afterRender',
+        this,
+        'updateScrollToProperty',
+        'scrollToX',
+        dragPerc,
+        'width'
+      );
     },
     verticalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'updateScrollToProperty', 'scrollToY', dragPerc, 'height');
+      scheduleOnce(
+        'afterRender',
+        this,
+        'updateScrollToProperty',
+        'scrollToY',
+        dragPerc,
+        'height'
+      );
     },
     horizontalJumpTo(jumpPositive) {
       this.jumpScroll(jumpPositive, 'scrollToX', 'width');
@@ -507,6 +537,6 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
     },
     verticalBoundaryEvent(isStart) {
       this.toggleDraggingBoundary('isVerticalDragging', isStart);
-    }
-  }
+    },
+  },
 });

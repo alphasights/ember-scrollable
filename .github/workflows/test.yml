@@ -9,10 +9,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Set Node.js 8.x
+    - name: Set Node.js 12.x
       uses: actions/setup-node@master
       with:
-        node-version: 8.x
+        node-version: 12.x
 
     - name: Install, lint:hbs, lint:js, tests
       run: |
@@ -27,23 +27,22 @@ jobs:
     strategy:
       matrix:
         ember-release:
-          - ember-lts-2.18
-          - ember-lts-3.4
-          - ember-lts-3.8
-          - ember-lts-3.12
+          - ember-lts-3.20
+          - ember-lts-3.24
           - ember-release
           - ember-beta
           - ember-canary
           - ember-default-with-jquery
+          - ember-classic
 
     steps:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Set Node.js 10.x
+    - name: Set Node.js 12.x
       uses: actions/setup-node@master
       with:
-        node-version: 10.x
+        node-version: 12.x
 
     - name: Install, lint:js, tests
       continue-on-error: true
