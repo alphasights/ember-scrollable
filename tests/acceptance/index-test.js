@@ -95,20 +95,18 @@ module('Acceptance | ember-scrollbar', function (hooks) {
     scrollArea = find(
       '.no-scrollbar-demo .ember-scrollable .scrollable-content'
     );
-    assert.equal(
-      elementHeight(scrollArea),
-      18.5,
-      'there is no overflow as 18.5 < 200px'
+    assert.ok(
+      elementHeight(scrollArea) < 200,
+      'there is no overflow as ~18 < 200px'
     );
 
     await click(toggleButtonSelector);
     scrollArea = find(
       '.no-scrollbar-demo .ember-scrollable .scrollable-content'
     );
-    assert.equal(
-      elementHeight(scrollArea),
-      501.5,
-      'there is overflow as 501.5 > 200px'
+    assert.ok(
+      elementHeight(scrollArea) > 200,
+      'there is overflow as ~500 > 200px'
     );
 
     await triggerEvent(
@@ -121,7 +119,7 @@ module('Acceptance | ember-scrollbar', function (hooks) {
     );
 
     await click(toggleButtonSelector);
-    assert.equal(elementHeight(scrollArea), 18.5);
+    assert.ok(elementHeight(scrollArea) < 20, 'height is ~18');
     assert.ok(
       find('.no-scrollbar-demo .ember-scrollable .drag-handle:not(.visible)'),
       'handle goes away when overflow is gone'
