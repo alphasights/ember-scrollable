@@ -1,4 +1,4 @@
-# Ember Scrollable
+# ember-scrollable
 [![Ember Version](https://embadge.io/v1/badge.svg?start=2.8.0-lts)](https://embadge.io/v1/badge.svg?start=2.8.0-lts)
 [![Npm Version](https://badge.fury.io/js/ember-scrollable.svg)](http://badge.fury.io/js/ember-scrollable)
 [![Code
@@ -13,8 +13,8 @@ A simple scrollbar implementation inspired by Trackpad Scroll Emulator.
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
 * Node.js v12 or above
 
 

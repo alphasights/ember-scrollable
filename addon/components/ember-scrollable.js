@@ -5,7 +5,6 @@ import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import { addEventListener, runDisposables } from 'ember-lifeline';
 import layout from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 import { getHeight, getWidth } from '../util/measurements';
@@ -142,7 +141,7 @@ export default Component.extend({
 
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
-    addEventListener(this, window, 'mouseup', this.endDrag);
+    window.addEventListener('mouseup', this.endDrag);
     this.setupResize();
 
     this.mouseMoveHandler = bind(this, this.onMouseMove);
@@ -160,7 +159,8 @@ export default Component.extend({
   willDestroy() {
     this._super(...arguments);
 
-    runDisposables(this);
+    window.removeEventListener('mouseup', this.endDrag);
+    window.removeEventListener('resize', this._resizeHandler);
 
     this.el?.removeEventListener(
       'transitionend webkitTransitionEnd',
@@ -257,7 +257,7 @@ export default Component.extend({
   },
 
   setupResize() {
-    addEventListener(this, window, 'resize', this._resizeHandler, true);
+    window.addEventListener('resize', this._resizeHandler);
   },
 
   resizeScrollContent() {

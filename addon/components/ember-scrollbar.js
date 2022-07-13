@@ -2,7 +2,6 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import { throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import { addEventListener, runDisposables } from 'ember-lifeline';
 import layout from '../templates/components/ember-scrollbar';
 import { styleify } from '../util/css';
 import { THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS } from './ember-scrollable';
@@ -88,20 +87,22 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    addEventListener(this, window, 'mousemove', (e) => {
+    this._mousemoveListener = (e) => {
       throttle(
         this,
         this.updateMouseOffset,
         e,
         THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS
       );
-    });
+    };
+
+    window.addEventListener('mousemove', this._mousemoveListener);
   },
 
   willDestroy() {
     this._super(...arguments);
 
-    runDisposables(this);
+    window.removeEventListener('mousemove', this._mousemoveListener);
   },
 
   endDrag() {

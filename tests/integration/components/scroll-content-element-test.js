@@ -26,7 +26,7 @@ module('Integration | Component | scroll content element', function (hooks) {
         {{#scroll-content-element
           height=10
           width=10
-          scrollToY=scrollToY
+          scrollToY=this.scrollToY
           onScroll=(action 'scrolled')
         }}
           <div style="height: 40px; width: 40px;">
@@ -41,7 +41,7 @@ module('Integration | Component | scroll content element', function (hooks) {
         {{#scroll-content-element
           height=10
           width=10
-          scrollToX=scrollToX
+          scrollToX=this.scrollToX
           onScroll=(action 'scrolled')
         }}
           <div style="height: 40px; width: 40px;">

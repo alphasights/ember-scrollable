@@ -2,7 +2,6 @@ import { computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
 import layout from '../templates/components/scroll-content-element';
-import { addEventListener, runDisposables } from 'ember-lifeline';
 import { styleify } from '../util/css';
 import Number from '../util/number';
 
@@ -165,14 +164,14 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    addEventListener(this, this.element, 'scroll', this.scrolled);
+    this.element.addEventListener('scroll', this.scrolled);
     this.configureInitialScrollPosition();
   },
 
   willDestroy() {
     this._super(...arguments);
 
-    runDisposables(this);
+    this.element.removeEventListener('scroll', this.scrolled);
   },
 
   didReceiveAttrs() {
