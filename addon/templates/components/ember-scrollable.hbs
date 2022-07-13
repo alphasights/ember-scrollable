@@ -2,6 +2,7 @@
   class='ember-scrollable tse-scrollable {{if this.horizontal 'horizontal'}} {{
     if this.vertical 'vertical'
   }}'
+  ...attributes
   {{did-insert this.elementInserted}}
   {{on-resize this.recalculate}}
 >
