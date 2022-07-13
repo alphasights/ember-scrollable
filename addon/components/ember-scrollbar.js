@@ -26,8 +26,6 @@ export default Component.extend(DomMixin, {
   onDragEnd() {},
 
   horizontal: false,
-  isDragging: false,
-  showHandle: false,
   handleSize: null,
   handleOffset: 0,
 

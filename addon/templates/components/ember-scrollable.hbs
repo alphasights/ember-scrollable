@@ -3,14 +3,14 @@
     if vertical 'vertical'
   }}'
   {{did-insert this.elementInserted}}
-  {{on-resize (action 'recalculate')}}
+  {{on-resize this.recalculate}}
 >
   {{#if horizontal}}
     {{ember-scrollbar
       handleOffset=horizontalHandleOffset
       handleSize=horizontalHandleSize
       horizontal=true
-      showHandle=showHandle
+      showHandle=this.showHandle
       isDragging=isHorizontalDragging
       onJumpTo=(action 'horizontalJumpTo')
       onDrag=(action 'horizontalDrag')
@@ -23,7 +23,7 @@
       handleOffset=verticalHandleOffset
       handleSize=verticalHandleSize
       horizontal=false
-      showHandle=showHandle
+      showHandle=this.showHandle
       isDragging=isVerticalDragging
       onJumpTo=(action 'verticalJumpTo')
       onDrag=(action 'verticalDrag')
@@ -35,7 +35,7 @@
     <div class='tse-content scrollable-content'>
       {{yield
         (hash
-          recalculate=(action 'recalculate')
+          recalculate=this.recalculate
           update=(action 'update')
           scrollTop=(action 'scrollTop')
         )

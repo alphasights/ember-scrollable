@@ -19,6 +19,8 @@ const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
 export default Component.extend(DomMixin, {
+  scrollbarThickness: service(),
+  
   layout,
   tagName: '',
 
@@ -124,10 +126,9 @@ export default Component.extend(DomMixin, {
    */
   verticalScrollbar: null,
 
-  scrollbarThickness: service(),
-
   didReceiveAttrs() {
-    this._super();
+    this._super(...arguments);
+
     const horizontal = this.horizontal;
     const vertical = this.horizontal;
     // Keep backwards compatible functionality wherein vertical is default when neither vertical or horizontal are explicitly set
@@ -148,8 +149,17 @@ export default Component.extend(DomMixin, {
     this.el.addEventListener('mousemove', this.mouseMoveHandler);
   }),
 
+  /**
+   * Update action should be called when size of the scroll area changes
+   */
+  recalculate: action(function () {
+    // TODO this is effectively the same as `update`, except for update returns the passed in value. Keep one, and rename `resizeScrollbar` to be clear.
+    this.resizeScrollbar();
+  }),
+
   willDestroy() {
     this._super(...arguments);
+
     this.el?.removeEventListener(
       'transitionend webkitTransitionEnd',
       this._resizeHandler
@@ -471,14 +481,6 @@ export default Component.extend(DomMixin, {
   },
 
   actions: {
-    /**
-     * Update action should be called when size of the scroll area changes
-     */
-    recalculate() {
-      // TODO this is effectively the same as `update`, except for update returns the passed in value. Keep one, and rename `resizeScrollbar` to be clear.
-      this.resizeScrollbar();
-    },
-
     /**
      * Can be called when scrollbars change as a result of value change,
      *
