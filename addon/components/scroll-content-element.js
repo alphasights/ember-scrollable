@@ -17,6 +17,7 @@ import { layout, tagName } from '@ember-decorators/component';
  */
 @classic
 @layout(template)
+@tagName('')
 export default class ScrollContentElementComponent extends Component {
   /**
    * Callback function when scroll event occurs.
