@@ -50,10 +50,7 @@ export default Component.extend({
     'handleSize',
     'horizontal',
     function () {
-      const { handleOffset, handleSize } = this.getProperties(
-        'handleOffset',
-        'handleSize'
-      );
+      const { handleOffset, handleSize } = this;
       if (this.horizontal) {
         return { left: handleOffset + 'px', width: handleSize + 'px' };
       } else {
@@ -90,7 +87,7 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    
+
     addEventListener(this, window, 'mousemove', (e) => {
       throttle(
         this,

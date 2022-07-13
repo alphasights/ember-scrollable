@@ -20,7 +20,7 @@ const contentSelector = '.tse-content';
 
 export default Component.extend({
   scrollbarThickness: service(),
-  
+
   layout,
   tagName: '',
 
@@ -263,7 +263,7 @@ export default Component.extend({
   resizeScrollContent() {
     const width = getWidth(this.el);
     const height = getHeight(this.el);
-    const scrollbarThickness = this.get('scrollbarThickness.thickness');
+    const scrollbarThickness = this.scrollbarThickness.thickness;
 
     const hasHorizontal = this.horizontal;
     const hasVertical = this.vertical;

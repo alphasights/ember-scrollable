@@ -84,7 +84,7 @@ export default Component.extend({
    * @private
    */
   stylesJSON: computed('height', 'width', function () {
-    const { height, width } = this.getProperties('height', 'width');
+    const { height, width } = this;
     return { width: width + 'px', height: height + 'px' };
   }),
 

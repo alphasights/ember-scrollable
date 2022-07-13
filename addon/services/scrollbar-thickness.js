@@ -1,9 +1,14 @@
-import { computed } from '@ember/object';
 import Service from '@ember/service';
-import { getWidth } from '../util/measurements';
+import { getWidth } from 'ember-scrollable/util/measurements';
 
-export default Service.extend({
-  thickness: computed(() => {
+export default class ScrollbarThicknessService extends Service {
+  constructor() {
+    super(...arguments);
+
+    this.thickness = this.calculateScrollbarThickness();
+  }
+
+  calculateScrollbarThickness() {
     let tempEl = document.createElement('div');
     tempEl.setAttribute(
       'style',
@@ -18,6 +23,8 @@ export default Service.extend({
       tempEl.querySelector('.scrollbar-width-tester__inner')
     );
 
+    tempEl.remove();
+
     return width - widthMinusScrollbars;
-  }),
-});
+  }
+}
