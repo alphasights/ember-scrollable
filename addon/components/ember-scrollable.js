@@ -316,7 +316,7 @@ export default Component.extend(DomMixin, {
    * @private
    */
   onMouseMove() {
-    if (this.get('autoHide')) {
+    if (this.autoHide) {
       throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
   },
@@ -405,9 +405,10 @@ export default Component.extend(DomMixin, {
   },
 
   showScrollbar() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return;
     }
+    
     this.set('showHandle', true);
 
     if (!this.get('autoHide')) {

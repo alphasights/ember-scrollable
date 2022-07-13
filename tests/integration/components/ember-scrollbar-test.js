@@ -4,32 +4,32 @@ import { render, click, find, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import jQuery from 'jquery';
 
-
-module('Integration | Component | ember scrollbar', function(hooks) {
+module('Integration | Component | ember scrollbar', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.actions = {};
-    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+    this.send = (actionName, ...args) =>
+      this.actions[actionName].apply(this, args);
   });
 
   const handleClass = '.drag-handle';
   const barClass = '.tse-scrollbar';
 
-  function leftElementOffset(selector){
+  function leftElementOffset(selector) {
     return find(selector).getBoundingClientRect().left;
   }
 
-  function topElementOffset(selector){
+  function topElementOffset(selector) {
     return find(selector).getBoundingClientRect().top;
   }
 
-  test('Horizontal: offset and size get routed properly', async function(assert) {
+  test('Horizontal: offset and size get routed properly', async function (assert) {
     assert.expect(4);
 
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
     await render(hbs`
       <div style="height: 50px">
@@ -45,17 +45,28 @@ module('Integration | Component | ember scrollbar', function(hooks) {
       </div>
     </div>`);
     assert.equal(jQuery(handleClass).position().left, this.get('offset'));
-    assert.equal(Number.parseInt(jQuery(handleClass).css('width')), this.get('size'));
-    assert.equal(this.get('element').querySelector(handleClass).offsetLeft, this.get('offset'));
-    assert.equal(Number.parseInt(this.get('element').querySelector(handleClass).style.width), this.get('size'));
+    assert.equal(
+      Number.parseInt(jQuery(handleClass).css('width')),
+      this.get('size')
+    );
+    assert.equal(
+      this.get('element').querySelector(handleClass).offsetLeft,
+      this.get('offset')
+    );
+    assert.equal(
+      Number.parseInt(
+        this.get('element').querySelector(handleClass).style.width
+      ),
+      this.get('size')
+    );
   });
 
-  test('Vertical: offset and size get routed properly', async function(assert) {
+  test('Vertical: offset and size get routed properly', async function (assert) {
     assert.expect(4);
 
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
     await render(hbs`
       <div style="height: 50px">
@@ -72,25 +83,30 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     </div>`);
 
     assert.equal(jQuery(handleClass).position().top, this.get('offset'));
-    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.get('size'));
+    assert.equal(
+      Number.parseInt(jQuery(handleClass).css('height')),
+      this.get('size')
+    );
     assert.equal(jQuery(handleClass).position().top, this.get('offset'));
-    assert.equal(Number.parseInt(jQuery(handleClass).css('height')), this.get('size'));
+    assert.equal(
+      Number.parseInt(jQuery(handleClass).css('height')),
+      this.get('size')
+    );
   });
 
-
-  test('click event on handle triggers startDrag, but not onJumpTo', async function(assert) {
+  test('click event on handle triggers startDrag, but not onJumpTo', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
 
-    this.actions.onDragStart = function() {
+    this.actions.onDragStart = function () {
       assert.ok(true);
     };
 
-    this.actions.onJumpTo = function() {
+    this.actions.onJumpTo = function () {
       assert.ok(false);
     };
 
@@ -113,19 +129,19 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     click(handleClass);
   });
 
-  test('clicking on bar triggers onJumpTo and not startDrag', async function(assert) {
+  test('clicking on bar triggers onJumpTo and not startDrag', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
 
-    this.actions.onDragStart = function() {
+    this.actions.onDragStart = function () {
       assert.ok(false);
     };
 
-    this.actions.onJumpTo = function() {
+    this.actions.onJumpTo = function () {
       assert.ok(true);
     };
 
@@ -149,17 +165,19 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     click(barClass);
   });
 
-
-  test('Horizontal: onJumpTo first argument is true when click to the left of handle', async function(assert) {
+  test('Horizontal: onJumpTo first argument is true when click to the left of handle', async function (assert) {
     assert.expect(1);
 
-    const deltaX =  9; // some number less than 10, therefore `towardsAnchor` will be true
+    const deltaX = 9; // some number less than 10, therefore `towardsAnchor` will be true
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
-    this.actions.onJumpTo = function(towardsAnchor) {
-      assert.ok(towardsAnchor, 'towardsAnchor should be true if going towards anchor');
+    this.actions.onJumpTo = function (towardsAnchor) {
+      assert.ok(
+        towardsAnchor,
+        'towardsAnchor should be true if going towards anchor'
+      );
     };
 
     await render(hbs`
@@ -180,19 +198,21 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     // WHEN
     const clientX = leftElementOffset(barClass) + deltaX;
     click(barClass, { clientX });
-
   });
 
-  test('Horizontal: onJumpTo first argument is false when click to the right of handle', async function(assert) {
+  test('Horizontal: onJumpTo first argument is false when click to the right of handle', async function (assert) {
     assert.expect(1);
 
     const deltaX = 30; // more than offset of 10
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
-    this.actions.onJumpTo = function(towardsAnchor) {
-      assert.notOk(towardsAnchor, 'towardsAnchor should be false if going away from anchor');
+    this.actions.onJumpTo = function (towardsAnchor) {
+      assert.notOk(
+        towardsAnchor,
+        'towardsAnchor should be false if going away from anchor'
+      );
     };
 
     await render(hbs`
@@ -213,20 +233,21 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     // WHEN
     const clientX = leftElementOffset(barClass) + deltaX;
     click(barClass, { clientX });
-
   });
 
-
-  test('Vertical: onJumpTo first argument is true when click to the top of handle', async function(assert) {
+  test('Vertical: onJumpTo first argument is true when click to the top of handle', async function (assert) {
     assert.expect(1);
 
     const deltaY = 2; // less than offset of 10
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
-    this.actions.onJumpTo = function(towardsAnchor) {
-      assert.ok(towardsAnchor, 'towardsAnchor should be true if going towards anchor');
+    this.actions.onJumpTo = function (towardsAnchor) {
+      assert.ok(
+        towardsAnchor,
+        'towardsAnchor should be true if going towards anchor'
+      );
     };
 
     await render(hbs`
@@ -247,19 +268,21 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     // WHEN
     const clientY = topElementOffset(barClass) + deltaY;
     click(barClass, { clientY });
-
   });
 
-  test('Vertical: onJumpTo first argument is false when clicking below the vertical handle', async function(assert) {
+  test('Vertical: onJumpTo first argument is false when clicking below the vertical handle', async function (assert) {
     assert.expect(1);
 
     const deltaY = 30; // more than offset of 10
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
-    this.actions.onJumpTo = function(towardsAnchor) {
-      assert.notOk(towardsAnchor, 'towardsAnchor should be false if going away from anchor');
+    this.actions.onJumpTo = function (towardsAnchor) {
+      assert.notOk(
+        towardsAnchor,
+        'towardsAnchor should be false if going away from anchor'
+      );
     };
 
     await render(hbs`
@@ -280,19 +303,17 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     // WHEN
     const clientY = topElementOffset(barClass) + deltaY;
     click(barClass, { clientY });
-
   });
 
-
-  test('mouseup event triggers onDragEnd', async function(assert) {
+  test('mouseup event triggers onDragEnd', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
       size: 40,
-      offset: 10
+      offset: 10,
     });
     let called = false;
-    this.actions.onDragEnd = function() {
+    this.actions.onDragEnd = function () {
       called = true;
     };
 
@@ -311,22 +332,21 @@ module('Integration | Component | ember scrollbar', function(hooks) {
       </div>
     </div>`);
 
-    triggerEvent(handleClass, 'mouseup');
+    await triggerEvent(handleClass, 'mouseup');
 
     assert.ok(called);
   });
 
-
-  test('Vertical: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function(assert) {
+  test('Vertical: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
       size: 40,
       offset: 10,
-      isDragging: false
+      isDragging: false,
     });
 
-    this.actions.onDrag = function() {
+    this.actions.onDrag = function () {
       // THEN
       assert.ok(true);
     };
@@ -353,15 +373,15 @@ module('Integration | Component | ember scrollbar', function(hooks) {
     triggerEvent(window, 'mousemove', { pageX: 0, pageY: 0 });
   });
 
-  test('Horizontal: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function(assert) {
+  test('Horizontal: onDrag is called when a change occurs when onDragging is true and mousemove event is triggered', async function (assert) {
     assert.expect(1);
 
     this.setProperties({
       size: 40,
       offset: 10,
-      isDragging: false
+      isDragging: false,
     });
-    this.actions.onDrag = function() {
+    this.actions.onDrag = function () {
       // THEN
       assert.ok(true);
     };
