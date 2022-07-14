@@ -1,10 +1,11 @@
-import { computed } from '@ember/object';
+import { action, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
-import layout from '../templates/components/scroll-content-element';
-import DomMixin from 'ember-lifeline/mixins/dom';
+import template from '../templates/components/scroll-content-element';
 import { styleify } from '../util/css';
 import Number from '../util/number';
+import classic from 'ember-classic-decorator';
+import { layout, tagName } from '@ember-decorators/component';
 
 /**
  *
@@ -14,19 +15,10 @@ import Number from '../util/number';
  * @class ScrollContentElement
  * @extends Ember.Component
  */
-export default Component.extend(DomMixin, {
-  /**
-   * Adds the `tse-scroll-content` class to this element which is in charge of removing the default scrollbar(s) from
-   * this element (the container for the content being scrolled). Also the `tse-scroll-content` class enables
-   * overflow to trigger scroll events although this element doesn't have a native scrollbar.
-   *
-   * @property  classNameBindings
-   * @public
-   * @type Array
-   */
-  classNameBindings: [':tse-scroll-content'],
-  attributeBindings: ['style'],
-  layout,
+@classic
+@layout(template)
+@tagName('')
+export default class ScrollContentElementComponent extends Component {
   /**
    * Callback function when scroll event occurs.
    * Arguments are: jQueryEvent, scrollOffset, and horizontal'|'vertical'
@@ -34,7 +26,7 @@ export default Component.extend(DomMixin, {
    * @public
    * @type Function
    */
-  onScroll(){},
+  onScroll() {}
 
   /**
    * Height of this content. Note content must have a height that is larger than this in order to cause overflow-y,
@@ -44,7 +36,7 @@ export default Component.extend(DomMixin, {
    * @public
    * @type Number
    */
-  height: null,
+  height = null;
 
   /**
    * Width of this content. Note contnet must have a width that is larger than this in order to cause overflow-x
@@ -54,7 +46,7 @@ export default Component.extend(DomMixin, {
    * @public
    * @type Number
    */
-  width: null,
+  width = null;
 
   /**
    * Integer representing desired scrollLeft to be set for this element.
@@ -64,7 +56,7 @@ export default Component.extend(DomMixin, {
    * @type Number
    * @default 0
    */
-  scrollToX: 0,
+  scrollToX = 0;
 
   /**
    * Integer representing desired scrollTop to be set for this element.
@@ -74,7 +66,7 @@ export default Component.extend(DomMixin, {
    * @type Number
    * @default 0
    */
-  scrollToY: 0,
+  scrollToY = 0;
 
   /**
    * Intermediate object to collect style attributes. Height and width are set dynamically such that space is allocated
@@ -83,10 +75,11 @@ export default Component.extend(DomMixin, {
    * @property stylesJSON
    * @private
    */
-  stylesJSON: computed('height', 'width', function() {
-    const { height, width } = this.getProperties('height', 'width');
+  @computed('height', 'width')
+  get stylesJSON() {
+    const { height, width } = this;
     return { width: width + 'px', height: height + 'px' };
-  }),
+  }
 
   /**
    * String bound to the style attribute.
@@ -95,9 +88,10 @@ export default Component.extend(DomMixin, {
    * @private
    * @type String
    */
-  style: computed('stylesJSON.{height,width}', function() {
-    return styleify(this.get('stylesJSON'));
-  }),
+  @computed('stylesJSON.{height,width}')
+  get style() {
+    return styleify(this.stylesJSON);
+  }
 
   /**
    * Previous scrollToX value. Useful for calculating changes in scrollToX.
@@ -106,7 +100,7 @@ export default Component.extend(DomMixin, {
    * @private
    * @type Number
    */
-  previousScrollToX: 0,
+  previousScrollToX = 0;
 
   /**
    * Previous scrollToY value. Useful for calculating changes in scrollToY.
@@ -115,7 +109,7 @@ export default Component.extend(DomMixin, {
    * @private
    * @type Number
    */
-  previousScrollToY: 0,
+  previousScrollToY = 0;
 
   /**
    * Callback from scroll event on the content of this element.
@@ -127,18 +121,19 @@ export default Component.extend(DomMixin, {
    * @method scrolled
    * @param e jQueryEvent
    */
+  @action
   scrolled(e) {
     const newScrollLeft = e.target.scrollLeft;
     const newScrollTop = e.target.scrollTop;
 
-    if (newScrollLeft !== this.get('previousScrollToX')) {
-      this.get('onScroll')(e, newScrollLeft, 'horizontal');
+    if (newScrollLeft !== this.previousScrollToX) {
+      this.onScroll(e, newScrollLeft, 'horizontal');
       this.set(`previousScrollToX`, newScrollLeft);
-    } else if (newScrollTop !== this.get('previousScrollToY')) {
-      this.get('onScroll')(e, newScrollTop, 'vertical');
+    } else if (newScrollTop !== this.previousScrollToY) {
+      this.onScroll(e, newScrollTop, 'vertical');
       this.set(`previousScrollToY`, newScrollTop);
     }
-  },
+  }
 
   /**
    * Sets the scroll property (scrollTop, or scrollLeft) for the given the direction and offset.
@@ -148,6 +143,7 @@ export default Component.extend(DomMixin, {
    * @param offset  Number -- offset amount in pixels
    * @param direction String -- 'X' | 'Y' -- indicates what direction is being scrolled
    */
+  @action
   scrollToPosition(offset, direction) {
     offset = Number.parseInt(offset, 10);
 
@@ -155,21 +151,30 @@ export default Component.extend(DomMixin, {
       return;
     }
     let scrollOffsetAttr = direction === 'X' ? 'scrollLeft' : 'scrollTop';
-    this.get('element')[scrollOffsetAttr] = offset
-  },
+    this.el[scrollOffsetAttr] = offset;
+  }
 
+  @action
   configureInitialScrollPosition() {
-    this.scrollToPosition(this.get('scrollToX'), 'X');
-    this.scrollToPosition(this.get('scrollToY'), 'Y');
-  },
+    this.scrollToPosition(this.scrollToX, 'X');
+    this.scrollToPosition(this.scrollToY, 'Y');
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.addEventListener(this.element, 'scroll', this.scrolled);
+  @action
+  elementInserted(element) {
+    this.el = element;
+    this.el.addEventListener('scroll', this.scrolled);
     this.configureInitialScrollPosition();
-  },
+  }
+
+  willDestroy() {
+    super.willDestroy(...arguments);
+
+    this.el?.removeEventListener('scroll', this.scrolled);
+  }
 
   didReceiveAttrs() {
+    super.didReceiveAttrs(...arguments);
     // Sync property changes to `scrollToX` and `scrollToY` with the `scrollTop` and `scrollLeft` attributes
     // of the rendered DOM element.
     ['X', 'Y'].forEach((direction) => {
@@ -177,9 +182,14 @@ export default Component.extend(DomMixin, {
       const newOffset = this.get(`scrollTo${direction}`);
 
       if (oldOffset !== newOffset) {
-        schedule('afterRender', this, this.scrollToPosition, newOffset, direction);
+        schedule(
+          'afterRender',
+          this,
+          this.scrollToPosition,
+          newOffset,
+          direction
+        );
       }
     });
   }
-
-});
+}

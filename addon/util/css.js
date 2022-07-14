@@ -1,5 +1,5 @@
 import { isEmpty } from '@ember/utils';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 
 function styleify(obj) {
   if (isEmpty(obj)) {
@@ -13,7 +13,6 @@ function styleify(obj) {
     return styleString;
   }, '');
   return htmlSafe(styles);
-
 }
 
 export { styleify };

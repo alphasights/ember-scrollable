@@ -1,7 +1,7 @@
 <section>
-  {{#link-to 'index'}}
+  <LinkTo @route='index'>
     Home
-  {{/link-to}}
+  </LinkTo>
   This page is for demonstrating more advanced / potentially real world uses of ember-scrollable. Please feel free to make additions if you see fit.
 </section>
 <section class="vertical-demo">
@@ -10,11 +10,11 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
     <div style="height: 400px;">
-      {{#ember-scrollable scrollToY=scrollToY onScrollY=(action (mut scrollToY))}}
+      <EmberScrollable @scrollToY={{this.scrollToY}} @onScrollY={{action (mut this.scrollToY)}}>
         <p>
-          {{#draggable-object content=this}}
+          <DraggableObject @content={{this}}>
             Drag Me!
-          {{/draggable-object}}
+          </DraggableObject>
         </p>
         <p>Some more content</p>
         <p>Some content</p>
@@ -35,7 +35,7 @@
         <p>Some more content</p>
         <p>Some content</p>
         <p>Some more content</p>
-      {{/ember-scrollable}}
+      </EmberScrollable>
     </div>
     {{!-- END-SNIPPET --}}
   </div>
@@ -43,11 +43,11 @@
   <div class="output">
     {{!-- BEGIN-SNIPPET vertical --}}
     <div style="height: 400px;">
-      {{#ember-scrollable scrollToY=scrollToY onScrollY=(action (mut scrollToY))}}
+      <EmberScrollable @scrollToY={{this.scrollToY}} @onScrollY={{action (mut this.scrollToY)}}>
         <p>
-          {{#draggable-object content=this}}
+          <DraggableObject @content={{this}}>
             Drag Me!
-          {{/draggable-object}}
+          </DraggableObject>
         </p>
         <p>Some more content</p>
         <p>Some content</p>
@@ -68,7 +68,7 @@
         <p>Some more content</p>
         <p>Some content</p>
         <p>Some more content</p>
-      {{/ember-scrollable}}
+      </EmberScrollable>
     </div>
     {{!-- END-SNIPPET --}}
   </div>

@@ -10,23 +10,24 @@ export default class Scrollable {
   }
 
   get isNecessary() {
-    return this.scrollbarSize() < this.contentOuterSize();
+    return this.scrollbarSize < this.contentOuterSize;
   }
 
-
-  scrollbarSize() {
+  get scrollbarSize() {
     return this.scrollbarElement[`client${capitalize(this.sizeAttr)}`];
   }
 
-  contentOuterSize() {
-    return DynamicMethods[`get${capitalize(this.sizeAttr)}`](this.contentElement);
+  get contentOuterSize() {
+    return DynamicMethods[`get${capitalize(this.sizeAttr)}`](
+      this.contentElement
+    );
   }
 
   getHandlePositionAndSize(scrollOffset) {
     // we own this data
-    let contentSize = this.contentOuterSize();
+    let contentSize = this.contentOuterSize;
     // we pass this to the child
-    let scrollbarSize = this.scrollbarSize();
+    let scrollbarSize = this.scrollbarSize;
     let scrollbarRatio = scrollbarSize / contentSize;
 
     // Calculate new height/position of drag handle.
@@ -37,21 +38,21 @@ export default class Scrollable {
 
     // check if content is scrollbar is longer than content
     if (scrollbarRatio < 1) {
-      let handleSizeCalculated = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+      let handleSizeCalculated =
+        Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
       // check if handleSize is too small
       handleSize = handleSizeCalculated < 10 ? 10 : handleSizeCalculated;
     }
 
-    return {handleOffset, handleSize};
+    return { handleOffset, handleSize };
   }
 
   isScrolledToBottom(scrollBuffer, scrollOffset) {
-    let contentSize = this.contentOuterSize();
-    let scrollbarSize = this.scrollbarSize();
+    let contentSize = this.contentOuterSize;
+    let scrollbarSize = this.scrollbarSize;
 
     return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
   }
-
 }
 
 export class Vertical extends Scrollable {

@@ -1,258 +1,533 @@
 <section>
-  {{#link-to 'cookbook'}}
+  <LinkTo @route='cookbook'>
     Cookbook
-  {{/link-to}}
+  </LinkTo>
 </section>
-<section class="vertical-demo">
-  <h1>Vertical</h1>
+<section class='vertical-demo'>
+  <h1>
+    Vertical
+  </h1>
 
-  <div class="output">
-    {{!-- BEGIN-SNIPPET vertical --}}
-    <div style="height: 400px;">
-      {{#ember-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-      {{/ember-scrollable}}
+  <div class='output'>
+    {{! BEGIN-SNIPPET vertical }}
+    <div style='height: 400px;'>
+      <EmberScrollable @onScrolledToBottom={{fn this.log 'Bottom reached!'}}>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+      </EmberScrollable>
     </div>
-    {{!-- END-SNIPPET --}}
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="vertical.hbs"}}
+  <div class='code'>
+    {{#let (get-code-snippet 'vertical.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>
 
-<section class="horizontal-demo">
-  <h1>Horizontal</h1>
+<section class='horizontal-demo'>
+  <h1>
+    Horizontal
+  </h1>
 
-  <div class="output">
-    {{!-- BEGIN-SNIPPET horizontal --}}
-    {{#ember-scrollable horizontal=true}}
+  <div class='output'>
+    {{! BEGIN-SNIPPET horizontal }}
+    <EmberScrollable @horizontal={{true}}>
       <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
+        <li>
+          1
+        </li>
+        <li>
+          2
+        </li>
+        <li>
+          3
+        </li>
+        <li>
+          4
+        </li>
+        <li>
+          5
+        </li>
+        <li>
+          6
+        </li>
+        <li>
+          7
+        </li>
+        <li>
+          8
+        </li>
+        <li>
+          9
+        </li>
+        <li>
+          10
+        </li>
       </ul>
-    {{/ember-scrollable}}
-    {{!-- END-SNIPPET --}}
+    </EmberScrollable>
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="horizontal.hbs"}}
+  <div class='code'>
+    {{#let (get-code-snippet 'horizontal.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>
 
-<section class="no-auto-hide-demo">
-  <h1>No Auto Hide</h1>
+<section class='no-auto-hide-demo'>
+  <h1>
+    No Auto Hide
+  </h1>
 
-  <div class="output">
-    {{!-- BEGIN-SNIPPET no-auto-hide --}}
-    <div style="height: 200px;">
-      {{#ember-scrollable autoHide=false}}
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-      {{/ember-scrollable}}
+  <div class='output'>
+    {{! BEGIN-SNIPPET no-auto-hide }}
+    <div style='height: 200px;'>
+      <EmberScrollable @autoHide={{false}}>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+      </EmberScrollable>
     </div>
-    {{!-- END-SNIPPET --}}
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="no-auto-hide.hbs"}}
+  <div class='code'>
+    {{#let (get-code-snippet 'no-auto-hide.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>
 
-<section class="no-scrollbar-demo">
-  <h1>No Scroll </h1>
-  <button {{action 'toggleHeight'}}>Make {{if isShort 'Overflow' 'No Overflow'}}</button>
-  <div class="output">
-    {{!-- BEGIN-SNIPPET no-scrollbar-demo --}}
-    <div style="height: 200px;">
-      {{#ember-scrollable}}
-        <p>Some content</p>
-        {{#unless isShort}}
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
-          <p>Some content</p>
+<section class='no-scrollbar-demo'>
+  <h1>
+    No Scroll
+  </h1>
+  <button type='button' {{on 'click' this.toggleHeight}}>
+    Make {{if this.isShort 'Overflow' 'No Overflow'}}
+  </button>
+  <div class='output'>
+    {{! BEGIN-SNIPPET no-scrollbar-demo }}
+    <div style='height: 200px;'>
+      <EmberScrollable>
+        <p>
+          Some content
+        </p>
+        {{#unless this.isShort}}
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some content
+          </p>
         {{/unless}}
-      {{/ember-scrollable}}
+      </EmberScrollable>
     </div>
-    {{!-- END-SNIPPET --}}
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="no-scrollbar-demo.hbs"}}
+  <div class='code'>
+    {{#let (get-code-snippet 'no-scrollbar-demo.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>
-<!-- TODO rename class and apply styles to dual scroll demo class-->
-<section class="vertical-demo">
-  <h1>Double Scroll</h1>
+{{! TODO rename class and apply styles to dual scroll demo class}}
+<section class='vertical-demo'>
+  <h1>
+    Double Scroll
+  </h1>
 
-  <div class="output">
-    {{!-- BEGIN-SNIPPET dual-scroll --}}
-    <div class="double-scroll-container">
-      {{#ember-scrollable horizontal=true vertical=true onScrolledToBottom=(action 'log' 'Bottom reached!')}}
-        <div class="wide-content">
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
-          <p>Some content</p>
-          <p>Some more content</p>
+  <div class='output'>
+    {{! BEGIN-SNIPPET dual-scroll }}
+    <div class='double-scroll-container'>
+      <EmberScrollable
+        @horizontal={{true}}
+        @vertical={{true}}
+        @onScrolledToBottom={{fn this.log 'Bottom reached!'}}
+      >
+        <div class='wide-content'>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
+          <p>
+            Some content
+          </p>
+          <p>
+            Some more content
+          </p>
         </div>
-      {{/ember-scrollable}}
+      </EmberScrollable>
     </div>
-    {{!-- END-SNIPPET --}}
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="double.hbs"}}
+  {{! TODO: where did double.hbs go? }}
+  {{!-- <div class='code'>
+    {{#let (get-code-snippet 'double.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
+  </div> --}}
+</section>
+
+<section class='resize-demo'>
+  <h1>
+    Auto resizing
+  </h1>
+  <button type='button' {{on "click" this.toggleHeight}}>
+    Make {{if this.isShort 'Tall' 'Short'}}
+  </button>
+  <p>
+    The scrollbar automatically recalculates when the height of the parent container changes.
+  </p>
+
+  <div class='output'>
+    {{! BEGIN-SNIPPET vertical }}
+    <div class={{if this.isShort 'is-short' 'is-tall'}}>
+      <EmberScrollable @onScrolledToBottom={{fn this.log 'Bottom reached!'}}>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+      </EmberScrollable>
+    </div>
+    {{! END-SNIPPET }}
+  </div>
+
+  <div class='code'>
+    {{#let (get-code-snippet 'vertical.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>
 
+<section class='event-and-setter-demo'>
+  <h1>
+    Scroll event and setting the offset
+  </h1>
 
-<section class="resize-demo">
-  <h1>Auto resizing</h1>
-  <button {{action 'toggleHeight'}}>Make {{if isShort 'Tall' 'Short'}}</button>
-  <p>The scrollbar automatically recalculates when the height of the parent container changes. </p>
-
-  <div class="output">
-    {{!-- BEGIN-SNIPPET vertical --}}
-    <div class={{if isShort 'is-short' 'is-tall'}}>
-      {{#ember-scrollable onScrolledToBottom=(action 'log' 'Bottom reached!')}}
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-      {{/ember-scrollable}}
-    </div>
-    {{!-- END-SNIPPET --}}
-  </div>
-
-  <div class="code">
-    {{code-snippet name="vertical.hbs"}}
-  </div>
-</section>
-
-<section class="event-and-setter-demo">
-  <h1>Scroll event and setting the offset</h1>
-
-  <div class="output">
-    {{!-- BEGIN-SNIPPET event-and-setter --}}
-    <label id="targetScrollOffset">
-      targetScrollOffset: {{input value=targetScrollOffset type="number" min=0 step=10 max=400}}
+  <div class='output'>
+    {{! BEGIN-SNIPPET event-and-setter }}
+    <label id='targetScrollOffset'>
+      targetScrollOffset:
+      <Input
+        @value={{this.targetScrollOffset}}
+        @type='number'
+        min={{0}}
+        step={{10}}
+        max={{400}}
+      />
     </label>
-    <br>
-    <label id="currentScrollOffset">
-      currentScrollOffset: {{currentScrollOffset}} px
+    <br />
+    <label id='currentScrollOffset'>
+      currentScrollOffset: {{this.currentScrollOffset}} px
     </label>
 
-    <hr>
+    <hr />
 
-    <div style="height: 400px;">
-      {{#ember-scrollable
-        scrollToY=targetScrollOffset
-        onScrollY=(action (mut currentScrollOffset))
-      }}
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-        <p>Some content</p>
-        <p>Some more content</p>
-      {{/ember-scrollable}}
+    <div style='height: 400px;'>
+      <EmberScrollable
+        @scrollToY={{this.targetScrollOffset}}
+        @onScrollY={{action (mut this.currentScrollOffset)}}
+      >
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+        <p>
+          Some content
+        </p>
+        <p>
+          Some more content
+        </p>
+      </EmberScrollable>
     </div>
-    {{!-- END-SNIPPET --}}
+    {{! END-SNIPPET }}
   </div>
 
-  <div class="code">
-    {{code-snippet name="event-and-setter.hbs"}}
+  <div class='code'>
+    {{#let (get-code-snippet 'event-and-setter.hbs') as |snippet|}}
+      <CodeBlock @language={{snippet.language}} @code={{snippet.source}} />
+    {{/let}}
   </div>
 </section>

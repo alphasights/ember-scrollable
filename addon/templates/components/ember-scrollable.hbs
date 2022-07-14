@@ -1,42 +1,51 @@
-{{resize-detector (concat '#' elementId) on-resize=(action 'recalculate')}}
-{{#if horizontal}}
-  {{ember-scrollbar
-    handleOffset=horizontalHandleOffset
-    handleSize=horizontalHandleSize
-    horizontal=true
-    showHandle=showHandle
-    isDragging=isHorizontalDragging
-    onJumpTo=(action 'horizontalJumpTo')
-    onDrag=(action 'horizontalDrag')
-    onDragStart=(action 'horizontalDragBoundary' true)
-    onDragEnd=(action 'horizontalDragBoundary' false)
-  }}
-{{/if}}
-{{#if vertical}}
-  {{ember-scrollbar
-    handleOffset=verticalHandleOffset
-    handleSize=verticalHandleSize
-    horizontal=false
-    showHandle=showHandle
-    isDragging=isVerticalDragging
-    onJumpTo=(action 'verticalJumpTo')
-    onDrag=(action 'verticalDrag')
-    onDragStart=(action 'verticalBoundaryEvent' true)
-    onDragEnd=(action 'verticalBoundaryEvent' false)
-  }}
-{{/if}}
-{{#scroll-content-element
-  height=scrollContentHeight
-  width=scrollContentWidth
-  scrollToX=scrollToX
-  scrollToY=scrollToY
-  onScroll=(action 'scrolled')
-}}
-  <div class="tse-content scrollable-content">
-    {{yield (hash
-              recalculate=(action 'recalculate')
-              update=(action 'update')
-              scrollTop=(action 'scrollTop')
-            )}}
-  </div>
-{{/scroll-content-element}}
+<div
+  class='ember-scrollable tse-scrollable {{if this.horizontal 'horizontal'}} {{
+    if this.vertical 'vertical'
+  }}'
+  ...attributes
+  {{did-insert this.elementInserted}}
+  {{on-resize this.update}}
+>
+  {{#if this.horizontal}}
+    <EmberScrollbar
+      @handleOffset={{this.horizontalHandleOffset}}
+      @handleSize={{this.horizontalHandleSize}}
+      @horizontal={{true}}
+      @showHandle={{this.showHandle}}
+      @isDragging={{this.isHorizontalDragging}}
+      @onJumpTo={{this.horizontalJumpTo}}
+      @onDrag={{this.horizontalDrag}}
+      @onDragStart={{fn this.horizontalDragBoundary true}}
+      @onDragEnd={{fn this.horizontalDragBoundary false}}
+    />
+  {{/if}}
+  {{#if this.vertical}}
+    <EmberScrollbar
+      @handleOffset={{this.verticalHandleOffset}}
+      @handleSize={{this.verticalHandleSize}}
+      @horizontal={{false}}
+      @showHandle={{this.showHandle}}
+      @isDragging={{this.isVerticalDragging}}
+      @onJumpTo={{this.verticalJumpTo}}
+      @onDrag={{this.verticalDrag}}
+      @onDragStart={{fn this.verticalBoundaryEvent true}}
+      @onDragEnd={{fn this.verticalBoundaryEvent false}}
+    />
+  {{/if}}
+  <ScrollContentElement
+    @height={{this.scrollContentHeight}}
+    @width={{this.scrollContentWidth}}
+    @scrollToX={{this.scrollToX}}
+    @scrollToY={{this.scrollToY}}
+    @onScroll={{this.scrolled}}
+  >
+    <div class='tse-content scrollable-content'>
+      {{yield
+        (hash
+          update=this.update
+          scrollTop=(action 'scrollTop')
+        )
+      }}
+    </div>
+  </ScrollContentElement>
+</div>
