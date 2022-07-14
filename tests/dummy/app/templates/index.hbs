@@ -11,7 +11,7 @@
   <div class='output'>
     {{! BEGIN-SNIPPET vertical }}
     <div style='height: 400px;'>
-      <EmberScrollable @onScrolledToBottom={{action 'log' 'Bottom reached!'}}>
+      <EmberScrollable @onScrolledToBottom={{fn this.log 'Bottom reached!'}}>
         <p>
           Some content
         </p>
@@ -190,7 +190,7 @@
   <h1>
     No Scroll
   </h1>
-  <button type='button' {{action 'toggleHeight'}}>
+  <button type='button' {{on 'click' this.toggleHeight}}>
     Make {{if this.isShort 'Overflow' 'No Overflow'}}
   </button>
   <div class='output'>
@@ -267,7 +267,7 @@
       <EmberScrollable
         @horizontal={{true}}
         @vertical={{true}}
-        @onScrolledToBottom={{action 'log' 'Bottom reached!'}}
+        @onScrolledToBottom={{fn this.log 'Bottom reached!'}}
       >
         <div class='wide-content'>
           <p>
@@ -348,7 +348,7 @@
   <h1>
     Auto resizing
   </h1>
-  <button type='button' {{action 'toggleHeight'}}>
+  <button type='button' {{on "click" this.toggleHeight}}>
     Make {{if this.isShort 'Tall' 'Short'}}
   </button>
   <p>
@@ -358,7 +358,7 @@
   <div class='output'>
     {{! BEGIN-SNIPPET vertical }}
     <div class={{if this.isShort 'is-short' 'is-tall'}}>
-      <EmberScrollable @onScrolledToBottom={{action 'log' 'Bottom reached!'}}>
+      <EmberScrollable @onScrolledToBottom={{fn this.log 'Bottom reached!'}}>
         <p>
           Some content
         </p>

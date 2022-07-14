@@ -13,10 +13,10 @@
       @horizontal={{true}}
       @showHandle={{this.showHandle}}
       @isDragging={{this.isHorizontalDragging}}
-      @onJumpTo={{action 'horizontalJumpTo'}}
-      @onDrag={{action 'horizontalDrag'}}
-      @onDragStart={{action 'horizontalDragBoundary' true}}
-      @onDragEnd={{action 'horizontalDragBoundary' false}}
+      @onJumpTo={{this.horizontalJumpTo}}
+      @onDrag={{this.horizontalDrag}}
+      @onDragStart={{fn this.horizontalDragBoundary true}}
+      @onDragEnd={{fn this.horizontalDragBoundary false}}
     />
   {{/if}}
   {{#if this.vertical}}
@@ -26,10 +26,10 @@
       @horizontal={{false}}
       @showHandle={{this.showHandle}}
       @isDragging={{this.isVerticalDragging}}
-      @onJumpTo={{action 'verticalJumpTo'}}
-      @onDrag={{action 'verticalDrag'}}
-      @onDragStart={{action 'verticalBoundaryEvent' true}}
-      @onDragEnd={{action 'verticalBoundaryEvent' false}}
+      @onJumpTo={{this.verticalJumpTo}}
+      @onDrag={{this.verticalDrag}}
+      @onDragStart={{fn this.verticalBoundaryEvent true}}
+      @onDragEnd={{fn this.verticalBoundaryEvent false}}
     />
   {{/if}}
   <ScrollContentElement
