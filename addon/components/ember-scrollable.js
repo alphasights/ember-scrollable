@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import { action } from '@ember/object';
+import { getOwner } from '@ember/application';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
@@ -11,7 +11,6 @@ import { getHeight, getWidth } from '../util/measurements';
 import classic from 'ember-classic-decorator';
 import { layout, tagName } from '@ember-decorators/component';
 
-const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
 
 export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
@@ -106,6 +105,13 @@ export default class EmberScrollableComponent extends Component {
   verticalScrollbar = null;
 
   @tracked showHandle = false;
+
+  init() {
+    super.init(...arguments);
+
+    const config = getOwner(this).resolveRegistration('config:environment');
+    this.hideDelay = config.environment === 'test' ? 16 : 1000;
+  }
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
@@ -409,7 +415,7 @@ export default class EmberScrollableComponent extends Component {
       return;
     }
 
-    debounce(this, this.hideScrollbar, hideDelay);
+    debounce(this, this.hideScrollbar, this.hideDelay);
   }
 
   @action
