@@ -247,8 +247,8 @@ module('Integration | Component | ember scrollbar', function (hooks) {
       <div class="tse-scrollable vertical" >
 
       {{ember-scrollbar
-        handleOffset=offset
-        handleSize=size
+        handleOffset=this.offset
+        handleSize=this.size
         horizontal=false
         showHandle=true
         onJumpTo=this.onJumpTo

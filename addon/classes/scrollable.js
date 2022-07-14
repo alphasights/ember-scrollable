@@ -10,14 +10,14 @@ export default class Scrollable {
   }
 
   get isNecessary() {
-    return this.scrollbarSize() < this.contentOuterSize();
+    return this.scrollbarSize < this.contentOuterSize;
   }
 
-  scrollbarSize() {
+  get scrollbarSize() {
     return this.scrollbarElement[`client${capitalize(this.sizeAttr)}`];
   }
 
-  contentOuterSize() {
+  get contentOuterSize() {
     return DynamicMethods[`get${capitalize(this.sizeAttr)}`](
       this.contentElement
     );
@@ -25,9 +25,9 @@ export default class Scrollable {
 
   getHandlePositionAndSize(scrollOffset) {
     // we own this data
-    let contentSize = this.contentOuterSize();
+    let contentSize = this.contentOuterSize;
     // we pass this to the child
-    let scrollbarSize = this.scrollbarSize();
+    let scrollbarSize = this.scrollbarSize;
     let scrollbarRatio = scrollbarSize / contentSize;
 
     // Calculate new height/position of drag handle.
@@ -48,8 +48,8 @@ export default class Scrollable {
   }
 
   isScrolledToBottom(scrollBuffer, scrollOffset) {
-    let contentSize = this.contentOuterSize();
-    let scrollbarSize = this.scrollbarSize();
+    let contentSize = this.contentOuterSize;
+    let scrollbarSize = this.scrollbarSize;
 
     return scrollOffset + scrollbarSize + scrollBuffer >= contentSize;
   }

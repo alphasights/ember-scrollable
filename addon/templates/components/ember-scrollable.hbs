@@ -4,7 +4,7 @@
   }}'
   ...attributes
   {{did-insert this.elementInserted}}
-  {{on-resize this.recalculate}}
+  {{on-resize this.update}}
 >
   {{#if this.horizontal}}
     <EmberScrollbar
@@ -42,8 +42,7 @@
     <div class='tse-content scrollable-content'>
       {{yield
         (hash
-          recalculate=this.recalculate
-          update=(action 'update')
+          update=this.update
           scrollTop=(action 'scrollTop')
         )
       }}

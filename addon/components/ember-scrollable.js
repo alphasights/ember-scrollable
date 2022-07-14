@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { action, computed } from '@ember/object';
-import { deprecate } from '@ember/debug';
+import { action } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 import template from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 import { getHeight, getWidth } from '../util/measurements';
@@ -105,6 +105,8 @@ export default class EmberScrollableComponent extends Component {
    */
   verticalScrollbar = null;
 
+  @tracked showHandle = false;
+
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
@@ -127,15 +129,6 @@ export default class EmberScrollableComponent extends Component {
 
     this.mouseMoveHandler = bind(this, this.onMouseMove);
     this.el.addEventListener('mousemove', this.mouseMoveHandler);
-  }
-
-  /**
-   * Update action should be called when size of the scroll area changes
-   */
-  @action
-  recalculate() {
-    // TODO this is effectively the same as `update`, except for update returns the passed in value. Keep one, and rename `resizeScrollbar` to be clear.
-    this.resizeScrollbar();
   }
 
   willDestroy() {
@@ -169,7 +162,7 @@ export default class EmberScrollableComponent extends Component {
   isVerticalDragging = false;
   /**
    * Size in pixels of the handle within the horizontal scrollbar.
-   * Determined by a ration between the scroll content and the scroll viewport
+   * Determined by a ratio between the scroll content and the scroll viewport
    *
    * @property horizontalHandleSize
    * @private
@@ -177,7 +170,7 @@ export default class EmberScrollableComponent extends Component {
   horizontalHandleSize = null;
   /**
    * Size in pixels of the handle within the vertical scrollbar.
-   * Determined by a ration between the scroll content and the scroll viewport
+   * Determined by a ratio between the scroll content and the scroll viewport
    *
    * @property verticalHandleSize
    * @private
@@ -410,7 +403,7 @@ export default class EmberScrollableComponent extends Component {
       return;
     }
 
-    this.set('showHandle', true);
+    this.showHandle = true;
 
     if (!this.autoHide) {
       return;
@@ -424,7 +417,7 @@ export default class EmberScrollableComponent extends Component {
     if (this.isDestroyed) {
       return;
     }
-    this.set('showHandle', false);
+    this.showHandle = false;
   }
 
   /**
