@@ -256,3 +256,23 @@
     {{code-snippet name="event-and-setter.hbs"}}
   </div>
 </section>
+
+<section class="infinite-scroll-demo">
+  <h1>Infinite Scroll</h1>
+
+  <div class="output">
+    {{!-- BEGIN-SNIPPET infinite-scroll --}}
+    <div style="height: 400px;">
+      {{#ember-scrollable onScrolledToBottom=(action 'loadMore') as |scrollable|}}
+        {{#each (repeat (compute scrollable.update infiniteScrollItems)) as |empty|}}
+          <p>Some Content</p>
+        {{/each}}
+      {{/ember-scrollable}}
+    </div>
+    {{!-- END-SNIPPET --}}
+  </div>
+
+  <div class="code">
+    {{code-snippet name="infinite-scroll.hbs"}}
+  </div>
+</section>
