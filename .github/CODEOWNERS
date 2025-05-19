@@ -1,0 +1,7 @@
+# Code owners file for repository
+# See: https://docs.github.com/en/repositories/managing-your-code/about-code-owners
+
+# Default owners for everything
+* @alphasights/authorized-approvers
+
+# Add specific ownership rules below
