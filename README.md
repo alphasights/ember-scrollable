@@ -1,4 +1,4 @@
-# Ember Scrollable
+# ember-scrollable
 [![Ember Version](https://embadge.io/v1/badge.svg?start=2.8.0-lts)](https://embadge.io/v1/badge.svg?start=2.8.0-lts)
 [![Npm Version](https://badge.fury.io/js/ember-scrollable.svg)](http://badge.fury.io/js/ember-scrollable)
 [![Code
@@ -8,6 +8,15 @@ Climate](https://codeclimate.com/github/alphasights/ember-scrollable/badges/gpa.
 A simple scrollbar implementation inspired by Trackpad Scroll Emulator.
 
 [Check out the demo](https://alphasights.github.io/ember-scrollable)
+
+
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
+* Node.js v12 or above
+
 
 Installation
 ------------------------------------------------------------------------------
@@ -45,34 +54,6 @@ The component accepts the following options:
 {{/ember-scrollable}}
 ```
 
-## Developing
-
-### Setup
-
-* `git clone https://github.com/alphasights/ember-scrollable.git`
-* `npm install && bower install`
-
-### Running
-
-* `ember server`
-
-### Linting
-
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Running tests
-
-* `ember test` – Runs the test suite on the current Ember version
-* `ember test --server` – Runs the test suite in "watch mode"
-* `ember try:each` – Runs the test suite against multiple Ember versions
-
-### Running the dummy application
-
-* `ember serve`
-* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
 License
 ------------------------------------------------------------------------------

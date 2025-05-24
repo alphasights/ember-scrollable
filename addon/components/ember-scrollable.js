@@ -1,17 +1,16 @@
-import Ember from 'ember';
-import { computed } from '@ember/object';
-import { deprecate } from '@ember/application/deprecations';
+import { action } from '@ember/object';
+import { getOwner } from '@ember/application';
 import { isPresent } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import { bind, scheduleOnce, debounce, throttle } from '@ember/runloop';
 import Component from '@ember/component';
-import InboundActionsMixin from 'ember-component-inbound-actions/inbound-actions';
-import DomMixin from 'ember-lifeline/mixins/dom';
-import layout from '../templates/components/ember-scrollable';
+import { tracked } from '@glimmer/tracking';
+import template from '../templates/components/ember-scrollable';
 import { Horizontal, Vertical } from '../classes/scrollable';
 import { getHeight, getWidth } from '../util/measurements';
+import classic from 'ember-classic-decorator';
+import { layout, tagName } from '@ember-decorators/component';
 
-const hideDelay = Ember.testing ? 16 : 1000;
 const PAGE_JUMP_MULTIPLE = 7 / 8;
 
 export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 = 16ms
@@ -19,9 +18,11 @@ export const THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS = 1; // 60 fps -> 1 sec / 60 =
 const scrollbarSelector = '.tse-scrollbar';
 const contentSelector = '.tse-content';
 
-export default Component.extend(InboundActionsMixin, DomMixin, {
-  layout,
-  classNameBindings: [':ember-scrollable', ':tse-scrollable', 'horizontal', 'vertical'],
+@classic
+@layout(template)
+@tagName('')
+export default class EmberScrollableComponent extends Component {
+  @service scrollbarThickness;
 
   /**
    * If true, a scrollbar will be shown horizontally
@@ -31,7 +32,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @type Boolean
    * @default false
    */
-  horizontal: null,
+  horizontal = null;
 
   /**
    * If true, a scrollbar will be shown vertically
@@ -40,7 +41,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Boolean
    */
-  vertical: null,
+  vertical = null;
   /**
    * Indicates whether the scrollbar should auto hide after a given period of time (see hideDelay),
    * or remain persitent alongside the content to be scrolled.
@@ -50,28 +51,8 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @type Boolean
    * @default true
    */
-  autoHide: true,
-  scrollBuffer: 50,
-  /**
-   * Number indicating offset from anchor point (top for vertical, left for horizontal) where the scroll handle
-   * should be rendered.
-   *
-   * @property scrollTo
-   * @public
-   * @type Number
-   */
-  scrollTo: computed('vertical', {
-    get() {
-      return this.get('vertical') ? this.get('scrollToY') : this.get('scrollToX');
-    },
-    set(key, value) {
-      // TODO this is deprecated. remove eventually.
-      deprecate('Using the `scrollTo` property directly has been deprecated, please prefer being explicit by using `scrollToX` and `scrollToY`.');
-      const prop = this.get('vertical') ? 'scrollToY' : 'scrollToX';
-      this.set(prop, value);
-      return value;
-    }
-  }),
+  autoHide = true;
+  scrollBuffer = 50;
 
   /**
    * Position in pixels for which to scroll horizontal scrollbar.
@@ -80,7 +61,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Number
    */
-  scrollToX: 0,
+  scrollToX = 0;
   /**
    * Position in pixels for which to scroll vertical scrollbar.
    *
@@ -88,7 +69,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Number
    */
-  scrollToY: 0,
+  scrollToY = 0;
 
   /**
    * Callback when the content is scrolled horizontally.
@@ -97,7 +78,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Function
    */
-  onScrollX() {},
+  onScrollX() {}
 
   /**
    * Callback when the content is scrolled vertically.
@@ -106,7 +87,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @public
    * @type Function
    */
-  onScrollY() {},
+  onScrollY() {}
 
   /**
    * Local reference the horizontal scrollbar.
@@ -114,118 +95,139 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @property horizontalScrollbar
    * @private
    */
-  horizontalScrollbar: null,
+  horizontalScrollbar = null;
   /**
    * Local reference the vertical scrollbar.
    *
    * @property verticalScrollbar
    * @private
    */
-  verticalScrollbar: null,
+  verticalScrollbar = null;
 
-  scrollbarThickness: service(),
+  @tracked showHandle = false;
+
+  init() {
+    super.init(...arguments);
+
+    const config = getOwner(this).resolveRegistration('config:environment');
+    this.hideDelay = config.environment === 'test' ? 16 : 1000;
+  }
 
   didReceiveAttrs() {
-    const horizontal = this.get('horizontal');
-    const vertical = this.get('horizontal');
+    super.didReceiveAttrs(...arguments);
+
+    const horizontal = this.horizontal;
+    const vertical = this.horizontal;
     // Keep backwards compatible functionality wherein vertical is default when neither vertical or horizontal are explicitly set
     if (!horizontal && !isPresent(vertical)) {
       this.set('vertical', true);
     }
-  },
+  }
 
-  didInsertElement() {
-    this._super(...arguments);
+  @action
+  elementInserted(element) {
+    this.el = element;
+
     this.setupElements();
     scheduleOnce('afterRender', this, this.createScrollbarAndShowIfNecessary);
-    this.addEventListener(window, 'mouseup', this.endDrag);
+    window.addEventListener('mouseup', this.endDrag);
     this.setupResize();
 
-    this.mouseMoveHandler = bind(this, this.onMouseMove)
-    this.element.addEventListener('mousemove', this.mouseMoveHandler)
-  },
+    this.mouseMoveHandler = bind(this, this.onMouseMove);
+    this.el.addEventListener('mousemove', this.mouseMoveHandler);
+  }
 
-  willDestroyElement() {
-    this._super(...arguments);
-    this.element.removeEventListener('transitionend webkitTransitionEnd', this._resizeHandler)
+  willDestroy() {
+    super.willDestroy(...arguments);
+    super.willDestroy(...arguments);
 
-    this.element.removeEventListener('mousemove', this.mouseMoveHandler)
-    this.mouseMoveHandler = null
-  },
+    window.removeEventListener('mouseup', this.endDrag);
+    window.removeEventListener('resize', this._resizeHandler);
 
+    this.el?.removeEventListener(
+      'transitionend webkitTransitionEnd',
+      this._resizeHandler
+    );
+
+    this.el?.removeEventListener('mousemove', this.mouseMoveHandler);
+    this.mouseMoveHandler = null;
+    this.el = null;
+  }
 
   /**
    * Inidcates that the horizontal scrollbar is dragging at this moment in time.
    * @property isHorizontalDragging
    * @private
    */
-  isHorizontalDragging: false,
+  isHorizontalDragging = false;
   /**
    * Inidcates that the vertical scrollbar is dragging at this moment in time.
    * @property isVerticalDragging
    * @private
    */
-  isVerticalDragging: false,
+  isVerticalDragging = false;
   /**
    * Size in pixels of the handle within the horizontal scrollbar.
-   * Determined by a ration between the scroll content and the scroll viewport
+   * Determined by a ratio between the scroll content and the scroll viewport
    *
    * @property horizontalHandleSize
    * @private
    */
-  horizontalHandleSize: null,
+  horizontalHandleSize = null;
   /**
    * Size in pixels of the handle within the vertical scrollbar.
-   * Determined by a ration between the scroll content and the scroll viewport
+   * Determined by a ratio between the scroll content and the scroll viewport
    *
    * @property verticalHandleSize
    * @private
    */
-  verticalHandleSize: null,
+  verticalHandleSize = null;
   /**
    * Amount in pixels offset from the anchor (leftmost point of horizontal scrollbar)
    *
    * @property horizontalHandleOffset
    * @private
    */
-  horizontalHandleOffset: 0,
+  horizontalHandleOffset = 0;
   /**
    * Amount in pixels offset from the anchor (topmost point of vertical scrollbar)
    *
    * @property verticalHandleOffest
    * @private
    */
-  verticalHandleOffest: 0,
+  verticalHandleOffest = 0;
   /**
    *
    * @property dragOffset
    * @private
    */
-  dragOffset: 0,
+  dragOffset = 0;
   /**
    * @property mouseMoveHandler
    * @private
    */
-  mouseMoveHandler: null,
+  mouseMoveHandler = null;
 
+  @action
   contentSize(sizeAttr) {
-
     let getters = {
-      'height': getHeight,
-      'width': getWidth
-    }
+      height: getHeight,
+      width: getWidth,
+    };
     return getters[sizeAttr](this._contentElement);
-  },
+  }
 
+  @action
   setupElements() {
-    this._contentElement = this.get('element').querySelector(`${contentSelector}`);
-  },
+    this._contentElement = this.el.querySelector(`${contentSelector}`);
+  }
 
   /**
    * Used to create/reset scrollbar(s) if they are necessary
    *
    * @method createScrollbarAndShowIfNecessary
    */
+  @action
   createScrollbarAndShowIfNecessary() {
     this.createScrollbar().map((scrollbar) => {
       this.checkScrolledToBottom(scrollbar);
@@ -233,23 +235,26 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
         this.showScrollbar();
       }
     });
-  },
+  }
 
+  @action
   _resizeHandler() {
     debounce(this, this.resizeScrollbar, 16);
-  },
+  }
 
+  @action
   setupResize() {
-    this.addEventListener(window, 'resize', this._resizeHandler, true);
-  },
+    window.addEventListener('resize', this._resizeHandler);
+  }
 
+  @action
   resizeScrollContent() {
-    const width = getWidth(this.element);
-    const height = getHeight(this.element);
-    const scrollbarThickness = this.get('scrollbarThickness.thickness');
+    const width = getWidth(this.el);
+    const height = getHeight(this.el);
+    const scrollbarThickness = this.scrollbarThickness.thickness;
 
-    const hasHorizontal = this.get('horizontal');
-    const hasVertical = this.get('vertical');
+    const hasHorizontal = this.horizontal;
+    const hasVertical = this.vertical;
 
     if (hasHorizontal && hasVertical) {
       this.set('scrollContentWidth', width + scrollbarThickness);
@@ -262,7 +267,7 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
       this.set('scrollContentWidth', width + scrollbarThickness);
       this.set('scrollContentHeight', height);
     }
-  },
+  }
 
   /**
    * Creates the corresponding scrollbar(s) from the configured `vertical` and `horizontal` properties
@@ -270,34 +275,39 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @method createScrollbar
    * @return {Array} Scrollbar(s) that were created
    */
+  @action
   createScrollbar() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return [];
     }
     const scrollbars = [];
 
     this.resizeScrollContent();
 
-    if (this.get('vertical')) {
+    if (this.vertical) {
       const verticalScrollbar = new Vertical({
-        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.vertical`),
-        contentElement: this._contentElement
+        scrollbarElement: this.el.querySelector(
+          `${scrollbarSelector}.vertical`
+        ),
+        contentElement: this._contentElement,
       });
       this.set('verticalScrollbar', verticalScrollbar);
       this.updateScrollbarAndSetupProperties(0, 'vertical');
       scrollbars.push(verticalScrollbar);
     }
-    if (this.get('horizontal')) {
+    if (this.horizontal) {
       const horizontalScrollbar = new Horizontal({
-        scrollbarElement: this.element.querySelector(`${scrollbarSelector}.horizontal`),
-        contentElement: this._contentElement
+        scrollbarElement: this.el.querySelector(
+          `${scrollbarSelector}.horizontal`
+        ),
+        contentElement: this._contentElement,
       });
       this.set('horizontalScrollbar', horizontalScrollbar);
       this.updateScrollbarAndSetupProperties(0, 'horizontal');
       scrollbars.push(horizontalScrollbar);
     }
     return scrollbars;
-  },
+  }
 
   /**
    * Show the scrollbar(s) when the user moves within the scroll viewport
@@ -305,11 +315,12 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @method onMouseMove
    * @private
    */
+  @action
   onMouseMove() {
-    if (this.get('autoHide')) {
+    if (this.autoHide) {
       throttle(this, this.showScrollbar, THROTTLE_TIME_LESS_THAN_60_FPS_IN_MS);
     }
-  },
+  }
 
   /**
    * Called on mouse up to indicate dragging is over.
@@ -318,12 +329,12 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param e
    * @private
    */
-
+  @action
   endDrag(e) {
     /* eslint no-unused-vars: 0 */
     this.set('isVerticalDragging', false);
     this.set('isHorizontalDragging', false);
-  },
+  }
 
   /**
    * Calculates and setups the correct handle position using the scrollbar offset and size
@@ -333,11 +344,14 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param scrollbarDirection
    * @private
    */
+  @action
   updateScrollbarAndSetupProperties(scrollOffset, scrollbarDirection) {
-    const { handleOffset, handleSize } = this.get(`${scrollbarDirection}Scrollbar`).getHandlePositionAndSize(scrollOffset);
+    const { handleOffset, handleSize } = this.get(
+      `${scrollbarDirection}Scrollbar`
+    ).getHandlePositionAndSize(scrollOffset);
     this.set(`${scrollbarDirection}HandleOffset`, handleOffset);
     this.set(`${scrollbarDirection}HandleSize`, handleSize);
-  },
+  }
 
   /**
    * Callback for the scroll event emitted by the container of the content that can scroll.
@@ -349,64 +363,68 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param scrollDirection 'vertical' or 'horizontal'
    * @private
    */
+  @action
   scrolled(event, scrollOffset, scrollDirection) {
-    this.updateScrollbarAndSetupProperties(scrollOffset, scrollDirection);
-    this.showScrollbar();
+    const _scrolled = () => {
+      this.updateScrollbarAndSetupProperties(scrollOffset, scrollDirection);
+      this.showScrollbar();
 
-    this.checkScrolledToBottom(this.get(`${scrollDirection}Scrollbar`), scrollOffset);
-    const direction = scrollDirection === 'vertical' ? 'Y' : 'X';
-    this.get(`onScroll${direction}`)(scrollOffset);
-    // synchronize scrollToX / scrollToY
-    this.set(`scrollTo${direction}`, scrollOffset);
-    // TODO this is deprecated. remove eventually.
-    this.sendScroll(event, scrollOffset);
-  },
+      this.checkScrolledToBottom(
+        this.get(`${scrollDirection}Scrollbar`),
+        scrollOffset
+      );
+      const direction = scrollDirection === 'vertical' ? 'Y' : 'X';
+      this.get(`onScroll${direction}`)(scrollOffset);
+      // synchronize scrollToX / scrollToY
+      this.set(`scrollTo${direction}`, scrollOffset);
+    };
 
+    scheduleOnce('afterRender', this, _scrolled);
+  }
 
+  @action
   checkScrolledToBottom(scrollbar, scrollOffset) {
-    let scrollBuffer = this.get('scrollBuffer');
+    let scrollBuffer = this.scrollBuffer;
 
     if (scrollbar.isScrolledToBottom(scrollBuffer, scrollOffset)) {
       debounce(this, this.sendScrolledToBottom, 100);
     }
-  },
+  }
 
+  @action
   sendScrolledToBottom() {
-    if (this.get('onScrolledToBottom')) {
-      this.get('onScrolledToBottom')();
+    if (this.onScrolledToBottom) {
+      this.onScrolledToBottom();
     }
-  },
+  }
 
-  sendScroll(event, scrollOffset) {
-    if (this.get('onScroll')) {
-      deprecate('Using the `onScroll` callback has deprecated in favor of the explicit `onScrollX` and `onScrollY callbacks');
-      this.get('onScroll')(scrollOffset, event);
-    }
-  },
-
+  @action
   resizeScrollbar() {
     this.createScrollbarAndShowIfNecessary();
-  },
+  }
 
+  @action
   showScrollbar() {
-    if (this.get('isDestroyed')) {
-      return;
-    }
-    this.set('showHandle', true);
-
-    if (!this.get('autoHide')) {
+    if (this.isDestroyed) {
       return;
     }
 
-    debounce(this, this.hideScrollbar, hideDelay);
-  },
+    this.showHandle = true;
 
+    if (!this.autoHide) {
+      return;
+    }
+
+    debounce(this, this.hideScrollbar, this.hideDelay);
+  }
+
+  @action
   hideScrollbar() {
-    if (this.get('isDestroyed')) {
+    if (this.isDestroyed) {
       return;
     }
-    this.set('showHandle', false);
-  },
+    this.showHandle = false;
+  }
 
   /**
    * Sets scrollTo{X,Y} by using the ratio of offset to content size.
@@ -418,10 +436,11 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param sizeAttr {String} String indicating the attribute used to get to the size of the content ('height'|'width')
    * @private
    */
+  @action
   updateScrollToProperty(scrollProp, dragPerc, sizeAttr) {
-    const srcollTo = dragPerc * this.contentSize(sizeAttr);
-    this.set(scrollProp, srcollTo);
-  },
+    const scrollTo = dragPerc * this.contentSize(sizeAttr);
+    this.set(scrollProp, scrollTo);
+  }
 
   /**
    * Sets is{Horizontal,Vertical}Dragging to true or false when the handle starts or ends dragging
@@ -431,9 +450,10 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param startOrEnd true if starting to drag, false if ending
    * @private
    */
+  @action
   toggleDraggingBoundary(isDraggingProp, startOrEnd) {
     this.set(isDraggingProp, startOrEnd);
-  },
+  }
 
   /**
    * Jumps a page because user clicked on scroll bar not scroll bar handle.
@@ -445,68 +465,84 @@ export default Component.extend(InboundActionsMixin, DomMixin, {
    * @param sizeAttr 'width' or 'height'
    * @private
    */
+  @action
   jumpScroll(jumpPositive, scrollToProp, sizeAttr) {
     const scrollOffset = this.get(scrollToProp);
     let jumpAmt = PAGE_JUMP_MULTIPLE * this.contentSize(sizeAttr);
-    let scrollPos = jumpPositive ? scrollOffset - jumpAmt : scrollOffset + jumpAmt;
+    let scrollPos = jumpPositive
+      ? scrollOffset - jumpAmt
+      : scrollOffset + jumpAmt;
     this.set(scrollToProp, scrollPos);
-  },
-
-
-  actions: {
-
-    /**
-     * Update action should be called when size of the scroll area changes
-     */
-    recalculate() {
-      // TODO this is effectively the same as `update`, except for update returns the passed in value. Keep one, and rename `resizeScrollbar` to be clear.
-      this.resizeScrollbar();
-    },
-
-    /**
-     * Can be called when scrollbars change as a result of value change,
-     *
-     * for example
-     * ```
-     * {{#as-scrollable as |scrollbar|}}
-     *   {{#each (compute scrollbar.update rows) as |row|}}
-     *     {{row.title}}
-     *   {{/each}}
-     * {{/as-scrollable}}
-     * ```
-     */
-    update(value) {
-      scheduleOnce('afterRender', this, this.resizeScrollbar);
-      return value;
-    },
-
-    /**
-     * Scroll Top action should be called when when the scroll area should be scrolled top manually
-     */
-    scrollTop() {
-      // TODO some might expect the `scrollToY` action to be called here
-      this.set('scrollToY', 0);
-    },
-    scrolled() {
-      scheduleOnce('afterRender', this, 'scrolled', ...arguments);
-    },
-    horizontalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'updateScrollToProperty', 'scrollToX', dragPerc, 'width');
-    },
-    verticalDrag(dragPerc) {
-      scheduleOnce('afterRender', this, 'updateScrollToProperty', 'scrollToY', dragPerc, 'height');
-    },
-    horizontalJumpTo(jumpPositive) {
-      this.jumpScroll(jumpPositive, 'scrollToX', 'width');
-    },
-    verticalJumpTo(jumpPositive) {
-      this.jumpScroll(jumpPositive, 'scrollToY', 'height');
-    },
-    horizontalDragBoundary(isStart) {
-      this.toggleDraggingBoundary('isHorizontalDragging', isStart);
-    },
-    verticalBoundaryEvent(isStart) {
-      this.toggleDraggingBoundary('isVerticalDragging', isStart);
-    }
   }
-});
+
+  /**
+   * Can be called when scrollbars change as a result of value change,
+   *
+   * for example
+   * ```
+   * {{#as-scrollable as |scrollbar|}}
+   *   {{#each (compute scrollbar.update rows) as |row|}}
+   *     {{row.title}}
+   *   {{/each}}
+   * {{/as-scrollable}}
+   * ```
+   */
+  @action
+  update(value) {
+    scheduleOnce('afterRender', this, this.resizeScrollbar);
+    return value;
+  }
+
+  /**
+   * Scroll Top action should be called when when the scroll area should be scrolled top manually
+   */
+  @action
+  scrollTop() {
+    // TODO some might expect the `scrollToY` action to be called here
+    this.set('scrollToY', 0);
+  }
+
+  @action
+  horizontalDrag(dragPerc) {
+    scheduleOnce(
+      'afterRender',
+      this,
+      'updateScrollToProperty',
+      'scrollToX',
+      dragPerc,
+      'width'
+    );
+  }
+
+  @action
+  verticalDrag(dragPerc) {
+    scheduleOnce(
+      'afterRender',
+      this,
+      'updateScrollToProperty',
+      'scrollToY',
+      dragPerc,
+      'height'
+    );
+  }
+
+  @action
+  horizontalJumpTo(jumpPositive) {
+    this.jumpScroll(jumpPositive, 'scrollToX', 'width');
+  }
+
+  @action
+  verticalJumpTo(jumpPositive) {
+    this.jumpScroll(jumpPositive, 'scrollToY', 'height');
+  }
+
+  @action
+  horizontalDragBoundary(isStart) {
+    this.toggleDraggingBoundary('isHorizontalDragging', isStart);
+  }
+
+  @action
+  verticalBoundaryEvent(isStart) {
+    this.toggleDraggingBoundary('isVerticalDragging', isStart);
+  }
+}

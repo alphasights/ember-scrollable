@@ -1,4 +1,3 @@
-
 /**
  * Replacement for jQuery $.height()
  * Borrowed with thanks from https://github.com/nefe/You-Dont-Need-jQuery#2.2
@@ -10,7 +9,9 @@ export function getHeight(el) {
   let borderBottomWidth = parseFloat(styles.borderBottomWidth);
   let paddingTop = parseFloat(styles.paddingTop);
   let paddingBottom = parseFloat(styles.paddingBottom);
-  return height - borderBottomWidth - borderTopWidth - paddingTop - paddingBottom;
+  return (
+    height - borderBottomWidth - borderTopWidth - paddingTop - paddingBottom
+  );
 }
 /**
  * Replacement function for jQuery $.width()
@@ -23,5 +24,7 @@ export function getWidth(el) {
   let borderRightWidth = parseFloat(styles.borderRightWidth);
   let paddingLeft = parseFloat(styles.paddingLeft);
   let paddingRight = parseFloat(styles.paddingRight);
-  return width - borderLeftWidth - borderRightWidth - paddingRight - paddingLeft;
-} 
+  return (
+    width - borderLeftWidth - borderRightWidth - paddingRight - paddingLeft
+  );
+}

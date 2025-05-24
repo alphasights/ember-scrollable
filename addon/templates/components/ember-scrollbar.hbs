@@ -1,1 +1,11 @@
-<div class="drag-handle {{if showHandle 'visible'}}" onmousedown={{action 'startDrag'}} style={{handleStyles}}></div>
+<div
+  class='tse-scrollbar {{if @horizontal 'horizontal' 'vertical'}}'
+  ...attributes
+  {{did-insert this.elementInserted}}
+>
+  <div
+    class='drag-handle {{if @showHandle 'visible'}}'
+    style={{this.handleStyles}}
+    {{on 'mousedown' this.startDrag}}
+  ></div>
+</div>
